@@ -1,4 +1,4 @@
-class Petition
+class Petition < ApplicationRecord
   has_one :petition
 
 
