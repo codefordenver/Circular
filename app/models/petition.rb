@@ -1,5 +1,5 @@
 class Petition < ApplicationRecord
-  has_one :petition
+  belongs_to :apartment
 
 
 end

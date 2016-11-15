@@ -5,11 +5,10 @@ class ApartmentsController < ApplicationController
   end
 
   def create
-    @petition = Petition.new
-    @petition.save
     @apartment = Apartment.create(apartment_params)
     if @apartment.save
-      @apartment.update_attributes(petition_id: @petition.id)
+      @petition = Petition.new(apartment: @apartment)
+      @petition.save
       flash[:success] = "Your petition was created. Thank you!"
       redirect_to apartment_path(@apartment)
     else
@@ -23,7 +22,5 @@ class ApartmentsController < ApplicationController
   def apartment_params
     params.require(:apartment).permit(:street_address, :petition_id)
   end
-
-
 
 end

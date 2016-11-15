@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115031409) do
+ActiveRecord::Schema.define(version: 20161115042115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 20161115031409) do
     t.string   "street_address"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "petition_id"
-    t.index ["petition_id"], name: "index_apartments_on_petition_id", using: :btree
   end
 
   create_table "petitions", force: :cascade do |t|
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "vote_count", default: 1
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "vote_count",   default: 1
+    t.integer  "apartment_id"
+    t.index ["apartment_id"], name: "index_petitions_on_apartment_id", using: :btree
   end
 
 end
