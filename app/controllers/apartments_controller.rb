@@ -13,7 +13,7 @@ class ApartmentsController < ApplicationController
       flash[:success] = "Your petition was created. Thank you!"
       redirect_to apartment_path(@apartment)
     else
-      flash[:warning] = "Something went wrong with your donation confirmation."
+      flash[:warning] = "Something went wrong with your petition."
       redirect_to root_path
     end
   end
