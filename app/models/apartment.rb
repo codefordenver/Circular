@@ -1,0 +1,4 @@
+class Apartment < ApplicationRecord
+  
+
+end

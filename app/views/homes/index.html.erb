@@ -1,0 +1,13 @@
+<h1>Tenants</h1>
+
+<h3>Enter Your Apartment</h3>
+<%= form_for @apartment do |f| %>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<h3>All Apartments</h3>
+<% @apartments.each do |apartment| %>
+<p><%= apartment.street_address%></p>
+<% end %>
