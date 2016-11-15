@@ -11,14 +11,14 @@ class ApartmentsController < ApplicationController
       if @apartment.save
         @petition = Petition.new(apartment: @apartment)
         @petition.save
-        flash[:success] = "Your petition was created. Thank you!"
+        flash[:success] = "A campaign was created for #{@apartment.street_address}. Thank you!"
         redirect_to apartment_path(@apartment)
       else
         flash[:warning] = @apartment.errors.full_messages.join(", ")
         redirect_to root_path
       end
     else
-      flash[:success] = "A petition already exists!"
+      flash[:success] = "A campaign already exists for #{@apartment.street_address}!"
       redirect_to apartment_path(@apartment)
     end
   end
