@@ -26,7 +26,8 @@ ActiveRecord::Schema.define(version: 20161115042115) do
     t.datetime "updated_at",               null: false
     t.integer  "vote_count",   default: 1
     t.integer  "apartment_id"
-    t.index ["apartment_id"], name: "index_petitions_on_apartment_id", using: :btree
+    t.index ["apartment_id"], name: "index_petitions_on_apartment_id", unique: true, using: :btree
   end
 
+  add_foreign_key "petitions", "apartments"
 end
