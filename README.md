@@ -1,24 +1,57 @@
-# README
+# Circular
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Stories in Ready](https://badge.waffle.io/codefordenver/Circular.png?label=ready&title=Ready)](https://waffle.io/codefordenver/Circular)
 
-Things you may want to cover:
+## Install Ruby/Rails
 
-* Ruby version
+(Ask for help if needed.)
 
-* System dependencies
+## Install Postgres
 
-* Configuration
+(Use homebrew if you have it.)
 
-* Database creation
+```
+brew install postgres
 
-* Database initialization
+pg_ctl -D <var folder> start
+```
 
-* How to run the test suite
+## Clone source code
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+https://github.com/codefordenver/Circular
 
-* Deployment instructions
+git clone https://github.com/codefordenver/Circular.git
+```
 
-* ...
+## Install rails app and dependencies
+
+```
+bundle install
+```
+
+## Database creation/Database initialization
+
+```
+rails db:create
+rails db:migrate
+```
+
+## Run the app
+
+```
+rails s
+```
+
+## Run the app console
+
+```
+rails c
+```
+
+## How to run the test suite
+
+```
+rspec
+```
+
