@@ -5,8 +5,5 @@ class HomesController < ApplicationController
     @apartments = Apartment.all
   end
 
-  private
-
-
 
 end

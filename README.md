@@ -1,5 +1,7 @@
 # Circular
 
+[![Stories in Ready](https://badge.waffle.io/codefordenver/Circular.png?label=ready&title=Ready)](https://waffle.io/codefordenver/Circular)
+
 ## Install Ruby/Rails
 
 (Ask for help if needed.)
