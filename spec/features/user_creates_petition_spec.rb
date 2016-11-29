@@ -4,7 +4,7 @@ RSpec.feature "User creates a petition" do
   scenario "User enters addresss for apartment that has no campaign" do
 
     visit '/'
-    fill_in "Street address", with: "1000 Broadway"
+    fill_in "street_address", with: "1000 Broadway"
     click_on "Submit"
     expect(current_path).to eq apartment_path(Apartment.last)
     expect(page).to have_content("A campaign was created for 1000 Broadway")
@@ -21,7 +21,7 @@ RSpec.feature "User creates a petition" do
     expect(Petition.count).to eq(1)
 
     visit '/'
-    fill_in "Street address", with: "1000 Broadway"
+    fill_in "street_address", with: "1000 Broadway"
     click_on "Submit"
     expect(current_path).to eq apartment_path(Apartment.last)
     expect(page).to have_content("A campaign already exists for 1000 Broadway")
@@ -33,7 +33,7 @@ RSpec.feature "User creates a petition" do
   scenario "User enters empty addresss for apartment and receives an error" do
 
     visit '/'
-    fill_in "Street address", with: ""
+    fill_in "street_address", with: ""
     click_on "Submit"
     expect(current_path).to eq root_path
     expect(page).to have_content("Street address can't be blank")

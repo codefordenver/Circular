@@ -1,13 +1,28 @@
 <h1>Tenants</h1>
 
-<h3>Enter Your Apartment</h3>
-<%= form_for @apartment do |f| %>
-  <%= f.label :street_address %>
-  <%= f.text_field :street_address %>
-  <%= f.submit "Submit" %>
-<% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">Enter Your Apartment</h3>
+      </div>
+
+      <div class="panel-body new-link-section">
+
+
+            <%= form_for @apartment do |f| %>
+            <div class="input-group">
+              <%= f.text_field :street_address, id: "street_address", class: "form-control", placeholder: "street address" %><span class="input-group-btn">
+              <%= f.button "Submit", class: "btn btn-primary"%></span>
+            </div>
+            <% end %>
+  </div>
+</div>
 
 <h3>All Apartments</h3>
+<ul class="list-group">
 <% @apartments.each do |apartment| %>
-<p><%= apartment.street_address%></p>
+    <li class="list-group-item"><%= apartment.street_address%></li>
 <% end %>
+</ul>
