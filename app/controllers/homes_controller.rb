@@ -4,6 +4,10 @@ class HomesController < ApplicationController
     @apartment = Apartment.new
     @apartments = Apartment.all
   end
+  
+  def show
+    
+  end
 
 
 end
