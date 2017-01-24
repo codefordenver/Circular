@@ -3,12 +3,18 @@
   <head>
     <title>Circular</title>
     <%= csrf_meta_tags %>
-
+    <script src="//maps.google.com/maps/api/js?key=<%=ENV['google_maps_secret']%>"></script>
+    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
   </head>
 
   <body>
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+
     <div class="container">
     <% flash.each do |type, message| %>
       <div class="alert alert-<%= type %> text-center alert-dismissible" role="alert">
