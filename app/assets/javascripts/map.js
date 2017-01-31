@@ -2,9 +2,10 @@ $(document).ready(function(){
   initMap();
 })
 
-function initMap(){ 
+function initMap(){
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  handler.buildMap({ provider: {
+  }, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers([
       {
         "lat": 39.7392,
@@ -19,6 +20,6 @@ function initMap(){
     ]);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
+    handler.getMap().setZoom(10);
   });
 }
-  
