@@ -1,0 +1,46 @@
+@import 'variables';
+
+.home-link {
+  color: $green-color;
+  margin-left: 1vw;
+  font-size: 30px;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 700;
+}
+
+.home-link:hover {
+  text-decoration: none;
+  color: $green-color;
+  font-size: 32px;
+}
+
+.non-bold {
+  font-weight: 100;
+}
+.navbar {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.top-nav.navbar.navbar-default.navbar-fixed-top {
+  background-color: $top-nav-color;
+  opacity: 10;
+  vertical-align: top;
+  z-index: 10000;
+}
+
+.top-nav-list {
+  color: $green-color;
+  display: inline-block;
+  list-style: none;
+  text-align: right;
+}
+
+.top-nav-list > li {
+  color: $green-color;
+  text-decoration: none;
+}
+
+.top-nav-list > li > a:hover {
+  color: $secondary-color;
+}
