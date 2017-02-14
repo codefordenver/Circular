@@ -13,6 +13,8 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['google_maps_secret']%>&callback=initMap"></script>
     
     <div class="container">
+      <%= render partial: "layouts/navbar" %>
+    <div class="alerts">
     <% flash.each do |type, message| %>
       <div class="alert alert-<%= type %> text-center alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -21,18 +23,6 @@
       </div>
     <% end %>
     
-    <div>
-      <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-      <% end %>
-    </div>
-  
-    <div style='width: 800px;'>
-      <div id="map" style='width: 800px; height: 400px;'></div>
-    </div>
     
     <%= yield %>
 
