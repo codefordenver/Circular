@@ -1,12 +1,8 @@
 class ApartmentsController < ApplicationController
   protect_from_forgery except: :show
-  @booly = false
 
   def show
-
     @apartment = Apartment.find(params[:id])
-    @booly = false
-    
   end
 
   def create

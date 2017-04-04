@@ -1,8 +1,6 @@
 <div>
   <div id="map" class="col-md-12"></div>
 </div>
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
 
 <div class="row">
   <div class="col-md-3 col-sm-6 col-xs-12">Create</div>
@@ -11,6 +9,8 @@
   <div class="col-md-3 col-sm-6 col-xs-12">Recycle</div>
 </div>   
 <h1>Tenants</h1>
+
+<%= render "apartments/iminmodal" %>
 
 <div class="row">
   <div class="col-md-6">
@@ -23,12 +23,13 @@
       <div class="panel-body new-link-section">
 
 
-            <%= form_for @apartment do |f| %>
-            <div class="input-group">
-              <%= f.text_field :street_address, id: "street_address", class: "form-control", placeholder: "street address" %><span class="input-group-btn">
-              <%= f.button "Submit", class: "btn btn-primary"%></span>
-            </div>
-            <% end %>
+    <%= form_tag do %>
+    <div class="input-group">
+      <%= text_field_tag(:apartment, :street_address, value: nil, class: 'form-control', placeholder: 'Street Address') %>
+    <span class="input-group-btn">
+      <%= button_tag "Submit", class: "btn btn-primary", id: 'address_search'%></span>
+    </div>
+    <% end %>
   </div>
 </div>
 
