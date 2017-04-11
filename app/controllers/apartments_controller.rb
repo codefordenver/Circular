@@ -5,6 +5,15 @@ class ApartmentsController < ApplicationController
     @apartment = Apartment.find(params[:id])
   end
 
+  def find
+    @apartment = Apartment.find_by("street_address": params[:street_address])
+    if @apartment
+      render :js => "window.location = '#{apartment_path(@apartment.id)}'"
+    else
+      render status: 404
+    end
+  end
+
   def create
     @apartment = Apartment.find_by(street_address: apartment_params[:street_address]);
     if !@apartment
