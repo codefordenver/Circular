@@ -4,6 +4,9 @@
 
 ## Install Ruby/Rails
 
+[Quick Guide for Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+[Quick Guide for Installing Rails](http://guides.rubyonrails.org/getting_started.html<Paste>)
+
 (Ask for help if needed.)
 
 ## Install Postgres
@@ -52,6 +55,7 @@ rails c
 ## How to run the test suite
 
 ```
+rails db:test:prepare
 rspec
 ```
 
