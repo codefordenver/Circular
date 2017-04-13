@@ -7,7 +7,7 @@ RSpec.describe ApartmentsController, type: :controller do
       apartment = create(:apartment)
       get :find, :street_address => apartment.street_address 
       
-      expect(response).to have_http_status(302)
+      expect(response).to be_success 
     end
   end
 end

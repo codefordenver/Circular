@@ -1,5 +1,5 @@
 class ApartmentsController < ApplicationController
-  protect_from_forgery except: :show
+  protect_from_forgery except: [:show, :find]
 
   def show
     @apartment = Apartment.find(params[:id])
