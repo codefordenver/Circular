@@ -14,6 +14,7 @@
           <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
         <% else %>
           <li><%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %></li>
+          <li><%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %></li>
         <% end %>
       </ul>
     </div>
