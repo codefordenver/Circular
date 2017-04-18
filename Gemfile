@@ -41,7 +41,9 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'simplecov', :require => false, :group => :test
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.53.4'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
 end
 
 group :development do
