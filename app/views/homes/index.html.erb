@@ -3,39 +3,87 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3 col-sm-6 col-xs-12">Create</div>
-  <div class="col-md-3 col-sm-6 col-xs-12">Organize</div>
-  <div class="col-md-3 col-sm-6 col-xs-12">Request</div>
-  <div class="col-md-3 col-sm-6 col-xs-12">Recycle</div>
-</div>   
-<h1>Tenants</h1>
-
-<%= render "apartments/iminmodal" %>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-
-      <div class="panel-heading">
-        <h3 class="panel-title text-center">Enter Your Apartment</h3>
+  <div class="col-md-12">
+    <div class="info-icons">
+      <div class="action-icon">
+        <i class="fa fa-bullhorn fa-3x" aria-hidden="true"></i>
+        <h4>1. CREATE</h4>
+        <!-- <p>Create and share a page with your neighbors</p> -->
       </div>
-
-      <div class="panel-body new-link-section">
-
-
-    <%= form_tag do %>
-    <div class="input-group">
-      <%= text_field_tag(:apartment, :street_address, value: nil, class: 'form-control', placeholder: 'Street Address') %>
-    <span class="input-group-btn">
-      <%= button_tag "Submit", class: "btn btn-primary", id: 'address_search'%></span>
+      <div class="action-icon">
+        <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+        <h4>2. SUPPORT</h4>
+        <!-- <p>Voice and show your support</p> -->
+      </div>
+      <div class="action-icon">
+        <i class="fa fa-question-circle fa-3x" aria-hidden="true"></i>
+        <h4>3. REQUEST</h4>
+        <!-- <p>Request recycling collection by sharing your building's page with your landlord</p> -->
+      </div>
+      <div class="action-icon">
+        <i class="fa fa-recycle fa-3x" aria-hidden="true"></i>
+        <h4>4. RECYCLE</h4>
+        <!-- <p>Live in a more sustainable building!</p> -->
+      </div>
     </div>
-    <% end %>
   </div>
 </div>
 
-<h3>All Apartments</h3>
-<ul class="list-group">
-<% @apartments.each do |apartment| %>
-    <li class="list-group-item"><%= apartment.street_address%></li>
-<% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6">
+    <div class="recycling-facts">
+      <h4>Denver's recycling rate is only 18%, while the national average is 35%.</h4>
+      <p>
+        The City of Denver only provides recycling service to single-family
+        residential homes and buildings with seven or fewer units. Furthermore,
+        multi-family building managers are not mandated to provide recycling
+        service, but you and your neighbors can request recycling service from
+        your landlord today!
+      </p>
+      <h4>Learn More</h4>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="property-manager">
+      <h4>Property Managers</h4>
+      <p>Provide sustainable waste managment to your tenants!</p>
+      <p>Increase tenant satisfaction and boost your building's appeal by providing recycling service</p>
+      <h4>Tips and Resources <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"></i></h4>
+      <h4>FAQ <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"></i></h4>
+      <h4>Estimate Cost / Request a Bid <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"></i></h4>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Tenants</h1>
+
+  <%= render "apartments/iminmodal" %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Enter Your Apartment</h3>
+        </div>
+
+        <div class="panel-body new-link-section">
+          <%= form_for @apartment do |f| %>
+          <div class="input-group">
+            <%= f.text_field :street_address, id: "street_address", class: "form-control", placeholder: "street address" %><span class="input-group-btn">
+            <%= f.button "Submit", class: "btn btn-primary"%></span>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+  <h3>All Apartments</h3>
+    <ul class="list-group">
+    <% @apartments.each do |apartment| %>
+        <li class="list-group-item"><%= apartment.street_address%></li>
+    <% end %>
+    </ul>
+
+</div>

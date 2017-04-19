@@ -14,6 +14,37 @@
   font-size: 32px;
 }
 
+.info-icons {
+  background-color: $icon-row-color;
+  height: 150px;
+  text-align: center;
+  padding: 30px;
+}
+
+.fa {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.action-icon {
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+  color: $green-color;
+}
+
+.property-manager {
+  background-color: $green-color;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.recycling-facts {
+  padding: 10px;
+  text-align: center;
+}
+
 .non-bold {
   font-weight: 100;
 }
