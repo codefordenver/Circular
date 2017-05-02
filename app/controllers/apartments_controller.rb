@@ -6,7 +6,7 @@ class ApartmentsController < ApplicationController
   end
 
   def find
-    @apartment = Apartment.find_by("street_address": params[:street_address])
+    @apartment = Apartment.find_by("street_address": apartment_params[:street_address])
     if @apartment
       render :js => "window.location = '#{apartment_path(@apartment.id)}'"
     else
@@ -22,14 +22,14 @@ class ApartmentsController < ApplicationController
         @petition = Petition.new(apartment: @apartment)
         @petition.save
         flash[:success] = "A campaign was created for #{@apartment.street_address}. Thank you!"
-        redirect_to apartment_path(@apartment)
+        render :js => "window.location = '#{apartment_path(@apartment.id)}'"
       else
         flash[:warning] = @apartment.errors.full_messages.join(", ")
-        redirect_to root_path
+        render :js => "window.location = '#{root_path}'"
       end
     else
       flash[:success] = "A campaign already exists for #{@apartment.street_address}!"
-      redirect_to apartment_path(@apartment)
+      render :js => "window.location = '#{apartment_path(@apartment.id)}'"
     end
   end
 

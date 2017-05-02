@@ -8,7 +8,7 @@ $(document).ready(() => {
       $.ajax({
         url: '/apartments/find',
         method: 'GET',
-        data: {"street_address": streetAddress}
+        data: {'apartment': {'street_address': streetAddress}}
       })
       .done(response => {
         response()
