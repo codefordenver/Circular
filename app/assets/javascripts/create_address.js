@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  $('#create-address').click(() => {
+  $('#create-address').click(( event ) => {
     event.preventDefault()
     let streetAddress = $('input[name=apartment]').val()
     $.ajax({
