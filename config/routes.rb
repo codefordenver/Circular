@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 
   root to: "homes#index"
   
-  get 'apartments/find', to: 'apartments#find'
+  # get 'apartments/find', to: 'apartments#find'
   resources :apartments
 end

@@ -44,6 +44,8 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 2.53.4'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
+  gem 'pry'
+  gem 'pry-byebug'
 end
 
 group :development do
