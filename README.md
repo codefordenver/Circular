@@ -15,7 +15,7 @@ Follow the instructions in the link install Ruby:
 (Don't hesitate to ask for help if needed!)
 
 #### 2. Install Rails
-Follow the instructions in the link to install Rails: [Quick Guide for Installing Rails](http://guides.rubyonrails.org/getting_started.html<Paste>)
+Follow the instructions in the link to install Rails: [Quick Guide for Installing Rails](http://guides.rubyonrails.org/getting_started.html)
 
 
 #### 3. Install PostgreSQL
