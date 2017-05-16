@@ -28,7 +28,6 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'figaro'
 gem 'gmaps4rails'
 gem 'omniauth-facebook'
-gem 'lograge'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
