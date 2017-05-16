@@ -4,13 +4,13 @@ function initMap(){
   var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
           center: {
-            lat: 39.7392, 
+            lat: 39.7392,
             lng: -104.9903
           }
         });
- 
+
   <% Apartment.all.each do |apartment| %>
-    geocoder.geocode( { 'address': "<%= apartment.street_address %>"}, function(results, status) {
+    geocoder.geocode({ 'address': "<%= apartment.street_address %>" }, function(results, status) {
     if (status == 'OK') {
       var markerLocation = results[0].geometry.location;
 
@@ -25,3 +25,5 @@ function initMap(){
 
   <% end %>
 }
+
+

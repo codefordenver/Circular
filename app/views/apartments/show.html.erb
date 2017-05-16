@@ -1,5 +1,35 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['google_maps_secret']%>&callback=initApartment"></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+
 <h1> Address: <%= @apartment.street_address %></h1>
 
+<div>
+  <div id="map" class="col-md-12"></div>
+</div>
+
+<script>
+  function initApartment(){
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ 'address': "<%= @apartment.street_address %>" }, function(results, status) {
+      if (status == 'OK') {
+        var markerLocation = results[0].geometry.location;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: markerLocation
+        });
+
+
+        var marker = new google.maps.Marker({
+          position: markerLocation,
+          map: map
+        });
+      } else {
+        console.log("could not geolocate " + "<%= @apartment.street_address %>");
+      }
+    });
+  }
+</script>
 
 
 <%= render "iminmodal" if @booly %>

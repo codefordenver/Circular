@@ -6,8 +6,8 @@ $(document).ready(() => {
       $('.panel-body').append("Street address can't be blank").css('color', 'red')
     } else {
       $.ajax({
-        url: '/apartments',
-        method: 'POST',
+        url: '/apartments/find',
+        method: 'GET',
         data: {'apartment': {'street_address': streetAddress}}
       })
       .done(response => {
