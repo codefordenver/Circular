@@ -1,7 +1,7 @@
 $(document).ready(() => {
   $('#create-address').click(( event ) => {
     event.preventDefault()
-    let streetAddress = $('input[name=apartment]').val()
+    let streetAddress = $('input[name=apartment]').val();
     $.ajax({
       url: '/apartments',
       method: 'POST',
@@ -9,6 +9,7 @@ $(document).ready(() => {
     })
     .done(response => {
       response()
-    }) 
+    })
   })
 })
+

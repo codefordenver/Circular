@@ -3,7 +3,6 @@
   <head>
     <title>Circular</title>
     <%= csrf_meta_tags %>
-    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <script src="https://use.fontawesome.com/6cc4e8cbaf.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -11,9 +10,8 @@
   </head>
 
   <body>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['google_maps_secret']%>&callback=initMap"></script>
 
-    <!-- <div class="container"> -->
+    <div class="container">
       <%= render partial: "layouts/navbar" %>
     <div class="alerts">
     <% flash.each do |type, message| %>
@@ -23,8 +21,8 @@
         <%= sanitize(message) %>
       </div>
     <% end %>
-
-
+    
+    
     <%= yield %>
 
   </div>

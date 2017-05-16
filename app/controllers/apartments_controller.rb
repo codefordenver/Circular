@@ -15,22 +15,12 @@ class ApartmentsController < ApplicationController
   end
 
   def create
-    @apartment = Apartment.find_by(street_address: apartment_params[:street_address]);
-    if !@apartment
-      @apartment = Apartment.create(apartment_params)
-      if @apartment.save
-        @petition = Petition.new(apartment: @apartment)
-        @petition.save
-        flash[:success] = "A campaign was created for #{@apartment.street_address}. Thank you!"
+    @apartment = Apartment.find_or_create_by("street_address": apartment_params[:street_address])
+      if @apartment
         render :js => "window.location = '#{apartment_path(@apartment.id)}'"
       else
-        flash[:warning] = @apartment.errors.full_messages.join(", ")
-        render :js => "window.location = '#{root_path}'"
+        render status: 404
       end
-    else
-      flash[:success] = "A campaign already exists for #{@apartment.street_address}!"
-      render :js => "window.location = '#{apartment_path(@apartment.id)}'"
-    end
   end
 
   private
