@@ -13,4 +13,10 @@ Rails.application.routes.draw do
   
   get 'apartments/find', to: 'apartments#find'
   resources :apartments
+
+  namespace :api do
+    namespace :v1 do
+      resources :apartments, only: [:index]
+    end
+  end
 end
