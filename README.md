@@ -53,11 +53,11 @@ $ rails db:migrate
 
 #### 7. Run the App
 
-Finally, run the app using the `rails s` (short for `rails server`). This will
-allow you to access the application through a web browser. After starting the server, open http://localhost:3000 in order to see the Rails app run in your favorite browser.
+Finally, run the app using the `rake start` command. This alias will start 2 servers: React's Node server on port 3000, and Rails' Puma server on port 3001. (The Node server is then proxied to port 3001 to avoid CORS issues). The app will open in a new window/tab automagically! However, if you need to access the app in a different browser window/tab, simply point the browser to `http://localhost:3000/`.
+
 
 ```
-$ rails s
+$ rake start
 ```
 
 #### Optional: Run the App Console
