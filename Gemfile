@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.0.0', '= 5.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -28,6 +28,7 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'figaro'
 gem 'gmaps4rails'
 gem 'omniauth-facebook'
+gem 'foreman', '~>0.82.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
