@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User creates a petition", js: true do
-  scenario "User enters addresss for apartment that has no campaign" do
+  scenario "User enters address for apartment that has no campaign" do
 
     visit '/'
     fill_in "apartment", with: "1000 Broadway"

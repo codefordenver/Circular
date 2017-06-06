@@ -1,22 +1,37 @@
 class Api::V1::ApartmentsController < Api::V1::BaseController
+  before_action :set_apartment, only: [:show, :update, :destroy]
 
   def index
-    respond_with Apartment.all
+    @apartments = Apartment.all
+    json_response(@apartments)
   end
 
   def create
-    respond_with :api, :v1, Apartment.create(apartment_params)
+    @apartment = Apartment.create!(apartment_params)
+    json_response(@apartment, :created)
+  end
+
+  def show
+    json_response(@apartment)
   end
 
   def update
-    apartment = Apartment.find(params['id'])
-    apartment.update_attributes(apartment_params)
-    respond_with apartment, json: apartment
+    @apartment.update(apartment_params)
+    head :no_content
+  end
+
+  def destroy
+    @apartment.destroy
+    head :no_content
   end
 
   private
 
   def apartment_params
-    params.require(:apartment).permit(:id, :street_address)
+    params.permit(:street_address)
+  end
+
+  def set_apartment
+    @apartment = Apartment.find(params[:id])
   end
 end
