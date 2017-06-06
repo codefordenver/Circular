@@ -264,8 +264,8 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 3.0)
-  responders
   rails (~> 5.0.0, = 5.0.1)
+  responders
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver (~> 2.53.4)
