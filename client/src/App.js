@@ -3,6 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+	componentDidMount(){
+		// fetch('api/vi/apartments')
+	}
   render() {
     return (
       <div className="App">

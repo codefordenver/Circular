@@ -51,10 +51,38 @@ $ rails db:create
 $ rails db:migrate
 ```
 
-#### 7. Run the App
+#### 7. Install node
 
-Finally, run the app using the `rake start` command. This alias will start 2 servers: React's Node server on port 3000, and Rails' Puma server on port 3001. (The Node server is then proxied to port 3001 to avoid CORS issues). The app will open in a new window/tab automagically! However, if you need to access the app in a different browser window/tab, simply point the browser to `http://localhost:3000/`.
+This includes a download of `npm`'s command line tools, which we'll use for managing frontend javascript modules. This only needs to be done once.
 
+```
+$ brew install node
+```
+
+#### 8. Navitage into the React app
+
+From the root of the repository:
+
+```
+cd client
+```
+
+#### 9. Install the project's node modules
+
+This only needs to be done the first time you run the app, or if you pull down the app and someone else has added modules since your last pull. From _inside the `client` directory_:
+
+```
+npm install
+```
+
+
+#### 10. Run the App
+
+Finally, navigate _back to the root_ with `cd ..` and then run the `rake start` command. This alias will start 2 servers: React's Node server on port 3000, and Rails' Puma server on port 3001. (The Node server is then proxied to port 3001 to avoid CORS issues). The app will open in a new window/tab automagically! However, if you need to access the app in a different browser window/tab, simply point the browser to `http://localhost:3000/`.
+
+```
+cd ..
+```
 
 ```
 $ rake start
