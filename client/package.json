@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-google-maps": "latest",
+    "lodash": "latest"
   },
   "devDependencies": {
     "react-scripts": "1.0.5"
@@ -15,5 +17,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-	"proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001/"
 }
