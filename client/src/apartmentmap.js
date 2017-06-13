@@ -23,7 +23,6 @@ const GettingStartedGoogleMap = withScriptjs(
 )));
 class ApartmentMap extends Component {
   render() {
-    console.log(`env: ${process.env.NODE_ENV}`);
     const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`;
     return (
       <GettingStartedGoogleMap
