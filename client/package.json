@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "geocoder": "^0.2.3",
+    "lodash": "latest",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-google-maps": "latest",
-    "lodash": "latest"
+    "react-google-maps": "^6.3.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.5"

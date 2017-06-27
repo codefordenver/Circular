@@ -2,20 +2,39 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBar from './navbar';
 import ApartmentMap from './apartmentmap';
+import NodeGeocoder from 'geocoder';
 
 class App extends Component {
-  componentDidMount(){
-    // fetch('api/vi/apartments')
-  }
   state = {
-    markers: [{
-      position: {
-        lat: 39.7392, lng: -104.9903
-      },
-      key: `Taiwan`,
-      defaultAnimation: 2,
-    }],
+    markers: [],
   };
+
+  componentDidMount(){
+    fetch('/api/v1/apartments')
+      .then(response => {
+        if(response.ok) {
+          response.json().then(apartmentRecords => {
+            apartmentRecords.map(record => {
+              NodeGeocoder.geocode(record.street_address, (err, geoCodedAddress) => {
+                const location = geoCodedAddress.results[0].geometry.location
+                  this.setState(previous => {
+                    previous.markers.push({
+                      key: record.id,
+                      position: {
+                        lat: location.lat,
+                        lng: location.lng
+                      },
+                      defaultAnimation: 2
+                    });
+                    return {markers: previous.markers};
+                  })
+                })
+              })
+            })
+          }
+        });
+  }
+
   render() {
     return (
       <div className="container">
