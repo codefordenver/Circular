@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import NavBar from './navbar';
-import ApartmentMap from './apartmentmap';
+import './App.scss';
+import ApartmentMap from '../components/ApartmentMap/apartmentmap';
+import NavBar from '../components/Navbar/navbar';
 import NodeGeocoder from 'geocoder';
 
 class App extends Component {

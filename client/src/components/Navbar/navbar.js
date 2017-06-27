@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
+const styles = require('./NavBar.scss');
+
 class NavBar extends Component {
+
   render() {
     return (
-      <nav className="top-nav navbar navbar-default navbar-fixed-top">
+      <nav className='top_nav'>
       <div className="row">
 
       <div className="col-md-9 navbar-header">
