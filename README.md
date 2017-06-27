@@ -8,6 +8,8 @@ Circular provides a platform for tenants of multi-family buildings within the Ci
 
 In order to get the project up and running on your local machine, you will first need to install a few software tools and copy the project source code on to your local machine.
 
+FOR WINDOWS! Use this guide for Ruby, Rails, node, and Github: http://installfest.railsbridge.org/installfest/windows
+
 #### 1. Install Ruby
 Follow the instructions in the link install Ruby:
 [Quick Guide for Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/)
