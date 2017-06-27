@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBar from './navbar';
 import ApartmentMap from './apartmentmap';
-import NodeGeocoder from 'node-geocoder';
+import NodeGeocoder from 'geocoder';
 
 class App extends Component {
   state = {
@@ -15,30 +15,24 @@ class App extends Component {
     }],
   };
 
-  geocoder = NodeGeocoder({
-    provider: 'google',
-    apiKey: `${process.env.REACT_APP_GOOGLE_MAPS_KEY}`,
-  });
-
   componentDidMount(){
     fetch('/api/v1/apartments')
       .then(response => {
         if(response.ok) {
           response.json().then(apartmentRecords => {
             apartmentRecords.map(record => {
-              // this.geocoder.geocode(record.street_address)
-              this.geocoder.geocode(record.street_address, function(err, geoCodedAddress) {
-                //.then(geoCodedAddress => {
+              NodeGeocoder.geocode(record.street_address, (err, geoCodedAddress) => {
+                const location = geoCodedAddress.results[0].geometry.location
                   this.setState(previous => {
                     previous.markers.push({
                       key: record.id,
                       position: {
-                        lat: geoCodedAddress.latitude,
-                        lng: geoCodedAddress.longitude,
-                        defaultAnimation: 2
-                      }
+                        lat: location.lat,
+                        lng: location.lng
+                      },
+                      defaultAnimation: 2
                     });
-                    return {markers: previous};
+                    return {markers: previous.markers};
                   })
                 })
               })
