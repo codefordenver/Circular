@@ -6,13 +6,7 @@ import NodeGeocoder from 'geocoder';
 
 class App extends Component {
   state = {
-    markers: [{
-      position: {
-        lat: 39.7392, lng: -104.9903
-      },
-      key: `Denver`,
-      defaultAnimation: 2,
-    }],
+    markers: [],
   };
 
   componentDidMount(){
