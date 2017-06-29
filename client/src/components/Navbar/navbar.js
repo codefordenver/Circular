@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-const styles = require('./NavBar.scss');
 
 class NavBar extends Component {
 

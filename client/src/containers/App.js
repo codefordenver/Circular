@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.scss';
 import ApartmentMap from '../components/ApartmentMap/apartmentmap';
 import NavBar from '../components/Navbar/navbar';
 import NodeGeocoder from 'geocoder';
