@@ -11,7 +11,7 @@ class NavBar extends Component {
 
       <div className="col-md-9 navbar-header">
       <p>
-      <a className="home-link" href="/">DENVER: RE<span class="non-bold">IMAGINE</span></a>
+      <a className="home-link" href="/">DENVER: RE<span className="non-bold">IMAGINE</span></a>
       </p>
       </div>
 
