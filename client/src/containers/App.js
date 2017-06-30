@@ -51,7 +51,11 @@ class App extends Component {
         <HeroCTA
         openMap={() => this.openMap()}
         />
-        <ApartmentMap isOpen={this.state.isOpen} markers={this.state.markers} closeMap={() => this.closeMap()} />
+        <ApartmentMap
+          isOpen={this.state.isOpen}
+          markers={this.state.markers}
+          closeMap={() => this.closeMap()}
+        />
       </div>
     );
   }
