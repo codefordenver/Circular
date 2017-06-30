@@ -12,6 +12,7 @@
   "devDependencies": {
     "css-loader": "^0.28.4",
     "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "^4.0.2",
     "react-scripts": "1.0.5",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2"
