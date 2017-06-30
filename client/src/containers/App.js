@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
 import ApartmentMap from '../components/ApartmentMap/apartmentmap';
 import NavBar from '../components/Navbar/navbar';
 import NodeGeocoder from 'geocoder';
@@ -52,12 +51,7 @@ class App extends Component {
         <HeroCTA
         openMap={() => this.openMap()}
         />
-        <Modal
-          isOpen={this.state.isOpen}
-          contentLabel="Modal"
-        >
-          <ApartmentMap markers={this.state.markers} closeMap={() => this.closeMap()} />
-        </Modal>
+        <ApartmentMap isOpen={this.state.isOpen} markers={this.state.markers} closeMap={() => this.closeMap()} />
       </div>
     );
   }
