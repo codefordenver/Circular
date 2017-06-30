@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import ApartmentMap from '../components/ApartmentMap/apartmentmap';
 import NavBar from '../components/Navbar/navbar';
 import NodeGeocoder from 'geocoder';
+import HeroCTA from '../components/HeroCTA';
 
 class App extends Component {
   state = {
     markers: [],
+    isOpen: false
   };
 
   componentDidMount(){
@@ -34,11 +37,27 @@ class App extends Component {
         });
   }
 
+  openMap() {
+    this.setState({isOpen: true});
+  }
+
+  closeMap(){
+    this.setState({isOpen: false});
+  }
+  
   render() {
     return (
       <div className="container">
         <NavBar />
-        <ApartmentMap markers={this.state.markers} />
+        <HeroCTA
+        openMap={() => this.openMap()}
+        />
+        <Modal
+          isOpen={this.state.isOpen}
+          contentLabel="Modal"
+        >
+          <ApartmentMap markers={this.state.markers} closeMap={() => this.closeMap()} />
+        </Modal>
       </div>
     );
   }
