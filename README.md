@@ -28,6 +28,8 @@ If you have Homebrew, use the following command to install PostgreSQL.
 $ brew install postgres
 $ pg_ctl -D <var folder> start
 ```
+
+If you happen to stop your brew installed postgres server by accident or for whatever reason, you can always restart it using `pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start`.
 Otherwise, you can download the software [here](https://www.postgresql.org/download/).
 
 #### 4. Clone Project Source Code from GitHub
@@ -61,7 +63,7 @@ This includes a download of `npm`'s command line tools, which we'll use for mana
 $ brew install node
 ```
 
-#### 8. Navitage into the React app
+#### 8. Navigate into the React app
 
 From the root of the repository:
 
