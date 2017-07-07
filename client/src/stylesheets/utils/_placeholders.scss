@@ -1,0 +1,13 @@
+%btn_primary {
+  background-color: $maingreen;
+  color: $mainwhite;
+  border-radius: 0;
+  border: none;
+  font-size: 1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  &:hover{
+    cursor: pointer;
+    background-color: $hovergreen;
+  }
+}

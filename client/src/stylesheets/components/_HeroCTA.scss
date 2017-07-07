@@ -1,0 +1,13 @@
+@import '../utils/placeholders';
+
+.hero_wrapper {
+  background-color: seagreen;
+  height: 33vh;
+  padding: 1em;
+}
+
+.open_map_button {
+  @extend %btn_primary;
+  padding: 1em;
+  height: 4em;
+}
