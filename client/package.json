@@ -8,7 +8,10 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-google-maps": "^6.3.0",
-    "react-modal": "^2.2.0"
+    "react-modal": "^2.2.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-saga": "^0.15.4"
   },
   "devDependencies": {
     "css-loader": "^0.28.4",
