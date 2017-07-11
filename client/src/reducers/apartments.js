@@ -3,7 +3,7 @@ import { APARTMENTS_REQUEST, APARTMENTS_SUCCESS, APARTMENTS_FAILURE } from '../c
 const defaultState = {
   loading: false,
   loaded: false,
-  data: []
+  apartments: []
 };
 
 export default function(state = defaultState, action) {

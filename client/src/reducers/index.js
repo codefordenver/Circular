@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
 import apartments from './apartments';
+import googleMap from './googleMap';
 
 const reducers = combineReducers({
-  apartments
+  apartments,
+  googleMap
 });
 
 export default reducers;

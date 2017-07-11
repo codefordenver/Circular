@@ -5,6 +5,7 @@ import NavBar from '../components/Navbar/navbar';
 import HeroCTA from '../components/HeroCTA';
 
 import fetchApartmentsRequest from '../actions/apartments'
+import { openMap, closeMap } from '../actions/googleMap';
 
 class App extends Component {
   constructor(props) {
@@ -14,22 +15,21 @@ class App extends Component {
   }
 
   render() {
-    const { apartments: { apartments } } = this.props;
-    const isOpen = false;
+    const { apartments: { apartments }, googleMap: { isOpen } } = this.props;
     return (
       <div className="container">
         <NavBar />
         <HeroCTA
-        openMap={() => null}
+        openMap={this.props.openMap}
         />
         <ApartmentMap
           isOpen={isOpen}
           markers={apartments}
-          closeMap={() => null}
+          closeMap={this.props.closeMap}
         />
       </div>
     );
   }
 }
 
-export default connect(({ apartments, map}) => ({ apartments, map }), { fetchApartmentsRequest })(App);
+export default connect(({ apartments, googleMap}) => ({ apartments, googleMap }), { fetchApartmentsRequest, openMap, closeMap })(App);
