@@ -25,10 +25,19 @@ class Api::V1::ApartmentsController < Api::V1::BaseController
     head :no_content
   end
 
+  def find
+    @apartments = Apartment.within_radius(250, params[:lat], params[:long]).order_by_distance(params[:lat], params[:long])
+    if @apartments.empty?
+      head :no_content
+    else
+      json_response(@apartments)
+    end
+  end
+
   private
 
   def apartment_params
-    params.permit(:street_address)
+    params.permit(:street_address, :lat, :long)
   end
 
   def set_apartment
