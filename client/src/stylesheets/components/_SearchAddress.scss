@@ -1,0 +1,43 @@
+.searchAddress {
+    background-color: rgba(99, 214, 113, .5);
+    margin: 0 auto;    
+    max-width: 24rem;
+    text-align: center;
+    padding: .5rem;
+}
+
+.searchAddress-heading {
+    color: $mainwhite;
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 900;
+}
+
+.searchAddress-inputGroup {
+    margin-top: .5rem;
+}
+
+.searchAddress-input {
+    padding: .5rem;   
+    font-size: 1rem;
+    width: 70%;
+    border-color: #fff;
+    border-style: solid;
+}
+
+.searchAddress-button {
+    background-color: $maingreen;
+    color: $mainwhite;
+    text-decoration: none;
+    padding: .5rem .75rem;   
+    border: 2px solid $maingreen;
+}
+
+.searchAddress-link {
+    color: $mainwhite;
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-top: .5rem;    
+    text-decoration: none;
+    font-weight: 900;    
+}

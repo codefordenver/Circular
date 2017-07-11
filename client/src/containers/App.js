@@ -3,6 +3,7 @@ import ApartmentMap from '../components/ApartmentMap/apartmentmap';
 import NavBar from '../components/Navbar/navbar';
 import NodeGeocoder from 'geocoder';
 import HeroCTA from '../components/HeroCTA';
+import SearchAddress from '../components/SearchAddress';
 
 class App extends Component {
   state = {
