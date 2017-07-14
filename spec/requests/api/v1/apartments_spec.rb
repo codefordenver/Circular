@@ -81,12 +81,12 @@ RSpec.describe 'Apartments API', type: :request do
   end
 
   describe "GET #find" do
-    it "returns http success if the apartment exists" do
+    it "returns http success if an apartment exists" do
       get "/api/v1/apartments/find",  params: { lat: apartments.first.lat, long: apartments.first.long }
 
       expect(response).to be_success
     end
-    it "returns http failure if the apartment exists" do
+    it "returns http failure if there are no apartments" do
       get "/api/v1/apartments/find",  params: { lat: 0, long: 0 }
 
       expect(response).to have_http_status(:no_content)
