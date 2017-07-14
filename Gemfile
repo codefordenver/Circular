@@ -46,7 +46,7 @@ group :development, :test do
   gem 'simplecov', :require => false, :group => :test
   gem 'selenium-webdriver', '~> 2.53.4'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'faker'
+  gem 'faker', '~> 1.8.2' 
   gem 'pry'
   gem 'pry-byebug'
 end
