@@ -1,65 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ApartmentMap from '../components/ApartmentMap/apartmentmap';
 import NavBar from '../components/Navbar/navbar';
-import NodeGeocoder from 'geocoder';
 import HeroCTA from '../components/HeroCTA';
 import SearchAddress from '../components/SearchAddress';
 
+import fetchApartmentsRequest from '../actions/apartments'
+import { openMap, closeMap } from '../actions/googleMap';
+
 class App extends Component {
-  state = {
-    markers: [],
-    isOpen: false
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount(){
-    fetch('/api/v1/apartments')
-      .then(response => {
-        if(response.ok) {
-          response.json().then(apartmentRecords => {
-            apartmentRecords.map(record => {
-              NodeGeocoder.geocode(record.street_address, (err, geoCodedAddress) => {
-                const location = geoCodedAddress.results[0].geometry.location
-                  this.setState(previous => {
-                    previous.markers.push({
-                      key: record.id,
-                      position: {
-                        lat: location.lat,
-                        lng: location.lng
-                      },
-                      defaultAnimation: 2
-                    });
-                    return {markers: previous.markers};
-                  })
-                })
-              })
-            })
-          }
-        });
+    this.props.fetchApartmentsRequest();
   }
 
-  openMap() {
-    this.setState({isOpen: true});
-  }
-
-  closeMap(){
-    this.setState({isOpen: false});
-  }
-  
   render() {
+    const { apartments: { apartments }, googleMap: { isOpen } } = this.props;
     return (
       <div className="container">
         <NavBar />
         <HeroCTA
-        openMap={() => this.openMap()}
+        openMap={this.props.openMap}
         />
         <ApartmentMap
-          isOpen={this.state.isOpen}
-          markers={this.state.markers}
-          closeMap={() => this.closeMap()}
+          isOpen={isOpen}
+          markers={apartments}
+          closeMap={this.props.closeMap}
         />
       </div>
     );
   }
 }
 
-export default App;
+export default connect(({ apartments, googleMap}) => ({ apartments, googleMap }), { fetchApartmentsRequest, openMap, closeMap })(App);
