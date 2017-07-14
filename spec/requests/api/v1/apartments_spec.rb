@@ -79,4 +79,31 @@ RSpec.describe 'Apartments API', type: :request do
       expect(response).to have_http_status(204)
     end
   end
+
+  describe "GET #find" do
+    it "returns http success if an apartment exists" do
+      get "/api/v1/apartments/find",  params: { lat: apartments.first.lat, long: apartments.first.long }
+
+      expect(response).to be_success
+    end
+    it "returns http failure if there are no apartments" do
+      get "/api/v1/apartments/find",  params: { lat: 0, long: 0 }
+
+      expect(response).to have_http_status(:no_content)
+    end
+
+    it "returns apartments within 250 meters of search location" do
+      apartment1 = create(:apartment, lat: 50.000000, long: 50.000000)
+      apartment2 = create(:apartment, lat: 50.0018, long: 50.0019)
+      # apt 2 is 242 m away from apt 1 according to http://andrew.hedges.name/experiments/haversine/
+      apartment3 = create(:apartment, lat: 50.0019, long: 50.0019)
+      # apt 3 is 251 m away from apt 1 according to http://andrew.hedges.name/experiments/haversine/
+
+      get "/api/v1/apartments/find",  params: { lat: apartment1.lat, long: apartment1.long }
+
+      expect(json.pluck("id")).to include(apartment1.id)
+      expect(json.pluck("id")).to include(apartment2.id)
+      expect(json.pluck("id")).to_not include(apartment3.id)
+    end
+  end
 end

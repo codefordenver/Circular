@@ -30,6 +30,7 @@ gem 'gmaps4rails'
 gem 'omniauth-facebook'
 gem 'responders'
 gem 'foreman', '~>0.82.0'
+gem 'activerecord-postgres-earthdistance'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
