@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import scriptLoader from 'react-async-script-loader';
 
+
+@scriptLoader(
+  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`
+)
 export default class AutoSuggestInput extends Component {
   constructor(props) {
     super(props);
