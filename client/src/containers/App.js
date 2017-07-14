@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ApartmentMap from '../components/ApartmentMap/apartmentmap';
 import NavBar from '../components/Navbar/navbar';
 import HeroCTA from '../components/HeroCTA';
+import SearchAddress from '../components/SearchAddress';
 
 import fetchApartmentsRequest from '../actions/apartments'
 import { openMap, closeMap } from '../actions/googleMap';
