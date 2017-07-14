@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112024448) do
+ActiveRecord::Schema.define(version: 20170711171010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "cube"
+  enable_extension "earthdistance"
 
   create_table "apartments", force: :cascade do |t|
     t.string   "street_address"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.float    "long"
+    t.float    "lat"
   end
 
   create_table "petitions", force: :cascade do |t|
