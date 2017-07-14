@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 
-
-@scriptLoader(
-  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`
-)
-export default class AutoSuggestInput extends Component {
+class AutoSuggestInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { address: '' };
+    this.state = {
+      address: '',
+      isGoogleReady: false
+    };
     this.onChange = address => this.setState({ address });
   }
 
@@ -30,9 +29,13 @@ export default class AutoSuggestInput extends Component {
 
     return (
       <form onSubmit={this.handleFormSubmit}>
-        <PlacesAutocomplete inputProps={inputProps} />
+        { this.props.isScriptLoaded ? <PlacesAutocomplete inputProps={inputProps} /> : <input type="text" /> }
         <button type="submit">Submit</button>
       </form>
     );
   }
 }
+
+export default scriptLoader(
+  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`
+)(AutoSuggestInput);
