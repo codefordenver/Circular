@@ -6,6 +6,7 @@
     "geocoder": "^0.2.3",
     "lodash": "latest",
     "react": "^15.5.4",
+    "react-async-script-loader": "^0.3.0",
     "react-dom": "^15.5.4",
     "react-google-maps": "^6.3.0",
     "react-modal": "^2.2.0",
