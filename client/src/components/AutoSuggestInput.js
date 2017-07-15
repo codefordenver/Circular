@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import React, {Component} from 'react';
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 
 class AutoSuggestInput extends Component {
@@ -7,18 +7,21 @@ class AutoSuggestInput extends Component {
     super(props);
     this.state = {
       address: '',
-      isGoogleReady: false
+      isGoogleReady: false,
+      googleApiError: false
     };
-    this.onChange = address => this.setState({ address });
+    this.onChange = address => this.setState({address, googleApiError: false});
   }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
-
+  handleSelect(address) {
+    this.setState({address});
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+      .then(latLng => {
+        console.log('Success', latLng);
+        this.setState({googleApiError: false})
+      })
+      .catch(error => this.setState({googleApiError: error}));
   }
 
   render() {
@@ -28,9 +31,17 @@ class AutoSuggestInput extends Component {
     };
 
     return (
-      <form onSubmit={(e) => { this.handleFormSubmit(e); }}>
-        { this.props.isScriptLoaded ? <PlacesAutocomplete inputProps={inputProps} /> : <input type="text" /> }
-        <button type="submit">Submit</button>
+      <form>
+        { this.state.googleApiError &&
+        <p style={{'color': 'red'}}> Sorry, we're having trouble finding that address </p>}
+        { this.props.isScriptLoaded ?
+          <PlacesAutocomplete
+            inputProps={inputProps}
+            onSelect={address => this.handleSelect(address)}
+            onEnterKeyDown={address => this.handleSelect(address)}
+            clearItemsOnError
+          />
+          : <input type="text"/> }
       </form>
     );
   }
