@@ -28,7 +28,7 @@ class AutoSuggestInput extends Component {
     };
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form onSubmit={(e) => { this.handleFormSubmit(e); }}>
         { this.props.isScriptLoaded ? <PlacesAutocomplete inputProps={inputProps} /> : <input type="text" /> }
         <button type="submit">Submit</button>
       </form>
