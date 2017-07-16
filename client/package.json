@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "font-awesome": "^4.7.0",
     "geocoder": "^0.2.3",
     "lodash": "latest",
     "react": "^15.5.4",

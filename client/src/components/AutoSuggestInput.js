@@ -25,12 +25,18 @@ class AutoSuggestInput extends Component {
   }
 
   render() {
-		    const AutocompleteItem = ({ formattedSuggestion }) => (
-  <div className="Demo__suggestion-item">
-    <i className="fa fa-map-marker Demo__suggestion-icon" />
-    <strong>{formattedSuggestion.mainText}</strong>{' '}
-    <small className="text-muted">{formattedSuggestion.secondaryText}</small>
-  </div>);
+    const cssClasses = {
+      root: 'form-group',
+      input: 'search_input',
+      autocompleteContainer: 'autocomplete_container'
+    };
+    const AutocompleteItem = ({ formattedSuggestion }) => (
+      <div className="input_suggestion_item">
+        <i className="fa fa-map-marker" />
+        <strong>{formattedSuggestion.mainText}</strong>{' '}
+        <small className="text_muted">{formattedSuggestion.secondaryText}</small>
+      </div>);
+
     const inputProps = {
       type: 'text',
       value: this.state.address,
@@ -40,11 +46,13 @@ class AutoSuggestInput extends Component {
     };
 
     return (
-      <form>
+      <form className="autosuggest_input_form">
         { this.state.googleApiError &&
         <p style={{ color: 'red' }}> Sorry, we're having trouble finding that address </p>}
         { this.props.isScriptLoaded ?
           <PlacesAutocomplete
+            autocompleteItem={AutocompleteItem}
+            classNames={cssClasses}
             inputProps={inputProps}
             onSelect={address => this.handleSelect(address)}
             onEnterKeyDown={address => this.handleSelect(address)}

@@ -7,11 +7,8 @@ class SearchAddress extends Component {
     return (
       <div className="searchAddress">
         <h1 className="searchAddress-heading">Does your apartment building need recycling? Build Support!</h1>
-        <div className="searchAddress-inputGroup">
-          <AutoSuggestInput className="searchAddress-input" />
-        </div>
+        <AutoSuggestInput className="searchAddress-input" />
         <a className="searchAddress-link" href="/">Learn more first</a>
-
       </div>
     );
   }

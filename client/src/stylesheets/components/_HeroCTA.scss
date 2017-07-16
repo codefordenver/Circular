@@ -1,13 +1,22 @@
 @import '../utils/placeholders';
 
 .hero_wrapper {
-  background-color: seagreen;
-  height: 33vh;
+	background-image: url('../static/assets/1024px_Denver_Skyline.jpg');
+  background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+		@media (min-width: 650px){
   padding: 1em;
+
+	}
 }
 
 .open_map_button {
   @extend %btn_primary;
+	display: none;
+
+	@media (min-width: 650px){
   padding: 1em;
   height: 4em;
+	}
 }
