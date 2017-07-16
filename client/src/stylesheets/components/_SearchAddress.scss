@@ -5,7 +5,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 
     padding: .5rem;
 }
@@ -13,11 +13,20 @@
 .searchAddress-heading {
     color: $mainwhite;
 		font-family: 'Fira Sans Condensed', sans-serif;
-		margin: 1em;
+		margin: 0.5em 0;
 		text-align: center;
-    font-size: 2rem;
+    font-size: 2.5em;
     line-height: 1.2;
-    font-weight: 900;
+    font-weight: 600;
+}
+.searchAddress_sub_heading {   
+		color: $mainwhite;
+		font-family: 'Fira Sans Condensed', sans-serif;
+		text-align: center;
+		margin-bottom: 1em;
+    font-size: 1.5em;
+    line-height: 1.2;
+    font-weight: 600;
 }
 
 .searchAddress-inputGroup {
@@ -42,9 +51,11 @@
 
 .searchAddress-link {
     color: $mainwhite;
+		cursor: pointer;
+		font-family: 'Fira Sans Condensed', sans-serif;
+		font-size: 1em;
+		text-decoration: underline;
     display: inline-block;
-    font-size: 1.5rem;
-    margin-top: .5rem;    
-    text-decoration: none;
-    font-weight: 900;    
+    margin: 1rem;    
+    font-weight: 400;    
 }
