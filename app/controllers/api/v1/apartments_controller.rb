@@ -26,7 +26,7 @@ class Api::V1::ApartmentsController < Api::V1::BaseController
   end
 
   def find
-    @apartments = Apartment.within_radius(250, params[:lat], params[:long]).order_by_distance(params[:lat], params[:long])
+    @apartments = Apartment.within_radius(250, params[:lat], params[:lng]).order_by_distance(params[:lat], params[:lng])
     if @apartments.empty?
       head :no_content
     else
@@ -37,7 +37,7 @@ class Api::V1::ApartmentsController < Api::V1::BaseController
   private
 
   def apartment_params
-    params.permit(:street_address, :lat, :long)
+    params.permit(:street_address, :lat, :lng)
   end
 
   def set_apartment
