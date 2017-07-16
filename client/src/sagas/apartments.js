@@ -3,7 +3,7 @@ import NodeGeocoder from 'geocoder';
 
 import { APARTMENTS_REQUEST, APARTMENTS_SUCCESS, APARTMENTS_FAILURE } from '../constants/apartments';
 
-import fetchApartmentsApi from '../api/apartments';
+import { fetchApartmentsApi } from '../api/apartments';
 
 // Used to map the response of the API request for the apartments
 const mapApartmentsResponse = (apartmentRecords) => {
