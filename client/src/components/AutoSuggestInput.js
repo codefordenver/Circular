@@ -25,6 +25,19 @@ class AutoSuggestInput extends Component {
       .catch(error => this.setState({ googleApiError: error }));
   }
 
+  handleSearchClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.handleSelect(this.state.address);
+    this.addressInput.focus();
+  }
+
+  clearInput(e) {
+    e.preventDefault();
+    this.setState({ address: '' });
+    this.addressInput.focus();
+  }
+
   render() {
     const cssClasses = {
       root: 'form_group',
@@ -40,6 +53,7 @@ class AutoSuggestInput extends Component {
       </div>);
 
     const inputProps = {
+      ref: input => this.addressInput = input,
       type: 'text',
       value: this.state.address,
       onChange: this.onChange,
@@ -63,9 +77,21 @@ class AutoSuggestInput extends Component {
               clearItemsOnError
             />
           : <input type="text" /> }
-          { this.state.address && <button className="clear_button"><i className="fa fa-times-circle fa-lg" aria-hidden="true" /></button>
-}
-          <button className="search_button" disabled={!this.state.address}><i className="fa fa-search fa-2x" aria-hidden="true" /></button>
+          { this.state.address &&
+            <button
+              className="clear_button"
+              onClick={e => this.clearInput(e)}
+            >
+              <i className="fa fa-times fa-2x" aria-hidden="true" />
+            </button>
+	  			}
+          <button
+            className="search_button"
+            disabled={!this.state.address}
+            onClick={e => this.handleSearchClick(e)}
+          >
+            <i className="fa fa-search fa-2x" aria-hidden="true" />
+          </button>
         </div>
       </div>
     );

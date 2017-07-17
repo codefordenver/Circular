@@ -7,10 +7,11 @@
 .search_input,
 .search_input:focus,
 .search_input:active {
-	box-sizing: border-box;
-	margin: 16px;
-	padding: 0;
 	width: 100%;
+	margin: 16px;
+	margin-right: 0;
+	color: $secondary-color;
+	padding: 0;
 	background-color: #FAFAFA;
   display: inline-block;
   font-size: 16px;
@@ -21,11 +22,10 @@
 .input_form, 
 .input_form:focus,
 .input_form:active {
-		box-sizing: border-box;
+		position: relative;
 	height: 52px;
 	background-color: #FAFAFA;
 	box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
-  display: block;
   padding: 0;
   font-size: 16px;
 	border: none;
@@ -35,15 +35,17 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	justify-content: flex-end;
+	justify-content: flex-start;
   border-bottom: honeydew;
   border-left: honeydew;
   border-right: honeydew;
-  // border-top: 1px solid #e6e6e6;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   border-radius: 2px;
+	max-width: 530px;
+	margin: auto;
 }
+
 .autocomplete_container {
+	width: calc(100% + 52px);
   border-bottom: honeydew;
   border-left: honeydew;
   border-right: honeydew;
@@ -53,7 +55,7 @@
 }
 
 .form_group {
-	margin-right: auto;
+	width: calc(100% - 104px);
 }
 
 .input_suggestion_item {
@@ -62,45 +64,53 @@
 }
 
 .suggestion_text_bold {
-	font-weight: bold;
-	color: black;
+	font-weight: 600;
+	color: $secondary-color;
 }
 
 .search_button {
 	border: none;
-	position: relative;
-	background-color: rgba($secondarycolor, 0.85);
+	position: absolute;
+	border-radius: 0 2px 2px 0;
+	right: 0;
+	background-color: rgba($secondary-color, 0.85);
 	height: 52px;
 	width: 52px;
 	display: inline-block;
-	color: honeydew;
+	color: $mainwhite;
 
-	&:hover {
+	&:hover:not(:disabled), 
+	&:focus {
 		cursor: pointer;
-		background-color: $secondarycolor;
-	}
-
-		&:focus {
+		background-color: $secondary-color;
 		z-index: 100;
 	}
 	
 	&:disabled {
-		opacity: 0.5;
+		opacity: 0.75;
 	}
 	
 }
 
+.fa-map-marker {
+	color: $secondary-color;
+}
+
 .clear_button {
 	border: none;
-	padding: 0 ;
+	padding: 0;
+	color: $secondary-color;
+	position: absolute;
+	align-self: center;
+	right: 52px;
+	margin: 0 2px 2px 0;
 	background-color: #FAFAFA;
-	height: 52px;
-	width: 52px;
+	height: 41px;
+	width: 41px;
 	display: inline-block;
 
 		&:hover {
 		cursor: pointer;
-		background-color: honeydew;
 	}
 
 	&:focus {
@@ -111,5 +121,5 @@
 .suggestion_text_muted {
 	font-weight: lighter;
 	font-size: 0.75em;
-	color: #777
+	color: rgba($secondary-color, 0.85);
 }
