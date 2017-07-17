@@ -8,18 +8,41 @@
 .search_input:focus,
 .search_input:active {
 	box-sizing: border-box;
+	margin: 16px;
+	padding: 0;
 	width: 100%;
 	background-color: #FAFAFA;
-box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+  display: inline-block;
+  font-size: 16px;
+	border: none;
+  outline: none;
+}
+
+.input_form, 
+.input_form:focus,
+.input_form:active {
+		box-sizing: border-box;
+	height: 52px;
+	background-color: #FAFAFA;
+	box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
   display: block;
-  padding: 16px;
+  padding: 0;
   font-size: 16px;
 	border: none;
   border-radius: 2px;
 	border-bottom: 1px solid transparent;
   outline: none;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-end;
+  border-bottom: honeydew;
+  border-left: honeydew;
+  border-right: honeydew;
+  // border-top: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 2px;
 }
-
 .autocomplete_container {
   border-bottom: honeydew;
   border-left: honeydew;
@@ -29,7 +52,64 @@ box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
   border-radius: 0 0 2px 2px;
 }
 
+.form_group {
+	margin-right: auto;
+}
+
 .input_suggestion_item {
   padding: 4px;
   text-align: left;
+}
+
+.suggestion_text_bold {
+	font-weight: bold;
+	color: black;
+}
+
+.search_button {
+	border: none;
+	position: relative;
+	background-color: rgba($secondarycolor, 0.85);
+	height: 52px;
+	width: 52px;
+	display: inline-block;
+	color: honeydew;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $secondarycolor;
+	}
+
+		&:focus {
+		z-index: 100;
+	}
+	
+	&:disabled {
+		opacity: 0.5;
+	}
+	
+}
+
+.clear_button {
+	border: none;
+	padding: 0 ;
+	background-color: #FAFAFA;
+	height: 52px;
+	width: 52px;
+	display: inline-block;
+
+		&:hover {
+		cursor: pointer;
+		background-color: honeydew;
+	}
+
+	&:focus {
+		z-index: 100;
+	}
+}
+
+.suggestion_text_muted {
+	font-weight: lighter;
+	font-size: 0.75em;
+	color: #777
 }
