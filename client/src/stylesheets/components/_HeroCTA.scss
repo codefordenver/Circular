@@ -1,13 +1,76 @@
 @import '../utils/placeholders';
 
 .hero_wrapper {
-  background-color: seagreen;
-  height: 33vh;
-  padding: 1em;
+	height: 300px;
+	position: relative;
+	background-image: url($mobile-hero-image);
+  background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	@media (min-width: 420px){
+		background-image: url($desktop-hero-image);
+  	padding: 1em;
+	}
 }
 
 .open_map_button {
   @extend %btn_primary;
-  padding: 1em;
-  height: 4em;
+	display: none;
+
+	@media (min-width: 1024px){
+		display: inline-block;
+		position: absolute;
+  	padding: 1em;
+  	height: 4em;
+	}
+}
+
+.search_address_wrapper {
+		margin: auto;
+		height: 100%;
+    background-color: rgba($maingreen, 0.85);
+		display: flex;
+		flex-direction: column;
+		box-shadow: 0 0 6px 0 rgba(0,0,0,0.18), 0 6px 6px 0 rgba(0,0,0,0.32);
+		border-bottom: 1px solid transparent;
+		align-items: center;
+		justify-content: flex-start;
+		max-width: 600px;
+    padding: .5rem;
+		
+		@media (min-width: 415px) {
+
+			border-radius: 2px;
+		}
+}
+
+.search_address_heading {
+    color: $mainwhite;
+		font-family: 'Fira Sans Condensed', sans-serif;
+		margin: 0.5em 0;
+		text-align: center;
+    font-size: 2.5em;
+    line-height: 1.2;
+    font-weight: 600;
+}
+.search_address_sub_heading {   
+		color: $mainwhite;
+		font-family: 'Fira Sans Condensed', sans-serif;
+		text-align: center;
+		margin-bottom: 1em;
+    font-size: 1.75em;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.search_address_link {
+    color: $mainwhite;
+		cursor: pointer;
+		font-family: 'Fira Sans Condensed', sans-serif;
+		font-size: 1em;
+		text-decoration: underline;
+    display: inline-block;
+    margin: 1rem;    
+    font-weight: 400;    
 }
