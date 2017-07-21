@@ -1,11 +1,10 @@
 export default function createApiRequest(url, method, data) {
-  fetch(url, {
-    method,
-    body: data ? JSON.stringify(data) : null
-  })
-  // Pipe the stuff
-  .then(response => response.json())
-  .catch((error) => {
-    throw error;
+  return new Promise((resolve, reject) => {
+    fetch(`/api/v1/${url}`, {
+      method,
+      body: data ? JSON.stringify(data) : null
+    })
+    .then(response => resolve(response.json()))
+    .catch(err => reject(err));
   });
 }

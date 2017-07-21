@@ -6,8 +6,8 @@ const defaultState = {
   apartments: []
 };
 
-export default function(state = defaultState, action) {
-  const { apartments } = action;
+export default function (state = defaultState, action) {
+  const { response } = action;
   switch (action.type) {
     case APARTMENTS_REQUEST:
       return {
@@ -20,7 +20,7 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        apartments
+        apartments: response
       };
     case APARTMENTS_FAILURE:
       return {
