@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 
-import { fetchApartmentMatchesRequest } from '../actions/apartments';
+import { searchAddressFlow } from '../actions/apartments';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -19,14 +19,7 @@ class AutoSuggestInput extends Component {
 
   handleSelect(address) {
     this.setState({ address });
-    geocodeByAddress(this.state.address)
-      .then(results => getLatLng(results[0]))
-      .then((latLng) => {
-        console.log('Success!', latLng);
-        // this.props.fetchApartmentMatchesRequest(latLng)
-        this.setState({ googleApiError: false });
-      })
-      .catch(error => this.setState({ googleApiError: error }));
+    searchAddressFlow(address);
   }
 
   handleSearchClick(e) {
@@ -103,4 +96,4 @@ class AutoSuggestInput extends Component {
 }
 
 export default connect(
-  ({ apartmentMatches }) => ({ apartmentMatches }), { fetchApartmentMatchesRequest })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));
+  ({ apartmentMatches }) => ({ apartmentMatches }), { searchAddressFlow })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));

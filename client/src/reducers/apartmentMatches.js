@@ -6,9 +6,9 @@ const defaultState = {
   apartmentMatches: []
 };
 
-export default function(state = defaultState, action) {
-  const { apartments } = action;
-  switch (action.type) {
+export default function (state = defaultState, action) {
+  const { response, error, type } = action;
+  switch (type) {
     case APARTMENT_MATCHES_REQUEST:
       return {
         ...state,
@@ -20,13 +20,14 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        apartments
+        nearybyCampaigns: response
       };
     case APARTMENT_MATCHES_FAILURE:
       return {
         ...state,
         loading: false,
-        loaded: false
+        loaded: false,
+        error
       };
     default:
       return state;
