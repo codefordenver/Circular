@@ -8,32 +8,22 @@ export function fetchApartmentsRequest() {
 }
 
 function searchGoogleForAddress(address, searchAddressHelper) {
-  return {
-    type: 'SEARCH_GOOGLE_FOR_ADDRESS',
-    promise: searchAddressHelper(address)
-  };
+  return searchAddressHelper(address);
 }
 
 function getLatLong(place, latLngHelper) {
-  return {
-    type: 'GET_LAT_LNG',
-    promise: latLngHelper(place)
-  };
+  return latLngHelper(place);
 }
 
 function fetchNearbyCampaigns(latLng) {
-  return {
-    type: 'APARTMENT_MATCHES',
-    promise: createApiRequest('apartments/find', 'POST', latLng)
-  };
+  return createApiRequest(`apartments/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET');
 }
 
 export function searchAddressFlow(address, searchAddressHelper, latLngHelper) {
   return {
-    type: 'SEARCH_ADDRESS_FLOW',
+    type: 'APARTMENT_MATCHES',
     promise: searchGoogleForAddress(address, searchAddressHelper)
-      .then(results => getLatLong(results.response[0], latLngHelper))
-      .then(latLng => fetchNearbyCampaigns(latLng.response))
-      .catch(err => console.error(err))
+      .then(results => getLatLong(results[0], latLngHelper))
+      .then(latLng => fetchNearbyCampaigns(latLng))
   };
 }

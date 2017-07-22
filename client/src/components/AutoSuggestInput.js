@@ -19,7 +19,7 @@ class AutoSuggestInput extends Component {
 
   handleSelect(address) {
     this.setState({ address });
-    searchAddressFlow(address);
+    this.props.searchAddressFlow(address, geocodeByAddress, getLatLng);
   }
 
   handleSearchClick(e) {

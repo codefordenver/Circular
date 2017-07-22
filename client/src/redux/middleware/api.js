@@ -16,6 +16,7 @@ export default function apiMiddleware() {
       ...rest,
       type: REQUEST
     });
+
     return promise
       .then(
         response => next({ ...rest, response, type: SUCCESS }),
