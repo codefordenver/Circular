@@ -5,27 +5,22 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className='top_nav'>
-      <div className="row">
+      <nav className="top_nav">
 
-      <div className="col-md-9 navbar-header">
-      <p>
-      <a className="home-link" href="/">Recycling Request Tool</a>
-      </p>
-      </div>
+        <a className="home-link" href="/">Recycling Request Tool</a>
 
-      <div className="col-md-3">
-      <ul className="top-nav-list">
+      </nav>
 
-{/*  <li>sign in with google</li>
-    <li>sign in with facebook</li>*/}
-    </ul>
-    </div>
-    </div>
-    </nav>
-
-  );
+    );
   }
 }
 
 export default NavBar;
+
+// <div className="col-md-3">
+//         <ul className="top-nav-list">
+
+//         {/*  <li>sign in with google</li>
+//     <li>sign in with facebook</li>*/}
+//       </ul>
+//       </div>;

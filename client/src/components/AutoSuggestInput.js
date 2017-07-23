@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 
-import { searchAddressFlow } from '../actions/apartments';
+import {
+  beginAddressSearch,
+  searchGoogleForAddress,
+  getLatLong,
+  fetchNearbyCampaigns,
+  searchAddressFlow,
+  clearSearchResults
+} from '../actions/apartments';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -17,9 +24,38 @@ class AutoSuggestInput extends Component {
     this.onChange = address => this.setState({ address, googleApiError: false });
   }
 
-  handleSelect(address) {
-    this.setState({ address });
-    this.props.searchAddressFlow(address, geocodeByAddress, getLatLng);
+  async handleSelect(address) {
+    const {
+      beginAddressSearch,
+      searchGoogleForAddress,
+      getLatLong,
+      fetchNearbyCampaigns,
+      searchAddressFlow
+    } = this.props;
+
+    // asynch/await version:
+    beginAddressSearch();
+    const places = await searchGoogleForAddress(address, geocodeByAddress);
+    if (places.error) { return; }
+    const latLng = await getLatLong(places.response, getLatLng);
+    if (latLng.error) { return; }
+    fetchNearbyCampaigns(latLng.response);
+
+    // Promise version:
+    // beginAddressSearch();
+    // searchGoogleForAddress(address, geocodeByAddress)
+    //   .then((place) => {
+    //     if (!place.response) { throw new Error(place.error); }
+    //     return getLatLong(place.response, getLatLng);
+    //   })
+    //   .then((latLng) => {
+    //     if (!latLng.response) { throw new Error(latLng.error); }
+    //     return fetchNearbyCampaigns(latLng.response);
+    //   })
+    //   .catch(err => console.error(err));
+
+    // Broken version:
+    // searchAddressFlow(address, geocodeByAddress, getLatLng)
   }
 
   handleSearchClick(e) {
@@ -32,7 +68,12 @@ class AutoSuggestInput extends Component {
   clearInput(e) {
     e.preventDefault();
     this.setState({ address: '' });
+    this.props.clearSearchResults();
     this.addressInput.focus();
+  }
+
+  renderNearbyCampaigns(nearbyCampaignsArr) {
+    return nearbyCampaignsArr.map(c => <li><p>{ c.street_address }</p></li>);
   }
 
   render() {
@@ -41,6 +82,10 @@ class AutoSuggestInput extends Component {
       input: 'search_input',
       autocompleteContainer: 'autocomplete_container'
     };
+
+    const renderNearby = this.renderNearbyCampaigns;
+
+    const { error, nearbyCampaigns, loading, loaded } = this.props.initialSearch;
 
     const AutocompleteItem = ({ formattedSuggestion }) => (
       <div className="input_suggestion_item">
@@ -60,8 +105,6 @@ class AutoSuggestInput extends Component {
 
     return (
       <div className="autosuggest_input_form">
-        { this.state.googleApiError &&
-        <p style={{ color: 'red' }}> Sorry, we're having trouble finding that address </p>}
         <div className="input_form">
           { this.props.isScriptLoaded ?
             <PlacesAutocomplete
@@ -90,10 +133,29 @@ class AutoSuggestInput extends Component {
             <i className="fa fa-search fa-2x" aria-hidden="true" />
           </button>
         </div>
+        <div className="temporary-results-box">
+          { loading && <p> Searching... </p> }
+          { !loading && error && error.searchError && <p>{error.userMessage}</p> }
+          { loaded && nearbyCampaigns &&
+            <div>
+              <p>{"Here's some nearby campaigns:"}</p>
+              <ul>{renderNearby(nearbyCampaigns)}</ul>
+            </div>
+          }
+          { !loading && error && error.dbResponse &&
+            <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
+          }
+        </div>
       </div>
     );
   }
 }
 
 export default connect(
-  ({ apartmentMatches }) => ({ apartmentMatches }), { searchAddressFlow })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));
+  ({ initialSearch }) => ({ initialSearch }), { beginAddressSearch,
+    searchGoogleForAddress,
+    getLatLong,
+    fetchNearbyCampaigns,
+    searchAddressFlow,
+    clearSearchResults
+  })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));

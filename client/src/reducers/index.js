@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import apartments from './apartments';
-import apartmentMatches from './apartmentMatches';
+import initialSearch from './initialSearch';
 import googleMap from './googleMap';
 
 const reducers = combineReducers({
   apartments,
   googleMap,
-  apartmentMatches
+  initialSearch
 });
 
 export default reducers;

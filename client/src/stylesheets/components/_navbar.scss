@@ -1,70 +1,80 @@
 .home-link {
   color: $green-color;
-  margin-left: 1vw;
+  margin: 1em;
   font-size: 30px;
   font-family: 'Fira Sans Condensed', sans-serif;
   font-weight: 700;
   text-decoration: none;
 }
 
-.info-icons {
-  background-color: $icon-row-color;
-  height: 150px;
-  text-align: center;
-  padding: 30px;
+// .info-icons {
+//   background-color: $icon-row-color;
+//   height: 150px;
+//   text-align: center;
+//   padding: 30px;
+// }
+
+// .fa {
+//   padding-left: 10px;
+//   padding-right: 10px;
+// }
+
+// .action-icon {
+//   display: inline-block;
+//   width: 150px;
+//   text-align: center;
+//   color: $green-color;
+// }
+
+// .property-manager {
+//   background-color: $green-color;
+//   color: white;
+//   padding: 10px;
+//   text-align: center;
+// }
+
+// .recycling-facts {
+//   padding: 10px;
+//   text-align: center;
+// }
+
+// .non-bold {
+//   font-weight: 100;
+// }
+// .navbar {
+//   padding-top: 6px;
+//   padding-bottom: 6px;
+// }
+
+.top_nav {
+    height: 60px;
+    display: flex;
+    align-items: center;
+
 }
 
-.fa {
-  padding-left: 10px;
-  padding-right: 10px;
-}
+// .top-nav.navbar.navbar-default.navbar-fixed-top {
+//   background-color: $top-nav-color;
+//   display: flex;
+//   align-items: center;
+//   opacity: 10;
+//   vertical-align: top;
+//   z-index: 10000;
+//   padding: 1em;
+// }
 
-.action-icon {
-  display: inline-block;
-  width: 150px;
-  text-align: center;
-  color: $green-color;
-}
+// .top-nav-list {
+//   color: $green-color;
+//   display: inline-block;
+//   list-style: none;
+//   text-align: right;
+// }
 
-.property-manager {
-  background-color: $green-color;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
+// .top-nav-list > li {
+//   color: $green-color;
+//   text-decoration: none;
+// }
 
-.recycling-facts {
-  padding: 10px;
-  text-align: center;
-}
-
-.non-bold {
-  font-weight: 100;
-}
-.navbar {
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-.top-nav.navbar.navbar-default.navbar-fixed-top {
-  background-color: $top-nav-color;
-  opacity: 10;
-  vertical-align: top;
-  z-index: 10000;
-}
-
-.top-nav-list {
-  color: $green-color;
-  display: inline-block;
-  list-style: none;
-  text-align: right;
-}
-
-.top-nav-list > li {
-  color: $green-color;
-  text-decoration: none;
-}
-
-.top-nav-list > li > a:hover {
-  color: $secondary-color;
-}
+// .top-nav-list > li > a:hover {
+//   color: $secondary-color;
+// }
