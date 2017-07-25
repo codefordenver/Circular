@@ -3,30 +3,23 @@ import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 
-import { fetchApartmentMatchesRequest } from '../actions/apartments';
+import {
+  searchAddressFlow,
+  clearSearchResults
+} from '../actions/initialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: '',
-      isGoogleReady: false,
-      googleApiError: false,
       isFieldActive: false
     };
-    this.onChange = address => this.setState({ address, googleApiError: false });
+    this.onChange = address => this.setState({ address });
   }
 
   handleSelect(address) {
-    this.setState({ address });
-    geocodeByAddress(this.state.address)
-      .then(results => getLatLng(results[0]))
-      .then((latLng) => {
-        console.log('Success!', latLng);
-        // this.props.fetchApartmentMatchesRequest(latLng)
-        this.setState({ googleApiError: false });
-      })
-      .catch(error => this.setState({ googleApiError: error }));
+    this.props.searchAddressFlow(address, geocodeByAddress, getLatLng);
   }
 
   handleSearchClick(e) {
@@ -39,7 +32,16 @@ class AutoSuggestInput extends Component {
   clearInput(e) {
     e.preventDefault();
     this.setState({ address: '' });
+    this.props.clearSearchResults();
     this.addressInput.focus();
+  }
+
+  renderNearbyCampaigns(nearbyCampaignsArr) {
+    return (
+      <ul>
+        {nearbyCampaignsArr.map(c => <li><p>{ c.street_address }</p></li>)}
+      </ul>
+    );
   }
 
   render() {
@@ -48,6 +50,10 @@ class AutoSuggestInput extends Component {
       input: 'search_input',
       autocompleteContainer: 'autocomplete_container'
     };
+
+    const renderNearby = this.renderNearbyCampaigns;
+
+    const { error, nearbyCampaigns, loading, loaded } = this.props.initialSearch;
 
     const AutocompleteItem = ({ formattedSuggestion }) => (
       <div className="input_suggestion_item">
@@ -67,13 +73,10 @@ class AutoSuggestInput extends Component {
 
     return (
       <div className="autosuggest_input_form">
-        { this.state.googleApiError &&
-        <p style={{ color: 'red' }}> Sorry, we're having trouble finding that address </p>}
         <div className="input_form">
           { this.props.isScriptLoaded ?
             <PlacesAutocomplete
               autocompleteItem={AutocompleteItem}
-              highlightFirstSuggestion
               classNames={cssClasses}
               inputProps={inputProps}
               onSelect={address => this.handleSelect(address)}
@@ -97,10 +100,26 @@ class AutoSuggestInput extends Component {
             <i className="fa fa-search fa-2x" aria-hidden="true" />
           </button>
         </div>
+        <div className="temporary-results-box">
+          { loading && <p> Searching... </p> }
+          { !loading && error && error.searchError && <p>{error.userMessage}</p> }
+          { loaded && nearbyCampaigns &&
+            <div>
+              <p>{"Here's some nearby campaigns:"}</p>
+              {renderNearby(nearbyCampaigns)}
+            </div>
+          }
+          { !loading && error && error.dbResponse &&
+            <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
+          }
+        </div>
       </div>
     );
   }
 }
 
 export default connect(
-  ({ apartmentMatches }) => ({ apartmentMatches }), { fetchApartmentMatchesRequest })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));
+  ({ initialSearch }) => ({ initialSearch }), {
+    searchAddressFlow,
+    clearSearchResults
+  })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));
