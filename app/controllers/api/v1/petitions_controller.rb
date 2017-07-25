@@ -28,7 +28,7 @@ class Api::V1::PetitionsController < Api::V1::BaseController
   private
 
   def petition_params
-    params.permit(:vote_count, :apartment_id)
+    params.permit(:apartment_id)
   end
 
   def set_petition
