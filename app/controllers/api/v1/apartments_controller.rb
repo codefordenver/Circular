@@ -28,7 +28,7 @@ class Api::V1::ApartmentsController < Api::V1::BaseController
   def find
     @apartments = Apartment.within_radius(250, params[:lat], params[:lng]).order_by_distance(params[:lat], params[:lng])
     if @apartments.empty?
-      head :no_content
+      json_response({status: 'okay', results: nil})
     else
       json_response(@apartments)
     end
