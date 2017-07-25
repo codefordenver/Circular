@@ -1,16 +1,16 @@
 @import '../utils/placeholders';
 
 .hero_wrapper {
-	height: 300px;
 	position: relative;
-	background-image: url($mobile-hero-image);
+  background-image: url($mobile-hero-image);
+  background: $maingreen;
   background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	
+
 	@media (min-width: 420px){
 		background-image: url($desktop-hero-image);
-  	padding: 1em;
+  	padding: 2rem;
 	}
 }
 
@@ -37,26 +37,25 @@
 		align-items: center;
 		justify-content: flex-start;
 		max-width: 600px;
-    padding: .5rem;
-		
-		@media (min-width: 415px) {
+    padding: 1rem;
 
+		@media (min-width: 415px) {
 			border-radius: 2px;
 		}
 }
 
 .search_address_heading {
     color: $mainwhite;
-		font-family: 'Fira Sans Condensed', sans-serif;
+		font-family: Roboto, sans-serif;
 		margin: 0.5em 0;
 		text-align: center;
     font-size: 2.5em;
     line-height: 1.2;
     font-weight: 600;
 }
-.search_address_sub_heading {   
+.search_address_sub_heading {
 		color: $mainwhite;
-		font-family: 'Fira Sans Condensed', sans-serif;
+		font-family: Roboto, sans-serif;
 		text-align: center;
 		margin-bottom: 1em;
     font-size: 1.75em;
@@ -67,10 +66,10 @@
 .search_address_link {
     color: $mainwhite;
 		cursor: pointer;
-		font-family: 'Fira Sans Condensed', sans-serif;
+		font-family: Roboto, sans-serif;
 		font-size: 1em;
 		text-decoration: underline;
     display: inline-block;
-    margin: 1rem;    
-    font-weight: 400;    
+    margin: 1rem;
+    font-weight: 400;
 }

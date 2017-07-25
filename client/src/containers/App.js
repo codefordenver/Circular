@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ApartmentMap from '../components/ApartmentMap/apartmentmap';
-import NavBar from '../components/Navbar/navbar';
+import NavBar from '../components/Navbar';
 import HeroCTA from '../components/HeroCTA';
 
 import { fetchApartmentsRequest } from '../actions/apartments';
@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     const { apartments: { apartments }, googleMap: { isOpen } } = this.props;
     return (
-      <div className="container">
+      <div>
         <NavBar />
         <HeroCTA
           openMap={this.props.openMap}
