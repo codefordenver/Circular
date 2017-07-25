@@ -1,11 +1,11 @@
 import {
-  APARTMENT_MATCHES_REQUEST,
-  APARTMENT_MATCHES_SUCCESS,
-  APARTMENT_MATCHES_FAILURE,
+  FETCH_NEARBY_CAMPAIGNS_REQUEST,
+  FETCH_NEARBY_CAMPAIGNS_SUCCESS,
+  FETCH_NEARBY_CAMPAIGNS_FAILURE,
   VALIDATE_ADDRESS_SUCCESS,
   VALIDATE_ADDRESS_FAILURE,
   CLEAR_SEARCH_RESULTS
-} from '../constants/apartments';
+} from '../constants/initialSearch';
 
 const defaultState = {
   loading: false,
@@ -18,7 +18,7 @@ const defaultState = {
 export default function (state = defaultState, action) {
   const { response, error, type } = action;
   switch (type) {
-    case APARTMENT_MATCHES_REQUEST:
+    case FETCH_NEARBY_CAMPAIGNS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -36,14 +36,14 @@ export default function (state = defaultState, action) {
           searchError: error
         }
       };
-    case APARTMENT_MATCHES_SUCCESS:
+    case FETCH_NEARBY_CAMPAIGNS_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
         nearbyCampaigns: response
       };
-    case APARTMENT_MATCHES_FAILURE:
+    case FETCH_NEARBY_CAMPAIGNS_FAILURE:
       return {
         ...state,
         loading: false,
@@ -62,26 +62,3 @@ export default function (state = defaultState, action) {
       return state;
   }
 }
-
-// const reducerOptions = {
-//   name: 'nearbyCampaigns',
-//   dataLabel: 'response',
-//   async: true
-// }
-
-// function createDefaultReducer(options) {
-//   const { name, async, dataLabel } = options;
-//   if (async) {
-//     const defaultState = {
-//       loading: false,
-//       loaded: false
-//     };
-//     return (state = defaultState){
-
-//     }
-//   }
-//   function (){
-//     if(options.async)
-//   }
-
-// }

@@ -4,58 +4,22 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import scriptLoader from 'react-async-script-loader';
 
 import {
-  beginAddressSearch,
-  searchGoogleForAddress,
-  getLatLong,
-  fetchNearbyCampaigns,
   searchAddressFlow,
   clearSearchResults
-} from '../actions/apartments';
+} from '../actions/initialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: '',
-      isGoogleReady: false,
-      googleApiError: false,
       isFieldActive: false
     };
-    this.onChange = address => this.setState({ address, googleApiError: false });
+    this.onChange = address => this.setState({ address });
   }
 
-  async handleSelect(address) {
-    const {
-      beginAddressSearch,
-      searchGoogleForAddress,
-      getLatLong,
-      fetchNearbyCampaigns,
-      searchAddressFlow
-    } = this.props;
-
-    // asynch/await version:
-    beginAddressSearch();
-    const places = await searchGoogleForAddress(address, geocodeByAddress);
-    if (places.error) { return; }
-    const latLng = await getLatLong(places.response, getLatLng);
-    if (latLng.error) { return; }
-    fetchNearbyCampaigns(latLng.response);
-
-    // Promise version:
-    // beginAddressSearch();
-    // searchGoogleForAddress(address, geocodeByAddress)
-    //   .then((place) => {
-    //     if (!place.response) { throw new Error(place.error); }
-    //     return getLatLong(place.response, getLatLng);
-    //   })
-    //   .then((latLng) => {
-    //     if (!latLng.response) { throw new Error(latLng.error); }
-    //     return fetchNearbyCampaigns(latLng.response);
-    //   })
-    //   .catch(err => console.error(err));
-
-    // Broken version:
-    // searchAddressFlow(address, geocodeByAddress, getLatLng)
+  handleSelect(address) {
+    this.props.searchAddressFlow(address, geocodeByAddress, getLatLng);
   }
 
   handleSearchClick(e) {
@@ -73,7 +37,11 @@ class AutoSuggestInput extends Component {
   }
 
   renderNearbyCampaigns(nearbyCampaignsArr) {
-    return nearbyCampaignsArr.map(c => <li><p>{ c.street_address }</p></li>);
+    return (
+      <ul>
+        {nearbyCampaignsArr.map(c => <li><p>{ c.street_address }</p></li>)}
+      </ul>
+    );
   }
 
   render() {
@@ -109,7 +77,6 @@ class AutoSuggestInput extends Component {
           { this.props.isScriptLoaded ?
             <PlacesAutocomplete
               autocompleteItem={AutocompleteItem}
-              highlightFirstSuggestion
               classNames={cssClasses}
               inputProps={inputProps}
               onSelect={address => this.handleSelect(address)}
@@ -139,7 +106,7 @@ class AutoSuggestInput extends Component {
           { loaded && nearbyCampaigns &&
             <div>
               <p>{"Here's some nearby campaigns:"}</p>
-              <ul>{renderNearby(nearbyCampaigns)}</ul>
+              {renderNearby(nearbyCampaigns)}
             </div>
           }
           { !loading && error && error.dbResponse &&
@@ -152,10 +119,7 @@ class AutoSuggestInput extends Component {
 }
 
 export default connect(
-  ({ initialSearch }) => ({ initialSearch }), { beginAddressSearch,
-    searchGoogleForAddress,
-    getLatLong,
-    fetchNearbyCampaigns,
+  ({ initialSearch }) => ({ initialSearch }), {
     searchAddressFlow,
     clearSearchResults
   })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));

@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import apiMiddleware from './middleware/api';
 
@@ -10,6 +11,6 @@ export default function configureStore() {
 
   return createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(logger, apiMiddleware()))
+    composeEnhancers(applyMiddleware(logger, thunk, apiMiddleware()))
   );
 }
