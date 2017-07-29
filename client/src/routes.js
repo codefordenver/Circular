@@ -53,7 +53,6 @@ export default store => (
           callback(null, require('./containers/DenverInfo'));
         });
       }}
-      ignoreScrollBehavior={false}
     />
     <Route
       path="/manager-resources"
@@ -62,7 +61,6 @@ export default store => (
           callback(null, require('./containers/ManagerResources'));
         });
       }}
-      ignoreScrollBehavior={false}
     />
     <Route
       path="/error"
