@@ -6,7 +6,7 @@ import scriptLoader from 'react-async-script-loader';
 import {
   searchAddressFlow,
   clearSearchResults
-} from '../actions/initialSearch';
+} from '../redux/actions/initialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {

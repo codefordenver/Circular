@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import NavBar from '../components/Navbar';
-import Home from './Home';
 
-export default () => (
+const App = ({ children }) => (
   <div className="app-container">
     <NavBar />
-    <Home />
+    { children }
   </div>
 );
 
+App.PropTypes = {
+  children: PropTypes.object
+};
+
+export default App;
