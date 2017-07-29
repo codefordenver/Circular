@@ -8,7 +8,7 @@ import Tips from './containers/Tips';
 import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
 import NotFound from './containers/NotFound';
-
+import About from './containers/About';
 
 export default (
   <Route
@@ -41,6 +41,10 @@ export default (
     <Route
       path="/manager-resources"
       getComponent={(location, callback) => callback(null, ManagerResources)}
+    />
+    <Route
+      path="/about"
+      getComponent={(location, callback) => callback(null, About)}
     />
     <Route
       path="/error"

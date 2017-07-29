@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
 import ApartmentMap from '../components/CampaignsMap';
 
-import { fetchApartmentsRequest } from '../actions/apartments';
-import { openMap, closeMap } from '../actions/googleMap';
+import { fetchApartmentsRequest } from '../redux/actions/apartments';
+import { openMap, closeMap } from '../redux/actions/googleMap';
 
 class Home extends Component {
   componentWillMount() {
