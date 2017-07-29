@@ -39,10 +39,10 @@ export default store => (
       />
     </Route>
     <Route
-      path="/request-tips"
+      path="/tips-for-requesting"
       getComponent={(location, callback) => {
         require.ensure([], (require) => {
-          callback(null, require('./containers/RequestTips'));
+          callback(null, require('./containers/Tips'));
         });
       }}
     />
