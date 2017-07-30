@@ -103,13 +103,13 @@ class AutoSuggestInput extends Component {
         <div className="temporary-results-box">
           { loading && <p> Searching... </p> }
           { !loading && error && error.searchError && <p>{error.userMessage}</p> }
-          { loaded && nearbyCampaigns &&
+          { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
             <div>
               <p>{"Here's some nearby campaigns:"}</p>
               {renderNearby(nearbyCampaigns)}
             </div>
           }
-          { !loading && error && error.dbResponse &&
+          { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
             <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
           }
         </div>
