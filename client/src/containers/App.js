@@ -1,48 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import ApartmentMap from '../components/ApartmentMap/apartmentmap';
-import NavBar from '../components/Navbar/navbar';
-import HeroCTA from '../components/HeroCTA';
+import React, { PropTypes } from 'react';
+import NavBar from '../components/Navbar';
 
-import { fetchApartmentsRequest } from '../actions/apartments';
-import { openMap, closeMap } from '../actions/googleMap';
+const App = ({ children }) => (
+  <div className="app-container">
+    <NavBar />
+    { children }
+  </div>
+);
 
-class App extends Component {
-  componentWillMount() {
-    this.props.fetchApartmentsRequest();
-  }
-
-  render() {
-    const { apartments: { apartments }, googleMap: { isOpen } } = this.props;
-    return (
-      <div className="container">
-        <NavBar />
-        <HeroCTA
-          openMap={this.props.openMap}
-        />
-        <ApartmentMap
-          isOpen={isOpen}
-          markers={apartments}
-          closeMap={this.props.closeMap}
-        />
-      </div>
-    );
-  }
-}
-
-App.propTypes = {
-  fetchApartmentsRequest: PropTypes.func.isRequired,
-  apartments: PropTypes.shape({
-    apartments: PropTypes.array.isRequired
-  }).isRequired,
-  googleMap: PropTypes.shape({
-    isOpen: PropTypes.bool.isRequired
-  }).isRequired,
-  openMap: PropTypes.func.isRequired,
-  closeMap: PropTypes.func.isRequired
+App.PropTypes = {
+  children: PropTypes.object
 };
 
-export default connect(
-  ({ apartments, googleMap }) => ({ apartments, googleMap }),
-  { fetchApartmentsRequest, openMap, closeMap })(App);
+export default App;

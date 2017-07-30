@@ -1,4 +1,11 @@
-import createApiRequest from '../utils/createApiRequest';
+import createApiRequest from '../../utils/createApiRequest';
+
+export function fetchApartmentsRequest() {
+  return {
+    type: 'APARTMENTS',
+    promise: createApiRequest('apartments', 'GET')
+  };
+}
 
 export function beginAddressSearch() {
   return {
