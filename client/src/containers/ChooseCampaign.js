@@ -43,8 +43,6 @@ class ChooseCampaign extends Component {
     );
   }
 
-
-
   render() {
     const renderNearby = this.renderNearbyCampaigns;
     const { error, nearbyCampaigns, loading, loaded } = this.props.initialSearch;
