@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class ChooseCampaign extends Component {
   constructor(props) {
@@ -14,6 +15,15 @@ class ChooseCampaign extends Component {
     this.setState({
       selectedOption: e.target.value
     });
+  }
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+    const selectedOption = this.state.selectedOption;
+    console.log('You have selected:', selectedOption);
+    if(selectedOption === 'no-match') {
+      this.props.router.push('/new-campaign/address')
+    }
   }
 
   renderNearbyCampaigns(nearbyCampaignsArr, selectedOption, handleOptionChange) {
@@ -32,6 +42,7 @@ class ChooseCampaign extends Component {
       )
     );
   }
+
 
 
   render() {
@@ -53,7 +64,7 @@ class ChooseCampaign extends Component {
                 value="no-match"
                 checked={this.state.selectedOption === "no-match"}
                 onChange={(e) => this.handleOptionChange(e)} />
-              { "None of these match my address." }
+              { "None of these match my address. Let's start a new campaign." }
             </label>
           </div>
         </form>
@@ -61,10 +72,11 @@ class ChooseCampaign extends Component {
         { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
         <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
         }
+        <button className="btn" type="submit" onClick={(e) => this.handleFormSubmit(e)}>Next</button>
       </div>
     );
   }
 }
 
 export default connect(
-  ({ initialSearch }) => ({ initialSearch }))(ChooseCampaign);
+  ({ initialSearch }) => ({ initialSearch }))(withRouter(ChooseCampaign));
