@@ -2,6 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
+import ChooseCampaign from './containers/ChooseCampaign';
 import NewCampaign from './containers/NewCampaign';
 import CampaignPage from './containers/CampaignPage';
 import Tips from './containers/Tips';
@@ -19,13 +20,34 @@ export default (
       getComponent={(location, callback) => callback(null, Home)}
     />
     <Route
-      path="/campaign"
-      onEnter={(nextState, replace) => !nextState.params.id && replace('/campaign/new')}
+      path="/choose-campaign"
+      getComponent={(location, callback) => callback(null, ChooseCampaign)}
     />
     <Route
-      path="/campaign/new"
-      getComponent={(location, callback) => callback(null, NewCampaign)}
+      path="/campaign"
+      onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
     />
+    <Route
+      path="/new-campaign"
+      getComponent={(location, callback) => callback(null, NewCampaign)}
+    >
+      <Route
+        path="/new-campaign/address"
+        getComponent={(location, callback) => callback(null, NewCampaign)}
+      />
+      <Route
+        path="/new-campaign/specs"
+        getComponent={(location, callback) => callback(null, NewCampaign)}
+      />
+      <Route
+        path="/new-campaign/activate"
+        getComponent={(location, callback) => callback(null, NewCampaign)}
+      />
+      <Route
+        path="/new-campaign/success"
+        getComponent={(location, callback) => callback(null, NewCampaign)}
+      />
+    </Route>
     <Route
       path="/campaign/:id"
       getComponent={(location, callback) => callback(null, CampaignPage)}

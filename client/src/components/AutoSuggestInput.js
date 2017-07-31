@@ -36,24 +36,12 @@ class AutoSuggestInput extends Component {
     this.addressInput.focus();
   }
 
-  renderNearbyCampaigns(nearbyCampaignsArr) {
-    return (
-      <ul>
-        {nearbyCampaignsArr.map(c => <li><p>{ c.street_address }</p></li>)}
-      </ul>
-    );
-  }
-
   render() {
     const cssClasses = {
       root: 'form_group',
       input: 'search_input',
       autocompleteContainer: 'autocomplete_container'
     };
-
-    const renderNearby = this.renderNearbyCampaigns;
-
-    const { error, nearbyCampaigns, loading, loaded } = this.props.initialSearch;
 
     const AutocompleteItem = ({ formattedSuggestion }) => (
       <div className="input_suggestion_item">
@@ -99,19 +87,6 @@ class AutoSuggestInput extends Component {
           >
             <i className="fa fa-search fa-2x" aria-hidden="true" />
           </button>
-        </div>
-        <div className="temporary-results-box">
-          { loading && <p> Searching... </p> }
-          { !loading && error && error.searchError && <p>{error.userMessage}</p> }
-          { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
-            <div>
-              <p>{"Here's some nearby campaigns:"}</p>
-              {renderNearby(nearbyCampaigns)}
-            </div>
-          }
-          { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
-            <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
-          }
         </div>
       </div>
     );
