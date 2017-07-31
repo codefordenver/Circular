@@ -7,8 +7,26 @@ class ChooseCampaign extends Component {
     super(props);
     this.state = {
       selectedOption: null
+    };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    this.autoselectClosestCampaign(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.nearbyCampaigns !== nextProps.nearbyCampaigns) {
+      this.autoselectClosestCampaign(nextProps);
     }
-    this.handleOptionChange = this.handleOptionChange.bind(this)
+  }
+
+  autoselectClosestCampaign(props) {
+    const { nearbyCampaigns } = props;
+    if (nearbyCampaigns && Array.isArray(nearbyCampaigns)) {
+      this.setState({ selectedOption: nearbyCampaigns[0].street_address });
+    }
   }
 
   handleOptionChange(e) {
@@ -18,50 +36,53 @@ class ChooseCampaign extends Component {
   }
 
   handleFormSubmit(e) {
+    e.stopPropagation();
     e.preventDefault();
-    const selectedOption = this.state.selectedOption;
-    console.log('You have selected:', selectedOption);
-    if(selectedOption === 'no-match') {
-      this.props.router.push('/new-campaign/address')
+    const { selectedOption } = this.state;
+    if (!selectedOption || selectedOption === 'no-match') {
+      this.props.router.push('/new-campaign/address');
     }
   }
 
   renderNearbyCampaigns(nearbyCampaignsArr, selectedOption, handleOptionChange) {
     return (
-      nearbyCampaignsArr.map(c => (
+      nearbyCampaignsArr.map((c, i) => (
         <div className="radio" key={c.street_address}>
           <label>
             <input
               type="radio"
               value={c.street_address}
-              checked={selectedOption === c.street_address }
-              onChange={(e) => handleOptionChange(e)} />
+              checked={selectedOption === c.street_address}
+              onChange={handleOptionChange}
+            />
             { c.street_address }
           </label>
-      </div>)
+        </div>)
       )
     );
   }
 
   render() {
-    const renderNearby = this.renderNearbyCampaigns;
-    const { error, nearbyCampaigns, loading, loaded } = this.props.initialSearch;
+    const { selectedOption } = this.state;
+    const { error, nearbyCampaigns, loading, loaded } = this.props;
+
     return (
       <div className="temporary-results-box">
         { loading && <p> Searching... </p> }
         { !loading && error && error.searchError && <p>{error.userMessage}</p> }
         { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
         <form>
-          <p>{"We found these campaigns near you."}</p>
-          <p>{"Do any of these campaigns represent where you live?"}</p>
-          {renderNearby(nearbyCampaigns, this.state.selectedOption, this.handleOptionChange)}
+          <p>{'We found these campaigns near you.'}</p>
+          <p>{'Do any of these campaigns represent where you live?'}</p>
+          {this.renderNearbyCampaigns(nearbyCampaigns, selectedOption, this.handleOptionChange)}
           <div className="radio" key="no-match">
             <label>
               <input
                 type="radio"
                 value="no-match"
-                checked={this.state.selectedOption === "no-match"}
-                onChange={(e) => this.handleOptionChange(e)} />
+                checked={selectedOption === 'no-match'}
+                onChange={this.handleOptionChange}
+              />
               { "None of these match my address. Let's start a new campaign." }
             </label>
           </div>
@@ -70,11 +91,11 @@ class ChooseCampaign extends Component {
         { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
         <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
         }
-        <button className="btn" type="submit" onClick={(e) => this.handleFormSubmit(e)}>Next</button>
+        <button className="btn" type="submit" onClick={this.handleFormSubmit}>Next</button>
       </div>
     );
   }
 }
 
 export default connect(
-  ({ initialSearch }) => ({ initialSearch }))(withRouter(ChooseCampaign));
+  ({ initialSearch }) => ({ ...initialSearch }))(withRouter(ChooseCampaign));
