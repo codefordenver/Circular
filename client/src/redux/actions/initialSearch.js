@@ -1,4 +1,5 @@
 import createApiRequest from '../../utils/createApiRequest';
+import { browserHistory } from 'react-router';
 
 export function beginAddressSearch() {
   return {
@@ -36,6 +37,7 @@ export function clearSearchResults() {
 
 export function searchAddressFlow(address, searchAddressHelper, latLngHelper) {
   return async (dispatch) => {
+    browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
     const places = await dispatch(searchGoogleForAddress(address, searchAddressHelper));
     if (places.error) { return; }
