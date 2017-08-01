@@ -1,0 +1,2 @@
+- initial input field changes on focus: blue haze, or transform/grow like material gets closer.
+- put 'chosen address' in redux

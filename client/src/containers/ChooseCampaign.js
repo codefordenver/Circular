@@ -68,7 +68,7 @@ class ChooseCampaign extends Component {
 
     return (
       <div className="temporary-results-box">
-        { loading && <p> Searching... </p> }
+        { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
         { !loading && error && error.searchError && <p>{error.userMessage}</p> }
         { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
         <form>
