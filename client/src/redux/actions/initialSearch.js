@@ -1,5 +1,5 @@
-import createApiRequest from '../../utils/createApiRequest';
 import { browserHistory } from 'react-router';
+import createApiRequest from '../../utils/createApiRequest';
 
 export function beginAddressSearch() {
   return {
