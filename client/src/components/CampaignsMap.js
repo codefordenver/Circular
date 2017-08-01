@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import withScriptjs from "react-google-maps/lib/async/withScriptjs";
-import * as _ from "lodash";
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
+import * as _ from 'lodash';
 
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // and name it GettingStartedGoogleMap
@@ -34,8 +34,8 @@ class ApartmentMap extends Component {
         <GettingStartedGoogleMap
           googleMapURL={mapUrl}
           loadingElement={
-            <div style={{ height: `100%` }}>
-              {/*<FaSpinner
+            <div style={{ height: '100%' }}>
+              {/* <FaSpinner
                 style={{
                   display: `block`,
                   width: `80px`,
@@ -47,10 +47,10 @@ class ApartmentMap extends Component {
             </div>
           }
           containerElement={
-            <div style={{ height: `50vh` }} />
+            <div style={{ height: '50vh' }} />
           }
           mapElement={
-            <div style={{ height: `100%` }} />
+            <div style={{ height: '100%' }} />
           }
           onMapLoad={_.noop}
           onMapClick={_.noop}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const NavBar = () => (
   <nav className="navbar">
@@ -6,7 +7,7 @@ const NavBar = () => (
       <div className="row">
         <div className="col-md-9 navbar-header">
           <p>
-            <a className="home-link" href="/">Recycling Request Tool</a>
+            <Link className="home-link" to="/">Recycling Request Tool</Link>
           </p>
         </div>
 
