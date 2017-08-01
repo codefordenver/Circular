@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 
 import formatAddress from '../utils/formatAddress';
 
+import { setCampaignInformation } from '../redux/actions/initialSearch';
+
 class NewCampaign extends Component {
   constructor(props) {
     super(props);
@@ -11,8 +13,16 @@ class NewCampaign extends Component {
     this.setAddressStep = this.setAddressStep.bind(this);
   }
 
-  setAddressStep() {
-
+  setAddressStep(e) {
+    e.preventDefault();
+    this.props.setCampaignInformation({
+      street: e.target.street.value,
+      city: e.target.city.value,
+      state: e.target.state.value,
+      zip: e.target.zip.value,
+      aptNum: e.target.aptNum.value,
+      campaignName: e.target.campaignName.value
+    });
   }
 
   render() {
@@ -25,27 +35,34 @@ class NewCampaign extends Component {
       <div>
         <h1>New Campaign</h1>
         {formattedAddress.street &&
-        <form action="">
+        <form onSubmit={this.setAddressStep}>
           <div>
             <label>Street</label>
-            <input type="text" className="form-control" value={formattedAddress.street} />
+            <input type="text" className="form-control" value={formattedAddress.street} name="street" />
           </div>
           <div>
             <label>City</label>
-            <input type="text" className="form-control" value={formattedAddress.city} />
+            <input type="text" className="form-control" value={formattedAddress.city} name="city" />
           </div>
           <div>
             <label>State</label>
-            <input type="text" className="form-control" value={formattedAddress.state} />
+            <input type="text" className="form-control" value={formattedAddress.state} name="state" />
           </div>
           <div>
             <label>Zip</label>
-            <input type="number" className="form-control" value={formattedAddress.zip} />
+            <input type="number" className="form-control" value={formattedAddress.zip} name="zip" />
           </div>
           <div>
             <label>Apartment Number</label>
-            <input type="number" className="form-control" value={formattedAddress.aptNum} />
+            <input type="number" className="form-control" value={formattedAddress.aptNum} name="aptNum" />
           </div>
+          <br />
+          <div>
+            <label>Campaign Name</label>
+            <input type="text" className="form-control" name="campaignName" />
+          </div>
+          <br />
+          <button type="submit">Next</button>
         </form>}
         {!formattedAddress.street && <p>Add an address to start. <Link to="/">Click here</Link></p>}
       </div>
@@ -53,4 +70,6 @@ class NewCampaign extends Component {
   }
 }
 
-export default connect(({ initialSearch }) => ({ initialSearch }))(NewCampaign);
+export default connect(
+  ({ initialSearch }) => ({ initialSearch }),
+  { setCampaignInformation })(NewCampaign);

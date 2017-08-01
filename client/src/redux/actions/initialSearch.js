@@ -46,3 +46,10 @@ export function searchAddressFlow(address, searchAddressHelper, latLngHelper) {
     dispatch(fetchNearbyCampaigns(latLng.response));
   };
 }
+
+export function setCampaignInformation(campaignInfo) {
+  return {
+    type: 'SET_CAMPAIGN_INFORMATION',
+    campaignInfo
+  };
+}

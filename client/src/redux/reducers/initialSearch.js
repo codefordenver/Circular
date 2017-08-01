@@ -4,7 +4,8 @@ import {
   FETCH_NEARBY_CAMPAIGNS_FAILURE,
   VALIDATE_ADDRESS_SUCCESS,
   VALIDATE_ADDRESS_FAILURE,
-  CLEAR_SEARCH_RESULTS
+  CLEAR_SEARCH_RESULTS,
+  SET_CAMPAIGN_INFORMATION
 } from '../constants/initialSearch';
 
 const defaultState = {
@@ -57,6 +58,11 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         ...defaultState
+      };
+    case SET_CAMPAIGN_INFORMATION:
+      return {
+        ...state,
+        campaignInfo: action.campaignInfo
       };
     default:
       return state;
