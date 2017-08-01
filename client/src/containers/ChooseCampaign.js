@@ -7,8 +7,8 @@ class ChooseCampaign extends Component {
     super(props);
     this.state = {
       selectedOption: null
-    }
-    this.handleOptionChange = this.handleOptionChange.bind(this)
+    };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
   }
 
   handleOptionChange(e) {
@@ -21,8 +21,8 @@ class ChooseCampaign extends Component {
     e.preventDefault();
     const selectedOption = this.state.selectedOption;
     console.log('You have selected:', selectedOption);
-    if(selectedOption === 'no-match') {
-      this.props.router.push('/new-campaign/address')
+    if (selectedOption === 'no-match') {
+      this.props.router.push('/new-campaign/address');
     }
   }
 
@@ -34,11 +34,12 @@ class ChooseCampaign extends Component {
             <input
               type="radio"
               value={c.street_address}
-              checked={selectedOption === c.street_address }
-              onChange={(e) => handleOptionChange(e)} />
+              checked={selectedOption === c.street_address}
+              onChange={e => handleOptionChange(e)}
+            />
             { c.street_address }
           </label>
-      </div>)
+        </div>)
       )
     );
   }
@@ -48,20 +49,21 @@ class ChooseCampaign extends Component {
     const { error, nearbyCampaigns, loading, loaded } = this.props.initialSearch;
     return (
       <div className="temporary-results-box">
-        { loading && <p> Searching... </p> }
+        { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
         { !loading && error && error.searchError && <p>{error.userMessage}</p> }
         { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
         <form>
-          <p>{"We found these campaigns near you."}</p>
-          <p>{"Do any of these campaigns represent where you live?"}</p>
+          <p>{'We found these campaigns near you.'}</p>
+          <p>{'Do any of these campaigns represent where you live?'}</p>
           {renderNearby(nearbyCampaigns, this.state.selectedOption, this.handleOptionChange)}
           <div className="radio" key="no-match">
             <label>
               <input
                 type="radio"
                 value="no-match"
-                checked={this.state.selectedOption === "no-match"}
-                onChange={(e) => this.handleOptionChange(e)} />
+                checked={this.state.selectedOption === 'no-match'}
+                onChange={e => this.handleOptionChange(e)}
+              />
               { "None of these match my address. Let's start a new campaign." }
             </label>
           </div>
@@ -70,7 +72,7 @@ class ChooseCampaign extends Component {
         { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
         <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
         }
-        <button className="btn" type="submit" onClick={(e) => this.handleFormSubmit(e)}>Next</button>
+        <button className="btn" type="submit" onClick={e => this.handleFormSubmit(e)}>Next</button>
       </div>
     );
   }
