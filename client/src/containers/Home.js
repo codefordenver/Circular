@@ -15,7 +15,7 @@ class Home extends Component {
   render() {
     const { apartments: { apartments }, googleMap: { isOpen } } = this.props;
     return (
-      <div className="container">
+      <div>
         <HeroCTA
           openMap={this.props.openMap}
         />
