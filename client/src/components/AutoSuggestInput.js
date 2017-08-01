@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
@@ -51,7 +52,7 @@ class AutoSuggestInput extends Component {
       </div>);
 
     const inputProps = {
-      ref: input => this.addressInput = input,
+      ref: (input) => { this.addressInput = input; },
       type: 'text',
       value: this.state.address,
       onChange: this.onChange,
@@ -79,7 +80,7 @@ class AutoSuggestInput extends Component {
             >
               <i className="fa fa-times fa-2x" aria-hidden="true" />
             </button>
-	  			}
+          }
           <button
             className="search_button"
             disabled={!this.state.address}
@@ -92,6 +93,12 @@ class AutoSuggestInput extends Component {
     );
   }
 }
+
+AutoSuggestInput.propTypes = {
+  searchAddressFlow: PropTypes.func.isRequired,
+  clearSearchResults: PropTypes.func.isRequired,
+  isScriptLoaded: PropTypes.bool.isRequired
+};
 
 export default connect(
   ({ initialSearch }) => ({ initialSearch }), {

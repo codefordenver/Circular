@@ -1,7 +1,20 @@
+.navbar {
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .home-link {
   color: $green-color;
-  margin-left: 1vw;
-  font-size: 30px;
+  font-size: 2rem;
   font-family: 'Fira Sans Condensed', sans-serif;
   font-weight: 700;
   text-decoration: none;
@@ -40,10 +53,6 @@
 
 .non-bold {
   font-weight: 100;
-}
-.navbar {
-  padding-top: 6px;
-  padding-bottom: 6px;
 }
 
 .top-nav.navbar.navbar-default.navbar-fixed-top {
