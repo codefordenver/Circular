@@ -13,7 +13,6 @@
 # misc
 .DS_Store
 .env.local
-easy_to_forget_to_dos.txt
 src/**/*.css
 .env.development.local
 .env.test.local
