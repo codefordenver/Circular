@@ -44,3 +44,11 @@ export function searchAddressFlow(address, latLngHelper) {
     dispatch(fetchNearbyCampaigns(latLng.response));
   };
 }
+
+
+export function selectAddress(value) {
+  return {
+    type: 'SELECT_ADDRESS',
+    value
+  };
+}
