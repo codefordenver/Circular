@@ -19,5 +19,5 @@ Rails.application.routes.draw do
       get 'apartments/find', to: 'apartments#find'
       resources :apartments
     end
-  end
+  end	
 end
