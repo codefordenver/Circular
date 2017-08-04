@@ -22,9 +22,8 @@ class AutoSuggestInput extends Component {
 
   handleSelect(address) {
     this.setState({ address });
-    geocodeByAddress(this.state.address)
+    geocodeByAddress(address)
       .then((results) => {
-        console.log(results);
         this.props.searchAddressFlow(results[0], getLatLng);
       })
       .catch(error => this.setState({ error }));

@@ -2,33 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { selectAddress } from '../redux/actions/initialSearch';
+import fetchCampaignById from '../redux/actions/activeCampaign';
 
 class ChooseCampaign extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedOption: null
-    };
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
-
-  // componentWillMount() {
-  //   this.autoselectClosestCampaign(this.props);
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.nearbyCampaigns !== nextProps.nearbyCampaigns) {
-  //     this.autoselectClosestCampaign(nextProps);
-  //   }
-  // }
-
-  // autoselectClosestCampaign(props) {
-  //   const { nearbyCampaigns } = props;
-  //   if (nearbyCampaigns && Array.isArray(nearbyCampaigns)) {
-  //     this.setState({ selectedOption: nearbyCampaigns[0].street_address });
-  //   }
-  // }
 
   handleOptionChange(e) {
     this.props.selectAddress(e.target.value);
@@ -38,8 +19,11 @@ class ChooseCampaign extends Component {
     e.stopPropagation();
     e.preventDefault();
     const { selectedAddress } = this.props;
-    if (!selectedAddress || selectedAddress === 'no-match') {
+    if (!selectedAddress || selectedAddress === 'none') {
       this.props.router.push('/new-campaign/address');
+    } else {
+      this.props.fetchCampaignById(selectedAddress.id);
+      this.props.router.push(`/campaign/${selectedAddress.id}`);
     }
   }
 
@@ -62,7 +46,6 @@ class ChooseCampaign extends Component {
   }
 
   render() {
-    const { selectedOption } = this.state;
     const { error, nearbyCampaigns, loading, loaded, selectedAddress } = this.props;
 
     return (
@@ -79,7 +62,7 @@ class ChooseCampaign extends Component {
               <input
                 type="radio"
                 value={'none'}
-                checked={!selectedAddress}
+                checked={selectedAddress === 'none'}
                 onChange={this.handleOptionChange}
               />
               { "None of these match my address. Let's start a new campaign." }
@@ -97,4 +80,4 @@ class ChooseCampaign extends Component {
 }
 
 export default connect(
-  ({ initialSearch }) => ({ ...initialSearch }), { selectAddress })(withRouter(ChooseCampaign));
+  ({ initialSearch }) => ({ ...initialSearch }), { selectAddress, fetchCampaignById })(withRouter(ChooseCampaign));
