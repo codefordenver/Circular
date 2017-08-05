@@ -33,6 +33,7 @@ gem 'devise_token_auth'
 gem 'responders'
 gem 'foreman', '~>0.82.0'
 gem 'activerecord-postgres-earthdistance'
+gem 'rack-cors', :require => 'rack/cors'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

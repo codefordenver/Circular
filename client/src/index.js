@@ -14,17 +14,13 @@ const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
 store.dispatch(configure(
-  [
     {
-      default: {
-        apiUrl: 'http://localhost:3000',
+        apiUrl: 'http://localhost:3001',
         authProviderPaths: {
           facebook:  '/auth/facebook',
           google:    '/auth/google_oauth2'
         }
-      }
-    }
-  ], 
+    },
   {
     isServer: false, 
     cookies: document.cookie, 
