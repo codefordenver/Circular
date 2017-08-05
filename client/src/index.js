@@ -17,9 +17,9 @@ store.dispatch(configure(
   [
     {
       default: {
-        apiUrl: '/api/v1',
+        apiUrl: 'http://localhost:3000',
         authProviderPaths: {
-          facebook:  '/auth/acebook/callback',
+          facebook:  '/auth/facebook',
           google:    '/auth/google_oauth2'
         }
       }
