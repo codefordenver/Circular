@@ -14,7 +14,7 @@ const NavBar = () => (
         </div>
 
         <ButtonGroup>
-          <OAuthSignInButton provider="google" next="/Home">Google</OAuthSignInButton>
+          <OAuthSignInButton provider="google">Google</OAuthSignInButton>
           <OAuthSignInButton provider="facebook">Facebook</OAuthSignInButton>
         </ButtonGroup>
 
