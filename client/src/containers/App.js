@@ -4,7 +4,6 @@ import {AuthGlobals} from "redux-auth/default-theme";
 
 const App = ({ children }) => (
   <div className="app-container">
-    <AuthGlobals />
     <NavBar />
     { children }
   </div>
