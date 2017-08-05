@@ -28,6 +28,8 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'figaro'
 gem 'gmaps4rails'
 gem 'omniauth-facebook'
+gem 'devise'
+gem 'devise_token_auth'
 gem 'responders'
 gem 'foreman', '~>0.82.0'
 gem 'activerecord-postgres-earthdistance'
