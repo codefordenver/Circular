@@ -281,7 +281,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   omniauth-facebook
-  omniauth-google-oauth2 (~> 0.2.1)
+  omniauth-google-oauth2
   pg (~> 0.18)
   pry
   pry-byebug
