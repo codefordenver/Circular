@@ -9,7 +9,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :scope => "email, profile, plus.me",#, http://gdata.youtube.com",
     :prompt => "select_account",
     :image_aspect_ratio => "square",
-    :image_size => 50
+    :image_size => 50,
+    :skip_jwt => true
   }
 
   #Contact facebook, pull keys from 'congfig/secrets.yml', obtain user information.
