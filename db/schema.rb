@@ -10,28 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716014615) do
+ActiveRecord::Schema.define(version: 20170808022257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "cube"
   enable_extension "earthdistance"
 
-  create_table "apartments", force: :cascade do |t|
-    t.string   "street_address"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.float    "lng"
-    t.float    "lat"
+  create_table "campaigns", force: :cascade do |t|
     t.string   "name"
-  end
-
-  create_table "petitions", force: :cascade do |t|
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "vote_count",   default: 1
-    t.integer  "apartment_id"
-    t.index ["apartment_id"], name: "index_petitions_on_apartment_id", unique: true, using: :btree
+    t.string   "street_address"
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "vote_count",     default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,5 +37,4 @@ ActiveRecord::Schema.define(version: 20170716014615) do
     t.datetime "updated_at",       null: false
   end
 
-  add_foreign_key "petitions", "apartments"
 end
