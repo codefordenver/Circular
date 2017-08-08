@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import NavBar from '../components/Navbar';
-//import {AuthGlobals} from "redux-auth/default-theme";
 
 const App = ({ children }) => (
   <div className="app-container">
