@@ -1,5 +1,5 @@
-import createApiRequest from '../../utils/createApiRequest';
 import { browserHistory } from 'react-router';
+import createApiRequest from '../../utils/createApiRequest';
 
 export function beginAddressSearch() {
   return {
@@ -7,18 +7,17 @@ export function beginAddressSearch() {
   };
 }
 
-export function searchGoogleForAddress(address, searchAddressHelper) {
+export function stashAddress(address) {
   return {
-    type: 'VALIDATE_ADDRESS',
-    promise: searchAddressHelper(address)
+    type: 'STASH_ADDRESS',
+    data: address
   };
 }
 
-export function getLatLong(places, latLngHelper) {
-  const place = places[0];
+export function getLatLong(address, latLngHelper) {
   return {
     type: 'GET_LAT_LONG',
-    promise: latLngHelper(place)
+    promise: latLngHelper(address)
   };
 }
 
@@ -35,14 +34,21 @@ export function clearSearchResults() {
   };
 }
 
-export function searchAddressFlow(address, searchAddressHelper, latLngHelper) {
+export function searchAddressFlow(address, latLngHelper) {
   return async (dispatch) => {
     browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
-    const places = await dispatch(searchGoogleForAddress(address, searchAddressHelper));
-    if (places.error) { return; }
-    const latLng = await dispatch(getLatLong(places.response, latLngHelper));
+    dispatch(stashAddress(address));
+    const latLng = await dispatch(getLatLong(address, latLngHelper));
     if (latLng.error) { return; }
     dispatch(fetchNearbyCampaigns(latLng.response));
+  };
+}
+
+
+export function selectAddress(value) {
+  return {
+    type: 'SELECT_ADDRESS',
+    value
   };
 }
