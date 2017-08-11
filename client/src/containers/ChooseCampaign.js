@@ -49,31 +49,45 @@ class ChooseCampaign extends Component {
     const { error, nearbyCampaigns, loading, loaded, selectedAddress } = this.props;
 
     return (
-      <div className="temporary-results-box">
-        { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
-        { !loading && error && error.searchError && <p>{error.userMessage}</p> }
-        { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
-        <form>
-          <p>{'We found these campaigns near you.'}</p>
-          <p>{'Do any of these campaigns represent where you live?'}</p>
-          {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress, this.handleOptionChange)}
-          <div className="radio" key="no-match">
-            <label>
-              <input
-                type="radio"
-                value={'none'}
-                checked={selectedAddress === 'none'}
-                onChange={this.handleOptionChange}
-              />
-              { "None of these match my address. Let's start a new campaign." }
-            </label>
+      <div className="hero_wrapper">
+        <div className="container">
+          <div className="search_address_wrapper">
+          {/*<form className="search_address_wrapper">
+            <h1 className="search_address_heading">Need recycling at your building?</h1>
+            <h2 className="search_address_sub_heading"> Join or create a campaign!</h2>
+            <AutoSuggestInput />
+            <Link className="search_address_link" to="/denver-recycling-info">Learn more first</Link>
+          </form>*/}
+          { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
+          { !loading && error && error.searchError && <p>{error.userMessage}</p> }
+          { loaded && nearbyCampaigns && Array.isArray(nearbyCampaigns) &&
+          <form className="">
+            <h1 className="search_address_heading">{'We found these campaigns near you.'}</h1>
+            <h2 className="search_address_sub_heading">{'Do any of these campaigns represent where you live?'}</h2>
+            {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress, this.handleOptionChange)}
+            <div className="radio" key="no-match">
+              <label>
+                <input
+                  type="radio"
+                  value={'none'}
+                  checked={selectedAddress === 'none'}
+                  onChange={this.handleOptionChange}
+                />
+                { "None of these match my address. Let's start a new campaign." }
+              </label>
+            </div>
+          </form>
+          }
+          { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
+          <div>
+            <h1 className="search_address_heading">{"You're the first to support recycling for your building!"}</h1>
+            <h2 className="search_address_sub_heading">{"Launch your building's request for recycling!"}</h2>
+            <h2 className="search_address_sub_heading">{"(We promise it will only take a minute)"}</h2>
           </div>
-        </form>
-        }
-        { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
-        <p>{"We didn't find any campaigns near you. Would you like to start one?"}</p>
-        }
-        <button className="btn" type="submit" onClick={this.handleFormSubmit}>Next</button>
+          }
+          <button className="btn" type="submit" onClick={this.handleFormSubmit}>OK - LET'S DO THIS!</button>
+        </div>
+        </div>
       </div>
     );
   }
