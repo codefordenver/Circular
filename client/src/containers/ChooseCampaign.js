@@ -7,6 +7,10 @@ import fetchCampaignById from '../redux/actions/activeCampaign';
 class ChooseCampaign extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedOption: null
+    };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
@@ -18,6 +22,8 @@ class ChooseCampaign extends Component {
   handleFormSubmit(e) {
     e.stopPropagation();
     e.preventDefault();
+    const selectedOption = this.state.selectedOption;
+    console.log('You have selected:', selectedOption);
     const { selectedAddress } = this.props;
     if (!selectedAddress || selectedAddress === 'none') {
       this.props.router.push('/new-campaign/address');
@@ -94,4 +100,5 @@ class ChooseCampaign extends Component {
 }
 
 export default connect(
-  ({ initialSearch }) => ({ ...initialSearch }), { selectAddress, fetchCampaignById })(withRouter(ChooseCampaign));
+  ({ initialSearch }) => ({ ...initialSearch }),
+  { selectAddress, fetchCampaignById })(withRouter(ChooseCampaign));

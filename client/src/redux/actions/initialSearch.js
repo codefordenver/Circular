@@ -10,7 +10,7 @@ export function beginAddressSearch() {
 export function stashAddress(address) {
   return {
     type: 'STASH_ADDRESS',
-    data: address
+    address
   };
 }
 
@@ -24,7 +24,7 @@ export function getLatLong(address, latLngHelper) {
 export function fetchNearbyCampaigns(latLng) {
   return {
     type: 'FETCH_NEARBY_CAMPAIGNS',
-    promise: createApiRequest(`apartments/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET')
+    promise: createApiRequest(`campaigns/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET')
   };
 }
 
@@ -45,6 +45,12 @@ export function searchAddressFlow(address, latLngHelper) {
   };
 }
 
+export function setCampaignInformation(campaignInfo) {
+  return {
+    type: 'SET_CAMPAIGN_INFORMATION',
+    campaignInfo
+  };
+}
 
 export function selectAddress(value) {
   return {
