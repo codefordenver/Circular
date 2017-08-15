@@ -24,7 +24,7 @@ export function getLatLong(address, latLngHelper) {
 export function fetchNearbyCampaigns(latLng) {
   return {
     type: 'FETCH_NEARBY_CAMPAIGNS',
-    promise: createApiRequest(`apartments/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET')
+    promise: createApiRequest(`campaigns/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET')
   };
 }
 
