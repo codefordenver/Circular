@@ -5,7 +5,7 @@ import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
-import { configure } from "redux-auth";
+import { configure } from 'redux-auth';
 import './stylesheets/main.css';
 
 import configureStore from './redux/configureStore';
@@ -22,8 +22,8 @@ store.dispatch(configure(
     }
   },
   {
-    isServer: false, 
-    cookies: document.cookie, 
+    isServer: false,
+    cookies: document.cookie,
     currentLocation: window.location.href,
     cleanSession: true,
     clientOnly: true

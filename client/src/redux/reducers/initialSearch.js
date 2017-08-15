@@ -5,6 +5,7 @@ import {
   VALIDATE_ADDRESS_SUCCESS,
   VALIDATE_ADDRESS_FAILURE,
   CLEAR_SEARCH_RESULTS,
+  SET_CAMPAIGN_INFORMATION,
   SELECT_ADDRESS
 } from '../constants/initialSearch';
 
@@ -56,15 +57,27 @@ export default function (state = defaultState, action) {
         }
       };
     case SELECT_ADDRESS:
-      const selectedAddress = state.nearbyCampaigns.find(c => c.street_address === action.value) || 'none';
+      {
+        const selectedAddress = state.nearbyCampaigns.find(c => c.street_address === action.value) || 'none';
+        return {
+          ...state,
+          selectedAddress
+        };
+      }
+    case 'STASH_ADDRESS':
       return {
         ...state,
-        selectedAddress
+        searchedAddress: action.address
       };
     case CLEAR_SEARCH_RESULTS:
       return {
         ...state,
         ...defaultState
+      };
+    case SET_CAMPAIGN_INFORMATION:
+      return {
+        ...state,
+        campaignInfo: action.campaignInfo
       };
     default:
       return state;
