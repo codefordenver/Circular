@@ -1,4 +1,5 @@
 class Api::V1::CampaignsController < Api::V1::BaseController
+
   before_action :set_campaign, only: [:show, :update, :destroy]
 
   def index
@@ -7,6 +8,7 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   end
 
   def create
+    address = campaign_params[:campaignInfo][:street]
     @campaign = Campaign.create!(campaign_params)
     json_response(@campaign, :created)
   end
@@ -37,7 +39,7 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   private
 
   def campaign_params
-    params.permit(:name, :street_address, :lat, :lng)
+    params.permit(:name, :street_address, :lat, :lng, :campaignInfo)
   end
 
   def set_campaign

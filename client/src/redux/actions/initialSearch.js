@@ -48,7 +48,7 @@ export function searchAddressFlow(address, latLngHelper) {
 export function setCampaignInformation(campaignInfo) {
   return {
     type: 'SET_CAMPAIGN_INFORMATION',
-    campaignInfo
+    promise: createApiRequest('campaigns', 'POST', { campaignInfo })
   };
 }
 
