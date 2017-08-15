@@ -9,8 +9,11 @@ services:
     command: rake start
     depends_on:
       - db
-    ports: 
+    links:
+      - db
+    ports:
       - "3000:3000"
       - "3001:3001"
     volumes:
       - .:/circular
+    tty: true
