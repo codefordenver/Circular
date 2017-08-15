@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
@@ -13,13 +14,19 @@ class AutoSuggestInput extends Component {
     super(props);
     this.state = {
       address: '',
-      isFieldActive: false
+      isFieldActive: false,
+      error: ''
     };
-    this.onChange = address => this.setState({ address });
+    this.onChange = address => this.setState({ address, error: '' });
   }
 
   handleSelect(address) {
-    this.props.searchAddressFlow(address, geocodeByAddress, getLatLng);
+    this.setState({ address });
+    geocodeByAddress(address)
+      .then((results) => {
+        this.props.searchAddressFlow(results[0], getLatLng);
+      })
+      .catch(error => this.setState({ error }));
   }
 
   handleSearchClick(e) {
@@ -31,7 +38,7 @@ class AutoSuggestInput extends Component {
 
   clearInput(e) {
     e.preventDefault();
-    this.setState({ address: '' });
+    this.setState({ address: '', error: '' });
     this.props.clearSearchResults();
     this.addressInput.focus();
   }
@@ -40,7 +47,8 @@ class AutoSuggestInput extends Component {
     const cssClasses = {
       root: 'form_group',
       input: 'search_input',
-      autocompleteContainer: 'autocomplete_container'
+      autocompleteContainer: 'autocomplete_container',
+      autocompleteItemActive: 'input_suggestion_item_active'
     };
 
     const AutocompleteItem = ({ formattedSuggestion }) => (
@@ -51,7 +59,7 @@ class AutoSuggestInput extends Component {
       </div>);
 
     const inputProps = {
-      ref: input => this.addressInput = input,
+      ref: (input) => { this.addressInput = input; },
       type: 'text',
       value: this.state.address,
       onChange: this.onChange,
@@ -61,6 +69,11 @@ class AutoSuggestInput extends Component {
 
     return (
       <div className="autosuggest_input_form">
+        <div className={`error-box ${this.state.error ? 'open' : 'closed'}`}>
+          <p className="error-text">
+            {"Sorry, we couldn't find that address."}
+          </p>
+        </div>
         <div className="input_form">
           { this.props.isScriptLoaded ?
             <PlacesAutocomplete
@@ -79,10 +92,10 @@ class AutoSuggestInput extends Component {
             >
               <i className="fa fa-times fa-2x" aria-hidden="true" />
             </button>
-	  			}
+          }
           <button
             className="search_button"
-            disabled={!this.state.address}
+            disabled={!this.state.address || this.state.error}
             onClick={e => this.handleSearchClick(e)}
           >
             <i className="fa fa-search fa-2x" aria-hidden="true" />
@@ -92,6 +105,12 @@ class AutoSuggestInput extends Component {
     );
   }
 }
+
+AutoSuggestInput.propTypes = {
+  searchAddressFlow: PropTypes.func.isRequired,
+  clearSearchResults: PropTypes.func.isRequired,
+  isScriptLoaded: PropTypes.bool.isRequired
+};
 
 export default connect(
   ({ initialSearch }) => ({ initialSearch }), {
