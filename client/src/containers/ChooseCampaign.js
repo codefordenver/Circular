@@ -85,7 +85,7 @@ class ChooseCampaign extends Component {
             <h2 className="search_address_sub_heading">{"(We promise it will only take a minute)"}</h2>
           </div>
           }
-          <button className="btn" type="submit" onClick={this.handleFormSubmit}>OK - LET'S DO THIS!</button>
+          <button className="btn" type="submit" onClick={this.handleFormSubmit}>{"OK - LET'S DO THIS!"}</button>
         </div>
         </div>
       </div>
