@@ -1,3 +1,5 @@
+@import '../base/colors';
+
 * {
 	box-sizing: border-box;
 }
@@ -9,4 +11,14 @@ body {
 .row {
   display: flex;
   flex-direction: row;
+}
+
+.btn {
+	background-color: #fff;	
+	border: none;	
+	color: $maingreen;	
+	font-family: 'Fira Sans';
+	font-weight: 700;
+	font-size: 1rem;
+	padding: .75rem 1.25rem;
 }

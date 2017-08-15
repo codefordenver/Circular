@@ -36,17 +36,19 @@ class ChooseCampaign extends Component {
   renderNearbyCampaigns(nearbyCampaignsArr, selectedOption, handleOptionChange) {
     return (
       nearbyCampaignsArr.map(c => (
-        <div className="radio" key={c.street_address}>
-          <label>
-            <input
+        <li className="chooseCampaign-item" key={c.street_address}>
+              
+          <input
               type="radio"
+              id={c.street_address}
               value={c.street_address}
               checked={selectedOption && selectedOption.street_address === c.street_address}
               onChange={handleOptionChange}
             />
+            <label htmlFor={c.street_address}>
             { c.street_address }
           </label>
-        </div>)
+        </li>)
       )
     );
   }
@@ -70,18 +72,22 @@ class ChooseCampaign extends Component {
           <form className="">
             <h1 className="search_address_heading">{'We found these campaigns near you.'}</h1>
             <h2 className="search_address_sub_heading">{'Do any of these campaigns represent where you live?'}</h2>
+            <ul className="chooseCampaign-list">
             {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress, this.handleOptionChange)}
-            <div className="radio" key="no-match">
-              <label>
-                <input
+            <li className="chooseCampaign-item" key="no-match">
+              <input
+                  id="none"
                   type="radio"
                   value={'none'}
                   checked={selectedAddress === 'none'}
                   onChange={this.handleOptionChange}
                 />
+              <label htmlFor="none">
+               
                 { "None of these match my address. Let's start a new campaign." }
               </label>
-            </div>
+            </li>
+            </ul>
           </form>
           }
           { !loading && nearbyCampaigns && nearbyCampaigns.status === 'okay' && !nearbyCampaigns.results &&
