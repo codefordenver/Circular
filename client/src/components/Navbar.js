@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { OAuthSignInButton, SignOutButton } from "redux-auth/default-theme";
+import { ButtonGroup } from "react-bootstrap";
 
 const NavBar = () => (
   <nav className="navbar">
@@ -13,8 +15,11 @@ const NavBar = () => (
 
         <div className="col-md-3">
           <ul className="top-nav-list">
-            {/*  <li>sign in with google</li>
-            <li>sign in with facebook</li>*/}
+            <ButtonGroup>
+              <OAuthSignInButton provider="google">Google</OAuthSignInButton>
+              <OAuthSignInButton provider="facebook">Facebook</OAuthSignInButton>
+              <SignOutButton>Sign Out</SignOutButton>
+            </ButtonGroup>
           </ul>
         </div>
       </div>
