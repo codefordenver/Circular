@@ -64,6 +64,11 @@ export default function (state = defaultState, action) {
           selectedAddress
         };
       }
+    case 'STASH_ADDRESS':
+      return {
+        ...state,
+        searchedAddress: action.address
+      };
     case CLEAR_SEARCH_RESULTS:
       return {
         ...state,

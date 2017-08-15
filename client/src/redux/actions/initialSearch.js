@@ -10,7 +10,7 @@ export function beginAddressSearch() {
 export function stashAddress(address) {
   return {
     type: 'STASH_ADDRESS',
-    data: address
+    address
   };
 }
 
