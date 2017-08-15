@@ -8,7 +8,6 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   end
 
   def create
-    address = campaign_params[:campaignInfo][:street]
     @campaign = Campaign.create!(campaign_params)
     json_response(@campaign, :created)
   end
@@ -39,7 +38,11 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   private
 
   def campaign_params
-    params.permit(:name, :street_address, :lat, :lng, :campaignInfo)
+    params.permit(:name, :lat, :lng).merge(street_address: convert_address_to_string)
+  end
+
+  def convert_address_to_string
+    "#{params['campaignInfo']['street']}, #{params['campaignInfo']['city']}, #{params['campaignInfo']['state']}, #{params['campaignInfo']['zip']}"
   end
 
   def set_campaign
