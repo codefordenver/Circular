@@ -1,10 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'database_cleaner'
+
+DatabaseCleaner.clean_with(:truncation)
+
 Campaign.create!([
   { street_address: '710 E 26th Ave, Denver, CO 80205', lat: 39.7392, lng: -104.673828, name: 'Nuggets', vote_count: 4 },
   { street_address: '1435 Jersey St, Denver, CO 80220, USA', lat: 39.739163, lng: -104.920209, name: 'Rockies', vote_count: 3 },
