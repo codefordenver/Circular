@@ -19,7 +19,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        activeCampaign: response
+        campaign: response
       };
     case FETCH_CAMPAIGN_FAILURE:
       return {

@@ -48,7 +48,7 @@ export function searchAddressFlow(address, latLngHelper) {
 export function setCampaignInformation(campaignInfo) {
   return {
     type: 'SET_CAMPAIGN_INFORMATION',
-    campaignInfo
+    promise: createApiRequest('campaigns', 'POST', { campaignInfo })
   };
 }
 
@@ -56,5 +56,12 @@ export function selectAddress(value) {
   return {
     type: 'SELECT_ADDRESS',
     value
+  };
+}
+
+export function createCampaign(campaignInfo) {
+  return async (dispatch) => {
+    const { response } = await dispatch(setCampaignInformation(campaignInfo));
+    browserHistory.push(`/campaign/${response.id}`);
   };
 }
