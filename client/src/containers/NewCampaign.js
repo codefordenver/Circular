@@ -6,7 +6,7 @@ import formatAddress from '../utils/formatAddress';
 
 import ModalWrapper from '../components/ModalWrapper';
 
-import { setCampaignInformation } from '../redux/actions/initialSearch';
+import { createCampaign } from '../redux/actions/initialSearch';
 
 class NewCampaign extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class NewCampaign extends Component {
 
   setAddressStep(e) {
     e.preventDefault();
-    this.props.setCampaignInformation({
+    this.props.createCampaign({
       street: e.target.street.value,
       city: e.target.city.value,
       state: e.target.state.value,
@@ -74,4 +74,4 @@ class NewCampaign extends Component {
 
 export default connect(
   ({ initialSearch }) => ({ initialSearch }),
-  { setCampaignInformation })(NewCampaign);
+  { createCampaign })(NewCampaign);

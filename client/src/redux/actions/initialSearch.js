@@ -58,3 +58,10 @@ export function selectAddress(value) {
     value
   };
 }
+
+export function createCampaign(campaignInfo) {
+  return async (dispatch) => {
+    const { response } = await dispatch(setCampaignInformation(campaignInfo));
+    browserHistory.push(`/campaign/${response.id}`);
+  };
+}
