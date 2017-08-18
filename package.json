@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "postinstall": "cd client && yarn"
+    "postinstall": "cd client && yarn",
+    "heroku-postbuild": "cd client && yarn build && cp -a ./build/. ../public"
   }
 }
