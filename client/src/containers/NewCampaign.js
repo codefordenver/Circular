@@ -4,7 +4,9 @@ import { Link } from 'react-router';
 
 import formatAddress from '../utils/formatAddress';
 
-import { setCampaignInformation } from '../redux/actions/initialSearch';
+import ModalWrapper from '../components/ModalWrapper';
+
+import { createCampaign } from '../redux/actions/initialSearch';
 
 class NewCampaign extends Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class NewCampaign extends Component {
 
   setAddressStep(e) {
     e.preventDefault();
-    this.props.setCampaignInformation({
+    this.props.createCampaign({
       street: e.target.street.value,
       city: e.target.city.value,
       state: e.target.state.value,
@@ -32,7 +34,7 @@ class NewCampaign extends Component {
       formattedAddress = formatAddress(searchedAddress.address_components);
     }
     return (
-      <div>
+      <ModalWrapper title="New Campaign">
         <h1>New Campaign</h1>
         {formattedAddress.street &&
         <form onSubmit={this.setAddressStep}>
@@ -65,11 +67,11 @@ class NewCampaign extends Component {
           <button type="submit">Next</button>
         </form>}
         {!formattedAddress.street && <p>Add an address to start. <Link to="/">Click here</Link></p>}
-      </div>
+      </ModalWrapper>
     );
   }
 }
 
 export default connect(
   ({ initialSearch }) => ({ initialSearch }),
-  { setCampaignInformation })(NewCampaign);
+  { createCampaign })(NewCampaign);
