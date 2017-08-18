@@ -61,4 +61,6 @@ Rails.application.configure do
         :methods => [:get, :post, :options, :delete, :put]
     end
   end
+
+  config.secret_key_base = ENV["secret_key_base"]
 end
