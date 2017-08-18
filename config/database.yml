@@ -75,7 +75,7 @@ test:
 #
 # You can use this database configuration with:
 #
- production:
+production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
 
