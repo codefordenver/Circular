@@ -92,6 +92,12 @@ cd ..
 $ rake start
 ```
 
+#### 11. Setting up secret keys
+
+We use the gem Figaro to set our secret keys. To make sure it's properly configured, please run `bundle exec figaro install` which will create an application.yml file that is git-ignored. 
+Git-ignoring this file means that our secret keys will not get pushed up to Github. You'll need to get these secret keys from another person who already has them, so please ask when you're ready for this step.
+  *We don't use config/secrets.yml so if you see a tutorial instructing you to add secret keys here, please instead add them to application.yml.*
+
 #### Optional: Run the App Console
 
 `rails c` is short for `rails console` and allows you to interact with the application straight from the command line. This is helpful for checking what data is in the database, among other things.
