@@ -116,3 +116,55 @@ In order to run the test suite, use the commands below. `rails db:test:prepare` 
 $ rails db:test:prepare
 $ rspec
 ```
+## Running with Docker
+
+![Docker Logo](https://www.docker.com/sites/default/files/mono_horizontal_large.png)
+
+###What is Docker?
+Docker is a software platform that allows you to develop and run your software in *__containers__*. 
+
+*__Containers__* are isolated environments in which you can install and run your software along with any libraries and denpendcies your software needs without the bloat that comes with running a full operating system like you normally would within a Virtual Machine. You can learn more about Docker *__containers__* [here](https://www.docker.com/what-container).
+
+One advantage to running your software in *__containers__* is that you can standardize your development environment and eliminate problems that may arise out of having a unique development environment or working with other developers that may also have unique development environments.
+
+
+###Why Docker?
+Code for Denver is using Docker in an effort to reduce time spent onboarding new members onto new projects. By using Docker, we can take advantage of a standardized development environment shared by everyone working on a project and spend less time installing new software and setting up projects on everyone's unique machines. Every project repository contains a Dockerfile specific to that project that will configure and run the project within Docker containers - all you need to do to get started with a project is install Docker and follow the instructions below!
+
+## Setting Up Docker
+#### 1. Install Docker
+You will need docker loaded locally on your machine to access your developement environment.
+
+[Dowload Docker for your OS] (https://store.docker.com/search?type=edition&offering=community)
+
+Verify Docker is up and running. You should see the docker program icon in your tray, menu bar or dock. From the link provided you should have the latest version.
+
+#### 2. Ensure you have the lastest GitHub pull
+If you havent already done so you can use the GitHub Desktop App.
+
+[Donwload GitHub Desktop](https://help.github.com/desktop/guides/getting-started/installing-github-desktop/)
+
+
+#### 3. Run configuration script to connect to the Circular Docker Container
+
+You can access the script directly from within your local repository by navigating here:
+
+```
+/Users/<your user acct>/GitHub/Circular (for example)
+```
+
+
+Check the script ran?
+
+#### 5. Opening you Docker container with Kitematic (GUI)
+When clicking on the docker icon or in the drop down there Kitematic is listed and will require installation.
+
+You should see an containers you have interacted with listed in Kitemaitc fort quick access.
+
+#### 6. Opeing you docker container from the command line
+
+Access your local linux instance. for MAC OS and current linux users this is straight forward.
+
+For legacy Windows systems refer to the Docker docs site for instructions.
+
+[Docker for Windows Old School] (https://docs.docker.com/toolbox/toolbox_install_windows/)
