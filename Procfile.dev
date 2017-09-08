@@ -1,2 +1,2 @@
-web: cd client && yarn build && cp -a ./build/. ../public
+web: cd client && npm start
 api: bundle exec rails s -p 3001
