@@ -42,7 +42,7 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   end
 
   def convert_address_to_string
-    "#{params['campaignInfo']['street']}, #{params['campaignInfo']['city']}, #{params['campaignInfo']['state']}, #{params['campaignInfo']['zip']}"
+    "#{params['street_address']}" || "#{params['campaignInfo']['street']}, #{params['campaignInfo']['city']}, #{params['campaignInfo']['state']}, #{params['campaignInfo']['zip']}"
   end
 
   def set_campaign
