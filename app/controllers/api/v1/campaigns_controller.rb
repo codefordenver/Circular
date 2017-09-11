@@ -8,8 +8,12 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   end
 
   def create
-    @campaign = Campaign.create!(campaign_params)
-    json_response(@campaign, :created)
+    @campaign = Campaign.create(campaign_params)
+    if @campaign.save
+      json_response(@campaign, :created)
+    else
+      render json: { errors: @campaign.errors.messages }, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -38,11 +42,15 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   private
 
   def campaign_params
-    params.permit(:name, :lat, :lng).merge(street_address: convert_address_to_string)
+    params.permit(:name, :lat, :lng).merge(street_address: convert_address_to_string, name: set_campaign_name)
   end
 
   def convert_address_to_string
-    "#{params['campaignInfo']['street']}, #{params['campaignInfo']['city']}, #{params['campaignInfo']['state']}, #{params['campaignInfo']['zip']}"
+    "#{params['campaignInfo']['street']}, #{params['campaignInfo']['city']}, #{params['campaignInfo']['state']}, #{params['campaignInfo']['zip']}" || "#{params['street_address']}"
+  end
+
+  def set_campaign_name
+    "#{params['campaignInfo']['campaignName']}"
   end
 
   def set_campaign
