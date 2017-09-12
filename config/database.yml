@@ -75,11 +75,13 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: circular_production
-  username: circular
-  password: <%= ENV['CIRCULAR_DATABASE_PASSWORD'] %>
+
+#production:
+#  <<: *default
+#  database: circular_production
+#  username: circular
+#  password: <%= ENV['CIRCULAR_DATABASE_PASSWORD'] %>
