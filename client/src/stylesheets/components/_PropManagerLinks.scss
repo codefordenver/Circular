@@ -1,0 +1,76 @@
+@import '../utils/placeholders';
+
+.managerlinks_wrapper {
+  background-color: $maingreen;
+  line-height: 1.9em;
+  display: table-cell;
+  width: 50%;
+  overflow: auto;
+
+	@media (min-width: 651px){
+  	padding: 2rem;
+  }
+  @media (max-width: 650px) {
+    padding: 1em;
+  }
+  
+  @media (max-width: 849px) {
+    width: 100%;
+    display: block;
+  }
+}
+
+.managerlinks_header {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  color: #FFFFFF;
+  font-family: Roboto, sans-serif;
+  font-size: 1.6em;
+  font-weight: bolder;
+}
+
+.managerlinks_details {
+  position: relative;
+  width: 100%;
+  font-family: Roboto, sans-serif;
+  font-size: 1.2em;
+  font-weight: lighter;
+  padding-top: 1.5em;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.managerlinks_links {
+  padding-top: 3em;
+  width: 80%;
+  margin: 0 auto;
+
+  @media (max-width: 515px) {
+    width: 100%
+  }
+}
+
+.managerlink {
+  position: relative;
+  float: left;
+  width: 90%;
+  color: #FFFFFF;
+  font-family: Roboto, sans-serif;
+  font-size: 1.5em;
+  font-weight: bolder;
+  padding-top: 5px;
+  height: 50px;
+}
+
+.arrowlink {
+  width: 22px;
+  float: right;
+  position: relative;
+  margin: 0 auto;
+  background-size: 22px 22px;
+  height: 22px;
+  background-repeat: no-repeat; 
+  background-position: center center;
+  background-image: url($link_arrow)
+}
