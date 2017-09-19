@@ -94,7 +94,7 @@ $ rake start
 
 #### 11. Setting up secret keys
 
-We use the gem Figaro to set our secret keys. To make sure it's properly configured, please run `bundle exec figaro install` which will create an application.yml file that is git-ignored. 
+We use the gem Figaro to set our secret keys. To make sure it's properly configured, please run `bundle exec figaro install` which will create an application.yml file that is git-ignored.
 Git-ignoring this file means that our secret keys will not get pushed up to Github. You'll need to get these secret keys from another person who already has them, so please ask when you're ready for this step.
   *We don't use config/secrets.yml so if you see a tutorial instructing you to add secret keys here, please instead add them to application.yml.*
 
@@ -115,4 +115,22 @@ In order to run the test suite, use the commands below. `rails db:test:prepare` 
 ```
 $ rails db:test:prepare
 $ rspec
+```
+
+## Backend API documentation
+
+To receive a list of all Campaigns, send a `GET` request to `/api/v1/campaigns`
+
+To find a list of campaigns with a 250 meters send a `GET` request `/api/v1/campaigns/find` containing JSON params `{ lat: latitude, lng: longitude }`
+
+To add a Campaign, send a `POST` request to `/api/v1/campaigns` containing the following JSON information:
+```
+{
+  street: street,
+  city: city,
+  state: state,
+  zip: zip,
+  aptNum: apartment number,
+  campaignName: campaign name
+}
 ```
