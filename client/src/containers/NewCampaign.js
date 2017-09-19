@@ -26,7 +26,6 @@ class NewCampaign extends Component {
       campaignName: e.target.campaignName.value,
       lat: e.target.lat.value,
       lng: e.target.lng.value
-
     });
   }
 
