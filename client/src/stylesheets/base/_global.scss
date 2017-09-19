@@ -1,3 +1,5 @@
+@import '../base/colors';
+
 * {
 	box-sizing: border-box;
 }
@@ -11,8 +13,19 @@ body {
   flex-direction: row;
 }
 
+.btn {
+  background-color: #fff;
+  border: none;
+  color: $maingreen;
+  font-family: 'Fira Sans';
+  font-weight: 700;
+  font-size: 1rem;
+  padding: .75rem 1.25rem;
+}
+
 .app-container {
   width: 90%;
   margin: auto;
   max-width: 1170px;
+
 }
