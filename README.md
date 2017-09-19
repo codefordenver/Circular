@@ -76,9 +76,16 @@ cd client
 This only needs to be done the first time you run the app, or if you pull down the app and someone else has added modules since your last pull. From _inside the `client` directory_:
 
 ```
-npm install
+yarn install
 ```
 
+#### 10. Add a google maps key
+
+Retrieve a google api maps key for development https://developers.google.com/maps/documentation/javascript/ and put it in the client/.env.local file
+
+```
+REACT_APP_GOOGLE_MAPS_KEY=somevalidkey
+```
 
 #### 10. Run the App
 
