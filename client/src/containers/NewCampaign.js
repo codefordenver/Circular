@@ -23,7 +23,10 @@ class NewCampaign extends Component {
       state: e.target.state.value,
       zip: e.target.zip.value,
       aptNum: e.target.aptNum.value,
-      campaignName: e.target.campaignName.value
+      campaignName: e.target.campaignName.value,
+      lat: e.target.lat.value,
+      lng: e.target.lng.value
+
     });
   }
 
@@ -63,6 +66,8 @@ class NewCampaign extends Component {
             <label>Campaign Name</label>
             <input type="text" className="form-control" name="campaignName" />
           </div>
+          <input type="hidden" name="lat" value={searchedAddress.geometry.location.lat()} />
+          <input type="hidden" name="lng" value={searchedAddress.geometry.location.lng()} />
           <br />
           <button type="submit">Next</button>
         </form>}
