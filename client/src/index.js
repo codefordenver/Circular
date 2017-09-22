@@ -3,9 +3,9 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { configure } from 'redux-auth';
 import routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
-import { configure } from 'redux-auth';
 import './stylesheets/main.css';
 
 import configureStore from './redux/configureStore';
@@ -17,8 +17,8 @@ store.dispatch(configure(
   {
     apiUrl: 'http://localhost:3001',
     authProviderPaths: {
-      facebook:  '/auth/facebook',
-      google:    '/auth/google_oauth2'
+      facebook: '/auth/facebook',
+      google: '/auth/google_oauth2'
     }
   },
   {

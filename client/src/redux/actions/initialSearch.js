@@ -1,6 +1,13 @@
 import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
 
+export function fetchApartmentsRequest() {
+  return {
+    type: 'APARTMENTS',
+    promise: createApiRequest('campaigns', 'GET')
+  };
+}
+
 export function beginAddressSearch() {
   return {
     type: 'FETCH_NEARBY_CAMPAIGNS_REQUEST'
