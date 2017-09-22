@@ -47,7 +47,9 @@ export function searchAddressFlow(address, latLngHelper) {
     dispatch(beginAddressSearch());
     dispatch(stashAddress(address));
     const latLng = await dispatch(getLatLong(address, latLngHelper));
-    if (latLng.error) { return; }
+    if (latLng.error) {
+      return console.error(latLng);
+    }
     dispatch(fetchNearbyCampaigns(latLng.response));
   };
 }
