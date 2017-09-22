@@ -1,0 +1,23 @@
+@import '../base/_colors.scss';
+
+.form-group {
+  margin-bottom: 1rem;
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: .5rem;
+    color: $secondary-color;
+  }
+  .form-control {
+    padding: .5rem;
+    font-size: 1rem;
+    border: solid 1px #ddd;
+    border-radius: 4px;
+    width: 100%;
+    color: $secondary-color;
+    &:focus {
+      outline: none;
+      border-color: $maingreen;
+    }
+  }
+}
