@@ -14,14 +14,6 @@ const PropManagerLinks = () => (
         <div className="managerlink">Tips And Resources</div>
         <div className="arrowlink" />
       </Link>
-      <Link to="/denver-recycling-info">
-        <div className="managerlink">Cost and Service Estimator</div>
-        <div className="arrowlink" />
-      </Link>
-      <Link to="/denver-recycling-info">
-        <div className="managerlink">FAQ</div>
-        <div className="arrowlink" />
-      </Link>
     </div>
   </div>
 );

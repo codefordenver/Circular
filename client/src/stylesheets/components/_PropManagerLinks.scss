@@ -53,6 +53,8 @@
 
 .managerlink {
   position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   float: left;
   width: 90%;
   color: #FFFFFF;
@@ -61,12 +63,21 @@
   font-weight: bolder;
   padding-top: 5px;
   height: 50px;
+
+  @media (max-width: 425px) {
+    font-size: 1.2em;
+  }
+  @media (max-width: 320px) {
+    font-size: 1em;
+  }
 }
 
 .arrowlink {
   width: 22px;
   float: right;
   position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   margin: 0 auto;
   background-size: 22px 22px;
   height: 22px;
