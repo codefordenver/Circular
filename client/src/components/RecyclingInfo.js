@@ -7,14 +7,13 @@ const RecyclingInfo = () => (
       Denver's recycling rate is only 20%, while the national average is 35%.
     </div>
     <div className="info_details">
-      The City of Denver does not provide recycling collection service to multi-family buildings with 8 or more units;
-      nor does the City mandate that multi-family building managers provide the service to their tenants. You and your neighbors
-      must persuade your landlord to provide recycling collection service. Use this tool to organize and collectively request recycling
-      collection!
+      The City of Denver only provides recycling service to single-family residential homes and buildings with seven 
+      or fewer units. Furthermore, multi-family building managers are not mandated to provide recycling service, but you and your neighbors can 
+      request recycling service from your landlord today!
     </div>
     <Link to="/denver-recycling-info">
       <div className="info_footer">
-        Learn more about recycling in Denver!
+        Learn More
       </div>
     </Link>
   </div>

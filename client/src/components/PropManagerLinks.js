@@ -7,7 +7,12 @@ const PropManagerLinks = () => (
       Property Managers
     </div>
     <div className="managerlinks_details">
-      Boost tenant retention and building appeal by providing sustainable waste disposal to your tenants!
+      Provide sustainable waste management to your tenants!<br />
+      Increase tenant satisfaction and boost your building's appeal by providing recycling service.
+      <br />
+      <br />
+      Please visit the page below to estimate your required level of service and tips on 
+      purchasing service.
     </div>
     <div className="managerlinks_links">
       <Link to="/denver-recycling-info">
