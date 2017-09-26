@@ -3,7 +3,7 @@ require 'database_cleaner'
 DatabaseCleaner.clean_with(:truncation)
 
 Campaign.create!([
-  { street_address: '710 E 26th Ave, Denver, CO 80205', lat: 39.7392, lng: -104.673828, name: 'Nuggets', vote_count: 4 },
+  { street_address: '710 E 26th Ave, Denver, CO 80205', lat: 39.7544539, lng: -104.97782, name: 'Nuggets', vote_count: 4 },
   { street_address: '1435 Jersey St, Denver, CO 80220, USA', lat: 39.739163, lng: -104.920209, name: 'Rockies', vote_count: 3 },
   { street_address: 'Barnum West, Denver, CO, USA', lat: 39.721756, lng: -105.044840, name: 'Avalanche', vote_count: 7 },
   { street_address: 'Platt Park, Denver, CO 80210, USA', lat: 39.696614, lng: -104.982272, name: 'Cherry Creek', vote_count: 6 },

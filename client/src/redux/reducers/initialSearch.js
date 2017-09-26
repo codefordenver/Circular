@@ -69,6 +69,11 @@ export default function (state = defaultState, action) {
         ...state,
         searchedAddress: action.address
       };
+    case 'STASH_LAT_LNG':
+      return {
+        ...state,
+        latLng: action.latLng
+      };
     case CLEAR_SEARCH_RESULTS:
       return {
         ...state,
