@@ -76,11 +76,18 @@ cd client
 This only needs to be done the first time you run the app, or if you pull down the app and someone else has added modules since your last pull. From _inside the `client` directory_:
 
 ```
-npm install
+yarn install
 ```
 
+#### 10. Add a google maps key
 
-#### 10. Run the App
+Retrieve a google api maps key for development https://developers.google.com/maps/documentation/javascript/ and put it in the client/.env.local file
+
+```
+REACT_APP_GOOGLE_MAPS_KEY=somevalidkey
+```
+
+#### 11. Run the App
 
 Finally, navigate _back to the root_ with `cd ..` and then run the `rake start` command. This alias will start 2 servers: React's Node server on port 3000, and Rails' Puma server on port 3001. (The Node server is then proxied to port 3001 to avoid CORS issues). The app will open in a new window/tab automagically! However, if you need to access the app in a different browser window/tab, simply point the browser to `http://localhost:3000/`.
 
@@ -92,9 +99,9 @@ cd ..
 $ rake start
 ```
 
-#### 11. Setting up secret keys
+#### 12. Setting up secret keys
 
-We use the gem Figaro to set our secret keys. To make sure it's properly configured, please run `bundle exec figaro install` which will create an application.yml file that is git-ignored. 
+We use the gem Figaro to set our secret keys. To make sure it's properly configured, please run `bundle exec figaro install` which will create an application.yml file that is git-ignored.
 Git-ignoring this file means that our secret keys will not get pushed up to Github. You'll need to get these secret keys from another person who already has them, so please ask when you're ready for this step.
   *We don't use config/secrets.yml so if you see a tutorial instructing you to add secret keys here, please instead add them to application.yml.*
 
@@ -115,4 +122,22 @@ In order to run the test suite, use the commands below. `rails db:test:prepare` 
 ```
 $ rails db:test:prepare
 $ rspec
+```
+
+## Backend API documentation
+
+To receive a list of all Campaigns, send a `GET` request to `/api/v1/campaigns`
+
+To find a list of campaigns with a 250 meters send a `GET` request `/api/v1/campaigns/find` containing JSON params `{ lat: latitude, lng: longitude }`
+
+To add a Campaign, send a `POST` request to `/api/v1/campaigns` containing the following JSON information:
+```
+{
+  street: street,
+  city: city,
+  state: state,
+  zip: zip,
+  aptNum: apartment number,
+  campaignName: campaign name
+}
 ```

@@ -24,8 +24,8 @@ class NewCampaign extends Component {
       zip: e.target.zip.value,
       aptNum: e.target.aptNum.value,
       campaignName: e.target.campaignName.value,
-      lat: e.target.lat.value,
-      lng: e.target.lng.value
+      lat: this.props.initialSearch.searchedAddress.latLng.response.lat,
+      lng: this.props.initialSearch.searchedAddress.latLng.response.lng
     });
   }
 

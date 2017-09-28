@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
 import ApartmentMap from '../components/CampaignsMap';
+import StepByStep from '../components/StepByStep';
+import InfoAndLinks from '../components/InfoAndLinks';
 
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import { openMap, closeMap } from '../redux/actions/googleMap';
@@ -24,6 +26,9 @@ class Home extends Component {
           markers={apartments}
           closeMap={this.props.closeMap}
         />
+        <StepByStep />
+
+        <InfoAndLinks />
       </div>
     );
   }

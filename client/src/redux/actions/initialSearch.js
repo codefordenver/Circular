@@ -21,6 +21,13 @@ export function stashAddress(address) {
   };
 }
 
+export function stashLatLng(latLng) {
+  return {
+    type: 'STASH_LAT_LNG',
+    latLng
+  };
+}
+
 export function getLatLong(address, latLngHelper) {
   return {
     type: 'GET_LAT_LONG',
@@ -45,8 +52,9 @@ export function searchAddressFlow(address, latLngHelper) {
   return async (dispatch) => {
     browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
-    dispatch(stashAddress(address));
     const latLng = await dispatch(getLatLong(address, latLngHelper));
+    const addressWithLatlng = { ...address, latLng }
+    dispatch(stashAddress(addressWithLatlng));
     if (latLng.error) {
       return console.error(latLng);
     }
