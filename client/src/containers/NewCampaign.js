@@ -37,38 +37,39 @@ class NewCampaign extends Component {
     }
     return (
       <ModalWrapper title="New Campaign">
-        <h1>New Campaign</h1>
+        <h1>Create a new campaign using the form below.</h1>
+        <br />
         {formattedAddress.street &&
         <form onSubmit={this.setAddressStep}>
-          <div>
+          <div className="form-group">
             <label>Street</label>
             <input type="text" className="form-control" value={formattedAddress.street} name="street" />
           </div>
-          <div>
+          <div className="form-group">
             <label>City</label>
             <input type="text" className="form-control" value={formattedAddress.city} name="city" />
           </div>
-          <div>
+          <div className="form-group">
             <label>State</label>
             <input type="text" className="form-control" value={formattedAddress.state} name="state" />
           </div>
-          <div>
+          <div className="form-group">
             <label>Zip</label>
             <input type="number" className="form-control" value={formattedAddress.zip} name="zip" />
           </div>
-          <div>
+          <div className="form-group">
             <label>Apartment Number</label>
             <input type="number" className="form-control" value={formattedAddress.aptNum} name="aptNum" />
           </div>
-          <br />
-          <div>
+          <div className="form-group">
             <label>Campaign Name</label>
             <input type="text" className="form-control" name="campaignName" />
           </div>
           <input type="hidden" name="lat" value={searchedAddress.geometry.location.lat()} />
           <input type="hidden" name="lng" value={searchedAddress.geometry.location.lng()} />
           <br />
-          <button type="submit">Next</button>
+          <button className="btn btn-primary fr" type="submit">Next</button>
+          <div className="cf" />
         </form>}
         {!formattedAddress.street && <p>Add an address to start. <Link to="/">Click here</Link></p>}
       </ModalWrapper>

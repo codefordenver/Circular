@@ -9,7 +9,8 @@
 //Do not change the order of these imports:
 @import
 'utils/placeholders',
-'utils/mixins';
+'utils/mixins',
+'utils/_floats';
 
 //import new component stylesheets here:
 @import
@@ -23,4 +24,6 @@
 'components/RecyclingInfo.scss',
 'components/PropManagerLinks.scss',
 'components/ChooseCampaign',
-'components/modalWrapper.scss';
+'components/modalWrapper',
+'components/_form',
+'components/_button';
