@@ -1,5 +1,6 @@
 import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
+import handleApiError from '../../utils/handleApiError'
 
 export function fetchApartmentsRequest() {
   return {
@@ -79,6 +80,10 @@ export function selectAddress(value) {
 export function createCampaign(campaignInfo) {
   return async (dispatch) => {
     const { response } = await dispatch(setCampaignInformation(campaignInfo));
-    browserHistory.push(`/campaign/${response.id}`);
+    if (response.errors) {
+      handleApiError(response.errors);
+    } else {
+      browserHistory.push(`/campaign/${response.id}`);
+    }
   };
 }
