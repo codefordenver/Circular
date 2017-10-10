@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
 import ApartmentMap from '../components/CampaignsMap';
+import StepByStep from '../components/StepByStep';
+import InfoAndLinks from '../components/InfoAndLinks';
 
-import { fetchApartmentsRequest } from '../redux/actions/apartments';
+import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import { openMap, closeMap } from '../redux/actions/googleMap';
 
 class Home extends Component {
@@ -13,7 +15,7 @@ class Home extends Component {
   }
 
   render() {
-    const { apartments: { apartments }, googleMap: { isOpen } } = this.props;
+    const { initialSearch: { apartments }, googleMap: { isOpen } } = this.props;
     return (
       <div>
         <HeroCTA
@@ -24,6 +26,9 @@ class Home extends Component {
           markers={apartments}
           closeMap={this.props.closeMap}
         />
+        <StepByStep />
+
+        <InfoAndLinks />
       </div>
     );
   }
@@ -31,7 +36,7 @@ class Home extends Component {
 
 Home.propTypes = {
   fetchApartmentsRequest: PropTypes.func.isRequired,
-  apartments: PropTypes.shape({
+  initialSearch: PropTypes.shape({
     apartments: PropTypes.array.isRequired
   }).isRequired,
   googleMap: PropTypes.shape({
@@ -42,5 +47,5 @@ Home.propTypes = {
 };
 
 export default connect(
-  ({ apartments, googleMap }) => ({ apartments, googleMap }),
+  ({ initialSearch, googleMap }) => ({ initialSearch, googleMap }),
   { fetchApartmentsRequest, openMap, closeMap })(Home);

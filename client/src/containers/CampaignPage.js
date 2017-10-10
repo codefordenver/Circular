@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 
 import fetchCampaignById from '../redux/actions/activeCampaign';
 
@@ -12,12 +12,25 @@ class CampaignPage extends Component {
 
   render() {
     const { activeCampaign: { loading, loaded, campaign } } = this.props;
+    console.log(campaign);
     return (
       <div className="app-container">
-        <h1>I am a campaign page</h1>
-        { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
-        { loaded && campaign &&
-        <p>{`Welcome to the ${campaign.street_address} recycling campaign!`}</p> }
+        {campaign && campaign.street_address &&
+          <div>
+            <h1>I am a campaign page</h1>
+            <div>
+              { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
+              { loaded && campaign &&
+              <p>{`Welcome to the ${campaign.street_address} recycling campaign!`}</p> }
+            </div>
+          </div>
+        }
+        {campaign && campaign.message &&
+          <div>
+            <p>{campaign.message}</p>
+            <Link to="/">Head home</Link>
+          </div>
+        }
       </div>
     );
   }

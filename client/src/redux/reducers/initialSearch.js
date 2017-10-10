@@ -6,7 +6,10 @@ import {
   VALIDATE_ADDRESS_FAILURE,
   CLEAR_SEARCH_RESULTS,
   SET_CAMPAIGN_INFORMATION,
-  SELECT_ADDRESS
+  SELECT_ADDRESS,
+  APARTMENTS_REQUEST,
+  APARTMENTS_SUCCESS,
+  APARTMENTS_FAILURE
 } from '../constants/initialSearch';
 
 const defaultState = {
@@ -69,6 +72,11 @@ export default function (state = defaultState, action) {
         ...state,
         searchedAddress: action.address
       };
+    case 'STASH_LAT_LNG':
+      return {
+        ...state,
+        latLng: action.latLng
+      };
     case CLEAR_SEARCH_RESULTS:
       return {
         ...state,
@@ -78,6 +86,26 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         campaignInfo: action.campaignInfo
+      };
+    case APARTMENTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      };
+    case APARTMENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        apartments: response
+      };
+    case APARTMENTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error
       };
     default:
       return state;
