@@ -4,7 +4,7 @@ Circular provides a platform for tenants of multi-family buildings within the Ci
 
 ## Contributing
 
-We use git for the project. When you work on an issue, create a branch, and follow the steps in this link https://guides.github.com/introduction/flow/ to commit your code.
+We use git for the version control. When you work on an issue, please create a branch, and follow the work flow in this link https://guides.github.com/introduction/flow/ . The specific git commands can be found in this link http://rogerdudler.github.io/git-guide/ .
 
 ## Getting Started
 
