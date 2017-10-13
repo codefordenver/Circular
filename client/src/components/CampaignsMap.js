@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import Modal from 'react-modal';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
@@ -6,7 +7,7 @@ import * as _ from 'lodash';
 
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // and name it GettingStartedGoogleMap
-const GettingStartedGoogleMap = withScriptjs(
+const GettingStartedGoogleMap = withRouter(withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
       ref={props.onMapLoad}
@@ -15,13 +16,15 @@ const GettingStartedGoogleMap = withScriptjs(
       onClick={props.onMapClick}
     >
       {props.markers.map(marker => (
-        <Marker
-          {...marker}
-          onRightClick={() => props.onMarkerRightClick(marker)}
+        <Marker key={marker.id}
+                position={{lat: marker.lat, lng: marker.lng }}
+                onRightClick={() => props.onMarkerRightClick(marker)}
+                onClick={() => props.router.push(`/campaign/${marker.id}`)}
+                title={marker.street_address}
         />
       ))}
     </GoogleMap>
-)));
+))));
 class ApartmentMap extends Component {
   render() {
     const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`;
