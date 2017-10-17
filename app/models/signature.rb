@@ -1,4 +1,4 @@
-class Signature  < ApplicationRecord
-  belongs_to :users
-  belongs_to :campaigns
+class Signature < ApplicationRecord
+  belongs_to :campaign
+  belongs_to :user
 end
