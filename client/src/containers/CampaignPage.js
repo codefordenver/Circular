@@ -4,16 +4,18 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router';
 
 import fetchCampaignById from '../redux/actions/activeCampaign';
+import fetchSignatures from '../redux/actions/signature';
 import SignCampaign from '../components/SignCampaign';
+import SignatureList from '../components/SignatureList';
 
 class CampaignPage extends Component {
   componentWillMount() {
     this.props.fetchCampaignById(this.props.params.id);
+    this.props.fetchSignatures(this.props.params.id);
   }
 
   render() {
     const { activeCampaign: { loading, loaded, campaign } } = this.props;
-    console.log(campaign);
     return (
       <div className="app-container">
         {campaign && campaign.street_address &&
@@ -33,6 +35,7 @@ class CampaignPage extends Component {
           </div>
         }
       <SignCampaign/>
+      <SignatureList/>
       </div>
     );
   }
@@ -47,10 +50,11 @@ CampaignPage.propTypes = {
     loaded: PropTypes.bool
   }).isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
+  fetchSignatures: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
   }).isRequired
 };
 
 export default connect(
-  ({ activeCampaign }) => ({ activeCampaign }), { fetchCampaignById })(withRouter(CampaignPage));
+  ({ activeCampaign }) => ({ activeCampaign }), { fetchCampaignById, fetchSignatures })(withRouter(CampaignPage));

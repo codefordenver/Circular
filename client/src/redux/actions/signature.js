@@ -9,3 +9,11 @@ export function addSignatureToCampaign(userId, campaignId) {
   };
 }
 
+export default function fetchSignatures(campaign_id) {
+  return {
+    type: 'FETCH_SIGNATURES',
+    promise: createApiRequest(`signatures/${campaign_id}`, 'GET')
+  };
+}
+
+

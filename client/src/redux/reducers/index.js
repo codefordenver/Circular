@@ -5,13 +5,15 @@ import { authStateReducer } from 'redux-auth';
 import initialSearch from './initialSearch';
 import googleMap from './googleMap';
 import activeCampaign from './activeCampaign';
+import signature from './signature';
 
 const reducers = combineReducers({
   auth: authStateReducer,
   routing,
   googleMap,
   initialSearch,
-  activeCampaign
+  activeCampaign,
+  signature
 });
 
 export default reducers;
