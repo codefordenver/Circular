@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'campaigns/find', to: 'campaigns#find'
       resources :campaigns
       post 'signatures', to: 'signatures#create'
+      get 'signatures/:id', to: 'signatures#index'
     end
   end	
 end
