@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :signatures
+  has_many :campaigns, through: :signatures
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
