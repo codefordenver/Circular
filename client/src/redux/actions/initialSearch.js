@@ -81,9 +81,16 @@ export function createCampaign(campaignInfo) {
   return async (dispatch) => {
     const { response } = await dispatch(setCampaignInformation(campaignInfo));
     if (response.errors) {
-      handleApiError(response.errors);
+      dispatch(createCampaignFailure(response.errors));
     } else {
       browserHistory.push(`/campaign/${response.id}`);
     }
   };
+}
+
+export function createCampaignFailure(error) {
+  return {
+    type: 'CREATE_CAMPAIGN_FAILURE',
+    error
+  }
 }
