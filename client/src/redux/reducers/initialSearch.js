@@ -9,7 +9,8 @@ import {
   SELECT_ADDRESS,
   APARTMENTS_REQUEST,
   APARTMENTS_SUCCESS,
-  APARTMENTS_FAILURE
+  APARTMENTS_FAILURE,
+  CREATE_CAMPAIGN_FAILURE
 } from '../constants/initialSearch';
 
 const defaultState = {
@@ -64,7 +65,8 @@ export default function (state = defaultState, action) {
         const selectedAddress = state.nearbyCampaigns.find(c => c.street_address === action.value) || 'none';
         return {
           ...state,
-          selectedAddress
+          selectedAddress,
+          error: null
         };
       }
     case 'STASH_ADDRESS':
@@ -107,6 +109,12 @@ export default function (state = defaultState, action) {
         loaded: false,
         error
       };
+    case CREATE_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        searchedAddress: null,
+        error
+      }
     default:
       return state;
   }
