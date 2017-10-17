@@ -24,14 +24,14 @@ class NewCampaign extends Component {
   }
 
   render() {
-    const { initialSearch: { searchedAddress } } = this.props;
-    let formattedAddress = '';
+    const { initialSearch: { searchedAddress, error } } = this.props;
+    let formattedAddress = {};
     if (searchedAddress) {
       formattedAddress = searchedAddress.formatted_address;
     }
     return (
       <ModalWrapper title="New Campaign">
-        <h1>Create a new campaign using the form below.</h1>
+        {!error && <h1>Create a new campaign using the form below.</h1>}
         <br />
         {formattedAddress && (
           <form onSubmit={this.setAddressStep}>
@@ -59,6 +59,15 @@ class NewCampaign extends Component {
             </button>
             <div className="cf" />
           </form>
+        )}
+        {error && (
+          <div>
+            <p>
+              There was an issue with the address you provided. It may be associated with a
+              preexisting campaign.
+            </p>
+            <br />
+          </div>
         )}
         {!formattedAddress && (
           <p>
