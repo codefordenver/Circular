@@ -9,16 +9,14 @@ const SignCampaign = (props) => {
   const { activeCampaign } = props;
   const user = auth && auth.user;
   // const isSignedIn = user && user.isSignedIn;
-  const name = user && user.attributes && user.attributes.name;
-  const email = user && user.attributes && user.attributes.email;
-  const userId = user && user.attributes && user.attributes.id;
+  // const name = user && user.attributes && user.attributes.name;
+  // const email = user && user.attributes && user.attributes.email;
   const campaignId = activeCampaign && activeCampaign.campaign && activeCampaign.campaign.id;
-  const sendUserSignature = () => { addSignatureToCampaign(userId, campaignId)};
+  const sendUserSignature = (userId, campaignId) => { addSignatureToCampaign(userId, campaignId)};
   return (
     <div className="sign-campaign-wrapper">
       <h2>Show your support!</h2>
-      <OAuthSignInButton next={() => { sendUserSignature()
-      }} provider="google">Google</OAuthSignInButton>
+      <OAuthSignInButton next={(response) => {sendUserSignature(response.user.id, campaignId)}} provider="google">Google</OAuthSignInButton>
       <OAuthSignInButton provider="facebook">Facebook</OAuthSignInButton>
     </div>
   )
