@@ -107,9 +107,6 @@ export default function (state = defaultState, action) {
         loaded: false,
         error
       };
-    case 'OAUTH_SIGN_IN_COMPLETE':
-      console.log('reducers connected!');
-      return state;
     default:
       return state;
   }
