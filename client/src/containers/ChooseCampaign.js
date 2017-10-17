@@ -37,15 +37,22 @@ class ChooseCampaign extends Component {
     return (
       nearbyCampaignsArr.map(c => (
         <li className="chooseCampaign-item" key={c.street_address}>
-              
+
           <input
-              type="radio"
-              id={c.street_address}
-              value={c.street_address}
-              checked={selectedOption && selectedOption.street_address === c.street_address}
-              onChange={handleOptionChange}
-            />
-            <label htmlFor={c.street_address}>
+            type="radio"
+            id={c.street_address}
+            value={c.street_address}
+            checked={selectedOption && selectedOption.street_address === c.street_address}
+            onChange={handleOptionChange}
+          />
+          <label htmlFor={c.street_address}>
+            { c.name
+              ? <div>
+                {c.name}
+                <br />
+              </div>
+              : ""
+            }
             { c.street_address }
           </label>
         </li>)
@@ -83,7 +90,7 @@ class ChooseCampaign extends Component {
                   onChange={this.handleOptionChange}
                 />
               <label htmlFor="none">
-               
+
                 { "None of these match my address. Let's start a new campaign." }
               </label>
             </li>
