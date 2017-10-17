@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router';
 
 import fetchCampaignById from '../redux/actions/activeCampaign';
-import SignPetition from '../components/SignPetition';
+import SignCampaign from '../components/SignCampaign';
 
 class CampaignPage extends Component {
   componentWillMount() {
@@ -32,7 +32,7 @@ class CampaignPage extends Component {
             <Link to="/">Head home</Link>
           </div>
         }
-      <SignPetition/>
+      <SignCampaign/>
       </div>
     );
   }

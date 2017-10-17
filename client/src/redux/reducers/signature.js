@@ -1,4 +1,4 @@
-import { ADD_SIGNATURE_TO_PETITION_REQUEST, ADD_SIGNATURE_TO_PETITION_SUCCESS, ADD_SIGNATURE_TO_PETITION_FAILURE } from '../constants/petition';
+import { ADD_SIGNATURE_TO_CAMPAIGN_REQUEST, ADD_SIGNATURE_TO_CAMPAIGN_SUCCESS, ADD_SIGNATURE_TO_CAMPAIGN_FAILURE } from '../constants/signature';
 
 const defaultState = {
   loading: false,
@@ -8,29 +8,25 @@ const defaultState = {
 export default function (state = defaultState, action) {
   const { response, error, type } = action;
   switch (type) {
-    case ADD_SIGNATURE_TO_PETITION_REQUEST:
+    case ADD_SIGNATURE_TO_CAMPAIGN_REQUEST:
       return {
         ...state,
         loading: true,
         loaded: false
       };
-    case ADD_SIGNATURE_TO_PETITION_SUCCESS:
+    case ADD_SIGNATURE_TO_CAMPAIGN_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
         campaign: response
       };
-    case ADD_SIGNATURE_TO_PETITION_FAILURE:
+    case ADD_SIGNATURE_TO_CAMPAIGN_FAILURE:
       return {
         ...state,
         loading: false,
         loaded: false,
         error
       };
-    case OAUTH_SIGN_IN_COMPLETE:
-      return log.debug('reducers connected!');
-    default:
-      return state;
   }
 }
