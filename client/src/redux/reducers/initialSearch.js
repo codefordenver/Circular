@@ -38,7 +38,8 @@ export default function (state = defaultState, action) {
     case VALIDATE_ADDRESS_FAILURE:
       return {
         error: {
-          userMessage: "Sorry, we couldn't locate that address. Try selecting one of the auto-suggested addresses for better accuracy.",
+          userMessage:
+            "Sorry, we couldn't locate that address. Try selecting one of the auto-suggested addresses for better accuracy.",
           searchError: error
         }
       };
@@ -60,15 +61,15 @@ export default function (state = defaultState, action) {
           dbResponse: error
         }
       };
-    case SELECT_ADDRESS:
-      {
-        const selectedAddress = state.nearbyCampaigns.find(c => c.street_address === action.value) || 'none';
-        return {
-          ...state,
-          selectedAddress,
-          error: null
-        };
-      }
+    case SELECT_ADDRESS: {
+      const selectedAddress =
+        state.nearbyCampaigns.find(c => c.street_address === action.value) || action.value;
+      return {
+        ...state,
+        selectedAddress,
+        error: null
+      };
+    }
     case 'STASH_ADDRESS':
       return {
         ...state,
@@ -114,7 +115,7 @@ export default function (state = defaultState, action) {
         ...state,
         searchedAddress: null,
         error
-      }
+      };
     default:
       return state;
   }

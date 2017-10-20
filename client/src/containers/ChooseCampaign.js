@@ -25,7 +25,9 @@ class ChooseCampaign extends Component {
     const selectedOption = this.state.selectedOption;
     console.log('You have selected:', selectedOption);
     const { selectedAddress } = this.props;
-    if (!selectedAddress || selectedAddress === 'none') {
+    if (selectedAddress === 'different') {
+      this.props.router.push('/');
+    } else if (!selectedAddress || selectedAddress === 'none') {
       this.props.router.push('/new-campaign/address');
     } else {
       this.props.fetchCampaignById(selectedAddress.id);
@@ -49,7 +51,14 @@ class ChooseCampaign extends Component {
   }
 
   render() {
-    const { error, nearbyCampaigns, loading, loaded, selectedAddress } = this.props;
+    const {
+      error,
+      nearbyCampaigns,
+      loading,
+      loaded,
+      selectedAddress,
+      searchedAddress
+    } = this.props;
 
     return (
       <div className="hero_wrapper">
@@ -77,18 +86,32 @@ class ChooseCampaign extends Component {
                       selectedAddress,
                       this.handleOptionChange
                     )}
-                    <li className="chooseCampaign-item" key="no-match">
-                      <input
-                        id="none"
-                        type="radio"
-                        value={'none'}
-                        checked={selectedAddress === 'none'}
-                        onChange={this.handleOptionChange}
-                      />
-                      <label htmlFor="none">
-                        {"None of these match my address. Let's start a new campaign."}
-                      </label>
-                    </li>
+                    {nearbyCampaigns[0].street_address === searchedAddress.formatted_address && (
+                      <li className="chooseCampaign-item" key="no-match">
+                        <input
+                          id="different"
+                          type="radio"
+                          value={'different'}
+                          checked={selectedAddress === 'different'}
+                          onChange={this.handleOptionChange}
+                        />
+                        <label htmlFor="different">{'Input a different address.'}</label>
+                      </li>
+                    )}
+                    {nearbyCampaigns[0].street_address !== searchedAddress.formatted_address && (
+                      <li className="chooseCampaign-item" key="no-match">
+                        <input
+                          id="none"
+                          type="radio"
+                          value={'none'}
+                          checked={selectedAddress === 'none'}
+                          onChange={this.handleOptionChange}
+                        />
+                        <label htmlFor="none">
+                          {"None of these match my address. Let's start a new campaign."}
+                        </label>
+                      </li>
+                    )}
                   </ul>
                 </form>
               )}
