@@ -1,3 +1,4 @@
+import { loadState } from '../localStorage';
 import {
   FETCH_NEARBY_CAMPAIGNS_REQUEST,
   FETCH_NEARBY_CAMPAIGNS_SUCCESS,
@@ -13,7 +14,9 @@ import {
   CREATE_CAMPAIGN_FAILURE
 } from '../constants/initialSearch';
 
-const defaultState = {
+const stateLoader = loadState();
+
+const defaultState = stateLoader.initialSearch || {
   loading: false,
   loaded: false,
   searchedAddress: null,
