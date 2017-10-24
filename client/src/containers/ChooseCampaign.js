@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { selectAddress } from '../redux/actions/initialSearch';
 import fetchCampaignById from '../redux/actions/activeCampaign';
+import AutoSuggestInput from '../components/AutoSuggestInput';
 
 class ChooseCampaign extends Component {
   constructor(props) {
@@ -25,7 +26,9 @@ class ChooseCampaign extends Component {
     const selectedOption = this.state.selectedOption;
     console.log('You have selected:', selectedOption);
     const { selectedAddress } = this.props;
-    if (!selectedAddress || selectedAddress === 'none') {
+    if (selectedAddress === 'different') {
+      this.props.router.push('/');
+    } else if (!selectedAddress || selectedAddress === 'none') {
       this.props.router.push('/new-campaign/address');
     } else {
       this.props.fetchCampaignById(selectedAddress.id);
@@ -49,7 +52,14 @@ class ChooseCampaign extends Component {
   }
 
   render() {
-    const { error, nearbyCampaigns, loading, loaded, selectedAddress } = this.props;
+    const {
+      error,
+      nearbyCampaigns,
+      loading,
+      loaded,
+      selectedAddress,
+      searchedAddress
+    } = this.props;
 
     return (
       <div className="hero_wrapper">
@@ -66,31 +76,63 @@ class ChooseCampaign extends Component {
             {loaded &&
               nearbyCampaigns &&
               Array.isArray(nearbyCampaigns) && (
-                <form className="">
-                  <h1 className="search_address_heading">{'We found these campaigns near you.'}</h1>
-                  <h2 className="search_address_sub_heading">
-                    {'Do any of these campaigns represent where you live?'}
-                  </h2>
-                  <ul className="chooseCampaign-list">
-                    {this.renderNearbyCampaigns(
-                      nearbyCampaigns,
-                      selectedAddress,
-                      this.handleOptionChange
-                    )}
-                    <li className="chooseCampaign-item" key="no-match">
-                      <input
-                        id="none"
-                        type="radio"
-                        value={'none'}
-                        checked={selectedAddress === 'none'}
-                        onChange={this.handleOptionChange}
-                      />
-                      <label htmlFor="none">
-                        {"None of these match my address. Let's start a new campaign."}
-                      </label>
-                    </li>
-                  </ul>
-                </form>
+                <div>
+                  {nearbyCampaigns[0].street_address === searchedAddress.formatted_address && (
+                    <form className="">
+                      <h1 className="search_address_heading">
+                        {'Your address already has a campaign!.'}
+                      </h1>
+                      <h2 className="search_address_sub_heading">{'Is this your address?'}</h2>
+                      <ul className="chooseCampaign-list">
+                        {this.renderNearbyCampaigns(
+                          nearbyCampaigns,
+                          selectedAddress,
+                          this.handleOptionChange
+                        )}
+                        <div className="btn-wrapper">
+                          <button className="btn" type="submit" onClick={this.handleFormSubmit}>
+                            {"YES - LET'S DO THIS!"}
+                          </button>
+                        </div>
+                        <AutoSuggestInput />
+                      </ul>
+                    </form>
+                  )}
+                  {nearbyCampaigns[0].street_address !== searchedAddress.formatted_address && (
+                    <form className="">
+                      <h1 className="search_address_heading">
+                        {'We found these campaigns near you.'}
+                      </h1>
+                      <h2 className="search_address_sub_heading">
+                        {'Do any of these campaigns represent where you live?'}
+                      </h2>
+                      <ul className="chooseCampaign-list">
+                        {this.renderNearbyCampaigns(
+                          nearbyCampaigns,
+                          selectedAddress,
+                          this.handleOptionChange
+                        )}
+                        <li className="chooseCampaign-item" key="no-match">
+                          <input
+                            id="none"
+                            type="radio"
+                            value={'none'}
+                            checked={selectedAddress === 'none'}
+                            onChange={this.handleOptionChange}
+                          />
+                          <label htmlFor="none">
+                            {"None of these match my address. Let's start a new campaign."}
+                          </label>
+                        </li>
+                      </ul>
+                      <div className="btn-wrapper">
+                        <button className="btn" type="submit" onClick={this.handleFormSubmit}>
+                          {"OK - LET'S DO THIS!"}
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </div>
               )}
             {!loading &&
               nearbyCampaigns &&
@@ -106,11 +148,13 @@ class ChooseCampaign extends Component {
                   <h2 className="search_address_sub_heading">
                     {'(We promise it will only take a minute)'}
                   </h2>
+                  <div className="btn-wrapper">
+                    <button className="btn" type="submit" onClick={this.handleFormSubmit}>
+                      {"OK - LET'S DO THIS!"}
+                    </button>
+                  </div>
                 </div>
               )}
-            <button className="btn" type="submit" onClick={this.handleFormSubmit}>
-              {"OK - LET'S DO THIS!"}
-            </button>
           </div>
         </div>
       </div>
