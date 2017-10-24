@@ -31,7 +31,8 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   end
 
   def find
-    @campaigns = Campaign.within_radius(250, params[:lat], params[:lng]).order_by_distance(params[:lat], params[:lng])
+    @campaigns = Campaign.within_radius(250, params[:lat], params[:lng])
+                         .order_by_distance(params[:lat], params[:lng])
     if @campaigns.empty?
       json_response({status: 'okay', results: nil})
     else
@@ -42,23 +43,8 @@ class Api::V1::CampaignsController < Api::V1::BaseController
   private
 
   def campaign_params
-    params.permit(:name, :lat, :lng).merge(street_address: convert_address_to_string, name: set_campaign_name, lat: set_lat, lng: set_lng)
-  end
-
-  def set_lat
-    "#{params['campaignInfo']['lat']}"
-  end
-
-  def set_lng
-    "#{params['campaignInfo']['lng']}"
-  end
-
-  def convert_address_to_string
-    "#{params['campaignInfo']['street']}, #{params['campaignInfo']['city']}, #{params['campaignInfo']['state']}, #{params['campaignInfo']['zip']}" || "#{params['street_address']}"
-  end
-
-  def set_campaign_name
-    "#{params['campaignInfo']['campaignName']}"
+    params.require(:campaignInfo).permit(:name, :lat, :lng)
+          .merge(street_address: params['campaignInfo']['address'])
   end
 
   def set_campaign
