@@ -16,13 +16,17 @@ import {
 
 const stateLoader = loadState();
 
-const defaultState = stateLoader.initialSearch || {
+let defaultState = {
   loading: false,
   loaded: false,
   searchedAddress: null,
   error: null,
   nearbyCampaigns: null
 };
+
+if (stateLoader) {
+  defaultState = stateLoader.initialSearch;
+}
 
 export default function (state = defaultState, action) {
   const { response, error, type } = action;
