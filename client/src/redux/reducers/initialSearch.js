@@ -1,3 +1,4 @@
+import { loadState } from '../localStorage';
 import {
   FETCH_NEARBY_CAMPAIGNS_REQUEST,
   FETCH_NEARBY_CAMPAIGNS_SUCCESS,
@@ -13,13 +14,19 @@ import {
   CREATE_CAMPAIGN_FAILURE
 } from '../constants/initialSearch';
 
-const defaultState = {
+const stateLoader = loadState();
+
+let defaultState = {
   loading: false,
   loaded: false,
   searchedAddress: null,
   error: null,
   nearbyCampaigns: null
 };
+
+if (stateLoader) {
+  defaultState = stateLoader.initialSearch;
+}
 
 export default function (state = defaultState, action) {
   const { response, error, type } = action;
