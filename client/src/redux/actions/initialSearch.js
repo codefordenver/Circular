@@ -1,6 +1,5 @@
 import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
-import handleApiError from '../../utils/handleApiError'
 
 export function fetchApartmentsRequest() {
   return {
@@ -54,7 +53,7 @@ export function searchAddressFlow(address, latLngHelper) {
     browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
     const latLng = await dispatch(getLatLong(address, latLngHelper));
-    const addressWithLatlng = { ...address, latLng }
+    const addressWithLatlng = { ...address, latLng };
     dispatch(stashAddress(addressWithLatlng));
     if (latLng.error) {
       return console.error(latLng);
@@ -77,6 +76,13 @@ export function selectAddress(value) {
   };
 }
 
+export function createCampaignFailure(error) {
+  return {
+    type: 'CREATE_CAMPAIGN_FAILURE',
+    error
+  };
+}
+
 export function createCampaign(campaignInfo) {
   return async (dispatch) => {
     const { response } = await dispatch(setCampaignInformation(campaignInfo));
@@ -86,11 +92,4 @@ export function createCampaign(campaignInfo) {
       browserHistory.push(`/campaign/${response.id}`);
     }
   };
-}
-
-export function createCampaignFailure(error) {
-  return {
-    type: 'CREATE_CAMPAIGN_FAILURE',
-    error
-  }
 }
