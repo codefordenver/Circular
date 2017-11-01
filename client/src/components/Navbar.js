@@ -14,16 +14,6 @@ const NavBar = () => (
             </Link>
           </p>
         </div>
-
-        <div className="col-md-3">
-          <ul className="top-nav-list">
-            <ButtonGroup>
-              <OAuthSignInButton provider="google">Google</OAuthSignInButton>
-              <OAuthSignInButton provider="facebook">Facebook</OAuthSignInButton>
-              <SignOutButton>Sign Out</SignOutButton>
-            </ButtonGroup>
-          </ul>
-        </div>
       </div>
     </div>
   </nav>

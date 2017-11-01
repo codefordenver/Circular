@@ -23,7 +23,7 @@ store
   .dispatch(
     configure(
       {
-        apiUrl: 'http://localhost:3001',
+        apiUrl: process.env.REACT_APP_GOOGLE_CALLBACK_URL ||'http://localhost:3001',
         authProviderPaths: {
           facebook: '/auth/facebook',
           google: '/auth/google_oauth2'
