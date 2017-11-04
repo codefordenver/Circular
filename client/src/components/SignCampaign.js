@@ -9,6 +9,16 @@ class SignCampaign extends Component {
     super(props);
   }
 
+  renderError() {
+    return (
+      <div className="error-message">
+        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
+          ? 'You already have signed this petition!'
+          : null}
+      </div>
+    );
+  }
+
   renderContent() {
     const campaignId =
       this.props.activeCampaign &&
@@ -41,6 +51,7 @@ class SignCampaign extends Component {
     return (
       <div>
         <h1>Show your support!</h1>
+        {this.renderError()}
         <div>{this.renderContent()}</div>
       </div>
     );

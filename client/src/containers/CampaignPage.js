@@ -38,7 +38,7 @@ class CampaignPage extends Component {
               <Link to="/">Head home</Link>
             </div>
           )}
-        <SignCampaign signatures={this.props.signature.signatures} />
+        <SignCampaign signatureObj={this.props.signature} />
         <SignatureList signatures={this.props.signature.signatures} />
       </div>
     );
