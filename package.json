@@ -5,15 +5,15 @@
   "main": "index.js",
   "engines": {
     "node": "8.3.0",
-    "npm": "5.5.1"
+    "yarn": "1.2"
   },
   "scripts": {
     "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
     "client": "npm run start --prefix client",
+    "lint": "eslint backend && npm run lint --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":
-      "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client "
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client "
   },
   "author": "",
   "license": "ISC",
@@ -29,5 +29,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0"
   }
 }

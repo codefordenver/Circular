@@ -48,4 +48,5 @@ Home.propTypes = {
 
 export default connect(
   ({ initialSearch, googleMap }) => ({ initialSearch, googleMap }),
-  { fetchApartmentsRequest, openMap, closeMap })(Home);
+  { fetchApartmentsRequest, openMap, closeMap }
+)(Home);
