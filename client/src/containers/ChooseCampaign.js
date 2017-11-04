@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import { selectAddress } from '../redux/actions/initialSearch';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import AutoSuggestInput from '../components/AutoSuggestInput';
+import FullScreenLoader from '../components/FullScreenLoader';
+import cx from 'classnames';
 
 class ChooseCampaign extends Component {
   constructor(props) {
@@ -61,16 +63,11 @@ class ChooseCampaign extends Component {
     } = this.props;
 
     return (
-      <div className="hero_wrapper">
+			<div className="hero_wrapper">
+				{loading && <FullScreenLoader className={cx("loader", loading && "show")} loaderText={'Searching for nearby campaigns...'}/> }
         <div className="container">
           <div className="search_address_wrapper">
-            {/* <form className="search_address_wrapper">
-            <h1 className="search_address_heading">Need recycling at your building?</h1>
-            <h2 className="search_address_sub_heading"> Join or create a campaign!</h2>
-            <AutoSuggestInput />
-            <Link className="search_address_link" to="/denver-recycling-info">Learn more first</Link>
-          </form> */}
-            {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
+            
             {!loading && error && error.searchError && <p>{error.userMessage}</p>}
             {loaded &&
               nearbyCampaigns &&
