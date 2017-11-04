@@ -2,12 +2,15 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.3.0",
+    "npm": "5.5.1"
+  },
   "dependencies": {
     "axios": "^0.17.0",
     "css-loader": "^0.28.4",
     "geocoder": "^0.2.3",
     "lodash": "latest",
-    "material-ui": "^0.19.4",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "prop-types": "^15.5.10",

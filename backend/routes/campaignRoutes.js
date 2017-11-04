@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const Campaign = mongoose.model('Campaign');
-const _ = require('lodash');
-const Path = require('path-parser');
-const { URL } = require('url');
 
 module.exports = app => {
   app.get('/api/campaigns/find', async (req, res) => {
@@ -16,7 +13,7 @@ module.exports = app => {
         if (err) {
           res.status(422).send(err);
         } else {
-          data = _.map(results, ({ obj: { address, name, voteCount, _id } }) => {
+          data = results.map(({ obj: { address, name, voteCount, _id } }) => {
             return {
               address,
               name,
@@ -33,7 +30,7 @@ module.exports = app => {
   app.get('/api/campaigns', async (req, res) => {
     const campaigns = await Campaign.find({});
 
-    data = _.map(campaigns, ({ _id, address, name, voteCount, latLng: { coordinates } }) => {
+    data = campaigns.map(({ _id, address, name, voteCount, latLng: { coordinates } }) => {
       return {
         address,
         name,

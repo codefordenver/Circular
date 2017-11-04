@@ -23,7 +23,6 @@
     "concurrently": "^3.5.0",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
-    "lodash": "^4.17.4",
     "mongoose": "^4.12.3",
     "mongoose-geojson-schema": "^2.1.2",
     "nodemon": "^1.12.1",
