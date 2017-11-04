@@ -1,19 +1,23 @@
-import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
 
-export function addSignatureToCampaign(userId, campaignId) {
-  let data = { user_id: userId, campaign_id: campaignId }
+export function addsignature(data) {
   return {
     type: 'ADD_SIGNATURE_TO_CAMPAIGN',
-    promise: createApiRequest('signatures', 'POST', data)
+    promise: createApiRequest('api/signatures', 'POST', data)
   };
 }
 
 export default function fetchSignatures(campaign_id) {
   return {
     type: 'FETCH_SIGNATURES',
-    promise: createApiRequest(`signatures/${campaign_id}`, 'GET')
+    promise: createApiRequest(`api/signatures/${campaign_id}`, 'GET')
   };
 }
 
-
+export function addSignatureToCampaign(userId, campaignId) {
+  const data = { user_id: userId, campaign_id: campaignId };
+  return async (dispatch) => {
+    dispatch(addsignature(data));
+    dispatch(fetchSignatures(campaignId));
+  };
+}

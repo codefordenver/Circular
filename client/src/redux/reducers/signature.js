@@ -1,5 +1,11 @@
-import { ADD_SIGNATURE_TO_CAMPAIGN_REQUEST, ADD_SIGNATURE_TO_CAMPAIGN_SUCCESS, ADD_SIGNATURE_TO_CAMPAIGN_FAILURE,
-  FETCH_SIGNATURES_REQUEST, FETCH_SIGNATURES_SUCCESS, FETCH_SIGNATURES_FAILURE} from '../constants/signature';
+import {
+  ADD_SIGNATURE_TO_CAMPAIGN_REQUEST,
+  ADD_SIGNATURE_TO_CAMPAIGN_SUCCESS,
+  ADD_SIGNATURE_TO_CAMPAIGN_FAILURE,
+  FETCH_SIGNATURES_REQUEST,
+  FETCH_SIGNATURES_SUCCESS,
+  FETCH_SIGNATURES_FAILURE
+} from '../constants/signature';
 
 const defaultState = {
   loading: false,
@@ -40,7 +46,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        signatures: response
+        signatures: response.data
       };
     case FETCH_SIGNATURES_FAILURE:
       return {

@@ -1,6 +1,33 @@
 {
+  "name": "Denver-ReImagine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8.3.0",
+    "npm": "5.5.1"
+  },
   "scripts": {
-    "postinstall": "cd client && yarn",
-    "heroku-postbuild": "cd client && yarn build && cp -a ./build/. ../public"
+    "start": "node backend/index.js",
+    "server": "nodemon backend/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild":
+      "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.18.2",
+    "concurrently": "^3.5.0",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.3",
+    "mongoose-geojson-schema": "^2.1.2",
+    "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "path-parser": "^2.0.2"
   }
 }

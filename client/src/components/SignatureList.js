@@ -1,20 +1,22 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const SignatureList = (props) => {
-  const { signature } = props;
-  const signatures = signature && signature.signatures;
-
-  return (
-    <div className="sign-campaign-wrapper">
-      <h2>Signatures</h2>
+class SignatureList extends Component {
+  render() {
+    return (
+      <div className="sign-campaign-wrapper">
+        <h2>Signatures</h2>
         <ul>
-          {signatures && signatures.map(function(name, index){
-            return <li key={ index }>{name}</li>;
-          })}
+          {this.props.signatures &&
+            this.props.signatures.map(({ id, name, email }) => (
+              <li key={id}>
+                {name}: {email}
+              </li>
+            ))}
         </ul>
-    </div>
-  )
-};
+      </div>
+    );
+  }
+}
 
-export default connect(({signature}) => ({signature}))(SignatureList);
+export default SignatureList;
