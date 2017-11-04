@@ -53,7 +53,7 @@ export function searchAddressFlow(address, latLngHelper) {
     browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
     const latLng = await dispatch(getLatLong(address, latLngHelper));
-    const addressWithLatlng = { ...address, latLng }
+    const addressWithLatlng = { ...address, latLng };
     dispatch(stashAddress(addressWithLatlng));
     if (latLng.error) {
       return console.error(latLng);
@@ -76,9 +76,20 @@ export function selectAddress(value) {
   };
 }
 
+export function createCampaignFailure(error) {
+  return {
+    type: 'CREATE_CAMPAIGN_FAILURE',
+    error
+  };
+}
+
 export function createCampaign(campaignInfo) {
   return async (dispatch) => {
     const { response } = await dispatch(setCampaignInformation(campaignInfo));
-    browserHistory.push(`/campaign/${response.id}`);
+    if (response.errors) {
+      dispatch(createCampaignFailure(response.errors));
+    } else {
+      browserHistory.push(`/campaign/${response.id}`);
+    }
   };
 }

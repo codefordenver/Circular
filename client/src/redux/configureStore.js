@@ -8,9 +8,10 @@ import rootReducer from './reducers/index';
 
 export default function configureStore() {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-  return createStore(
+  const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(logger, thunk, apiMiddleware()))
   );
+
+  return store;
 }

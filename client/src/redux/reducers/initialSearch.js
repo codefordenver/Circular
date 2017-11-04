@@ -1,3 +1,4 @@
+import { loadState } from '../localStorage';
 import {
   FETCH_NEARBY_CAMPAIGNS_REQUEST,
   FETCH_NEARBY_CAMPAIGNS_SUCCESS,
@@ -9,16 +10,23 @@ import {
   SELECT_ADDRESS,
   APARTMENTS_REQUEST,
   APARTMENTS_SUCCESS,
-  APARTMENTS_FAILURE
+  APARTMENTS_FAILURE,
+  CREATE_CAMPAIGN_FAILURE
 } from '../constants/initialSearch';
 
-const defaultState = {
+const stateLoader = loadState();
+
+let defaultState = {
   loading: false,
   loaded: false,
   searchedAddress: null,
   error: null,
   nearbyCampaigns: null
 };
+
+if (stateLoader) {
+  defaultState = stateLoader.initialSearch;
+}
 
 export default function (state = defaultState, action) {
   const { response, error, type } = action;
@@ -37,7 +45,8 @@ export default function (state = defaultState, action) {
     case VALIDATE_ADDRESS_FAILURE:
       return {
         error: {
-          userMessage: "Sorry, we couldn't locate that address. Try selecting one of the auto-suggested addresses for better accuracy.",
+          userMessage:
+            "Sorry, we couldn't locate that address. Try selecting one of the auto-suggested addresses for better accuracy.",
           searchError: error
         }
       };
@@ -59,14 +68,15 @@ export default function (state = defaultState, action) {
           dbResponse: error
         }
       };
-    case SELECT_ADDRESS:
-      {
-        const selectedAddress = state.nearbyCampaigns.find(c => c.street_address === action.value) || 'none';
-        return {
-          ...state,
-          selectedAddress
-        };
-      }
+    case SELECT_ADDRESS: {
+      const selectedAddress =
+        state.nearbyCampaigns.find(c => c.street_address === action.value) || action.value;
+      return {
+        ...state,
+        selectedAddress,
+        error: null
+      };
+    }
     case 'STASH_ADDRESS':
       return {
         ...state,
@@ -105,6 +115,12 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: false,
+        error
+      };
+    case CREATE_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        searchedAddress: null,
         error
       };
     default:
