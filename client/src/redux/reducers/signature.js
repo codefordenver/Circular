@@ -33,7 +33,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: false,
-        error
+        error: error.data
       };
     case FETCH_SIGNATURES_REQUEST:
       return {
