@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
-import ModalWrapper from '../components/ModalWrapper';
-
 import { createCampaign } from '../redux/actions/initialSearch';
 
 class NewCampaign extends Component {
@@ -25,21 +22,22 @@ class NewCampaign extends Component {
   }
 
   render() {
-    const { initialSearch: { searchedAddress, error } } = this.props;
+    const {initialSearch: {searchedAddress, error}} = this.props;
     let formattedAddress = {};
     if (searchedAddress) {
       formattedAddress = searchedAddress.formatted_address;
     }
     return (
-      <ModalWrapper title="New Campaign">
-        {!error && <h1>Create a new campaign using the form below.</h1>}
-        <br />
+      <div className="hero_wrapper">
+        <div className="container">
+          <div className="search_address_wrapper">
+        {!error && <h1className="search_address_heading">Create a new campaign using the form below.</h1>}
+
         {formattedAddress && (
           <form onSubmit={this.setAddressStep}>
             <div className="form-group">
-              <label htmlFor="formAddress">Address</label>
-              <input
-                id="formAddress"
+              <labelhtmlFor="formAddress">Address</label>
+              <inputid="formAddress"
                 type="text"
                 className="form-control"
                 value={formattedAddress}
@@ -48,12 +46,12 @@ class NewCampaign extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="aptNum">Apartment Number</label>
-              <input type="text" className="form-control" name="aptNum" id="aptNum" />
+              <labelhtmlFor="aptNum"> Numberof Apartments</label>
+              <input type="text" className="form-control" name="aptNum" id="aptNum"/>
             </div>
             <div className="form-group">
-              <label htmlFor="campaignName">Campaign Name</label>
-              <input type="text" className="form-control" name="campaignName" id="campaignName" />
+              <labelhtmlFor="campaignName">Campaign Name</label>
+              <input type="text" className="form-control" name="campaignName" id="campaignName"/>
             </div>
             <br />
             <button className="btn btn-primary fr" type="submit">
@@ -76,7 +74,9 @@ class NewCampaign extends Component {
             Add an address to start. <Link to="/">Click here</Link>
           </p>
         )}
-      </ModalWrapper>
+      </div>
+        </div>
+      </div>
     );
   }
 }
@@ -91,4 +91,4 @@ NewCampaign.propTypes = {
   }).isRequired
 };
 
-export default connect(({ initialSearch }) => ({ initialSearch }), { createCampaign })(NewCampaign);
+export default connect(({initialSearch}) => ({initialSearch}), {createCampaign})(NewCampaign);
