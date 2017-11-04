@@ -9,7 +9,7 @@ import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
 
 class CampaignPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchSignatures(this.props.params.id);
   }
@@ -18,24 +18,28 @@ class CampaignPage extends Component {
     const { activeCampaign: { loading, loaded, campaign } } = this.props;
     return (
       <div className="app-container">
-        {campaign && campaign.street_address &&
-          <div>
-            <h1>I am a campaign page</h1>
+        {campaign &&
+          campaign.street_address && (
             <div>
-              { loading && <i className="fa fa-recycle fa-4x fa-spin" /> }
-              { loaded && campaign &&
-              <p>{`Welcome to the ${campaign.street_address} recycling campaign!`}</p> }
+              <h1>I am a campaign page</h1>
+              <div>
+                {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
+                {loaded &&
+                  campaign && (
+                    <p>{`Welcome to the ${campaign.street_address} recycling campaign!`}</p>
+                  )}
+              </div>
             </div>
-          </div>
-        }
-        {campaign && campaign.message &&
-          <div>
-            <p>{campaign.message}</p>
-            <Link to="/">Head home</Link>
-          </div>
-        }
-      <SignCampaign/>
-      <SignatureList/>
+          )}
+        {campaign &&
+          campaign.message && (
+            <div>
+              <p>{campaign.message}</p>
+              <Link to="/">Head home</Link>
+            </div>
+          )}
+        <SignCampaign signatures={this.props.signature.signatures} />
+        <SignatureList signatures={this.props.signature.signatures} />
       </div>
     );
   }
@@ -56,5 +60,7 @@ CampaignPage.propTypes = {
   }).isRequired
 };
 
-export default connect(
-  ({ activeCampaign }) => ({ activeCampaign }), { fetchCampaignById, fetchSignatures })(withRouter(CampaignPage));
+export default connect(({ activeCampaign, signature }) => ({ activeCampaign, signature }), {
+  fetchCampaignById,
+  fetchSignatures
+})(withRouter(CampaignPage));

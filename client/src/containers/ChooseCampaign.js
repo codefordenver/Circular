@@ -24,7 +24,6 @@ class ChooseCampaign extends Component {
     e.stopPropagation();
     e.preventDefault();
     const selectedOption = this.state.selectedOption;
-    console.log('You have selected:', selectedOption);
     const { selectedAddress } = this.props;
     if (selectedAddress === 'different') {
       this.props.router.push('/');
@@ -38,15 +37,15 @@ class ChooseCampaign extends Component {
 
   renderNearbyCampaigns(nearbyCampaignsArr, selectedOption, handleOptionChange) {
     return nearbyCampaignsArr.map(c => (
-      <li className="chooseCampaign-item" key={c.street_address}>
+      <li className="chooseCampaign-item" key={c.address}>
         <input
           type="radio"
-          id={c.street_address}
-          value={c.street_address}
-          checked={selectedOption && selectedOption.street_address === c.street_address}
+          id={c.address}
+          value={c.address}
+          checked={selectedOption && selectedOption.address === c.address}
           onChange={handleOptionChange}
         />
-        <label htmlFor={c.street_address}>{c.street_address}</label>
+        <label htmlFor={c.address}>{c.address}</label>
       </li>
     ));
   }
@@ -75,9 +74,9 @@ class ChooseCampaign extends Component {
             {!loading && error && error.searchError && <p>{error.userMessage}</p>}
             {loaded &&
               nearbyCampaigns &&
-              Array.isArray(nearbyCampaigns) && (
+              nearbyCampaigns.length !== 0 && (
                 <div>
-                  {nearbyCampaigns[0].street_address === searchedAddress.formatted_address && (
+                  {nearbyCampaigns[0].address === searchedAddress.formatted_address && (
                     <form className="">
                       <h1 className="search_address_heading">
                         {'Your address already has a campaign!.'}
@@ -98,7 +97,7 @@ class ChooseCampaign extends Component {
                       </ul>
                     </form>
                   )}
-                  {nearbyCampaigns[0].street_address !== searchedAddress.formatted_address && (
+                  {nearbyCampaigns[0].address !== searchedAddress.formatted_address && (
                     <form className="">
                       <h1 className="search_address_heading">
                         {'We found these campaigns near you.'}
@@ -136,8 +135,7 @@ class ChooseCampaign extends Component {
               )}
             {!loading &&
               nearbyCampaigns &&
-              nearbyCampaigns.status === 'okay' &&
-              !nearbyCampaigns.results && (
+              nearbyCampaigns.length === 0 && (
                 <div>
                   <h1 className="search_address_heading">
                     {"You're the first to support recycling for your building!"}
