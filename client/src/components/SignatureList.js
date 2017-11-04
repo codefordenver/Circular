@@ -8,11 +8,7 @@ class SignatureList extends Component {
         <h2>Signatures</h2>
         <ul>
           {this.props.signatures &&
-            this.props.signatures.map(({ id, name, email }) => (
-              <li key={id}>
-                {name}: {email}
-              </li>
-            ))}
+            this.props.signatures.map(({ id, name }) => <li key={id}>{name}</li>)}
         </ul>
       </div>
     );
