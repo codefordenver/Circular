@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign } from '../redux/actions/signature';
 
 import GoogleButton from 'react-google-button';
@@ -9,17 +10,45 @@ class SignCampaign extends Component {
     super(props);
   }
 
-  renderContent() {
-    const campaignId =
-      this.props.activeCampaign &&
-      this.props.activeCampaign.campaign &&
-      this.props.activeCampaign.campaign._id;
+  componentWillMount = () => {
+    this.selectedCheckboxes = new Set();
+  }
 
-    if (this.props.auth.data === undefined) {
-      return;
+  toggleCheckbox = label => {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
     }
+  }
 
-    if (!this.props.auth.data.googleID) {
+  handleFormSubmit = formSubmitEvent => {
+    formSubmitEvent.preventDefault();
+
+    for (const checkbox of this.selectedCheckboxes) {
+      console.log(checkbox, 'is selected.');
+    }
+  }
+
+  createCheckbox = label => (
+    <Checkbox
+      label={label}
+      handleCheckboxChange={this.toggleCheckbox}
+      key={label}
+    />
+  )
+
+  createCheckboxes = () => {
+    const checkboxes = [
+      'Keep me updated on the status of this request',
+      'Publicly display my first name on this page'
+    ]
+    return checkboxes.map(label => this.createCheckbox(label))
+  }
+
+  checkSignIn = () => {
+
+    if (this.props.auth.data && !this.props.auth.data.googleID) {
       return (
         <a className="google-button-signature" href="/auth/google">
           <GoogleButton label="Sign in to google to sign!" />
@@ -27,16 +56,42 @@ class SignCampaign extends Component {
       );
     }
     return (
-      <button
-        className="pure-button"
-        onClick={() => {
-          this.props.addSignatureToCampaign(this.props.auth.data._id, campaignId);
-        }}
-      >
-        Sign the petition!
-      </button>
+      <a className="google-oauth-button" href="/api/logout">
+        <GoogleButton label="Sign Out" />
+      </a>
     );
   }
+
+
+  renderContent() {
+    const campaignId =
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
+
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <form onSubmit={this.handleFormSubmit}>
+              {this.createCheckboxes()}
+              {this.checkSignIn()}
+              <button className="btn" type="submit">Save</button>
+            </form>
+          </div>
+        </div>
+        <button
+          className="pure-button"
+          onClick={() => {
+            this.props.addSignatureToCampaign(this.props.auth.data._id, campaignId);
+          }}
+        >
+          Sign the petition!
+        </button>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
