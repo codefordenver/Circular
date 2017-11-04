@@ -25,7 +25,7 @@ let defaultState = {
 };
 
 if (stateLoader) {
-  defaultState = stateLoader.initialSearch;
+  defaultState = { error: null, ...stateLoader.initialSearch };
 }
 
 export default function (state = defaultState, action) {
@@ -55,8 +55,8 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        nearbyCampaigns: response,
-        selectedAddress: response[0],
+        nearbyCampaigns: response.data,
+        selectedAddress: response.data[0],
         error: null
       };
     case FETCH_NEARBY_CAMPAIGNS_FAILURE:
@@ -71,7 +71,7 @@ export default function (state = defaultState, action) {
       };
     case SELECT_ADDRESS: {
       const selectedAddress =
-        state.nearbyCampaigns.find(c => c.street_address === action.value) || action.value;
+        state.nearbyCampaigns.find(c => c.address === action.value) || action.value;
       return {
         ...state,
         selectedAddress,
@@ -109,7 +109,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        apartments: response
+        apartments: response.data
       };
     case APARTMENTS_FAILURE:
       return {

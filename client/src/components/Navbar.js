@@ -1,22 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { OAuthSignInButton, SignOutButton } from 'redux-auth/default-theme';
-import { ButtonGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import GoogleButton from 'react-google-button';
 
-const NavBar = () => (
-  <nav className="navbar">
-    <div className="container">
-      <div className="row">
-        <div className="col-md-9 navbar-header">
-          <p>
-            <Link className="home-link" to="/">
-              Recycling Request Tool
-            </Link>
-          </p>
+class Navbar extends Component {
+  renderContent() {
+    if (this.props.auth.data === undefined) {
+      return;
+    }
+
+    if (!this.props.auth.data.googleID) {
+      return (
+        <a className="google-oauth-button" href="/auth/google">
+          <GoogleButton />
+        </a>
+      );
+    }
+    return (
+      <a className="google-oauth-button" href="/api/logout">
+        <GoogleButton label="Sign Out" />
+      </a>
+    );
+  }
+  render() {
+    return (
+      <nav className="navbar">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-9 navbar-header">
+              <p>
+                <Link className="home-link" to="/">
+                  Recycling Request Tool
+                </Link>
+              </p>
+            </div>
+            {this.renderContent()}
+          </div>
         </div>
-      </div>
-    </div>
-  </nav>
-);
+      </nav>
+    );
+  }
+}
 
-export default NavBar;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Navbar);

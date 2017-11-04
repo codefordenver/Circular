@@ -12,13 +12,8 @@ import NotFound from './containers/NotFound';
 import About from './containers/About';
 
 export default (
-  <Route
-    path="/"
-    getComponent={(location, callback) => callback(null, App)}
-  >
-    <IndexRoute
-      getComponent={(location, callback) => callback(null, Home)}
-    />
+  <Route path="/" getComponent={(location, callback) => callback(null, App)}>
+    <IndexRoute getComponent={(location, callback) => callback(null, Home)} />
     <Route
       path="/choose-campaign"
       getComponent={(location, callback) => callback(null, ChooseCampaign)}
@@ -27,10 +22,7 @@ export default (
       path="/campaign"
       onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
     />
-    <Route
-      path="/new-campaign"
-      getComponent={(location, callback) => callback(null, NewCampaign)}
-    >
+    <Route path="/new-campaign" getComponent={(location, callback) => callback(null, NewCampaign)}>
       <Route
         path="/new-campaign/address"
         getComponent={(location, callback) => callback(null, NewCampaign)}
@@ -64,20 +56,6 @@ export default (
       path="/manager-resources"
       getComponent={(location, callback) => callback(null, ManagerResources)}
     />
-    <Route
-      path="/about"
-      getComponent={(location, callback) => callback(null, About)}
-    />
-    <Route
-      path="/error"
-      status={404}
-      getComponent={(location, callback) => callback(null, NotFound)}
-    />
-    {/* Catch all route */}
-    <Route
-      path="*"
-      status={404}
-      onEnter={(nextState, replace) => replace('/error')}
-    />
+    <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
   </Route>
 );

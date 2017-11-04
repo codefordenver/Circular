@@ -46,7 +46,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        signatures: response
+        signatures: response.data
       };
     case FETCH_SIGNATURES_FAILURE:
       return {
