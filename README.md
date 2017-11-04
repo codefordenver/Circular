@@ -9,4 +9,4 @@ yarn in client and top directory
 5. Open a new tab in your browser, and navigate to [Chrome's inspect page](chrome://inspect)
 6. On the Chrome inspect page, click "Open dedicated DevTools for Node"
 7. Perform the function in your app running locally and you should hit your debugger
-8. You can then play around in the debugger in your browser window where your app is running! 
+8. You can then play around in the debugger in your inspect window! 
