@@ -1,26 +1,52 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {OAuthSignInButton} from "redux-auth/default-theme";
-import {addSignatureToCampaign} from '../redux/actions/signature'
-// import { Link } from 'react-router';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addSignatureToCampaign } from '../redux/actions/signature';
 
-const SignCampaign = (props) => {
-  const { auth } = props;
-  const { activeCampaign } = props;
-  const user = auth && auth.user;
-  // const isSignedIn = user && user.isSignedIn;
-  // const name = user && user.attributes && user.attributes.name;
-  // const email = user && user.attributes && user.attributes.email;
-  const campaignId = activeCampaign && activeCampaign.campaign && activeCampaign.campaign.id;
-  const sendUserSignature = (userId, campaignId) => { addSignatureToCampaign(userId, campaignId)};
-  return (
-    <div className="sign-campaign-wrapper">
-      <h2>Show your support!</h2>
-      <OAuthSignInButton next={(response) => {sendUserSignature(response.user.id, campaignId)}} provider="google">Google</OAuthSignInButton>
-      <OAuthSignInButton provider="facebook">Facebook</OAuthSignInButton>
-    </div>
-  )
-};
+import GoogleButton from 'react-google-button';
 
-export default connect(
-  ({auth, activeCampaign}) => ({auth, activeCampaign}), {addSignatureToCampaign})(SignCampaign);
+class SignCampaign extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  renderContent() {
+    const campaignId =
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
+
+    if (this.props.auth.data === undefined) {
+      return;
+    }
+
+    if (!this.props.auth.data.googleID) {
+      return (
+        <a className="google-button-signature" href="/auth/google">
+          <GoogleButton label="Sign in to google to sign!" />
+        </a>
+      );
+    }
+    return (
+      <button
+        className="pure-button"
+        onClick={() => {
+          this.props.addSignatureToCampaign(this.props.auth.data._id, campaignId);
+        }}
+      >
+        Sign the petition!
+      </button>
+    );
+  }
+  render() {
+    return (
+      <div>
+        <h1>Show your support!</h1>
+        <div>{this.renderContent()}</div>
+      </div>
+    );
+  }
+}
+
+export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
+  addSignatureToCampaign
+})(SignCampaign);

@@ -4,7 +4,7 @@ import createApiRequest from '../../utils/createApiRequest';
 export function fetchApartmentsRequest() {
   return {
     type: 'APARTMENTS',
-    promise: createApiRequest('campaigns', 'GET')
+    promise: createApiRequest('api/campaigns', 'GET')
   };
 }
 
@@ -38,7 +38,7 @@ export function getLatLong(address, latLngHelper) {
 export function fetchNearbyCampaigns(latLng) {
   return {
     type: 'FETCH_NEARBY_CAMPAIGNS',
-    promise: createApiRequest(`campaigns/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET')
+    promise: createApiRequest(`api/campaigns/find?lat=${latLng.lat}&lng=${latLng.lng}`, 'GET')
   };
 }
 
@@ -65,7 +65,7 @@ export function searchAddressFlow(address, latLngHelper) {
 export function setCampaignInformation(campaignInfo) {
   return {
     type: 'SET_CAMPAIGN_INFORMATION',
-    promise: createApiRequest('campaigns', 'POST', { campaignInfo })
+    promise: createApiRequest('api/campaigns', 'POST', { ...campaignInfo })
   };
 }
 
@@ -89,7 +89,7 @@ export function createCampaign(campaignInfo) {
     if (response.errors) {
       dispatch(createCampaignFailure(response.errors));
     } else {
-      browserHistory.push(`/campaign/${response.id}`);
+      browserHistory.push(`/campaign/${response.data._id}`);
     }
   };
 }

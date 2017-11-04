@@ -1,4 +1,8 @@
-import { FETCH_CAMPAIGN_REQUEST, FETCH_CAMPAIGN_SUCCESS, FETCH_CAMPAIGN_FAILURE } from '../constants/activeCampaign';
+import {
+  FETCH_CAMPAIGN_REQUEST,
+  FETCH_CAMPAIGN_SUCCESS,
+  FETCH_CAMPAIGN_FAILURE
+} from '../constants/activeCampaign';
 
 const defaultState = {
   loading: false,
@@ -19,7 +23,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        campaign: response
+        campaign: response.data[0]
       };
     case FETCH_CAMPAIGN_FAILURE:
       return {
