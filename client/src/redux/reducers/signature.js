@@ -29,8 +29,6 @@ export default function (state = defaultState, action) {
         campaign: response
       };
     case ADD_SIGNATURE_TO_CAMPAIGN_FAILURE:
-      console.log(error);
-      console.log(response);
       return {
         ...state,
         loading: false,
