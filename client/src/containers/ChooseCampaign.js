@@ -47,7 +47,13 @@ class ChooseCampaign extends Component {
           checked={selectedOption && selectedOption.address === c.address}
           onChange={handleOptionChange}
         />
-        <label htmlFor={c.address}>{c.address}</label>
+        <label htmlFor={c.address}>
+            { c.name
+                ? <div>{c.name}</div>
+                : ""
+            }
+            {c.address}
+        </label>
       </li>
     ));
   }
