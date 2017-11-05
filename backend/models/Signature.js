@@ -11,6 +11,12 @@ const signatureSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Campaign',
     required: true
+  },
+  _keepUpdated: {
+    type: Boolean
+  },
+  _agree: {
+    type: Boolean
   }
 });
 

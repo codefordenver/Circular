@@ -36,11 +36,11 @@ class SignCampaign extends Component {
       this.props.activeCampaign.campaign &&
       this.props.activeCampaign.campaign._id;
 
-    if (this.props.auth === undefined) {
-      return <div />;
-    }
+    // if (this.props.auth === undefined) {
+    //   return <div />;
+    // } // I'm not sure this is needed but I don't remember what it was for...
 
-    this.props.addSignatureToCampaign(this.props.auth.data._id, this.selectedCheckboxes, campaignId);
+    this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
 
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
@@ -58,14 +58,14 @@ class SignCampaign extends Component {
   createCheckboxes = () => {
     const checkboxes = [
       'Keep me updated on the status of this request',
-      'Publicly display my first name on this page'
+      'I agree with the Terms of Agreement and Privacy Policy'
     ]
     return checkboxes.map(label => this.createCheckbox(label))
   }
 
   checkSignIn = () => {
 
-    if (this.props.auth.data && !this.props.auth.data.googleID) {
+    if (this.props.auth && !this.props.auth.googleID) {
       return (
         <a className="google-button-signature" href="/auth/google">
           <GoogleButton label="Sign in to google to sign!" />
@@ -78,7 +78,6 @@ class SignCampaign extends Component {
       </a>
     );
   }
-
 
   renderContent() {
     return (
