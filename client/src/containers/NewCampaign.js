@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -36,8 +37,9 @@ class NewCampaign extends Component {
         {formattedAddress && (
           <form onSubmit={this.setAddressStep}>
             <div className="form-group">
-              <label>Address</label>
+              <label htmlFor="formAddress">Address</label>
               <input
+                id="formAddress"
                 type="text"
                 className="form-control"
                 value={formattedAddress}
@@ -46,12 +48,12 @@ class NewCampaign extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Apartment Number</label>
-              <input type="text" className="form-control" name="aptNum" />
+              <label htmlFor="aptNum">Apartment Number</label>
+              <input type="text" className="form-control" name="aptNum" id="aptNum" />
             </div>
             <div className="form-group">
-              <label>Campaign Name</label>
-              <input type="text" className="form-control" name="campaignName" />
+              <label htmlFor="campaignName">Campaign Name</label>
+              <input type="text" className="form-control" name="campaignName" id="campaignName" />
             </div>
             <br />
             <button className="btn btn-primary fr" type="submit">
@@ -78,5 +80,15 @@ class NewCampaign extends Component {
     );
   }
 }
+
+NewCampaign.defaultProps = {};
+
+NewCampaign.propTypes = {
+  createCampaign: PropTypes.func.isRequired,
+  initialSearch: PropTypes.shape({
+    apartments: PropTypes.array.isRequired,
+    searchedAddress: PropTypes.objectOf(PropTypes.any)
+  }).isRequired
+};
 
 export default connect(({ initialSearch }) => ({ initialSearch }), { createCampaign })(NewCampaign);

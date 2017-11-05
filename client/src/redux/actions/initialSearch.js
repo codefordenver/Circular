@@ -58,7 +58,7 @@ export function searchAddressFlow(address, latLngHelper) {
     if (latLng.error) {
       return console.error(latLng);
     }
-    dispatch(fetchNearbyCampaigns(latLng.response));
+    return dispatch(fetchNearbyCampaigns(latLng.response));
   };
 }
 

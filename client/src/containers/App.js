@@ -19,7 +19,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  fetchUser: PropTypes.func.isRequired
 };
 
 export default connect(null, { fetchUser })(App);

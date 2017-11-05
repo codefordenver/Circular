@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class SignatureList extends Component {
-  render() {
-    return (
-      <div className="sign-campaign-wrapper">
-        <h2>Signatures</h2>
-        <ul>
-          {this.props.signatures &&
-            this.props.signatures.map(({ id, name }) => <li key={id}>{name}</li>)}
-        </ul>
-      </div>
-    );
-  }
-}
+const SignatureList = props => (
+  <div className="sign-campaign-wrapper">
+    <h2>Signatures</h2>
+    <ul>{props.signatures && props.signatures.map(({ id, name }) => <li key={id}>{name}</li>)}</ul>
+  </div>
+);
+
+SignatureList.defaultProps = {
+  signatures: []
+};
+
+SignatureList.propTypes = {
+  signatures: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default SignatureList;

@@ -57,6 +57,12 @@ CampaignPage.propTypes = {
   fetchSignatures: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
+  }).isRequired,
+  signature: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    signatures: PropTypes.arrayOf(PropTypes.object),
+    error: PropTypes.objectOf(PropTypes.any)
   }).isRequired
 };
 
