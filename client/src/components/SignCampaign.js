@@ -25,6 +25,14 @@ class SignCampaign extends Component {
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
+    const campaignId =
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
+
+
+    this.props.addSignatureToCampaign(this.props.auth.data._id, this.selectedCheckboxes, campaignId);
+
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
     }
@@ -64,11 +72,6 @@ class SignCampaign extends Component {
 
 
   renderContent() {
-    const campaignId =
-      this.props.activeCampaign &&
-      this.props.activeCampaign.campaign &&
-      this.props.activeCampaign.campaign._id;
-
     return (
       <div className="container">
         <div className="row">
@@ -76,18 +79,11 @@ class SignCampaign extends Component {
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
               {this.checkSignIn()}
-              <button className="btn" type="submit">Save</button>
+              <button className="btn" type="submit">Sign the petition</button>
             </form>
           </div>
         </div>
-        <button
-          className="pure-button"
-          onClick={() => {
-            this.props.addSignatureToCampaign(this.props.auth.data._id, campaignId);
-          }}
-        >
-          Sign the petition!
-        </button>
+
       </div>
     );
   }
@@ -105,3 +101,12 @@ class SignCampaign extends Component {
 export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
   addSignatureToCampaign
 })(SignCampaign);
+
+//<button
+  //className="pure-button"
+  //onClick={() => {
+    //this.props.addSignatureToCampaign(this.props.auth.data._id, campaignId);
+  //}}
+//>
+  //Sign the petition!
+//</button>

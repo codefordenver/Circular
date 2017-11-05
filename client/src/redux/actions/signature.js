@@ -14,8 +14,9 @@ export default function fetchSignatures(campaign_id) {
   };
 }
 
-export function addSignatureToCampaign(userId, campaignId) {
-  const data = { user_id: userId, campaign_id: campaignId };
+export function addSignatureToCampaign(userId, checkboxes, campaignId) {
+  console.log(checkboxes)
+  const data = { user_id: userId, campaign_id: campaignId, checkboxes: checkboxes };
   return async (dispatch) => {
     dispatch(addsignature(data));
     dispatch(fetchSignatures(campaignId));

@@ -29,6 +29,7 @@ module.exports = app => {
     const signature = new Signature({
       _userID: user_id,
       _campaignID: campaign_id
+      // _keep_updated: checkboxes['Keep me updated on the status of this request']
     });
 
     try {
