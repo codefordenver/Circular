@@ -7,10 +7,10 @@ export function addsignature(data) {
   };
 }
 
-export default function fetchSignatures(campaign_id) {
+export default function fetchSignatures(campaignId) {
   return {
     type: 'FETCH_SIGNATURES',
-    promise: createApiRequest(`api/signatures/${campaign_id}`, 'GET')
+    promise: createApiRequest(`api/signatures/${campaignId}`, 'GET')
   };
 }
 

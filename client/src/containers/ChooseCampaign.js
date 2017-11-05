@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { selectAddress } from '../redux/actions/initialSearch';
@@ -23,7 +24,6 @@ class ChooseCampaign extends Component {
   handleFormSubmit(e) {
     e.stopPropagation();
     e.preventDefault();
-    const selectedOption = this.state.selectedOption;
     const { selectedAddress } = this.props;
     if (selectedAddress === 'different') {
       this.props.router.push('/');
@@ -35,7 +35,7 @@ class ChooseCampaign extends Component {
     }
   }
 
-  renderNearbyCampaigns(nearbyCampaignsArr, selectedOption, handleOptionChange) {
+  renderNearbyCampaigns(nearbyCampaignsArr, selectedOption) {
     return nearbyCampaignsArr.map(c => (
       <li className="chooseCampaign-item" key={c.address}>
         <input
@@ -43,9 +43,12 @@ class ChooseCampaign extends Component {
           id={c.address}
           value={c.address}
           checked={selectedOption && selectedOption.address === c.address}
-          onChange={handleOptionChange}
+          onChange={this.handleOptionChange}
         />
-        <label htmlFor={c.address}>{c.address}</label>
+        <label htmlFor={c.address}>
+          {c.name ? <div>{c.name}</div> : ''}
+          {c.address}
+        </label>
       </li>
     ));
   }
@@ -64,12 +67,6 @@ class ChooseCampaign extends Component {
       <div className="hero_wrapper">
         <div className="container">
           <div className="search_address_wrapper">
-            {/* <form className="search_address_wrapper">
-            <h1 className="search_address_heading">Need recycling at your building?</h1>
-            <h2 className="search_address_sub_heading"> Join or create a campaign!</h2>
-            <AutoSuggestInput />
-            <Link className="search_address_link" to="/denver-recycling-info">Learn more first</Link>
-          </form> */}
             {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
             {!loading && error && error.searchError && <p>{error.userMessage}</p>}
             {loaded &&
@@ -81,13 +78,9 @@ class ChooseCampaign extends Component {
                       <h1 className="search_address_heading">
                         {'Your address already has a campaign!.'}
                       </h1>
-                      <h2 className="search_address_sub_heading">{'Is this your address?'}</h2>
+                      <h2 className="search_address_sub_heading">Is this your address?</h2>
                       <ul className="chooseCampaign-list">
-                        {this.renderNearbyCampaigns(
-                          nearbyCampaigns,
-                          selectedAddress,
-                          this.handleOptionChange
-                        )}
+                        {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress)}
                         <div className="btn-wrapper">
                           <button className="btn" type="submit" onClick={this.handleFormSubmit}>
                             {"YES - LET'S DO THIS!"}
@@ -106,16 +99,12 @@ class ChooseCampaign extends Component {
                         {'Do any of these campaigns represent where you live?'}
                       </h2>
                       <ul className="chooseCampaign-list">
-                        {this.renderNearbyCampaigns(
-                          nearbyCampaigns,
-                          selectedAddress,
-                          this.handleOptionChange
-                        )}
+                        {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress)}
                         <li className="chooseCampaign-item" key="no-match">
                           <input
                             id="none"
                             type="radio"
-                            value={'none'}
+                            value="none"
                             checked={selectedAddress === 'none'}
                             onChange={this.handleOptionChange}
                           />
@@ -159,6 +148,21 @@ class ChooseCampaign extends Component {
     );
   }
 }
+
+ChooseCampaign.defaultProps = {
+  error: null
+};
+
+ChooseCampaign.propTypes = {
+  selectAddress: PropTypes.func.isRequired,
+  error: PropTypes.objectOf(PropTypes.any),
+  nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  searchedAddress: PropTypes.objectOf(PropTypes.any).isRequired,
+  fetchCampaignById: PropTypes.func.isRequired,
+  router: PropTypes.objectOf(PropTypes.any).isRequired
+};
 
 export default connect(({ initialSearch }) => ({ ...initialSearch }), {
   selectAddress,

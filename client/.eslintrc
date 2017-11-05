@@ -2,13 +2,24 @@
   "extends": "airbnb",
   "plugins": ["react"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": "warn",
+    "react/no-unescaped-entities": "off",
+    "max-len": "warn",
+    "react/prop-types": "warn",
     "comma-dangle": ["error", "never"],
-    "no-console": ["error", { "allow": ["warn", "error", "info"] }]
+    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "consistent-return": "warn",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "warn",
+    "jsx-a11y/label-has-for": "warn",
+    "import/no-unresolved": "warn", // something is screwy with our setup on this one - it would be great to fix this
+    "import/extensions": "off"
   },
   "globals": {
-    "document": true,
-    "window": true,
     "fetch": true
+  },
+  "env": {
+    "browser": true
   }
 }
