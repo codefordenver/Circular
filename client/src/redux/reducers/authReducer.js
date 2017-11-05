@@ -10,7 +10,7 @@ export default function (state = {}, action) {
     case FETCH_USER_SUCCESS:
       return {
         ...state,
-        ...response
+        ...response.data
       };
     case FETCH_USER_FAILURE:
       return {

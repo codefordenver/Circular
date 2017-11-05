@@ -7,9 +7,7 @@ const StepByStep = () => (
         <div className="step">
           <div className="step1 step_pic" />
           1. Create
-          <span className="step_instructions">
-            Create and share a page with your neighbors
-          </span>
+          <span className="step_instructions">Create and share a page with your neighbors</span>
         </div>
       </div>
 
@@ -17,9 +15,7 @@ const StepByStep = () => (
         <div className="step">
           <div className="step2 step_pic" />
           2. Support
-          <span className="step_instructions">
-          Voice and organize your support
-          </span>
+          <span className="step_instructions">Voice and organize your support</span>
         </div>
       </div>
 
@@ -28,7 +24,8 @@ const StepByStep = () => (
           <div className="step3 step_pic" />
           3. Request
           <span className="step_instructions">
-            Request a recycling collection from your landlord by sharing your building's support page
+            Request a recycling collection from your landlord by sharing your building's support
+            page
           </span>
         </div>
       </div>
@@ -37,9 +34,7 @@ const StepByStep = () => (
         <div className="step">
           <div className="step4 step_pic" />
           4. Recycle
-          <span className="step_instructions">
-            Live in a more sustainable building
-          </span>
+          <span className="step_instructions">Live in a more sustainable building</span>
         </div>
       </div>
     </div>
