@@ -18,11 +18,13 @@ Run `yarn lint -- --fix` in the root repo.
 It is highly recommended that you configure your editor to display eslint errors
 
 ## Debugging instructions for Node
-1. Open package.json in the root
-2. Within "scripts", and within the key of "start", add `--inspect` so that the line looks like "start": "node --inspect backend/index.js"
-3. In the node file you want to debug, add a `debugger`
-4. Open a new tab in your terminal, and run the backend server separately with `yarn start`
-5. Open a new tab in your browser, and navigate to [Chrome's inspect page](chrome://inspect)
-6. On the Chrome inspect page, click "Open dedicated DevTools for Node"
-7. Perform the function in your app running locally and you should hit your debugger
-8. You can then play around in the debugger in your inspect window! 
+1. Kill your server
+2. Open package.json in the root
+3. Within "scripts", and within the key of "start", add `--inspect` so that the line looks like "start": "node --inspect backend/index.js"
+4. In the node file you want to debug, add a `debugger`
+5. Open a new tab in your terminal, and run the backend server separately with `yarn start`
+6. Start your frontend server again with `yarn dev`
+7. Open a new tab in your browser, and navigate to [Chrome's inspect page](chrome://inspect)
+8. On the Chrome inspect page, click "Open dedicated DevTools for Node"
+9. Perform the function in your app running locally and you should hit your debugger
+10. You can then play around in the debugger in your inspect window! 
