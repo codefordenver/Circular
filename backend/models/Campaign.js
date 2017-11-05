@@ -1,3 +1,4 @@
+const GeoJSON = require('mongoose-geojson-schema');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
