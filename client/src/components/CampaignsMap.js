@@ -7,28 +7,24 @@ import * as _ from 'lodash';
 
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // and name it GettingStartedGoogleMap
-const GettingStartedGoogleMap = withRouter(
-  withScriptjs(
-    withGoogleMap(props => (
-      <GoogleMap
-        ref={props.onMapLoad}
-        defaultZoom={12}
-        defaultCenter={{ lat: 39.7392, lng: -104.9903 }}
-        onClick={props.onMapClick}
-      >
-        {props.markers.map(marker => (
-          <Marker
-            key={marker.id}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onRightClick={() => props.onMarkerRightClick(marker)}
-            onClick={() => props.router.push(`/campaign/${marker.id}`)}
-            title={marker.street_address}
-          />
+const GettingStartedGoogleMap = withRouter(withScriptjs(withGoogleMap(props => (
+  <GoogleMap
+    ref={props.onMapLoad}
+    defaultZoom={12}
+    defaultCenter={{ lat: 39.7392, lng: -104.9903 }}
+    onClick={props.onMapClick}
+  >
+    {props.markers.map(marker => (
+      <Marker
+        key={marker.id}
+        position={{ lat: marker.lat, lng: marker.lng }}
+        onRightClick={() => props.onMarkerRightClick(marker)}
+        onClick={() => props.router.push(`/campaign/${marker.id}`)}
+        title={marker.street_address}
+      />
         ))}
-      </GoogleMap>
-    ))
-  )
-);
+  </GoogleMap>
+))));
 class ApartmentMap extends Component {
   render() {
     const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env

@@ -23,7 +23,6 @@ class ChooseCampaign extends Component {
   handleFormSubmit(e) {
     e.stopPropagation();
     e.preventDefault();
-    const selectedOption = this.state.selectedOption;
     const { selectedAddress } = this.props;
     if (selectedAddress === 'different') {
       this.props.router.push('/');
@@ -46,11 +45,11 @@ class ChooseCampaign extends Component {
           onChange={handleOptionChange}
         />
         <label htmlFor={c.address}>
-            { c.name
+          { c.name
                 ? <div>{c.name}</div>
-                : ""
+                : ''
             }
-            {c.address}
+          {c.address}
         </label>
       </li>
     ));
@@ -87,7 +86,7 @@ class ChooseCampaign extends Component {
                       <h1 className="search_address_heading">
                         {'Your address already has a campaign!.'}
                       </h1>
-                      <h2 className="search_address_sub_heading">{'Is this your address?'}</h2>
+                      <h2 className="search_address_sub_heading">Is this your address?</h2>
                       <ul className="chooseCampaign-list">
                         {this.renderNearbyCampaigns(
                           nearbyCampaigns,
@@ -121,7 +120,7 @@ class ChooseCampaign extends Component {
                           <input
                             id="none"
                             type="radio"
-                            value={'none'}
+                            value="none"
                             checked={selectedAddress === 'none'}
                             onChange={this.handleOptionChange}
                           />

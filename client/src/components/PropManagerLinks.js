@@ -11,7 +11,7 @@ const PropManagerLinks = () => (
       Increase tenant satisfaction and boost your building's appeal by providing recycling service.
       <br />
       <br />
-      Please visit the page below to estimate your required level of service and tips on 
+      Please visit the page below to estimate your required level of service and tips on
       purchasing service.
     </div>
     <div className="managerlinks_links">

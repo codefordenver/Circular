@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import GoogleButton from 'react-google-button';
 import { addSignatureToCampaign } from '../redux/actions/signature';
 
-import GoogleButton from 'react-google-button';
 
 class SignCampaign extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderError() {
     return (
       <div className="error-message">

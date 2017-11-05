@@ -57,7 +57,7 @@ export default function (state = defaultState, action) {
         loaded: true,
         nearbyCampaigns: response.data,
         selectedAddress: response.data[0],
-	error: null
+        error: null
       };
     case FETCH_NEARBY_CAMPAIGNS_FAILURE:
       return {
