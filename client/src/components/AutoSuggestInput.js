@@ -14,7 +14,6 @@ class AutoSuggestInput extends Component {
     super(props);
     this.state = {
       address: '',
-      isFieldActive: false,
       error: ''
     };
     this.onChange = address => this.setState({ address, error: '' });
@@ -112,8 +111,7 @@ AutoSuggestInput.propTypes = {
   isScriptLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(
-  ({ initialSearch }) => ({ initialSearch }), {
-    searchAddressFlow,
-    clearSearchResults
-  })(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));
+export default connect(({ initialSearch }) => ({ initialSearch }), {
+  searchAddressFlow,
+  clearSearchResults
+})(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));

@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const Signature = mongoose.model('Signature');
 const User = mongoose.model('User');
-const _ = require('lodash');
 const async = require('async');
-const Path = require('path-parser');
-const { URL } = require('url');
 
 module.exports = app => {
   app.get('/api/signatures/:id', async (req, res) => {

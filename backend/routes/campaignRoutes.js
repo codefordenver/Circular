@@ -13,7 +13,7 @@ module.exports = app => {
         if (err) {
           res.status(422).send(err);
         } else {
-          data = results.map(({ obj: { address, name, voteCount, _id } }) => {
+          const data = results.map(({ obj: { address, name, voteCount, _id } }) => {
             return {
               address,
               name,
@@ -30,7 +30,7 @@ module.exports = app => {
   app.get('/api/campaigns', async (req, res) => {
     const campaigns = await Campaign.find({});
 
-    data = campaigns.map(({ _id, address, name, voteCount, latLng: { coordinates } }) => {
+    const data = campaigns.map(({ _id, address, name, voteCount, latLng: { coordinates } }) => {
       return {
         address,
         name,

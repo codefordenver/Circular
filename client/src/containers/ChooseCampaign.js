@@ -25,7 +25,6 @@ class ChooseCampaign extends Component {
 	handleFormSubmit(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		const selectedOption = this.state.selectedOption;
 		const { selectedAddress } = this.props;
 		if (selectedAddress === "different") {
 			this.props.router.push("/");
