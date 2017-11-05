@@ -31,13 +31,13 @@ class NewCampaign extends Component {
       <div className="hero_wrapper">
         <div className="container">
           <div className="search_address_wrapper">
-        {!error && <h1className="search_address_heading">Create a new campaign using the form below.</h1>}
+        {!error && <h1 className="search_address_heading">Create a new campaign using the form below.</h1>}
 
         {formattedAddress && (
           <form onSubmit={this.setAddressStep}>
             <div className="form-group">
-              <labelhtmlFor="formAddress">Address</label>
-              <inputid="formAddress"
+              <label htmlFor="formAddress">Address</label>
+              <input id="formAddress"
                 type="text"
                 className="form-control"
                 value={formattedAddress}
@@ -46,11 +46,11 @@ class NewCampaign extends Component {
               />
             </div>
             <div className="form-group">
-              <labelhtmlFor="aptNum"> Numberof Apartments</label>
+              <label htmlFor="aptNum">Number of Apartments</label>
               <input type="text" className="form-control" name="aptNum" id="aptNum"/>
             </div>
             <div className="form-group">
-              <labelhtmlFor="campaignName">Campaign Name</label>
+              <label htmlFor="campaignName">Campaign Name</label>
               <input type="text" className="form-control" name="campaignName" id="campaignName"/>
             </div>
             <br />
