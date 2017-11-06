@@ -160,6 +160,7 @@ ChooseCampaign.propTypes = {
   loading: PropTypes.bool.isRequired,
   loaded: PropTypes.bool.isRequired,
   searchedAddress: PropTypes.objectOf(PropTypes.any).isRequired,
+  selectedAddress: PropTypes.string.isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
   router: PropTypes.objectOf(PropTypes.any).isRequired
 };

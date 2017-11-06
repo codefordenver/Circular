@@ -5,13 +5,13 @@
   "main": "index.js",
   "engines": {
     "node": "8.3.0",
-    "yarn": "1.2"
+    "yarn": ">=1.2"
   },
   "scripts": {
     "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
     "client": "( cd ./client && yarn start)",
-    "lint": "eslint backend && yarn lint --prefix client",
+    "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
@@ -33,10 +33,14 @@
     "path-parser": "^2.0.2"
   },
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "babel-eslint": "^8.0.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-node": "4.2.2",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-react": "^7.4.0"
   }
 }
