@@ -1,16 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router";
 import cx from "classnames";
-
 import { createCampaign } from "../redux/actions/initialSearch";
 
 class NewCampaign extends Component {
 	constructor(props) {
 		super(props);
-
 	}
-
 
 	render() {
 		const { childRoutes } = this.props.route;

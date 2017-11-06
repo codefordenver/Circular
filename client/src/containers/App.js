@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchUser from '../redux/actions/authorization';
 import NavBar from '../components/Navbar';
@@ -19,7 +20,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  fetchUser: PropTypes.func.isRequired
 };
 
 export default connect(null, { fetchUser })(App);

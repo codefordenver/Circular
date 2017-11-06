@@ -4,7 +4,7 @@
   "rules": {
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": "warn",
-    "react/no-unescaped-entities": "warn",
+    "react/no-unescaped-entities": "off",
     "max-len": "warn",
     "react/prop-types": "warn",
     "comma-dangle": ["error", "never"],

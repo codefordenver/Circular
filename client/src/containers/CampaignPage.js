@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router';
+import { withRouter } from 'react-router';
 
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
@@ -19,23 +19,16 @@ class CampaignPage extends Component {
     return (
       <div className="app-container">
         {campaign &&
-          campaign.street_address && (
+          campaign.address && (
             <div>
-              <h1>I am a campaign page</h1>
-              <div>
+              <div className="campaign-page-name">{campaign.name}</div>
+              <div className="campaign-page-address">
                 {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
                 {loaded &&
                   campaign && (
-                    <p>{`Welcome to the ${campaign.street_address} recycling campaign!`}</p>
+                    campaign.address
                   )}
               </div>
-            </div>
-          )}
-        {campaign &&
-          campaign.message && (
-            <div>
-              <p>{campaign.message}</p>
-              <Link to="/">Head home</Link>
             </div>
           )}
         <SignCampaign signatureObj={this.props.signature} />
@@ -57,6 +50,12 @@ CampaignPage.propTypes = {
   fetchSignatures: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
+  }).isRequired,
+  signature: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    signatures: PropTypes.arrayOf(PropTypes.object),
+    error: PropTypes.objectOf(PropTypes.any)
   }).isRequired
 };
 
