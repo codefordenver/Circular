@@ -1,5 +1,12 @@
 @import '../base/colors';
 
+.loader {
+	display: none;
+	&.hide {
+		display: block;
+	}
+}
+
 .chooseCampaign-list {
   margin-bottom: 2rem;
 }
