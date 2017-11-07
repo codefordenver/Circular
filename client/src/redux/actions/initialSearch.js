@@ -69,28 +69,3 @@ export function selectAddress(value) {
 	};
 }
 
-// export function setCampaignInformation(campaignInfo) {
-//   return {
-//     type: 'SET_CAMPAIGN_INFORMATION',
-//     promise: createApiRequest('api/campaigns', 'POST', { ...campaignInfo })
-//   };
-// }
-
-
-// export function createCampaignFailure(error) {
-//   return {
-//     type: 'CREATE_CAMPAIGN_FAILURE',
-//     error
-//   };
-// }
-
-// export function createCampaign(campaignInfo) {
-//   return async (dispatch) => {
-//     const { response } = await dispatch(setCampaignInformation(campaignInfo));
-//     if (response.errors) {
-//       dispatch(createCampaignFailure(response.errors));
-//     } else {
-//       browserHistory.push(`/campaign/${response.data._id}`);
-//     }
-//   };
-// }
