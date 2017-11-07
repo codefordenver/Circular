@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Checkbox from './SignatureCheckbox';
 import GoogleButton from 'react-google-button';
-import { addSignatureToCampaign } from '../redux/actions/signature';
+import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
   renderError() {
@@ -28,7 +28,7 @@ class SignCampaign extends Component {
     }
   }
 
-  handleFormSubmit = formSubmitEvent => {
+  handleFormSubmit = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
     const campaignId =
@@ -40,11 +40,13 @@ class SignCampaign extends Component {
     //   return <div />;
     // } // I'm not sure this is needed but I don't remember what it was for...
 
-    this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
+    await this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
 
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
     }
+    // debugger
+    this.props.logSignerOut()
   }
 
   createCheckbox = label => (
@@ -64,20 +66,24 @@ class SignCampaign extends Component {
   }
 
   checkSignIn = () => {
-
     if (this.props.auth && !this.props.auth.googleID) {
       return (
         <a className="google-button-signature" href="/auth/google">
           <GoogleButton label="Sign in to google to sign!" />
         </a>
       );
+    } else {
+      return (
+        <a className="google-oauth-button" href="/api/logout">
+          <GoogleButton label="Sign Out" />
+        </a>
+      );
     }
-    return (
-      <a className="google-oauth-button" href="/api/logout">
-        <GoogleButton label="Sign Out" />
-      </a>
-    );
   }
+
+  // signOut = () => {
+  //
+  // }
 
   renderContent() {
     return (
@@ -131,9 +137,10 @@ SignCampaign.propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,
-  addSignatureToCampaign: PropTypes.func.isRequired
+  addSignatureToCampaign: PropTypes.func.isRequired,
+  logSignerOut: PropTypes.func.isRequired
 };
 
 export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
-  addSignatureToCampaign
+  addSignatureToCampaign, logSignerOut
 })(SignCampaign);

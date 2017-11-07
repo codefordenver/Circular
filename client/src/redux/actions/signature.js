@@ -24,3 +24,10 @@ export function addSignatureToCampaign(userId, checkboxes, campaignId) {
     dispatch(fetchSignatures(campaignId));
   };
 }
+
+export function logSignerOut() {
+  return {
+    type: 'LOG_OUT',
+    promise: createApiRequest('api/logout', 'GET')
+  };
+}

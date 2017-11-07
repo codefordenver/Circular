@@ -1,4 +1,4 @@
-import { FETCH_USER_REQUEST, FETCH_USER_SUCCESS, FETCH_USER_FAILURE } from '../constants/auth';
+import { FETCH_USER_REQUEST, FETCH_USER_SUCCESS, FETCH_USER_FAILURE, LOG_OUT_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS } from '../constants/auth';
 
 export default function (state = {}, action) {
   const { response, error, type } = action;
@@ -13,6 +13,20 @@ export default function (state = {}, action) {
         ...response.data
       };
     case FETCH_USER_FAILURE:
+      return {
+        ...state,
+        error
+      };
+    case LOG_OUT_REQUEST:
+      return {
+        ...state
+      };
+    case LOG_OUT_SUCCESS:
+      return {
+        ...state,
+        ...response.data
+      };
+    case LOG_OUT_FAILURE:
       return {
         ...state,
         error
