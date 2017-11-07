@@ -18,7 +18,7 @@ class SignCampaign extends Component {
 
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
-  }
+  };
 
   toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
@@ -26,7 +26,7 @@ class SignCampaign extends Component {
     } else {
       this.selectedCheckboxes.add(label);
     }
-  }
+  };
 
   handleFormSubmit = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
@@ -40,30 +40,30 @@ class SignCampaign extends Component {
     //   return <div />;
     // } // I'm not sure this is needed but I don't remember what it was for...
 
-    await this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
+    await this.props.addSignatureToCampaign(
+      this.props.auth._id,
+      this.selectedCheckboxes,
+      campaignId
+    );
 
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
     }
     // debugger
-    this.props.logSignerOut()
-  }
+    this.props.logSignerOut();
+  };
 
   createCheckbox = label => (
-    <Checkbox
-      label={label}
-      handleCheckboxChange={this.toggleCheckbox}
-      key={label}
-    />
-  )
+    <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />
+  );
 
   createCheckboxes = () => {
     const checkboxes = [
       'Keep me updated on the status of this request',
       'I agree with the Terms of Agreement and Privacy Policy'
-    ]
-    return checkboxes.map(label => this.createCheckbox(label))
-  }
+    ];
+    return checkboxes.map(label => this.createCheckbox(label));
+  };
 
   checkSignIn = () => {
     if (this.props.auth && !this.props.auth.googleID) {
@@ -74,12 +74,12 @@ class SignCampaign extends Component {
       );
     } else {
       return (
-        <a className="google-oauth-button" href="/api/logout">
-          <GoogleButton label="Sign Out" />
-        </a>
+        <button className="btn" type="submit">
+          Sign the petition
+        </button>
       );
     }
-  }
+  };
 
   // signOut = () => {
   //
@@ -93,11 +93,9 @@ class SignCampaign extends Component {
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
               {this.checkSignIn()}
-              <button className="btn" type="submit">Sign the petition</button>
             </form>
           </div>
         </div>
-
       </div>
     );
   }
@@ -142,5 +140,6 @@ SignCampaign.propTypes = {
 };
 
 export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
-  addSignatureToCampaign, logSignerOut
+  addSignatureToCampaign,
+  logSignerOut
 })(SignCampaign);
