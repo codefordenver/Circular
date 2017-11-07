@@ -21,13 +21,12 @@ module.exports = app => {
   });
 
   app.post('/api/signatures', async (req, res) => {
-    const { user_id, campaign_id, keepUpdated, agree } = req.body;
+    const { user_id, campaign_id, keepUpdated } = req.body;
 
     const signature = new Signature({
       _userID: user_id,
       _campaignID: campaign_id,
-      _keepUpdated: keepUpdated,
-      _agree: agree
+      _keepUpdated: keepUpdated
     });
 
     try {

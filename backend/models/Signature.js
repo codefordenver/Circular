@@ -14,9 +14,6 @@ const signatureSchema = new Schema({
   },
   _keepUpdated: {
     type: Boolean
-  },
-  _agree: {
-    type: Boolean
   }
 });
 

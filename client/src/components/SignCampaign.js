@@ -49,7 +49,6 @@ class SignCampaign extends Component {
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
     }
-    // debugger
     this.props.logSignerOut();
   };
 
@@ -59,8 +58,7 @@ class SignCampaign extends Component {
 
   createCheckboxes = () => {
     const checkboxes = [
-      'Keep me updated on the status of this request',
-      'I agree with the Terms of Agreement and Privacy Policy'
+      'Keep me updated on the status of this request'
     ];
     return checkboxes.map(label => this.createCheckbox(label));
   };
@@ -80,10 +78,6 @@ class SignCampaign extends Component {
       );
     }
   };
-
-  // signOut = () => {
-  //
-  // }
 
   renderContent() {
     return (

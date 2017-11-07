@@ -16,9 +16,8 @@ export default function fetchSignatures(campaignId) {
 
 export function addSignatureToCampaign(userId, checkboxes, campaignId) {
   const keepUpdated = checkboxes.has('Keep me updated on the status of this request')
-  const agree = checkboxes.has('I agree with the Terms of Agreement and Privacy Policy')
 
-  const data = { user_id: userId, campaign_id: campaignId, keepUpdated: keepUpdated, agree: agree };
+  const data = { user_id: userId, campaign_id: campaignId, keepUpdated: keepUpdated};
   return async (dispatch) => {
     dispatch(addsignature(data));
     dispatch(fetchSignatures(campaignId));
