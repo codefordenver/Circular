@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "classnames": "^2.2.5",
     "css-loader": "^0.28.4",
     "eslint-plugin-react": "^7.4.0",
     "geocoder": "^0.2.3",
