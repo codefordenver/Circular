@@ -7,11 +7,17 @@ h2 {
 }
 
 .sign-campaign-wrapper {
-  background-color: lightGrey;
+  margin: 1em 0em;
 }
+
+.signature-wrapper {
+  margin: 1em 0em;
+}
+
 .google-button-signature {
   text-decoration: none;
 }
+
 .pure-button {
   font-family: inherit;
   font-size: 100%;
@@ -40,4 +46,43 @@ h2 {
 .pure-button:active {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.2) inset;
   border-color: #000\9;
+}
+
+.signature-list-down, .signature-list-up {
+  position: relative;
+  height: 1em;
+  display: inline-block;
+  margin-bottom:.5em;
+}
+
+.signature-list-up:after {
+  content:'';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-top: solid 5px black;
+  border-left: solid 25px transparent;
+  border-right: solid 25px transparent;
+}
+
+.signature-list-hide {
+  display:none;
+}
+
+.signature-list-down:after {
+  content:'';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-bottom: solid 5px black;
+  border-left: solid 25px transparent;
+  border-right: solid 25px transparent;
 }

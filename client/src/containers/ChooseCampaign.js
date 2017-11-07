@@ -1,39 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { selectAddress } from '../redux/actions/initialSearch';
-import fetchCampaignById from '../redux/actions/activeCampaign';
-import AutoSuggestInput from '../components/AutoSuggestInput';
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { selectAddress } from "../redux/actions/initialSearch";
+import fetchCampaignById from "../redux/actions/activeCampaign";
+import AutoSuggestInput from "../components/AutoSuggestInput";
+import FullScreenLoader from "../components/FullScreenLoader";
+import cx from "classnames";
 
 class ChooseCampaign extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedOption: null
-    };
-    this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedOption: null
+		};
+		this.handleOptionChange = this.handleOptionChange.bind(this);
+		this.handleOptionChange = this.handleOptionChange.bind(this);
+		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+	}
 
-  handleOptionChange(e) {
-    this.props.selectAddress(e.target.value);
-  }
+	handleOptionChange(e) {
+		this.props.selectAddress(e.target.value);
+	}
 
-  handleFormSubmit(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    const { selectedAddress } = this.props;
-    if (selectedAddress === 'different') {
-      this.props.router.push('/');
-    } else if (!selectedAddress || selectedAddress === 'none') {
-      this.props.router.push('/new-campaign/address');
-    } else {
-      this.props.fetchCampaignById(selectedAddress.id);
-      this.props.router.push(`/campaign/${selectedAddress.id}`);
-    }
-  }
+	handleFormSubmit(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		const { selectedAddress } = this.props;
+		if (selectedAddress === "different") {
+			this.props.router.push("/");
+		} else if (!selectedAddress || selectedAddress === "none") {
+			this.props.router.push("/new-campaign/address");
+		} else {
+			this.props.fetchCampaignById(selectedAddress.id);
+			this.props.router.push(`/campaign/${selectedAddress.id}`);
+		}
+	}
 
   renderNearbyCampaigns(nearbyCampaignsArr, selectedOption) {
     return nearbyCampaignsArr.map(c => (
@@ -53,15 +55,15 @@ class ChooseCampaign extends Component {
     ));
   }
 
-  render() {
-    const {
-      error,
-      nearbyCampaigns,
-      loading,
-      loaded,
-      selectedAddress,
-      searchedAddress
-    } = this.props;
+	render() {
+		const {
+			error,
+			nearbyCampaigns,
+			loading,
+			loaded,
+			selectedAddress,
+			searchedAddress
+		} = this.props;
 
     return (
       <div className="hero_wrapper">
@@ -160,11 +162,12 @@ ChooseCampaign.propTypes = {
   loading: PropTypes.bool.isRequired,
   loaded: PropTypes.bool.isRequired,
   searchedAddress: PropTypes.objectOf(PropTypes.any).isRequired,
+  selectedAddress: PropTypes.string.isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
   router: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default connect(({ initialSearch }) => ({ ...initialSearch }), {
-  selectAddress,
-  fetchCampaignById
+	selectAddress,
+	fetchCampaignById
 })(withRouter(ChooseCampaign));
