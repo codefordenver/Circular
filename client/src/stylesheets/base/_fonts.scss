@@ -1,1 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:200,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald:400,600');
+
+//Fallbacks for our two typefaces.
+$oswald_stack: "Oswald", Impact, "Franklin Gothic Bold", sans-serif;
+$open_sans_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
+
+@mixin oswald-36-bold (){
+	font-family: $oswald_stack;
+	font-size: 36px;
+	
+}
