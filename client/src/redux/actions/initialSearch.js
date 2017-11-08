@@ -63,9 +63,9 @@ export function searchAddressFlow(address, latLngHelper) {
 }
 
 export function selectAddress(value) {
-	return {
-		type: 'SELECT_ADDRESS',
-		value
-	};
+  return {
+    type: 'SELECT_ADDRESS',
+    value
+  };
 }
 

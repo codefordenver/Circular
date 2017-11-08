@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "8.3.0",
+    "node": ">=8.3.0",
     "yarn": ">=1.2"
   },
   "scripts": {
@@ -15,7 +15,8 @@
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+    "postinstall": "yarn install --cwd client"
   },
   "author": "",
   "license": "ISC",

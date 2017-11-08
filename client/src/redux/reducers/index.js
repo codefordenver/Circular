@@ -12,8 +12,8 @@ import signature from './signature';
 const reducers = combineReducers({
   auth: authReducer,
   routing,
-	googleMap,
-	newCampaign,
+  googleMap,
+  newCampaign,
   initialSearch,
   activeCampaign,
   signature
