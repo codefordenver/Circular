@@ -31,8 +31,10 @@ module.exports = app => {
 
     try {
       const data = await signature.save();
-
-      res.send(data);
+			const signatures = await Signature.find({
+				_campaignID: campaign_id
+			})
+      res.json({ data, signatures });
     } catch (err) {
       res.status(422).send(err);
     }

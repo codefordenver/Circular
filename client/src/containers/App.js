@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import fetchUser from '../redux/actions/authorization';
+import { fetchUser } from '../redux/actions/authorization';
 import NavBar from '../components/Navbar';
 
 class App extends Component {
