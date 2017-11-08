@@ -10,10 +10,14 @@ module.exports = app => {
     })
   );
 
-  app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-    res.redirect(req.session.returnTo);
-    delete req.session.returnTo;
-  });
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect(req.session.returnTo);
+      delete req.session.returnTo;
+    }
+  );
 
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
@@ -21,6 +25,6 @@ module.exports = app => {
 
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.send({});
   });
 };
