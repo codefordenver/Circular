@@ -15,8 +15,7 @@
 		"dev": "concurrently \"yarn server\" \"yarn client\"",
 		"client-install": "(cd ./client && yarn install)",
 		"client-build": "(cd ./client && yarn run build)",
-		"heroku-postbuild":
-			"YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+		"heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
 		"postinstall": "yarn install --cwd client"
 	},
 	"author": "",
@@ -40,6 +39,7 @@
 		"babel-eslint": "^8.0.2",
 		"eslint": "4.11.0",
 		"eslint-config-airbnb": "^16.1.0",
+		"eslint-config-prettier": "^2.7.0",
 		"eslint-config-react-app": "^2.0.1",
 		"eslint-plugin-flowtype": "^2.39.1",
 		"eslint-plugin-import": "^2.6.1",
