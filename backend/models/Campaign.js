@@ -28,6 +28,6 @@ const campaignSchema = new Schema(
 	{ timestamps: true }
 );
 
-campaignSchema.index({ latLng: "2dsphere" });
+campaignSchema.index({ latLng: '2dsphere' });
 
-mongoose.model("Campaign", campaignSchema);
+mongoose.model('Campaign', campaignSchema);

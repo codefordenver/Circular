@@ -41,3 +41,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
+
+//clientId: 45736087042-kdq1atpud65dca2a44hmtpadura3qcfa.apps.googleusercontent.com
+//client secret: Zl0Y0r6ISoesuby7aLshgTx5

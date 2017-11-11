@@ -32,7 +32,8 @@
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "path-parser": "^2.0.2"
+    "path-parser": "^2.0.2",
+    "react-social-login": "^3.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
