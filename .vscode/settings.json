@@ -1,7 +1,8 @@
 {
-	"editor.useTabStops": true,
+	"editor.useTabStops": false,
 	"editor.detectIndentation": true,
-	"editor.formatOnSave": true,
+	"editor.insertSpaces": true,
+	"editor.formatOnSave": false,
 	"eslint.autoFixOnSave": true,
 	"prettier.eslintIntegration": true
 }
