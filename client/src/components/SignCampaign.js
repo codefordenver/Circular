@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import SocialLogin from 'react-social-login';
 import Checkbox from './SignatureCheckbox';
-import GoogleButton from 'react-google-button';
+// import GoogleButton from 'react-google-button';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
-import { beginAuth } from '../redux/actions/authorization';
+// import { beginAuth } from '../redux/actions/authorization';
+
+const Button = ({ children, triggerLogin, ...props }) => (
+  <button onClick={triggerLogin} {...props}>
+    {children}
+  </button>
+);
+
+const SocialButton = SocialLogin(Button);
 
 class SignCampaign extends Component {
   renderError() {
@@ -62,12 +72,25 @@ class SignCampaign extends Component {
    return checkboxes.map(label => this.createCheckbox(label));
  };
 
+ handleSocialLogin = (user) => {
+   console.log(user);
+ };
+
+ handleSocialLoginFailure = (err) => {
+   console.error(err);
+ };
+
  checkSignIn = () => {
    if (this.props.auth && !this.props.auth.googleID) {
      return (
-       <button className="google-button-signature" onClick={() => this.props.beginAuth()}>
+       <SocialButton
+         provider="google"
+         appId={'AIzaSyAwICoMBInIKadYG6gXwsfSaL4fGNbog3U'}
+         onLoginSuccess={this.handleSocialLogin}
+         onLoginFailure={this.handleSocialLoginFailure}
+       >
          {'sign with the googs'}
-       </button>
+       </SocialButton>
      );
    }
  };
@@ -77,10 +100,15 @@ class SignCampaign extends Component {
      <div className="container">
        <div className="row">
          <div className="col-sm-12">
-           <form onSubmit={this.handleFormSubmit}>
-             {this.createCheckboxes()}
-             {this.checkSignIn()}
-           </form>
+           {this.createCheckboxes()}
+           <SocialButton
+             provider="google"
+             appId={'45736087042-kdq1atpud65dca2a44hmtpadura3qcfa.apps.googleusercontent.com'}
+             onLoginSuccess={this.handleSocialLogin}
+             onLoginFailure={this.handleSocialLoginFailure}
+           >
+             {'sign with the googs'}
+           </SocialButton>
          </div>
        </div>
      </div>
@@ -94,8 +122,15 @@ class SignCampaign extends Component {
        {this.renderError()}
        <div className="sign-campaign-signature-button">
          <div>Sign with:</div>
+         <SocialButton
+           provider="google"
+           appId={'45736087042-kdq1atpud65dca2a44hmtpadura3qcfa.apps.googleusercontent.com'}
+           onLoginSuccess={this.handleSocialLogin}
+           onLoginFailure={this.handleSocialLoginFailure}
+         >
+           {'sign with the googs'}
+         </SocialButton>
        </div>
-       <div>{this.renderContent()}</div>
      </div>
    );
  }
@@ -131,6 +166,5 @@ SignCampaign.propTypes = {
 
 export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
   addSignatureToCampaign,
-  logSignerOut,
-  beginAuth
-})(SignCampaign);
+  logSignerOut
+})(withRouter(SignCampaign));

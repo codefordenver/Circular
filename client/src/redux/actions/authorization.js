@@ -7,9 +7,9 @@ export function fetchUser() {
   };
 }
 
-export function beginAuth() {
-  return {
-    type: 'REQUEST_GOOGLE_AUTH',
-    promise: createApiRequest('/auth/google', 'GET')
-  };
-}
+// export function beginAuth(router) {
+//   return {
+//     type: 'REQUEST_GOOGLE_AUTH',
+//     promise: router.push('auth/google')
+//   };
+// }
