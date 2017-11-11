@@ -1,49 +1,50 @@
 {
-  "name": "Denver-ReImagine",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "engines": {
-    "node": ">=8.3.0",
-    "yarn": ">=1.2"
-  },
-  "scripts": {
-    "start": "node backend/index.js",
-    "server": "nodemon backend/index.js",
-    "client": "( cd ./client && yarn start)",
-    "lint": "eslint .",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "client-install": "(cd ./client && yarn install)",
-    "client-build": "(cd ./client && yarn run build)",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
-    "postinstall": "yarn install --cwd client"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "async": "^2.6.0",
-    "body-parser": "^1.18.2",
-    "concurrently": "^3.5.0",
-    "cookie-session": "^2.0.0-beta.3",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "mongoose": "^4.13.1",
-    "mongoose-geojson-schema": "^2.1.2",
-    "nodemon": "^1.12.1",
-    "passport": "^0.4.0",
-    "passport-google-oauth20": "^1.0.0",
-    "path-parser": "^2.1.0",
-    "react-social-login": "^3.4.1"
-  },
-  "devDependencies": {
-    "babel-eslint": "^8.0.2",
-    "eslint": "4.11.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-plugin-flowtype": "^2.39.1",
-    "eslint-plugin-import": "^2.6.1",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-node": "5.2.1",
-    "eslint-plugin-react": "^7.4.0"
-  }
+	"name": "Denver-ReImagine",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"engines": {
+		"node": ">=8.3.0",
+		"yarn": ">=1.2"
+	},
+	"scripts": {
+		"start": "node backend/index.js",
+		"server": "nodemon backend/index.js",
+		"client": "( cd ./client && yarn start)",
+		"lint": "eslint .",
+		"dev": "concurrently \"yarn server\" \"yarn client\"",
+		"client-install": "(cd ./client && yarn install)",
+		"client-build": "(cd ./client && yarn run build)",
+		"heroku-postbuild":
+			"YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+		"postinstall": "yarn install --cwd client"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"async": "^2.6.0",
+		"body-parser": "^1.18.2",
+		"concurrently": "^3.5.0",
+		"cookie-session": "^2.0.0-beta.3",
+		"cors": "^2.8.4",
+		"express": "^4.16.2",
+		"mongoose": "^4.13.1",
+		"mongoose-geojson-schema": "^2.1.2",
+		"nodemon": "^1.12.1",
+		"passport": "^0.4.0",
+		"passport-google-oauth20": "^1.0.0",
+		"path-parser": "^2.1.0",
+		"react-social-login": "^3.4.1"
+	},
+	"devDependencies": {
+		"babel-eslint": "^8.0.2",
+		"eslint": "4.11.0",
+		"eslint-config-airbnb": "^16.1.0",
+		"eslint-config-react-app": "^2.0.1",
+		"eslint-plugin-flowtype": "^2.39.1",
+		"eslint-plugin-import": "^2.6.1",
+		"eslint-plugin-jsx-a11y": "^6.0.2",
+		"eslint-plugin-node": "5.2.1",
+		"eslint-plugin-react": "^7.4.0"
+	}
 }
