@@ -4,39 +4,69 @@ const User = mongoose.model('User');
 const async = require('async');
 
 module.exports = app => {
-  app.get('/api/signatures/:id', async (req, res) => {
-    const signatures = await Signature.find({ _campaignID: req.params.id });
+	const sendCampaignSignatures = (arr, res) =>
+		async.map(
+			arr,
+			function({ _id, _userID }, callback) {
+				User.findOne({ _id: _userID }).then(user => {
+					return callback(null, { name: user.name, id: _id });
+				});
+			},
+			function(err, results) {
+				res.send(results);
+			}
+		);
 
-    async.map(
-      signatures,
-      function({ _id, _userID }, callback) {
-        User.findOne({ _id: _userID }).then(user => {
-          return callback(null, { name: user.name, id: _id });
-        });
-      },
-      function(err, results) {
-        res.send(results);
-      }
-    );
-  });
+	app.get('/api/signatures/:id', async (req, res) => {
+		const signatures = await Signature.find({ _campaignID: req.params.id });
 
-  app.post('/api/signatures', async (req, res) => {
-    const { user_id, campaign_id, keepUpdated } = req.body;
+		sendCampaignSignatures(signatures, res);
+	});
 
-    const signature = new Signature({
-      _userID: user_id,
-      _campaignID: campaign_id,
-      _keepUpdated: keepUpdated
-    });
+	app.post('/api/signatures', async (req, res) => {
+		const { userData, campaignID, keepUpdated } = req.body;
+		const {
+			id: googleID,
+			email,
+			name,
+			firstName,
+			lastName,
+			profilePicURL
+		} = userData;
+		const thisUser = await User.findOne({ googleID: googleID });
+		let userID = '';
 
-    try {
-      const data = await signature.save();
-			const signatures = await Signature.find({
-				_campaignID: campaign_id
-			})
-      res.json({ data, signatures });
-    } catch (err) {
-      res.status(422).send(err);
-    }
-  });
+		if (!thisUser) {
+			const newUser = new User({
+				googleID,
+				email,
+				name,
+				firstName,
+				lastName,
+				profilePicURL
+			});
+			try {
+				const data = await newUser.save();
+				userID = data.id;
+			} catch (err) {
+				console.log(err);
+			}
+		} else {
+			userID = thisUser._id;
+		}
+
+		const signature = new Signature({
+			_userID: userID,
+			_campaignID: campaignID,
+			_keepUpdated: keepUpdated
+		});
+
+		try {
+			const thisSignature = await signature.save();
+			const { name, _id } = await User.findOne({ _id: thisSignature._userID });
+			res.send({ name, id: _id });
+		} catch (err) {
+			res.status(422).send(err);
+		}
+	});
 };

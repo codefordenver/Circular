@@ -1,172 +1,107 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import SocialLogin from 'react-social-login';
-import Checkbox from './SignatureCheckbox';
-import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
-// import { beginAuth } from '../redux/actions/authorization';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import Checkbox from "./SignatureCheckbox";
+import { addSignature } from "../redux/actions/signature";
+import LoginButton from "./LoginButton";
 
 const authId = process.env.REACT_APP_GOOGLE_AUTH_ID;
 
-const Button = ({ children, triggerLogin, ...props }) => (
-  <button onClick={triggerLogin} {...props}>
-    {children}
-  </button>
-);
-
-const SocialButton = SocialLogin(Button);
-
 class SignCampaign extends Component {
-  renderError() {
-    return (
-      <div className="error-message">
-        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
-					? 'You already have signed this petition!'
-					: null}
-      </div>
-    );
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			loggedIn: false
+		};
+		this.googleBtn = "";
+	}
 
-	componentWillMount = () => {
-	  this.selectedCheckboxes = new Set();
+	setNodeRef = node => {
+		this.googleBtn = node;
 	};
 
-	toggleCheckbox = (label) => {
-	  if (this.selectedCheckboxes.has(label)) {
-	    this.selectedCheckboxes.delete(label);
-	  } else {
-	    this.selectedCheckboxes.add(label);
-	  }
+	handleLoginSuccess = async data => {
+		this.setState({ loggedIn: true });
+		const signatureData = {
+			userData: data._profile,
+			campaignID: this.props.activeCampaign.campaign._id,
+			keepUpdated: true
+		};
+		try {
+			await this.props.addSignature(signatureData);
+			this.logout();
+		} catch (err) {
+			console.error("addSignature error:", err);
+			this.logout();
+		}
 	};
 
-	handleFormSubmit = async (formSubmitEvent) => {
-	  formSubmitEvent.preventDefault();
-
-	  const campaignId =
-			this.props.activeCampaign &&
-			this.props.activeCampaign.campaign &&
-			this.props.activeCampaign.campaign._id;
-
-	  // if (this.props.auth === undefined) {
-	  //   return <div />;
-	  // } // I'm not sure this is needed but I don't remember what it was for...
-
-	  await this.props.addSignatureToCampaign(
-	    this.props.auth._id,
-	    this.selectedCheckboxes,
-	    campaignId
-	  );
-
-	  for (const checkbox of this.selectedCheckboxes) {
-	    console.log(checkbox, 'is selected.');
-	  }
-	  this.props.logSignerOut();
+	handleLoginFailure = err => {
+		console.error("login error:", err);
 	};
 
-	createCheckbox = label => (
-  <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />
-	);
-
-	createCheckboxes = () => {
-	  const checkboxes = ['Keep me updated on the status of this request'];
-	  return checkboxes.map(label => this.createCheckbox(label));
+	logout = () => {
+		this.googleBtn && this.googleBtn.props.triggerLogout();
 	};
 
-	handleSocialLogin = (user) => {
-	  console.log(user);
+	handleLogoutSuccess = () => {
+		this.setState({ loggedIn: false });
 	};
 
-	handleSocialLoginFailure = (err) => {
-	  console.error(err);
+	handleLogoutFailure = err => {
+		console.error("logout error:", err);
 	};
 
-	// checkSignIn = () => {
-	// 	if (this.props.auth && !this.props.auth.googleID) {
-	// 		return (
-	// 			<SocialButton
-	// 				provider="google"
-	// 				appId={`${authId}`}
-	// 				onLoginSuccess={this.handleSocialLogin}
-	// 				onLoginFailure={this.handleSocialLoginFailure}
-	// 			>
-	// 				{"sign with the googs"}
-	// 			</SocialButton>
-	// 		);
-	// 	}
-	// };
-
-	// renderContent() {
-	// 	return (
-	// 		<div className="container">
-	// 			<div className="row">
-	// 				<div className="col-sm-12">
-	// 					{this.createCheckboxes()}
-	// 					<SocialButton
-	// 						provider="google"
-	// 						appId={googleAuthId}
-	// 						onLoginSuccess={this.handleSocialLogin}
-	// 						onLoginFailure={this.handleSocialLoginFailure}
-	// 					>
-	// 						{"sign with the googs"}
-	// 					</SocialButton>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
+	toggleCheckbox = label => {
+		if (this.selectedCheckboxes.has(label)) {
+			this.selectedCheckboxes.delete(label);
+		} else {
+			this.selectedCheckboxes.add(label);
+		}
+	};
 
 	render() {
-	  console.log(authId);
-	  return (
+		return (
   <div className="sign-campaign-wrapper">
     <h1>Yes, I Want Recycling!</h1>
-    {this.renderError()}
     <div className="sign-campaign-signature-button">
       <div>Sign with:</div>
-      <SocialButton
+      <LoginButton
+        disabled={this.state.loggedIn}
         provider="google"
         appId={`${authId}`}
-        onLoginSuccess={this.handleSocialLogin}
-        onLoginFailure={this.handleSocialLoginFailure}
+        onLoginSuccess={this.handleLoginSuccess}
+        onLoginFailure={this.handleLoginFailure}
+        onLogoutSuccess={this.handleLogoutSuccess}
+        onLogoutFailure={this.handleLogoutFailure}
+        getInstance={node => this.setNodeRef(node)}
+        key="google"
       >
-        {'sign with the googs'}
-      </SocialButton>
+        {"GOOGLE"}
+      </LoginButton>
+      <Checkbox
+        label="Keep me updated on the status of this request"
+        handleCheckboxChange={this.toggleCheckbox}
+      />
     </div>
   </div>
-	  );
+		);
 	}
 }
 
-SignCampaign.defaultProps = {
-  signatureObj: { signatures: [] },
-  auth: {}
-};
-
 SignCampaign.propTypes = {
-  signatureObj: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    signatures: PropTypes.arrayOf(PropTypes.object),
-    error: PropTypes.objectOf(PropTypes.any)
-  }).isRequired,
-  auth: PropTypes.shape({
-    _id: PropTypes.string,
-    googleID: PropTypes.string
-  }),
-  activeCampaign: PropTypes.shape({
-    campaign: PropTypes.shape({
-      street_address: PropTypes.string,
-      _id: PropTypes.string
-    }),
-    loading: PropTypes.bool,
-    loaded: PropTypes.bool
-  }).isRequired,
-  addSignatureToCampaign: PropTypes.func.isRequired,
-  logSignerOut: PropTypes.func.isRequired
+	activeCampaign: PropTypes.shape({
+		campaign: PropTypes.shape({
+			street_address: PropTypes.string,
+			_id: PropTypes.string
+		}),
+		loading: PropTypes.bool,
+		loaded: PropTypes.bool
+	}).isRequired,
+	addSignature: PropTypes.func.isRequired
 };
 
 export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
-  addSignatureToCampaign,
-  logSignerOut
+	addSignature
 })(withRouter(SignCampaign));

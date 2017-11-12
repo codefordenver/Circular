@@ -26,7 +26,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        campaign: response
+        signatures: [...state.signatures, response.data]
       };
     case ADD_SIGNATURE_TO_CAMPAIGN_FAILURE:
       return {
