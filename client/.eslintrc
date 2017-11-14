@@ -1,20 +1,21 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "react-app"],
   "plugins": ["react"],
   "rules": {
-    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
-    "react/prefer-stateless-function": "warn",
-    "react/no-unescaped-entities": "off",
-    "max-len": "warn",
-    "react/prop-types": "warn",
-    "comma-dangle": ["error", "never"],
-    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
-    "consistent-return": "warn",
-    "no-underscore-dangle": "off",
     "class-methods-use-this": "warn",
-    "jsx-a11y/label-has-for": "warn",
+    "comma-dangle": ["error", "never"],
+    "consistent-return": "warn",
+    "import/extensions": "off",
     "import/no-unresolved": "warn", // something is screwy with our setup on this one - it would be great to fix this
-    "import/extensions": "off"
+    "jsx-a11y/anchor-is-valid": ["warn", { "components": [] }],
+    "jsx-a11y/label-has-for": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "warn",
+    "max-len": "warn",
+    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "no-underscore-dangle": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/no-unescaped-entities": "off",
+    "react/prefer-stateless-function": "warn"
   },
   "globals": {
     "fetch": true
