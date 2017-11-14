@@ -4,7 +4,7 @@ const defaultState = {
   isOpen: false
 };
 
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
     case OPEN_MAP:
       return {

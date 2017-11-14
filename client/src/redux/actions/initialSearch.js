@@ -49,7 +49,7 @@ export function clearSearchResults() {
 }
 
 export function searchAddressFlow(address, latLngHelper) {
-  return async (dispatch) => {
+  return async dispatch => {
     browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
     const latLng = await dispatch(getLatLong(address, latLngHelper));
@@ -68,4 +68,3 @@ export function selectAddress(value) {
     value
   };
 }
-

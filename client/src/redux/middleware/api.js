@@ -1,10 +1,6 @@
 export default function apiMiddleware() {
-  return () => next => (action) => {
-    const {
-      type,
-      promise,
-      ...rest
-    } = action;
+  return () => next => action => {
+    const { type, promise, ...rest } = action;
 
     if (!promise) return next(action);
 
@@ -17,11 +13,9 @@ export default function apiMiddleware() {
       type: REQUEST
     });
 
-    return promise
-      .then(
-        response => next({ ...rest, response, type: SUCCESS }),
-        error => next({ ...rest, error, type: FAILURE })
-      );
+    return promise.then(
+      response => next({ ...rest, response, type: SUCCESS }),
+      error => next({ ...rest, error, type: FAILURE })
+    );
   };
 }
-

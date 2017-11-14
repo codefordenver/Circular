@@ -18,14 +18,8 @@ class Home extends Component {
     const { initialSearch: { apartments }, googleMap: { isOpen } } = this.props;
     return (
       <div>
-        <HeroCTA
-          openMap={this.props.openMap}
-        />
-        <ApartmentMap
-          isOpen={isOpen}
-          markers={apartments}
-          closeMap={this.props.closeMap}
-        />
+        <HeroCTA openMap={this.props.openMap} />
+        <ApartmentMap isOpen={isOpen} markers={apartments} closeMap={this.props.closeMap} />
         <StepByStep />
 
         <InfoAndLinks />
@@ -46,7 +40,8 @@ Home.propTypes = {
   closeMap: PropTypes.func.isRequired
 };
 
-export default connect(
-  ({ initialSearch, googleMap }) => ({ initialSearch, googleMap }),
-  { fetchApartmentsRequest, openMap, closeMap }
-)(Home);
+export default connect(({ initialSearch, googleMap }) => ({ initialSearch, googleMap }), {
+  fetchApartmentsRequest,
+  openMap,
+  closeMap
+})(Home);

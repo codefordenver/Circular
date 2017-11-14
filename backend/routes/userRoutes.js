@@ -4,21 +4,20 @@ const User = mongoose.model('User');
 const async = require('async');
 
 module.exports = app => {
-	app.post('/api/users', async (req, res) => {
-		const { googleId, name, email } = req.body;
+  app.post('/api/users', async (req, res) => {
+    const { googleId, name, email } = req.body;
 
-		const user = await User.find({ googleId: req.params.googleId });
+    const user = await User.find({ googleId: req.params.googleId });
 
-		if (!user) {
-			const newUser = new User({
-				googleId,
-				name,
-				email
-			});
+    if (!user) {
+      const newUser = new User({
+        googleId,
+        name,
+        email
+      });
       const data = await newUser.save();
-		}
+    }
 
-
-		res.send(data);
-	});
+    res.send(data);
+  });
 };

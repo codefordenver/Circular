@@ -1,6 +1,7 @@
 {
-  "extends": ["airbnb", "react-app", "prettier"],
-  "plugins": ["react"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "parser": "babel-eslint",
   "rules": {
     "class-methods-use-this": "warn",
     "comma-dangle": ["error", "never"],

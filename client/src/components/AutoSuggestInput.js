@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 
-import {
-  searchAddressFlow,
-  clearSearchResults
-} from '../redux/actions/initialSearch';
+import { searchAddressFlow, clearSearchResults } from '../redux/actions/initialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -22,7 +19,7 @@ class AutoSuggestInput extends Component {
   handleSelect(address) {
     this.setState({ address });
     geocodeByAddress(address)
-      .then((results) => {
+      .then(results => {
         this.props.searchAddressFlow(results[0], getLatLng);
       })
       .catch(error => this.setState({ error }));
@@ -55,10 +52,13 @@ class AutoSuggestInput extends Component {
         <i className="fa fa-map-marker" />
         <strong className="suggestion_text_bold">{formattedSuggestion.mainText}</strong>{' '}
         <small className="suggestion_text_muted">{formattedSuggestion.secondaryText}</small>
-      </div>);
+      </div>
+    );
 
     const inputProps = {
-      ref: (input) => { this.addressInput = input; },
+      ref: input => {
+        this.addressInput = input;
+      },
       type: 'text',
       value: this.state.address,
       onChange: this.onChange,
@@ -69,12 +69,10 @@ class AutoSuggestInput extends Component {
     return (
       <div className="autosuggest_input_form">
         <div className={`error-box ${this.state.error ? 'open' : 'closed'}`}>
-          <p className="error-text">
-            {"Sorry, we couldn't find that address."}
-          </p>
+          <p className="error-text">Sorry, we couldn't find that address.</p>
         </div>
         <div className="input_form">
-          { this.props.isScriptLoaded ?
+          {this.props.isScriptLoaded ? (
             <PlacesAutocomplete
               autocompleteItem={AutocompleteItem}
               classNames={cssClasses}
@@ -83,15 +81,14 @@ class AutoSuggestInput extends Component {
               onEnterKeyDown={address => this.handleSelect(address)}
               clearItemsOnError
             />
-          : <input type="text" /> }
-          { this.state.address &&
-            <button
-              className="clear_button"
-              onClick={e => this.clearInput(e)}
-            >
+          ) : (
+            <input type="text" />
+          )}
+          {this.state.address && (
+            <button className="clear_button" onClick={e => this.clearInput(e)}>
               <i className="fa fa-times fa-2x" aria-hidden="true" />
             </button>
-          }
+          )}
           <button
             className="search_button"
             disabled={!this.state.address || this.state.error}
@@ -114,4 +111,9 @@ AutoSuggestInput.propTypes = {
 export default connect(({ initialSearch }) => ({ initialSearch }), {
   searchAddressFlow,
   clearSearchResults
-})(scriptLoader(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`)(AutoSuggestInput));
+})(
+  scriptLoader(
+    `https://maps.googleapis.com/maps/api/js?key=${process.env
+      .REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`
+  )(AutoSuggestInput)
+);

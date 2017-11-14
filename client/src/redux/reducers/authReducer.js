@@ -7,7 +7,7 @@ import {
   LOG_OUT_SUCCESS
 } from '../constants/auth';
 
-export default function (state = {}, action) {
+export default function(state = {}, action) {
   const { response, error, type } = action;
   switch (type) {
     case FETCH_USER_REQUEST:

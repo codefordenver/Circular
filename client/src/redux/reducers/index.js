@@ -8,7 +8,6 @@ import activeCampaign from './activeCampaign';
 import newCampaign from './newCampaign';
 import signature from './signature';
 
-
 const reducers = combineReducers({
   auth: authReducer,
   routing,

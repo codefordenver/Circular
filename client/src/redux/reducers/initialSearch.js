@@ -28,7 +28,7 @@ if (stateLoader) {
   defaultState = { error: null, ...stateLoader.initialSearch };
 }
 
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   const { response, error, type } = action;
   switch (type) {
     case FETCH_NEARBY_CAMPAIGNS_REQUEST:

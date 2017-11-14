@@ -15,7 +15,7 @@ const defaultState = {
   loaded: false
 };
 
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   const { response, error, type } = action;
   switch (type) {
     case FETCH_CAMPAIGN_REQUEST:

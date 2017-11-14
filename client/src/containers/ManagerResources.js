@@ -7,4 +7,3 @@ const ManagerResources = () => (
 );
 
 export default ManagerResources;
-

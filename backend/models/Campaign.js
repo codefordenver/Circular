@@ -6,26 +6,26 @@ const { Schema } = mongoose;
 var SchemaTypes = mongoose.Schema.Types;
 
 const campaignSchema = new Schema(
-	{
-		name: { type: String, required: true, unique: true },
-		address: { type: String, required: true },
-		latLng: { type: SchemaTypes.GeoJSON, required: true },
-		propertyManager: {
-			name: { type: String },
-			address: { type: String },
-			phone: { type: Number },
-			email: { type: String }
-		},
-		wasteProvider: {
-			name: { type: String },
-			phone: { type: Number },
-			email: { type: String }
-		},
-		unitCount: {
-			type: Number
-		}
-	},
-	{ timestamps: true }
+  {
+    name: { type: String, required: true, unique: true },
+    address: { type: String, required: true },
+    latLng: { type: SchemaTypes.GeoJSON, required: true },
+    propertyManager: {
+      name: { type: String },
+      address: { type: String },
+      phone: { type: Number },
+      email: { type: String }
+    },
+    wasteProvider: {
+      name: { type: String },
+      phone: { type: Number },
+      email: { type: String }
+    },
+    unitCount: {
+      type: Number
+    }
+  },
+  { timestamps: true }
 );
 
 campaignSchema.index({ latLng: '2dsphere' });

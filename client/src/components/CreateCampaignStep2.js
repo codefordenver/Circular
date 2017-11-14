@@ -1,13 +1,13 @@
-/* eslint-disable react/prop-types, no-shadow *//* - TODO: Fix and remove this line */
+/* eslint-disable react/prop-types, no-shadow */ /* - TODO: Fix and remove this line */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
-const CreateCampaignStep2 = (props) => {
+const CreateCampaignStep2 = props => {
   const { updateNewCampaign, router } = props;
 
-  const setOptionalInfo = async (e) => {
+  const setOptionalInfo = async e => {
     e.preventDefault();
 
     await updateNewCampaign({
@@ -31,55 +31,20 @@ const CreateCampaignStep2 = (props) => {
   return (
     <form onSubmit={setOptionalInfo}>
       <div className="form-group">
-        <label>{'Property Manager or Company (Optional):'}</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Name"
-          name="name"
-        />
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Address"
-          name="address"
-        />
-        <input
-          type="tel"
-          placeholder="Phone"
-          className="form-control"
-          name="phone"
-        />
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Email"
-          name="email"
-        />
+        <label>Property Manager or Company (Optional):</label>
+        <input type="text" className="form-control" placeholder="Name" name="name" />
+        <input type="text" className="form-control" placeholder="Address" name="address" />
+        <input type="tel" placeholder="Phone" className="form-control" name="phone" />
+        <input type="email" className="form-control" placeholder="Email" name="email" />
       </div>
       <div className="form-group">
-        <label>{'Waste Collection Provider (Optional):'}</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Name"
-          name="wasteMgmtName"
-        />
-        <input
-          type="tel"
-          placeholder="Phone"
-          className="form-control"
-          name="wasteMgmtPhone"
-        />
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Email"
-          name="wasteMgmtEmail"
-        />
+        <label>Waste Collection Provider (Optional):</label>
+        <input type="text" className="form-control" placeholder="Name" name="wasteMgmtName" />
+        <input type="tel" placeholder="Phone" className="form-control" name="wasteMgmtPhone" />
+        <input type="email" className="form-control" placeholder="Email" name="wasteMgmtEmail" />
       </div>
       <div className="form-group">
-        <label>{'Number of Units (Optional)'}</label>
+        <label>Number of Units (Optional)</label>
         <input type="number" className="form-control" name="unitCount" />
       </div>
       <button className="btn btn-primary fr" type="submit">
