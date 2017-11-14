@@ -20,7 +20,7 @@ class SignatureList extends Component {
     const { signatures } = this.props;
     return (
       <div className="signature-wrapper">
-        <h2 className={this.state.areSignaturesExpanded ? ('signature-list-down') : 'signature-list-up'} onClick={this.toggleSignatures}>View Signatures</h2>
+        {signatures.length ? <h2 className={this.state.areSignaturesExpanded ? ('signature-list-down') : 'signature-list-up'} onClick={this.toggleSignatures}>View ({signatures.length}) Signature{signatures.length > 1 ? 's' : ''}</h2> : ''}
         <ul className={this.state.areSignaturesExpanded ? ('signature-list-show') : 'signature-list-hide'}>{signatures && signatures.map(({ id, name }) => <li key={id}>{name}</li>)}</ul>
       </div>
     );
