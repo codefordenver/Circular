@@ -30,7 +30,7 @@ const CreateCampaignStep1 = (props) => {
       {formattedAddress && (
         <form onSubmit={setAddressAndName}>
           <div className="form-group">
-            <label className='required'>Address</label>
+            <label className="required">Address</label>
             <input
               type="text"
               className="form-control"
