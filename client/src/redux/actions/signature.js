@@ -15,9 +15,9 @@ export default function fetchSignatures(campaignId) {
 }
 
 export function addSignatureToCampaign(userId, checkboxes, campaignId) {
-  const keepUpdated = checkboxes.has('Keep me updated on the status of this request')
+  const keepUpdated = checkboxes.has('Keep me updated on the status of this request');
 
-  const data = { user_id: userId, campaign_id: campaignId, keepUpdated: keepUpdated};
+  const data = { user_id: userId, campaign_id: campaignId, keepUpdated };
   return async (dispatch) => {
     dispatch(addsignature(data));
     dispatch(fetchSignatures(campaignId));

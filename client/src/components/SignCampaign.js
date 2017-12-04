@@ -20,7 +20,7 @@ class SignCampaign extends Component {
     this.selectedCheckboxes = new Set();
   };
 
-  toggleCheckbox = label => {
+  toggleCheckbox = (label) => {
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
     } else {
@@ -28,7 +28,7 @@ class SignCampaign extends Component {
     }
   };
 
-  handleFormSubmit = async formSubmitEvent => {
+  handleFormSubmit = async (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
 
     const campaignId =
@@ -70,13 +70,12 @@ class SignCampaign extends Component {
           <GoogleButton label="Google" />
         </a>
       );
-    } else {
-      return (
-        <button className="btn" type="submit">
+    }
+    return (
+      <button className="btn" type="submit">
           Sign the petition
         </button>
-      );
-    }
+    );
   };
 
   renderContent() {
