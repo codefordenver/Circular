@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Checkbox from './SignatureCheckbox';
 import GoogleButton from 'react-google-button';
+import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
-  renderError() {
-    return (
-      <div className="error-message">
-        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
-          ? 'You already have signed this petition!'
-          : null}
-      </div>
-    );
-  }
-
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
@@ -36,20 +26,12 @@ class SignCampaign extends Component {
       this.props.activeCampaign.campaign &&
       this.props.activeCampaign.campaign._id;
 
-    // if (this.props.auth === undefined) {
-    //   return <div />;
-    // } // I'm not sure this is needed but I don't remember what it was for...
-
     await this.props.addSignatureToCampaign(
       this.props.auth._id,
       this.selectedCheckboxes,
       campaignId
     );
 
-    for (const checkbox of this.selectedCheckboxes) {
-      console.log(checkbox, 'is selected.');
-    }
-    // debugger
     this.props.logSignerOut();
   };
 
@@ -62,7 +44,10 @@ class SignCampaign extends Component {
       'Keep me updated on the status of this request',
       'I agree with the Terms of Agreement and Privacy Policy'
     ];
-    return checkboxes.map(label => this.createCheckbox(label));
+    if (this.props.auth._id) {
+      return checkboxes.map(label => this.createCheckbox(label));
+    }
+    return <div />;
   };
 
   checkSignIn = () => {
@@ -80,9 +65,15 @@ class SignCampaign extends Component {
     );
   };
 
-  // signOut = () => {
-  //
-  // }
+  renderError() {
+    return (
+      <div className="error-message">
+        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
+          ? 'You already have signed this petition!'
+          : null}
+      </div>
+    );
+  }
 
   renderContent() {
     return (
