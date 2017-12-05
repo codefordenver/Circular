@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Checkbox from './SignatureCheckbox';
 import GoogleButton from 'react-google-button';
+import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
-  renderError() {
-    return (
-      <div className="error-message">
-        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
-          ? 'You already have signed this petition!'
-          : null}
-      </div>
-    );
-  }
-
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
@@ -50,10 +40,11 @@ class SignCampaign extends Component {
   );
 
   createCheckboxes = () => {
-    const checkboxes = [
-      'Keep me updated on the status of this request'
-    ];
-    return checkboxes.map(label => this.createCheckbox(label));
+    const checkboxes = ['Keep me updated on the status of this request'];
+    if (this.props.auth._id) {
+      return checkboxes.map(label => this.createCheckbox(label));
+    }
+    return <div />;
   };
 
   checkSignIn = () => {
@@ -66,11 +57,20 @@ class SignCampaign extends Component {
     }
     return (
       <button className="btn" type="submit">
-          Sign the petition
-        </button>
+        Sign the petition
+      </button>
     );
   };
 
+  renderError() {
+    return (
+      <div className="error-message">
+        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
+          ? 'You already have signed this petition!'
+          : null}
+      </div>
+    );
+  }
   renderContent() {
     return (
       <div className="container">
