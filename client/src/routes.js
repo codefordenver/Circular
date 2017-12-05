@@ -1,15 +1,19 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
+import { IndexRoute, Route, IndexRedirect } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import ChooseCampaign from './containers/ChooseCampaign';
 import NewCampaign from './containers/NewCampaign';
+import CreateCampaignStep1 from './components/CreateCampaignStep1';
+import CreateCampaignStep2 from './components/CreateCampaignStep2';
+import CreateCampaignStep3 from './components/CreateCampaignStep3';
 import CampaignPage from './containers/CampaignPage';
 import Tips from './containers/Tips';
 import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
-// import NotFound from './containers/NotFound'; -- TODO: Add back
+import NotFound from './containers/NotFound';
 import About from './containers/About';
+// import NotFound from './containers/NotFound'; -- TODO: Add back
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
@@ -23,21 +27,18 @@ export default (
       onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
     />
     <Route path="/new-campaign" getComponent={(location, callback) => callback(null, NewCampaign)}>
+      <IndexRedirect to="address" />
       <Route
-        path="/new-campaign/address"
-        getComponent={(location, callback) => callback(null, NewCampaign)}
+        path="address"
+        getComponent={(location, callback) => callback(null, CreateCampaignStep1)}
       />
       <Route
-        path="/new-campaign/specs"
-        getComponent={(location, callback) => callback(null, NewCampaign)}
+        path="optional-info"
+        getComponent={(location, callback) => callback(null, CreateCampaignStep2)}
       />
       <Route
-        path="/new-campaign/activate"
-        getComponent={(location, callback) => callback(null, NewCampaign)}
-      />
-      <Route
-        path="/new-campaign/success"
-        getComponent={(location, callback) => callback(null, NewCampaign)}
+        path="activate"
+        getComponent={(location, callback) => callback(null, CreateCampaignStep3)}
       />
     </Route>
     <Route

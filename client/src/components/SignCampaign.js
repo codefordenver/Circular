@@ -20,7 +20,7 @@ class SignCampaign extends Component {
     this.selectedCheckboxes = new Set();
   };
 
-  toggleCheckbox = label => {
+  toggleCheckbox = (label) => {
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
     } else {
@@ -28,7 +28,7 @@ class SignCampaign extends Component {
     }
   };
 
-  handleFormSubmit = async formSubmitEvent => {
+  handleFormSubmit = async (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
 
     const campaignId =
@@ -69,16 +69,15 @@ class SignCampaign extends Component {
     if (this.props.auth && !this.props.auth.googleID) {
       return (
         <a className="google-button-signature" href="/auth/google">
-          <GoogleButton label="Sign in to google to sign!" />
+          <GoogleButton label="Google" />
         </a>
       );
-    } else {
-      return (
-        <button className="btn" type="submit">
-          Sign the petition
-        </button>
-      );
     }
+    return (
+      <button className="btn" type="submit">
+        Sign the petition
+      </button>
+    );
   };
 
   // signOut = () => {
@@ -102,9 +101,12 @@ class SignCampaign extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Show your support!</h1>
+      <div className="sign-campaign-wrapper">
+        <h1>Yes, I Want Recycling!</h1>
         {this.renderError()}
+        <div className="sign-campaign-signature-button">
+          <div>Sign with:</div>
+        </div>
         <div>{this.renderContent()}</div>
       </div>
     );
