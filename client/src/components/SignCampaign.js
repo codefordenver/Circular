@@ -40,10 +40,7 @@ class SignCampaign extends Component {
   );
 
   createCheckboxes = () => {
-    const checkboxes = [
-      'Keep me updated on the status of this request',
-      'I agree with the Terms of Agreement and Privacy Policy'
-    ];
+    const checkboxes = ['Keep me updated on the status of this request'];
     if (this.props.auth._id) {
       return checkboxes.map(label => this.createCheckbox(label));
     }
@@ -74,7 +71,6 @@ class SignCampaign extends Component {
       </div>
     );
   }
-
   renderContent() {
     return (
       <div className="container">
