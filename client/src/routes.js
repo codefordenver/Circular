@@ -15,7 +15,6 @@ import NotFound from './containers/NotFound';
 import About from './containers/About';
 // import NotFound from './containers/NotFound'; -- TODO: Add back
 
-
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
     <IndexRoute getComponent={(location, callback) => callback(null, Home)} />
@@ -25,28 +24,21 @@ export default (
     />
     <Route
       path="/campaign"
-      onEnter={(nextState, replace) =>
-        !nextState.params.id && replace('/new-campaign')}
+      onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
     />
-    <Route
-      path="/new-campaign"
-      getComponent={(location, callback) => callback(null, NewCampaign)}
-    >
+    <Route path="/new-campaign" getComponent={(location, callback) => callback(null, NewCampaign)}>
       <IndexRedirect to="address" />
       <Route
         path="address"
-        getComponent={(location, callback) =>
-          callback(null, CreateCampaignStep1)}
+        getComponent={(location, callback) => callback(null, CreateCampaignStep1)}
       />
       <Route
         path="optional-info"
-        getComponent={(location, callback) =>
-          callback(null, CreateCampaignStep2)}
+        getComponent={(location, callback) => callback(null, CreateCampaignStep2)}
       />
       <Route
         path="activate"
-        getComponent={(location, callback) =>
-          callback(null, CreateCampaignStep3)}
+        getComponent={(location, callback) => callback(null, CreateCampaignStep3)}
       />
     </Route>
     <Route
@@ -65,9 +57,6 @@ export default (
       path="/manager-resources"
       getComponent={(location, callback) => callback(null, ManagerResources)}
     />
-    <Route
-      path="/about"
-      getComponent={(location, callback) => callback(null, About)}
-    />
+    <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
   </Route>
 );

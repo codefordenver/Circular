@@ -41,8 +41,8 @@
     "path-parser": "^2.0.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "eslint": "3.19.0",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-react-app": "^2.0.1",
     "eslint-plugin-flowtype": "^2.39.1",

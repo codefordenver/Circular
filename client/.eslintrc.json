@@ -1,12 +1,13 @@
 {
   "extends": ["airbnb", "react-app"],
   "plugins": ["react"],
+  "parser": "babel-eslint",
   "rules": {
     "class-methods-use-this": "warn",
     "comma-dangle": ["error", "never"],
     "consistent-return": "warn",
     "import/extensions": "off",
-    "import/no-unresolved": "warn", // something is screwy with our setup on this one - it would be great to fix this
+    "import/no-unresolved": "warn",
     "jsx-a11y/anchor-is-valid": ["warn", { "components": [] }],
     "jsx-a11y/label-has-for": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",

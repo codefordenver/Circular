@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types, no-shadow *//* - TODO: Fix and remove this line */
+/* eslint-disable react/prop-types, no-shadow */ /* - TODO: Fix and remove this line */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -6,11 +6,7 @@ import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep1 = (props) => {
-  const {
-    initialSearch: { searchedAddress, error },
-    updateNewCampaign,
-    router
-  } = props;
+  const { initialSearch: { searchedAddress, error }, updateNewCampaign, router } = props;
 
   const formattedAddress = searchedAddress && searchedAddress.formatted_address;
 

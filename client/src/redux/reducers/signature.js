@@ -39,7 +39,8 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         loading: true,
-        loaded: false
+        loaded: false,
+        error: null
       };
     case FETCH_SIGNATURES_SUCCESS:
       return {

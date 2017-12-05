@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types *//* - TODO: Fix and remove this line */
+/* eslint-disable react/prop-types */ /* - TODO: Fix and remove this line */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,23 +17,20 @@ class NewCampaign extends Component {
 
     return (
       <div className="create_campaign_wrapper">
-        <h1 className="create_campaign_header">{'Let\'s create a campaign!'}</h1>
+        <h1 className="create_campaign_header">{"Let's create a campaign!"}</h1>
         <div className="create_campaign_breadcrumbs">
           {childRoutes.map(childRoute => (
             <Link to={`/new-campaign/${childRoute.path}`}>
               <div
                 className={cx(
                   'breadcrumb',
-                  pathname === `/new-campaign/${childRoute.path}` &&
-                    'active_route'
+                  pathname === `/new-campaign/${childRoute.path}` && 'active_route'
                 )}
               />
             </Link>
           ))}
         </div>
-        <section className="create_campaign_subroute_wrapper">
-          {this.props.children}
-        </section>
+        <section className="create_campaign_subroute_wrapper">{this.props.children}</section>
       </div>
     );
   }
