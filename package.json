@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
-    "client": "( cd ./client && yarn start)",
+    "client": "(cd ./client && yarn start)",
+    "cypress:open": "cypress open",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client-install": "(cd ./client && yarn install)",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "cypress": "^1.0.3",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-react-app": "^2.0.1",
