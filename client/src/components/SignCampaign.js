@@ -36,19 +36,12 @@ class SignCampaign extends Component {
       this.props.activeCampaign.campaign &&
       this.props.activeCampaign.campaign._id;
 
-    // if (this.props.auth === undefined) {
-    //   return <div />;
-    // } // I'm not sure this is needed but I don't remember what it was for...
-
     await this.props.addSignatureToCampaign(
       this.props.auth._id,
       this.selectedCheckboxes,
       campaignId
     );
 
-    for (const checkbox of this.selectedCheckboxes) {
-      console.log(checkbox, 'is selected.');
-    }
     this.props.logSignerOut();
   };
 
