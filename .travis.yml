@@ -4,4 +4,7 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
   - export PATH="$HOME/.yarn/bin:$PATH"
+before_script:
+  - yarn run client-build
+  - yarn start
 script: "yarn lint && yarn run ci:test"
