@@ -17,3 +17,7 @@ describe('The landing page', () => {
     })
   })
 })
+
+describe('Create a new campaign', () => {
+  
+});

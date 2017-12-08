@@ -3,6 +3,8 @@
     "mocha": true
   },
   "globals": {
+    "Cypress": true,
+    "localStorage": true,
     "cy": true,
     "expect": true
   }
