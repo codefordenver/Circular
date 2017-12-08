@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep1 = (props) => {

@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
 
 import { UPDATE_NEW_CAMPAIGN } from '../constants/newCampaign';
