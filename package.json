@@ -12,7 +12,7 @@
     "server": "nodemon backend/index.js",
     "client": "(cd ./client && yarn start)",
     "cypress:open": "cypress open",
-    "ci:test": "cypress run -s cypress/integration/example_spec.js",
+    "ci:test": "cypress run -s cypress/integration/simple_spec.js",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client-install": "(cd ./client && yarn install)",
