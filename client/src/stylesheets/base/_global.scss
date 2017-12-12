@@ -1,12 +1,50 @@
 @import '../base/colors';
+@import '../base/fonts';
 
 * {
 	box-sizing: border-box;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
-	background: linear-gradient(to bottom, #0C6F91, #164C5F);	
+	@include open-sans-16;
+	min-height: 100vh;
+	position: relative;
+	background: linear-gradient(to bottom, #0C6F91, #164C5F);
+	overflow-x: hidden;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+p {
+	line-height: 1.5;
+}
+
+h1 {
+	@include display-32-med;
+}
+
+h2 {
+	@include display-24-reg;
+}
+
+h3 {
+	@include display-20-reg;
+}
+
+h4 {
+	@include body-16-semibold-tt;
+}
+
+ul {
+	padding: 0;
+}
+
+input {
+	@include body-16;
 }
 
 .row {

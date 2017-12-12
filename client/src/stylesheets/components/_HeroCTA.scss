@@ -46,30 +46,24 @@
 
 .search_address_heading {
     color: $mainwhite;
-		font-family: Roboto, sans-serif;
+
 		margin: 0.5em 0;
 		text-align: center;
-    font-size: 2.5em;
-    line-height: 1.2;
-    font-weight: 600;
+
 }
 .search_address_sub_heading {
 		color: $mainwhite;
-		font-family: Roboto, sans-serif;
+
 		text-align: center;
 		margin-bottom: 1em;
-    font-size: 1.75em;
-    line-height: 1.2;
-    font-weight: 600;
+
 }
 
 .search_address_link {
     color: $mainwhite;
 		cursor: pointer;
-		font-family: Roboto, sans-serif;
 		font-size: 1em;
 		text-decoration: underline;
     display: inline-block;
     margin: 1rem;
-    font-weight: 400;
 }
