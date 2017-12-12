@@ -68,4 +68,3 @@ export function selectAddress(value) {
     value
   };
 }
-

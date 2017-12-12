@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types *//* - TODO: Fix and remove this line */
+/* eslint-disable react/prop-types */ /* - TODO: Fix and remove this line */
 import React from 'react';
 import { Link } from 'react-router';
 
@@ -12,7 +12,8 @@ const FullScreenLoader = (props) => {
           <i className="fa fa-recycle fa-4x fa-spin" />
         </div>
       </div>
-    </div>);
+    </div>
+  );
 };
 
 export default FullScreenLoader;

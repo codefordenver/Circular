@@ -24,10 +24,7 @@ class CampaignPage extends Component {
               <div className="campaign-page-name">{campaign.name}</div>
               <div className="campaign-page-address">
                 {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
-                {loaded &&
-                  campaign && (
-                    campaign.address
-                  )}
+                {loaded && campaign && campaign.address}
               </div>
             </div>
           )}

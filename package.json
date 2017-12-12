@@ -15,8 +15,15 @@
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
-    "postinstall": "yarn install --cwd client"
+    "heroku-postbuild":
+      "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+    "postinstall": "yarn install --cwd client",
+    "lint-server": "yarn prettier-eslint backend/**/*.js --write",
+    "lint-client": "yarn prettier-eslint client/src/**/*.js --write",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json}": ["prettier-eslint --write", "git add"]
   },
   "author": "",
   "license": "ISC",
@@ -34,14 +41,19 @@
     "path-parser": "^2.0.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "eslint": "3.19.0",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-import": "^2.6.1",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-node": "4.2.2",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-plugin-flowtype": "^2.39.1",
-    "eslint-plugin-react": "^7.4.0"
+    "eslint-plugin-react": "^7.4.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2",
+    "prettier-eslint": "^8.2.2",
+    "prettier-eslint-cli": "^4.4.0"
   }
 }
