@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./models/Campaign');
 require('./models/Signature');
+require('./models/Comment');
 
 require('./services/passport');
 
@@ -27,6 +28,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/campaignRoutes')(app);
 require('./routes/signatureRoutes')(app);
+require('./routes/commentRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
