@@ -8,7 +8,7 @@ class CommentWrapper extends Component {
 
   render() {
     return (
-      <div className="signature-wrapper">
+      <div className="comments-wrapper">
         <div />
       </div>
     );
