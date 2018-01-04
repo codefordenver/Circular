@@ -7,6 +7,7 @@ class Comment extends Component {
       <div>
         {Object.keys(comments).map(u => (
           <Comment
+            key={comments[u]._id}
             userName={comments[u].userName}
             message={comments[u].message}
             dateAdded={comments[u].createdAt}
@@ -19,7 +20,14 @@ class Comment extends Component {
 
   render() {
     return (
-      <div style={{ padding: '10px', border: '2px solid black' }}>
+      <div
+        style={{
+          padding: '10px',
+          marginBottom: '6px',
+          marginTop: '6px',
+          border: '2px solid black'
+        }}
+      >
         <p style={{ fontWeight: 'bold' }}>{this.props.userName}</p>
         <br />
         <p>{this.props.message}</p>

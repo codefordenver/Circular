@@ -14,7 +14,7 @@ module.exports = app => {
     }
   });
 
-  app.post('/api/comments/:id', async (req, res) => {
+  app.post('/api/comments', async (req, res) => {
     const { user_id, campaign_id, message, parent_id } = req.body;
     const user = await User.findOne({ _id: user_id });
     let comObj = {
