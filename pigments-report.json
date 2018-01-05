@@ -1,0 +1,81 @@
+{
+  "atom": "1.22.1",
+  "pigments": "0.40.2",
+  "platform": "darwin",
+  "config": {
+    "traverseIntoSymlinkDirectories": false,
+    "sourceNames": [
+      "**/*.css",
+      "**/*.styl",
+      "**/*.stylus",
+      "**/*.less",
+      "**/*.sass",
+      "**/*.scss"
+    ],
+    "ignoredNames": ["vendor/*", "node_modules/*", "spec/*", "test/*"],
+    "ignoredBufferNames": [],
+    "extendedSearchNames": ["**/*.css"],
+    "supportedFiletypes": ["*"],
+    "filetypesForColorWords": ["css", "less", "styl", "stylus", "sass", "scss"],
+    "ignoredScopes": [],
+    "autocompleteScopes": [
+      ".source.css",
+      ".source.css.less",
+      ".source.sass",
+      ".source.css.scss",
+      ".source.stylus"
+    ],
+    "extendAutocompleteToVariables": false,
+    "extendAutocompleteToColorValue": false,
+    "autocompleteSuggestionsFromValue": false,
+    "maxDecorationsInGutter": 100,
+    "markerType": "native-background",
+    "sassShadeAndTintImplementation": "compass",
+    "sortPaletteColors": "none",
+    "groupPaletteColors": "none",
+    "mergeColorDuplicates": false,
+    "delayBeforeScan": 500,
+    "ignoreVcsIgnoredPaths": true,
+    "notifyReloads": true,
+    "dismissableReloadNotifications": true
+  },
+  "project": {
+    "config": {},
+    "paths": [
+      "<root>/client/src/stylesheets/main.scss",
+      "<root>/client/src/stylesheets/base/_breakpoints.scss",
+      "<root>/client/src/stylesheets/base/_colors.scss",
+      "<root>/client/src/stylesheets/base/_fonts.scss",
+      "<root>/client/src/stylesheets/base/_global.scss",
+      "<root>/client/src/stylesheets/base/_reset.scss",
+      "<root>/client/src/stylesheets/components/_AddressSearch.scss",
+      "<root>/client/src/stylesheets/components/_AutoSuggestInput.scss",
+      "<root>/client/src/stylesheets/components/_CampaignPage.scss",
+      "<root>/client/src/stylesheets/components/_ChooseCampaign.scss",
+      "<root>/client/src/stylesheets/components/_CreateCampaignStep1.scss",
+      "<root>/client/src/stylesheets/components/_CreateCampaignStep2.scss",
+      "<root>/client/src/stylesheets/components/_CreateCampaignStep3.scss",
+      "<root>/client/src/stylesheets/components/_FullScreenLoader.scss",
+      "<root>/client/src/stylesheets/components/_HeroCTA.scss",
+      "<root>/client/src/stylesheets/components/_InfoAndLinks.scss",
+      "<root>/client/src/stylesheets/components/_NewCampaign.scss",
+      "<root>/client/src/stylesheets/components/_PropManagerLinks.scss",
+      "<root>/client/src/stylesheets/components/_RecyclingInfo.scss",
+      "<root>/client/src/stylesheets/components/_SearchAddress.scss",
+      "<root>/client/src/stylesheets/components/_SignCampaign.scss",
+      "<root>/client/src/stylesheets/components/_StepByStep.scss",
+      "<root>/client/src/stylesheets/components/_app.scss",
+      "<root>/client/src/stylesheets/components/_button.scss",
+      "<root>/client/src/stylesheets/components/_form.scss",
+      "<root>/client/src/stylesheets/components/_modalWrapper.scss",
+      "<root>/client/src/stylesheets/components/_navbar.scss",
+      "<root>/client/src/stylesheets/utils/_floats.scss",
+      "<root>/client/src/stylesheets/utils/_mixins.scss",
+      "<root>/client/src/stylesheets/utils/_placeholders.scss"
+    ],
+    "variables": {
+      "colors": 11,
+      "total": 25
+    }
+  }
+}

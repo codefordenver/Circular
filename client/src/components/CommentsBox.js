@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
 
 class CommentsBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { error: false };
 
     this.comments = this.props.comments;
     this.handleSubmitComment = this.handleSubmitComment.bind(this);
@@ -15,9 +17,6 @@ class CommentsBox extends Component {
 
   componentDidMount() {
     this.props.fetchComments(this.props.campaignID);
-  }
-  componentDidUpdate() {
-    console.log('updated');
   }
 
   handleMessageChange(e) {
@@ -36,9 +35,28 @@ class CommentsBox extends Component {
       });
       this.props.fetchComments(this.props.campaignID);
     } else {
-      console.log('must be logged in');
+      this.setState({ error: true });
     }
   }
+
+  renderMainCommentInput() {
+    if (this.props.auth && this.props.auth._id) {
+      return (
+        <form>
+          New Message:
+          <br />
+          <input type="text" onChange={this.handleMessageChange} />
+          <br />
+          {this.renderError()}
+          <button type="submit" onClick={this.handleSubmitComment}>
+            Post Message
+          </button>
+        </form>
+      );
+    }
+    return <div>Log in to join the discussion!</div>;
+  }
+
   renderComments() {
     const comments = this.props.comments;
     if (comments.loaded === true) {
@@ -58,22 +76,50 @@ class CommentsBox extends Component {
     }
     return <div />;
   }
+
+  renderError() {
+    return (
+      <div className="error-message">
+        {this.state.error ? 'You must be logged in to post!' : null}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
-        <form>
-          New Message:
-          <br />
-          <input type="text" onChange={this.handleMessageChange} />
-          <button type="submit" onClick={this.handleSubmitComment}>
-            Post Message
-          </button>
-        </form>
+        {this.renderMainCommentInput()}
         {this.renderComments()}
       </div>
     );
   }
 }
+
+CommentsBox.defaultProps = {
+  signatureObj: { signatures: [] },
+  auth: {}
+};
+
+CommentsBox.propTypes = {
+  auth: PropTypes.shape({
+    _id: PropTypes.string,
+    googleID: PropTypes.string
+  }),
+  activeCampaign: PropTypes.shape({
+    campaign: PropTypes.shape({
+      street_address: PropTypes.string,
+      _id: PropTypes.string
+    }),
+    loading: PropTypes.bool,
+    loaded: PropTypes.bool
+  }).isRequired,
+  comments: PropTypes.shape({
+    campaignComments: PropTypes.Object
+  }).isRequired,
+  campaignID: PropTypes.string.isRequired,
+  fetchComments: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired
+};
 
 export default connect(
   ({ activeCampaign, auth, comments }) => ({ activeCampaign, auth, comments }),
