@@ -6,6 +6,12 @@
 1. Install [node 8.3](https://nodejs.org/) and [yarn 1.2.1](https://yarnpkg.com)
 2. Clone the repo
 3. Run `yarn install` in the root of the repo
+4. create a backend/config/dev.js file by getting one from another developer or getting keys for
+  - googleClientId
+  - googleClientSecret:
+  - mongoURI
+  - cookieKey
+  - redirectDomain (usually `http://localhost:3000`)
 
 ## Local Development
 
