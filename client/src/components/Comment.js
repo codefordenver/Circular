@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import MakeComment from './MakeComment';
+import PostBox from './PostBox';
 
 class Comment extends Component {
   constructor(props) {
@@ -40,7 +40,6 @@ class Comment extends Component {
   }
 
   handleCloseReply() {
-    console.log('canceled');
     this.setState({ replyClicked: false });
   }
 
@@ -61,6 +60,7 @@ class Comment extends Component {
               passedChildren={comments[u].children}
               campaignID={this.props.campaignID}
               commentID={comments[u]._id}
+              authorized={this.props.authorized}
             />
           </div>
         ))}
@@ -69,7 +69,6 @@ class Comment extends Component {
   }
 
   render() {
-    const { leftBorder } = this.props;
     return (
       <div
         style={{
@@ -85,11 +84,10 @@ class Comment extends Component {
         <br />
         <p>{this.props.message}</p>
         <br />
-        {this.state.replyClicked === false && (
-          <button onClick={this.handleReplyClick}>reply</button>
-        )}
+        {this.state.replyClicked === false &&
+          this.props.authorized && <button onClick={this.handleReplyClick}>reply</button>}
         {this.state.replyClicked && (
-          <MakeComment
+          <PostBox
             className="commentReply"
             isAReply
             parentID={this.props.commentID}

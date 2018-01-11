@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
-import MakeComment from './MakeComment';
+import PostBox from './PostBox';
 
 class CommentsBox extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class CommentsBox extends Component {
         //     Post Message
         //   </button>
         // </form>
-        <MakeComment campaignID={this.props.campaignID} fetchComments={this.props.fetchComments} />
+        <PostBox campaignID={this.props.campaignID} fetchComments={this.props.fetchComments} />
       );
     }
     return <div>Log in to join the discussion!</div>;
@@ -57,6 +57,7 @@ class CommentsBox extends Component {
                 passedChildren={comments.campaignComments[u].children}
                 campaignID={this.props.campaignID}
                 commentID={comments.campaignComments[u]._id}
+                authorized={this.props.auth !== undefined && this.props.auth._id !== undefined}
               />
             </div>
           ))}

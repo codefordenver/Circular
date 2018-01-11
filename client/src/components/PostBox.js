@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { postComment, fetchComments } from '../redux/actions/comments';
 
-class MakeComment extends Component {
+class PostBox extends Component {
   constructor(props) {
     super(props);
 
@@ -90,9 +90,9 @@ class MakeComment extends Component {
   }
 }
 
-MakeComment.defaultProps = {};
+PostBox.defaultProps = {};
 
-MakeComment.propTypes = {
+PostBox.propTypes = {
   campaignID: PropTypes.string.isRequired,
 
   postComment: PropTypes.func.isRequired
@@ -101,4 +101,4 @@ MakeComment.propTypes = {
 export default connect(({ activeCampaign, auth }) => ({ activeCampaign, auth }), {
   postComment,
   fetchComments
-})(MakeComment);
+})(PostBox);
