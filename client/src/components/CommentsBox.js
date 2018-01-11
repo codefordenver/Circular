@@ -27,16 +27,6 @@ class CommentsBox extends Component {
   renderMainCommentInput() {
     if (this.props.auth && this.props.auth._id) {
       return (
-        // <form>
-        //   New Message:
-        //   <br />
-        //   <input type="text" onChange={this.handleMessageChange} />
-        //   <br />
-        //   {this.renderError()}
-        //   <button type="submit" onClick={this.handleSubmitComment}>
-        //     Post Message
-        //   </button>
-        // </form>
         <PostBox campaignID={this.props.campaignID} fetchComments={this.props.fetchComments} />
       );
     }
@@ -95,14 +85,6 @@ CommentsBox.propTypes = {
     _id: PropTypes.string,
     googleID: PropTypes.string
   }),
-  // activeCampaign: PropTypes.shape({
-  //   campaign: PropTypes.shape({
-  //     street_address: PropTypes.string,
-  //     _id: PropTypes.string
-  //   }),
-  //   loading: PropTypes.bool,
-  //   loaded: PropTypes.bool
-  // }).isRequired,
   comments: PropTypes.shape({
     campaignComments: PropTypes.Object
   }).isRequired,
