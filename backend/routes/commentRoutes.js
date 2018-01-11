@@ -8,7 +8,7 @@ module.exports = app => {
 
     try {
       const comments = await Comment.find({ campaignID: campaign_id });
-      res.send(comments);
+      res.send(comments.reverse());
     } catch (err) {
       res.status(422).send(err);
     }
@@ -31,7 +31,7 @@ module.exports = app => {
       const savedComment = await comment.save();
       if (parent_id) {
         const parent = await Comment.findOne({ _id: parent_id });
-        parent.children.push(savedComment._id);
+        parent.children.unshift(savedComment._id);
         var savedParent = await parent.save();
         res.send({ savedComment, savedParent });
       } else {
