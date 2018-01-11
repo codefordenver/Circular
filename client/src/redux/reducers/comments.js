@@ -18,42 +18,35 @@ export default function (state = defaultState, action) {
     case FETCH_COMMENTS_REQUEST:
       return {
         ...state,
-        loading: true,
-        loaded: false
+        commentsLoading: true,
+        commentsLoaded: false
       };
     case FETCH_COMMENTS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        commentsLoading: false,
+        commentsLoaded: true,
         campaignComments: response.data
       };
     case FETCH_COMMENTS_FAILURE:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error
+        commentsLoading: false,
+        commentsLoaded: false,
+        fetchError: error
       };
     case POST_COMMENT_REQUEST:
       return {
-        ...state,
-        loading: true,
-        loaded: false
+        ...state
       };
     case POST_COMMENT_SUCCESS:
       return {
-        ...state,
-        loading: false,
-        loaded: true,
-        postSuccess: true
+        ...state
       };
     case POST_COMMENT_FAILURE:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error
+        postError: error
       };
     default:
       return state;

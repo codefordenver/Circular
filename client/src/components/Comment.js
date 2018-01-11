@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import MakeComment from './MakeComment';
+
 class Comment extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { replyClicked: false };
+
+    this.handleReplyClick = this.handleReplyClick.bind(this);
+    this.handleCloseReply = this.handleCloseReply.bind(this);
+  }
+
   findTime() {
     const seconds = Math.floor((new Date() - new Date(this.props.dateAdded)) / 1000);
     let interval = Math.floor(seconds / 31536000);
@@ -28,19 +39,30 @@ class Comment extends Component {
     return `${Math.floor(seconds)} seconds`;
   }
 
+  handleCloseReply() {
+    console.log('canceled');
+    this.setState({ replyClicked: false });
+  }
+
+  handleReplyClick() {
+    this.setState({ replyClicked: true });
+  }
+
   renderChildren() {
     const comments = this.props.passedChildren;
     return (
       <div>
         {Object.keys(comments).map(u => (
-          <Comment
-            key={comments[u]._id}
-            userName={comments[u].userName}
-            message={comments[u].message}
-            dateAdded={comments[u].createdAt}
-            passedChildren={comments[u].children}
-            leftBorder
-          />
+          <div key={comments[u]._id}>
+            <Comment
+              userName={comments[u].userName}
+              message={comments[u].message}
+              dateAdded={comments[u].createdAt}
+              passedChildren={comments[u].children}
+              campaignID={this.props.campaignID}
+              commentID={comments[u]._id}
+            />
+          </div>
         ))}
       </div>
     );
@@ -54,15 +76,27 @@ class Comment extends Component {
           padding: '10px 20px',
           marginBottom: '12px',
           marginTop: '12px',
-          borderLeft: leftBorder ? 'solid 2px #ebebeb' : '',
-          backgroundColor: 'white'
+          borderLeft: 'solid 2px #ebebeb'
         }}
       >
         <span style={{ fontWeight: 'bold' }}>{this.props.userName}</span>
-        <span style={{ fontSize: '12px' }}>&nbsp;&bull;&nbsp; {this.findTime()}</span>
+        <span style={{ fontSize: '12px' }}>&nbsp;&bull;&nbsp;{this.findTime()}</span>
         <br />
         <br />
         <p>{this.props.message}</p>
+        <br />
+        {this.state.replyClicked === false && (
+          <button onClick={this.handleReplyClick}>reply</button>
+        )}
+        {this.state.replyClicked && (
+          <MakeComment
+            className="commentReply"
+            isAReply
+            parentID={this.props.commentID}
+            campaignID={this.props.campaignID}
+            handleCloseReply={this.handleCloseReply}
+          />
+        )}
         {this.renderChildren()}
       </div>
     );

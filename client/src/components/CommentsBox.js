@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
+import MakeComment from './MakeComment';
 
 class CommentsBox extends Component {
   constructor(props) {
@@ -11,47 +12,32 @@ class CommentsBox extends Component {
     this.state = { error: false };
 
     this.comments = this.props.comments;
-    this.handleSubmitComment = this.handleSubmitComment.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchComments(this.props.campaignID);
   }
 
-  handleMessageChange(e) {
-    this.setState({
-      message: e.target.value
-    });
-  }
-  async handleSubmitComment(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    if (this.props.auth && this.props.auth._id) {
-      await this.props.postComment({
-        message: this.state.message,
-        user_id: this.props.auth._id,
-        campaign_id: this.props.activeCampaign.campaign._id
-      });
-      this.props.fetchComments(this.props.campaignID);
-    } else {
-      this.setState({ error: true });
-    }
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextProps.comments.commentsLoaded === true || nextProps.comments.fetchError !== undefined
+    );
   }
 
   renderMainCommentInput() {
     if (this.props.auth && this.props.auth._id) {
       return (
-        <form>
-          New Message:
-          <br />
-          <input type="text" onChange={this.handleMessageChange} />
-          <br />
-          {this.renderError()}
-          <button type="submit" onClick={this.handleSubmitComment}>
-            Post Message
-          </button>
-        </form>
+        // <form>
+        //   New Message:
+        //   <br />
+        //   <input type="text" onChange={this.handleMessageChange} />
+        //   <br />
+        //   {this.renderError()}
+        //   <button type="submit" onClick={this.handleSubmitComment}>
+        //     Post Message
+        //   </button>
+        // </form>
+        <MakeComment campaignID={this.props.campaignID} fetchComments={this.props.fetchComments} />
       );
     }
     return <div>Log in to join the discussion!</div>;
@@ -59,17 +45,20 @@ class CommentsBox extends Component {
 
   renderComments() {
     const comments = this.props.comments;
-    if (comments.loaded === true) {
+    if (comments.commentsLoaded === true) {
       return (
         <div>
           {Object.keys(comments.campaignComments).map(u => (
-            <Comment
-              key={comments.campaignComments[u]._id}
-              userName={comments.campaignComments[u].userName}
-              message={comments.campaignComments[u].message}
-              dateAdded={comments.campaignComments[u].createdAt}
-              passedChildren={comments.campaignComments[u].children}
-            />
+            <div key={comments.campaignComments[u]._id}>
+              <Comment
+                userName={comments.campaignComments[u].userName}
+                message={comments.campaignComments[u].message}
+                dateAdded={comments.campaignComments[u].createdAt}
+                passedChildren={comments.campaignComments[u].children}
+                campaignID={this.props.campaignID}
+                commentID={comments.campaignComments[u]._id}
+              />
+            </div>
           ))}
         </div>
       );
@@ -87,7 +76,7 @@ class CommentsBox extends Component {
 
   render() {
     return (
-      <div>
+      <div className="discussion" style={{ backgroundColor: 'white' }}>
         {this.renderMainCommentInput()}
         {this.renderComments()}
       </div>
@@ -105,20 +94,19 @@ CommentsBox.propTypes = {
     _id: PropTypes.string,
     googleID: PropTypes.string
   }),
-  activeCampaign: PropTypes.shape({
-    campaign: PropTypes.shape({
-      street_address: PropTypes.string,
-      _id: PropTypes.string
-    }),
-    loading: PropTypes.bool,
-    loaded: PropTypes.bool
-  }).isRequired,
+  // activeCampaign: PropTypes.shape({
+  //   campaign: PropTypes.shape({
+  //     street_address: PropTypes.string,
+  //     _id: PropTypes.string
+  //   }),
+  //   loading: PropTypes.bool,
+  //   loaded: PropTypes.bool
+  // }).isRequired,
   comments: PropTypes.shape({
     campaignComments: PropTypes.Object
   }).isRequired,
   campaignID: PropTypes.string.isRequired,
-  fetchComments: PropTypes.func.isRequired,
-  postComment: PropTypes.func.isRequired
+  fetchComments: PropTypes.func.isRequired
 };
 
 export default connect(
