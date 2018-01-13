@@ -70,25 +70,21 @@ class Comment extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          padding: '10px 20px',
-          marginBottom: '12px',
-          marginTop: '12px',
-          borderLeft: 'solid 2px #ebebeb'
-        }}
-      >
+      <div className="comment">
         <span style={{ fontWeight: 'bold' }}>{this.props.userName}</span>
         <span style={{ fontSize: '12px' }}>&nbsp;&bull;&nbsp;{this.findTime()}</span>
-        <br />
-        <br />
-        <p>{this.props.message}</p>
-        <br />
+        <p className="posted-message">{this.props.message}</p>
         {this.state.replyClicked === false &&
-          this.props.authorized && <button onClick={this.handleReplyClick}>reply</button>}
+          this.props.authorized && (
+            <div className="comment-options">
+              <button className="reply-button" onClick={this.handleReplyClick}>
+                REPLY
+              </button>
+            </div>
+          )}
         {this.state.replyClicked && (
           <PostBox
-            className="commentReply"
+            className="child-comment-post-box"
             isAReply
             parentID={this.props.commentID}
             campaignID={this.props.campaignID}

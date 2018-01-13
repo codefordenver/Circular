@@ -14,6 +14,7 @@ class PostBox extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleFocusText = this.handleFocusText.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmitComment = this.handleSubmitComment.bind(this);
   }
@@ -21,6 +22,11 @@ class PostBox extends Component {
   handleFocus() {
     this.setState({ selected: true });
   }
+
+  handleFocusText() {
+    this.textElement.focus();
+  }
+
   handleBlur() {
     if (this.state.message === '') {
       this.setState({ selected: false });
@@ -63,28 +69,38 @@ class PostBox extends Component {
 
   render() {
     return (
-      <div>
-        <div className="post-box">
-          <div className="text-box-wrapper">
-            <div
-              ref={(input) => {
-                this.textElement = input;
-              }}
-              className="text-area"
-              style={{
-                minHeight: this.state.selected || this.props.isAReply ? '100px' : '20px'
-              }}
-              contentEditable="PLAINTEXT-ONLY"
-              onInput={this.handleChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
-            />
+      <div className={`${this.props.className} post-box-shared`}>
+        <div className="text-area-wrapper" onClick={this.handleFocusText}>
+          <div
+            ref={(input) => {
+              this.textElement = input;
+            }}
+            className="post-box-message"
+            style={{
+              minHeight: this.state.selected || this.props.isAReply ? '100px' : '20px'
+            }}
+            contentEditable="PLAINTEXT-ONLY"
+            onInput={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+            suppressContentEditableWarning
+          >
+            Join the Discussion...
           </div>
         </div>
-        <div className="post-options">
-          <button onClick={this.handleSubmitComment}>Post Comment</button>
-          {this.props.isAReply && <button onClick={this.props.handleCloseReply}>Cancel</button>}
-        </div>
+        {(this.state.selected || this.props.isAReply) && (
+          <div className="post-options">
+            <div className="post-options-whitespace" />
+            {this.props.isAReply && (
+              <button className="cancel-post" onClick={this.props.handleCloseReply}>
+                CANCEL
+              </button>
+            )}
+            <button className="post-comment-button" onClick={this.handleSubmitComment}>
+              POST COMMENT
+            </button>
+          </div>
+        )}
       </div>
     );
   }

@@ -6,7 +6,7 @@ import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
 import PostBox from './PostBox';
 
-class CommentsBox extends Component {
+class Discussion extends Component {
   constructor(props) {
     super(props);
     this.state = { error: false };
@@ -24,10 +24,14 @@ class CommentsBox extends Component {
     );
   }
 
-  renderMainCommentInput() {
+  renderMainPostBox() {
     if (this.props.auth && this.props.auth._id) {
       return (
-        <PostBox campaignID={this.props.campaignID} fetchComments={this.props.fetchComments} />
+        <PostBox
+          className="main-post-box"
+          campaignID={this.props.campaignID}
+          fetchComments={this.props.fetchComments}
+        />
       );
     }
     return <div>Log in to join the discussion!</div>;
@@ -68,19 +72,19 @@ class CommentsBox extends Component {
   render() {
     return (
       <div className="discussion" style={{ backgroundColor: 'white' }}>
-        {this.renderMainCommentInput()}
+        {this.renderMainPostBox()}
         {this.renderComments()}
       </div>
     );
   }
 }
 
-CommentsBox.defaultProps = {
+Discussion.defaultProps = {
   signatureObj: { signatures: [] },
   auth: {}
 };
 
-CommentsBox.propTypes = {
+Discussion.propTypes = {
   auth: PropTypes.shape({
     _id: PropTypes.string,
     googleID: PropTypes.string
@@ -95,4 +99,4 @@ CommentsBox.propTypes = {
 export default connect(
   ({ activeCampaign, auth, comments }) => ({ activeCampaign, auth, comments }),
   { fetchComments, postComment }
-)(CommentsBox);
+)(Discussion);
