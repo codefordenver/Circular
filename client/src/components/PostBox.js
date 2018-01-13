@@ -34,7 +34,10 @@ class PostBox extends Component {
   }
 
   handleChange(e) {
-    const formattedText = e.target.innerText.replace(/ +/g, ' ').replace(/[\r\n]{3,}/g, '\n\n');
+    const formattedText = e.target.innerText
+      .replace(/ +/g, ' ') // deletes extra spaces
+      .replace(/[\r\n]{3,}/g, '\n\n') // deletes > 2 carriage returns
+      .replace(/^[\r\n]+|\.|[\r\n]+$/g, ''); // deletes leading and trailing carriage returns
     this.setState({ message: formattedText });
   }
 
@@ -42,28 +45,34 @@ class PostBox extends Component {
     e.stopPropagation();
     e.preventDefault();
     if (this.props.auth && this.props.auth._id) {
-      if (this.props.parentID) {
-        await this.props.postComment({
-          message: this.state.message,
-          user_id: this.props.auth._id,
-          parent_id: this.props.parentID
-        });
+      if (this.state.message.length < 2000) {
+        if (this.props.parentID) {
+          await this.props.postComment({
+            message: this.state.message,
+            user_id: this.props.auth._id,
+            parent_id: this.props.parentID
+          });
+        } else {
+          await this.props.postComment({
+            message: this.state.message,
+            user_id: this.props.auth._id,
+            campaign_id: this.props.campaignID
+          });
+        }
+        this.props.fetchComments(this.props.campaignID);
+        if (this.props.isAReply) {
+          this.props.handleCloseReply();
+        } else {
+          this.textElement.innerText = '';
+          this.setState({ message: '', selected: false });
+        }
       } else {
-        await this.props.postComment({
-          message: this.state.message,
-          user_id: this.props.auth._id,
-          campaign_id: this.props.campaignID
-        });
-      }
-      this.props.fetchComments(this.props.campaignID);
-      if (this.props.isAReply) {
-        this.props.handleCloseReply();
-      } else {
-        this.textElement.innerText = '';
-        this.setState({ message: '', selected: false });
+        this.setState({ error: true });
+        // throw error: too many characters
       }
     } else {
       this.setState({ error: true });
+      // throw error: need to be logged in
     }
   }
 

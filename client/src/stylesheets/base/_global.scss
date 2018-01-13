@@ -1,13 +1,13 @@
 @import '../base/colors';
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
-	background: linear-gradient(to bottom, #0C6F91, #164C5F);	
-	height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #0c6f91, #164c5f);
+  height: 100vh;
 }
 
 .row {
@@ -19,4 +19,5 @@ body {
   width: 90%;
   margin: auto;
   max-width: 1170px;
+  margin-bottom: 25px;
 }
