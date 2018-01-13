@@ -31,6 +31,7 @@ class Discussion extends Component {
           className="main-post-box"
           campaignID={this.props.campaignID}
           fetchComments={this.props.fetchComments}
+          isAReply={false}
         />
       );
     }

@@ -70,12 +70,12 @@ class PostBox extends Component {
   render() {
     return (
       <div className={`${this.props.className} post-box-shared`}>
-        <div className="text-area-wrapper" onClick={this.handleFocusText}>
+        <div className="text-area-wrapper" role="presentation" onClick={this.handleFocusText}>
           <div
-            ref={(input) => {
+            ref={input => {
               this.textElement = input;
             }}
-            className="post-box-message"
+            className={'post-box-message'}
             style={{
               minHeight: this.state.selected || this.props.isAReply ? '100px' : '20px'
             }}
@@ -83,10 +83,9 @@ class PostBox extends Component {
             onInput={this.handleChange}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
+            placeholder="Join the discussion..."
             suppressContentEditableWarning
-          >
-            Join the Discussion...
-          </div>
+          />
         </div>
         {(this.state.selected || this.props.isAReply) && (
           <div className="post-options">
@@ -105,13 +104,13 @@ class PostBox extends Component {
     );
   }
 }
-
-PostBox.defaultProps = {};
-
+PostBox.defaultProps = {
+  handleCloseReply: () => {}
+};
 PostBox.propTypes = {
-  campaignID: PropTypes.string.isRequired,
-
-  postComment: PropTypes.func.isRequired
+  className: PropTypes.string.isRequired,
+  handleCloseReply: PropTypes.func,
+  isAReply: PropTypes.bool.isRequired
 };
 
 export default connect(({ activeCampaign, auth }) => ({ activeCampaign, auth }), {

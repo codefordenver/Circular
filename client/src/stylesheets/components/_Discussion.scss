@@ -59,6 +59,13 @@
     width: 100%;
     word-wrap: break-word;
 
+    .post-box-message[placeholder]:empty::before {
+      content: attr(placeholder);
+      opacity: 0.5;
+      color: inherit;
+      cursor: text;
+    }
+
     .post-box-message {
       transition: all 0.2s ease-in-out;
 

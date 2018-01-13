@@ -102,8 +102,10 @@ Comment.defaultProps = {
 };
 
 Comment.propTypes = {
+  authorized: PropTypes.bool.isRequired,
+  campaignID: PropTypes.string.isRequired,
+  commentID: PropTypes.string.isRequired,
   dateAdded: PropTypes.string.isRequired,
-  leftBorder: PropTypes.bool,
   message: PropTypes.string.isRequired,
   passedChildren: PropTypes.arrayOf(PropTypes.any).isRequired,
   userName: PropTypes.string.isRequired
