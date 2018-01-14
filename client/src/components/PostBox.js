@@ -88,7 +88,7 @@ class PostBox extends Component {
             style={{
               minHeight: this.state.selected || this.props.isAReply ? '100px' : '20px'
             }}
-            contentEditable="PLAINTEXT-ONLY"
+            contentEditable="true"
             onInput={this.handleChange}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
