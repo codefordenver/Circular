@@ -10,6 +10,8 @@ body {
   height: 100vh;
 }
 
+$information-phone: 'only screen and (max-width : 800px)';
+
 .row {
   display: flex;
   flex-direction: row;
@@ -20,4 +22,8 @@ body {
   margin: auto;
   max-width: 1170px;
   margin-bottom: 25px;
+
+  @media #{$information-phone} {
+    width: 98%;
+  }
 }

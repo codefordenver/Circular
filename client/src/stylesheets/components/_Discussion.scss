@@ -4,8 +4,16 @@
   font-size: 14px;
   padding: 20px 30px 10px;
   width: 80%;
+  // min-width: 400px;
   margin-left: auto;
   margin-right: auto;
+
+  @media #{$information-phone} {
+    width: 100%;
+    padding: 10px 15px 5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .discussion-header {
     font-size: 22px;
@@ -27,6 +35,10 @@
   padding: 10px 10px 0 20px;
   margin-top: 12px;
   border-left: solid 2px #1a5a99;
+
+  @media #{$information-phone} {
+    padding: 8px 3px 0 6px;
+  }
 
   .comment-options {
     display: grid;

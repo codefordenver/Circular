@@ -72,7 +72,7 @@ class Discussion extends Component {
 
   render() {
     return (
-      <div className="discussion" style={{ backgroundColor: 'white' }}>
+      <div className="discussion">
         <div className="discussion-header">COMMENTS</div>
         {this.renderMainPostBox()}
         {this.renderComments()}
