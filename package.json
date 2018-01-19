@@ -12,6 +12,8 @@
     "server": "nodemon backend/index.js",
     "client": "(cd ./client && yarn start)",
     "cypress:open": "cypress open",
+    "ci:start-app-for-test":
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run -s cypress/integration/simple_spec.js",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
@@ -41,7 +43,8 @@
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "path-parser": "^2.0.2"
+    "path-parser": "^2.0.2",
+    "serve": "^6.4.8"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
