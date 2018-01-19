@@ -38,7 +38,7 @@ const CreateCampaignStep1 = (props) => {
           <div className="form-group">
             <label className="required">Campaign Name</label>
             <div className="requiredtool" />
-            <input type="text" className="form-control" name="campaignName" required />
+            <input type="text" className="form-control campaign" name="campaignName" required />
           </div>
           <br />
           <button className="btn btn-primary fr" type="submit">
