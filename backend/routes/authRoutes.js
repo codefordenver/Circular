@@ -19,6 +19,23 @@ module.exports = app => {
     }
   );
 
+  app.get(
+    '/auth/facebook',
+    checkPath,
+    passport.authenticate('facebook', {
+      scope: ['public_profile', 'email']
+    })
+  );
+
+  app.get(
+    '/auth/facebook/callback',
+    passport.authenticate('facebook'),
+    (req, res) => {
+      res.redirect(req.session.returnTo);
+      delete req.session.returnTo;
+    }
+  );
+
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });
