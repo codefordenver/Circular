@@ -114,12 +114,21 @@ class PostBox extends Component {
   }
 }
 PostBox.defaultProps = {
-  handleCloseReply: () => {}
+  handleCloseReply: () => {},
+  auth: {}
 };
 PostBox.propTypes = {
+  auth: PropTypes.shape({
+    _id: PropTypes.string,
+    googleID: PropTypes.string
+  }),
+  campaignID: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
+  fetchComments: PropTypes.func.isRequired,
   handleCloseReply: PropTypes.func,
-  isAReply: PropTypes.bool.isRequired
+  isAReply: PropTypes.bool.isRequired,
+  parentID: PropTypes.string.isRequired,
+  postComment: PropTypes.func.isRequired
 };
 
 export default connect(({ activeCampaign, auth }) => ({ activeCampaign, auth }), {
