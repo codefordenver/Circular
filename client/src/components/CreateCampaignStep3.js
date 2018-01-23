@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { createCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep3 = (props) => {
-  const { createCampaign, activeCampaign, newCampaign, router } = props;
+  const { createCampaign, newCampaign, router } = props;
 
   const makeNewCampaign = async (e) => {
     e.preventDefault();

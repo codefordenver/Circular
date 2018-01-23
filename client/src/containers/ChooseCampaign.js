@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import cx from 'classnames';
 import { selectAddress } from '../redux/actions/initialSearch';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import AutoSuggestInput from '../components/AutoSuggestInput';
-import FullScreenLoader from '../components/FullScreenLoader';
 
 class ChooseCampaign extends Component {
   constructor(props) {

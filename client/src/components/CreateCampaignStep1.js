@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep1 = (props) => {
@@ -38,7 +38,7 @@ const CreateCampaignStep1 = (props) => {
           <div className="form-group">
             <label className="required">Campaign Name</label>
             <div className="requiredtool" />
-            <input type="text" className="form-control" name="campaignName" required />
+            <input type="text" className="form-control campaign" name="campaignName" required />
           </div>
           <br />
           <button className="btn btn-primary fr" type="submit">
