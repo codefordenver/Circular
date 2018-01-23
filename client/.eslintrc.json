@@ -3,6 +3,7 @@
   "plugins": ["react"],
   "parser": "babel-eslint",
   "rules": {
+    "arrow-parens": "off",
     "class-methods-use-this": "warn",
     "comma-dangle": ["error", "never"],
     "consistent-return": "warn",
