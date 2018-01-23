@@ -1,14 +1,5 @@
-.google-oauth-button {
-  text-decoration: none;
-  position: absolute;
-  right: 0px;
-  bottom: -10px;
-}
-.row {
-  position: relative;
-  align-items: stretch;
-}
 .navbar {
+  background-color: $secondary-color;
   height: 5rem;
   display: flex;
   flex-direction: row;
@@ -20,8 +11,6 @@
   font-size: 2rem;
   font-family: 'Fira Sans Condensed', sans-serif;
   font-weight: 500;
-
-  background-color: $secondary-color;
 }
 
 .container {
@@ -30,40 +19,14 @@
   margin-right: auto;
 }
 
+.row {
+  position: relative;
+  align-items: stretch;
+}
+
 .home-link {
   color: $mainwhite;
   text-decoration: none;
-}
-
-.info-icons {
-  background-color: $icon-row-color;
-  height: 150px;
-  text-align: center;
-  padding: 30px;
-}
-
-.fa {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.action-icon {
-  display: inline-block;
-  width: 150px;
-  text-align: center;
-  color: $green-color;
-}
-
-.property-manager {
-  background-color: $green-color;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
-
-.recycling-facts {
-  padding: 10px;
-  text-align: center;
 }
 
 .top-nav.navbar.navbar-default.navbar-fixed-top {
@@ -86,12 +49,15 @@
 }
 
 .top-nav-list > li > a {
-  text-decoration: none;
   color: $mainwhite;
+  text-decoration: none;
 
   font-size: inherit;
   font-family: inherit;
   font-weight: inherit;
+
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .top-nav-list > li > a:hover {
