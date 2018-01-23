@@ -1,0 +1,25 @@
+@import '../base/colors';
+
+.about-container {
+  color: $mainwhite;
+  padding: 20px;
+}
+
+.about-header {
+  font-size: 4em;
+  margin-bottom: 1em;
+}
+
+.about-text {
+  font-size: 1em;
+  padding-bottom: 1em;
+}
+
+.about-link {
+  text-decoration: none;
+  color: $maingreen;
+}
+
+.about-link:hover {
+  color: $hovergreen;
+}
