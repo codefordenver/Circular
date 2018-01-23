@@ -1,0 +1,134 @@
+.discussion {
+  background: $mainwhite;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 20px 30px 10px;
+  width: 80%;
+  // min-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media #{$information-phone} {
+    width: 100%;
+    padding: 10px 15px 5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .discussion-header {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 12px;
+    -webkit-appearance: none;
+    outline: none;
+  }
+}
+
+.comment {
+  padding: 10px 10px 0 20px;
+  margin-top: 12px;
+  border-left: solid 2px #1a5a99;
+
+  @media #{$information-phone} {
+    padding: 8px 3px 0 6px;
+  }
+
+  .comment-options {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+
+    .reply-button {
+      text-align: left;
+      grid-column-start: 0;
+      padding: 8px 0 0 0;
+    }
+  }
+
+  .posted-message {
+    font-family: 'Inter UI', sans-serif;
+    margin: 10px 0 0 0;
+    line-height: 1.3;
+    white-space: pre-wrap;
+    overflow-x: hidden;
+  }
+}
+
+.post-box-shared {
+  border: 2px solid $light-gray;
+  border-radius: 3px;
+
+  .text-area-wrapper {
+    color: #2a2e2e;
+    cursor: text;
+    display: block;
+    height: auto;
+    line-height: 1.4;
+    margin: 0;
+    max-height: 360px;
+    overflow-y: scroll;
+    padding: 10px;
+    // overflow: auto;
+    resize: none;
+    width: 100%;
+    word-wrap: break-word;
+
+    .post-box-message[placeholder]:empty::before {
+      content: attr(placeholder);
+      opacity: 0.5;
+      color: inherit;
+      cursor: text;
+    }
+
+    .post-box-message {
+      font-family: 'Inter UI', sans-serif;
+      transition: all 0.2s ease-in-out;
+
+      &:focus {
+        -webkit-appearance: none;
+        outline: none;
+      }
+    }
+  }
+
+  .post-options {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 120px 120px;
+    border-top: 2px solid $light-gray;
+
+    button {
+      padding: 8px;
+
+      &:focus {
+        background-color: $light-gray;
+      }
+    }
+
+    .post-comment-button {
+      display: block;
+      border-left: 2px solid $light-gray;
+      grid-column-end: -1;
+    }
+
+    .cancel-post {
+      border-left: 2px solid $light-gray;
+    }
+  }
+}
+
+.main-post-box {
+  position: relative;
+  margin-top: 10px;
+}
+
+.child-comment-post-box {
+  margin-top: 10px;
+  transition: all 0.2s ease-in-out;
+}

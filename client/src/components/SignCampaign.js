@@ -10,7 +10,7 @@ class SignCampaign extends Component {
     this.selectedCheckboxes = new Set();
   };
 
-  toggleCheckbox = (label) => {
+  toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
     } else {
@@ -18,7 +18,7 @@ class SignCampaign extends Component {
     }
   };
 
-  handleFormSubmit = async (formSubmitEvent) => {
+  handleFormSubmit = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
     const campaignId =
