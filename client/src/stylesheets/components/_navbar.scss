@@ -20,6 +20,8 @@
   font-size: 2rem;
   font-family: 'Fira Sans Condensed', sans-serif;
   font-weight: 500;
+
+  background-color: $secondary-color;
 }
 
 .container {
@@ -93,5 +95,5 @@
 }
 
 .top-nav-list > li > a:hover {
-  color: $secondary-color;
+  color: $green-color;
 }
