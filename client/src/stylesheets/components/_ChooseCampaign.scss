@@ -1,10 +1,36 @@
 @import '../base/colors';
 
+.loading-spinner {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: $mainwhite;
+  color: transparent;
+}
+
+.slow-spin {
+  animation: fa-spin 4s infinite linear;
+}
+
 .loader {
-	display: none;
-	&.hide {
-		display: block;
-	}
+  display: block;
+  text-align: center;
+
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 500;
+  color: $mainwhite;
+
+  &.hide {
+    display: none;
+  }
+
+  h1 {
+    padding: 100px;
+    font-size: 2em;
+
+    @media #{$information-phone} {
+      padding: 50px;
+      font-size: 1em;
+    }
+  }
 }
 
 .chooseCampaign-list {

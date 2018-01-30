@@ -64,9 +64,19 @@ class ChooseCampaign extends Component {
     } = this.props;
 
     return (
+      <div className="container">
+        <div className="loader">
+          <h1 className="loading-header">Searching for nearby campaigns...</h1>
+          <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
+        </div>
+      </div>
+    );
+    /*
       <div className="hero_wrapper">
         <div className="container">
           <div className="search_address_wrapper">
+
+
             {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
             {!loading && error && error.searchError && <p>{error.userMessage}</p>}
             {loaded &&
@@ -142,10 +152,12 @@ class ChooseCampaign extends Component {
                   </div>
                 </div>
               )}
+
           </div>
         </div>
       </div>
     );
+    */
   }
 }
 
