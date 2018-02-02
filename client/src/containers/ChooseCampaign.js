@@ -76,7 +76,7 @@ class ChooseCampaign extends Component {
                   {nearbyCampaigns[0].address === searchedAddress.formatted_address && (
                     <form className="">
                       <h1 className="search_address_heading">
-                        {'Your address already has a campaign!.'}
+                        {'Your address already has a campaign!'}
                       </h1>
                       <h2 className="search_address_sub_heading">Is this your address?</h2>
                       <ul className="chooseCampaign-list">
