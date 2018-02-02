@@ -3,6 +3,7 @@
   "plugins": ["react"],
   "parser": "babel-eslint",
   "rules": {
+    "arrow-parens": "off",
     "class-methods-use-this": "warn",
     "comma-dangle": ["error", "never"],
     "consistent-return": "warn",
@@ -13,6 +14,7 @@
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
     "max-len": "warn",
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "no-debugger": "off",
     "no-underscore-dangle": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/no-unescaped-entities": "off",
