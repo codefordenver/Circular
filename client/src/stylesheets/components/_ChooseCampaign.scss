@@ -53,6 +53,7 @@
 
     &:checked + label {
     background-color: $green-color;
+    }
   }
 
   label {
@@ -62,6 +63,10 @@
 
     div { margin-bottom: 5px; }
     &:hover { background-color: $green-color; }
+  }
+
+  i {
+    text-align: left;
   }
 
   .fa-check { color: $green-color }
