@@ -35,22 +35,44 @@ class ChooseCampaign extends Component {
     }
   }
 
-  buildNearbyCampaignList(nearbyCampaignsArr, selectedOption) {
-    return nearbyCampaignsArr.map(c => (
-      <li className="chooseCampaign-item" key={c.address}>
+  buildNearbyCampaignList(nearbyCampaignsArr, selectedOption, includeNoMatch = false) {
+    const liClassNames = 'list-group-item row mx-0 my-2 rounded-0';
+    const nearbyCampaignListItems = nearbyCampaignsArr.map(c => (
+      <li className={liClassNames} key={c.address}>
         <input
+          className="col-1"
           type="radio"
           id={c.address}
           value={c.address}
           checked={selectedOption && selectedOption.address === c.address}
           onChange={this.handleOptionChange}
         />
-        <label htmlFor={c.address}>
+        <label className="col-11" htmlFor={c.address}>
           {c.name ? <div>{c.name}</div> : ''}
           {c.address}
         </label>
       </li>
     ));
+
+    if (includeNoMatch) {
+      nearbyCampaignListItems.push(
+        <li className={liClassNames} key="no-match">
+          <input
+            className="col-1"
+            id="none"
+            type="radio"
+            value="none"
+            checked={selectedOption === 'none'}
+            onChange={this.handleOptionChange}
+          />
+          <label className="col-11" htmlFor="none">
+            {"None of these match my address. Let's start a new campaign."}
+          </label>
+        </li>
+      );
+    }
+
+    return <ul className="list-group my-2">{nearbyCampaignListItems}</ul>;
   }
 
   chooseAndRenderProperCampaignView = ({
@@ -60,12 +82,6 @@ class ChooseCampaign extends Component {
     selectedAddress,
     searchedAddress
   } = {}) => {
-    console.log(loading);
-    console.log(loaded);
-    console.log(nearbyCampaigns);
-    console.log(selectedAddress);
-    console.log(searchedAddress);
-
     if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
       if (nearbyCampaigns[0].address === searchedAddress.formatted_address) {
         return this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress);
@@ -83,11 +99,9 @@ class ChooseCampaign extends Component {
           'Your address already has a campaign!.',
           'Is this your address?'
         )}
-        <ul className="chooseCampaign-list">
-          {this.buildNearbyCampaignList(nearbyCampaigns, selectedAddress)}
-          {this.renderSubmitButton()}
-          <AutoSuggestInput />
-        </ul>
+        {this.buildNearbyCampaignList(nearbyCampaigns, selectedAddress)}
+        {this.renderSubmitButton()}
+        <AutoSuggestInput />
       </form>
     </div>
   );
@@ -95,25 +109,12 @@ class ChooseCampaign extends Component {
   renderNearbyCampaigns = (nearbyCampaigns, selectedAddress) => (
     <div>
       <form className="">
-        {this.renderAddressHeading(
-          'We found these campaigns near you.',
-          'Do any of these campaigns represent where you live?'
+        {this.renderAddressHeading('We found some campaigns nearby!')}
+        {this.buildNearbyCampaignList(
+          nearbyCampaigns,
+          selectedAddress,
+          /* includeNoMatch = */ true
         )}
-        <ul className="chooseCampaign-list">
-          {this.buildNearbyCampaignList(nearbyCampaigns, selectedAddress)}
-          <li className="chooseCampaign-item" key="no-match">
-            <input
-              id="none"
-              type="radio"
-              value="none"
-              checked={selectedAddress === 'none'}
-              onChange={this.handleOptionChange}
-            />
-            <label htmlFor="none">
-              {"None of these match my address. Let's start a new campaign."}
-            </label>
-          </li>
-        </ul>
         {this.renderSubmitButton()}
       </form>
     </div>
@@ -129,17 +130,21 @@ class ChooseCampaign extends Component {
       {this.renderSubmitButton()}
     </div>
   );
-  renderSubmitButton = () => (
-    <div className="btn-wrapper">
-      <button className="btn" type="submit" onClick={this.handleFormSubmit}>
-        {"OK - LET'S DO THIS!"}
-      </button>
-    </div>
-  );
   renderAddressHeading = (headingTitle, subTitle) => (
     <div>
       <h1 className="search_address_heading">{headingTitle}</h1>
-      <h2 className="search_address_sub_heading">{subTitle}</h2>
+      {subTitle && <h2 className="search_address_sub_heading">{subTitle}</h2>}
+    </div>
+  );
+  renderSubmitButton = () => (
+    <div className="row">
+      <button
+        className="col-10 offset-1 btn p-3 rounded-0"
+        type="submit"
+        onClick={this.handleFormSubmit}
+      >
+        {"OK - LET'S DO THIS!"}
+      </button>
     </div>
   );
 
@@ -154,19 +159,23 @@ class ChooseCampaign extends Component {
     } = this.props;
 
     return (
-      <div className="container">
-        {loading && (
-          <div className="loader">
-            <h1 className="loading-header">Searching for nearby campaigns...</h1>
-            <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12 col-md-6 offset-md-3 p-0">
+            {loading && (
+              <div className="loader">
+                <h1 className="loading-header">Searching for nearby campaigns...</h1>
+                <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
+              </div>
+            )}
+            {!loading && (
+              <div className="">
+                {!loading && error && error.searchError && <p>{error.userMessage}</p>}
+                {this.chooseAndRenderProperCampaignView(this.props)}
+              </div>
+            )}
           </div>
-        )}
-        {!loading && (
-          <div className="search_address_wrapper">
-            {!loading && error && error.searchError && <p>{error.userMessage}</p>}
-            {this.chooseAndRenderProperCampaignView(this.props)}
-          </div>
-        )}
+        </div>
       </div>
     );
   }
