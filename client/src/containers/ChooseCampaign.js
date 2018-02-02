@@ -36,33 +36,40 @@ class ChooseCampaign extends Component {
   }
 
   buildNearbyCampaignList(nearbyCampaignsArr, selectedOption, includeNoMatch = false) {
-    const liClassNames = 'list-group-item row mx-0 my-2 rounded-0';
-    const nearbyCampaignListItems = nearbyCampaignsArr.map(c => (
-      <li className={liClassNames} key={c.address}>
-        <input
-          className="col-1"
-          type="radio"
-          id={c.address}
-          value={c.address}
-          checked={selectedOption && selectedOption.address === c.address}
-          onChange={this.handleOptionChange}
-        />
-        <label className="col-11" htmlFor={c.address}>
-          {c.name ? <div>{c.name}</div> : ''}
-          {c.address}
-        </label>
-      </li>
-    ));
+    const liClassNames =
+      'list-group-item row p-0 mx-0 my-2 rounded-0 bg-clear border-clear nearby-address-item';
+    const nearbyCampaignListItems = nearbyCampaignsArr.map(c => {
+      const checked = selectedOption && selectedOption.address === c.address;
+      return (
+        <li className={liClassNames} key={c.address}>
+          <i className={`col-1 fa ${checked ? 'fa-check' : 'fa-circle-thin'}`} />
+          <input
+            className=""
+            type="radio"
+            id={c.address}
+            value={c.address}
+            checked={checked}
+            onChange={this.handleOptionChange}
+          />
+          <label className="col-11" htmlFor={c.address}>
+            {c.name ? <div>{c.name}</div> : ''}
+            {c.address}
+          </label>
+        </li>
+      );
+    });
 
     if (includeNoMatch) {
+      const checked = selectedOption === 'none';
       nearbyCampaignListItems.push(
         <li className={liClassNames} key="no-match">
+          <i className={`col-1 fa ${checked ? 'fa-check' : 'fa-circle-thin'}`} />
           <input
-            className="col-1"
+            className=""
             id="none"
             type="radio"
             value="none"
-            checked={selectedOption === 'none'}
+            checked={checked}
             onChange={this.handleOptionChange}
           />
           <label className="col-11" htmlFor="none">
@@ -72,7 +79,7 @@ class ChooseCampaign extends Component {
       );
     }
 
-    return <ul className="list-group my-2">{nearbyCampaignListItems}</ul>;
+    return <ul className="list-group my-2 nearby-address-list">{nearbyCampaignListItems}</ul>;
   }
 
   chooseAndRenderProperCampaignView = ({
@@ -131,7 +138,7 @@ class ChooseCampaign extends Component {
     </div>
   );
   renderAddressHeading = (headingTitle, subTitle) => (
-    <div>
+    <div className="py-3">
       <h1 className="search_address_heading">{headingTitle}</h1>
       {subTitle && <h2 className="search_address_sub_heading">{subTitle}</h2>}
     </div>
@@ -160,8 +167,8 @@ class ChooseCampaign extends Component {
 
     return (
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 col-md-6 offset-md-3 p-0">
+        <div className="row justify-content-md-center">
+          <div className="col-12 col-md-5  p-0">
             {loading && (
               <div className="loader">
                 <h1 className="loading-header">Searching for nearby campaigns...</h1>
