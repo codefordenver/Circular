@@ -1,59 +1,56 @@
-
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Oswald:400,500');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Oswald:400,500");
 
 //Fallbacks for our two typefaces.
 $display_stack: "Oswald", Impact, "Franklin Gothic Bold", sans-serif;
 $body_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
 
-@mixin font ($fontFamily, $fontSize, $fontWeight, $color, $lineHeight, $letterSpacing){
-	font-family: $fontFamily;
-	font-size: $fontSize;
-	font-weight: $fontWeight;
-	color: $mainwhite;
+@mixin font ($fontFamily, $fontSize, $fontWeight) {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  color: $mainwhite;
 }
 
-@mixin display-36-med (){
-	@include font($display_stack, 36rem, 500);
-	line-height: normal;
+@mixin display-36-med () {
+  @include font($display_stack, 36px, 500);
+  line-height: normal;
 }
 
-@mixin display-24-med (){
-	@include font($display_stack, 24rem, 500);
-	line-height: 1.25;
+@mixin display-24-med () {
+  @include font($display_stack, 24px, 500);
+  line-height: 1.25;
 }
 
-@mixin display-24-reg (){
-	@include font($display_stack, 24rem, 400);
-	line-height: 1.25;
+@mixin display-24-reg () {
+  @include font($display_stack, 24px, 400);
+  line-height: 1.25;
 }
 
-@mixin display-20-reg (){
-	@include font($display_stack, 20rem, 400);
-	line-height: 1.33;
+@mixin display-20-reg () {
+  @include font($display_stack, 20px, 400);
+  line-height: 1.33;
 }
 
-@mixin body-16-semibold-tt (){
-	@include font($body_stack, 16rem, 600);
-	text-transform: uppercase;
-	line-height: 1.5;
-	letter-spacing: 1px;
+@mixin body-16-semibold-tt () {
+  @include font($body_stack, 16px, 600);
+  text-transform: uppercase;
+  line-height: 1.5;
+  letter-spacing: 1px;
 }
 
-@mixin body-16 (){
-	@include font($body_stack, 16rem, 400);
-	line-height: 1.5;
+@mixin body-16 () {
+  @include font($body_stack, 16px, 400);
+  line-height: 1.5;
 }
 
-@mixin body-14 (){
-	@include font($body_stack, 14rem, 400);
-	line-height: 1.5;
-	letter-spacing: 0.2px;
+@mixin body-14 () {
+  @include font($body_stack, 14px, 400);
+  line-height: 1.5;
+  letter-spacing: 0.2px;
 }
 
-@mixin body-12 (){
-	@include font($body_stack, 12rem, 400);
-	line-height: 1.5;
-	letter-spacing: 0.5px;
+@mixin body-12 () {
+  @include font($body_stack, 12px, 400);
+  line-height: 1.5;
+  letter-spacing: 0.5px;
 }
-
-
