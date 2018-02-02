@@ -53,21 +53,26 @@ class ChooseCampaign extends Component {
     ));
   }
 
-  chooseAndRenderProperCampaignView = (
+  chooseAndRenderProperCampaignView = ({
     loading,
     loaded,
     nearbyCampaigns,
     selectedAddress,
     searchedAddress
-  ) => {
+  } = {}) => {
+    console.log(loading);
+    console.log(loaded);
+    console.log(nearbyCampaigns);
+    console.log(selectedAddress);
+    console.log(searchedAddress);
+
     if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
       if (nearbyCampaigns[0].address === searchedAddress.formatted_address) {
-        this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress);
-      } else {
-        this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress);
+        return this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress);
       }
+      return this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress);
     } else if (!loading && nearbyCampaigns && nearbyCampaigns.length === 0) {
-      this.renderNewCampaign();
+      return this.renderNewCampaign();
     }
   };
 
@@ -139,7 +144,14 @@ class ChooseCampaign extends Component {
   );
 
   render() {
-    const { loading, error } = this.props;
+    const {
+      loading,
+      loaded,
+      nearbyCampaigns,
+      selectedAddress,
+      searchedAddress,
+      error
+    } = this.props;
 
     return (
       <div className="container">
@@ -152,7 +164,7 @@ class ChooseCampaign extends Component {
         {!loading && (
           <div className="search_address_wrapper">
             {!loading && error && error.searchError && <p>{error.userMessage}</p>}
-            {this.chooseAndRenderProperCampaignView(...this.props)}
+            {this.chooseAndRenderProperCampaignView(this.props)}
           </div>
         )}
       </div>
