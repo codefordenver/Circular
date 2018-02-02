@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */ /* - TODO: Fix and remove this line */
 import React from 'react';
-import { Link } from 'react-router';
 
-const FullScreenLoader = (props) => {
+const FullScreenLoader = props => {
   const { loaderText } = props;
   return (
     <div className="fullscreen_loader_wrapper">

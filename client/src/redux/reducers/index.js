@@ -7,6 +7,7 @@ import googleMap from './googleMap';
 import activeCampaign from './activeCampaign';
 import newCampaign from './newCampaign';
 import signature from './signature';
+import comments from './comments';
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   newCampaign,
   initialSearch,
   activeCampaign,
+  comments,
   signature
 });
 

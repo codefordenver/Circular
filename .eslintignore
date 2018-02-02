@@ -1,2 +1,4 @@
 client/node_modules/*
 client/build/*
+cypress/support/*
+cypress/integration/example_spec.js
