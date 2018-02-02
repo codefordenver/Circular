@@ -1,10 +1,10 @@
-@import '../base/colors';
+@import "../base/colors";
 
 .loader {
-	display: none;
-	&.hide {
-		display: block;
-	}
+  display: none;
+  &.hide {
+    display: block;
+  }
 }
 
 .chooseCampaign-list {
@@ -21,6 +21,7 @@
 
 .chooseCampaign-item label {
   background-color: #fff;
+  color: $dark-blue;
   display: block;
   padding: 1.5rem 3rem;
   transition: transform 0.2s, box-shadow 0.4s;
@@ -43,8 +44,8 @@
 }
 
 .chooseCampaign-item input + label:before {
-  font-family: 'FontAwesome';
-  content: '\f00c';
+  font-family: "FontAwesome";
+  content: "\f00c";
   color: $maingreen;
   position: absolute;
   display: inline-block;
