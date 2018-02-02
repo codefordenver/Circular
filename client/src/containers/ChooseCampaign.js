@@ -47,9 +47,14 @@ class ChooseCampaign extends Component {
     }
 
     const nearbyCampaignListItems = campaignsArr.map(c => {
-      const checked = selectedOption && selectedOption.address === c.address;
+      // if the noMatch item is selected, selectedOption is the string 'none' instead of an object
+      let checked = selectedOption && selectedOption.address === c.address;
+      if (typeof selectedOption === 'string') {
+        checked = c.address === 'none';
+      }
       const showAddress = c.address !== 'none';
       const checkedClass = checked ? 'fa-check' : 'fa-circle-thin';
+
       return (
         <li
           className="list-group-item row p-0 mx-0 my-2 rounded-0 bg-clear border-clear nearby-address-item"
