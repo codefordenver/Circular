@@ -60,15 +60,8 @@
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
-<<<<<<< HEAD
-    "mongo-in-memory": "0.0.5",
-    "prettier": "^1.8.2",
-||||||| merged common ancestors
-    "prettier": "^1.8.2",
-=======
     "mongo-in-memory": "0.0.5",
     "prettier": "^1.10.0",
->>>>>>> 6d985ad53d3a1e8bf36adb9f59c16257a26788e4
     "prettier-eslint": "^8.2.2",
     "prettier-eslint-cli": "^4.4.0"
   }
