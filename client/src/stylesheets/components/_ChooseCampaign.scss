@@ -33,8 +33,12 @@
   }
 }
 
-.search_address_heading {
+.new-address-heading {
   font-size: 1.5em;
+}
+
+.new-address-sub-heading {
+  font-size: 1em;
 }
 
 .bg-clear {
@@ -67,6 +71,7 @@
 
   i {
     text-align: left;
+    font-size: 20px;
   }
 
   .fa-check { color: $green-color }
@@ -75,8 +80,11 @@
      vertical-align: middle was not working no matter where I put it so I used this janky solution to stop being  blocked
     */
     position: absolute;
-    top:33%;
+    top:25%;
+    margin-left: -7px;
   }
 }
 
-
+.join-campaign-button {
+  background-color: $green-color!important; // override bootstrap .btn background-color
+}
