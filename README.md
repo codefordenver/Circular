@@ -30,3 +30,9 @@ It is highly recommended that you configure your editor to display eslint errors
  
 ## Checkout the database
 We use mLab to host our dev and production databases so even when we are running our servers locally, we're all sharing the same remote development database. To query the database during local development, ask Danny to get you a login to our mLab account. Once you've signed in, you can the instructions to get into the database with this shell prompt command: `mongo ds243335.mlab.com:43335/reimagine-dev -u <user> -p <password>`
+
+## Develop with docker
+Rather than trying to mess with yarn and the node dependencies required, it is possible to run Denver Re:Imagine in a docker container.
+1. run `docker image build -t react:app .` to build the docker container image
+2. run `docker container run -it -p 3000:3000 react:app` to make the app available in browser at `http://localhost:3000`
+3. alternatively, to use warm reloading run `docker container run -it -p 3000:3000 -p 35729:35729 -v $(pwd):/ react:app` which should force a webpage reload on document changes
