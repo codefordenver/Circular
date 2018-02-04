@@ -6,11 +6,9 @@ const Navbar = () => (
     <div className="container">
       <div className="row">
         <div className="col-md-9 navbar-header">
-          <p>
-            <Link className="home-link" to="/">
-              Recycling Request Tool
-            </Link>
-          </p>
+          <Link className="home-link" to="/">
+            <h1>Recycling Request Tool</h1>
+          </Link>
         </div>
       </div>
     </div>

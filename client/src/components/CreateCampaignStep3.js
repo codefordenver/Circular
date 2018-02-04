@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { createCampaign } from '../redux/actions/newCampaign';
 
-const CreateCampaignStep3 = (props) => {
+const CreateCampaignStep3 = props => {
   const { createCampaign, newCampaign, router } = props;
 
-  const makeNewCampaign = async (e) => {
+  const makeNewCampaign = async e => {
     e.preventDefault();
     console.log('newCampaign:', newCampaign);
     const { response } = await createCampaign(newCampaign);
