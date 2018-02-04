@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
+import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
 
@@ -30,6 +31,7 @@ class CampaignPage extends Component {
           )}
         <SignCampaign signatureObj={this.props.signature} />
         <SignatureList signatures={this.props.signature.signatures} />
+        <Discussion campaignID={this.props.params.id} />
       </div>
     );
   }

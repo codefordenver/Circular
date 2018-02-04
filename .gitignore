@@ -5,3 +5,5 @@ coverage
 tmp
 log
 .vscode
+cypress/videos
+cypress/screenshots

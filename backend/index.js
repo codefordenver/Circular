@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
@@ -7,10 +8,32 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./models/Campaign');
 require('./models/Signature');
+require('./models/Comment');
 
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI);
+if (process.env.NODE_ENV === 'test') {
+  const MongoInMemory = require('mongo-in-memory');
+
+  var port = 8000;
+  var mongoServerInstance = new MongoInMemory(port); //DEFAULT PORT is 27017
+
+  mongoServerInstance.start((error, config) => {
+    if (error) {
+      console.error(error);
+    } else {
+      //callback when server has started successfully
+
+      console.log('HOST ' + config.host);
+      console.log('PORT ' + config.port);
+
+      var mongouri = mongoServerInstance.getMongouri('myDatabaseName');
+      mongoose.connect(mongouri);
+    }
+  });
+} else {
+  mongoose.connect(keys.mongoURI);
+}
 
 const app = express();
 
@@ -27,6 +50,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/campaignRoutes')(app);
 require('./routes/signatureRoutes')(app);
+require('./routes/commentRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

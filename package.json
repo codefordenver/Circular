@@ -10,9 +10,14 @@
   "scripts": {
     "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
-    "client": "( cd ./client && yarn start)",
+    "client": "(cd ./client && yarn start)",
+    "cypress": "cypress",
+    "ci:start-app-for-test":
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
+    "ci:test": "cypress run -s cypress/integration/simple_spec.js",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "test-dev": "cross-env NODE_ENV=test yarn dev",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
     "heroku-postbuild":
@@ -38,10 +43,13 @@
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "path-parser": "^2.0.2"
+    "path-parser": "^2.0.2",
+    "serve": "^6.4.8"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "cross-env": "^5.1.1",
+    "cypress": "^1.0.3",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-react-app": "^2.0.1",
@@ -52,7 +60,8 @@
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
-    "prettier": "^1.8.2",
+    "mongo-in-memory": "0.0.5",
+    "prettier": "^1.10.0",
     "prettier-eslint": "^8.2.2",
     "prettier-eslint-cli": "^4.4.0"
   }

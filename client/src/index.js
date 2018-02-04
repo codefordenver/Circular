@@ -12,7 +12,7 @@ import { saveState } from './redux/localStorage';
 const store = configureStore();
 
 store.subscribe(() => {
-  saveState(store.getState());
+  saveState({ initialSearch: store.getState().initialSearch });
 });
 
 const history = syncHistoryWithStore(browserHistory, store);
