@@ -5,12 +5,12 @@ import { Link } from 'react-router';
 // import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
-const CreateCampaignStep1 = (props) => {
+const CreateCampaignStep1 = props => {
   const { initialSearch: { searchedAddress, error }, updateNewCampaign, router } = props;
 
   const formattedAddress = searchedAddress && searchedAddress.formatted_address;
 
-  const setAddressAndName = async (e) => {
+  const setAddressAndName = async e => {
     e.preventDefault();
     await updateNewCampaign({
       address: searchedAddress.formatted_address,
