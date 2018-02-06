@@ -11,7 +11,7 @@ function NewCampaign(props) {
 
   return (
     <div className="create_campaign_wrapper">
-      <h1 className="create_campaign_header">{'Let\'s create a campaign!'}</h1>
+      <h1 className="create_campaign_header">{"Let's create a campaign!"}</h1>
       <div className="create_campaign_breadcrumbs">
         {childRoutes.map(childRoute => (
           <Link to={`/new-campaign/${childRoute.path}`}>
@@ -24,9 +24,7 @@ function NewCampaign(props) {
           </Link>
         ))}
       </div>
-      <section className="create_campaign_subroute_wrapper">
-        {props.children}
-      </section>
+      <section className="create_campaign_subroute_wrapper">{props.children}</section>
     </div>
   );
 }

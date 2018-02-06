@@ -1,20 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-const Navbar = () => (
-  <nav className="navbar">
-    <div className="container">
-      <div className="row">
-        <div className="col-md-9 navbar-header">
-          <p>
+const Navbar = props => {
+  let homeText;
+  if (props.location.pathname === '/') {
+    homeText = 'RE:IMAGINE DENVER';
+  } else {
+    homeText = 'HOME';
+  }
+
+  return (
+    <nav className="navbar-component">
+      <div className="nav-bar-container">
+        <div className="nav-bar-row">
+          <p className="float-left">
             <Link className="home-link" to="/">
-              Recycling Request Tool
+              {homeText}
             </Link>
           </p>
+          <ul className="top-nav-list">
+            <li>
+              <Link className="fa" to="/about">
+                Why
+              </Link>
+            </li>
+            <li>
+              <Link className="fa" to="/tools">
+                Tools
+              </Link>
+            </li>
+            <li>
+              <Link className="fa" to="/who-are-we">
+                Who Are We
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+};
+
+Navbar.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired
+};
 
 export default Navbar;
