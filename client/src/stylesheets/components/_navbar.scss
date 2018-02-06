@@ -27,6 +27,11 @@
 .home-link {
   color: $mainwhite;
   text-decoration: none;
+
+  &:hover {
+    text-decoration:none;
+    color: $green-color;
+  }
 }
 
 .top-nav.navbar.navbar-default.navbar-fixed-top {
