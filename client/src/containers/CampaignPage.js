@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
@@ -21,35 +20,68 @@ class CampaignPage extends Component {
       <div className="">
         <div className="row">
           <div className="col-9 camp-main">
-            {campaign &&
-              campaign.address && (
-                <div className="row">
-                  <div className="col-7">
-                    <h1 className="campaign-page-name col-7 text-left">{campaign.name}</h1>
-                    <h2 className="campaign-page-address text-left">
-                      {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
-                      {loaded && campaign && campaign.address}
-                    </h2>
-                    <h4>CLASSIC PROPERTIES OF DENVER</h4>
-                    <h4>
-                      1620 E 6th Ave, Denver, CO 80218 <br /> (303) 355-4112
-                    </h4>
-                  </div>
-                  <div className="col-4 offset-md-1">
-                    <button className="btn btn-secondary btn-block">Facebook</button>
-                  </div>
-                </div>
-              )}
+            <div className="row">
+              <div className="col-6">
+                {campaign &&
+                  campaign.address && (
+                    <div>
+                      <div className="campaign-page-name">{campaign.name}</div>
+                      <div className="campaign-page-address">
+                        {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
+                        {loaded && campaign && campaign.address}
+                      </div>
+                    </div>
+                  )}
+              </div>
+              <div className="col-6">
+                <img
+                  id="mapImg"
+                  src="http://gws2.maps.yahoo.com/MapImage?appid=ysbs_map&mflags=y&zoom=15&imw=350&imh=250&street=3935+Dupont+Circle++Suite+A&city=+Louisville&state=+KY&zip=+40207"
+                  alt=""
+                />
+              </div>
+            </div>
             <div className="row ml-auto">
-              <h2 className="col"> SHARE YOUR CAMPAGIN: </h2>
-              <div className="col">
-                <button className="btn btn-secondary btn-block">Facebook</button>
+              <h2 className="col-3"> SHARE YOUR CAMPAGIN: </h2>
+              <div className="col-3">
+                <button className="large ui facebook button">
+                  <i className="facebook icon" />
+                  Facebook
+                </button>
               </div>
-              <div className="col">
-                <button className="btn btn-danger btn-block">Instagram</button>
+              <div className="col-3">
+                <button className="large ui instagram button">
+                  <i className="instagram icon" />
+                  Instagram
+                </button>
               </div>
-              <div className="col">
-                <button className="btn btn-success btn-block">Test</button>
+              <div className="col-3">
+                <button className="btn btn-secondary">
+                  <i className="twitter icon" />
+                  Twitter
+                </button>
+              </div>
+            </div>
+            <div className="row ml-auto">
+              <div>
+                <h2 className="col-4">TOOLS:</h2>
+                <ul className="toolList">
+                  <li>
+                    <span>Download a Flyer</span>
+                  </li>
+                  <li>
+                    <span>Level of Service Esimator</span>
+                  </li>
+                  <li>
+                    <span>Tips for Approaching Your Landlord</span>
+                  </li>
+                  <li>
+                    <span>Denver Recycling Facts</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="col-8">
+                <a> Hello </a>
               </div>
             </div>
           </div>

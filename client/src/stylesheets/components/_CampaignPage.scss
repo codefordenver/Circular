@@ -4,8 +4,28 @@
 }
 
 .campaign-page-address {
-	font-size: 30px;
+	font-size: 16px;
 	white-space: nowrap;
+}
+
+#mapImg {
+	width: 250px;
+	height: 200px;
+}
+
+#button1 {
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 500px;
+}
+
+.toolList {
+	list-style-type: disc;
+	color: $maingreen;
+}
+
+.toolList span {
+	color: white;
 }
 
 h1 {
