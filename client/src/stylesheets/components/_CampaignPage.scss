@@ -1,7 +1,35 @@
 .campaign-page-name {
-  font-size: 1.5em;
+	@include display-36-med;
+	background-color: $background-main;
 }
 
 .campaign-page-address {
-  font-size: 1em;
+	font-size: 30px;
+	white-space: nowrap;
+}
+
+h1 {
+	font-size: x-large;
+}
+
+.camp-main {
+	padding-top: 1em;
+	color: $mainwhite;
+	background-color: $background-main;
+	.row {
+		padding: 10px;
+	}
+}
+
+.sign-campaign-wrapper {
+	backgroud-color: $top-nav-color;
+}
+
+.col-3 {
+	padding: 0;
+}
+
+.camp-sm {
+	color: $main-blue;
+	background-color: #f7f7f7;
 }

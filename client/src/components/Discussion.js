@@ -19,9 +19,7 @@ class Discussion extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      nextProps.comments.commentsLoaded === true || nextProps.comments.fetchError !== undefined
-    );
+    return nextProps.comments.commentsLoaded === true || nextProps.comments.fetchError !== undefined;
   }
 
   renderMainPostBox() {
@@ -63,17 +61,13 @@ class Discussion extends Component {
   }
 
   renderError() {
-    return (
-      <div className="error-message">
-        {this.state.error ? 'You must be logged in to post!' : null}
-      </div>
-    );
+    return <div className="error-message">{this.state.error ? 'You must be logged in to post!' : null}</div>;
   }
 
   render() {
     return (
-      <div className="discussion">
-        <div className="discussion-header">COMMENTS</div>
+      <div className="col-10 offset-sm-1">
+        <div>COMMENTS</div>
         {this.renderMainPostBox()}
         {this.renderComments()}
       </div>
@@ -98,7 +92,7 @@ Discussion.propTypes = {
   fetchComments: PropTypes.func.isRequired
 };
 
-export default connect(
-  ({ activeCampaign, auth, comments }) => ({ activeCampaign, auth, comments }),
-  { fetchComments, postComment }
-)(Discussion);
+export default connect(({ activeCampaign, auth, comments }) => ({ activeCampaign, auth, comments }), {
+  fetchComments,
+  postComment
+})(Discussion);

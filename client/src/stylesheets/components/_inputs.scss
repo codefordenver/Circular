@@ -1,0 +1,18 @@
+@import '../base/_colors.scss';
+
+label input,
+textarea,
+.sign-campaign-input {
+	padding: 0.5rem;
+	font-size: 1rem;
+	border: solid 1px #ddd;
+	border-radius: 4px;
+	width: 100%;
+	color: $secondary-color;
+	&:hover,
+	&:active,
+	&:focus {
+		outline: 0; !important;
+		border: 1px solid $maingreen;
+	}
+}

@@ -1,5 +1,63 @@
+h1 {
+  background-color: $mainwhite;
+  padding: 0.75em;
+}
+
+.toUpperCase {
+  text-transform: uppercase;
+  color: $background-main;
+}
+
 h2 {
-  font-size: 150%;
+  font-size: 100%;
+  padding: 0.5em;
+  padding-left: 0;
+}
+
+.input {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.col-10 {
+  background-color: none;
+  .form-group label {
+    color: $background-main;
+    text-algin: left;
+    font-size: 12px;
+    .form-control {
+      display: inline;
+      outline: 0;
+      input {
+        min-width: 100%;
+        border-width: 0;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        color: $dark-gray;
+        box-sizing: border-box;
+        &:focus,
+        &:active {
+          outline: 0 !important;
+          border: 1px solid $maingreen;
+          box-sizing: border-box;
+          width: 100%;
+        }
+      }
+    }
+  }
+  .signup-camp {
+    color: $background-main;
+    h4 {
+      color: $dark-gray;
+      font-size: 12px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  &:focus,
+  &:active {
+    outline: 0 !important;
+  }
 }
 
 .error-message {
@@ -7,21 +65,25 @@ h2 {
 }
 
 .sign-campaign-wrapper {
-  margin: 1em 0em;
+  margin: 0em 0em;
+  border: 0px $main-gray;
 }
 
 .signature-wrapper {
   margin: 1em 0em;
+  padding: 1em;
 }
 
-.google-button-signature {
-  text-decoration: none;
+GoogleButton {
+  max-width: 208.75px;
 }
 
 .pure-button {
   font-family: inherit;
   font-size: 100%;
   padding: 0.5em 1em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
   color: white;
   border: 1px solid #999;
   border: transparent;
@@ -34,11 +96,7 @@ h2 {
 .pure-button:focus,
 .pure-button:hover {
   filter: alpha(opacity=90);
-  background-image: -webkit-linear-gradient(
-    transparent,
-    rgba(0, 0, 0, 0.05) 40%,
-    rgba(0, 0, 0, 0.1)
-  );
+  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
   background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
 }
 
@@ -48,15 +106,16 @@ h2 {
   border-color: #000\9;
 }
 
-.signature-list-down, .signature-list-up {
+.signature-list-down,
+.signature-list-up {
   position: relative;
   height: 1em;
   display: inline-block;
-  margin-bottom:.5em;
+  margin-bottom: 0.5em;
 }
 
 .signature-list-up:after {
-  content:'';
+  content: '';
   position: absolute;
   top: 110%;
   left: 0;
@@ -70,11 +129,11 @@ h2 {
 }
 
 .signature-list-hide {
-  display:none;
+  display: none;
 }
 
 .signature-list-down:after {
-  content:'';
+  content: '';
   position: absolute;
   top: 110%;
   left: 0;

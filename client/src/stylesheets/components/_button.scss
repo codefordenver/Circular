@@ -1,15 +1,54 @@
 @import '../base/_colors.scss';
 
-.btn {
-  padding: .5rem .75rem;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 1rem;
-  background-color: #aaa;
-  color: $mainwhite;
+// OPACTIY BUTTONS ARE 1 AND HOVER STATES ARE .8
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	// IE8 filter
+	$opacity-ie: ($opacity * 100);
+	filter: #{alpha(opacity=$opacity-ie)};
 }
 
-.btn-primary {
-  background-color: $maingreen;
+// BOX SHADOWS
+// @mixin box-shadow($shadow...) {
+// 	-webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+// 	box-shadow: $shadow;
+// }
+
+.btn {
+	@include opacity(0.8);
+	padding: 0.5rem 0.75rem;
+	border: none;
+	border-radius: 1px;
+	font-weight: 500;
+	font-size: 1rem;
+	color: $mainwhite;
+
+	&:hover,
+	&:hover,
+	&:focus,
+	&:active,
+	&:focus {
+		@include opacity(1);
+		outline: 0 !important;
+	}
+}
+
+.btn.btn-primary {
+	background-color: $btn-primary;
+	border-radius: 1px;
+}
+
+.btn.btn-secondary {
+	background-color: $btn-secondary;
+	border-radius: 1px;
+}
+
+btn.btn-success {
+	background-color: $btn-success;
+	border-radius: 1px;
+}
+
+btn.btn-danger {
+	background-color: $btn-danger;
+	border-radius: 1px;
 }
