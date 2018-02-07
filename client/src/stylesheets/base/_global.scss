@@ -56,9 +56,8 @@ $information-phone: 'only screen and (max-width : 800px)';
 }
 
 .app-container {
-  width: 90%;
+  width: 100%;
   margin: auto;
-  max-width: 1170px;
   margin-bottom: 25px;
 
   @media #{$information-phone} {

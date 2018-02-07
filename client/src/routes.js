@@ -13,6 +13,8 @@ import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
 // import NotFound from './containers/NotFound';
 import About from './containers/About';
+import Tools from './containers/Tools';
+import Collaboration from './containers/Collaboration';
 // import NotFound from './containers/NotFound'; -- TODO: Add back
 
 export default (
@@ -58,5 +60,10 @@ export default (
       getComponent={(location, callback) => callback(null, ManagerResources)}
     />
     <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
+    <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
+    <Route
+      path="/who-are-we"
+      getComponent={(location, callback) => callback(null, Collaboration)}
+    />
   </Route>
 );

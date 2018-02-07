@@ -1,67 +1,32 @@
-.google-oauth-button {
-  text-decoration: none;
-  position: absolute;
-  right: 0px;
-  bottom: -10px;
-}
-.row {
-  position: relative;
-}
 .navbar {
+  background-color: $secondary-color;
   height: 5rem;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
+  padding: 20px;
+
+  font-size: 2rem;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 500;
 }
 
 .container {
-  width: 90%;
-  max-width: 1170px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
+.row {
+  position: relative;
+  align-items: stretch;
+}
+
 .home-link {
-  color: $green-color;
-  font-size: 2rem;
-  font-family: 'Fira Sans Condensed', sans-serif;
-  font-weight: 700;
+  color: $mainwhite;
   text-decoration: none;
-}
-
-.info-icons {
-  background-color: $icon-row-color;
-  height: 150px;
-  text-align: center;
-  padding: 30px;
-}
-
-.fa {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.action-icon {
-  display: inline-block;
-  width: 150px;
-  text-align: center;
-  color: $green-color;
-}
-
-.property-manager {
-  background-color: $green-color;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
-
-.recycling-facts {
-  padding: 10px;
-  text-align: center;
-}
-
-.non-bold {
-  font-weight: 100;
 }
 
 .top-nav.navbar.navbar-default.navbar-fixed-top {
@@ -72,17 +37,29 @@
 }
 
 .top-nav-list {
-  color: $green-color;
   display: inline-block;
   list-style: none;
   text-align: right;
+  position: absolute;
+  right: 0px;
 }
 
 .top-nav-list > li {
-  color: $green-color;
+  float: left;
+}
+
+.top-nav-list > li > a {
+  color: $mainwhite;
   text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+
 }
 
 .top-nav-list > li > a:hover {
-  color: $secondary-color;
+  color: $green-color;
 }

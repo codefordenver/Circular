@@ -23,14 +23,22 @@ class SignCampaign extends Component {
     formSubmitEvent.preventDefault();
 
     const campaignId =
-      this.props.activeCampaign && this.props.activeCampaign.campaign && this.props.activeCampaign.campaign._id;
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
 
-    await this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
+    await this.props.addSignatureToCampaign(
+      this.props.auth._id,
+      this.selectedCheckboxes,
+      campaignId
+    );
 
     this.props.logSignerOut();
   };
 
-  createCheckbox = label => <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />;
+  createCheckbox = label => (
+    <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />
+  );
 
   createCheckboxes = () => {
     const checkboxes = ['Keep me updated on the status of this request'];
@@ -41,11 +49,16 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
-    if (this.props.auth && !this.props.auth.googleID) {
+    if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
       return (
-        <a className="google-button-signature" href="/auth/google">
-          <GoogleButton label="Google" />
-        </a>
+        <div>
+          <a className="google-button-signature" href="/auth/google">
+            <GoogleButton label="Google" />
+          </a>
+          <a className="facebook-button-signature" href="/auth/facebook">
+            Sign In With Facebook!
+          </a>
+        </div>
       );
     }
     return (
@@ -131,7 +144,8 @@ SignCampaign.propTypes = {
   }).isRequired,
   auth: PropTypes.shape({
     _id: PropTypes.string,
-    googleID: PropTypes.string
+    googleID: PropTypes.string,
+    facebookID: PropTypes.string
   }),
   activeCampaign: PropTypes.shape({
     campaign: PropTypes.shape({
