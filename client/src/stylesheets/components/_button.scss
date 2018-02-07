@@ -1,32 +1,6 @@
-@mixin btn($color) {
-	.btn {
-		display: inline-block;
-		text-align: center;
-		white-space: nowrap;
-		vertical-align: middle;
-		user-select: none;
-		outline: 0 !important;
-		backgrond-color: $color;
-
-		// Share hover and focus styles
-		&:focus,
-		&.focus {
-			outline: 0;
-			box-shadow: unset;
-			background-color: mix(white, $color, 10%);
-		}
-
-		// Disabled comes first so active can properly restyle
-		&.disabled,
-		&:disabled {
-			opacity: 0.65;
-			box-shadow: unset;
-		}
-
-		&:active,
-		&.active {
-			background-image: none;
-			box-shadow: unset;
-		}
+.btn.btn-warning {
+	color: $mainwhite;
+	&:active {
+		color: $mainwhite;
 	}
 }

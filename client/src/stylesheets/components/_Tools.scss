@@ -1,0 +1,27 @@
+.list-group-item {
+	background-color: $background-main;
+	border: none;
+	font-size: 75%;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.list-group-item .fa.fa-circle {
+	color: $maingreen;
+	font-size: 8px;
+}
+
+span i {
+	color: $mainwhite;
+	// font-size: 1rem;
+}
+
+.main-tools {
+	background-color: $main-gray;
+	padding: 9px;
+	border-radius: 3px;
+}
+
+.tool-list {
+	padding-left: 0;
+} 

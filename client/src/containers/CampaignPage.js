@@ -6,6 +6,9 @@ import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
+import CampaignStatus from '../components/CampaignStatus';
+import ShareCampaign from '../components/ShareCampaign';
+import Tools from '../components/Tools';
 import SignatureList from '../components/SignatureList';
 
 class CampaignPage extends Component {
@@ -41,48 +44,10 @@ class CampaignPage extends Component {
                 />
               </div>
             </div>
+            <ShareCampaign />
+            <CampaignStatus />
             <div className="row ml-auto">
-              <h2 className="col-3"> SHARE YOUR CAMPAGIN: </h2>
-              <div className="col-3">
-                <button className="large ui facebook button">
-                  <i className="facebook icon" />
-                  Facebook
-                </button>
-              </div>
-              <div className="col-3">
-                <button className="large ui instagram button">
-                  <i className="instagram icon" />
-                  Instagram
-                </button>
-              </div>
-              <div className="col-3">
-                <button className="btn btn-secondary">
-                  <i className="twitter icon" />
-                  Twitter
-                </button>
-              </div>
-            </div>
-            <div className="row ml-auto">
-              <div>
-                <h2 className="col-4">TOOLS:</h2>
-                <ul className="toolList">
-                  <li>
-                    <span>Download a Flyer</span>
-                  </li>
-                  <li>
-                    <span>Level of Service Esimator</span>
-                  </li>
-                  <li>
-                    <span>Tips for Approaching Your Landlord</span>
-                  </li>
-                  <li>
-                    <span>Denver Recycling Facts</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-8">
-                <a> Hello </a>
-              </div>
+              <Tools />
             </div>
           </div>
           <div className="col-3 camp-sm">
