@@ -60,7 +60,6 @@ class ChooseCampaign extends Component {
           className="list-group-item row p-0 mx-0 my-2 rounded-0 bg-clear border-clear nearby-address-item"
           key={c.address}
         >
-          <i className={`col-1 fa ${checkedClass}`} />
           <input
             type="radio"
             id={c.address}
@@ -68,9 +67,14 @@ class ChooseCampaign extends Component {
             checked={checked}
             onChange={this.handleOptionChange}
           />
-          <label className="col-10" htmlFor={c.address}>
-            {c.name ? <div>{c.name}</div> : ''}
-            {showAddress && c.address}
+          <label className="col-12" htmlFor={c.address}>
+            <div className="row">
+              <i className={`col-1 fa ${checkedClass}`} />
+              <div className="col-10 nearby-address-info">
+                {c.name ? <div>{c.name}</div> : ''}
+                {showAddress && c.address}
+              </div>
+            </div>
           </label>
         </li>
       );
@@ -80,20 +84,20 @@ class ChooseCampaign extends Component {
   }
 
   chooseAndRenderProperCampaignView = ({
-    loading,
-    loaded,
     nearbyCampaigns,
     selectedAddress,
-    searchedAddress
+    searchedAddress,
+    error
   } = {}) => {
-    if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
+    if (nearbyCampaigns && nearbyCampaigns.length !== 0) {
       if (nearbyCampaigns[0].address === searchedAddress.formatted_address) {
         return this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress);
       }
       return this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress);
-    } else if (!loading && nearbyCampaigns && nearbyCampaigns.length === 0) {
+    } else if (nearbyCampaigns && nearbyCampaigns.length === 0) {
       return this.renderNewCampaign();
     }
+    return this.renderError(error);
   };
 
   renderCampaignAlreadyExists = (nearbyCampaigns, selectedAddress) => (
@@ -152,7 +156,28 @@ class ChooseCampaign extends Component {
       </button>
     </div>
   );
-
+  renderLoading = () => (
+    <div className="loader">
+      <h1 className="loading-header">Searching for nearby campaigns...</h1>
+      <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
+    </div>
+  );
+  renderError = error => {
+    let specialtyMessage;
+    if (error) {
+      if (error.searchError) {
+        specialtyMessage = <p>An error occurred with the search</p>;
+      } else {
+        specialtyMessage = <p>An error occured</p>;
+      }
+    }
+    return (
+      <div>
+        {specialtyMessage}
+        <p>{error.userMessage}</p>
+      </div>
+    );
+  };
   render() {
     const {
       loading,
@@ -162,23 +187,13 @@ class ChooseCampaign extends Component {
       searchedAddress,
       error
     } = this.props;
-
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-5  p-0">
-            {loading && (
-              <div className="loader">
-                <h1 className="loading-header">Searching for nearby campaigns...</h1>
-                <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
-              </div>
-            )}
-            {!loading && (
-              <div className="text-white">
-                {!loading && error && error.searchError && <p>{error.userMessage}</p>}
-                {this.chooseAndRenderProperCampaignView(this.props)}
-              </div>
-            )}
+          <div className="col-12 col-md-5  p-0 text-white">
+            {!loading && !loaded && this.renderError(error)}
+            {loading && this.renderLoading()}
+            {loaded && this.chooseAndRenderProperCampaignView(this.props)}
           </div>
         </div>
       </div>
