@@ -163,21 +163,15 @@ class ChooseCampaign extends Component {
     </div>
   );
   renderError = error => {
-    let specialtyMessage;
-    if (error) {
-      if (error.searchError) {
-        specialtyMessage = <p>An error occurred with the search</p>;
-      } else {
-        specialtyMessage = <p>An error occured</p>;
-      }
+    if (error.searchError) {
+      return (
+        <div>
+          <p>{error.userMessage}</p>
+        </div>
+      );
     }
-    return (
-      <div>
-        {specialtyMessage}
-        <p>{error.userMessage}</p>
-      </div>
-    );
   };
+
   render() {
     const {
       loading,
@@ -191,8 +185,8 @@ class ChooseCampaign extends Component {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-12 col-md-5  p-0 text-white">
-            {!loading && !loaded && this.renderError(error)}
             {loading && this.renderLoading()}
+            {!loading && error && this.renderError(error)}
             {loaded && this.chooseAndRenderProperCampaignView(this.props)}
           </div>
         </div>
