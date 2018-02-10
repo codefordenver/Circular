@@ -84,17 +84,19 @@ class ChooseCampaign extends Component {
   }
 
   chooseAndRenderProperCampaignView = ({
+    loading,
+    loaded,
     nearbyCampaigns,
     selectedAddress,
     searchedAddress,
     error
   } = {}) => {
-    if (nearbyCampaigns && nearbyCampaigns.length !== 0) {
+    if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
       if (nearbyCampaigns[0].address === searchedAddress.formatted_address) {
         return this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress);
       }
       return this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress);
-    } else if (nearbyCampaigns && nearbyCampaigns.length === 0) {
+    } else if (!loading && nearbyCampaigns && nearbyCampaigns.length === 0) {
       return this.renderNewCampaign();
     }
     return this.renderError(error);
@@ -187,7 +189,7 @@ class ChooseCampaign extends Component {
           <div className="col-12 col-md-5  p-0 text-white">
             {loading && this.renderLoading()}
             {!loading && error && this.renderError(error)}
-            {loaded && this.chooseAndRenderProperCampaignView(this.props)}
+            {this.chooseAndRenderProperCampaignView(this.props)}
           </div>
         </div>
       </div>
