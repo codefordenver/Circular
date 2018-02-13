@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -25,7 +24,14 @@ class SignupForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('firstName: ' + this.state.firstName + ' lastName: ' + this.state.lastName + ' email: ' + this.state.email);
+    alert(
+      `firstName: ${
+        this.state.firstName
+      } lastName: ${
+        this.state.lastName
+      } email: ${
+        this.state.email}`
+    );
   }
 
   render() {

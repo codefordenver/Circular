@@ -1,4 +1,4 @@
-.navbar {
+.nav-bar-component {
   background-color: $secondary-color;
   height: 5rem;
   width: 100%;
@@ -13,13 +13,23 @@
   font-weight: 500;
 }
 
-.container {
+.nav-bar-container {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.row {
+.home-link {
+  color: $mainwhite;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: $green-color;
+  }
+}
+
+.nav-bar-row {
   position: relative;
   align-items: stretch;
 }
@@ -57,7 +67,6 @@
   font-size: inherit;
   font-family: inherit;
   font-weight: inherit;
-
 }
 
 .top-nav-list > li > a:hover {

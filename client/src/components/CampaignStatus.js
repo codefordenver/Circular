@@ -40,34 +40,3 @@ const CampaignStatus = () => (
 );
 
 export default CampaignStatus;
-
-{
-  /* <div>
-    <div className="row ml-auto flexy">
-      <h4 className="col-3">
-        Create Campaign
-        <ul className="complete">
-          <li />
-        </ul>
-      </h4>
-      <h4 className="col-3">
-        Gather Signature
-        <ul className="pending">
-          <li> test </li>
-        </ul>
-      </h4>
-      <h4 className="col-3">
-        Test
-        <ul className="pending">
-          <li> test </li>
-        </ul>
-      </h4>
-      <h4 className="col-3">
-        Test
-        <ul className="pending">
-          <li> test </li>
-        </ul>
-      </h4>
-    </div>
-  </div> */
-}
