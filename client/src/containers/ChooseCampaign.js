@@ -164,7 +164,9 @@ class ChooseCampaign extends Component {
       <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
     </div>
   );
+  /* eslint-disable consistent-return */
   renderError = error => {
+    /* eslint-enable */
     if (error && error.searchError) {
       return (
         <div>
@@ -175,12 +177,19 @@ class ChooseCampaign extends Component {
   };
 
   render() {
+    /*
+      no-unused-prop-types false positive when prop is used in function
+      https://github.com/yannickcr/eslint-plugin-react/issues/933
+
+      this bug also causing the no-unsued-vars to error even though
+      the props are passed into chooseAndRenderProperCampaignView
+    */
     const {
       loading,
-      loaded,
-      nearbyCampaigns,
-      selectedAddress,
-      searchedAddress,
+      loaded, // eslint-disable-line no-unused-vars
+      nearbyCampaigns, // eslint-disable-line no-unused-vars
+      selectedAddress, // eslint-disable-line no-unused-vars
+      searchedAddress, // eslint-disable-line no-unused-vars
       error
     } = this.props;
     return (
