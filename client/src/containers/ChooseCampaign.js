@@ -165,7 +165,7 @@ class ChooseCampaign extends Component {
     </div>
   );
   renderError = error => {
-    if (error.searchError) {
+    if (error && error.searchError) {
       return (
         <div>
           <p>{error.userMessage}</p>
@@ -183,7 +183,6 @@ class ChooseCampaign extends Component {
       searchedAddress,
       error
     } = this.props;
-    console.log(this.props);
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
