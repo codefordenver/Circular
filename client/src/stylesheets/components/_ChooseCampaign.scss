@@ -54,7 +54,6 @@
 
   label {
     height: 100%;
-    padding: 7px 5px;
     color: $mainwhite;
 
     i {
@@ -84,6 +83,10 @@
     top: 25%;
     margin-left: -7px;
   }
+}
+
+.nearby-address-info {
+  padding: 7px 5px;
 }
 
 .join-campaign-button {

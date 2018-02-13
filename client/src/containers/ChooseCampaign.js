@@ -57,7 +57,7 @@ class ChooseCampaign extends Component {
 
       return (
         <li
-          className="list-group-item row p-0 mx-0 my-2 rounded-0 bg-clear border-clear nearby-address-item"
+          className="list-group-item row p-0 mx-0 rounded-0 bg-clear border-clear nearby-address-item"
           key={c.address}
         >
           <input
@@ -183,6 +183,7 @@ class ChooseCampaign extends Component {
       searchedAddress,
       error
     } = this.props;
+    console.log(this.props);
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
