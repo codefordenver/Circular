@@ -1,6 +1,5 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 
@@ -33,28 +32,6 @@ passport.use(
         googleID: profile.id,
         name: profile.displayName,
         email: profile.emails[0].value
-      }).save();
-      done(null, user);
-    }
-  )
-);
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: keys.facebookAppId,
-      clientSecret: keys.facebookAppSecret,
-      callbackURL: '/auth/facebook/callback'
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await User.findOne({ facebookID: profile.id });
-      if (existingUser) {
-        return done(null, existingUser);
-      }
-      const user = await new User({
-        facebookID: profile.id,
-        name: profile.displayName,
-        email: profile.email
       }).save();
       done(null, user);
     }

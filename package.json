@@ -35,7 +35,7 @@
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "^1.18.2",
-    "concurrently": "^3.5.0",
+    "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
     "mongoose": "^4.12.3",
@@ -45,6 +45,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
+    "react-bootstrap": "^0.32.1",
     "serve": "^6.4.8"
   },
   "devDependencies": {
