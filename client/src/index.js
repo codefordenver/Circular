@@ -3,11 +3,18 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 import routes from './routes';
 import './stylesheets/main.css';
-
 import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
+
+import { Button, ControlLabel } from 'react-bootstrap';
+import { bootstrapUtils } from 'react-bootstrap/lib/utils';
+
+bootstrapUtils.addStyle(Button, ['main-green']);
+bootstrapUtils.addStyle(ControlLabel, 'remove-default');
 
 const store = configureStore();
 
