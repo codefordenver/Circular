@@ -5,13 +5,12 @@ import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import { ControlLabel } from 'react-bootstrap';
+import { bootstrapUtils } from 'react-bootstrap/lib/utils';
 import routes from './routes';
 import './stylesheets/main.css';
 import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
-
-import { ControlLabel } from 'react-bootstrap';
-import { bootstrapUtils } from 'react-bootstrap/lib/utils';
 
 bootstrapUtils.addStyle(ControlLabel, 'remove-default');
 
