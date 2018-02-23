@@ -9,7 +9,7 @@
   padding: 20px;
 
   font-size: 2rem;
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: "Fira Sans Condensed", sans-serif;
   font-weight: 500;
 }
 
@@ -29,7 +29,7 @@
   text-decoration: none;
 
   &:hover {
-    text-decoration:none;
+    text-decoration: none;
     color: $green-color;
   }
 }
@@ -62,7 +62,6 @@
   font-size: inherit;
   font-family: inherit;
   font-weight: inherit;
-
 }
 
 .top-nav-list > li > a:hover {

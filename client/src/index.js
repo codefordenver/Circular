@@ -10,10 +10,9 @@ import './stylesheets/main.css';
 import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
 
-import { Button, ControlLabel } from 'react-bootstrap';
+import { ControlLabel } from 'react-bootstrap';
 import { bootstrapUtils } from 'react-bootstrap/lib/utils';
 
-bootstrapUtils.addStyle(Button, ['main-green']);
 bootstrapUtils.addStyle(ControlLabel, 'remove-default');
 
 const store = configureStore();
