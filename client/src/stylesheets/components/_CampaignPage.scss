@@ -6,6 +6,16 @@
 	font-size: 1em;
 }
 
+.btn,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+	box-shadow: 2px 2px 1px $shadow;
+}
+
 .body {
 	margin: 0;
 	padding: 0;
