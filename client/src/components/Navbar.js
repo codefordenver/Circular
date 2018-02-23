@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-const Navbar = (props) => {
+const Navbar = props => {
   let homeText;
   if (props.location.pathname === '/') {
     homeText = 'RE:IMAGINE DENVER';
