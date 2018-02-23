@@ -31,6 +31,11 @@ const Navbar = props => {
               </Link>
             </li>
             <li>
+              <Link className="fa" to="/now-what">
+                Now What
+              </Link>
+            </li>
+            <li>
               <Link className="fa" to="/who-are-we">
                 Who Are We
               </Link>

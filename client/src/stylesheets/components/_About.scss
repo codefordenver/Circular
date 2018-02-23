@@ -1,4 +1,4 @@
-@import '../base/colors';
+@import "../base/colors";
 
 .about-container {
   color: $mainwhite;
@@ -22,4 +22,8 @@
 
 .about-link:hover {
   color: $hovergreen;
+}
+
+.about-ordered-list {
+  list-style-position: inside;
 }
