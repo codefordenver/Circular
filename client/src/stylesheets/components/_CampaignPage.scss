@@ -1,7 +1,143 @@
 .campaign-page-name {
-  font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 .campaign-page-address {
-  font-size: 1em;
+	font-size: 1em;
+}
+
+.body {
+	margin: 0;
+	padding: 0;
+}
+
+.top {
+	margin-top: 2vh;
+}
+
+.side-bar {
+	background-color: $light-gray;
+}
+
+.social-bar {
+	height: 10vh;
+	margin-top: 3vh;
+	margin-right: 2vw;
+}
+.status {
+	height: 15vh;
+}
+
+.map {
+	width: 250px;
+	height: 200px;
+	background-color: white;
+	margin-top: 2vh;
+}
+
+.tools {
+	margin-left: 2vw;
+	font-size: 14px;
+	& i {
+		color: $maingreen;
+		font-size: 8px;
+	}
+}
+
+.toolList {
+	margin: 5px;
+	i {
+		margin-right: 5px;
+	}
+}
+
+.btn i {
+	margin-right: 10px;
+}
+
+.btn.btn-facebook {
+	color: #fff;
+	background-color: $facebook-blue;
+	padding-left: 5px;
+	padding-right: 5px;
+	&:hover,
+	:focus {
+		background-color: darken($facebook-blue, 5%);
+		outline: 0 !important;
+		outline-color: transparent !important;
+	}
+	&:active {
+		background-color: darken($facebook-blue, 10%);
+		color: white;
+		outline: 0 !important;
+		outline-color: transparent !important;
+	}
+}
+
+.btn.btn-twitter {
+	color: #fff;
+	background-color: $twitter-blue;
+	padding-left: 5px;
+	padding-right: 5px;
+	&:hover,
+	:focus {
+		background-color: darken($twitter-blue, 5%);
+		outline: 0 !important;
+		outline-color: transparent !important;
+	}
+	&:active {
+		background-color: darken($twitter-blue, 10%);
+		color: white;
+		outline: 0 !important;
+		outline-color: transparent !important;
+	}
+}
+
+.btn.btn-text {
+	color: #fff;
+	background-color: $maingreen;
+	padding-left: 5px;
+	padding-right: 5px;
+	&:hover,
+	:focus {
+		background-color: darken($maingreen, 5%);
+		outline: 0 !important;
+		outline-color: transparent !important;
+	}
+	&:active {
+		background-color: darken($maingreen, 10%);
+		color: white;
+		outline: 0 !important;
+		outline-color: transparent !important;
+	}
+}
+
+.fa {
+	font-size: 1.2em;
+}
+
+.complete {
+	font-size: 1.5em;
+	color: $maingreen;
+}
+
+.share,
+.status {
+	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.status-child {
+		flex-direction: column;
+		text-align: center;
+		h5 {
+			font-size: 0.85em;
+			margin-top: 0;
+			margin-bottom: -3px;
+		}
+		p {
+			font-size: 0.65em;
+			margin-top: -7px;
+		}
+	}
 }
