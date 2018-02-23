@@ -1,65 +1,26 @@
 .navbar {
-  background-color: $secondary-color;
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-  padding: 20px;
+	&.navbar-default {
+		background-color: $dark-blue;
+		color: white;
+		border: none;
+		border-radius: 0;
+		margin-bottom: 0;
 
-  font-size: 2rem;
-  font-family: 'Fira Sans Condensed', sans-serif;
-  font-weight: 500;
+		.navbar-nav > li > a {
+			color: white;
+			&:hover {
+				color: $hovergreen;
+			}
+		}
+		.navbar-brand {
+			color: white;
+			&:hover {
+				color: $hovergreen;
+			}
+		}
+	}
 }
 
-.container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.row {
-  position: relative;
-  align-items: stretch;
-}
-
-.home-link {
-  color: $mainwhite;
-  text-decoration: none;
-}
-
-.top-nav.navbar.navbar-default.navbar-fixed-top {
-  background-color: $top-nav-color;
-  opacity: 10;
-  vertical-align: top;
-  z-index: 10000;
-}
-
-.top-nav-list {
-  display: inline-block;
-  list-style: none;
-  text-align: right;
-  position: absolute;
-  right: 0px;
-}
-
-.top-nav-list > li {
-  float: left;
-}
-
-.top-nav-list > li > a {
-  color: $mainwhite;
-  text-decoration: none;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  font-size: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-
-}
-
-.top-nav-list > li > a:hover {
-  color: $green-color;
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: white;
 }

@@ -12,10 +12,10 @@ const NavBar = props => {
   }
 
   return (
-    <Navbar className="NavBar" collapseOnSelect>
+    <Navbar collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#brand">{homeText}</a>
+          <Link to="./containers/Home">{homeText}</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
@@ -27,7 +27,10 @@ const NavBar = props => {
           <NavItem eventKey={2} href="#">
             Tools
           </NavItem>
-          <NavItem eventKey={2} href="#">
+          <NavItem eventKey={3} href="">
+            My Campaign
+          </NavItem>
+          <NavItem eventKey={4} href="">
             Who We Are
           </NavItem>
         </Nav>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoogleButton from 'react-google-button';
+import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
@@ -22,21 +23,17 @@ class SignCampaign extends Component {
     formSubmitEvent.preventDefault();
 
     const campaignId =
-      this.props.activeCampaign &&
-      this.props.activeCampaign.campaign &&
-      this.props.activeCampaign.campaign._id;
+      this.props.activeCampaign && this.props.activeCampaign.campaign && this.props.activeCampaign.campaign._id;
 
-    await this.props.addSignatureToCampaign(
-      this.props.auth._id,
-      this.selectedCheckboxes,
-      campaignId
-    );
+    await this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
 
     this.props.logSignerOut();
   };
 
   createCheckbox = label => (
-    <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />
+    <FormGroup>
+      <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} number="1" />
+    </FormGroup>
   );
 
   createCheckboxes = () => {
@@ -48,22 +45,39 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
+    function FieldGroup({ id, label, ...props }) {
+      return (
+        <FormGroup controlId={id}>
+          <ControlLabel>{label}</ControlLabel>
+          <FormControl {...props} />
+        </FormGroup>
+      );
+    }
     if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
       return (
-        <div>
-          <a className="google-button-signature" href="/auth/google">
-            <GoogleButton label="Google" />
-          </a>
-          <a className="facebook-button-signature" href="/auth/facebook">
-            Sign In With Facebook!
-          </a>
-        </div>
+        <Row>
+          <Col md={12}>
+            <a className="google-button-signature" href="/auth/google">
+              <GoogleButton label="Google" />
+            </a>
+            <h5 className="content text-center">OR</h5>
+            <a className="google-button-signature" href="/auth/google">
+              <GoogleButton label="Google" />
+            </a>
+            <h5 className="content text-center">OR</h5>
+            <form>
+              <FieldGroup type="text" label="First Name:" required />
+              <FieldGroup type="text" label="Last Name:" required />
+              <FieldGroup type="email" label="Email:" required />
+            </form>
+          </Col>
+        </Row>
       );
     }
     return (
-      <button className="btn" type="submit">
+      <Button className="btn" type="submit">
         Sign the petition
-      </button>
+      </Button>
     );
   };
 
@@ -78,29 +92,45 @@ class SignCampaign extends Component {
   }
   renderContent() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12">
-            <form onSubmit={this.handleFormSubmit}>
-              {this.createCheckboxes()}
-              {this.checkSignIn()}
-            </form>
-          </div>
-        </div>
-      </div>
+      <Row>
+        <Col md={10} mdOffset={1}>
+          <h4>Sign In With:</h4>
+          <form onSubmit={this.handleFormSubmit}>
+            {this.createCheckboxes()}
+            {this.checkSignIn()}
+          </form>
+        </Col>
+      </Row>
+    );
+  }
+
+  renderImSigning() {
+    return (
+      <Row>
+        <Col md={10} mdOffset={1}>
+          <FormGroup controlId="signingBecause">
+            <ControlLabel id="control-label">
+              <h4>I'm signing because...</h4>
+            </ControlLabel>
+            <FormControl componentClass="textarea" placeholder="Optional" />
+          </FormGroup>
+        </Col>
+      </Row>
     );
   }
 
   render() {
     return (
-      <div className="sign-campaign-wrapper">
-        <h1>Yes, I Want Recycling!</h1>
-        {this.renderError()}
-        <div className="sign-campaign-signature-button">
-          <div>Sign with:</div>
-        </div>
-        <div>{this.renderContent()}</div>
-      </div>
+      <Row className="show-grid">
+        <Col md={12} className="resets">
+          <div className="sig-head">
+            <h2 className="content text-center">Yes, I Want Recycling!</h2>
+            {this.renderError()}
+          </div>
+          <div>{this.renderImSigning()}</div>
+          <div>{this.renderContent()}</div>
+        </Col>
+      </Row>
     );
   }
 }
