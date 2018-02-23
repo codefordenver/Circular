@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-const NavBar = props => {
+const Navbar = props => {
   let homeText;
   if (props.location.pathname === '/') {
     homeText = 'RE:IMAGINE DENVER';
@@ -12,34 +11,41 @@ const NavBar = props => {
   }
 
   return (
-    <Navbar className="NavBar" collapseOnSelect>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <a href="#brand">{homeText}</a>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav pullRight>
-          <NavItem eventKey={1} href="#">
-            Why
-          </NavItem>
-          <NavItem eventKey={2} href="#">
-            Tools
-          </NavItem>
-          <NavItem eventKey={2} href="#">
-            Who We Are
-          </NavItem>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <nav className="navbar">
+      <div className="container">
+        <div className="row">
+          <p>
+            <Link className="home-link" to="/">
+              {homeText}
+            </Link>
+          </p>
+          <ul className="top-nav-list">
+            <li>
+              <Link className="fa" to="/about">
+                Why
+              </Link>
+            </li>
+            <li>
+              <Link className="fa" to="/tools">
+                Tools
+              </Link>
+            </li>
+            <li>
+              <Link className="fa" to="/who-are-we">
+                Who Are We
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 
-NavBar.propTypes = {
+Navbar.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired
 };
 
-export default NavBar;
+export default Navbar;
