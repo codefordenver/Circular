@@ -163,3 +163,18 @@ table {
   vertical-align: baseline;
   border-radius: inherit;
 }
+
+.btn-remove-default {
+  background-color: none;
+}
+
+// REMOVES HTML AND BOOTSTRAP BLUE OUTLINE
+.btn,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: 0;
+}
