@@ -14,6 +14,7 @@ import ManagerResources from './containers/ManagerResources';
 // import NotFound from './containers/NotFound';
 import About from './containers/About';
 import Tools from './containers/Tools';
+import NowWhat from './containers/NowWhat';
 import Collaboration from './containers/Collaboration';
 // import NotFound from './containers/NotFound'; -- TODO: Add back
 
@@ -60,6 +61,7 @@ export default (
       getComponent={(location, callback) => callback(null, ManagerResources)}
     />
     <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
+    <Route path="/now-what" getComponent={(location, callback) => callback(null, NowWhat)} />
     <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
     <Route
       path="/who-are-we"
