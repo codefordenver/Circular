@@ -55,7 +55,7 @@ class ChooseCampaign extends Component {
         checked = c.address === 'none';
       }
       const showAddress = c.address !== 'none';
-      const checkedClass = checked ? 'fa-check-circle-o' : 'fa-circle-thin';
+      const checkedClass = checked ? 'fa-check-circle-o' : 'fa-circle-o';
 
       return (
         <Row>
@@ -96,28 +96,9 @@ class ChooseCampaign extends Component {
     );
   }
 
-  chooseAndRenderProperCampaignView = ({
-    loading,
-    loaded,
-    nearbyCampaigns,
-    selectedAddress,
-    searchedAddress,
-    error
-  } = {}) => {
-    if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
-      if (nearbyCampaigns[0].address === searchedAddress.formatted_address) {
-        return this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress);
-      }
-      return this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress);
-    } else if (!loading && nearbyCampaigns && nearbyCampaigns.length === 0) {
-      return this.renderNewCampaign();
-    }
-    return this.renderError(error);
-  };
-
   renderCampaignAlreadyExists = (nearbyCampaigns, selectedAddress) => (
     <div>
-      <form className="">
+      <form>
         {this.renderAddressHeading('Your address already has a campaign.', 'Is this your address?')}
         {this.buildNearbyCampaignList(nearbyCampaigns, selectedAddress)}
         {this.renderSubmitButton('JOIN CAMPAIGN')}
@@ -129,10 +110,9 @@ class ChooseCampaign extends Component {
       </form>
     </div>
   );
-
   renderNearbyCampaigns = (nearbyCampaigns, selectedAddress) => (
     <div>
-      <form className="">
+      <form>
         {this.renderAddressHeading('We found some campaigns nearby!')}
         {this.buildNearbyCampaignList(
           nearbyCampaigns,
@@ -163,13 +143,13 @@ class ChooseCampaign extends Component {
     <Row>
       <Col xs={12}>
         <Button
+          bsStyle="remove-default"
           className="join-campaign-button"
           type="submit"
           onClick={this.handleFormSubmit}
           block
         >
-          {submitText}
-          <i className="fa fa-arrow-right" />
+          {submitText} <i className="fa fa-arrow-right" />
         </Button>
       </Col>
     </Row>
@@ -193,19 +173,12 @@ class ChooseCampaign extends Component {
   };
 
   render() {
-    /*
-      no-unused-prop-types false positive when prop is used in function
-      https://github.com/yannickcr/eslint-plugin-react/issues/933
-
-      this bug also causing the no-unsued-vars to error even though
-      the props are passed into chooseAndRenderProperCampaignView
-    */
     const {
       loading,
-      loaded, // eslint-disable-line no-unused-vars
-      nearbyCampaigns, // eslint-disable-line no-unused-vars
-      selectedAddress, // eslint-disable-line no-unused-vars
-      searchedAddress, // eslint-disable-line no-unused-vars
+      loaded,
+      nearbyCampaigns,
+      selectedAddress,
+      searchedAddress,
       error
     } = this.props;
 
@@ -215,7 +188,23 @@ class ChooseCampaign extends Component {
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
             {loading && this.renderLoading()}
             {!loading && error && this.renderError(error)}
-            {this.chooseAndRenderProperCampaignView(this.props)}
+            {/* if no longer loading and not erroring then
+            render one of the following three depending
+             on the status of nearby campaign */}
+            {loaded &&
+              nearbyCampaigns &&
+              nearbyCampaigns.length !== 0 &&
+              nearbyCampaigns[0].address === searchedAddress.formatted_address &&
+              this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress)}
+            {loaded &&
+              nearbyCampaigns &&
+              nearbyCampaigns.length !== 0 &&
+              nearbyCampaigns[0].address !== searchedAddress.formatted_address &&
+              this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress)}
+            {!loading &&
+              nearbyCampaigns &&
+              nearbyCampaigns.length === 0 &&
+              this.renderNewCampaign()}
           </Col>
         </Row>
       </Grid>

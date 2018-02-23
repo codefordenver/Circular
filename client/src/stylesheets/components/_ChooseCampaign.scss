@@ -63,10 +63,10 @@
     .nearby-address-info {
       margin-bottom: 5px;
     }
-    &:hover .nearby-address-info {
-      background-color: $green-color;
+    &:hover {
+      cursor: pointer;
     }
-    i:hover ~ .nearby-address-info {
+    &:hover .nearby-address-info {
       background-color: $green-color;
     }
   }
@@ -90,4 +90,15 @@
 
 .join-campaign-button {
   background-color: $green-color; // override bootstrap .btn background-color
+  &:hover {
+    background-color: darken($green-color, 5%);
+    color: inherit;
+  }
+  &:active {
+    background-color: darken($green-color, 10%);
+    color: inherit;
+  }
+  &:focus {
+    color: inherit;
+  }
 }
