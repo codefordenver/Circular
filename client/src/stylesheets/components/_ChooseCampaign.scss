@@ -47,12 +47,12 @@
   input {
     display: none;
 
-    &:checked + label .nearby-address-info {
+    &:checked .control-label .nearby-address-info {
       background-color: $green-color;
     }
   }
 
-  label {
+  .control-label {
     height: 100%;
     color: $mainwhite;
 
@@ -71,17 +71,16 @@
     }
   }
 
-  .fa-check {
+  .fa-check-circle-o {
     color: $green-color;
   }
   .fa-circle-thin:before,
-  .fa-check:before {
+  .fa:before {
     /*
      vertical-align: middle was not working no matter where I put it so I used this janky solution to stop being  blocked
     */
     position: absolute;
     top: 25%;
-    margin-left: -7px;
   }
 }
 
@@ -90,5 +89,5 @@
 }
 
 .join-campaign-button {
-  background-color: $green-color !important; // override bootstrap .btn background-color
+  background-color: $green-color; // override bootstrap .btn background-color
 }

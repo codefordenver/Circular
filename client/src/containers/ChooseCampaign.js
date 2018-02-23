@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { selectAddress } from '../redux/actions/initialSearch';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import AutoSuggestInput from '../components/AutoSuggestInput';
+import { Grid, Row, Col, Button, ListGroup, ControlLabel, ListGroupItem } from 'react-bootstrap';
 
 class ChooseCampaign extends Component {
   constructor(props) {
@@ -53,34 +54,45 @@ class ChooseCampaign extends Component {
         checked = c.address === 'none';
       }
       const showAddress = c.address !== 'none';
-      const checkedClass = checked ? 'fa-check' : 'fa-circle-thin';
+      const checkedClass = checked ? 'fa-check-circle-o' : 'fa-circle-thin';
 
       return (
-        <li
-          className="list-group-item row p-0 mx-0 rounded-0 bg-clear border-clear nearby-address-item"
-          key={c.address}
-        >
-          <input
-            type="radio"
-            id={c.address}
-            value={c.address}
-            checked={checked}
-            onChange={this.handleOptionChange}
-          />
-          <label className="col-12" htmlFor={c.address}>
-            <div className="row">
-              <i className={`col-1 fa ${checkedClass}`} />
-              <div className="col-10 nearby-address-info">
-                {c.name ? <div>{c.name}</div> : ''}
-                {showAddress && c.address}
-              </div>
-            </div>
-          </label>
-        </li>
+        <Row>
+          <ListGroupItem
+            className="p-0 mx-0 rounded-0 bg-clear border-clear nearby-address-item"
+            key={c.address}
+          >
+            <input
+              type="radio"
+              id={c.address}
+              value={c.address}
+              checked={checked}
+              onChange={this.handleOptionChange}
+            />
+            <Col xs={12}>
+              <ControlLabel bsStyle="remove-default" htmlFor={c.address}>
+                {/* turn it into a flexbox */}
+                <Row>
+                  <Col xs={1}>
+                    <i className={`fa ${checkedClass}`} />
+                  </Col>
+                  <Col xs={10} className="nearby-address-info mx-10">
+                    {c.name ? <div>{c.name}</div> : ''}
+                    {showAddress && c.address}
+                  </Col>
+                </Row>
+              </ControlLabel>
+            </Col>
+          </ListGroupItem>
+        </Row>
       );
     });
 
-    return <ul className="list-group my-2 nearby-address-list">{nearbyCampaignListItems}</ul>;
+    return (
+      <ListGroup className="list-group my-10 nearby-address-list">
+        {nearbyCampaignListItems}
+      </ListGroup>
+    );
   }
 
   chooseAndRenderProperCampaignView = ({
@@ -108,11 +120,11 @@ class ChooseCampaign extends Component {
         {this.renderAddressHeading('Your address already has a campaign.', 'Is this your address?')}
         {this.buildNearbyCampaignList(nearbyCampaigns, selectedAddress)}
         {this.renderSubmitButton('JOIN CAMPAIGN')}
-        <div className="row justify-content-center">
-          <div className="col-11 padding-box">
+        <Row>
+          <Col xs={12} className="padding-box">
             <AutoSuggestInput />
-          </div>
-        </div>
+          </Col>
+        </Row>
       </form>
     </div>
   );
@@ -141,22 +153,25 @@ class ChooseCampaign extends Component {
     </div>
   );
   renderAddressHeading = (headingTitle, subTitle) => (
-    <div className="py-3 text-center">
-      <h1 className="new-address-heading py-3">{headingTitle}</h1>
-      {subTitle && <h2 className="new-address-sub-heading py-3">{subTitle}</h2>}
+    <div className="py-15 text-center">
+      <h1 className="new-address-heading py-15">{headingTitle}</h1>
+      {subTitle && <h2 className="new-address-sub-heading py-15">{subTitle}</h2>}
     </div>
   );
   renderSubmitButton = submitText => (
-    <div className="row justify-content-center">
-      <button
-        className="col-10 btn p-3 rounded-0 join-campaign-button"
-        type="submit"
-        onClick={this.handleFormSubmit}
-      >
-        {submitText}
-        <i className="fa fa-arrow-right" />
-      </button>
-    </div>
+    <Row>
+      <Col xs={12}>
+        <Button
+          className="join-campaign-button"
+          type="submit"
+          onClick={this.handleFormSubmit}
+          block
+        >
+          {submitText}
+          <i className="fa fa-arrow-right" />
+        </Button>
+      </Col>
+    </Row>
   );
   renderLoading = () => (
     <div className="loader">
@@ -192,16 +207,17 @@ class ChooseCampaign extends Component {
       searchedAddress, // eslint-disable-line no-unused-vars
       error
     } = this.props;
+
     return (
-      <div className="container-fluid">
-        <div className="row justify-content-center">
-          <div className="col-12 col-md-5  p-0 text-white">
+      <Grid fluid>
+        <Row>
+          <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
             {loading && this.renderLoading()}
             {!loading && error && this.renderError(error)}
             {this.chooseAndRenderProperCampaignView(this.props)}
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
