@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoogleButton from 'react-google-button';
 import Checkbox from './SignatureCheckbox';
+import SignupForm from './SignupForm';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
@@ -78,28 +79,52 @@ class SignCampaign extends Component {
   }
   renderContent() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12">
-            <form onSubmit={this.handleFormSubmit}>
-              {this.createCheckboxes()}
-              {this.checkSignIn()}
-            </form>
-          </div>
-        </div>
+      <div className="">
+        <form onSubmit={this.handleFormSubmit}>
+          {this.createCheckboxes()}
+          {this.checkSignIn()}
+        </form>
       </div>
     );
   }
 
   render() {
     return (
-      <div className="sign-campaign-wrapper">
-        <h1>Yes, I Want Recycling!</h1>
-        {this.renderError()}
-        <div className="sign-campaign-signature-button">
-          <div>Sign with:</div>
+      <div className="sign-campaign-wrapper text-center">
+        <h1 className="toUpperCase">Yes, I Want Recycling!</h1>
+        <div className="col-10 offset-md-1 text-left">
+          {this.renderError()}
+          <h2 className="toUpperCase">I'm Signing Because</h2>
+          <div className="form-group">
+            <label htmlFor="sign-campaign-input" />
+            <textarea
+              className="form-control sign-campaign-input"
+              id="sign-campaign-input"
+              placeholder="Optional"
+              rows="2"
+            />
+            <div className="">
+              <h2 className="toUpperCase signup-camp">Signin with:</h2>
+            </div>
+          </div>
+          <GoogleButton
+            onClick={() => {
+              alert('button clicked');
+            }}
+          />
+          <div className="signup-camp text-center">
+            <h4>- OR -</h4>
+          </div>
+          <GoogleButton
+            onClick={() => {
+              alert('button clicked');
+            }}
+          />
+          <div className="signup-camp text-center">
+            <h4>- OR -</h4>
+          </div>
+          <SignupForm />
         </div>
-        <div>{this.renderContent()}</div>
       </div>
     );
   }

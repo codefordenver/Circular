@@ -11,10 +11,10 @@ const Navbar = props => {
   }
 
   return (
-    <nav className="navbar">
-      <div className="container">
-        <div className="row">
-          <p>
+    <nav className="nav-bar-component">
+      <div className="nav-bar-container">
+        <div className="nav-bar-row">
+          <p className="float-left">
             <Link className="home-link" to="/">
               {homeText}
             </Link>

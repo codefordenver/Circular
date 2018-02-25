@@ -1,0 +1,21 @@
+.pending {
+	color: $mainwhite;
+}
+
+.complete {
+	color: $maingreen;
+}
+
+h4 {
+	font-size: 80%;
+	white-space: nowrap;
+}
+.col-3 {
+	box-sizing: border-box;
+}
+
+// .flexy .col-3 {
+// 	display: flex;
+// 	justify-content: space-evenly;
+// 	align-itmes: center;
+// }

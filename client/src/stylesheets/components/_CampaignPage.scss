@@ -1,7 +1,53 @@
 .campaign-page-name {
-  font-size: 1.5em;
+	@include display-36-med;
+	background-color: $background-main;
 }
 
 .campaign-page-address {
-  font-size: 1em;
+	font-size: 16px;
+	white-space: nowrap;
+}
+
+#mapImg {
+	width: 300px;
+	height: 150px;
+}
+
+.toolList {
+	list-style-type: disc;
+	color: $maingreen;
+}
+
+.toolList span {
+	color: white;
+}
+
+h1 {
+	font-size: x-large;
+}
+
+div .row {
+	padding: 0;
+}
+
+.camp-main {
+	padding-top: 1em;
+	color: $mainwhite;
+	background-color: $background-main;
+	.row {
+		padding: 10px;
+	}
+}
+
+.sign-campaign-wrapper {
+	backgroud-color: $top-nav-color;
+}
+
+.col-3 {
+	padding: 0;
+}
+
+.camp-sm {
+	color: $main-blue;
+	background-color: #f7f7f7;
 }

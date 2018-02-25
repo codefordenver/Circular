@@ -3,17 +3,32 @@ $mainwhite: #fff;
 $hovergreen: #08cc91;
 
 $dark-blue: #164c5f;
+$main-blue: #164c5f;
 $top-nav-color: #fdfffd;
 $secondary-color: #214552;
+$background-main: #0c6f91;
 $green-color: #25c890;
 $icon-row-color: #e3e3e3;
+$main-gray: #f6f6f6;
+$light-gray: #dbdfe4;
+$dark-gray: #5d726d;
 
 //comments
-$light-gray: #dbdfe4;
-$mobile-hero-image: "../static/assets/512px_Denver_Skyline.jpg";
-$desktop-hero-image: "../static/assets/1024px_Denver_Skyline.jpg";
-$step1_imgage: "../static/assets/megaphone.png";
-$step2_imgage: "../static/assets/people.png";
-$step3_imgage: "../static/assets/request.png";
-$step4_imgage: "../static/assets/recycle.png";
-$link_arrow: "../static/assets/arrow_right.png";
+$mobile-hero-image: '../static/assets/512px_Denver_Skyline.jpg';
+$desktop-hero-image: '../static/assets/1024px_Denver_Skyline.jpg';
+$step1_imgage: '../static/assets/megaphone.png';
+$step2_imgage: '../static/assets/people.png';
+$step3_imgage: '../static/assets/request.png';
+$step4_imgage: '../static/assets/recycle.png';
+$link_arrow: '../static/assets/arrow_right.png';
+
+// BUTTONS
+$btn-primary: #164c5f;
+$btn-secondary: #4688f1;
+$btn-success: #25c890;
+$btn-danger: red;
+$btn-second: #4688f1;
+// $btn-info:
+// $btn-light:
+// $btn-dark:
+// $btn-link:
