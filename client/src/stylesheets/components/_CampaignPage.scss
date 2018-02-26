@@ -1,9 +1,23 @@
 .campaign-page-name {
 	font-size: 1.5em;
+	color: white;
+	margin-left: 1em;
+}
+
+.container {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+row {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .campaign-page-address {
 	font-size: 1em;
+	color: white;
+	margin-left: 1em;
 }
 
 .btn,
@@ -19,23 +33,32 @@
 .body {
 	margin: 0;
 	padding: 0;
+	margin-bottom: 7rem;
 }
 
 .top {
-	margin-top: 2vh;
+	margin-top: 3em;
 }
 
 .side-bar {
 	background-color: $light-gray;
 }
 
-.social-bar {
-	height: 10vh;
-	margin-top: 3vh;
-	margin-right: 2vw;
-}
-.status {
-	height: 15vh;
+.status-bar {
+	.status h5 {
+		margin-bottom: o;
+	}
+	.status p {
+		font-size: 80%;
+	}
+	.status .status-date {
+		h3 {
+			font-size: 40px;
+		}
+		p {
+			text-transform: uppercase;
+		}
+	}
 }
 
 .map {
@@ -46,7 +69,6 @@
 }
 
 .tools {
-	margin-left: 2vw;
 	font-size: 14px;
 	& i {
 		color: $maingreen;
@@ -131,23 +153,69 @@
 	color: $maingreen;
 }
 
-.share,
-.status {
-	text-transform: uppercase;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	.status-child {
-		flex-direction: column;
+@media (max-width: 992px) {
+	.address {
+		padding-top: 1em;
+		padding-bottom: 1em;
+		max-width: 80%;
+		margin: auto;
 		text-align: center;
-		h5 {
-			font-size: 0.85em;
-			margin-top: 0;
-			margin-bottom: -3px;
+		color: white;
+	}
+	.center-block {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		float: unset;
+	}
+
+	.map {
+		margin: auto;
+	}
+
+	.share {
+		text-transform: uppercase;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.share-buttons {
+		max-width: 90%;
+		margin: auto;
+	}
+
+	.btn {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.tools {
+		font-size: 14px;
+		text-align: center;
+		margin-left: 8.3333333333%;
+		margin-bottom: 3em;
+		& i {
+			color: $maingreen;
+			font-size: 8px;
 		}
-		p {
-			font-size: 0.65em;
-			margin-top: -7px;
+	}
+
+	.status {
+		margin-top: 1.5em;
+	}
+
+	.status-bar {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		font-size: 0.85em;
+	}
+
+	.status-child {
+		margin-top: 0.5rem;
+		p,
+		i,
+		h3 {
+			font-size: 2.5rem;
 		}
 	}
 }

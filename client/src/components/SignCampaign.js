@@ -23,9 +23,15 @@ class SignCampaign extends Component {
     formSubmitEvent.preventDefault();
 
     const campaignId =
-      this.props.activeCampaign && this.props.activeCampaign.campaign && this.props.activeCampaign.campaign._id;
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
 
-    await this.props.addSignatureToCampaign(this.props.auth._id, this.selectedCheckboxes, campaignId);
+    await this.props.addSignatureToCampaign(
+      this.props.auth._id,
+      this.selectedCheckboxes,
+      campaignId
+    );
 
     this.props.logSignerOut();
   };
@@ -127,8 +133,10 @@ class SignCampaign extends Component {
             <h2 className="content text-center">Yes, I Want Recycling!</h2>
             {this.renderError()}
           </div>
-          <div>{this.renderImSigning()}</div>
-          <div>{this.renderContent()}</div>
+          <div className="side-wrap">
+            <div>{this.renderImSigning()}</div>
+            <div>{this.renderContent()}</div>
+          </div>
         </Col>
       </Row>
     );

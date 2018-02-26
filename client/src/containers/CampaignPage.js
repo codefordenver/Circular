@@ -17,7 +17,11 @@ class CampaignPage extends Component {
   }
 
   render() {
-    const tools = ['Download a flyer', 'Tips for Approaching your Landlord', 'Denver Recycling Facts'];
+    const tools = [
+      'Download a flyer',
+      'Tips for Approaching your Landlord',
+      'Denver Recycling Facts'
+    ];
     const toolsList = tools.map(tool => (
       <li className="toolList">
         <i className="fa fa-circle" aria-hidden="true" />
@@ -26,12 +30,12 @@ class CampaignPage extends Component {
     ));
     const { activeCampaign: { loading, loaded, campaign } } = this.props;
     return (
-      <Grid fluid>
-        <Row className="show-grid">
-          <Col lg={9} sm={12} className="body">
+      <Grid className="">
+        <Row>
+          <Col md={9} xs={12} className="body">
             <Row className="show-grid">
-              <Col lg={7} sm={12} className="top">
-                <h4>
+              <Col md={7} xs={12} className="top center-block">
+                <h4 className="address">
                   {campaign &&
                     campaign.address && (
                       <div>
@@ -44,85 +48,91 @@ class CampaignPage extends Component {
                     )}
                 </h4>
               </Col>
-              <Col className="map" md={3} lgPush={1}>
+              <Col className="map center-block" md={3} mdPush={1} xs={12}>
                 <ApartmentMap />
               </Col>
             </Row>
-            <Row className="show-grid">
+            <Row className="show-grid top">
               <Col className="social-bar" md={12} xs={12}>
-                <Row>
-                  <Col className="share center-text" md={3} xs={3}>
-                    <h3>Share Your Campaign:</h3>
-                  </Col>
-                  <Col md={3} xs={3}>
+                <Col md={3} xs={12} className="text-center share">
+                  <p className="vcenter">Share Your Campaign</p>
+                </Col>
+                <div className="share-buttons">
+                  <Col md={3} xs={6}>
                     <Button className="btn btn-facebook" block>
                       <i className="fa fa-facebook-square " />Facebook
                     </Button>
                   </Col>
-                  <Col md={3} xs={3}>
+                  <Col md={3} xs={6}>
                     <Button className="btn btn-twitter" block>
                       <i className="fa fa-twitter-square" />Tweet
                     </Button>
                   </Col>
-                  <Col md={3} xs={3}>
+                  <Col md={3} xs={12}>
                     <Button className="btn btn-text" block>
                       <i className="fa fa-comment" />
                       Text a Link
                     </Button>
                   </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row className="show-grid">
-              <Col className="status" md={2}>
-                <div className="status-child">
-                  <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                  <h5>December 5</h5>
-                  <p>Campaign Created</p>
-                </div>
-              </Col>
-              <Col className="status" md={2}>
-                <div className="status-child">
-                  <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                  <h5>December 12</h5>
-                  <p>Print Flyers</p>
-                </div>
-              </Col>
-              <Col className="status" md={2}>
-                <div className="status-child">
-                  <i className="fa fa-circle-o" aria-hidden="true" />
-                  <h5>December 19</h5>
-                  <p>Final Signatures</p>
-                </div>
-              </Col>
-              <Col className="status" md={2}>
-                <div className="status-child">
-                  <i className="fa fa-circle-o" aria-hidden="true" />
-                  <h5>December 26</h5>
-                  <p>Request Recycling</p>
-                </div>
-              </Col>
-              <Col className="status" md={3}>
-                <div className="status-child date">
-                  <h3>10</h3>
-                  <p>Days Left</p>
-                  <i className="fa fa-calendar" aria-hidden="true" />
                 </div>
               </Col>
             </Row>
-            <Row className="show-grid">
-              <Col className="tools" md={3}>
-                <h3>TOOLS:</h3>
-                <ul>{toolsList}</ul>
+            <Row className="show-grid top">
+              <Col className="status-bar" md={12} xs={12}>
+                <Col className="status" md={2} xs={6}>
+                  <div className="text-center">
+                    <i className="fa fa-check-circle-o complete" aria-hidden="true" />
+                    <h5>December 5</h5>
+                    <p>Campaign Created</p>
+                  </div>
+                </Col>
+                <Col className="status" md={2} xs={6}>
+                  <div className="text-center">
+                    <i className="fa fa-check-circle-o complete" aria-hidden="true" />
+                    <h5>December 12</h5>
+                    <p>Print Flyers</p>
+                  </div>
+                </Col>
+                <Col className="status" md={2} xs={6}>
+                  <div className="text-center">
+                    <i className="fa fa-circle-o" aria-hidden="true" />
+                    <h5>December 19</h5>
+                    <p>Final Signatures</p>
+                  </div>
+                </Col>
+                <Col className="status" md={2} xs={6}>
+                  <div className="text-center">
+                    <i className="fa fa-circle-o" aria-hidden="true" />
+                    <h5>December 26</h5>
+                    <p>Request Recycling</p>
+                  </div>
+                </Col>
+                <Col className="status " md={4} xs={12}>
+                  <div className="text-center status-date">
+                    <h3>10</h3>
+                    <p>Days Left</p>
+                    <i className="fa fa-calendar" aria-hidden="true" />
+                  </div>
+                </Col>
               </Col>
-              <Col lg={9} sm={12}>
-                <Discussion campaignID={this.props.params.id} />
+            </Row>
+            <Row className="show-grid top">
+              <Col md={12} xs={12}>
+                <Col md={3} xs={10} className="tools">
+                  <h3>TOOLS:</h3>
+                  <ul>{toolsList}</ul>
+                </Col>
+                <Col md={8} mdOffset={1} xs={10} className="tools">
+                  <Discussion campaignID={this.props.params.id} />
+                </Col>
               </Col>
             </Row>
           </Col>
-          <Col md={3} sm={12} className="side-bar">
-            <SignCampaign signatureObj={this.props.signature} />
-            <SignatureList signatures={this.props.signature.signatures} />
+          <Col md={3} xs={12} className="side-bar">
+            <div>
+              <SignCampaign signatureObj={this.props.signature} />
+              <SignatureList signatures={this.props.signature.signatures} />
+            </div>
           </Col>
         </Row>
       </Grid>
