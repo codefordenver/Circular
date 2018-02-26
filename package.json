@@ -12,31 +12,29 @@
     "server": "nodemon backend/index.js",
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",
-    "ci:start-app-for-test": "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
+    "ci:start-app-for-test":
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run -s cypress/integration/simple_spec.js",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+    "heroku-postbuild":
+      "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
     "postinstall": "yarn install --cwd client",
     "lint-server": "yarn prettier-eslint backend/**/*.js --write",
     "lint-client": "yarn prettier-eslint client/src/**/*.js --write",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json}": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "*.{js,json}": ["prettier-eslint --write", "git add"]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "^1.18.2",
-    "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
