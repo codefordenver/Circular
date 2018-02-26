@@ -1,3 +1,5 @@
+@import "../base/colors";
+
 .collapse-panel-toggle {
   &:hover {
     color: inherit;
@@ -6,4 +8,10 @@
 
 .collpase-panel-title {
   font-size: 20px;
+
+  a {
+    color: $mainwhite;
+  }
 }
+
+// 242
