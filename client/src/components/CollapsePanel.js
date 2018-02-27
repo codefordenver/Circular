@@ -20,7 +20,7 @@ const CollapsePanel = props => (
 
 CollapsePanel.propTypes = {
   titleText: PropTypes.string.isRequired,
-  body: React.PropTypes.element.isRequired
+  body: PropTypes.element.isRequired
 };
 
 export default CollapsePanel;
