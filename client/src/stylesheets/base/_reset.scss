@@ -112,7 +112,8 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -124,7 +125,7 @@ q {
 blockquote {
   &:before,
   &:after {
-    content: '';
+    content: "";
     content: none;
   }
 }
@@ -132,7 +133,7 @@ blockquote {
 q {
   &:before,
   &:after {
-    content: '';
+    content: "";
     content: none;
   }
 }
@@ -154,6 +155,7 @@ table {
 
 .navbar-remove-default {
   background-image: none;
+}
 
 // REMOVES HTML AND BOOTSTRAP BLUE OUTLINE
 .btn,

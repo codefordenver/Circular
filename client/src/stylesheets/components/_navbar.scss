@@ -5,6 +5,9 @@
   border-radius: 0;
   margin-bottom: 0;
 
+  .dropdown-menu {
+    background-color: $dark-blue;
+  }
   .navbar-nav li a {
     color: $mainwhite;
     cursor: pointer;
