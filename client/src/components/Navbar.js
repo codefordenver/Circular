@@ -22,27 +22,23 @@ const NavBar = props => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <Link to="/about">
-            <NavItem eventKey={1}>Why</NavItem>
-          </Link>
+          <NavItem eventKey={1}>
+            <Link to="/about">Why</Link>
+          </NavItem>
           <NavDropdown id="tools-dropdown" eventKey={2} title="Tools" href="#">
-            <Link to="/manager-resources">
-              <MenuItem eventKey={2.1}>Manager Resources</MenuItem>
-            </Link>
-            <Link to="/what-now">
-              <MenuItem eventKey={2.2}>What Now?</MenuItem>
-            </Link>
+            <MenuItem eventKey={2.1}>
+              <Link to="/manager-resources">Manager Resources</Link>
+            </MenuItem>
+            <MenuItem eventKey={2.2}>
+              <Link to="/what-now">What Now?</Link>
+            </MenuItem>
           </NavDropdown>
-          <Link to="">
-            <NavItem eventKey={3} href="">
-              My Campaign
-            </NavItem>
-          </Link>
-          <Link to="/who-are-we">
-            <NavItem eventKey={4} href="">
-              Who We Are
-            </NavItem>
-          </Link>
+          <NavItem eventKey={3}>
+            <Link to="">My Campaign</Link>
+          </NavItem>
+          <NavItem eventKey={4}>
+            <Link to="/who-are-we">Who We Are</Link>
+          </NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
