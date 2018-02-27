@@ -5,10 +5,34 @@
   border-radius: 0;
   margin-bottom: 0;
 
-  .navbar-nav li a {
-    color: $mainwhite;
+  /*
+   to make the whole collapse nav row selectable it has
+  to be wrapped in a `Link` tag.  this throws off
+  'react-bootstrap' css classing heitarchy.  Below is
+  copying the styles of react-bootstrap into this new
+  structuure
+  */
+  .navbar-nav a {
+    text-decoration: none;
+    li {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      line-height: 20px;
+      color: $mainwhite;
+      cursor: pointer;
+      a {
+        margin-left: 15px;
+        color: inherit;
+        outline: none;
+      }
+      &:hover {
+        color: inherit;
+        background-color: #eee;
+      }
+    }
     &:hover {
       color: $hovergreen;
+      text-decoration: none;
     }
   }
   .navbar-brand {
