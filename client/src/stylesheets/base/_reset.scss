@@ -157,6 +157,30 @@ table {
   background-image: none;
 }
 
+.list-group,
+.list-group-item {
+  display: block;
+  width: 100%;
+  box-shadow: none;
+}
+
+.control-label-remove-default {
+  background-color: none;
+  display: inherit;
+  padding: 0px;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: inherit;
+  vertical-align: baseline;
+  border-radius: inherit;
+}
+
+.btn-remove-default {
+  background-color: none;
+}
+
 // REMOVES HTML AND BOOTSTRAP BLUE OUTLINE
 .btn,
 .btn:focus,
