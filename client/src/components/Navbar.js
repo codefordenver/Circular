@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 const NavBar = props => {
@@ -24,9 +24,10 @@ const NavBar = props => {
           <NavItem eventKey={1} href="#">
             Why
           </NavItem>
-          <NavItem eventKey={2} href="#">
-            Tools
-          </NavItem>
+          <NavDropdown eventKey={2} title="Tools" href="#">
+            <MenuItem eventKey={3.1}>Manager Resources</MenuItem>
+            <MenuItem eventKey={3.2}>What Now?</MenuItem>
+          </NavDropdown>
           <NavItem eventKey={3} href="">
             My Campaign
           </NavItem>
