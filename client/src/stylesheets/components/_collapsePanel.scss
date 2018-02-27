@@ -1,17 +1,22 @@
 @import "../base/colors";
 
-.collapse-panel-toggle {
-  &:hover {
-    color: inherit;
+.collapse-panel {
+  .collapse-panel-toggle {
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  .collpase-panel-title {
+    font-size: 20px;
+
+    a {
+      color: $mainwhite;
+    }
+  }
+
+  ol {
+    list-style-position: inside;
   }
 }
-
-.collpase-panel-title {
-  font-size: 20px;
-
-  a {
-    color: $mainwhite;
-  }
-}
-
 // 242

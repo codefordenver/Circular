@@ -2,7 +2,7 @@ import React from 'react';
 import { Panel } from 'react-bootstrap';
 
 const CollapsePanel = props => (
-  <Panel bsStyle="remove-default">
+  <Panel bsStyle="remove-default" className="collapse-panel">
     <Panel.Toggle className="collapse-panel-toggle">
       <Panel.Heading className="bg-green-color">
         <Panel.Title className="collpase-panel-title" toggle>
@@ -12,7 +12,7 @@ const CollapsePanel = props => (
       </Panel.Heading>
     </Panel.Toggle>
     <Panel.Collapse>
-      <Panel.Body>{props.body}</Panel.Body>
+      <Panel.Body className="text-black ">{props.body}</Panel.Body>
     </Panel.Collapse>
   </Panel>
 );
