@@ -21,24 +21,19 @@ const Navbar = props => {
           </p>
           <ul className="top-nav-list">
             <li>
-              <Link className="fa" to="/about">
-                Why
-              </Link>
+              <Link to="/about">Why</Link>
             </li>
             <li>
-              <Link className="fa" to="/tools">
-                Tools
-              </Link>
+              <Link to="/tools">Tools</Link>
             </li>
             <li>
-              <Link className="fa" to="/now-what">
-                Now What
-              </Link>
+              <Link to="/now-what">Now What</Link>
             </li>
             <li>
-              <Link className="fa" to="/who-are-we">
-                Who Are We
-              </Link>
+              <Link to="/manager-resources">Manager Resources</Link>
+            </li>
+            <li>
+              <Link to="/who-are-we">Who Are We</Link>
             </li>
           </ul>
         </div>
