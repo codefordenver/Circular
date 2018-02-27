@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
-// import { IndexLinkContainer, LinkContainer } from "react-router-bootstrap";
 
 const NavBar = props => {
   let homeText;
