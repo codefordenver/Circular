@@ -37,7 +37,7 @@ const NavBar = props => {
             <Link to="">My Campaign</Link>
           </NavItem>
           <NavItem eventKey={4}>
-            <Link to="/who-are-we">Who We Are</Link>
+            <Link to="/who-are-we">Who Are We</Link>
           </NavItem>
         </Nav>
       </Navbar.Collapse>
