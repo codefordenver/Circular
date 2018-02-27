@@ -1,5 +1,5 @@
-@import "../base/colors";
-@import "../base/fonts";
+@import '../base/colors';
+@import '../base/fonts';
 
 * {
   box-sizing: border-box;
@@ -47,19 +47,5 @@ input {
   @include body-16;
 }
 
-$information-phone: "only screen and (max-width : 800px)";
+$information-phone: 'only screen and (max-width : 800px)';
 
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.app-container {
-  width: 100%;
-  margin: auto;
-  margin-bottom: 25px;
-
-  @media #{$information-phone} {
-    width: 98%;
-  }
-}

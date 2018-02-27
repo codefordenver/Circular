@@ -31,8 +31,7 @@ const GettingStartedGoogleMap = withRouter(
   )
 );
 
-const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env
-  .REACT_APP_GOOGLE_MAPS_KEY}`;
+const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`;
 
 const ApartmentMap = props => (
   <Modal isOpen={props.isOpen} contentLabel="Modal">
