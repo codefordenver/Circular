@@ -19,6 +19,12 @@
   }
   .navbar-toggle {
     border: 1px solid $mainwhite;
+    &:hover {
+      border: 1px solid $hovergreen;
+      .icon-bar {
+        background-color: $hovergreen;
+      }
+    }
     .icon-bar {
       background-color: $mainwhite;
     }
