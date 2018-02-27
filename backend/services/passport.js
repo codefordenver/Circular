@@ -38,25 +38,3 @@ passport.use(
     }
   )
 );
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: keys.facebookAppId,
-      clientSecret: keys.facebookAppSecret,
-      callbackURL: '/auth/facebook/callback'
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await User.findOne({ facebookID: profile.id });
-      if (existingUser) {
-        return done(null, existingUser);
-      }
-      const user = await new User({
-        facebookID: profile.id,
-        name: profile.displayName,
-        email: profile.email
-      }).save();
-      done(null, user);
-    }
-  )
-);

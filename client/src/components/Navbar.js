@@ -15,23 +15,23 @@ const NavBar = props => {
     <Navbar collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="./containers/Home">{homeText}</Link>
+          <Link to="/">{homeText}</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
           <NavItem eventKey={1} href="#">
-            Why
+            <Link to="/about">About</Link>
           </NavItem>
           <NavItem eventKey={2} href="#">
-            Tools
+            <Link to="/tools">Tools</Link>
           </NavItem>
           <NavItem eventKey={3} href="">
-            My Campaign
+            <Link to="">My Campaign</Link>
           </NavItem>
           <NavItem eventKey={4} href="">
-            Who We Are
+            <Link to="/who-are-we">Who Are We</Link>
           </NavItem>
         </Nav>
       </Navbar.Collapse>
