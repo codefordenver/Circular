@@ -1,26 +1,26 @@
 .navbar {
-	&.navbar-default {
-		background-color: $dark-blue;
-		color: white;
-		border: none;
-		border-radius: 0;
-		margin-bottom: 0;
+  &.navbar-default {
+    background-color: $dark-blue;
+    color: white;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
 
-		.navbar-nav > li > a {
-			color: white;
-			&:hover {
-				color: $hovergreen;
-			}
-		}
-		.navbar-brand {
-			color: white;
-			&:hover {
-				color: $hovergreen;
-			}
-		}
-	}
+    .navbar-nav > li > a {
+      color: white;
+      &:hover {
+        color: $hovergreen;
+      }
+    }
+    .navbar-brand {
+      color: white;
+      &:hover {
+        color: $hovergreen;
+      }
+    }
+  }
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-	background-color: white;
+  background-color: white;
 }

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Grid, Row, Col, Button, ListGroup, ControlLabel, ListGroupItem } from 'react-bootstrap';
 import { selectAddress } from '../redux/actions/initialSearch';
 import fetchCampaignById from '../redux/actions/activeCampaign';
+
 import AutoSuggestInput from '../components/AutoSuggestInput';
 
 class ChooseCampaign extends Component {
@@ -35,116 +37,177 @@ class ChooseCampaign extends Component {
     }
   }
 
-  renderNearbyCampaigns(nearbyCampaignsArr, selectedOption) {
-    return nearbyCampaignsArr.map(c => (
-      <li className="chooseCampaign-item" key={c.address}>
-        <input
-          type="radio"
-          id={c.address}
-          value={c.address}
-          checked={selectedOption && selectedOption.address === c.address}
-          onChange={this.handleOptionChange}
-        />
-        <label htmlFor={c.address}>
-          {c.name ? <div>{c.name}</div> : ''}
-          {c.address}
-        </label>
-      </li>
-    ));
+  noMatchAddress = {
+    address: 'none',
+    name: "None of these match my address. Let's start a new campaign."
+  };
+
+  buildNearbyCampaignList(nearbyCampaigns, selectedOption, includeNoMatch = false) {
+    const campaignsArr = [...nearbyCampaigns];
+    if (includeNoMatch) {
+      campaignsArr.push(this.noMatchAddress);
+    }
+
+    const nearbyCampaignListItems = campaignsArr.map(c => {
+      // if the noMatch item is selected, selectedOption is the string 'none' instead of an object
+      let checked = selectedOption && selectedOption.address === c.address;
+      if (typeof selectedOption === 'string') {
+        checked = c.address === 'none';
+      }
+      const showAddress = c.address !== 'none';
+      const checkedClass = checked ? 'fa-check-circle-o' : 'fa-circle-o';
+
+      return (
+        <Row>
+          <ListGroupItem
+            className="p-0 mx-0 rounded-0 bg-clear border-clear nearby-address-item"
+            key={c.address}
+          >
+            <input
+              type="radio"
+              id={c.address}
+              value={c.address}
+              checked={checked}
+              onChange={this.handleOptionChange}
+            />
+            <Col xs={12}>
+              <ControlLabel bsStyle="remove-default" htmlFor={c.address}>
+                {/* turn it into a flexbox */}
+                <Row>
+                  <Col xs={1}>
+                    <i className={`fa ${checkedClass}`} />
+                  </Col>
+                  <Col xs={10} className="nearby-address-info mx-10">
+                    {c.name ? <div>{c.name}</div> : ''}
+                    {showAddress && c.address}
+                  </Col>
+                </Row>
+              </ControlLabel>
+            </Col>
+          </ListGroupItem>
+        </Row>
+      );
+    });
+
+    return (
+      <ListGroup className="list-group my-10 nearby-address-list">
+        {nearbyCampaignListItems}
+      </ListGroup>
+    );
   }
+
+  renderCampaignAlreadyExists = (nearbyCampaigns, selectedAddress) => (
+    <div>
+      <form>
+        {this.renderAddressHeading('Your address already has a campaign.', 'Is this your address?')}
+        {this.buildNearbyCampaignList(nearbyCampaigns, selectedAddress)}
+        {this.renderSubmitButton('JOIN CAMPAIGN')}
+        <Row>
+          <Col xs={12} className="padding-box">
+            <AutoSuggestInput />
+          </Col>
+        </Row>
+      </form>
+    </div>
+  );
+  renderNearbyCampaigns = (nearbyCampaigns, selectedAddress) => (
+    <div>
+      <form>
+        {this.renderAddressHeading('We found some campaigns nearby!')}
+        {this.buildNearbyCampaignList(
+          nearbyCampaigns,
+          selectedAddress,
+          /* includeNoMatch = */ true
+        )}
+        {this.renderSubmitButton('JOIN CAMPAIGN')}
+      </form>
+    </div>
+  );
+
+  renderNewCampaign = () => (
+    <div>
+      {this.renderAddressHeading(
+        "You're the first to support recycling for your building!",
+        "Launch your building's request for recycling! (We promise it will only take a minute)"
+      )}
+      {this.renderSubmitButton('CREATE CAMPAIGN')}
+    </div>
+  );
+  renderAddressHeading = (headingTitle, subTitle) => (
+    <div className="py-15 text-center">
+      <h1 className="new-address-heading py-15">{headingTitle}</h1>
+      {subTitle && <h2 className="new-address-sub-heading py-15">{subTitle}</h2>}
+    </div>
+  );
+  renderSubmitButton = submitText => (
+    <Row>
+      <Col xs={12}>
+        <Button
+          bsStyle="remove-default"
+          className="join-campaign-button"
+          type="submit"
+          onClick={this.handleFormSubmit}
+          block
+        >
+          {submitText} <i className="fa fa-arrow-right" />
+        </Button>
+      </Col>
+    </Row>
+  );
+  renderLoading = () => (
+    <div className="loader">
+      <h1 className="loading-header">Searching for nearby campaigns...</h1>
+      <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
+    </div>
+  );
+  /* eslint-disable consistent-return */
+  renderError = error => {
+    /* eslint-enable */
+    if (error && error.searchError) {
+      return (
+        <div>
+          <p>{error.userMessage}</p>
+        </div>
+      );
+    }
+  };
 
   render() {
     const {
-      error,
-      nearbyCampaigns,
       loading,
       loaded,
+      nearbyCampaigns,
       selectedAddress,
-      searchedAddress
+      searchedAddress,
+      error
     } = this.props;
 
     return (
-      <div className="hero_wrapper">
-        <div className="container">
-          <div className="search_address_wrapper">
-            {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
-            {!loading && error && error.searchError && <p>{error.userMessage}</p>}
+      <Grid fluid>
+        <Row>
+          <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
+            {loading && this.renderLoading()}
+            {!loading && error && this.renderError(error)}
+            {/* if no longer loading and not erroring then
+            render one of the following three depending
+             on the status of nearby campaign */}
             {loaded &&
               nearbyCampaigns &&
-              nearbyCampaigns.length !== 0 && (
-                <div>
-                  {nearbyCampaigns[0].address === searchedAddress.formatted_address && (
-                    <form className="">
-                      <h1 className="search_address_heading">
-                        {'Your address already has a campaign!.'}
-                      </h1>
-                      <h2 className="search_address_sub_heading">Is this your address?</h2>
-                      <ul className="chooseCampaign-list">
-                        {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress)}
-                        <div className="btn-wrapper">
-                          <button className="btn" type="submit" onClick={this.handleFormSubmit}>
-                            {"YES - LET'S DO THIS!"}
-                          </button>
-                        </div>
-                        <AutoSuggestInput />
-                      </ul>
-                    </form>
-                  )}
-                  {nearbyCampaigns[0].address !== searchedAddress.formatted_address && (
-                    <form className="">
-                      <h1 className="search_address_heading">
-                        {'We found these campaigns near you.'}
-                      </h1>
-                      <h2 className="search_address_sub_heading">
-                        {'Do any of these campaigns represent where you live?'}
-                      </h2>
-                      <ul className="chooseCampaign-list">
-                        {this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress)}
-                        <li className="chooseCampaign-item" key="no-match">
-                          <input
-                            id="none"
-                            type="radio"
-                            value="none"
-                            checked={selectedAddress === 'none'}
-                            onChange={this.handleOptionChange}
-                          />
-                          <label htmlFor="none">
-                            {"None of these match my address. Let's start a new campaign."}
-                          </label>
-                        </li>
-                      </ul>
-                      <div className="btn-wrapper">
-                        <button className="btn" type="submit" onClick={this.handleFormSubmit}>
-                          {"OK - LET'S DO THIS!"}
-                        </button>
-                      </div>
-                    </form>
-                  )}
-                </div>
-              )}
+              nearbyCampaigns.length !== 0 &&
+              nearbyCampaigns[0].address === searchedAddress.formatted_address &&
+              this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress)}
+            {loaded &&
+              nearbyCampaigns &&
+              nearbyCampaigns.length !== 0 &&
+              nearbyCampaigns[0].address !== searchedAddress.formatted_address &&
+              this.renderNearbyCampaigns(nearbyCampaigns, selectedAddress)}
             {!loading &&
               nearbyCampaigns &&
-              nearbyCampaigns.length === 0 && (
-                <div>
-                  <h1 className="search_address_heading">
-                    {"You're the first to support recycling for your building!"}
-                  </h1>
-                  <h2 className="search_address_sub_heading">
-                    {"Launch your building's request for recycling!"}
-                  </h2>
-                  <h2 className="search_address_sub_heading">
-                    {'(We promise it will only take a minute)'}
-                  </h2>
-                  <div className="btn-wrapper">
-                    <button className="btn" type="submit" onClick={this.handleFormSubmit}>
-                      {"OK - LET'S DO THIS!"}
-                    </button>
-                  </div>
-                </div>
-              )}
-          </div>
-        </div>
-      </div>
+              nearbyCampaigns.length === 0 &&
+              this.renderNewCampaign()}
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
