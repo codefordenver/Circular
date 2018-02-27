@@ -45,6 +45,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
+    "react-bootstrap": "^0.32.1",
     "serve": "^6.4.8"
   },
   "devDependencies": {

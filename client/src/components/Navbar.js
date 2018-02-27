@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-const Navbar = props => {
+const NavBar = props => {
   let homeText;
   if (props.location.pathname === '/') {
     homeText = 'RE:IMAGINE DENVER';
@@ -11,41 +12,37 @@ const Navbar = props => {
   }
 
   return (
-    <nav className="navbar-component">
-      <div className="nav-bar-container">
-        <div className="nav-bar-row">
-          <p className="float-left">
-            <Link className="home-link" to="/">
-              {homeText}
-            </Link>
-          </p>
-          <ul className="top-nav-list">
-            <li>
-              <Link className="fa" to="/about">
-                Why
-              </Link>
-            </li>
-            <li>
-              <Link className="fa" to="/tools">
-                Tools
-              </Link>
-            </li>
-            <li>
-              <Link className="fa" to="/who-are-we">
-                Who Are We
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <Navbar collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Link to="/">{homeText}</Link>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullRight>
+          <NavItem eventKey={1} href="#">
+            <Link to="/about">About</Link>
+          </NavItem>
+          <NavItem eventKey={2} href="#">
+            <Link to="/tools">Tools</Link>
+          </NavItem>
+          <NavItem eventKey={3} href="">
+            <Link to="">My Campaign</Link>
+          </NavItem>
+          <NavItem eventKey={4} href="">
+            <Link to="/who-are-we">Who Are We</Link>
+          </NavItem>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
-Navbar.propTypes = {
+NavBar.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired
 };
 
-export default Navbar;
+export default NavBar;
