@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
+// import { IndexLinkContainer, LinkContainer } from "react-router-bootstrap";
 
 const NavBar = props => {
   let homeText;
@@ -15,24 +16,28 @@ const NavBar = props => {
     <Navbar bsStyle="remove-default" collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="./containers/Home">{homeText}</Link>
+          <Link to="/">{homeText}</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <NavItem eventKey={1} href="#">
-            Why
+          <NavItem eventKey={1}>
+            <Link to="/about">Why</Link>
           </NavItem>
-          <NavDropdown eventKey={2} title="Tools" href="#">
-            <MenuItem eventKey={3.1}>Manager Resources</MenuItem>
-            <MenuItem eventKey={3.2}>What Now?</MenuItem>
+          <NavDropdown id="tools-dropdown" eventKey={2} title="Tools" href="#">
+            <MenuItem eventKey={2.1}>
+              <Link to="/manager-resources">Manager Resources</Link>
+            </MenuItem>
+            <MenuItem eventKey={2.2}>
+              <Link to="/what-now">What Now?</Link>
+            </MenuItem>
           </NavDropdown>
           <NavItem eventKey={3} href="">
-            My Campaign
+            <Link to="">My Campaign</Link>
           </NavItem>
           <NavItem eventKey={4} href="">
-            Who We Are
+            <Link to="/who-are-we">Who We Are</Link>
           </NavItem>
         </Nav>
       </Navbar.Collapse>
