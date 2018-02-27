@@ -61,7 +61,7 @@ export default (
       getComponent={(location, callback) => callback(null, ManagerResources)}
     />
     <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
-    <Route path="/now-what" getComponent={(location, callback) => callback(null, NowWhat)} />
+    <Route path="/what-now" getComponent={(location, callback) => callback(null, NowWhat)} />
     <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
     <Route
       path="/who-are-we"
