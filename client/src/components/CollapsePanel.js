@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
 
 const CollapsePanel = props => (
@@ -16,5 +17,10 @@ const CollapsePanel = props => (
     </Panel.Collapse>
   </Panel>
 );
+
+CollapsePanel.propTypes = {
+  titleText: PropTypes.string.isRequired,
+  body: React.PropTypes.element.isRequired
+};
 
 export default CollapsePanel;
