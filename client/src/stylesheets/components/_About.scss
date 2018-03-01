@@ -5,11 +5,6 @@
   padding: 20px;
 }
 
-.about-header {
-  font-size: 4em;
-  margin-bottom: 1em;
-}
-
 .about-text {
   font-size: 1em;
   padding-bottom: 1em;
@@ -26,4 +21,22 @@
 
 .about-page-header-overrides {
   border-bottom: none;
+}
+
+.about-list {
+  padding-left: 25px;
+  padding-right: 25px;
+  list-style-position: outside;
+  li {
+    padding-left: 10px;
+    padding-bottom: 7px;
+  }
+}
+
+.numberic-list {
+  list-style-type: decimal;
+}
+
+.alpha-list {
+  list-style-type: lower-alpha;
 }
