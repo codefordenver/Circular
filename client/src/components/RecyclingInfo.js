@@ -12,7 +12,7 @@ const RecyclingInfo = () => (
       mandated to provide recycling service, but you and your neighbors can request recycling
       service from your landlord today!
     </div>
-    <Link to="/denver-recycling-info">
+    <Link to="/property-owner-faq">
       <div className="info_footer">Learn More</div>
     </Link>
   </div>
