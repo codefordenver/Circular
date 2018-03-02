@@ -7,13 +7,13 @@ const RecyclingInfo = () => (
     <Col xs={10} xsOffset={1} md={6} mdOffset={0}>
       <Row>
         <Col xs={12}>
-          <PageHeader className="step-by-step-page-header">Wait, But Why?</PageHeader>
+          <PageHeader className="home-section-page-header">Wait, But Why?</PageHeader>
         </Col>
         <Col xs={12}>
-          <h3 className="step-title">
+          <h3 className="home-section-title">
             Denver's recycling rate is only 20%, while the national average is 35%.
           </h3>
-          <p className="step-description">
+          <p className="home-section-description">
             The City of Denver only provides recycling service to single-family residential homes
             and buildings with seven or fewer units. Furthermore, multi-family building managers are
             not mandated to provide recycling service, but you and your neighbors can request
@@ -21,7 +21,7 @@ const RecyclingInfo = () => (
           </p>
         </Col>
         <Col xs={12}>
-          <Link to="/property-owner-faq" className="info-footer">
+          <Link to="/property-owner-faq" className="home-section-link">
             Learn More
           </Link>
         </Col>

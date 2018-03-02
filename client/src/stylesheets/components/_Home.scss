@@ -1,0 +1,32 @@
+@import "../base/colors";
+
+.home-section-title {
+  margin-top: 10px;
+  padding-bottom: 7px;
+}
+
+.home-section-description {
+  font-size: 12px;
+  padding-bottom: 7px;
+}
+
+.home-section-page-header {
+  color: $mainwhite;
+  border-bottom: none;
+  margin-bottom: 5px;
+  h1 {
+    font-size: 24px;
+  }
+}
+
+.home-section-link {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: $maingreen;
+  padding-top: 1em;
+  &:hover {
+    color: $mainwhite;
+    text-decoration: none;
+  }
+}

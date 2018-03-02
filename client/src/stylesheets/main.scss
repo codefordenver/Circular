@@ -10,6 +10,7 @@
 
 //import new component stylesheets here:
 @import "components/app",
+  "components/Home",
   "components/collapsePanel",
   "components/_form",
   "components/_button",
@@ -26,8 +27,6 @@
   "components/modalWrapper.scss",
   "components/StepByStep.scss",
   "components/SignCampaign.scss",
-  "components/RecyclingInfo.scss",
-  "components/PropManagerLinks.scss",
   "components/ChooseCampaign",
   "components/CampaignPage",
   "components/modalWrapper",

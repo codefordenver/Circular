@@ -7,8 +7,8 @@ const Step = props => (
     <div className="step-emoji-icon">
       <p>{props.emojiIcon}</p>
     </div>
-    <h3 className="step-title">{props.title}</h3>
-    <p className="step-description">{props.description}</p>
+    <h3 className="home-section-title">{props.title}</h3>
+    <p className="home-section-description">{props.description}</p>
   </Col>
 );
 Step.propTypes = {
@@ -22,7 +22,7 @@ const StepByStep = () => (
     <Col xs={10} xsOffset={1} md={6} mdOffset={3}>
       <Row>
         <Col xs={12}>
-          <PageHeader className="step-by-step-page-header">How does this work?</PageHeader>
+          <PageHeader className="home-section-page-header">How does this work?</PageHeader>
         </Col>
         <Step
           emojiIcon="&#x270D;"

@@ -7,14 +7,14 @@ const PropManagerLinks = () => (
     <Col xs={10} xsOffset={1} md={6} mdOffset={0}>
       <Row>
         <Col xs={12}>
-          <PageHeader className="step-by-step-page-header">
+          <PageHeader className="home-section-page-header">
             I'm a Property Manager, what can I do?
           </PageHeader>
         </Col>
-        <Col xs={12} className="step-title">
+        <Col xs={12} className="home-section-title">
           <h3>Provide sustainable waste management to your tenants! </h3>
         </Col>
-        <Col xs={12} className="step-description">
+        <Col xs={12} className="home-section-description">
           <p>
             Increase tenant satisfaction and boost your building's appeal by providing recycling
             service.
@@ -26,7 +26,7 @@ const PropManagerLinks = () => (
           </p>
         </Col>
         <Col xs={12}>
-          <Link to="/denver-recycling-info" className="info-footer">
+          <Link to="/denver-recycling-info" className="home-section-link">
             Tips ad Resources
           </Link>
         </Col>
