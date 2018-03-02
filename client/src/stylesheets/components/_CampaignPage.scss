@@ -1,23 +1,23 @@
 .campaign-page-name {
-	font-size: 1.5em;
-	color: white;
-	margin-left: 1em;
+  font-size: 1.5em;
+  color: white;
+  margin-left: 1em;
 }
 
 .container {
-	margin-left: 0;
-	margin-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 row {
-	margin-left: 0;
-	margin-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .campaign-page-address {
-	font-size: 1em;
-	color: white;
-	margin-left: 1em;
+  font-size: 1em;
+  color: white;
+  margin-left: 1em;
 }
 
 .btn,
@@ -27,202 +27,198 @@ row {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-	box-shadow: 2px 2px 1px $shadow;
+  box-shadow: 2px 2px 1px $shadow;
 }
 
 .body {
-	margin: 0;
-	padding: 0;
-	margin-bottom: 7rem;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 7rem;
 }
 
 .top {
-	margin-top: 3em;
+  margin-top: 3em;
 }
 
 .side-bar {
-	background-color: $light-gray;
+  background-color: $light-gray;
 }
 
 .status-bar {
-	.status h5 {
-		margin-bottom: o;
-	}
-	.status p {
-		font-size: 80%;
-	}
-	.status .status-date {
-		h3 {
-			font-size: 40px;
-		}
-		p {
-			text-transform: uppercase;
-		}
-	}
+  .status h5 {
+    margin-bottom: o;
+  }
+  .status p {
+    font-size: 80%;
+  }
+  .status .status-date {
+    h3 {
+      font-size: 40px;
+    }
+    p {
+      text-transform: uppercase;
+    }
+  }
 }
 
 .map {
-	width: 250px;
-	height: 200px;
-	background-color: white;
-	margin-top: 2vh;
+  width: 250px;
+  height: 200px;
+  background-color: white;
+  margin-top: 2vh;
 }
 
 .tools {
-	font-size: 14px;
-	& i {
-		color: $maingreen;
-		font-size: 8px;
-	}
-	& a:hover {
-		color: $maingreen;
-	}
+  font-size: 14px;
+  & i {
+    color: $maingreen;
+    font-size: 8px;
+  }
+  & a:hover {
+    color: $maingreen;
+  }
 
-	a:focus {
-		color: $light-gray;
-	}
+  a:focus {
+    color: $light-gray;
+  }
 }
 
 .toolList {
-	margin: 5px;
-	i {
-		margin-right: 5px;
-	}
+  margin: 5px;
+  i {
+    margin-right: 5px;
+  }
 }
 
 .btn i {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 .btn.btn-facebook {
-	color: #fff;
-	background-color: $facebook-blue;
-	padding-left: 5px;
-	padding-right: 5px;
-	&:hover,
-	:focus {
-		background-color: darken($facebook-blue, 5%);
-		outline: 0 !important;
-		outline-color: transparent !important;
-	}
-	&:active {
-		background-color: darken($facebook-blue, 10%);
-		color: white;
-		outline: 0 !important;
-		outline-color: transparent !important;
-	}
+  color: #fff;
+  background-color: $facebook-blue;
+  padding-left: 5px;
+  padding-right: 5px;
+  &:hover,
+  :focus {
+    background-color: darken($facebook-blue, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($facebook-blue, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
 }
 
 .btn.btn-twitter {
-	color: #fff;
-	background-color: $twitter-blue;
-	padding-left: 5px;
-	padding-right: 5px;
-	&:hover,
-	:focus {
-		background-color: darken($twitter-blue, 5%);
-		outline: 0 !important;
-		outline-color: transparent !important;
-	}
-	&:active {
-		background-color: darken($twitter-blue, 10%);
-		color: white;
-		outline: 0 !important;
-		outline-color: transparent !important;
-	}
+  color: #fff;
+  background-color: $twitter-blue;
+  padding-left: 5px;
+  padding-right: 5px;
+  &:hover,
+  :focus {
+    background-color: darken($twitter-blue, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($twitter-blue, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
 }
 
 .btn.btn-text {
-	color: #fff;
-	background-color: $maingreen;
-	padding-left: 5px;
-	padding-right: 5px;
-	&:hover,
-	:focus {
-		background-color: darken($maingreen, 5%);
-		outline: 0 !important;
-		outline-color: transparent !important;
-	}
-	&:active {
-		background-color: darken($maingreen, 10%);
-		color: white;
-		outline: 0 !important;
-		outline-color: transparent !important;
-	}
-}
-
-.fa {
-	font-size: 1.2em;
+  color: #fff;
+  background-color: $maingreen;
+  padding-left: 5px;
+  padding-right: 5px;
+  &:hover,
+  :focus {
+    background-color: darken($maingreen, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($maingreen, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
 }
 
 .complete {
-	font-size: 1.5em;
-	color: $maingreen;
+  font-size: 1.5em;
+  color: $maingreen;
 }
 
 @media (max-width: 992px) {
-	.address {
-		padding-top: 1em;
-		padding-bottom: 1em;
-		max-width: 80%;
-		margin: auto;
-		text-align: center;
-		color: white;
-	}
-	.center-block {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-		float: unset;
-	}
+  .address {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    max-width: 80%;
+    margin: auto;
+    text-align: center;
+    color: white;
+  }
+  .center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float: unset;
+  }
 
-	.map {
-		margin: auto;
-	}
+  .map {
+    margin: auto;
+  }
 
-	.share {
-		text-transform: uppercase;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
+  .share {
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
-	.share-buttons {
-		max-width: 90%;
-		margin: auto;
-	}
+  .share-buttons {
+    max-width: 90%;
+    margin: auto;
+  }
 
-	.btn {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
+  .btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
-	.tools {
-		font-size: 14px;
-		text-align: center;
-		margin-left: 8.3333333333%;
-		margin-bottom: 3em;
-		& i {
-			color: $maingreen;
-			font-size: 8px;
-		}
-	}
+  .tools {
+    font-size: 14px;
+    text-align: center;
+    margin-left: 8.3333333333%;
+    margin-bottom: 3em;
+    & i {
+      color: $maingreen;
+      font-size: 8px;
+    }
+  }
 
-	.status {
-		margin-top: 1.5em;
-	}
+  .status {
+    margin-top: 1.5em;
+  }
 
-	.status-bar {
-		margin-top: 20px;
-		margin-bottom: 20px;
-		font-size: 0.85em;
-	}
+  .status-bar {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 0.85em;
+  }
 
-	.status-child {
-		margin-top: 0.5rem;
-		p,
-		i,
-		h3 {
-			font-size: 2.5rem;
-		}
-	}
+  .status-child {
+    margin-top: 0.5rem;
+    p,
+    i,
+    h3 {
+      font-size: 2.5rem;
+    }
+  }
 }
