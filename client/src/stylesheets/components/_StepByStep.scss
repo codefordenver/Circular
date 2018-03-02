@@ -1,14 +1,42 @@
-@import '../utils/placeholders';
+@import "../utils/placeholders";
+@import "../base/colors";
 
+.step-container {
+  display: block;
+  padding-bottom: 15px;
+  .step-emoji-icon {
+    //display: block;
+    text-align: right;
+    padding-right: 3px;
+    font-size: 30px;
+  }
+  .step-title {
+    margin-top: 10px;
+    padding-bottom: 7px;
+  }
+  .step-description {
+    font-size: 12px;
+  }
+}
+
+.step-by-step-page-header {
+  h1 {
+    font-size: 24px;
+  }
+  color: $mainwhite;
+  border-bottom: none;
+  margin-bottom: 5px;
+}
+/*
 .stepbystep_wrapper {
-	position: relative;
+  position: relative;
   background-position: center;
-	background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-size: cover;
   background-color: #DCDCDC;
 
-	@media (min-width: 420px){
-  	padding: 2em;
+  @media (min-width: 420px){
+    padding: 2em;
   }
   @media (min-width: 1250px) {
     height: 10em;
@@ -25,7 +53,7 @@
   width: 90%;
   max-width: 1170px;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   @media (min-width: 1250px) {
     height: 10em;
   }
@@ -100,7 +128,7 @@
   width: 50%;
   margin: 0 auto;
   height: 70px;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   background-position: center center;
 }
 
@@ -126,3 +154,4 @@
 .testcontainer {
   width: 100%;
 }
+*/
