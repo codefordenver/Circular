@@ -21,32 +21,32 @@ Step.propTypes = {
 
 const StepByStep = () => (
   <div>
-    <Grid>
+    <Grid fluid>
       <Row>
-        <Col xs={12} md={8} mdOffset={2}>
+        <Col xs={10} xsOffset={1} md={6} mdOffset={3}>
           <Row>
-            <Col xs={11} xsOffset={1}>
+            <Col xs={11} xsOffset={1} className="page-header-container">
               <PageHeader className="step-by-step-page-header">How does this work?</PageHeader>
             </Col>
             <Step
               emojiIcon="&#x270D;"
               title="Create a campaign"
-              description="Create and share a page with your neightbors."
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
             />
             <Step
               emojiIcon="&#x1F91D;"
               title="Recruit support"
-              description="Voice and organize your support"
+              description="ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat."
             />
             <Step
               emojiIcon="&#x1F64F;"
               title="Request"
-              description="Request a recycling collection from your landlord by sharing your building's support page"
+              description="nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             />
             <Step
               emojiIcon="&#x1F64C;"
               title="Recycle!"
-              description="Live in a more sustainable building!"
+              description="ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam!"
             />
           </Row>
         </Col>
