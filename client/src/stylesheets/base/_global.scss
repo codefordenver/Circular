@@ -1,5 +1,5 @@
-@import '../base/colors';
-@import '../base/fonts';
+@import "../base/colors";
+@import "../base/fonts";
 
 * {
   box-sizing: border-box;
@@ -47,5 +47,77 @@ input {
   @include body-16;
 }
 
-$information-phone: 'only screen and (max-width : 800px)';
+$information-phone: "only screen and (max-width : 800px)";
 
+.app-container {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 25px;
+
+  @media #{$information-phone} {
+    width: 98%;
+  }
+}
+
+.text-black {
+  color: black;
+}
+
+.bg-green-color {
+  background-color: $green-color;
+}
+
+.float-right {
+  float: right;
+}
+
+.bg-clear {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.border-clear {
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+// remove these classes when react-bootstrap is built off bootstrap 4
+.rounded-0 {
+  border-radius: 0;
+}
+
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.mx-10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.my-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.p-0 {
+  padding: 0px;
+}
+
+.py-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.py-15 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.padding-box {
+  box-sizing: padding-box;
+}
+
+.float-left {
+  float: left;
+}
+// end of bootstrap 4 delete

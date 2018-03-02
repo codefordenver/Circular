@@ -1,32 +1,37 @@
 //Do not change the order of these imports:
-@import 'base/reset', 'base/fonts', 'base/colors', 'base/breakpoints', 'base/global';
+@import "base/reset",
+  "base/fonts",
+  "base/colors",
+  "base/breakpoints",
+  "base/global";
 
 //Do not change the order of these imports:
-@import 'utils/placeholders', 'utils/mixins', 'utils/_floats';
+@import "utils/placeholders", "utils/mixins", "utils/_floats";
 
 //import new component stylesheets here:
-@import 'components/app',
-  'components/navbar',
-  'components/HeroCTA',
-  'components/FullScreenLoader',
-  'components/NewCampaign',
-  'components/Discussion',
-  'components/CreateCampaignStep1',
-  'components/CreateCampaignStep2',
-  'components/CreateCampaignStep3',
-  'components/SearchAddress',
-  'components/AutoSuggestInput',
-  'components/modalWrapper.scss',
-  'components/StepByStep.scss',
-  'components/SignCampaign.scss',
-  'components/RecyclingInfo.scss',
-  'components/PropManagerLinks.scss',
-  'components/ChooseCampaign',
-  'components/CampaignPage',
-  'components/modalWrapper',
-  'components/About',
-  'components/_form',
-  'components/_button';
+@import "components/app",
+  "components/collapsePanel",
+  "components/_form",
+  "components/_button",
+  "components/navbar",
+  "components/HeroCTA",
+  "components/FullScreenLoader",
+  "components/NewCampaign",
+  "components/Discussion",
+  "components/CreateCampaignStep1",
+  "components/CreateCampaignStep2",
+  "components/CreateCampaignStep3",
+  "components/SearchAddress",
+  "components/AutoSuggestInput",
+  "components/modalWrapper.scss",
+  "components/StepByStep.scss",
+  "components/SignCampaign.scss",
+  "components/RecyclingInfo.scss",
+  "components/PropManagerLinks.scss",
+  "components/ChooseCampaign",
+  "components/CampaignPage",
+  "components/modalWrapper",
+  "components/About";
 
 //fonts
-@import url('https://rsms.me/inter/inter-ui.css');
+@import url("https://rsms.me/inter/inter-ui.css");
