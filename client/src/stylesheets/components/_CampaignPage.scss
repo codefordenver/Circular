@@ -74,6 +74,13 @@ row {
 		color: $maingreen;
 		font-size: 8px;
 	}
+	& a:hover {
+		color: $maingreen;
+	}
+
+	a:focus {
+		color: $light-gray;
+	}
 }
 
 .toolList {
