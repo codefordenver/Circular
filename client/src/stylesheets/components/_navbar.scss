@@ -1,26 +1,41 @@
 .navbar {
-  &.navbar-default {
-    background-color: $dark-blue;
-    color: white;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 0;
+  background-color: $dark-blue;
+  color: $mainwhite;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
 
-    .navbar-nav > li > a {
-      color: white;
-      &:hover {
-        color: $hovergreen;
-      }
+  .dropdown-menu {
+    background-color: $dark-blue;
+  }
+  .navbar-nav li a {
+    color: $mainwhite;
+    cursor: pointer;
+    &:hover {
+      color: $hovergreen;
+      text-decoration: none;
     }
-    .navbar-brand {
-      color: white;
-      &:hover {
-        color: $hovergreen;
-      }
+    a {
+      color: inherit;
     }
   }
-}
 
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: white;
+  .navbar-brand {
+    color: $mainwhite;
+    &:hover {
+      color: $hovergreen;
+    }
+  }
+  .navbar-toggle {
+    border: 1px solid $mainwhite;
+    &:hover {
+      border: 1px solid $hovergreen;
+      .icon-bar {
+        background-color: $hovergreen;
+      }
+    }
+    .icon-bar {
+      background-color: $mainwhite;
+    }
+  }
 }
