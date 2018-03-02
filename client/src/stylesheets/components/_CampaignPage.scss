@@ -51,6 +51,9 @@ row {
   .status p {
     font-size: 80%;
   }
+  .status i {
+    font-size: 1.2em;
+  }
   .status .status-date {
     h3 {
       font-size: 40px;
@@ -60,7 +63,6 @@ row {
     }
   }
 }
-
 .map {
   width: 250px;
   height: 200px;
@@ -85,6 +87,7 @@ row {
 
 .toolList {
   margin: 5px;
+
   i {
     margin-right: 5px;
   }
