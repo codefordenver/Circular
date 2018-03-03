@@ -1,22 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 import AutoSuggestInput from './AutoSuggestInput';
 
-
 const HeroCTA = ({ openMap }) => (
-  <div className="hero_wrapper">
-    <div className="container">
-      <button className="open_map_button" onClick={openMap}>Explore The Map</button>
-      <form className="search_address_wrapper">
-        <h1 className="search_address_heading">Need recycling at your building?</h1>
-        <h2 className="search_address_sub_heading"> Join or create a campaign!</h2>
-        <AutoSuggestInput />
-        <Link className="search_address_link" to="/denver-recycling-info">Learn more first</Link>
-      </form>
-    </div>
-  </div>
+  <Grid fluid>
+    <div className="tinted" />
+    <Row className="hero-wrapper">
+      <Col xs={12}>
+        <h1 className="hero-page-header">
+          NEED RECYCLING
+          <br />
+          <span className="italics">-in-</span>
+          <br />
+          YOUR BUILDIND?
+        </h1>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={12} className="mt-nug">
+        <form>
+          <AutoSuggestInput />
+          <Link className="home-section-link" to="/denver-recycling-info">
+            Learn more first
+          </Link>
+        </form>
+      </Col>
+    </Row>
+  </Grid>
+  /*
+  <button className="open_map_button" onClick={openMap}>
+    Explore The Map
+  </button>
+  */
 );
 
 HeroCTA.propTypes = {
