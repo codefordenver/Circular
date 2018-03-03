@@ -27,7 +27,7 @@ const PropManagerLinks = () => (
         </Col>
         <Col xs={12}>
           <Link to="/denver-recycling-info" className="home-section-link">
-            Tips ad Resources
+            Tips and Resources
           </Link>
         </Col>
       </Row>
