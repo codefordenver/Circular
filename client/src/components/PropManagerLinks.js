@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, PageHeader } from 'react-bootstrap';
+import { Col, PageHeader } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 const PropManagerLinks = () => (
