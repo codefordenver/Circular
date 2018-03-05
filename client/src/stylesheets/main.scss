@@ -32,5 +32,7 @@
   "components/modalWrapper",
   "components/About";
 
-//fonts
+//Do not change the order of these imports:
+@import "bootstrap-overrides/bootstrap-overrides.scss";
+
 @import url("https://rsms.me/inter/inter-ui.css");
