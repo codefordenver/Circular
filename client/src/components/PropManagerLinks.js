@@ -5,32 +5,30 @@ import { Link } from 'react-router';
 const PropManagerLinks = () => (
   <div>
     <Col xs={10} xsOffset={1} md={6} mdOffset={0}>
-      <Row>
-        <Col xs={12}>
-          <PageHeader className="home-section-page-header">
-            I'm a Property Manager, what can I do?
-          </PageHeader>
-        </Col>
-        <Col xs={12} className="home-section-title">
-          <h3>Provide sustainable waste management to your tenants! </h3>
-        </Col>
-        <Col xs={12} className="home-section-description">
-          <p>
-            Increase tenant satisfaction and boost your building's appeal by providing recycling
-            service.
-          </p>
-          <br />
-          <p>
-            Please visit the page below to estimate your required level of service and tips on
-            purchasing service.
-          </p>
-        </Col>
-        <Col xs={12}>
-          <Link to="/denver-recycling-info" className="home-section-link">
-            Tips and Resources
-          </Link>
-        </Col>
-      </Row>
+      <div>
+        <PageHeader className="home-section-page-header">
+          I'm a Property Manager, what can I do?
+        </PageHeader>
+      </div>
+      <div className="home-section-title">
+        <h3>Provide sustainable waste management to your tenants! </h3>
+      </div>
+      <div className="home-section-description">
+        <p>
+          Increase tenant satisfaction and boost your building's appeal by providing recycling
+          service.
+        </p>
+        <br />
+        <p>
+          Please visit the page below to estimate your required level of service and tips on
+          purchasing service.
+        </p>
+      </div>
+      <div>
+        <Link to="/denver-recycling-info" className="home-section-link">
+          Tips and Resources
+        </Link>
+      </div>
     </Col>
   </div>
 );

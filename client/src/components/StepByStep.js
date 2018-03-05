@@ -27,22 +27,22 @@ const StepByStep = () => (
         <Step
           emojiIcon="&#x270D;"
           title="Create a campaign"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
+          description="Create and share your Multi-family Complex (MFC's) campaign page with your neighbors."
         />
         <Step
           emojiIcon="&#x1F91D;"
           title="Recruit support"
-          description="ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat."
+          description="Voice and organize your support."
         />
         <Step
           emojiIcon="&#x1F64F;"
           title="Request"
-          description="nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          description="Request recycling services from your landlord by sharing your building's campaign page."
         />
         <Step
           emojiIcon="&#x1F64C;"
           title="Recycle!"
-          description="ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam!"
+          description="Recycle and live in a more sustainable building."
         />
       </Row>
     </Col>
