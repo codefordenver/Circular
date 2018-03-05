@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
 
 import AutoSuggestInput from './AutoSuggestInput';
 
@@ -13,28 +13,29 @@ const HeroCTA = ({ openMap }) => (
         <h1 className="hero-page-header">
           NEED RECYCLING
           <br />
-          <span className="italics">-in-</span>
+          <span className="font-italic">-in-</span>
           <br />
           YOUR BUILDIND?
         </h1>
       </Col>
     </Row>
     <Row>
-      <Col xs={12} className="mt-nug">
+      <Col xs={12} className="hero-search">
         <form>
           <AutoSuggestInput />
-          <Link className="home-section-link" to="/denver-recycling-info">
-            Learn more first
-          </Link>
+          <div className="text-center">
+            <Button bsStyle="as-link" onClick={openMap}>
+              Explore the map
+            </Button>
+            <p className="vertical-text-divider">|</p>
+            <Link className="home-section-link" to="/denver-recycling-info">
+              Learn more first
+            </Link>
+          </div>
         </form>
       </Col>
     </Row>
   </Grid>
-  /*
-  <button className="open_map_button" onClick={openMap}>
-    Explore The Map
-  </button>
-  */
 );
 
 HeroCTA.propTypes = {

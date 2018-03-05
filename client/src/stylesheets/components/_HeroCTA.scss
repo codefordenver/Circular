@@ -9,9 +9,6 @@
   @media #{$information-phone} {
     font-size: 36px;
   }
-  .italics {
-    font-style: italic;
-  }
 }
 .hero-wrapper {
   position: relative;
@@ -35,72 +32,14 @@
     background-color: rgba(0, 0, 0, 0.2);
   }
 }
-.mt-nug {
+.hero-search {
   padding-top: 0px;
   margin-top: -3em;
 }
 
-.hero-search {
-  position: relative;
-  .shift-auto-suggest-up {
-    position: absolute;
-    max-width: 530px;
-    min-width: 320px;
-    top: -3em;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-/*
-.open_map_button {
-  @extend %btn_primary;
-  display: none;
-
-  @media (min-width: 1024px) {
-    display: inline-block;
-    position: absolute;
-    padding: 1em;
-    height: 4em;
-  }
-}
-
-.search_address_wrapper {
-  margin: auto;
-  height: 100%;
-  background-color: rgba($maingreen, 0.85);
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.18), 0 6px 6px 0 rgba(0, 0, 0, 0.32);
-  border-bottom: 1px solid transparent;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 600px;
-  padding: 1rem;
-
-  @media (min-width: 415px) {
-    border-radius: 2px;
-  }
-}
-
-.search_address_heading {
-  color: $mainwhite;
-
-  margin: 0.5em 0;
-  text-align: center;
-}
-.search_address_sub_heading {
-  color: $mainwhite;
-
-  text-align: center;
-  margin-bottom: 1em;
-}
-
-.search_address_link {
-  color: $mainwhite;
-  cursor: pointer;
-  font-size: 1em;
-  text-decoration: underline;
+.vertical-text-divider {
   display: inline-block;
-  margin: 1rem;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
-*/
