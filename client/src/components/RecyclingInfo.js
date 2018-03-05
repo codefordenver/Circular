@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Row, Col, PageHeader } from 'react-bootstrap';
+import { Col, PageHeader } from 'react-bootstrap';
 
 const RecyclingInfo = () => (
   <div>
