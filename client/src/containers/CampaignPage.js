@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import Popup from 'react-popup';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import ApartmentMap from '../components/CampaignsMap';
@@ -59,14 +61,27 @@ class CampaignPage extends Component {
                 </Col>
                 <div className="share-buttons">
                   <Col md={3} xs={6}>
-                    <Button className="btn btn-facebook" block>
-                      <i className="fa fa-facebook-square " />Facebook
-                    </Button>
+                    <FacebookShareButton
+                      quote="Quote"
+                      description="description"
+                      url="www.google.com"
+                    >
+                      <Button className="btn btn-facebook" block>
+                        <i className="fa fa-facebook-square " />Facebook
+                      </Button>
+                    </FacebookShareButton>
                   </Col>
                   <Col md={3} xs={6}>
-                    <Button className="btn btn-twitter" block>
-                      <i className="fa fa-twitter-square" />Tweet
-                    </Button>
+                    <TwitterShareButton
+                      url="google.com"
+                      title="Support my recycling request!"
+                      via="EcoCycle"
+                      hashtags={['ZeroWasteDenver', 'Recycle']}
+                    >
+                      <Button className="btn btn-twitter" block>
+                        <i className="fa fa-twitter-square" />Tweet
+                      </Button>
+                    </TwitterShareButton>
                   </Col>
                   <Col md={3} xs={12}>
                     <Button className="btn btn-text" block>
