@@ -80,10 +80,13 @@ class CampaignPage extends Component {
                     </TwitterShareButton>
                   </Col>
                   <Col md={3} xs={12}>
-                    <Button className="btn btn-text" block>
-                      <i className="fa fa-comment" />
-                      Text a Link
-                    </Button>
+                    <a
+                      className="btn btn-flyer btn-block"
+                      href={`${process.env.PUBLIC_URL}/flyer.pdf`}
+                      target="_blank"
+                    >
+                      <i className="fa fa-download" /> Download a Flyer
+                    </a>
                   </Col>
                 </div>
               </Col>
@@ -131,15 +134,7 @@ class CampaignPage extends Component {
               <Col md={12} xs={12}>
                 <Col md={3} xs={10} className="tools">
                   <h3>TOOLS:</h3>
-                  <ul>
-                    <li className="toolList">
-                      <i className="fa fa-circle" aria-hidden="true" />
-                      <a href={`${process.env.PUBLIC_URL}/flyer.pdf`} target="_blank">
-                        Download a Flyer
-                      </a>
-                    </li>
-                    {toolsList}
-                  </ul>
+                  <ul>{toolsList}</ul>
                 </Col>
                 <Col md={8} mdOffset={1} xs={10} className="tools">
                   <Discussion campaignID={this.props.params.id} />
