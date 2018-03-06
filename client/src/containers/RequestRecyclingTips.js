@@ -7,7 +7,9 @@ const RequestRecyclingTips = () => (
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
-          <PageHeader className="about-page-header-overrides">Tips for Requesting</PageHeader>
+          <PageHeader className="about-page-header-overrides">
+            Tips for Requesting Service
+          </PageHeader>
           <CollapsePanel
             titleText={'Tips for approaching your landlord'}
             body={
