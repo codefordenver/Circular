@@ -41,7 +41,6 @@ class SignCampaign extends Component {
       <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} number="1" />
     </FormGroup>
   );
-
   createCheckboxes = () => {
     const checkboxes = ['Keep me updated on the status of this request'];
     if (this.props.auth._id) {
@@ -63,12 +62,14 @@ class SignCampaign extends Component {
       return (
         <Row>
           <Col md={12}>
-            <a className="google-button-signature" href="/auth/google">
-              <GoogleButton label="Google" />
+            <a className="login-button-signature" href="/auth/facebook">
+              <Button className="btn btn-facebook btn-login" block>
+                <i className="fa fa-facebook-square " />Login with Facebook
+              </Button>
             </a>
             <h5 className="content text-center">OR</h5>
-            <a className="google-button-signature" href="/auth/google">
-              <GoogleButton label="Google" />
+            <a className="login-button-signature" href="/auth/google">
+              <GoogleButton className="btn-google btn-login" />
             </a>
             <h5 className="content text-center">OR</h5>
             <form>
