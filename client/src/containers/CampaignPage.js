@@ -10,21 +10,66 @@ import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
 
+import HeroCTA from '../components/HeroCTA';
+import { openMap, closeMap } from '../redux/actions/googleMap';
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
+import * as _ from 'lodash';
+import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
+
 class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchSignatures(this.props.params.id);
+    this.props.fetchApartmentsRequest();
   }
 
   render() {
-    const tools = ['Tips for Approaching your Landlord', 'Denver Recycling Facts'];
+    const tools = [
+      'Download a flyer',
+      'Tips for Approaching your Landlord',
+      'Denver Recycling Facts'
+    ];
     const toolsList = tools.map(tool => (
       <li className="toolList">
         <i className="fa fa-circle" aria-hidden="true" />
         {tool}
       </li>
     ));
-    const { activeCampaign: { loading, loaded, campaign } } = this.props;
+
+    const MapWithAMarker = withRouter(
+      withScriptjs(
+        withGoogleMap(props => (
+          <GoogleMap
+            ref={props.onMapLoad}
+            defaultZoom={12}
+            defaultCenter={{ lat: 39.7392, lng: -104.9903 }}
+            onClick={props.onMapClick}
+          >
+            {props.markers.map(marker => (
+              <Marker
+                key={marker.id}
+                position={{ lat: marker.lat, lng: marker.lng }}
+                onRightClick={() => props.onMarkerRightClick(marker)}
+                onClick={() => props.router.push(`/campaign/${marker.id}`)}
+                title={marker.street_address}
+              >
+                {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen} />}
+              </Marker>
+            ))}
+          </GoogleMap>
+        ))
+      )
+    );
+
+    const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
+      process.env.REACT_APP_GOOGLE_MAPS_KEY
+    }`;
+
+    const {
+      activeCampaign: { loading, loaded, campaign },
+      initialSearch: { apartments }
+    } = this.props;
     return (
       <Grid className="">
         <Row>
@@ -44,8 +89,30 @@ class CampaignPage extends Component {
                     )}
                 </h4>
               </Col>
-              <Col className="map center-block" md={3} mdPush={1} xs={12}>
-                <ApartmentMap />
+              <Col className="map center-block" md={4} xs={9}>
+                <MapWithAMarker
+                  googleMapURL={mapUrl}
+                  loadingElement={<div style={{ height: '100%' }} />}
+                  containerElement={
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        height: '100%',
+                        width: '100%',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center'
+                      }}
+                    />
+                  }
+                  mapElement={<div style={{ height: '100%' }} />}
+                  onMapLoad={_.noop}
+                  onMapClick={_}
+                  markers={apartments}
+                  onMarkerRightClick={_.noop}
+                />
               </Col>
             </Row>
             <Row className="show-grid top">
@@ -116,15 +183,7 @@ class CampaignPage extends Component {
               <Col md={12} xs={12}>
                 <Col md={3} xs={10} className="tools">
                   <h3>TOOLS:</h3>
-                  <ul>
-                    <li className="toolList">
-                      <i className="fa fa-circle" aria-hidden="true" />
-                      <a href={`${process.env.PUBLIC_URL}/flyer.pdf`} target="_blank">
-                        Download a Flyer
-                      </a>
-                    </li>
-                    {toolsList}
-                  </ul>
+                  <ul>{toolsList}</ul>
                 </Col>
                 <Col md={8} mdOffset={1} xs={10} className="tools">
                   <Discussion campaignID={this.props.params.id} />
@@ -144,7 +203,15 @@ class CampaignPage extends Component {
   }
 }
 
+CampaignPage.defaultProps = {
+  markers: []
+};
+
 CampaignPage.propTypes = {
+  markers: PropTypes.arrayOf(PropTypes.object),
+  initialSearch: PropTypes.shape({
+    apartments: PropTypes.array.isRequired
+  }).isRequired,
   activeCampaign: PropTypes.shape({
     campaign: PropTypes.shape({
       street_address: PropTypes.string
@@ -162,10 +229,19 @@ CampaignPage.propTypes = {
     loading: PropTypes.bool.isRequired,
     signatures: PropTypes.arrayOf(PropTypes.object),
     error: PropTypes.objectOf(PropTypes.any)
+  }).isRequired,
+  openMap: PropTypes.func.isRequired,
+  closeMap: PropTypes.func.isRequired,
+  initialSearch: PropTypes.shape({
+    apartments: PropTypes.array.isRequired
   }).isRequired
 };
 
-export default connect(({ activeCampaign, signature }) => ({ activeCampaign, signature }), {
-  fetchCampaignById,
-  fetchSignatures
-})(withRouter(CampaignPage));
+export default connect(
+  ({ activeCampaign, signature, initialSearch }) => ({ activeCampaign, signature, initialSearch }),
+  {
+    fetchCampaignById,
+    fetchSignatures,
+    fetchApartmentsRequest
+  }
+)(withRouter(CampaignPage));

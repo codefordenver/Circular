@@ -15,7 +15,7 @@ import { saveState } from './redux/localStorage';
 bootstrapUtils.addStyle(Panel, 'remove-default');
 bootstrapUtils.addStyle(Navbar, 'remove-default');
 bootstrapUtils.addStyle(ControlLabel, 'remove-default');
-bootstrapUtils.addStyle(Button, 'remove-default');
+bootstrapUtils.addStyle(Button, ...['remove-default', 'as-link']);
 
 const store = configureStore();
 

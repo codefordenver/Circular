@@ -12,7 +12,7 @@ const NavBar = props => {
   }
 
   return (
-    <Navbar bsStyle="remove-default" collapseOnSelect>
+    <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/">{homeText}</Link>

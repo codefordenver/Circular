@@ -3,7 +3,7 @@ import RecyclingInfo from '../components/RecyclingInfo';
 import PropManagerLinks from '../components/PropManagerLinks';
 
 const InfoAndLinks = () => (
-  <div className="infoandlinkstable">
+  <div>
     <RecyclingInfo />
     <PropManagerLinks />
   </div>

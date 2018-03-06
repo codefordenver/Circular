@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
@@ -18,17 +19,12 @@ class Home extends Component {
     const { initialSearch: { apartments }, googleMap: { isOpen } } = this.props;
     return (
       <div>
-        <HeroCTA
-          openMap={this.props.openMap}
-        />
-        <ApartmentMap
-          isOpen={isOpen}
-          markers={apartments}
-          closeMap={this.props.closeMap}
-        />
-        <StepByStep />
-
-        <InfoAndLinks />
+        <HeroCTA openMap={this.props.openMap} />
+        <ApartmentMap isOpen={isOpen} markers={apartments} closeMap={this.props.closeMap} />
+        <Grid fluid>
+          <StepByStep />
+          <InfoAndLinks />
+        </Grid>
       </div>
     );
   }
@@ -46,7 +42,8 @@ Home.propTypes = {
   closeMap: PropTypes.func.isRequired
 };
 
-export default connect(
-  ({ initialSearch, googleMap }) => ({ initialSearch, googleMap }),
-  { fetchApartmentsRequest, openMap, closeMap }
-)(Home);
+export default connect(({ initialSearch, googleMap }) => ({ initialSearch, googleMap }), {
+  fetchApartmentsRequest,
+  openMap,
+  closeMap
+})(Home);
