@@ -1,0 +1,11 @@
+.not-found-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+
+  div {
+    padding: 20px;
+  }
+}
