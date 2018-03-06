@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
@@ -18,11 +18,20 @@ class CampaignPage extends Component {
   }
 
   render() {
-    const tools = ['Tips for Approaching your Landlord', 'Denver Recycling Facts'];
+    const tools = [
+      {
+        title: 'Tips for Approaching your Landlord',
+        to: '/tips-for-requesting'
+      },
+      {
+        title: 'Denver Recycling Facts',
+        to: '/denver-recycling-info'
+      }
+    ];
     const toolsList = tools.map(tool => (
       <li className="toolList">
         <i className="fa fa-circle" aria-hidden="true" />
-        {tool}
+        <Link to={tool.to}>{tool.title}</Link>
       </li>
     ));
     const { activeCampaign: { loading, loaded, campaign } } = this.props;
@@ -91,7 +100,7 @@ class CampaignPage extends Component {
                       href={`${process.env.PUBLIC_URL}/flyer.pdf`}
                       target="_blank"
                     >
-                      <i className="fa fa-download" /> Download a Flyer
+                      <i className="fa fa-download" /> Download Flyer
                     </a>
                   </Col>
                 </div>
