@@ -1,0 +1,55 @@
+@import "../base/colors";
+
+.control-label-remove-default {
+  background-color: none;
+  display: inherit;
+  padding: 0px;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: inherit;
+  vertical-align: baseline;
+  border-radius: inherit;
+}
+
+.btn-remove-default {
+  background-color: none;
+}
+
+.navbar-remove-default {
+  background-image: none;
+}
+
+.panel-remove-default {
+  background-image: none;
+  border: none;
+  a,
+  a:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.btn-as-link {
+  color: $maingreen;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: none;
+  text-shadow: none;
+  box-shadow: none;
+  padding: 0px;
+  padding-top: 1em;
+  vertical-align: top;
+  margin: 0px;
+}
+
+.btn-as-link:hover,
+.btn-as-link:focus,
+.btn-as-link:active:focus,
+.btn-as-link.active:focus,
+.btn-as-link.focus,
+.btn-as-link:active.focus,
+.btn-as-link.active.focus {
+  color: $mainwhite;
+  box-shadow: none;
+}
