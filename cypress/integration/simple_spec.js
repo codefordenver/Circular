@@ -3,7 +3,7 @@ describe('The landing page', () => {
     cy.visit('http://localhost:3000');
   });
   it('prompts the user with about recycling', () => {
-    cy.contains('Need recycling at your building?');
+    cy.contains('NEED RECYCLING');
   });
 
   describe('when searching an address', () => {

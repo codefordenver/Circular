@@ -19,11 +19,7 @@ class CampaignPage extends Component {
   }
 
   render() {
-    const tools = [
-      'Download a flyer',
-      'Tips for Approaching your Landlord',
-      'Denver Recycling Facts'
-    ];
+    const tools = ['Tips for Approaching your Landlord', 'Denver Recycling Facts'];
     const toolsList = tools.map(tool => (
       <li className="toolList">
         <i className="fa fa-circle" aria-hidden="true" />
@@ -135,7 +131,15 @@ class CampaignPage extends Component {
               <Col md={12} xs={12}>
                 <Col md={3} xs={10} className="tools">
                   <h3>TOOLS:</h3>
-                  <ul>{toolsList}</ul>
+                  <ul>
+                    <li className="toolList">
+                      <i className="fa fa-circle" aria-hidden="true" />
+                      <a href={`${process.env.PUBLIC_URL}/flyer.pdf`} target="_blank">
+                        Download a Flyer
+                      </a>
+                    </li>
+                    {toolsList}
+                  </ul>
                 </Col>
                 <Col md={8} mdOffset={1} xs={10} className="tools">
                   <Discussion campaignID={this.props.params.id} />
