@@ -4,10 +4,12 @@ import CollapsePanel from '.././components/CollapsePanel';
 
 const ManagerResources = () => (
   <div>
-    <PageHeader className="about-page-header-overrides">Property Manager Resources</PageHeader>
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
+          <PageHeader className="about-page-header-overrides">
+            Property Manager Resources
+          </PageHeader>
           <CollapsePanel
             titleText="Tips for Purchasing Service"
             body={

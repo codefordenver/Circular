@@ -4,10 +4,10 @@ import CollapsePanel from '.././components/CollapsePanel';
 
 const NowWhat = () => (
   <div>
-    <PageHeader className="about-page-header-overrides">What Now?</PageHeader>
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
+          <PageHeader className="about-page-header-overrides">What Now?</PageHeader>
           <CollapsePanel
             titleText={'Tips for approaching your landlord'}
             body={

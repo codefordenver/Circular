@@ -3,10 +3,12 @@ import { PageHeader, Grid, Row, Col } from 'react-bootstrap';
 
 const DenverInfo = () => (
   <div>
-    <PageHeader className="about-page-header-overrides">Recycling Request Tool FAQ</PageHeader>
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
+          <PageHeader className="about-page-header-overrides">
+            Recycling Request Tool FAQ
+          </PageHeader>
           <ol className="about-list numberic-list">
             <li>
               The primary goal of the project is to provide tenants with the ability to
