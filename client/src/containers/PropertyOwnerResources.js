@@ -8,6 +8,7 @@ const PropertyOwnerResources = () => (
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
           <PageHeader className="about-page-header-overrides">Property Owner Resources</PageHeader>
+
           <CollapsePanel
             titleText="Q: My tenants have requested service, now what?"
             body={

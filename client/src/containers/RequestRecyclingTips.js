@@ -29,8 +29,8 @@ const RequestRecyclingTips = () => (
             titleText={'Our Landlord ignored or denied our request'}
             body={
               <p>
-                Boo! Why? Fill out this survey and tell us what the roadblockers towards getting
-                recycling services were.
+                Boo! Why? Fill out <a href="">this survey</a> and tell us what the roadblockers
+                towards getting recycling services were.
               </p>
             }
           />
