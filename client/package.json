@@ -20,7 +20,6 @@
     "react-async-script-loader": "^0.3.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.5.4",
-    "react-facebook-login": "^4.0.1",
     "react-google-button": "^0.4.0",
     "react-google-maps": "^6.3.0",
     "react-modal": "^2.2.0",
