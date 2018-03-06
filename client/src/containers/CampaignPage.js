@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
-import Popup from 'react-popup';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import ApartmentMap from '../components/CampaignsMap';
@@ -27,6 +26,7 @@ class CampaignPage extends Component {
       </li>
     ));
     const { activeCampaign: { loading, loaded, campaign } } = this.props;
+    const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
     return (
       <Grid className="">
         <Row>
@@ -58,9 +58,15 @@ class CampaignPage extends Component {
                 <div className="share-buttons">
                   <Col md={3} xs={6}>
                     <FacebookShareButton
-                      quote="Quote"
-                      description="description"
-                      url="www.google.com"
+                      quote="Support my recycling request!"
+                      // facebook url errors on localhost, it has to be able to connect to something.  so if its on dev link it to the heroku page.
+                      url={
+                        hrefIsLocalhost
+                          ? `https://denver-reimagine.herokuapp.com/campaign/${
+                            this.props.params.id
+                          }`
+                          : window.location.href
+                      }
                     >
                       <Button className="btn btn-facebook" block>
                         <i className="fa fa-facebook-square " />Facebook
@@ -69,7 +75,7 @@ class CampaignPage extends Component {
                   </Col>
                   <Col md={3} xs={6}>
                     <TwitterShareButton
-                      url="google.com"
+                      url={window.location.href}
                       title="Support my recycling request!"
                       via="EcoCycle"
                       hashtags={['ZeroWasteDenver', 'Recycle']}

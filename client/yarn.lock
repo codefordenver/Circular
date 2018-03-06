@@ -3997,10 +3997,6 @@ keycode@^2.1.2:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.1.9.tgz#964a23c54e4889405b4861a5c9f0480d45141dfa"
 
-keymaster@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/keymaster/-/keymaster-1.6.2.tgz#e1ae54d0ea9488f9f60b66b668f02e9a1946c6eb"
-
 kind-of@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
@@ -5542,12 +5538,6 @@ react-places-autocomplete@^5.3.1:
   dependencies:
     lodash.debounce "^4.0.8"
     prop-types "^15.5.8"
-
-react-popup@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/react-popup/-/react-popup-0.9.2.tgz#5e8a983ff6c9572721528745250036de31702112"
-  dependencies:
-    keymaster "^1.6.2"
 
 react-prop-types-element-of-type@^2.2.0:
   version "2.2.0"

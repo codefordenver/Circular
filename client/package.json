@@ -24,7 +24,6 @@
     "react-google-maps": "^6.3.0",
     "react-modal": "^2.2.0",
     "react-places-autocomplete": "^5.3.1",
-    "react-popup": "^0.9.2",
     "react-redux": "^5.0.5",
     "react-router": "3.0.5",
     "react-router-bootstrap": "^0.24.2",
