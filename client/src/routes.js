@@ -8,16 +8,15 @@ import CreateCampaignStep1 from './components/CreateCampaignStep1';
 import CreateCampaignStep2 from './components/CreateCampaignStep2';
 import CreateCampaignStep3 from './components/CreateCampaignStep3';
 import CampaignPage from './containers/CampaignPage';
-import Tips from './containers/Tips';
+import RequestRecyclingTips from './containers/RequestRecyclingTips';
 import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
 // import NotFound from './containers/NotFound';
 import About from './containers/About';
 import Tools from './containers/Tools';
-import NowWhat from './containers/NowWhat';
 import PropertyOwnerResources from './containers/PropertyOwnerResources';
 import Collaboration from './containers/Collaboration';
-// import NotFound from './containers/NotFound'; -- TODO: Add back
+import NotFound from './containers/NotFound';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
@@ -51,7 +50,7 @@ export default (
     />
     <Route
       path="/tips-for-requesting"
-      getComponent={(location, callback) => callback(null, Tips)}
+      getComponent={(location, callback) => callback(null, RequestRecyclingTips)}
     />
     <Route
       path="/denver-recycling-info"
@@ -62,7 +61,6 @@ export default (
       getComponent={(location, callback) => callback(null, ManagerResources)}
     />
     <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
-    <Route path="/what-now" getComponent={(location, callback) => callback(null, NowWhat)} />
     <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
     <Route
       path="/property-owner-faq"
@@ -72,5 +70,7 @@ export default (
       path="/who-are-we"
       getComponent={(location, callback) => callback(null, Collaboration)}
     />
+
+    <Route path="*" getComponent={(location, callback) => callback(null, NotFound)} />
   </Route>
 );

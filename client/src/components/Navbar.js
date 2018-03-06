@@ -29,7 +29,7 @@ const NavBar = props => {
               <Link to="/manager-resources">Manager Resources</Link>
             </MenuItem>
             <MenuItem eventKey={2.2}>
-              <Link to="/what-now">What Now?</Link>
+              <Link to="/tips-for-requesting">Tips for Requesting</Link>
             </MenuItem>
           </NavDropdown>
           <NavItem eventKey={3}>
