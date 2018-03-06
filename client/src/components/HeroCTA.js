@@ -15,7 +15,7 @@ const HeroCTA = ({ openMap }) => (
           <br />
           <span className="font-italic">-in-</span>
           <br />
-          YOUR BUILDIND?
+          YOUR BUILDING?
         </h1>
       </Col>
     </Row>
