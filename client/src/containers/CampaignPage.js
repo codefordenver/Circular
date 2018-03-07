@@ -8,7 +8,6 @@ import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
-import { openMap, closeMap } from '../redux/actions/googleMap';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import CollapsePanel from '.././components/CollapsePanel';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
@@ -239,10 +238,7 @@ CampaignPage.propTypes = {
     error: PropTypes.objectOf(PropTypes.any)
   }).isRequired,
   openMap: PropTypes.func.isRequired,
-  closeMap: PropTypes.func.isRequired,
-  initialSearch: PropTypes.shape({
-    apartments: PropTypes.array.isRequired
-  }).isRequired
+  closeMap: PropTypes.func.isRequired
 };
 
 export default connect(
