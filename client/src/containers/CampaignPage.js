@@ -5,14 +5,12 @@ import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
-import ApartmentMap from '../components/CampaignsMap';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
-
-import HeroCTA from '../components/HeroCTA';
 import { openMap, closeMap } from '../redux/actions/googleMap';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import CollapsePanel from '.././components/CollapsePanel';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import * as _ from 'lodash';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
@@ -192,9 +190,19 @@ class CampaignPage extends Component {
             </Row>
           </Col>
           <Col md={3} xs={12} className="side-bar">
-            <div>
-              <SignCampaign signatureObj={this.props.signature} />
-              <SignatureList signatures={this.props.signature.signatures} />
+            <SignCampaign signatureObj={this.props.signature} />
+            <div className="text-center">
+              <CollapsePanel
+                signatures={this.props.signature.signatures}
+                titleText="See Who's Signed"
+                body={
+                  <ol>
+                    <li>
+                      <SignatureList signatures={this.props.signature.signatures} />
+                    </li>
+                  </ol>
+                }
+              />
             </div>
           </Col>
         </Row>
