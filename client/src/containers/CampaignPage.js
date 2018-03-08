@@ -18,14 +18,16 @@ class CampaignPage extends Component {
   }
 
   calculateDaysLeft = createdDate => {
+    // miliseconds in a day
+    const ONE_DAY = 1000 * 60 * 60 * 24;
     // number of days in a campaign
     const CAMPAIGN_DURATION = 14;
 
     const expireDate = new Date(createdDate);
-    expireDate.setDate(expireDate.getDate() + CAMPAIGN_DURATION);
+    expireDate.setTime(expireDate.getTime() + CAMPAIGN_DURATION * ONE_DAY);
     const now = new Date(Date.now());
 
-    return Math.max(expireDate.getDate() - now.getDate(), 0);
+    return Math.max(Math.round((expireDate.getTime() - now.getTime()) / ONE_DAY), 0);
   };
 
   render() {
