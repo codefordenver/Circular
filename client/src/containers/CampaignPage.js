@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import dateformat from 'dateformat';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import ApartmentMap from '../components/CampaignsMap';
@@ -29,6 +30,8 @@ class CampaignPage extends Component {
 
     return Math.max(Math.round((expireDate.getTime() - now.getTime()) / ONE_DAY), 0);
   };
+
+  getMonthAndDay = date => dateformat(date, 'mmmm dS');
 
   render() {
     const tools = [
@@ -124,7 +127,7 @@ class CampaignPage extends Component {
                 <Col className="status" md={2} xs={6}>
                   <div className="text-center">
                     <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                    <h5>December 5</h5>
+                    <h5>{campaign && this.getMonthAndDay(campaign.createdAt)}</h5>
                     <p>Campaign Created</p>
                   </div>
                 </Col>
