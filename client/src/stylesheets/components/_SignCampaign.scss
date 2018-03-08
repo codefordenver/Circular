@@ -49,6 +49,19 @@ h5 {
   background-color: white;
 }
 
+.login-button-signature {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+  .btn-google {
+    width: auto !important;
+  }
+  .btn-login {
+    height: 50px;
+  }
+}
+
 // .error-message {
 //   color: red;
 // }
@@ -61,9 +74,7 @@ h5 {
 //   margin: 1em 0em;
 // }
 
-// .google-button-signature {
-//   text-decoration: none;
-// }
+//
 
 // .pure-button {
 //   font-family: inherit;

@@ -30,6 +30,7 @@
     "react-router-dom": "^4.1.2",
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.0.13",
+    "react-share": "^2.0.0",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
