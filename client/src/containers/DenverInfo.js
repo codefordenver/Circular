@@ -9,7 +9,7 @@ const DenverInfo = () => (
           <PageHeader className="about-page-header-overrides">
             Recycling Request Tool FAQ
           </PageHeader>
-          <ol className="about-list numberic-list">
+          <ol className="about-list numeric-list">
             <li>
               The primary goal of the project is to provide tenants with the ability to
               transparently and collectively petition their landlord, through an automated and

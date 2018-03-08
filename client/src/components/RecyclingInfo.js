@@ -20,7 +20,7 @@ const RecyclingInfo = () => (
         </p>
       </div>
       <div>
-        <Link to="/property-owner-faq" className="home-section-link">
+        <Link to="/denver-learn-more" className="home-section-link">
           Learn More
         </Link>
       </div>

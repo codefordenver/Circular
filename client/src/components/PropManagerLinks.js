@@ -25,7 +25,7 @@ const PropManagerLinks = () => (
         </p>
       </div>
       <div>
-        <Link to="/denver-recycling-info" className="home-section-link">
+        <Link to="/manager-resources" className="home-section-link">
           Tips and Resources
         </Link>
       </div>
