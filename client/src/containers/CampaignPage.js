@@ -17,6 +17,17 @@ class CampaignPage extends Component {
     this.props.fetchSignatures(this.props.params.id);
   }
 
+  calculateDaysLeft = createdDate => {
+    // number of days in a campaign
+    const CAMPAIGN_DURATION = 14;
+
+    const expireDate = new Date(createdDate);
+    expireDate.setDate(expireDate.getDate() + CAMPAIGN_DURATION);
+    const now = new Date(Date.now());
+
+    return Math.max(expireDate.getDate() - now.getDate(), 0);
+  };
+
   render() {
     const tools = [
       {
@@ -138,7 +149,7 @@ class CampaignPage extends Component {
                 </Col>
                 <Col className="status " md={4} xs={12}>
                   <div className="text-center status-date">
-                    <h3>10</h3>
+                    <h3>{campaign ? this.calculateDaysLeft(campaign.createdAt) : '?'}</h3>
                     <p>Days Left</p>
                     <i className="fa fa-calendar" aria-hidden="true" />
                   </div>
