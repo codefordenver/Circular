@@ -119,7 +119,11 @@ class SignCampaign extends Component {
             <ControlLabel id="control-label">
               <h4>I'm signing because...</h4>
             </ControlLabel>
-            <FormControl componentClass="textarea" placeholder="Optional" />
+            <FormControl
+              className="form-resize-vertical"
+              componentClass="textarea"
+              placeholder="Optional"
+            />
           </FormGroup>
         </Col>
       </Row>
