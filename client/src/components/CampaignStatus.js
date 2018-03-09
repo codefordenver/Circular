@@ -15,7 +15,6 @@ class CampaignStatus extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Col className="status " md={12} xs={12}>
         <div className="text-center status-date">
@@ -28,7 +27,7 @@ class CampaignStatus extends React.Component {
   }
 }
 
-CampaignStatus.PropTypes = {
+CampaignStatus.propTypes = {
   createdAt: PropTypes.string.isRequired, // date string
   duration: PropTypes.number.isRequired
 };

@@ -71,7 +71,10 @@ class CampaignPage extends Component {
                   <Col md={3} xs={6}>
                     <FacebookShareButton
                       quote="Support my recycling request!"
-                      // facebook url errors on localhost, it has to be able to connect to something.  so if its on dev link it to the heroku page.
+                      /*
+                      facebook url errors on localhost, it has to be able to
+                      connect to something.  so if its on dev link it to the heroku page.
+                      */
                       url={
                         hrefIsLocalhost
                           ? `https://denver-reimagine.herokuapp.com/campaign/${
