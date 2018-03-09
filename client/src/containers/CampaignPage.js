@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
-import dateformat from 'dateformat';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import ApartmentMap from '../components/CampaignsMap';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
+import CampaignProgressBar from '../components/CampaignProgressBar';
 
+const CAMPAIGN_DURATION = 15;
 class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
@@ -22,7 +23,6 @@ class CampaignPage extends Component {
     // miliseconds in a day
     const ONE_DAY = 1000 * 60 * 60 * 24;
     // number of days in a campaign
-    const CAMPAIGN_DURATION = 14;
 
     const expireDate = new Date(createdDate);
     expireDate.setTime(expireDate.getTime() + CAMPAIGN_DURATION * ONE_DAY);
@@ -30,8 +30,6 @@ class CampaignPage extends Component {
 
     return Math.max(Math.round((expireDate.getTime() - now.getTime()) / ONE_DAY), 0);
   };
-
-  getMonthAndDay = date => dateformat(date, 'mmmm dS');
 
   render() {
     const tools = [
@@ -123,36 +121,24 @@ class CampaignPage extends Component {
               </Col>
             </Row>
             <Row className="show-grid top">
-              <Col className="status-bar" md={12} xs={12}>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                    <h5>{campaign && this.getMonthAndDay(campaign.createdAt)}</h5>
-                    <p>Campaign Created</p>
-                  </div>
-                </Col>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                    <h5>December 12</h5>
-                    <p>Print Flyers</p>
-                  </div>
-                </Col>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-circle-o" aria-hidden="true" />
-                    <h5>December 19</h5>
-                    <p>Final Signatures</p>
-                  </div>
-                </Col>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-circle-o" aria-hidden="true" />
-                    <h5>December 26</h5>
-                    <p>Request Recycling</p>
-                  </div>
-                </Col>
-                <Col className="status " md={4} xs={12}>
+              <Col className="status-bar" md={8} xs={12}>
+                <Row>
+                  {campaign && (
+                    <CampaignProgressBar
+                      createdAt={campaign.createdAt}
+                      phases={[
+                        'Campaign Created',
+                        'Print Flyers',
+                        'Final Signatures',
+                        'Request Recycling'
+                      ]}
+                      duration={CAMPAIGN_DURATION}
+                    />
+                  )}
+                </Row>
+              </Col>
+              <Col className="status-bar" md={4} xs={12}>
+                <Col className="status " md={12} xs={12}>
                   <div className="text-center status-date">
                     <h3>{campaign ? this.calculateDaysLeft(campaign.createdAt) : '?'}</h3>
                     <p>Days Left</p>
