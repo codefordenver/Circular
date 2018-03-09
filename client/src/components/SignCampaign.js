@@ -63,7 +63,7 @@ class SignCampaign extends Component {
         <Row>
           <Col md={12}>
             <a className="login-button-signature" href="/auth/facebook">
-              <Button className="btn btn-facebook btn-login" block>
+              <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
                 <i className="fa fa-facebook-square " />Login with Facebook
               </Button>
             </a>
