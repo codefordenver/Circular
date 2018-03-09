@@ -11,6 +11,7 @@ import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
 import CampaignProgressBar from '../components/CampaignProgressBar';
+import CampaignStatus from '../components/CampaignStatus';
 
 const CAMPAIGN_DURATION = 15;
 class CampaignPage extends Component {
@@ -18,18 +19,6 @@ class CampaignPage extends Component {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchSignatures(this.props.params.id);
   }
-
-  calculateDaysLeft = createdDate => {
-    // miliseconds in a day
-    const ONE_DAY = 1000 * 60 * 60 * 24;
-    // number of days in a campaign
-
-    const expireDate = new Date(createdDate);
-    expireDate.setTime(expireDate.getTime() + CAMPAIGN_DURATION * ONE_DAY);
-    const now = new Date(Date.now());
-
-    return Math.max(Math.round((expireDate.getTime() - now.getTime()) / ONE_DAY), 0);
-  };
 
   render() {
     const tools = [
@@ -120,10 +109,10 @@ class CampaignPage extends Component {
                 </div>
               </Col>
             </Row>
-            <Row className="show-grid top">
-              <Col className="status-bar" md={8} xs={12}>
-                <Row>
-                  {campaign && (
+            {campaign && (
+              <Row className="show-grid top">
+                <Col className="status-bar" md={8} xs={12}>
+                  <Row>
                     <CampaignProgressBar
                       createdAt={campaign.createdAt}
                       phases={[
@@ -134,19 +123,13 @@ class CampaignPage extends Component {
                       ]}
                       duration={CAMPAIGN_DURATION}
                     />
-                  )}
-                </Row>
-              </Col>
-              <Col className="status-bar" md={4} xs={12}>
-                <Col className="status " md={12} xs={12}>
-                  <div className="text-center status-date">
-                    <h3>{campaign ? this.calculateDaysLeft(campaign.createdAt) : '?'}</h3>
-                    <p>Days Left</p>
-                    <i className="fa fa-calendar" aria-hidden="true" />
-                  </div>
+                  </Row>
                 </Col>
-              </Col>
-            </Row>
+                <Col className="status-bar" md={4} xs={12}>
+                  <CampaignStatus createdAt={campaign.createdAt} duration={CAMPAIGN_DURATION} />
+                </Col>
+              </Row>
+            )}
             <Row className="show-grid top">
               <Col md={12} xs={12}>
                 <Col md={3} xs={10} className="tools">
