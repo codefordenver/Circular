@@ -1,11 +1,15 @@
+<<<<<<< HEAD
 @import "../base/colors";
+=======
+@import '../base/colors';
+>>>>>>> master
 
 .control-label-remove-default {
   background-color: none;
   display: inherit;
   padding: 0px;
   font-size: 100%;
-  font-weight: inherit;
+
   line-height: inherit;
   color: inherit;
   text-align: inherit;
@@ -15,6 +19,7 @@
 
 .btn-remove-default {
   background-color: none;
+  text-shadow: none;
 }
 
 .navbar-remove-default {

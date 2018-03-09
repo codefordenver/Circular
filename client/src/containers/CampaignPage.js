@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
@@ -23,50 +24,24 @@ class CampaignPage extends Component {
 
   render() {
     const tools = [
-      'Download a flyer',
-      'Tips for Approaching your Landlord',
-      'Denver Recycling Facts'
+      {
+        title: 'Tips for Approaching your Landlord',
+        to: '/tips-for-requesting'
+      },
+      {
+        title: 'Denver Recycling Facts',
+        to: '/denver-recycling-info'
+      }
     ];
     const toolsList = tools.map(tool => (
       <li className="toolList">
         <i className="fa fa-circle" aria-hidden="true" />
-        {tool}
+        <Link to={tool.to}>{tool.title}</Link>
       </li>
     ));
+    const { activeCampaign: { loading, loaded, campaign } } = this.props;
+    const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
 
-    const MapWithAMarker = withRouter(
-      withScriptjs(
-        withGoogleMap(props => (
-          <GoogleMap
-            ref={props.onMapLoad}
-            defaultZoom={12}
-            defaultCenter={{ lat: 39.7392, lng: -104.9903 }}
-            onClick={props.onMapClick}
-          >
-            {props.markers.map(marker => (
-              <Marker
-                key={marker.id}
-                position={{ lat: marker.lat, lng: marker.lng }}
-                onRightClick={() => props.onMarkerRightClick(marker)}
-                onClick={() => props.router.push(`/campaign/${marker.id}`)}
-                title={marker.street_address}
-              >
-                {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen} />}
-              </Marker>
-            ))}
-          </GoogleMap>
-        ))
-      )
-    );
-
-    const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
-      process.env.REACT_APP_GOOGLE_MAPS_KEY
-    }`;
-
-    const {
-      activeCampaign: { loading, loaded, campaign },
-      initialSearch: { apartments }
-    } = this.props;
     return (
       <Grid className="">
         <Row>
@@ -119,20 +94,42 @@ class CampaignPage extends Component {
                 </Col>
                 <div className="share-buttons">
                   <Col md={3} xs={6}>
-                    <Button className="btn btn-facebook" block>
-                      <i className="fa fa-facebook-square " />Facebook
-                    </Button>
+                    <FacebookShareButton
+                      quote="Support my recycling request!"
+                      // facebook url errors on localhost, it has to be able to connect to something.  so if its on dev link it to the heroku page.
+                      url={
+                        hrefIsLocalhost
+                          ? `https://denver-reimagine.herokuapp.com/campaign/${
+                            this.props.params.id
+                          }`
+                          : window.location.href
+                      }
+                    >
+                      <Button bsStyle="remove-default" className="btn btn-facebook" block>
+                        <i className="fa fa-facebook-square " />Facebook
+                      </Button>
+                    </FacebookShareButton>
                   </Col>
                   <Col md={3} xs={6}>
-                    <Button className="btn btn-twitter" block>
-                      <i className="fa fa-twitter-square" />Tweet
-                    </Button>
+                    <TwitterShareButton
+                      url={window.location.href}
+                      title="Support my recycling request!"
+                      via="EcoCycle"
+                      hashtags={['ZeroWasteDenver', 'Recycle']}
+                    >
+                      <Button bsStyle="remove-default" className="btn btn-twitter" block>
+                        <i className="fa fa-twitter-square" />Tweet
+                      </Button>
+                    </TwitterShareButton>
                   </Col>
                   <Col md={3} xs={12}>
-                    <Button className="btn btn-text" block>
-                      <i className="fa fa-comment" />
-                      Text a Link
-                    </Button>
+                    <a
+                      className="btn btn-flyer btn-block"
+                      href={`${process.env.PUBLIC_URL}/flyer.pdf`}
+                      target="_blank"
+                    >
+                      <i className="fa fa-download" /> Download Flyer
+                    </a>
                   </Col>
                 </div>
               </Col>

@@ -30,7 +30,7 @@ const StepByStep = () => (
           description="Create and share your Multi-family Complex (MFC's) campaign page with your neighbors."
         />
         <Step
-          emojiIcon="&#x1F91D;"
+          emojiIcon="&#x1F4CB;"
           title="Recruit support"
           description="Voice and organize your support."
         />

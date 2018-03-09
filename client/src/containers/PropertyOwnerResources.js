@@ -4,21 +4,23 @@ import CollapsePanel from '.././components/CollapsePanel';
 
 const PropertyOwnerResources = () => (
   <div>
-    <PageHeader className="about-page-header-overrides">Property Owner Resources</PageHeader>
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
+          <PageHeader className="about-page-header-overrides">Property Owner Resources</PageHeader>
+
           <CollapsePanel
             titleText="Q: My tenants have requested service, now what?"
             body={
               <p>
                 A: Check your current waste contract. Do they offer recycling services? Ask about
                 how much it would cost to get the service for your property. You can always shop
-                around for different haulers that offer recycling services in your area.{' '}
+                around for different haulers that offer recycling services in your area.
                 <a
                   className="about-link"
                   href="http://www.denvergov.org/content/denvergov/en/trash-and-recycling/recycling/business-and-multi-family-recycling.html"
                 >
+                  <br />
                   See a list of registered haulers here
                 </a>
               </p>
