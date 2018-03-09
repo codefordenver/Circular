@@ -62,6 +62,12 @@ h5 {
   }
 }
 
+.form-resize-vertical {
+  resize: vertical;
+  min-height: 75px;
+  max-height: 150px;
+}
+
 // .error-message {
 //   color: red;
 // }

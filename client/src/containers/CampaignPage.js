@@ -177,27 +177,28 @@ class CampaignPage extends Component {
                 </div>
               </Col>
             </Row>
-            {campaign && (
-              <Row className="show-grid top">
-                <Col className="status-bar" md={8} xs={12}>
-                  <Row>
-                    <CampaignProgressBar
-                      createdAt={campaign.createdAt}
-                      phases={[
-                        'Campaign Created',
-                        'Print Flyers',
-                        'Final Signatures',
-                        'Request Recycling'
-                      ]}
-                      duration={CAMPAIGN_DURATION}
-                    />
-                  </Row>
-                </Col>
-                <Col className="status-bar" md={4} xs={12}>
-                  <CampaignStatus createdAt={campaign.createdAt} duration={CAMPAIGN_DURATION} />
-                </Col>
-              </Row>
-            )}
+            {campaign &&
+              campaign.createdAt && (
+                <Row className="show-grid top">
+                  <Col className="status-bar" md={8} xs={12}>
+                    <Row>
+                      <CampaignProgressBar
+                        createdAt={campaign.createdAt}
+                        phases={[
+                          'Campaign Created',
+                          'Print Flyers',
+                          'Final Signatures',
+                          'Request Recycling'
+                        ]}
+                        duration={CAMPAIGN_DURATION}
+                      />
+                    </Row>
+                  </Col>
+                  <Col className="status-bar" md={4} xs={12}>
+                    <CampaignStatus createdAt={campaign.createdAt} duration={CAMPAIGN_DURATION} />
+                  </Col>
+                </Row>
+              )}
             <Row className="show-grid top">
               <Col md={12} xs={12}>
                 <Col md={3} xs={10} className="tools">
@@ -256,7 +257,11 @@ CampaignPage.propTypes = {
 };
 
 export default connect(
-  ({ activeCampaign, signature, initialSearch }) => ({ activeCampaign, signature, initialSearch }),
+  ({ activeCampaign, signature, initialSearch }) => ({
+    activeCampaign,
+    signature,
+    initialSearch
+  }),
   {
     fetchCampaignById,
     fetchSignatures,

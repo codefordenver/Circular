@@ -15,10 +15,17 @@ class CampaignStatus extends React.Component {
   };
 
   render() {
+    let { createdAt } = this.props;
+    const { duration } = this.props;
+    const timestamp = Date.parse(createdAt);
+    if (isNaN(timestamp)) {
+      createdAt = new Date(Date.now()).toString();
+    }
+
     return (
       <Col className="status " md={12} xs={12}>
         <div className="text-center status-date">
-          <h3>{this.calculateDaysLeft(this.props.createdAt, this.props.duration)}</h3>
+          <h3>{this.calculateDaysLeft(createdAt, duration)}</h3>
           <p>Days Left</p>
           <i className="fa fa-calendar" aria-hidden="true" />
         </div>
