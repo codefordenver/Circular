@@ -29,7 +29,6 @@ class CampaignPage extends Component {
     if (this.props.params.id !== nextProps.params.id) {
       nextProps.fetchCampaignById(nextProps.params.id);
       nextProps.fetchSignatures(nextProps.params.id);
-      nextProps.fetchApartmentsRequest();
     }
   }
 
