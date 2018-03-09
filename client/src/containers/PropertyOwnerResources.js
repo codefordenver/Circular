@@ -20,6 +20,7 @@ const PropertyOwnerResources = () => (
                   className="about-link"
                   href="http://www.denvergov.org/content/denvergov/en/trash-and-recycling/recycling/business-and-multi-family-recycling.html"
                 >
+                  <br />
                   See a list of registered haulers here
                 </a>
               </p>

@@ -13,7 +13,7 @@ const RequestRecyclingTips = () => (
           <CollapsePanel
             titleText={'Tips for approaching your landlord'}
             body={
-              <ol>
+              <ul>
                 <li>
                   Make an appointment with your property manager or landlord to talk about your
                   campaign
@@ -24,7 +24,7 @@ const RequestRecyclingTips = () => (
                 </li>
                 <li>Listen to your property manager's feedback or concerns</li>
                 <li>Let us know what they said!</li>
-              </ol>
+              </ul>
             }
           />
           <CollapsePanel
