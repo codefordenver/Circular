@@ -32,13 +32,15 @@ class CampaignProgessBar extends React.Component {
   };
 
   render() {
-    const phaseDates = this.getPhaseCompletionDates(
-      this.props.createdAt,
-      this.props.phases.length,
-      this.props.duration
-    );
+    let { createdAt, phases, duration } = this.props;
+    const timestamp = Date.parse(createdAt);
+    if (isNaN(timestamp)) {
+      createdAt = new Date(Date.now()).toString();
+    }
+
+    const phaseDates = this.getPhaseCompletionDates(createdAt, phases.length, duration);
     const progressSteps = phaseDates.map((phaseDate, index) =>
-      this.renderProgressPhase(phaseDate, this.props.phases[index])
+      this.renderProgressPhase(phaseDate, phases[index])
     );
 
     return <div>{progressSteps}</div>;
