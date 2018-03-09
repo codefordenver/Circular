@@ -64,10 +64,11 @@ row {
   }
 }
 .map {
-  width: 250px;
+  width: 375px;
   height: 200px;
   background-color: white;
   margin-top: 2vh;
+  top: 10px;
 }
 
 .tools {
@@ -177,6 +178,7 @@ row {
 
   .map {
     margin: auto;
+    width: 85%;
   }
 
   .share {
