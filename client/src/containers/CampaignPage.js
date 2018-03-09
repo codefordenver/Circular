@@ -217,13 +217,7 @@ class CampaignPage extends Component {
               <CollapsePanel
                 signatures={this.props.signature.signatures}
                 titleText="See Who's Signed"
-                body={
-                  <ol>
-                    <li>
-                      <SignatureList signatures={this.props.signature.signatures} />
-                    </li>
-                  </ol>
-                }
+                body={<SignatureList signatures={this.props.signature.signatures} />}
               />
             </div>
           </Col>
