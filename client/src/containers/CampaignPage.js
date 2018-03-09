@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import * as _ from 'lodash';
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import CollapsePanel from '.././components/CollapsePanel';
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
-import * as _ from 'lodash';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 
 class CampaignPage extends Component {
@@ -250,7 +250,6 @@ CampaignPage.defaultProps = {
 };
 
 CampaignPage.propTypes = {
-  markers: PropTypes.arrayOf(PropTypes.object),
   initialSearch: PropTypes.shape({
     apartments: PropTypes.array.isRequired
   }).isRequired,
@@ -263,6 +262,7 @@ CampaignPage.propTypes = {
   }).isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
   fetchSignatures: PropTypes.func.isRequired,
+  fetchApartmentsRequest: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
   }).isRequired,
@@ -271,9 +271,7 @@ CampaignPage.propTypes = {
     loading: PropTypes.bool.isRequired,
     signatures: PropTypes.arrayOf(PropTypes.object),
     error: PropTypes.objectOf(PropTypes.any)
-  }).isRequired,
-  openMap: PropTypes.func.isRequired,
-  closeMap: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default connect(
