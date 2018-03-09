@@ -32,7 +32,8 @@ class CampaignProgessBar extends React.Component {
   };
 
   render() {
-    let { createdAt, phases, duration } = this.props;
+    let { createdAt } = this.props;
+    const { phases, duration } = this.props;
     const timestamp = Date.parse(createdAt);
     if (isNaN(timestamp)) {
       createdAt = new Date(Date.now()).toString();

@@ -15,7 +15,8 @@ class CampaignStatus extends React.Component {
   };
 
   render() {
-    let { createdAt, duration } = this.props;
+    let { createdAt } = this.props;
+    const { duration } = this.props;
     const timestamp = Date.parse(createdAt);
     if (isNaN(timestamp)) {
       createdAt = new Date(Date.now()).toString();
