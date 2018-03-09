@@ -9,7 +9,7 @@ import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
-import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import CollapsePanel from '.././components/CollapsePanel';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import * as _ from 'lodash';
@@ -20,6 +20,14 @@ class CampaignPage extends Component {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchSignatures(this.props.params.id);
     this.props.fetchApartmentsRequest();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (this.props.params.id !== nextProps.params.id) {
+      nextProps.fetchCampaignById(nextProps.params.id);
+      nextProps.fetchSignatures(nextProps.params.id);
+      nextProps.fetchApartmentsRequest();
+    }
   }
 
   render() {
@@ -39,8 +47,37 @@ class CampaignPage extends Component {
         <Link to={tool.to}>{tool.title}</Link>
       </li>
     ));
-    const { activeCampaign: { loading, loaded, campaign } } = this.props;
+    const {
+      activeCampaign: { loading, loaded, campaign },
+      initialSearch: { apartments }
+    } = this.props;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
+    const MapWithAMarker = withRouter(
+      withScriptjs(
+        withGoogleMap(props => (
+          <GoogleMap
+            ref={props.onMapLoad}
+            defaultZoom={10}
+            defaultCenter={{ lat: 39.7392, lng: -104.9903 }}
+            onClick={props.onMapClick}
+          >
+            {props.markers.map(marker => (
+              <Marker
+                key={marker.id}
+                position={{ lat: marker.lat, lng: marker.lng }}
+                onRightClick={() => props.onMarkerRightClick(marker)}
+                onClick={() => props.router.push(`/campaign/${marker.id}`)}
+                title={marker.street_address}
+              />
+            ))}
+          </GoogleMap>
+        ))
+      )
+    );
+
+    const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
+      process.env.REACT_APP_GOOGLE_MAPS_KEY
+    }`;
 
     return (
       <Grid className="">
@@ -61,30 +98,31 @@ class CampaignPage extends Component {
                     )}
                 </h4>
               </Col>
-              <Col className="map center-block" md={4} xs={9}>
-                <MapWithAMarker
-                  googleMapURL={mapUrl}
-                  loadingElement={<div style={{ height: '100%' }} />}
-                  containerElement={
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        height: '100%',
-                        width: '100%',
-                        justifyContent: 'flex-end',
-                        alignItems: 'center'
-                      }}
-                    />
-                  }
-                  mapElement={<div style={{ height: '100%' }} />}
-                  onMapLoad={_.noop}
-                  onMapClick={_}
-                  markers={apartments}
-                  onMarkerRightClick={_.noop}
-                />
+              <Col className="map center-block" md={3} xs={10}>
+                <div>
+                  <MapWithAMarker
+                    googleMapURL={mapUrl}
+                    loadingElement={<div style={{ height: '100%' }} />}
+                    containerElement={
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          justifyContent: 'flex-end',
+                          alignItems: 'center'
+                        }}
+                      />
+                    }
+                    mapElement={<div style={{ height: '100%' }} />}
+                    onMapLoad={_.noop}
+                    onMapClick={_.noop}
+                    markers={apartments}
+                    onMarkerRightClick={_.noop}
+                  />
+                </div>
               </Col>
             </Row>
             <Row className="show-grid top">
