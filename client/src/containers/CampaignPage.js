@@ -14,7 +14,10 @@ import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
 import CollapsePanel from '.././components/CollapsePanel';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
+import CampaignProgressBar from '../components/CampaignProgressBar';
+import CampaignStatus from '../components/CampaignStatus';
 
+const CAMPAIGN_DURATION = 15;
 class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
@@ -134,7 +137,10 @@ class CampaignPage extends Component {
                   <Col md={3} xs={6}>
                     <FacebookShareButton
                       quote="Support my recycling request!"
-                      // facebook url errors on localhost, it has to be able to connect to something.  so if its on dev link it to the heroku page.
+                      /*
+                      facebook url errors on localhost, it has to be able to
+                      connect to something.  so if its on dev link it to the heroku page.
+                      */
                       url={
                         hrefIsLocalhost
                           ? `https://denver-reimagine.herokuapp.com/campaign/${
@@ -172,45 +178,27 @@ class CampaignPage extends Component {
                 </div>
               </Col>
             </Row>
-            <Row className="show-grid top">
-              <Col className="status-bar" md={12} xs={12}>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                    <h5>December 5</h5>
-                    <p>Campaign Created</p>
-                  </div>
+            {campaign && (
+              <Row className="show-grid top">
+                <Col className="status-bar" md={8} xs={12}>
+                  <Row>
+                    <CampaignProgressBar
+                      createdAt={campaign.createdAt}
+                      phases={[
+                        'Campaign Created',
+                        'Print Flyers',
+                        'Final Signatures',
+                        'Request Recycling'
+                      ]}
+                      duration={CAMPAIGN_DURATION}
+                    />
+                  </Row>
                 </Col>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-check-circle-o complete" aria-hidden="true" />
-                    <h5>December 12</h5>
-                    <p>Print Flyers</p>
-                  </div>
+                <Col className="status-bar" md={4} xs={12}>
+                  <CampaignStatus createdAt={campaign.createdAt} duration={CAMPAIGN_DURATION} />
                 </Col>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-circle-o" aria-hidden="true" />
-                    <h5>December 19</h5>
-                    <p>Final Signatures</p>
-                  </div>
-                </Col>
-                <Col className="status" md={2} xs={6}>
-                  <div className="text-center">
-                    <i className="fa fa-circle-o" aria-hidden="true" />
-                    <h5>December 26</h5>
-                    <p>Request Recycling</p>
-                  </div>
-                </Col>
-                <Col className="status " md={4} xs={12}>
-                  <div className="text-center status-date">
-                    <h3>10</h3>
-                    <p>Days Left</p>
-                    <i className="fa fa-calendar" aria-hidden="true" />
-                  </div>
-                </Col>
-              </Col>
-            </Row>
+              </Row>
+            )}
             <Row className="show-grid top">
               <Col md={12} xs={12}>
                 <Col md={3} xs={10} className="tools">
