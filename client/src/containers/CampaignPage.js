@@ -93,7 +93,7 @@ class CampaignPage extends Component {
                           : window.location.href
                       }
                     >
-                      <Button className="btn btn-facebook" block>
+                      <Button bsStyle="remove-default" className="btn btn-facebook" block>
                         <i className="fa fa-facebook-square " />Facebook
                       </Button>
                     </FacebookShareButton>
@@ -105,7 +105,7 @@ class CampaignPage extends Component {
                       via="EcoCycle"
                       hashtags={['ZeroWasteDenver', 'Recycle']}
                     >
-                      <Button className="btn btn-twitter" block>
+                      <Button bsStyle="remove-default" className="btn btn-twitter" block>
                         <i className="fa fa-twitter-square" />Tweet
                       </Button>
                     </TwitterShareButton>
