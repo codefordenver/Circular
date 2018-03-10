@@ -1,4 +1,4 @@
-@import "../base/_colors.scss";
+@import '../base/_colors.scss';
 
 .btn {
   padding: 0.5rem 0.75rem;
@@ -16,4 +16,27 @@
 
 .btn-primary {
   background-color: $maingreen;
+}
+
+.btn.btn-sign {
+  color: #fff;
+  background-color: #176682;
+  margin-bottom: 1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: none;
+  text-shadow: none;
+  border-radius: 2px;
+  &:hover,
+  :focus {
+    background-color: darken(#176682, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken(#176682, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
 }
