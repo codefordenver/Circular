@@ -62,6 +62,7 @@ class SignCampaign extends Component {
       return (
         <Row>
           <Col md={12}>
+            <h4>Sign In With:</h4>
             <a className="login-button-signature" href="/auth/facebook">
               <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
                 <i className="fa fa-facebook-square " />Login with Facebook
@@ -76,15 +77,20 @@ class SignCampaign extends Component {
               <FieldGroup type="text" label="First Name:" required />
               <FieldGroup type="text" label="Last Name:" required />
               <FieldGroup type="email" label="Email:" required />
+              <Button className="btn-sign" block>
+                Sign In With Email
+              </Button>
             </form>
           </Col>
         </Row>
       );
     }
     return (
-      <Button className="btn" type="submit">
-        Sign the petition
-      </Button>
+      <Col md={10} mdOffset={1}>
+        <Button bsStyle="remove-default" className="btn-sign" type="submit" block>
+          Sign the petition
+        </Button>
+      </Col>
     );
   };
 
@@ -101,7 +107,6 @@ class SignCampaign extends Component {
     return (
       <Row>
         <Col md={10} mdOffset={1}>
-          <h4>Sign In With:</h4>
           <form onSubmit={this.handleFormSubmit}>
             {this.createCheckboxes()}
             {this.checkSignIn()}
