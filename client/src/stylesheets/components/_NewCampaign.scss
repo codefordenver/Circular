@@ -1,30 +1,44 @@
-.create_campaign_wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+@import "../base/colors";
+
+.create-campaign-header {
+  text-align: center;
+  border-bottom: none;
+  text-decoration: underline;
 }
 
-.create_campaign_subroute_wrapper {
-	padding: 32px;
-	Width: 400px;
+.create-campaign-center {
+  text-align: center;
 }
 
-.create_campaign_breadcrumbs {
-	width: 200px;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+.create-campaign-breadcrumbs {
+  height: 40px;
+  text-align: center;
+
+  .breadcrumb {
+    display: inline-block;
+    margin: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    opacity: 0.5;
+    background-color: #14d997;
+    &.active_route {
+      opacity: 1;
+    }
+  }
 }
 
-.breadcrumb {
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
-	opacity: 0.5;
-	background-color: #14D997;
-	&.active_route{
-		opacity: 1;
-	}
+.create-campaign-subroute-wrapper {
+  padding: 32px;
+}
+
+.create-campaign-control-label {
+  display: inline;
+}
+
+.next-button {
+  background-color: $maingreen;
+  &:hover {
+    color: inherit;
+  }
 }

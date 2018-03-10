@@ -4,28 +4,32 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import cx from 'classnames';
+import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
 
 function NewCampaign(props) {
   const { childRoutes } = props.route;
   const { pathname } = props.location;
 
   return (
-    <div className="create_campaign_wrapper">
-      <h1 className="create_campaign_header">{"Let's create a campaign!"}</h1>
-      <div className="create_campaign_breadcrumbs">
-        {childRoutes.map(childRoute => (
-          <Link to={`/new-campaign/${childRoute.path}`}>
-            <div
-              className={cx(
-                'breadcrumb',
-                pathname === `/new-campaign/${childRoute.path}` && 'active_route'
-              )}
-            />
-          </Link>
-        ))}
-      </div>
-      <section className="create_campaign_subroute_wrapper">{props.children}</section>
-    </div>
+    <Grid fluid>
+      <Row>
+        <Col xs={12} md={4} mdOffset={4}>
+          <PageHeader className="create-campaign-header">Let's create a campaign!</PageHeader>
+          <div className="create-campaign-breadcrumbs">
+            {childRoutes.map(childRoute => (
+              <Link
+                to={`/new-campaign/${childRoute.path}`}
+                className={cx(
+                  'breadcrumb',
+                  pathname === `/new-campaign/${childRoute.path}` && 'active_route'
+                )}
+              />
+            ))}
+          </div>
+          <section className="create-campaign-subroute-wrapper">{props.children}</section>
+        </Col>
+      </Row>
+    </Grid>
   );
 }
 
