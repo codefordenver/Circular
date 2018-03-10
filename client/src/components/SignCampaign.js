@@ -87,7 +87,7 @@ class SignCampaign extends Component {
     }
     return (
       <Col md={10} mdOffset={1}>
-        <Button bsStyle="btn-remove-default" className="btn-sign" type="submit" block>
+        <Button bsStyle="remove-default" className="btn-sign" type="submit" block>
           Sign the petition
         </Button>
       </Col>
