@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 import {
-  Row,
   Col,
   PageHeader,
   Form,
@@ -81,20 +80,22 @@ const CreateCampaignStep2 = props => {
         <h2>Waste Collection Provider:</h2>
         <Col xs={12}>
           <ControlLabel>CURRENT PROVIDER</ControlLabel>
-          <FormControl type="select" name="wasteMgmtName">
+          <FormControl componentClass="select" name="wasteMgmtName">
             <option value="Matt's #1 Trash King">Matt's #1 Trash King</option>
           </FormControl>
           <ControlLabel>PHONE</ControlLabel>
           <FormControl
             type="tel"
-            name="wastemgmtPhone"
-            value={getInfoFromStateBasedOnWasteProviderSelected}
+            name="wasteMgmtPhone"
+            value={getInfoFromStateBasedOnWasteProviderSelected()}
+            readOnly
           />
           <ControlLabel>EMAIL</ControlLabel>
           <FormControl
             type="email"
             name="wasteMgmtEmail"
-            value={getInfoFromStateBasedOnWasteProviderSelected}
+            value={getInfoFromStateBasedOnWasteProviderSelected()}
+            readOnly
           />
         </Col>
       </FormGroup>

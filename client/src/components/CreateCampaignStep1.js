@@ -57,7 +57,7 @@ const CreateCampaignStep1 = props => {
             <p>
               {'Add an address to start.'}{' '}
               <Link className="about-link" to="/">
-                {'Click here'}
+                Click here
               </Link>
             </p>
           </div>

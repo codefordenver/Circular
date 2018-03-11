@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import cx from 'classnames';
-import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 function NewCampaign(props) {
   const { childRoutes } = props.route;
@@ -17,6 +17,7 @@ function NewCampaign(props) {
           <div className="create-campaign-breadcrumbs">
             {childRoutes.map(childRoute => (
               <Link
+                key={childRoute.path}
                 to={`/new-campaign/${childRoute.path}`}
                 className={cx(
                   'breadcrumb',
