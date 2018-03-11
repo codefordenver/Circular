@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { createCampaign } from '../redux/actions/newCampaign';
 import { Button, PageHeader } from 'react-bootstrap';
+import { createCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep3 = props => {
   const { createCampaign, newCampaign, router } = props;

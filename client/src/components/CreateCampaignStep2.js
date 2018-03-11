@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { updateNewCampaign } from '../redux/actions/newCampaign';
 import {
   Col,
   PageHeader,
@@ -12,6 +11,7 @@ import {
   FormControl,
   Button
 } from 'react-bootstrap';
+import { updateNewCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep2 = props => {
   const { updateNewCampaign, router } = props;

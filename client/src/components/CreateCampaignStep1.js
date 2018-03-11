@@ -2,9 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { Row, Col, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
-import { Row, Col, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 
 const CreateCampaignStep1 = props => {
   const { initialSearch: { searchedAddress, error }, updateNewCampaign, router } = props;
