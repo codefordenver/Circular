@@ -14,7 +14,6 @@ function NewCampaign(props) {
     <Grid fluid>
       <Row>
         <Col xs={12} md={4} mdOffset={4}>
-          <PageHeader className="create-campaign-header">Let's create a campaign!</PageHeader>
           <div className="create-campaign-breadcrumbs">
             {childRoutes.map(childRoute => (
               <Link

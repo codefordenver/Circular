@@ -3,11 +3,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
+import {
+  Row,
+  Col,
+  PageHeader,
+  Form,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Button
+} from 'react-bootstrap';
 
-const CreateCampaignStep2 = (props) => {
+const CreateCampaignStep2 = props => {
   const { updateNewCampaign, router } = props;
 
-  const setOptionalInfo = async (e) => {
+  const setOptionalInfo = async e => {
     e.preventDefault();
 
     await updateNewCampaign({
@@ -27,34 +37,97 @@ const CreateCampaignStep2 = (props) => {
 
     router.push('/new-campaign/activate');
   };
+  const getInfoFromStateBasedOnWasteProviderSelected = wasteProvider => {
+    console.log('WASTE PROVIDER LOGIC TODO');
+    return '';
+  };
 
   return (
-    <form onSubmit={setOptionalInfo}>
-      <div className="form-group">
-        <label>{'Property Manager or Company (Optional):'}</label>
-        <input type="text" className="form-control" placeholder="Name" name="name" />
-        <input type="text" className="form-control" placeholder="Address" name="address" />
-        <input type="tel" placeholder="Phone" className="form-control" name="phone" />
-        <input type="email" className="form-control" placeholder="Email" name="email" />
-      </div>
-      <div className="form-group">
-        <label>{'Waste Collection Provider (Optional):'}</label>
-        <input type="text" className="form-control" placeholder="Name" name="wasteMgmtName" />
-        <input type="tel" placeholder="Phone" className="form-control" name="wasteMgmtPhone" />
-        <input type="email" className="form-control" placeholder="Email" name="wasteMgmtEmail" />
-      </div>
-      <div className="form-group">
-        <label>{'Number of Units (Optional)'}</label>
-        <input type="number" className="form-control" name="unitCount" />
-      </div>
-      <button className="btn btn-primary fr" type="submit">
-        {'Next ➡'}
-      </button>
-      <Link to="/new-campaign/address" className="btn btn-primary fr">
-        {'⬅ Back'}
-      </Link>
-      <div className="cf" />
-    </form>
+    <Form onSubmit={setOptionalInfo} horizontal className="create-campaign-form">
+      <PageHeader>OPTIONAL INFO</PageHeader>
+      <FormGroup>
+        <h2>Property Manager or Company:</h2>
+        <Col xs={12}>
+          <ControlLabel>NAME</ControlLabel>
+          <FormControl type="text" name="name" />
+
+          <ControlLabel>PHONE</ControlLabel>
+          <FormControl type="tel" name="phone" />
+          <ControlLabel>EMAIL</ControlLabel>
+          <FormControl type="email" name="email" />
+          <ControlLabel>ADDRESS</ControlLabel>
+          <FormControl type="text" name="address" />
+        </Col>
+        <Col xs={6}>
+          <ControlLabel>CITY</ControlLabel>
+          <FormControl type="text" name="city" />
+        </Col>
+        <Col xs={3}>
+          <ControlLabel>STATE</ControlLabel>
+          <FormControl componentClass="select" name="state">
+            {/*
+              ADD IN STATES
+          */}
+            <option value="CO">CO</option>
+          </FormControl>
+        </Col>
+        <Col xs={3}>
+          <ControlLabel>ZIP</ControlLabel>
+          <FormControl type="number" name="zip" />
+        </Col>
+      </FormGroup>
+
+      <FormGroup>
+        <h2>Waste Collection Provider:</h2>
+        <Col xs={12}>
+          <ControlLabel>CURRENT PROVIDER</ControlLabel>
+          <FormControl type="select" name="wasteMgmtName">
+            <option value="Matt's #1 Trash King">Matt's #1 Trash King</option>
+          </FormControl>
+          <ControlLabel>PHONE</ControlLabel>
+          <FormControl
+            type="tel"
+            name="wastemgmtPhone"
+            value={getInfoFromStateBasedOnWasteProviderSelected}
+          />
+          <ControlLabel>EMAIL</ControlLabel>
+          <FormControl
+            type="email"
+            name="wasteMgmtEmail"
+            value={getInfoFromStateBasedOnWasteProviderSelected}
+          />
+        </Col>
+      </FormGroup>
+
+      <FormGroup>
+        <h2>Building Info:</h2>
+        <Col xs={12}>
+          <ControlLabel>THIS PROPERTY CONSISTS OF:</ControlLabel>
+        </Col>
+        <Col xs={2}>
+          <FormControl type="Number" name="buildingCount" />
+        </Col>
+        <Col xs={10}>BUILDING(S)</Col>
+        <Col xs={12}>
+          <ControlLabel>THIS BUILDING HAS APPROXIMATELY:</ControlLabel>
+        </Col>
+        <Col xs={2}>
+          <FormControl type="number" name="unitCount" />
+        </Col>
+        <Col xs={10}>TOTAL UNITS</Col>
+      </FormGroup>
+
+      <FormGroup>
+        <Col xs={12}>
+          <Link to="/new-campaign/address" className="btn next-button fl">
+            Back
+          </Link>
+          <Button bsStyle="remove-default" className="next-button fr" type="submit">
+            Next
+          </Button>
+        </Col>
+      </FormGroup>
+    </Form>
   );
 };
 

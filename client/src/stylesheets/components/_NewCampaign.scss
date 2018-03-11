@@ -1,9 +1,8 @@
-@import "../base/colors";
+@import '../base/colors';
 
 .create-campaign-header {
   text-align: center;
-  border-bottom: none;
-  text-decoration: underline;
+  display: inline;
 }
 
 .create-campaign-center {
@@ -11,6 +10,7 @@
 }
 
 .create-campaign-breadcrumbs {
+  margin-top: 20px;
   height: 40px;
   text-align: center;
 
@@ -40,5 +40,33 @@
   background-color: $maingreen;
   &:hover {
     color: inherit;
+  }
+}
+
+.create-campaign-form {
+  .form-group {
+    div {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+  h2 {
+    margin-top: 15px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+  }
+  .page-header {
+    margin-top: 10px;
+    border-bottom: none;
+    text-align: center;
+    h1 {
+      display: inline;
+      border-bottom: 1px solid $mainwhite;
+    }
+  }
+
+  .control-label {
+    font-size: 12px;
+    font-weight: 300;
   }
 }
