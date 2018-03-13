@@ -2,7 +2,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Row, Col, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  PageHeader,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  Button
+} from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
@@ -21,12 +29,12 @@ const CreateCampaignStep1 = props => {
     });
     router.push('/new-campaign/optional-info');
   };
-
   return (
     <Row>
       <Col xs={12}>
         {formattedAddress && (
-          <form onSubmit={setAddressAndName}>
+          <form onSubmit={setAddressAndName} className="create-campaign-form">
+            <PageHeader>Create Campaign</PageHeader>
             <FormGroup controlId="addressAndName">
               <ControlLabel>Address</ControlLabel>
               <FormControl type="text" value={formattedAddress} name="address" readOnly />
