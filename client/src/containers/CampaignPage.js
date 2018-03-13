@@ -93,7 +93,7 @@ class CampaignPage extends Component {
                       <div>
                         <div className="campaign-page-name">{campaign.name}</div>
                         <div className="campaign-page-address">
-                          {loading && <i className="fa fa-recycle fa-4x fa-spin" />}
+                          {loading && <i className="fa fa-recycle fa-2x fa-spin" />}
                           {loaded && campaign && campaign.address}
                         </div>
                       </div>
