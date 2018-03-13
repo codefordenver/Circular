@@ -37,8 +37,8 @@ class SignCampaign extends Component {
   };
 
   createCheckbox = label => (
-    <FormGroup>
-      <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} number="1" />
+    <FormGroup key={label}>
+      <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} number="1" />
     </FormGroup>
   );
   createCheckboxes = () => {
