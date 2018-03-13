@@ -44,7 +44,8 @@ class CollapsePanel extends Component {
 
 CollapsePanel.propTypes = {
   titleText: PropTypes.string.isRequired,
-  body: PropTypes.element.isRequired
+  body: PropTypes.element.isRequired,
+  expanded: PropTypes.bool.isRequired
 };
 
 export default CollapsePanel;

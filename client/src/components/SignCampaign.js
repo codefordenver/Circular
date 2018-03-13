@@ -11,6 +11,7 @@ class SignCampaign extends Component {
     super(props);
     this.handleSignOut = this.handleSignOut.bind(this);
   }
+
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
@@ -74,62 +75,53 @@ class SignCampaign extends Component {
         </Row>
       );
     }
+    // return (
+    //   <Row>
+    //     <Col md={12}>
+    //       <h4>Welcome to the campaign!</h4>
+    //       <h4>Thanks for signing!</h4>
+    //     </Col>
+    //     <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+    //       Sign Out
+    //       <i className="fa fa-sign-out" />
+    //     </Button>
+    //   </Row>
+    // );
     return (
       <Row>
-        <Col md={12} mdOffset={0} className="sign-campaign-actions">
-          <Button bsStyle="remove-default" className="sign-petition-button" type="submit" block>
-            Sign the petition
-          </Button>
-          <h5 className="content text-center">OR</h5>
-          <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-            Sign Out
-            <i className="fa fa-sign-out" />
-          </Button>
+        <Col md={12}>
+          <form onSubmit={this.handleFormSubmit}>
+            <FormGroup controlId="signingBecause">
+              <ControlLabel id="control-label">
+                <h4>I'm signing because...</h4>
+              </ControlLabel>
+              <FormControl
+                className="form-resize-vertical"
+                componentClass="textarea"
+                placeholder="Optional"
+              />
+              {this.createCheckboxes()}
+              <div className="sign-campaign-actions">
+                <Button
+                  className="remove-default sign-petition-button"
+                  value="submit"
+                  type="submit"
+                  block
+                >
+                  Sign the petition
+                </Button>
+                <h5 className="content text-center">OR</h5>
+              </div>
+            </FormGroup>
+          </form>
         </Col>
+        <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+          Sign Out
+          <i className="fa fa-sign-out" />
+        </Button>
       </Row>
     );
   };
-
-  renderError() {
-    return (
-      <div className="error-message">
-        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
-          ? 'You already have signed this petition!'
-          : null}
-      </div>
-    );
-  }
-  renderContent() {
-    return (
-      <Row>
-        <Col md={10} mdOffset={1}>
-          <form onSubmit={this.handleFormSubmit}>
-            {this.createCheckboxes()}
-            {this.checkSignIn()}
-          </form>
-        </Col>
-      </Row>
-    );
-  }
-
-  renderImSigning() {
-    return (
-      <Row>
-        <Col md={10} mdOffset={1}>
-          <FormGroup controlId="signingBecause">
-            <ControlLabel id="control-label">
-              <h4>I'm signing because...</h4>
-            </ControlLabel>
-            <FormControl
-              className="form-resize-vertical"
-              componentClass="textarea"
-              placeholder="Optional"
-            />
-          </FormGroup>
-        </Col>
-      </Row>
-    );
-  }
 
   render() {
     return (
@@ -137,11 +129,13 @@ class SignCampaign extends Component {
         <Col md={12} className="resets">
           <div className="sig-head">
             <h2 className="content text-center">Yes, I Want Recycling!</h2>
-            {this.renderError()}
           </div>
           <div className="side-wrap">
-            <div>{this.renderImSigning()}</div>
-            <div>{this.renderContent()}</div>
+            <Row>
+              <Col md={10} mdOffset={1}>
+                {this.checkSignIn()}
+              </Col>
+            </Row>
           </div>
         </Col>
       </Row>
@@ -155,16 +149,17 @@ SignCampaign.defaultProps = {
 };
 
 SignCampaign.propTypes = {
-  signatureObj: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    signatures: PropTypes.arrayOf(PropTypes.object),
-    error: PropTypes.objectOf(PropTypes.any)
-  }).isRequired,
+  // signatureObj: PropTypes.shape({
+  //   loaded: PropTypes.bool.isRequired,
+  //   loading: PropTypes.bool.isRequired,
+  //   signatures: PropTypes.arrayOf(PropTypes.object),
+  //   error: PropTypes.objectOf(PropTypes.any)
+  // }).isRequired,
   auth: PropTypes.shape({
     _id: PropTypes.string,
     googleID: PropTypes.string,
-    facebookID: PropTypes.string
+    facebookID: PropTypes.string,
+    name: PropTypes.string
   }),
   activeCampaign: PropTypes.shape({
     campaign: PropTypes.shape({
