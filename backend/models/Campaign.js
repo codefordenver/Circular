@@ -17,13 +17,14 @@ const campaignSchema = new Schema(
       phone: { type: Number },
       email: { type: String }
     },
-    wasteProvider: {
-      name: { type: String },
-      phone: { type: Number },
-      email: { type: String }
+    _wasteProviderId: {
+      type: Schema.Types.ObjectId,
+      ref: 'WasteProvider',
+      required: false
     },
-    unitCount: {
-      type: Number
+    buildingInfo: {
+      numBuildings: { type: Number, default: 1 },
+      numUnits: { type: Number, default: 8 }
     }
   },
   { timestamps: true }

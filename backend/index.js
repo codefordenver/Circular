@@ -9,6 +9,7 @@ require('./models/User');
 require('./models/Campaign');
 require('./models/Signature');
 require('./models/Comment');
+require('./models/WasteProvider');
 
 require('./services/passport');
 
@@ -51,6 +52,7 @@ require('./routes/authRoutes')(app);
 require('./routes/campaignRoutes')(app);
 require('./routes/signatureRoutes')(app);
 require('./routes/commentRoutes')(app);
+require('./routes/wasteProviderRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
