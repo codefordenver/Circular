@@ -5,6 +5,8 @@ import GoogleButton from 'react-google-button';
 import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
+import SignWithCollapsePanel from '.././components/SignWithCollapsePanel';
+import SignInWithEmail from './SignInWithEmail';
 
 class SignCampaign extends Component {
   componentWillMount = () => {
@@ -50,14 +52,6 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
-    function FieldGroup({ id, label, ...props }) {
-      return (
-        <FormGroup controlId={id}>
-          <ControlLabel>{label}</ControlLabel>
-          <FormControl {...props} />
-        </FormGroup>
-      );
-    }
     if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
       return (
         <Row>
@@ -73,14 +67,11 @@ class SignCampaign extends Component {
               <GoogleButton className="btn-google btn-login" />
             </a>
             <h5 className="content text-center">OR</h5>
-            <form>
-              <FieldGroup type="text" label="First Name:" required />
-              <FieldGroup type="text" label="Last Name:" required />
-              <FieldGroup type="email" label="Email:" required />
-              <Button className="btn-sign" block>
-                Sign In With Email
-              </Button>
-            </form>
+            <SignWithCollapsePanel
+              titleText="Sign In With Email"
+              bsStyle="text-white"
+              body={<SignInWithEmail />}
+            />
           </Col>
         </Row>
       );

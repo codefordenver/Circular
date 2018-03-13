@@ -1,0 +1,42 @@
+.sign-with-email {
+  color: #fff;
+  background-color: $main-blue;
+  margin-bottom: 1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: 2px 2px 1px #262626;
+}
+
+.form-group label.control-label.text-white {
+  color: white;
+}
+
+.text-white {
+  color: white;
+}
+
+.btn.btn-sign {
+  background-color: white;
+  color: $main-blue;
+  margin-top: 1rem;
+  &:hover,
+  :focus {
+    color: $main-blue;
+    background-color: darken(white, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken(white, 10%);
+    color: $main-blue;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+}
+label.control-label.sign-with-email-label {
+  color: white;
+  margin-top: 3px;
+}
