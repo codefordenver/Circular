@@ -70,21 +70,23 @@ class SignCampaign extends Component {
             <a className="login-button-signature" href="/auth/google">
               <GoogleButton className="btn-google btn-login" />
             </a>
-            <h5 className="content text-center">OR</h5>
           </Col>
         </Row>
       );
     }
     return (
-      <Col md={10} mdOffset={1} className="sign-campaign-actions">
-        <Button bsStyle="remove-default" className="sign-petition-button" type="submit" block>
-          Sign the petition
-        </Button>
-        <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-          Sign Out
-          <i className="fa fa-sign-out" />
-        </Button>
-      </Col>
+      <Row>
+        <Col md={12} mdOffset={0} className="sign-campaign-actions">
+          <Button bsStyle="remove-default" className="sign-petition-button" type="submit" block>
+            Sign the petition
+          </Button>
+          <h5 className="content text-center">OR</h5>
+          <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+            Sign Out
+            <i className="fa fa-sign-out" />
+          </Button>
+        </Col>
+      </Row>
     );
   };
 

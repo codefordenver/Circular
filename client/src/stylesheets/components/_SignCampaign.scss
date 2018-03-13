@@ -45,7 +45,6 @@ h5 {
 .btn.sign-petition-button {
   color: #fff;
   background-color: $main-blue;
-  margin-bottom: 1em;
   padding-left: 5px;
   padding-right: 5px;
   box-shadow: none;
@@ -67,7 +66,6 @@ h5 {
 .btn.logout-button-signature {
   color: #fff;
   background-color: $sign-out-button;
-  margin-bottom: 1em;
   padding-left: 5px;
   padding-right: 5px;
   box-shadow: none;
@@ -106,6 +104,10 @@ h5 {
   resize: vertical;
   min-height: 75px;
   max-height: 150px;
+}
+
+.sig-bar-collapse-panel {
+  margin-top: 3em;
 }
 
 // .error-message {

@@ -213,7 +213,7 @@ class CampaignPage extends Component {
           </Col>
           <Col md={3} xs={12} className="side-bar">
             <SignCampaign signatureObj={this.props.signature} />
-            <div className="text-center">
+            <div className="text-center sig-bar-collapse-panel">
               <CollapsePanel
                 signatures={this.props.signature.signatures}
                 titleText="See Who's Signed"
