@@ -23,13 +23,6 @@ h5 {
   margin-bottom: 0;
 }
 
-.form-group label.control-label {
-  margin-bottom: 0;
-  margin-top: 0;
-  color: $dark-blue;
-  font-size: 14px;
-}
-
 #text-form {
   min-width: 200px;
   max-width: 300px;
@@ -49,6 +42,53 @@ h5 {
   background-color: white;
 }
 
+.btn.sign-petition-button {
+  color: #fff;
+  background-color: $main-blue;
+  margin-bottom: 1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: none;
+  text-shadow: none;
+  border-radius: 2px;
+  &:hover,
+  :focus {
+    background-color: darken($main-blue, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($main-blue, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+}
+.btn.logout-button-signature {
+  color: #fff;
+  background-color: $sign-out-button;
+  margin-bottom: 1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: none;
+  text-shadow: none;
+  border-radius: 2px;
+  &:hover,
+  :focus {
+    background-color: darken($sign-out-button, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($sign-out-button, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  i.fa.fa-sign-out {
+    padding-left: 25px;
+  }
+}
 .login-button-signature {
   text-decoration: none;
   &:hover {

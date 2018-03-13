@@ -7,6 +7,10 @@ import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
@@ -18,6 +22,10 @@ class SignCampaign extends Component {
       this.selectedCheckboxes.add(label);
     }
   };
+
+  handleSignOut() {
+    this.props.logSignerOut();
+  }
 
   handleFormSubmit = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
@@ -32,8 +40,6 @@ class SignCampaign extends Component {
       this.selectedCheckboxes,
       campaignId
     );
-
-    this.props.logSignerOut();
   };
 
   createCheckbox = label => (
@@ -50,14 +56,6 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
-    function FieldGroup({ id, label, ...props }) {
-      return (
-        <FormGroup controlId={id}>
-          <ControlLabel>{label}</ControlLabel>
-          <FormControl {...props} />
-        </FormGroup>
-      );
-    }
     if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
       return (
         <Row>
@@ -65,7 +63,7 @@ class SignCampaign extends Component {
             <h4>Sign In With:</h4>
             <a className="login-button-signature" href="/auth/facebook">
               <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
-                <i className="fa fa-facebook-square " />Login with Facebook
+                <i className="fa fa-facebook-square" />Login with Facebook
               </Button>
             </a>
             <h5 className="content text-center">OR</h5>
@@ -73,22 +71,18 @@ class SignCampaign extends Component {
               <GoogleButton className="btn-google btn-login" />
             </a>
             <h5 className="content text-center">OR</h5>
-            <form>
-              <FieldGroup type="text" label="First Name:" required />
-              <FieldGroup type="text" label="Last Name:" required />
-              <FieldGroup type="email" label="Email:" required />
-              <Button className="btn-sign" block>
-                Sign In With Email
-              </Button>
-            </form>
           </Col>
         </Row>
       );
     }
     return (
-      <Col md={10} mdOffset={1}>
-        <Button bsStyle="remove-default" className="btn-sign" type="submit" block>
+      <Col md={10} mdOffset={1} className="sign-campaign-actions">
+        <Button bsStyle="remove-default" className="sign-petition-button" type="submit" block>
           Sign the petition
+        </Button>
+        <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+          Sign Out
+          <i className="fa fa-sign-out" />
         </Button>
       </Col>
     );
