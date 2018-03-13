@@ -7,7 +7,7 @@ const PropertyOwnerResources = () => (
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
-          <PageHeader className="about-page-header-overrides">Property Owner Resources</PageHeader>
+          <PageHeader className="info-page-header-overrides">Property Owner Resources</PageHeader>
 
           <CollapsePanel
             titleText="Q: My tenants have requested service, now what?"
@@ -17,7 +17,7 @@ const PropertyOwnerResources = () => (
                 how much it would cost to get the service for your property. You can always shop
                 around for different haulers that offer recycling services in your area.
                 <a
-                  className="about-link"
+                  className="info-link"
                   href="http://www.denvergov.org/content/denvergov/en/trash-and-recycling/recycling/business-and-multi-family-recycling.html"
                 >
                   <br />

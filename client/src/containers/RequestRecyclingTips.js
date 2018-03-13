@@ -7,7 +7,7 @@ const RequestRecyclingTips = () => (
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
-          <PageHeader className="about-page-header-overrides">
+          <PageHeader className="info-page-header-overrides">
             Tips for Requesting Service
           </PageHeader>
           <CollapsePanel
@@ -33,7 +33,7 @@ const RequestRecyclingTips = () => (
               <p>
                 Boo! Why? Fill out{' '}
                 <a
-                  className="about-link"
+                  className="info-link"
                   href="https://docs.google.com/spreadsheets/u/2/d/1LjlhDV17ciP0v_vn3Q5K4CJRm6ENgcZMrv5XTIXzLwY/edit?usp=drive_web&ouid=111725726550951812389"
                 >
                   this survey
