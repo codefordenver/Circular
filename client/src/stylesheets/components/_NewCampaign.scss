@@ -58,4 +58,18 @@
       color: inherit;
     }
   }
+  .form-group label.required {
+    display: inline-block;
+  }
+
+  .requiredtool {
+    color: #ff4747;
+    display: inline-block;
+    margin-left: 4px;
+    font-weight: 300;
+
+    &::after {
+      content: '*';
+    }
+  }
 }
