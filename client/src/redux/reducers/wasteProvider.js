@@ -46,7 +46,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        activeProvider: response.data[0]
+        wasteProvider: response.data[0]
       };
     case FETCH_WASTE_PROVIDER_FAILURE:
       return {
