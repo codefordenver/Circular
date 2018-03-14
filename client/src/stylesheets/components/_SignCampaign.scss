@@ -114,5 +114,10 @@
 
 .sig-bar-collapse-panel {
   margin-top: 3em;
+  h2 {
+    font-size: 150%;
+    color: $dark-blue;
+    padding: 10px;
+  }
 }
 
