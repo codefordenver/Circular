@@ -7,13 +7,6 @@
   margin-bottom: 0;
 }
 
-.form-label {
-  margin-bottom: 0;
-  margin-top: 0;
-  color: $dark-blue;
-  font-size: 14px;
-}
-
 #text-form {
   min-width: 200px;
   max-width: 300px;
@@ -24,13 +17,9 @@
   margin-top: 10px;
 }
 
-.resets {
+.sign-campaign-resets {
   padding: 0;
   margin: 0;
-}
-
-.sig-head {
-  background-color: white;
   h2 {
     font-size: 150%;
     color: $dark-blue;
@@ -53,6 +42,10 @@
     color: $dark-blue;
     font-size: 14px;
   }
+}
+
+.sig-head {
+  background-color: white;
 }
 
 .login-button-signature {

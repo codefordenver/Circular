@@ -138,7 +138,7 @@ class SignCampaign extends Component {
   render() {
     return (
       <Row className="show-grid">
-        <Col md={12} className="resets">
+        <Col md={12} className="sign-campaign-resets">
           <div className="sig-head">
             <h2 className="content text-center">Yes, I Want Recycling!</h2>
             {this.renderError()}
