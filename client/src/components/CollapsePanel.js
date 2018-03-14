@@ -6,16 +6,15 @@ class CollapsePanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: this.props.expanded
+      expanded: this.props.defaultExpanded
     };
-    this.expandPanel = this.expandPanel.bind(this);
   }
 
-  expandPanel(e) {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  }
+  togglePanelExpanded = () => {
+    this.setState(prevState => ({
+      expanded: !prevState.expanded
+    }));
+  };
 
   render() {
     const { body, titleText } = this.props;
@@ -23,7 +22,7 @@ class CollapsePanel extends Component {
       <Panel
         bsStyle="remove-default"
         className="collapse-panel"
-        onClick={this.expandPanel}
+        onClick={this.togglePanelExpanded}
         expanded={this.state.expanded}
       >
         <Panel.Toggle className="collapse-panel-toggle">
@@ -42,10 +41,14 @@ class CollapsePanel extends Component {
   }
 }
 
+CollapsePanel.defaultProps = {
+  defaultExpanded: false
+};
+
 CollapsePanel.propTypes = {
   titleText: PropTypes.string.isRequired,
   body: PropTypes.element.isRequired,
-  expanded: PropTypes.bool.isRequired
+  defaultExpanded: PropTypes.bool
 };
 
 export default CollapsePanel;

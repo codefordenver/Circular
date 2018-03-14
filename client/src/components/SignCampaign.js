@@ -7,11 +7,6 @@ import Checkbox from './SignatureCheckbox';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSignOut = this.handleSignOut.bind(this);
-  }
-
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
@@ -24,9 +19,9 @@ class SignCampaign extends Component {
     }
   };
 
-  handleSignOut() {
+  handleSignOut = () => {
     this.props.logSignerOut();
-  }
+  };
 
   handleFormSubmit = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
@@ -76,7 +71,7 @@ class SignCampaign extends Component {
         </Row>
       );
     }
-    // User is signed in and signed campaign
+    // User is signed in and has signed campaign
     const userHasSignedCampaign =
       this.props.auth &&
       this.props.signatureObj.signatures &&
@@ -95,7 +90,7 @@ class SignCampaign extends Component {
         </Row>
       );
     }
-    // User is signed but hasn't signed campaign
+    // User is signed in but hasn't signed campaign
     return (
       <Row>
         <Col md={12}>
