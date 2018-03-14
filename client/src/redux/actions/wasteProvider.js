@@ -10,6 +10,6 @@ export function fetchWasteProviders() {
 export function fetchWasteProviderById(id) {
   return {
     type: 'FETCH_WASTE_PROVIDER',
-    promise: createApiRequest(`api/waste_provider/${id}`, 'GET')
+    promise: createApiRequest(`api/waste_providers/${id}`, 'GET')
   };
 }
