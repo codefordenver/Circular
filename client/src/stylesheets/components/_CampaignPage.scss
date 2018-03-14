@@ -1,7 +1,7 @@
 .campaign-page-name {
   font-size: 1.5em;
   color: white;
-  margin-left: 1em;
+  margin-left: 1.5rem;
 }
 
 .container {
@@ -17,7 +17,7 @@ row {
 .campaign-page-address {
   font-size: 1em;
   color: white;
-  margin-left: 1em;
+  margin-left: 1.5rem;
 }
 
 .btn,
@@ -33,7 +33,6 @@ row {
 .body {
   margin: 0;
   padding: 0;
-  margin-bottom: 7rem;
 }
 
 .top {
@@ -42,6 +41,7 @@ row {
 
 .side-bar {
   background-color: $light-gray;
+  min-height: 100vh;
 }
 
 .status-bar {
@@ -92,10 +92,6 @@ row {
   i {
     margin-right: 5px;
   }
-}
-
-.btn i {
-  margin-right: 10px;
 }
 
 .btn.btn-facebook {

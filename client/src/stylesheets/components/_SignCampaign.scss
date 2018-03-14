@@ -23,13 +23,6 @@ h5 {
   margin-bottom: 0;
 }
 
-.form-group label.control-label {
-  margin-bottom: 0;
-  margin-top: 0;
-  color: $dark-blue;
-  font-size: 14px;
-}
-
 #text-form {
   min-width: 200px;
   max-width: 300px;
@@ -49,6 +42,51 @@ h5 {
   background-color: white;
 }
 
+.btn.sign-petition-button {
+  color: $button-white;
+  background-color: $main-blue;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: none;
+  text-shadow: none;
+  border-radius: 2px;
+  &:hover,
+  :focus {
+    background-color: darken($main-blue, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($main-blue, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+}
+.btn.logout-button-signature {
+  color: $button-white;
+  background-color: $sign-out-button;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: none;
+  text-shadow: none;
+  border-radius: 2px;
+  &:hover,
+  :focus {
+    background-color: darken($sign-out-button, 5%);
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  &:active {
+    background-color: darken($sign-out-button, 10%);
+    color: white;
+    outline: 0 !important;
+    outline-color: transparent !important;
+  }
+  i.fa.fa-sign-out {
+    padding-left: 25px;
+  }
+}
 .login-button-signature {
   text-decoration: none;
   &:hover {
@@ -68,82 +106,7 @@ h5 {
   max-height: 150px;
 }
 
-// .error-message {
-//   color: red;
-// }
+.sig-bar-collapse-panel {
+  margin-top: 3em;
+}
 
-// .sign-campaign-wrapper {
-//   margin: 1em 0em;
-// }
-
-// .signature-wrapper {
-//   margin: 1em 0em;
-// }
-
-//
-
-// .pure-button {
-//   font-family: inherit;
-//   font-size: 100%;
-//   padding: 0.5em 1em;
-//   color: white;
-//   border: 1px solid #999;
-//   border: transparent;
-//   background-color: #0078e7;
-//   text-decoration: none;
-//   border-radius: 2px;
-// }
-
-// .pure-button-hover,
-// .pure-button:focus,
-// .pure-button:hover {
-//   filter: alpha(opacity=90);
-//   background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
-//   background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
-// }
-
-// .pure-button-active,
-// .pure-button:active {
-//   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.2) inset;
-//   border-color: #000\9;
-// }
-
-// .signature-list-down,
-// .signature-list-up {
-//   position: relative;
-//   height: 1em;
-//   display: inline-block;
-//   margin-bottom: 0.5em;
-// }
-
-// .signature-list-up:after {
-//   content: '';
-//   position: absolute;
-//   top: 110%;
-//   left: 0;
-//   right: 0;
-//   margin: 0 auto;
-//   width: 0;
-//   height: 0;
-//   border-top: solid 5px black;
-//   border-left: solid 25px transparent;
-//   border-right: solid 25px transparent;
-// }
-
-// .signature-list-hide {
-//   display: none;
-// }
-
-// .signature-list-down:after {
-//   content: '';
-//   position: absolute;
-//   top: 110%;
-//   left: 0;
-//   right: 0;
-//   margin: 0 auto;
-//   width: 0;
-//   height: 0;
-//   border-bottom: solid 5px black;
-//   border-left: solid 25px transparent;
-//   border-right: solid 25px transparent;
-// }

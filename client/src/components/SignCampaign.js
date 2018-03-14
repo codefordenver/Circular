@@ -19,6 +19,10 @@ class SignCampaign extends Component {
     }
   };
 
+  handleSignOut = () => {
+    this.props.logSignerOut();
+  };
+
   handleFormSubmit = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -32,13 +36,11 @@ class SignCampaign extends Component {
       this.selectedCheckboxes,
       campaignId
     );
-
-    this.props.logSignerOut();
   };
 
   createCheckbox = label => (
-    <FormGroup>
-      <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} number="1" />
+    <FormGroup key={label}>
+      <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} number="1" />
     </FormGroup>
   );
   createCheckboxes = () => {
@@ -50,14 +52,7 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
-    function FieldGroup({ id, label, ...props }) {
-      return (
-        <FormGroup controlId={id}>
-          <ControlLabel>{label}</ControlLabel>
-          <FormControl {...props} />
-        </FormGroup>
-      );
-    }
+    // user is not signed in
     if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
       return (
         <Row>
@@ -65,87 +60,85 @@ class SignCampaign extends Component {
             <h4>Sign In With:</h4>
             <a className="login-button-signature" href="/auth/facebook">
               <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
-                <i className="fa fa-facebook-square " />Login with Facebook
+                <i className="fa fa-facebook-square" />Login with Facebook
               </Button>
             </a>
             <h5 className="content text-center">OR</h5>
             <a className="login-button-signature" href="/auth/google">
               <GoogleButton className="btn-google btn-login" />
             </a>
-            <h5 className="content text-center">OR</h5>
-            <form>
-              <FieldGroup type="text" label="First Name:" required />
-              <FieldGroup type="text" label="Last Name:" required />
-              <FieldGroup type="email" label="Email:" required />
-              <Button className="btn-sign" block>
-                Sign In With Email
-              </Button>
-            </form>
           </Col>
         </Row>
       );
     }
-    return (
-      <Col md={10} mdOffset={1}>
-        <Button bsStyle="remove-default" className="btn-sign" type="submit" block>
-          Sign the petition
-        </Button>
-      </Col>
-    );
-  };
-
-  renderError() {
-    return (
-      <div className="error-message">
-        {this.props.signatureObj.error && this.props.signatureObj.error.code === 11000
-          ? 'You already have signed this petition!'
-          : null}
-      </div>
-    );
-  }
-  renderContent() {
+    // User is signed in and has signed campaign
+    const userHasSignedCampaign =
+      this.props.auth &&
+      this.props.signatureObj.signatures &&
+      this.props.signatureObj.signatures.some(name => name.id === this.props.auth._id);
+    if (userHasSignedCampaign) {
+      return (
+        <Row>
+          <Col md={12}>
+            <h4>Welcome to the campaign!</h4>
+            <h4>Thanks for signing!</h4>
+          </Col>
+          <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+            Sign Out
+            <i className="fa fa-sign-out" />
+          </Button>
+        </Row>
+      );
+    }
+    // User is signed in but hasn't signed campaign
     return (
       <Row>
-        <Col md={10} mdOffset={1}>
+        <Col md={12}>
           <form onSubmit={this.handleFormSubmit}>
-            {this.createCheckboxes()}
-            {this.checkSignIn()}
+            <FormGroup controlId="signingBecause">
+              <ControlLabel id="control-label">
+                <h4>I'm signing because...</h4>
+              </ControlLabel>
+              <FormControl
+                className="form-resize-vertical"
+                componentClass="textarea"
+                placeholder="Optional"
+              />
+              {this.createCheckboxes()}
+              <div className="sign-campaign-actions">
+                <Button
+                  className="remove-default sign-petition-button"
+                  value="submit"
+                  type="submit"
+                  block
+                >
+                  Sign the petition
+                </Button>
+                <h5 className="content text-center">OR</h5>
+              </div>
+            </FormGroup>
           </form>
         </Col>
+        <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+          Sign Out
+          <i className="fa fa-sign-out" />
+        </Button>
       </Row>
     );
-  }
-
-  renderImSigning() {
-    return (
-      <Row>
-        <Col md={10} mdOffset={1}>
-          <FormGroup controlId="signingBecause">
-            <ControlLabel id="control-label">
-              <h4>I'm signing because...</h4>
-            </ControlLabel>
-            <FormControl
-              className="form-resize-vertical"
-              componentClass="textarea"
-              placeholder="Optional"
-            />
-          </FormGroup>
-        </Col>
-      </Row>
-    );
-  }
-
+  };
   render() {
     return (
       <Row className="show-grid">
         <Col md={12} className="resets">
           <div className="sig-head">
             <h2 className="content text-center">Yes, I Want Recycling!</h2>
-            {this.renderError()}
           </div>
           <div className="side-wrap">
-            <div>{this.renderImSigning()}</div>
-            <div>{this.renderContent()}</div>
+            <Row>
+              <Col md={10} mdOffset={1}>
+                {this.checkSignIn()}
+              </Col>
+            </Row>
           </div>
         </Col>
       </Row>
@@ -168,7 +161,8 @@ SignCampaign.propTypes = {
   auth: PropTypes.shape({
     _id: PropTypes.string,
     googleID: PropTypes.string,
-    facebookID: PropTypes.string
+    facebookID: PropTypes.string,
+    name: PropTypes.string
   }),
   activeCampaign: PropTypes.shape({
     campaign: PropTypes.shape({
