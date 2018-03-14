@@ -215,8 +215,7 @@ class CampaignPage extends Component {
             <SignCampaign signatureObj={this.props.signature} />
             <div className="text-center sig-bar-collapse-panel">
               <CollapsePanel
-                defaultExpanded="true"
-                signatures={this.props.signature.signatures}
+                defaultExpanded
                 titleText="See Who's Signed"
                 body={<SignatureList signatures={this.props.signature.signatures} />}
               />
