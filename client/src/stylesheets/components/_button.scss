@@ -10,6 +10,10 @@
   color: $mainwhite;
 }
 
+.btn i {
+  margin-right: 10px;
+}
+
 .btn-default {
   background-image: none;
 }
@@ -18,25 +22,4 @@
   background-color: $maingreen;
 }
 
-.btn.btn-sign {
-  color: #fff;
-  background-color: $main-blue;
-  margin-bottom: 1em;
-  padding-left: 5px;
-  padding-right: 5px;
-  box-shadow: none;
-  text-shadow: none;
-  border-radius: 2px;
-  &:hover,
-  :focus {
-    background-color: darken($main-blue, 5%);
-    outline: 0 !important;
-    outline-color: transparent !important;
-  }
-  &:active {
-    background-color: darken($main-blue, 10%);
-    color: white;
-    outline: 0 !important;
-    outline-color: transparent !important;
-  }
-}
+
