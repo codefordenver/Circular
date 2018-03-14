@@ -30,7 +30,7 @@
       padding-right: 5px;
     }
     .readonly {
-      background-color: rgba(200, 200, 200, 0.9);
+      background-color: darken($mainwhite, 15%);
     }
   }
   h2 {

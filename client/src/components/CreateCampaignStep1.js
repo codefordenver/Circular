@@ -63,7 +63,7 @@ const CreateCampaignStep1 = props => {
         {!formattedAddress && (
           <div className="text-center">
             <p>
-              {'Add an address to start.'}{' '}
+              {'Add an address to start. '}
               <Link className="about-link" to="/">
                 Click here
               </Link>

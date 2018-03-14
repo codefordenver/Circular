@@ -24,8 +24,8 @@ class CreateCampaignStep2 extends React.Component {
     this.defaultProvider = {
       _id: WASTE_PROVIDER_NOT_SET_ID,
       name: 'Select your provider(Optional)',
-      phone: 'N/A',
-      email: 'N/A'
+      phone: '',
+      email: ''
     };
     this.state = {
       activeProvider: this.defaultProvider
@@ -48,8 +48,8 @@ class CreateCampaignStep2 extends React.Component {
       },
       _wasteProviderId: undefined,
       buildingInfo: {
-        numBuildings: e.target.buildingCount.value,
-        numUnits: e.target.unitCount.value
+        numBuildings: e.target.buildingCount.value ? e.target.buildingCount.value : undefined,
+        numUnits: e.target.unitCount.value ? e.target.unitCount.value : undefined
       }
     };
     const wasteProviderId = e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
@@ -200,14 +200,14 @@ class CreateCampaignStep2 extends React.Component {
             <ControlLabel>THIS PROPERTY CONSISTS OF:</ControlLabel>
           </Col>
           <Col xs={2}>
-            <FormControl type="Number" name="buildingCount" placeholder={0} />
+            <FormControl type="Number" min="0" max="100" name="buildingCount" placeholder={0} />
           </Col>
           <Col xs={10}>BUILDING(S)</Col>
           <Col xs={12}>
             <ControlLabel>THIS BUILDING HAS APPROXIMATELY:</ControlLabel>
           </Col>
           <Col xs={2}>
-            <FormControl type="number" name="unitCount" placeholder={0} />
+            <FormControl type="number" min="0" max="500" name="unitCount" placeholder={0} />
           </Col>
           <Col xs={10}>TOTAL UNITS</Col>
         </FormGroup>
