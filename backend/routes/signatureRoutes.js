@@ -11,7 +11,7 @@ module.exports = app => {
       signatures,
       function({ _id, _userID }, callback) {
         User.findOne({ _id: _userID }).then(user => {
-          return callback(null, { name: user.name, id: _id });
+          return callback(null, { name: user.name, id: user._id });
         });
       },
       function(err, results) {

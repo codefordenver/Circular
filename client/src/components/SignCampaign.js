@@ -57,6 +57,7 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
+    // user is not signed in
     if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
       return (
         <Row>
@@ -75,18 +76,26 @@ class SignCampaign extends Component {
         </Row>
       );
     }
-    // return (
-    //   <Row>
-    //     <Col md={12}>
-    //       <h4>Welcome to the campaign!</h4>
-    //       <h4>Thanks for signing!</h4>
-    //     </Col>
-    //     <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-    //       Sign Out
-    //       <i className="fa fa-sign-out" />
-    //     </Button>
-    //   </Row>
-    // );
+    // User is signed in and signed campaign
+    const userHasSignedCampaign =
+      this.props.auth &&
+      this.props.signatureObj.signatures &&
+      this.props.signatureObj.signatures.some(name => name.id === this.props.auth._id);
+    if (userHasSignedCampaign) {
+      return (
+        <Row>
+          <Col md={12}>
+            <h4>Welcome to the campaign!</h4>
+            <h4>Thanks for signing!</h4>
+          </Col>
+          <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+            Sign Out
+            <i className="fa fa-sign-out" />
+          </Button>
+        </Row>
+      );
+    }
+    // User is signed but hasn't signed campaign
     return (
       <Row>
         <Col md={12}>
@@ -122,7 +131,6 @@ class SignCampaign extends Component {
       </Row>
     );
   };
-
   render() {
     return (
       <Row className="show-grid">
@@ -149,12 +157,12 @@ SignCampaign.defaultProps = {
 };
 
 SignCampaign.propTypes = {
-  // signatureObj: PropTypes.shape({
-  //   loaded: PropTypes.bool.isRequired,
-  //   loading: PropTypes.bool.isRequired,
-  //   signatures: PropTypes.arrayOf(PropTypes.object),
-  //   error: PropTypes.objectOf(PropTypes.any)
-  // }).isRequired,
+  signatureObj: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    signatures: PropTypes.arrayOf(PropTypes.object),
+    error: PropTypes.objectOf(PropTypes.any)
+  }).isRequired,
   auth: PropTypes.shape({
     _id: PropTypes.string,
     googleID: PropTypes.string,
