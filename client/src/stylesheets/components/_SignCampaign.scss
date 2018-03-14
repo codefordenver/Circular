@@ -43,7 +43,7 @@ h5 {
 }
 
 .btn.sign-petition-button {
-  color: #fff;
+  color: $button-white;
   background-color: $main-blue;
   padding-left: 5px;
   padding-right: 5px;
@@ -64,7 +64,7 @@ h5 {
   }
 }
 .btn.logout-button-signature {
-  color: #fff;
+  color: $button-white;
   background-color: $sign-out-button;
   padding-left: 5px;
   padding-right: 5px;
@@ -110,82 +110,3 @@ h5 {
   margin-top: 3em;
 }
 
-// .error-message {
-//   color: red;
-// }
-
-// .sign-campaign-wrapper {
-//   margin: 1em 0em;
-// }
-
-// .signature-wrapper {
-//   margin: 1em 0em;
-// }
-
-//
-
-// .pure-button {
-//   font-family: inherit;
-//   font-size: 100%;
-//   padding: 0.5em 1em;
-//   color: white;
-//   border: 1px solid #999;
-//   border: transparent;
-//   background-color: #0078e7;
-//   text-decoration: none;
-//   border-radius: 2px;
-// }
-
-// .pure-button-hover,
-// .pure-button:focus,
-// .pure-button:hover {
-//   filter: alpha(opacity=90);
-//   background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
-//   background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
-// }
-
-// .pure-button-active,
-// .pure-button:active {
-//   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.2) inset;
-//   border-color: #000\9;
-// }
-
-// .signature-list-down,
-// .signature-list-up {
-//   position: relative;
-//   height: 1em;
-//   display: inline-block;
-//   margin-bottom: 0.5em;
-// }
-
-// .signature-list-up:after {
-//   content: '';
-//   position: absolute;
-//   top: 110%;
-//   left: 0;
-//   right: 0;
-//   margin: 0 auto;
-//   width: 0;
-//   height: 0;
-//   border-top: solid 5px black;
-//   border-left: solid 25px transparent;
-//   border-right: solid 25px transparent;
-// }
-
-// .signature-list-hide {
-//   display: none;
-// }
-
-// .signature-list-down:after {
-//   content: '';
-//   position: absolute;
-//   top: 110%;
-//   left: 0;
-//   right: 0;
-//   margin: 0 auto;
-//   width: 0;
-//   height: 0;
-//   border-bottom: solid 5px black;
-//   border-left: solid 25px transparent;
-//   border-right: solid 25px transparent;
-// }
