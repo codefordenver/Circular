@@ -6,10 +6,8 @@ const DenverInfo = () => (
     <Grid fluid>
       <Row>
         <Col xs={12} md={10} mdOffset={1}>
-          <PageHeader className="about-page-header-overrides">
-            Recycling Request Tool FAQ
-          </PageHeader>
-          <ol className="about-list numeric-list">
+          <PageHeader className="info-page-header-overrides">Recycling Request Tool FAQ</PageHeader>
+          <ol className="info-list info-numeric-list">
             <li>
               The primary goal of the project is to provide tenants with the ability to
               transparently and collectively petition their landlord, through an automated and
@@ -34,7 +32,7 @@ const DenverInfo = () => (
               information and resources, is delivered to the landlord either electronically,
               physically, or both. A copy will also be emailed to each tenant that signed the
               petition. The deliverable will include the following:
-              <ol className="about-list alpha-list">
+              <ol className="info-list info-alpha-list">
                 <li>Statement regarding the benefits of recycling.</li>
                 <li>
                   Signed petition highlighting the number and overall fraction of tenants requesting

@@ -11,7 +11,6 @@ import CampaignPage from './containers/CampaignPage';
 import RequestRecyclingTips from './containers/RequestRecyclingTips';
 import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
-import About from './containers/About';
 import DenverLearnMore from './containers/DenverLearnMore';
 import Tools from './containers/Tools';
 import PropertyOwnerResources from './containers/PropertyOwnerResources';
@@ -64,7 +63,6 @@ export default (
       path="/denver-learn-more"
       getComponent={(location, callback) => callback(null, DenverLearnMore)}
     />
-    <Route path="/about" getComponent={(location, callback) => callback(null, About)} />
     <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
     <Route
       path="/property-owner-faq"

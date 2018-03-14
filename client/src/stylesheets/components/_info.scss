@@ -1,11 +1,6 @@
 @import "../base/colors";
 
-.about-container {
-  color: $mainwhite;
-  padding: 20px;
-}
-
-.about-text {
+.info-text {
   font-size: 1em;
   padding-bottom: 1em;
   p {
@@ -13,20 +8,20 @@
   }
 }
 
-.about-link {
+.info-link {
   text-decoration: none;
   color: $maingreen;
 }
 
-.about-link:hover {
+.info-link:hover {
   color: $hovergreen;
 }
 
-.about-page-header-overrides {
+.info-page-header-overrides {
   border-bottom: none;
 }
 
-.about-list {
+.info-list {
   padding-left: 25px;
   padding-right: 25px;
   list-style-position: outside;
@@ -36,10 +31,10 @@
   }
 }
 
-.numeric-list {
+.info-numeric-list {
   list-style-type: decimal;
 }
 
-.alpha-list {
+.info-alpha-list {
   list-style-type: lower-alpha;
 }

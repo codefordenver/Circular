@@ -6,10 +6,10 @@ const DenverLearnMore = () => (
   <Grid fluid>
     <Row>
       <Col xs={12} md={10} mdOffset={1}>
-        <PageHeader className="about-page-header-overrides">
+        <PageHeader className="info-page-header-overrides">
           Denver, we can do A LOT better than 20%!
         </PageHeader>
-        <div className="about-text">
+        <div className="info-text">
           <p>
             Denver recycles and composts only 20% of its waste, far behind the national average of
             34%. Curbside recycling is available only to most single-family residents--not to
@@ -28,7 +28,7 @@ const DenverLearnMore = () => (
           <p>
             It's time to speak up and make better recycling and composting a priority for Denver!
             Get involved by{' '}
-            <a className="about-link" href="http://ecocycle.org/take-action/denver">
+            <a className="info-link" href="http://ecocycle.org/take-action/denver">
               signing our letter
             </a>{' '}
             to Mayor Hancock.
@@ -43,7 +43,7 @@ const DenverLearnMore = () => (
                 the materials kept in the economy, it's about the energy saved in making all of your
                 things.
               </p>
-              <ul className="about-list">
+              <ul className="info-list">
                 <p>Energy Savings in:</p>
                 <li>Mining Natural Resources</li>
                 <li>Transportation</li>
@@ -109,7 +109,7 @@ const DenverLearnMore = () => (
         <CollapsePanel
           titleText="FAQ's"
           body={
-            <ol className="numeric-list">
+            <ol className="info-numeric-list">
               <li>
                 What happens if I live in....?
                 <p>Check your city's waste regulations.</p>
