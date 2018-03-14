@@ -13,13 +13,21 @@ import {
   Button
 } from 'react-bootstrap';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
-import { fetchWasteProviders, fetchWasteProviderById } from '../redux/actions/wasteProvider';
+import { fetchWasteProviders } from '../redux/actions/wasteProvider';
 
 class CreateCampaignStep2 extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.defaultProvider = {
+      _id: 'default',
+      name: 'Select your provider(Optional)',
+      phone: 'N/A',
+      email: 'N/A'
+    };
+    this.state = {
+      activeProvider: this.defaultProvider
+    };
   }
 
   componentDidMount() {
@@ -52,23 +60,25 @@ class CreateCampaignStep2 extends React.Component {
 
   handleWasteMgmtChange = async e => {
     const wasteMgmtId = e.target.options[e.target.selectedIndex].id;
-    console.log(wasteMgmtId);
-    this.props.fetchWasteProviderById(wasteMgmtId);
+    let activeProvider = this.defaultProvider;
+    if (wasteMgmtId !== this.defaultProvider._id) {
+      activeProvider = this.props.wasteProvider.wasteProviders.find(
+        provider => provider._id === wasteMgmtId
+      );
+    }
+
+    this.setState({ activeProvider });
   };
 
-  renderWasteProviderOptions = wasteProviders => [
-    <option key="default" id={null}>
-        halp
-    </option>,
-    ...wasteProviders.map(provider => (
+  renderWasteProviderOptions = wasteProviders =>
+    wasteProviders.map(provider => (
       <option key={provider._id} id={provider._id}>
         {provider.name}
       </option>
-    ))
-  ];
+    ));
   render() {
-    const { wasteProvider: { loaded, activeProvider, wasteProviders } } = this.props;
-    console.log(this.props);
+    let { wasteProvider: { wasteProviders } } = this.props;
+    wasteProviders = [this.defaultProvider, ...(wasteProviders || [])];
     return (
       <Form onSubmit={this.setOptionalInfo} horizontal className="create-campaign-form">
         <PageHeader>OPTIONAL INFO</PageHeader>
@@ -112,14 +122,14 @@ class CreateCampaignStep2 extends React.Component {
               name="wasteMgmtName"
               onChange={this.handleWasteMgmtChange}
             >
-              {wasteProviders && this.renderWasteProviderOptions(wasteProviders)}
+              {this.renderWasteProviderOptions(wasteProviders)}
             </FormControl>
             <ControlLabel>PHONE</ControlLabel>
             <FormControl
               className="readonly"
               type="tel"
               name="wasteMgmtPhone"
-              value={activeProvider ? activeProvider.phone : 'N/A'}
+              value={this.state.activeProvider.phone}
               readOnly
             />
             <ControlLabel>EMAIL</ControlLabel>
@@ -127,7 +137,7 @@ class CreateCampaignStep2 extends React.Component {
               className="readonly"
               type="email"
               name="wasteMgmtEmail"
-              value={activeProvider ? activeProvider.email : 'N/A'}
+              value={this.state.activeProvider.email}
               readOnly
             />
           </Col>
@@ -169,7 +179,6 @@ class CreateCampaignStep2 extends React.Component {
 CreateCampaignStep2.propTypes = {
   updateNewCampaign: PropTypes.func.isRequired,
   fetchWasteProviders: PropTypes.func.isRequired,
-  fetchWasteProviderById: PropTypes.func.isRequired,
   wasteProvider: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
@@ -180,14 +189,12 @@ CreateCampaignStep2.propTypes = {
 };
 
 export default connect(
-  ({ initialSearch, wasteProvider, newCampaign }) => ({
+  ({ initialSearch, wasteProvider }) => ({
     initialSearch,
-    wasteProvider,
-    newCampaign
+    wasteProvider
   }),
   {
     updateNewCampaign,
-    fetchWasteProviders,
-    fetchWasteProviderById
+    fetchWasteProviders
   }
 )(withRouter(CreateCampaignStep2));
