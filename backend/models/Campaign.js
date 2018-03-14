@@ -23,8 +23,8 @@ const campaignSchema = new Schema(
       required: false
     },
     buildingInfo: {
-      numBuildings: { type: Number, default: 1 },
-      numUnits: { type: Number, default: 8 }
+      numBuildings: { type: Number },
+      numUnits: { type: Number }
     }
   },
   { timestamps: true }

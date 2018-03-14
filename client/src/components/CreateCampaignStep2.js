@@ -48,8 +48,8 @@ class CreateCampaignStep2 extends React.Component {
       },
       _wasteProviderId: undefined,
       buildingInfo: {
-        numBuildings: e.target.buildingCount.value ? e.target.buildingCount.value : undefined,
-        numUnits: e.target.unitCount.value ? e.target.unitCount.value : undefined
+        numBuildings: e.target.buildingCount.value,
+        numUnits: e.target.unitCount.value
       }
     };
     const wasteProviderId = e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
