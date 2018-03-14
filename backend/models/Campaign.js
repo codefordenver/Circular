@@ -14,7 +14,7 @@ const campaignSchema = new Schema(
     propertyManager: {
       name: { type: String },
       address: { type: String },
-      phone: { type: Number },
+      phone: { type: String },
       email: { type: String }
     },
     _wasteProviderId: {

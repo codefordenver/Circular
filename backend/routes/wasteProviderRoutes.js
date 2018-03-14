@@ -7,12 +7,14 @@ module.exports = app => {
     res.send(wasteMgmts);
   });
 
-  app.get('/api/waste_provider/:id', async (req, res) => {
+  app.get('/api/waste_providers/:id', async (req, res) => {
     const wasteProvider = await WasteProvider.find({ _id: req.params.id });
     res.send(wasteProvider);
   });
 
-  // Delete this before pushing to master
+  /*
+   Comment this before pushing to master.  uncomment for easy manipulation on
+   WasteProviders database before loading scripts feature is completed
   app.post('/api/waste_provider', async (req, res) => {
     const { name, email, phone } = req.body;
 
@@ -30,7 +32,7 @@ module.exports = app => {
     res.send(data);
   });
 
-  app.delete('/api/waste_provider/:id', async (req, res) => {
+  app.delete('/api/waste_providers/:id', async (req, res) => {
     WasteProvider.findByIdAndRemove(req.params.id, (err, wasteProvider) => {
       if (err) return res.status(500).send(err);
       const response = {
@@ -40,4 +42,5 @@ module.exports = app => {
       return res.status(200).send(response);
     });
   });
+  */
 };

@@ -60,7 +60,15 @@ module.exports = app => {
   });
 
   app.post('/api/campaigns', async (req, res) => {
-    const { address, name, lat, lng, wasteProvider_id } = req.body;
+    const {
+      address,
+      name,
+      lat,
+      lng,
+      _wasteProviderId,
+      propertyManager,
+      buildingInfo
+    } = req.body;
 
     const campaign = new Campaign({
       name,
@@ -69,7 +77,9 @@ module.exports = app => {
         type: 'Point',
         coordinates: [parseFloat(lng), parseFloat(lat)]
       },
-      _wasteProviderId: wasteProvider_id
+      _wasteProviderId,
+      propertyManager,
+      buildingInfo
     });
 
     const data = await campaign.save();
