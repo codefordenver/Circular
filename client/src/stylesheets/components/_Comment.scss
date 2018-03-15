@@ -3,7 +3,7 @@
   margin-right: 5px;
   padding: 10px 10px 0 20px;
   margin-top: 12px;
-  border-left: solid 2px #1a5a99;
+  border-left: solid 2px $comment-box-blue;
   border-top: 1px solid $comment-box-blue;
   border-top: 1px solid $comment-box-blue;
   margin-top: 2em;
@@ -17,9 +17,9 @@
     fontsize: 12px;
   }
 
-  @media #{$information-phone} {
-    padding: 8px 3px 0 6px;
-  }
+  // @media #{$information-phone} {
+  //   padding: 8px 3px 0 6px;
+  // }
 
   .comment-options {
     display: grid;
