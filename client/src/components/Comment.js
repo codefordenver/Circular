@@ -16,24 +16,38 @@ class Comment extends Component {
   findTime() {
     const seconds = Math.floor((new Date() - new Date(this.props.dateAdded)) / 1000);
     let interval = Math.floor(seconds / 31536000); // one year in seconds
-    console.log(seconds);
     if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} year`;
+      }
       return `${interval} years`;
     }
     interval = Math.floor(seconds / 2592000);
     if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} month`;
+      }
       return `${interval} months`;
     }
     interval = Math.floor(seconds / 86400);
     if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} day`;
+      }
       return `${interval} days`;
     }
     interval = Math.floor(seconds / 3600);
     if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} hour`;
+      }
       return `${interval} hours`;
     }
     interval = Math.floor(seconds / 60);
     if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} minute`;
+      }
       return `${interval} minutes`;
     }
     return 'Less than a minute ago';
@@ -50,7 +64,7 @@ class Comment extends Component {
   renderChildren() {
     const comments = this.props.passedChildren;
     return (
-      <div>
+      <div className="comments-box">
         {Object.keys(comments).map(u => (
           <div key={comments[u]._id} className="comment-child">
             <Comment

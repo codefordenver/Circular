@@ -32,6 +32,10 @@
       color: $maingreen;
     }
   }
+  .comments-box {
+    overflow-y: scroll;
+    max-height: 400px;
+  }
 
   .posted-message {
     font-family: 'Inter UI', sans-serif;

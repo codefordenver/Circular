@@ -74,8 +74,10 @@ class Discussion extends Component {
     return (
       <div className="discussion">
         <div className="discussion-header">COMMENTS</div>
-        {this.renderMainPostBox()}
-        {this.renderComments()}
+        <div className="comment-box">
+          {this.renderMainPostBox()}
+          {this.renderComments()}
+        </div>
       </div>
     );
   }

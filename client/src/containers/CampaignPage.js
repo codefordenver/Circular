@@ -207,7 +207,7 @@ class CampaignPage extends Component {
                   <h3>TOOLS:</h3>
                   <ul>{toolsList}</ul>
                 </Col>
-                <Col md={7} mdOffset={1} xs={10} className="tools">
+                <Col md={8} xs={10} className="tools">
                   <Discussion campaignID={this.props.params.id} />
                 </Col>
               </Col>
