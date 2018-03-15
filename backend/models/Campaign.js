@@ -15,7 +15,10 @@ const campaignSchema = new Schema(
       name: { type: String },
       address: { type: String },
       phone: { type: String },
-      email: { type: String }
+      email: { type: String },
+      city: { type: String },
+      state: { type: String },
+      zip: { type: String }
     },
     _wasteProviderId: {
       type: Schema.Types.ObjectId,
