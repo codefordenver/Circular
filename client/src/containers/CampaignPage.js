@@ -36,15 +36,17 @@ class CampaignPage extends Component {
     const tools = [
       {
         title: 'Tips for Approaching your Landlord',
-        to: '/tips-for-requesting'
+        to: '/tips-for-requesting',
+        key: 'tool1'
       },
       {
         title: 'Denver Recycling Facts',
-        to: '/denver-recycling-info'
+        to: '/denver-recycling-info',
+        key: 'tool2'
       }
     ];
     const toolsList = tools.map(tool => (
-      <li className="toolList">
+      <li className="toolList" key={tool.key}>
         <i className="fa fa-circle" aria-hidden="true" />
         <Link to={tool.to}>{tool.title}</Link>
       </li>
