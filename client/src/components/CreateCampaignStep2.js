@@ -161,7 +161,12 @@ class CreateCampaignStep2 extends React.Component {
           </Col>
           <Col xs={3}>
             <ControlLabel>ZIP</ControlLabel>
-            <FormControl type="number" name="zip" />
+            <FormControl
+              type="text"
+              name="zip"
+              pattern="[0-9]{5}"
+              title="Must be a 5-digit zip code"
+            />
           </Col>
         </FormGroup>
         <FormGroup>
