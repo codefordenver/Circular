@@ -15,28 +15,28 @@ class Comment extends Component {
 
   findTime() {
     const seconds = Math.floor((new Date() - new Date(this.props.dateAdded)) / 1000);
-    let interval = Math.floor(seconds / 31536000);
-
-    if (interval > 1) {
+    let interval = Math.floor(seconds / 31536000); // one year in seconds
+    console.log(seconds);
+    if (interval >= 1) {
       return `${interval} years`;
     }
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
+    if (interval >= 1) {
       return `${interval} months`;
     }
     interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
+    if (interval >= 1) {
       return `${interval} days`;
     }
     interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
+    if (interval >= 1) {
       return `${interval} hours`;
     }
     interval = Math.floor(seconds / 60);
-    if (interval > 1) {
+    if (interval >= 1) {
       return `${interval} minutes`;
     }
-    return `${Math.floor(seconds)} seconds`;
+    return 'Less than a minute ago';
   }
 
   handleCloseReply() {
@@ -52,7 +52,7 @@ class Comment extends Component {
     return (
       <div>
         {Object.keys(comments).map(u => (
-          <div key={comments[u]._id}>
+          <div key={comments[u]._id} className="comment-child">
             <Comment
               userName={comments[u].userName}
               message={comments[u].message}
@@ -71,8 +71,10 @@ class Comment extends Component {
   render() {
     return (
       <div className="comment">
-        <span style={{ fontWeight: 'bold' }}>{this.props.userName}</span>
-        <span style={{ fontSize: '12px' }}>&nbsp;&bull;&nbsp;{this.findTime()}</span>
+        <span className="comment-name" style={{ fontWeight: 'bold' }}>
+          {this.props.userName}
+        </span>
+        <span className="comment-time">&nbsp;&bull;&nbsp;{this.findTime()}</span>
         <p className="posted-message">{this.props.message}</p>
         {this.state.replyClicked === false &&
           this.props.authorized && (

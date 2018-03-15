@@ -1,9 +1,5 @@
 //Do not change the order of these imports:
-@import 'base/reset',
-  'base/fonts',
-  'base/colors',
-  'base/breakpoints',
-  'base/global';
+@import 'base/reset', 'base/fonts', 'base/colors', 'base/breakpoints', 'base/global';
 
 //Do not change the order of these imports:
 @import 'utils/placeholders', 'utils/mixins', 'utils/_floats';
@@ -28,6 +24,7 @@
   'components/CampaignPage',
   'components/modalWrapper',
   'components/_info',
+  'components/Comment',
   'components/NotFound';
 
 //Do not change the order of these imports:

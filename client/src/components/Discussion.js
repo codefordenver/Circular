@@ -100,5 +100,8 @@ Discussion.propTypes = {
 
 export default connect(
   ({ activeCampaign, auth, comments }) => ({ activeCampaign, auth, comments }),
-  { fetchComments, postComment }
+  {
+    fetchComments,
+    postComment
+  }
 )(Discussion);
