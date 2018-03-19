@@ -2,6 +2,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import {
+  Row,
+  Col,
+  PageHeader,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  Button
+} from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
@@ -20,49 +29,49 @@ const CreateCampaignStep1 = props => {
     });
     router.push('/new-campaign/optional-info');
   };
-
   return (
-    <div className="add_address_wrapper">
-      {formattedAddress && (
-        <form onSubmit={setAddressAndName}>
-          <div className="form-group">
-            <label className="required">Address</label>
-            <input
-              type="text"
-              className="form-control"
-              value={formattedAddress}
-              name="address"
-              readOnly
-            />
+    <Row>
+      <Col xs={12}>
+        {formattedAddress && (
+          <form onSubmit={setAddressAndName} className="create-campaign-form">
+            <PageHeader>Create Campaign</PageHeader>
+            <FormGroup controlId="addressAndName">
+              <ControlLabel>Address</ControlLabel>
+              <FormControl type="text" value={formattedAddress} name="address" readOnly />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel className="create-campaign-control-label">Campaign Name</ControlLabel>
+              <div className="requiredtool" />
+              <FormControl type="text" name="campaignName" required />
+            </FormGroup>
+            <br />
+            <Button bsStyle="remove-default" className="next-button fr" type="submit">
+              Next
+            </Button>
+          </form>
+        )}
+        {error && (
+          <div className="text-center">
+            <p>
+              {
+                'There was an issue with the address you provided. It may be associated with a preexisting campaign.'
+              }
+            </p>
+            <br />
           </div>
-          <div className="form-group">
-            <label className="required">Campaign Name</label>
-            <div className="requiredtool" />
-            <input type="text" className="form-control campaign" name="campaignName" required />
+        )}
+        {!formattedAddress && (
+          <div className="text-center">
+            <p>
+              {'Add an address to start. '}
+              <Link className="about-link" to="/">
+                Click here
+              </Link>
+            </p>
           </div>
-          <br />
-          <button className="btn btn-primary fr" type="submit">
-            {'Next ➡'}
-          </button>
-          <div className="cf" />
-        </form>
-      )}
-      {error && (
-        <div>
-          <p>
-            {
-              'There was an issue with the address you provided. It may be associated with a preexisting campaign.'
-            }
-          </p>
-          <br />
-        </div>
-      )}
-      {!formattedAddress && (
-        <p>
-          {'Add an address to start.'} <Link to="/">{'Click here'}</Link>
-        </p>
-      )}
-    </div>
+        )}
+      </Col>
+    </Row>
   );
 };
 

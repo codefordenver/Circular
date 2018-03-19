@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SignatureList = ({ signatures }) => (
-  <div className="signature-wrapper">
+  <div>
     {signatures.length ? (
       <h2>
         ({signatures.length}) Signature{signatures.length > 1 ? 's' : ''} on the list!

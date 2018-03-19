@@ -14,16 +14,20 @@ const campaignSchema = new Schema(
     propertyManager: {
       name: { type: String },
       address: { type: String },
-      phone: { type: Number },
-      email: { type: String }
+      phone: { type: String },
+      email: { type: String },
+      city: { type: String },
+      state: { type: String },
+      zip: { type: String }
     },
-    wasteProvider: {
-      name: { type: String },
-      phone: { type: Number },
-      email: { type: String }
+    _wasteProviderId: {
+      type: Schema.Types.ObjectId,
+      ref: 'WasteProvider',
+      required: false
     },
-    unitCount: {
-      type: Number
+    buildingInfo: {
+      numBuildings: { type: Number },
+      numUnits: { type: Number }
     }
   },
   { timestamps: true }

@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { Button, PageHeader } from 'react-bootstrap';
 import { createCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep3 = props => {
@@ -15,13 +16,16 @@ const CreateCampaignStep3 = props => {
   };
 
   return (
-    <div className="add_address_wrapper">
-      <h1>{'Last step!'}</h1>
-      <h2>{'Sign your own petition to activate your new campaign!'}</h2>
-      <button className="btn btn-primary fr" onClick={makeNewCampaign}>
-        {'Activate your Campaign'}
-      </button>
-      <Link to="/new-campaign/optional-info">{'⬅ Back'}</Link>
+    <div>
+      <PageHeader>{'Last step!'}</PageHeader>
+      <h2 className="text-center">{'Sign your own petition to activate your new campaign!'}</h2>
+      <br />
+      <Button className="next-button fr" onClick={makeNewCampaign}>
+        Activate your Campaign
+      </Button>
+      <Link className="btn next-button fl" to="/new-campaign/optional-info">
+        Back
+      </Link>
     </div>
   );
 };

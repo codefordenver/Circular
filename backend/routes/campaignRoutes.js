@@ -52,12 +52,23 @@ module.exports = app => {
   });
 
   app.get('/api/campaigns/:id', async (req, res) => {
-    const campaign = await Campaign.find({ _id: req.params.id });
+    const campaign = await Campaign.find({ _id: req.params.id }).populate(
+      '_wasteProviderId'
+    );
+
     res.send(campaign);
   });
 
   app.post('/api/campaigns', async (req, res) => {
-    const { address, name, lat, lng } = req.body;
+    const {
+      address,
+      name,
+      lat,
+      lng,
+      _wasteProviderId,
+      propertyManager,
+      buildingInfo
+    } = req.body;
 
     const campaign = new Campaign({
       name,
@@ -65,7 +76,10 @@ module.exports = app => {
       latLng: {
         type: 'Point',
         coordinates: [parseFloat(lng), parseFloat(lat)]
-      }
+      },
+      _wasteProviderId,
+      propertyManager,
+      buildingInfo
     });
 
     const data = await campaign.save();
