@@ -13,7 +13,6 @@ import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
 import DenverLearnMore from './containers/DenverLearnMore';
 import Tools from './containers/Tools';
-import PropertyOwnerResources from './containers/PropertyOwnerResources';
 import Collaboration from './containers/Collaboration';
 import NotFound from './containers/NotFound';
 
@@ -64,10 +63,6 @@ export default (
       getComponent={(location, callback) => callback(null, DenverLearnMore)}
     />
     <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
-    <Route
-      path="/property-owner-faq"
-      getComponent={(location, callback) => callback(null, PropertyOwnerResources)}
-    />
     <Route
       path="/who-are-we"
       getComponent={(location, callback) => callback(null, Collaboration)}

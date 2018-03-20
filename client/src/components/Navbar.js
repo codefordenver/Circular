@@ -26,12 +26,9 @@ const NavBar = props => {
           </NavItem>
           <NavDropdown id="tools-dropdown" eventKey={2} title="Tools" href="#">
             <MenuItem eventKey={2.1}>
-              <Link to="/manager-resources">Manager Resources</Link>
+              <Link to="/manager-resources">Property Manager Resources</Link>
             </MenuItem>
             <MenuItem eventKey={2.2}>
-              <Link to="/property-owner-faq">Property Owner Resources</Link>
-            </MenuItem>
-            <MenuItem eventKey={2.3}>
               <Link to="/tips-for-requesting">Tips for Requesting</Link>
             </MenuItem>
           </NavDropdown>
