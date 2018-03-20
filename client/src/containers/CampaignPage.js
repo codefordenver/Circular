@@ -40,7 +40,7 @@ class CampaignPage extends Component {
       },
       {
         title: 'Denver Recycling Facts',
-        to: '/denver-recycling-info'
+        to: '/denver-learn-more'
       }
     ];
     const toolsList = tools.map(tool => (
