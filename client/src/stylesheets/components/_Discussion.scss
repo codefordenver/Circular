@@ -26,11 +26,6 @@
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
   }
 
-  .comment-box {
-    overflow-y: scroll;
-    max-height: 200px;
-  }
-
   button {
     background: none;
     border: none;
@@ -109,9 +104,4 @@
 .main-post-box {
   position: relative;
   margin-top: 10px;
-}
-
-.child-comment-post-box {
-  margin-top: 10px;
-  transition: all 0.2s ease-in-out;
 }

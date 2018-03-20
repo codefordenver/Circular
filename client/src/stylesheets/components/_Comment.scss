@@ -2,19 +2,24 @@
   margin-left: 5px;
   margin-right: 5px;
   padding: 10px 10px 0 20px;
-  margin-top: 12px;
+  max-width: 95%;
   border-left: solid 2px $comment-box-blue;
-  border-top: 1px solid $comment-box-blue;
   border-top: 1px solid $comment-box-blue;
   margin-top: 2em;
   border-top-left-radius: 10px;
   -webkit-box-shadow: -1px -1px -1px 0px $comment-box-blue;
   -moz-box-shadow: -1px -1px -1px 0px $comment-box-blue;
   box-shadow: -1px -1px -1px 0px $comment-box-blue;
+  text-align: left;
 
   .comment-time {
     color: $comment-gray;
     fontsize: 12px;
+  }
+
+  .comment-box {
+    overflow-y: scroll;
+    max-height: 200px;
   }
 
   // @media #{$information-phone} {
@@ -52,4 +57,9 @@
     border-top: none;
     border-top-left-radius: 0;
   }
+}
+
+.child-comment-post-box {
+  margin-top: 10px;
+  transition: all 0.2s ease-in-out;
 }

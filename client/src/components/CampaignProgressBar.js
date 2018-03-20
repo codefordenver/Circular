@@ -15,7 +15,7 @@ class CampaignProgessBar extends React.Component {
     return phaseDates;
   };
 
-  getMonthAndDay = date => dateformat(date, 'mmmm dS');
+  getMonthAndDay = date => dateformat(date, 'mmm dS');
 
   renderProgressPhase = (phaseCompletionDate, phaseTitle) => {
     const phaseComplete = Date.now() > phaseCompletionDate.getTime();

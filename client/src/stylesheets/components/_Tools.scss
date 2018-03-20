@@ -1,0 +1,42 @@
+.tool-list-wrapper {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.tools {
+  font-size: 14px;
+  color: $mainwhite;
+  & i {
+    color: $mainwhite;
+    font-size: 8px;
+  }
+  & ul {
+    color: $maingreen;
+  }
+  & a:hover {
+    color: darken($mainwhite, 5%);
+  }
+
+  a:focus {
+    color: darken($mainwhite, 5%);
+  }
+}
+
+.toolList {
+  margin: 5px;
+  i {
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tools {
+    font-size: 14px;
+    text-align: center;
+
+    & i {
+      color: $mainwhite;
+      font-size: 8px;
+    }
+  }
+}
