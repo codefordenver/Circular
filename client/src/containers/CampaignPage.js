@@ -167,7 +167,7 @@ CampaignPage.defaultProps = {
 
 CampaignPage.propTypes = {
   initialSearch: PropTypes.shape({
-    apartments: PropTypes.string.isRequired
+    apartments: PropTypes.array.isRequired
   }).isRequired,
   activeCampaign: PropTypes.shape({
     campaign: PropTypes.shape({

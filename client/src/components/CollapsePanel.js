@@ -21,7 +21,7 @@ class CollapsePanel extends Component {
     return (
       <Panel
         className="collapse-panel remove-default"
-        onClick={this.togglePanelExpanded}
+        onToggle={this.togglePanelExpanded}
         expanded={this.state.expanded}
       >
         <Panel.Toggle className="collapse-panel-toggle">
