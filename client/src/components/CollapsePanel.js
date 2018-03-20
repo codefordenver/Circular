@@ -20,8 +20,7 @@ class CollapsePanel extends Component {
     const { body, titleText } = this.props;
     return (
       <Panel
-        bsStyle="remove-default"
-        className="collapse-panel"
+        className="collapse-panel remove-default"
         onClick={this.togglePanelExpanded}
         expanded={this.state.expanded}
       >
