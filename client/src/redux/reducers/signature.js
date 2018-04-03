@@ -2,9 +2,12 @@ import {
   ADD_SIGNATURE_TO_CAMPAIGN_REQUEST,
   ADD_SIGNATURE_TO_CAMPAIGN_SUCCESS,
   ADD_SIGNATURE_TO_CAMPAIGN_FAILURE,
-  FETCH_SIGNATURES_REQUEST,
-  FETCH_SIGNATURES_SUCCESS,
-  FETCH_SIGNATURES_FAILURE,
+  FETCH_CAMPAIGN_SIGNATURES_REQUEST,
+  FETCH_CAMPAIGN_SIGNATURES_SUCCESS,
+  FETCH_CAMPAIGN_SIGNATURES_FAILURE,
+  FETCH_USER_SIGNATURES_REQUEST,
+  FETCH_USER_SIGNATURES_SUCCESS,
+  FETCH_USER_SIGNATURES_FAILURE,
   REMOVE_SIGNATURE_FROM_CAMPAIGN_REQUEST,
   REMOVE_SIGNATURE_FROM_CAMPAIGN_SUCCESS,
   REMOVE_SIGNATURE_FROM_CAMPAIGN_FAILURE
@@ -49,7 +52,6 @@ export default function (state = defaultState, action) {
         ...state,
         laoding: false,
         loaded: true
-        // ? does this return the deleted user?
       };
     case REMOVE_SIGNATURE_FROM_CAMPAIGN_FAILURE:
       return {
@@ -58,21 +60,42 @@ export default function (state = defaultState, action) {
         loaded: false,
         error
       };
-    case FETCH_SIGNATURES_REQUEST:
+    case FETCH_CAMPAIGN_SIGNATURES_REQUEST:
       return {
         ...state,
         loading: true,
         loaded: false,
         error: null
       };
-    case FETCH_SIGNATURES_SUCCESS:
+    case FETCH_CAMPAIGN_SIGNATURES_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
         signatures: response.data
       };
-    case FETCH_SIGNATURES_FAILURE:
+    case FETCH_CAMPAIGN_SIGNATURES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error
+      };
+    case FETCH_USER_SIGNATURES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        error: null
+      };
+    case FETCH_USER_SIGNATURES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        signatures: response.data
+      };
+    case FETCH_USER_SIGNATURES_FAILURE:
       return {
         ...state,
         loading: false,
