@@ -17,7 +17,8 @@ import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import CampaignProgressBar from '../components/CampaignProgressBar';
 import CampaignStatus from '../components/CampaignStatus';
 
-const CAMPAIGN_DURATION = 15;
+const MIN_CAMPAIGN_DURATION = 21;
+const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
@@ -31,6 +32,18 @@ class CampaignPage extends Component {
       nextProps.fetchSignatures(nextProps.params.id);
     }
   }
+
+  calculateCampaignDuration = creationDateString => {
+    const creationDate = new Date(creationDateString);
+    const expireDate = new Date(creationDateString);
+    // the campaign is set to expire the first Monday 3-weeks after campaign creation
+    expireDate.setDate(expireDate.getDate() + MIN_CAMPAIGN_DURATION);
+    expireDate.setDate(expireDate.getDate() + (1 + 7 - expireDate.getDay()) % 7);
+
+    const timeDiff = Math.abs(expireDate.getTime() - creationDate.getTime());
+    const diffDays = Math.ceil(timeDiff / ONE_DAY_IN_MILLISECONDS);
+    return diffDays;
+  };
 
   render() {
     const tools = [
@@ -190,12 +203,15 @@ class CampaignPage extends Component {
                           'Final Signatures',
                           'Request Recycling'
                         ]}
-                        duration={CAMPAIGN_DURATION}
+                        duration={this.calculateCampaignDuration(campaign.createdAt)}
                       />
                     </Row>
                   </Col>
                   <Col className="status-bar" md={4} xs={12}>
-                    <CampaignStatus createdAt={campaign.createdAt} duration={CAMPAIGN_DURATION} />
+                    <CampaignStatus
+                      createdAt={campaign.createdAt}
+                      duration={this.calculateCampaignDuration(campaign.createdAt)}
+                    />
                   </Col>
                 </Row>
               )}
