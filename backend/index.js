@@ -53,6 +53,7 @@ require('./routes/campaignRoutes')(app);
 require('./routes/signatureRoutes')(app);
 require('./routes/commentRoutes')(app);
 require('./routes/wasteProviderRoutes')(app);
+require('./routes/userRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

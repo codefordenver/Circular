@@ -15,6 +15,7 @@ import DenverLearnMore from './containers/DenverLearnMore';
 import Tools from './containers/Tools';
 import Collaboration from './containers/Collaboration';
 import NotFound from './containers/NotFound';
+import MyCampaign from './containers/MyCampaign';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
@@ -62,6 +63,7 @@ export default (
       path="/denver-learn-more"
       getComponent={(location, callback) => callback(null, DenverLearnMore)}
     />
+    <Route path="/my-campaign" getComponent={(location, callback) => callback(null, MyCampaign)} />
     <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
     <Route
       path="/who-are-we"

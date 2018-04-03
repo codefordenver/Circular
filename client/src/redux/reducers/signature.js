@@ -4,7 +4,10 @@ import {
   ADD_SIGNATURE_TO_CAMPAIGN_FAILURE,
   FETCH_SIGNATURES_REQUEST,
   FETCH_SIGNATURES_SUCCESS,
-  FETCH_SIGNATURES_FAILURE
+  FETCH_SIGNATURES_FAILURE,
+  REMOVE_SIGNATURE_FROM_CAMPAIGN_REQUEST,
+  REMOVE_SIGNATURE_FROM_CAMPAIGN_SUCCESS,
+  REMOVE_SIGNATURE_FROM_CAMPAIGN_FAILURE
 } from '../constants/signature';
 
 const defaultState = {
@@ -34,6 +37,26 @@ export default function (state = defaultState, action) {
         loading: false,
         loaded: false,
         error: error.data
+      };
+    case REMOVE_SIGNATURE_FROM_CAMPAIGN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      };
+    case REMOVE_SIGNATURE_FROM_CAMPAIGN_SUCCESS:
+      return {
+        ...state,
+        laoding: false,
+        loaded: true
+        // ? does this return the deleted user?
+      };
+    case REMOVE_SIGNATURE_FROM_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error
       };
     case FETCH_SIGNATURES_REQUEST:
       return {
