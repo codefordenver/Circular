@@ -1,4 +1,4 @@
-@import "../base/colors";
+@import '../base/colors';
 
 .collapse-panel {
   .collapse-panel-toggle {
@@ -9,9 +9,9 @@
 
   .collpase-panel-title {
     font-size: 20px;
-
     a {
       color: $mainwhite;
+      text-decoration: none;
     }
   }
 

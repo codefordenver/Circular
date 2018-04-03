@@ -74,31 +74,33 @@ class SignCampaign extends Component {
         </Row>
       );
     }
-    // User is signed in and has signed campaign
+    // User is signed in AND has signed campaign
     const userHasSignedCampaign =
       this.props.auth &&
       this.props.signatureObj.signatures &&
       this.props.signatureObj.signatures.some(name => name.id === this.props.auth._id);
     if (userHasSignedCampaign) {
       return (
-        <Row>
-          <Col md={12}>
-            <div className="text-center thanks-for-header">
-              <h4>Thanks for Signing</h4>
-            </div>
-          </Col>
-
-          <Col md={12}>
-            <div className="text-center">
-              <ToolList />
-
-              <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-                Sign Out
-                <i className="fa fa-sign-out" />
-              </Button>
-            </div>
-          </Col>
-        </Row>
+        <div>
+          <Row>
+            <Col md={12}>
+              <div className="text-center thanks-for-header">
+                <h4>Thanks for Signing</h4>
+              </div>
+            </Col>
+          </Row>
+          <ToolList />
+          <Row>
+            <Col md={12}>
+              <div className="text-center">
+                <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+                  Sign Out
+                  <i className="fa fa-sign-out" />
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </div>
       );
     }
     // User is signed in but hasn't signed campaign
@@ -146,9 +148,7 @@ class SignCampaign extends Component {
           </div>
           <div className="side-wrap">
             <Row>
-              <Col md={10} mdOffset={1}>
-                {this.checkSignIn()}
-              </Col>
+              <Col md={12}>{this.checkSignIn()}</Col>
             </Row>
           </div>
         </Col>

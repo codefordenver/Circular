@@ -1,42 +1,57 @@
-.tool-list-wrapper {
-  margin-top: 2em;
-  margin-bottom: 1em;
-}
+.tool-panel-wrapper {
+  .tool-panel {
+    margin-bottom: 2em;
+    background-color: $main-blue;
+    .panel-body {
+      ul {
+        list-style-type: square;
+        margin-left: 1em;
+        color: $main-blue;
+      }
+      li {
+        text-align: left;
+        font-size: 88%;
+      }
+      background-color: white;
+      a {
+        color: $main-blue;
+        &:hover,
+        :focus {
+          color: $hovergreen;
+          outline: 0 !important;
+          outline-color: transparent !important;
+        }
+        &:active {
+          color: darken($hovergreen, 5%);
+          outline: 0 !important;
+          outline-color: transparent !important;
+        }
+      }
+    }
 
-.tools {
-  font-size: 14px;
-  color: $mainwhite;
-  & i {
-    color: $mainwhite;
-    font-size: 8px;
+    text-align: center;
+    a {
+      text-decoration: none;
+    }
   }
-  & ul {
-    color: $maingreen;
-  }
-  & a:hover {
-    color: darken($mainwhite, 5%);
-  }
+  .tool-panel-title {
+    font-size: 20px;
 
-  a:focus {
-    color: darken($mainwhite, 5%);
-  }
-}
-
-.toolList {
-  margin: 5px;
-  i {
-    margin-right: 5px;
+    a {
+      color: white;
+      text-decoration: none;
+    }
   }
 }
 
 @media (max-width: 992px) {
-  .tools {
-    font-size: 14px;
-    text-align: center;
-
-    & i {
-      color: $mainwhite;
-      font-size: 8px;
+  .tool-panel-wrapper {
+    .tool-panel {
+      .panel-body {
+        li {
+          font-size: 100%;
+        }
+      }
     }
   }
 }
