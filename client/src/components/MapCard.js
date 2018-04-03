@@ -73,7 +73,7 @@ class MapCard extends Component {
 }
 
 MapCard.propTypes = {
-  apartments: PropTypes.array.isRequired,
+  apartments: PropTypes.arrayOf(PropTypes.string).isRequired,
   campaignAddress: PropTypes.string.isRequired
 };
 

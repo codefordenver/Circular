@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Panel } from 'react-bootstrap';
 
@@ -7,7 +6,7 @@ class ToolList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: this.props.defaultExpanded
+      expanded: this.defaultProps.defaultExpanded
     };
   }
 
