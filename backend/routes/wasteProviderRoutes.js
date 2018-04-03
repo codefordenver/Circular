@@ -15,6 +15,20 @@ module.exports = app => {
   /*
    Comment this before pushing to master.  uncomment for easy manipulation on
    WasteProviders database before loading scripts feature is completed
+   */
+  /*
+  app.post('/api/waste_providers', async (req, res) => {
+    const { waste_providers } = req.body;
+
+    WasteProvider.collection.insert(waste_providers, (err, docs) => {
+      if (err) {
+        res.status(422).send(err);
+      } else {
+        res.send(docs);
+      }
+    });
+  });
+
   app.post('/api/waste_provider', async (req, res) => {
     const { name, email, phone } = req.body;
 
