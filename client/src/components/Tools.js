@@ -6,7 +6,7 @@ class ToolList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: this.defaultProps.defaultExpanded
+      defaultExpanded: false
     };
   }
 
@@ -18,11 +18,7 @@ class ToolList extends Component {
 
   render() {
     return (
-      <div
-        className="tool-panel-wrapper"
-        onToggle={this.togglePanelExpanded}
-        expanded={this.state.expanded}
-      >
+      <div className="tool-panel-wrapper" onToggle={this.togglePanelExpanded}>
         <Panel className="tool-panel">
           <Panel.Toggle className="tool-panel-toggle">
             <Panel.Heading className="bg-blue-color">
@@ -53,9 +49,5 @@ class ToolList extends Component {
     );
   }
 }
-
-ToolList.defaultProps = {
-  defaultExpanded: false
-};
 
 export default ToolList;
