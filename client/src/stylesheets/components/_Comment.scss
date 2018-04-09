@@ -13,12 +13,12 @@
   text-align: left;
 
   .comment-name {
-    fontweight: 'bold';
+    font-weight: bold;
   }
 
   .comment-time {
     color: $comment-gray;
-    fontsize: 12px;
+    font-size: 12px;
   }
 
   .comment-box {
