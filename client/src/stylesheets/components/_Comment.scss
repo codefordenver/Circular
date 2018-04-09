@@ -12,6 +12,10 @@
   box-shadow: -1px -1px -1px 0px $comment-box-blue;
   text-align: left;
 
+  .comment-name {
+    fontweight: 'bold';
+  }
+
   .comment-time {
     color: $comment-gray;
     fontsize: 12px;

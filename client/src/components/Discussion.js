@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
 import PostBox from './PostBox';
@@ -10,7 +9,6 @@ class Discussion extends Component {
   constructor(props) {
     super(props);
     this.state = { error: false };
-
     this.comments = this.props.comments;
   }
 

@@ -15,35 +15,40 @@ class Comment extends Component {
 
   findTime() {
     const seconds = Math.floor((new Date() - new Date(this.props.dateAdded)) / 1000);
-    let interval = Math.floor(seconds / 31536000); // one year in seconds
+    const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
+    const ONE_MONTH_IN_SECONDS = 30 * 24 * 60 * 60;
+    const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
+    const ONE_HOUR_IN_SECONDS = 60 * 60;
+    const ONE_MINUTE_IN_SECONDS = 60;
+    let interval = Math.floor(seconds / ONE_YEAR_IN_SECONDS); // one year in seconds
     if (interval >= 1) {
       if (interval === 1) {
         return `${interval} year`;
       }
       return `${interval} years`;
     }
-    interval = Math.floor(seconds / 2592000);
+    interval = Math.floor(seconds / ONE_MONTH_IN_SECONDS);
     if (interval >= 1) {
       if (interval === 1) {
         return `${interval} month`;
       }
       return `${interval} months`;
     }
-    interval = Math.floor(seconds / 86400);
+    interval = Math.floor(seconds / ONE_DAY_IN_SECONDS);
     if (interval >= 1) {
       if (interval === 1) {
         return `${interval} day`;
       }
       return `${interval} days`;
     }
-    interval = Math.floor(seconds / 3600);
+    interval = Math.floor(seconds / ONE_HOUR_IN_SECONDS);
     if (interval >= 1) {
       if (interval === 1) {
         return `${interval} hour`;
       }
       return `${interval} hours`;
     }
-    interval = Math.floor(seconds / 60);
+    interval = Math.floor(seconds / ONE_MINUTE_IN_SECONDS);
     if (interval >= 1) {
       if (interval === 1) {
         return `${interval} minute`;
@@ -85,9 +90,7 @@ class Comment extends Component {
   render() {
     return (
       <div className="comment">
-        <span className="comment-name" style={{ fontWeight: 'bold' }}>
-          {this.props.userName}
-        </span>
+        <span className="comment-name">{this.props.userName}</span>
         <span className="comment-time">&nbsp;&bull;&nbsp;{this.findTime()}</span>
         <p className="posted-message">{this.props.message}</p>
         {this.state.replyClicked === false &&
