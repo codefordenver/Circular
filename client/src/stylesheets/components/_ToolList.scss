@@ -1,0 +1,29 @@
+@import '../base/colors';
+
+.tool-list-body {
+  background-color: $mainwhite;
+
+  ul {
+    list-style-type: square;
+    margin-left: 1em;
+    color: $main-blue;
+  }
+  li {
+    text-align: left;
+    font-size: 88%;
+
+    @media (max-width: 992px) {
+      font-size: 100%;
+    }
+  }
+  a {
+    color: $main-blue;
+    &:hover,
+    :focus {
+      color: $hovergreen;
+    }
+    &:active {
+      color: darken($hovergreen, 5%);
+    }
+  }
+}

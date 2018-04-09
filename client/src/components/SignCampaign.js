@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import GoogleButton from 'react-google-button';
 import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import Checkbox from './SignatureCheckbox';
-import ToolList from './Tools';
+import ToolList from './ToolList';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {

@@ -20,13 +20,19 @@ class CollapsePanel extends Component {
     const { body, titleText } = this.props;
     return (
       <Panel
-        className="collapse-panel remove-default"
+        /*
+          bsStyle="remove-default" causes an console error but it
+          is the correct way to remove react-bootstrap defaults.
+          the console error is react-bootstraps fault.
+        */
+        bsStyle="remove-default"
+        className="collapse-panel"
         onToggle={this.togglePanelExpanded}
         expanded={this.state.expanded}
       >
         <Panel.Toggle className="collapse-panel-toggle">
-          <Panel.Heading className="bg-green-color">
-            <Panel.Title className="collpase-panel-title" toggle>
+          <Panel.Heading className={this.props.headingStyle}>
+            <Panel.Title className="collapse-panel-title" toggle>
               {titleText}
               <i className="fa fa-chevron-down float-right" />
             </Panel.Title>
@@ -41,13 +47,15 @@ class CollapsePanel extends Component {
 }
 
 CollapsePanel.defaultProps = {
-  defaultExpanded: false
+  defaultExpanded: false,
+  headingStyle: 'bg-green-color'
 };
 
 CollapsePanel.propTypes = {
   titleText: PropTypes.string.isRequired,
   body: PropTypes.element.isRequired,
-  defaultExpanded: PropTypes.bool
+  defaultExpanded: PropTypes.bool,
+  headingStyle: PropTypes.string
 };
 
 export default CollapsePanel;

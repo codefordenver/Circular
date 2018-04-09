@@ -1,13 +1,14 @@
 @import '../base/colors';
 
 .collapse-panel {
+  margin-bottom: 2em;
   .collapse-panel-toggle {
     &:hover {
       color: inherit;
     }
   }
 
-  .collpase-panel-title {
+  .collapse-panel-title {
     font-size: 20px;
     a {
       color: $mainwhite;
