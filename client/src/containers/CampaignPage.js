@@ -44,10 +44,7 @@ class CampaignPage extends Component {
   };
 
   render() {
-    const {
-      activeCampaign: { loading, loaded, campaign },
-      initialSearch: { apartments }
-    } = this.props;
+    const { activeCampaign: { campaign }, initialSearch: { apartments } } = this.props;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
 
     return (
