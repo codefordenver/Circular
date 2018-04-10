@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
+import { logSignerOut } from '../redux/actions/signature';
 
 const UserIsLoggedIn = props => {
-  const { logSignerOut, auth: { name }, activeCampaign } = props;
+  const { logOutUser, auth: { name } } = props;
   const firstName = name.substr(0, name.indexOf(' '));
-  console.log(activeCampaign);
   return (
     <Navbar.Collapse>
       <Nav pullRight>
@@ -29,7 +28,7 @@ const UserIsLoggedIn = props => {
         <NavItem eventKey={4}>
           <Link to="">My Campaign</Link>
         </NavItem>
-        <NavItem eventKey={4} onClick={logSignerOut}>
+        <NavItem eventKey={4} onClick={logOutUser}>
           Sign Out, {firstName}
         </NavItem>
       </Nav>
@@ -96,10 +95,10 @@ const NavBar = props => {
 };
 
 UserIsLoggedIn.propTypes = {
-  logSignerOut: PropTypes.func.isRequired,
+  logOutUser: PropTypes.func.isRequired,
   auth: PropTypes.shape({
     name: PropTypes.string
-  })
+  }).isRequired
 };
 
 UserNavItem.propTypes = {
@@ -116,6 +115,5 @@ NavBar.propTypes = {
 };
 
 export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
-  addSignatureToCampaign,
   logSignerOut
 })(NavBar);
