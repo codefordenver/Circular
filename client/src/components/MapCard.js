@@ -8,6 +8,7 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 class MapCard extends Component {
   render() {
     const { apartments, campaignAddress } = this.props;
+    console.log(apartments);
     const MapWithAMarker = withRouter(
       withScriptjs(
         withGoogleMap(props => (
@@ -73,7 +74,7 @@ class MapCard extends Component {
 }
 
 MapCard.propTypes = {
-  apartments: PropTypes.arrayOf(PropTypes.string).isRequired,
+  apartments: PropTypes.arrayOf(PropTypes.object).isRequired,
   campaignAddress: PropTypes.string.isRequired
 };
 
