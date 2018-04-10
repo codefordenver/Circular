@@ -48,8 +48,8 @@ class CampaignPage extends Component {
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
 
     return (
-      <Grid className="">
-        <Row>
+      <Grid>
+        <Row className="full-height-side-bar">
           <Col md={9} xs={12} className="campaign-wrapper">
             <Row className="show-grid top">
               <Col md={6} xs={12} className="center-block">
