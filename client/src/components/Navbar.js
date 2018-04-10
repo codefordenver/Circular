@@ -14,7 +14,7 @@ const UserIsLoggedIn = props => {
         <NavItem eventKey={1}>
           <Link to="/denver-learn-more">Why</Link>
         </NavItem>
-        <NavDropdown id="tools-dropdown" eventKey={2} title="Tools" href="#">
+        <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
           <MenuItem eventKey={2.1}>
             <Link to="/manager-resources">Property Manager Resources</Link>
           </MenuItem>
@@ -43,7 +43,7 @@ function UserIsNotLoggedIn(props) {
         <NavItem eventKey={1}>
           <Link to="/denver-learn-more">Why</Link>
         </NavItem>
-        <NavDropdown id="tools-dropdown" eventKey={2} title="Tools" href="#">
+        <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
           <MenuItem eventKey={2.1}>
             <Link to="/manager-resources">Property Manager Resources</Link>
           </MenuItem>
@@ -54,7 +54,7 @@ function UserIsNotLoggedIn(props) {
         <NavItem eventKey={3}>
           <Link to="/who-are-we">Who Are We</Link>
         </NavItem>
-        <NavDropdown id="tools-dropdown" eventKey={4} title="Login" href="#">
+        <NavDropdown id="tools-dropdown" eventKey={4} title="Login">
           <MenuItem eventKey={4.1} href="/auth/facebook">
             Sign in With Facebook
           </MenuItem>
@@ -68,6 +68,7 @@ function UserIsNotLoggedIn(props) {
 }
 
 const UserNavItem = props => {
+  // checks if user is not currently authed with google or facebook
   if (props.auth && (!props.auth.googleID && !props.auth.facebookID)) {
     return <UserIsNotLoggedIn {...props} />;
   }
@@ -114,6 +115,6 @@ NavBar.propTypes = {
   }).isRequired
 };
 
-export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
+export default connect(({ auth }) => ({ auth }), {
   logSignerOut
 })(NavBar);
