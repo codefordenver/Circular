@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { logSignerOut } from '../redux/actions/signature';
 
 const UserIsLoggedIn = props => {
-  const { logOutUser, auth: { name } } = props;
+  const { auth: { name } } = props;
+  const logOutUser = props.logSignerOut;
   const firstName = name.substr(0, name.indexOf(' '));
   return (
     <Navbar.Collapse>
