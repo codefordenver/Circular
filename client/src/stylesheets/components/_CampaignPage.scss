@@ -1,42 +1,55 @@
-.campaign-page-name {
-  font-size: 1.5em;
-  color: white;
-  margin-left: 1.5rem;
+.full-height-side-bar {
+  display: flex;
+  @media #{$md-size} {
+    display: block;
+  }
 }
 
-.container {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.campaign-page-address {
-  font-size: 1em;
-  color: white;
-  margin-left: 1.5rem;
-}
-
-.btn,
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
-  box-shadow: 2px 2px 1px $shadow;
-}
-
-.body {
+.campaing-wrapper {
   margin: 0;
   padding: 0;
+
+  .campaign-page-name {
+    font-size: 1.5em;
+    color: white;
+    margin-left: 1.5rem;
+  }
+
+  .campaign-page-address {
+    font-size: 1em;
+    color: white;
+    margin-left: 1.5rem;
+    position: absolute;
+  }
+
+  .btn,
+  .btn:focus,
+  .btn:active:focus,
+  .btn.active:focus,
+  .btn.focus,
+  .btn:active.focus,
+  .btn.active.focus {
+    box-shadow: 2px 2px 1px $shadow;
+  }
+}
+
+.share-campaign-row {
+  border-top: 1px solid white;
+  padding-top: 5px;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+}
+
+.share-bar {
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .top {
-  margin-top: 3em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1em;
 }
 
 .side-bar {
@@ -46,7 +59,7 @@ row {
 
 .status-bar {
   .status h5 {
-    margin-bottom: o;
+    margin-bottom: 0;
   }
   .status p {
     font-size: 80%;
@@ -61,36 +74,6 @@ row {
     p {
       text-transform: uppercase;
     }
-  }
-}
-.map {
-  width: 375px;
-  height: 200px;
-  background-color: white;
-  margin-top: 2vh;
-  top: 10px;
-}
-
-.tools {
-  font-size: 14px;
-  & i {
-    color: $maingreen;
-    font-size: 8px;
-  }
-  & a:hover {
-    color: $maingreen;
-  }
-
-  a:focus {
-    color: $light-gray;
-  }
-}
-
-.toolList {
-  margin: 5px;
-
-  i {
-    margin-right: 5px;
   }
 }
 
@@ -156,7 +139,7 @@ row {
   color: $maingreen;
 }
 
-@media (max-width: 992px) {
+@media #{$md-size} {
   .address {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -176,11 +159,15 @@ row {
     margin: auto;
     width: 85%;
   }
+  .map-wrapper {
+    margin-left: 1em;
+    margin-rigth: 1em;
+  }
 
-  .share {
-    text-transform: uppercase;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  .top:first-child {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em;
   }
 
   .share-buttons {
@@ -193,25 +180,8 @@ row {
     margin-bottom: 10px;
   }
 
-  .tools {
-    font-size: 14px;
-    text-align: center;
-    margin-left: 8.3333333333%;
-    margin-bottom: 3em;
-    & i {
-      color: $maingreen;
-      font-size: 8px;
-    }
-  }
-
   .status {
     margin-top: 1.5em;
-  }
-
-  .status-bar {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 0.85em;
   }
 
   .status-child {

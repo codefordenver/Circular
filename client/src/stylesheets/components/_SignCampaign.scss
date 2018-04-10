@@ -12,6 +12,11 @@
   max-width: 300px;
 }
 
+.thanks-for-header {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 .form-title {
   color: $dark-blue;
   margin-top: 10px;
@@ -113,11 +118,10 @@
 }
 
 .sig-bar-collapse-panel {
-  margin-top: 3em;
+  margin-top: 2em;
   h2 {
     font-size: 150%;
     color: $dark-blue;
     padding: 10px;
   }
 }
-

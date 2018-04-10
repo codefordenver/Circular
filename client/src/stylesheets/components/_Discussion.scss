@@ -5,6 +5,9 @@
   // min-width: 400px;
   margin-left: auto;
   margin-right: auto;
+  color: $main-blue;
+  margin-bottom: 1rem;
+  padding-bottom: 1em;
 
   @media #{$information-phone} {
     width: 100%;
@@ -16,6 +19,11 @@
   .discussion-header {
     font-size: 22px;
     text-align: center;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    min-height: 2em;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
   }
 
   button {
@@ -26,35 +34,6 @@
     font-size: 12px;
     -webkit-appearance: none;
     outline: none;
-  }
-}
-
-.comment {
-  padding: 10px 10px 0 20px;
-  margin-top: 12px;
-  border-left: solid 2px #1a5a99;
-
-  @media #{$information-phone} {
-    padding: 8px 3px 0 6px;
-  }
-
-  .comment-options {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-
-    .reply-button {
-      text-align: left;
-      grid-column-start: 0;
-      padding: 8px 0 0 0;
-    }
-  }
-
-  .posted-message {
-    font-family: 'Inter UI', sans-serif;
-    margin: 10px 0 0 0;
-    line-height: 1.3;
-    white-space: pre-wrap;
-    overflow-x: hidden;
   }
 }
 
@@ -117,6 +96,7 @@
 
     .cancel-post {
       border-left: 2px solid $light-gray;
+      color: red;
     }
   }
 }
@@ -124,9 +104,4 @@
 .main-post-box {
   position: relative;
   margin-top: 10px;
-}
-
-.child-comment-post-box {
-  margin-top: 10px;
-  transition: all 0.2s ease-in-out;
 }

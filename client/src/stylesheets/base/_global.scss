@@ -48,6 +48,7 @@ input {
 }
 
 $information-phone: 'only screen and (max-width : 800px)';
+$md-size: 'only screen and (max-width : 992px)';
 
 .app-container {
   width: 100%;
@@ -60,6 +61,10 @@ $information-phone: 'only screen and (max-width : 800px)';
 
 .bg-green-color {
   background-color: $green-color;
+}
+
+.bg-blue-color {
+  background-color: $main-blue;
 }
 
 .float-right {
