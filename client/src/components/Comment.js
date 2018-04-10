@@ -15,28 +15,47 @@ class Comment extends Component {
 
   findTime() {
     const seconds = Math.floor((new Date() - new Date(this.props.dateAdded)) / 1000);
-    let interval = Math.floor(seconds / 31536000);
-
-    if (interval > 1) {
+    const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
+    const ONE_MONTH_IN_SECONDS = 30 * 24 * 60 * 60;
+    const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
+    const ONE_HOUR_IN_SECONDS = 60 * 60;
+    const ONE_MINUTE_IN_SECONDS = 60;
+    let interval = Math.floor(seconds / ONE_YEAR_IN_SECONDS); // one year in seconds
+    if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} year`;
+      }
       return `${interval} years`;
     }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
+    interval = Math.floor(seconds / ONE_MONTH_IN_SECONDS);
+    if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} month`;
+      }
       return `${interval} months`;
     }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
+    interval = Math.floor(seconds / ONE_DAY_IN_SECONDS);
+    if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} day`;
+      }
       return `${interval} days`;
     }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
+    interval = Math.floor(seconds / ONE_HOUR_IN_SECONDS);
+    if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} hour`;
+      }
       return `${interval} hours`;
     }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
+    interval = Math.floor(seconds / ONE_MINUTE_IN_SECONDS);
+    if (interval >= 1) {
+      if (interval === 1) {
+        return `${interval} minute`;
+      }
       return `${interval} minutes`;
     }
-    return `${Math.floor(seconds)} seconds`;
+    return 'Less than a minute ago';
   }
 
   handleCloseReply() {
@@ -50,9 +69,9 @@ class Comment extends Component {
   renderChildren() {
     const comments = this.props.passedChildren;
     return (
-      <div>
+      <div className="comments-box">
         {Object.keys(comments).map(u => (
-          <div key={comments[u]._id}>
+          <div key={comments[u]._id} className="comment-child">
             <Comment
               userName={comments[u].userName}
               message={comments[u].message}
@@ -71,8 +90,8 @@ class Comment extends Component {
   render() {
     return (
       <div className="comment">
-        <span style={{ fontWeight: 'bold' }}>{this.props.userName}</span>
-        <span style={{ fontSize: '12px' }}>&nbsp;&bull;&nbsp;{this.findTime()}</span>
+        <span className="comment-name">{this.props.userName}</span>
+        <span className="comment-time">&nbsp;&bull;&nbsp;{this.findTime()}</span>
         <p className="posted-message">{this.props.message}</p>
         {this.state.replyClicked === false &&
           this.props.authorized && (

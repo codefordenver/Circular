@@ -6,7 +6,7 @@ class CollapsePanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: this.props.defaultExpanded
+      expanded: props.defaultExpanded
     };
   }
 
@@ -19,36 +19,46 @@ class CollapsePanel extends Component {
   render() {
     const { body, titleText } = this.props;
     return (
-      <Panel
-        bsStyle="remove-default"
-        className="collapse-panel"
-        onClick={this.togglePanelExpanded}
-        expanded={this.state.expanded}
-      >
-        <Panel.Toggle className="collapse-panel-toggle">
-          <Panel.Heading className="bg-green-color">
-            <Panel.Title className="collpase-panel-title" toggle>
-              {titleText}
-              <i className="fa fa-chevron-down float-right" />
-            </Panel.Title>
-          </Panel.Heading>
-        </Panel.Toggle>
-        <Panel.Collapse>
-          <Panel.Body className="text-black ">{body}</Panel.Body>
-        </Panel.Collapse>
-      </Panel>
+      /* eslint-disable */
+      <div onClick={this.togglePanelExpanded}>
+        {/* eslint-enable */}
+        <Panel
+          /*
+          bsStyle="remove-default" causes an console error but it
+          is the correct way to remove react-bootstrap defaults.
+          the console error is react-bootstraps fault.
+        */
+          bsStyle="remove-default"
+          className="collapse-panel"
+          expanded={this.state.expanded}
+        >
+          <Panel.Toggle className="collapse-panel-toggle">
+            <Panel.Heading className={this.props.headingStyle}>
+              <Panel.Title className="collapse-panel-title" toggle>
+                {titleText}
+                <i className="fa fa-chevron-down float-right" />
+              </Panel.Title>
+            </Panel.Heading>
+          </Panel.Toggle>
+          <Panel.Collapse>
+            <Panel.Body className="text-black ">{body}</Panel.Body>
+          </Panel.Collapse>
+        </Panel>
+      </div>
     );
   }
 }
 
 CollapsePanel.defaultProps = {
-  defaultExpanded: false
+  defaultExpanded: false,
+  headingStyle: 'bg-green-color'
 };
 
 CollapsePanel.propTypes = {
   titleText: PropTypes.string.isRequired,
   body: PropTypes.element.isRequired,
-  defaultExpanded: PropTypes.bool
+  defaultExpanded: PropTypes.bool,
+  headingStyle: PropTypes.string
 };
 
 export default CollapsePanel;

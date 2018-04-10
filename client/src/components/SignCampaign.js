@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import GoogleButton from 'react-google-button';
 import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import Checkbox from './SignatureCheckbox';
+import ToolList from './ToolList';
 import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
 
 class SignCampaign extends Component {
@@ -39,12 +40,14 @@ class SignCampaign extends Component {
   };
 
   createCheckbox = label => (
-    <FormGroup key={label}>
-      <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} number="1" />
+    <FormGroup key={label} className="text-center">
+      <h4>
+        <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} number="1" />
+      </h4>
     </FormGroup>
   );
   createCheckboxes = () => {
-    const checkboxes = ['Keep me updated on the status of this request'];
+    const checkboxes = ['Keep me updated on this campaign'];
     if (this.props.auth._id) {
       return checkboxes.map(label => this.createCheckbox(label));
     }
@@ -71,23 +74,33 @@ class SignCampaign extends Component {
         </Row>
       );
     }
-    // User is signed in and has signed campaign
+    // User is signed in AND has signed campaign
     const userHasSignedCampaign =
       this.props.auth &&
       this.props.signatureObj.signatures &&
       this.props.signatureObj.signatures.some(name => name.id === this.props.auth._id);
     if (userHasSignedCampaign) {
       return (
-        <Row>
-          <Col md={12}>
-            <h4>Welcome to the campaign!</h4>
-            <h4>Thanks for signing!</h4>
-          </Col>
-          <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-            Sign Out
-            <i className="fa fa-sign-out" />
-          </Button>
-        </Row>
+        <div>
+          <Row>
+            <Col md={12}>
+              <div className="text-center thanks-for-header">
+                <h4>Thanks for Signing</h4>
+              </div>
+            </Col>
+          </Row>
+          <ToolList />
+          <Row>
+            <Col md={12}>
+              <div className="text-center">
+                <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+                  Sign Out
+                  <i className="fa fa-sign-out" />
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </div>
       );
     }
     // User is signed in but hasn't signed campaign
@@ -114,15 +127,15 @@ class SignCampaign extends Component {
                 >
                   Sign the petition
                 </Button>
-                <h5 className="content text-center">OR</h5>
               </div>
+              <h5 className="content remove-margin text-center">OR</h5>
             </FormGroup>
+            <Button className="logout-button-signature" onClick={this.handleSignOut} block>
+              Sign Out
+              <i className="fa fa-sign-out" />
+            </Button>
           </form>
         </Col>
-        <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-          Sign Out
-          <i className="fa fa-sign-out" />
-        </Button>
       </Row>
     );
   };
@@ -135,9 +148,7 @@ class SignCampaign extends Component {
           </div>
           <div className="side-wrap">
             <Row>
-              <Col md={10} mdOffset={1}>
-                {this.checkSignIn()}
-              </Col>
+              <Col md={12}>{this.checkSignIn()}</Col>
             </Row>
           </div>
         </Col>

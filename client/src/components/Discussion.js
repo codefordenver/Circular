@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
 import PostBox from './PostBox';
@@ -10,7 +9,6 @@ class Discussion extends Component {
   constructor(props) {
     super(props);
     this.state = { error: false };
-
     this.comments = this.props.comments;
   }
 
@@ -74,8 +72,8 @@ class Discussion extends Component {
     return (
       <div className="discussion">
         <div className="discussion-header">COMMENTS</div>
-        {this.renderMainPostBox()}
-        {this.renderComments()}
+        <div className="comment-box">{this.renderComments()}</div>
+        <div>{this.renderMainPostBox()}</div>
       </div>
     );
   }
@@ -100,5 +98,8 @@ Discussion.propTypes = {
 
 export default connect(
   ({ activeCampaign, auth, comments }) => ({ activeCampaign, auth, comments }),
-  { fetchComments, postComment }
+  {
+    fetchComments,
+    postComment
+  }
 )(Discussion);
