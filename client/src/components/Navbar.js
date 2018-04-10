@@ -97,7 +97,7 @@ const NavBar = props => {
 };
 
 UserIsLoggedIn.propTypes = {
-  logOutUser: PropTypes.func.isRequired,
+  logSignerOut: PropTypes.func.isRequired,
   auth: PropTypes.shape({
     name: PropTypes.string
   }).isRequired
