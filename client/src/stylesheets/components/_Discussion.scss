@@ -9,6 +9,16 @@
   margin-bottom: 1rem;
   padding-bottom: 1em;
 
+  .main-post-box {
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .login-post-box.well {
+    margin-top: 1.5em;
+    margin-bottom: 0;
+  }
+
   @media #{$information-phone} {
     width: 100%;
     padding: 10px 15px 5px;
@@ -99,9 +109,4 @@
       color: red;
     }
   }
-}
-
-.main-post-box {
-  position: relative;
-  margin-top: 10px;
 }
