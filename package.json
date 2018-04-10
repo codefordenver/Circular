@@ -8,7 +8,7 @@
     "yarn": ">=1.2"
   },
   "scripts": {
-    "start": "node backend/index.js",
+    "start": "node --inspect backend/index.js",
     "server": "nodemon backend/index.js",
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",

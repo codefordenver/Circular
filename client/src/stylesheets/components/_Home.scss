@@ -10,6 +10,20 @@
   padding-bottom: 7px;
 }
 
+.home-section-footer {
+  font-size: 7px;
+  padding-bottom: 7px;
+}
+
+.home-section-page-footer {
+  color: $mainwhite;
+  border-bottom: none;
+  margin-bottom: 5px;
+  h1 {
+    font-size: 10px;
+  }
+}
+
 .home-section-page-header {
   color: $mainwhite;
   border-bottom: none;
