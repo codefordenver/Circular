@@ -61,14 +61,6 @@ class Discussion extends Component {
     return <div />;
   }
 
-  renderError() {
-    return (
-      <Well className="error-message">
-        {this.state.error ? 'You must be logged in to post!' : null}
-      </Well>
-    );
-  }
-
   render() {
     return (
       <div className="discussion">
