@@ -6,6 +6,7 @@ import HeroCTA from '../components/HeroCTA';
 import ApartmentMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
 import InfoAndLinks from '../components/InfoAndLinks';
+import Footer from '../components/Footer';
 
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import { openMap, closeMap } from '../redux/actions/googleMap';
@@ -25,6 +26,7 @@ class Home extends Component {
           <StepByStep />
           <InfoAndLinks />
         </Grid>
+        <Footer />
       </div>
     );
   }

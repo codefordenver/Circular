@@ -1,0 +1,18 @@
+@import '../base/colors';
+
+.footer-container {
+  background-color: $secondary-color;
+  padding-top: 2em;
+  padding-bottom: 1em;
+  font-size: 12px;
+}
+
+.footer-link {
+  display: inline-block;
+  color: $light-gray;
+  padding-top: 1em;
+  &:hover {
+    color: $mainwhite;
+    text-decoration: none;
+  }
+}

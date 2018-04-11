@@ -1,4 +1,4 @@
-@import "../base/colors";
+@import '../base/colors';
 
 .home-section-title {
   margin-top: 10px;
@@ -28,4 +28,8 @@
     color: $mainwhite;
     text-decoration: none;
   }
+}
+
+.home-section-container {
+  padding-bottom: 2em;
 }
