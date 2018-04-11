@@ -14,7 +14,7 @@ export function removeSignature(signatureId) {
   };
 }
 
-export default function fetchCampaignSignatures(campaignId) {
+export function fetchCampaignSignatures(campaignId) {
   return {
     type: 'FETCH_CAMPAIGN_SIGNATURES',
     promise: createApiRequest(`api/signatures/campaigns/${campaignId}`, 'GET')

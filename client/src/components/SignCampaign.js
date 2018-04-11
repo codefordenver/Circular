@@ -80,7 +80,6 @@ class SignCampaign extends Component {
       this.props.activeCampaign.campaign &&
       this.props.activeCampaign.campaign._id;
 
-    console.log(this.props.auth._id);
     const signedIn = this.props.auth && (this.props.auth.googleID || this.props.auth.facebookID);
     const userHasSignedThisCampaign =
       campaignId && this.props.userSignatures._campaignID === campaignId;
