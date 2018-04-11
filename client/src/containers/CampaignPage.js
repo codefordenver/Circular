@@ -154,7 +154,7 @@ class CampaignPage extends Component {
             </Row>
           </Col>
           <Col md={3} xs={12} className="side-bar">
-            <SignCampaign signatureObj={this.props.signature} />
+            <SignCampaign />
             <div className="text-center sig-bar-collapse-panel">
               <CollapsePanel
                 defaultExpanded

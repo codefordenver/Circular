@@ -75,11 +75,24 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
+    const campaignId =
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
+
+    console.log(this.props.auth._id);
+    const signedIn = this.props.auth && (this.props.auth.googleID || this.props.auth.facebookID);
+    const userHasSignedThisCampaign =
+      campaignId && this.props.userSignatures._campaignID === campaignId;
+    const userHasSignedOtherCampaign =
+      !!this.props.userSignatures._id && !userHasSignedThisCampaign;
+    const userHasNotSignedAnyCampaign = !this.props.userSignatures._id;
+
     // user is not signed in
-    if (this.props.auth && (!this.props.auth.googleID && !this.props.auth.facebookID)) {
-      return (
-        <Row>
-          <Col md={12}>
+    const renderSignIn = (
+      <div>
+        {!signedIn && (
+          <div>
             <h4>Sign In With:</h4>
             <a className="login-button-signature" href="/auth/facebook">
               <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
@@ -90,108 +103,110 @@ class SignCampaign extends Component {
             <a className="login-button-signature" href="/auth/google">
               <GoogleButton className="btn-google btn-login" />
             </a>
-          </Col>
-        </Row>
-      );
-    }
-    // User is signed in AND has signed campaign
-    const userHasSignedCampaign =
-      this.props.auth &&
-      this.props.signatureObj.signatures &&
-      this.props.signatureObj.signatures.some(name => name.id === this.props.auth._id);
-    if (userHasSignedCampaign) {
-      return (
-        <div>
-          <Row>
-            <Col md={12}>
-              <form onSubmit={this.handleRemoveSignature}>{this.renderSignButton()}</form>
-            </Col>
-          </Row>
-          <ToolList />
-          <Row>
-            <Col md={12}>
-              <div className="text-center">
-                <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-                  Sign Out
-                  <i className="fa fa-sign-out" />
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      );
-    }
-    // User is signed in but hasn't signed campaign
-    return (
-      <Row>
-        <Col md={12}>
-          <form onSubmit={this.handleSignCampaign}>
-            <FormGroup controlId="signingBecause">
-              <ControlLabel id="control-label">
-                <h4>I'm signing because...</h4>
-              </ControlLabel>
-              <FormControl
-                className="form-resize-vertical"
-                componentClass="textarea"
-                placeholder="Optional"
-              />
-              {this.createCheckboxes()}
-              {this.renderSignButton()}
-              <h5 className="content remove-margin text-center">OR</h5>
-            </FormGroup>
+          </div>
+        )}
+      </div>
+    );
+
+    const renderSignCampaignPrompt = (
+      <div>
+        {signedIn &&
+          userHasNotSignedAnyCampaign && (
+            <form onSubmit={this.handleSignCampaign}>
+              <FormGroup controlId="signingBecause">
+                <ControlLabel id="control-label">
+                  <h4>I'm signing because...</h4>
+                </ControlLabel>
+                <FormControl
+                  className="form-resize-vertical"
+                  componentClass="textarea"
+                  placeholder="Optional"
+                />
+                {this.createCheckboxes()}
+                <div className="sign-campaign-actions">
+                  <Button
+                    className="remove-default sign-petition-button"
+                    value="submit"
+                    type="submit"
+                    block
+                  >
+                    Sign the petition
+                  </Button>
+                </div>
+                <h5 className="content remove-margin text-center">OR</h5>
+              </FormGroup>
+            </form>
+          )}
+      </div>
+    );
+
+    const renderRemoveSignaturePrompt = (
+      <div>
+        {signedIn &&
+          userHasSignedThisCampaign && (
+            <div>
+              <form onSubmit={this.handleRemoveSignature}>
+                <div className="sign-campaign-actions">
+                  <div className="text-center thanks-for-header">
+                    <h4>Thanks for Signing</h4>
+                  </div>
+                  <Button
+                    className="remove-default sign-petition-button"
+                    value="submit"
+                    type="submit"
+                    block
+                  >
+                    Remove signature from the petition
+                  </Button>
+                </div>
+              </form>
+              <ToolList />
+            </div>
+          )}
+      </div>
+    );
+
+    const renderUserHasSignedOtherCampaignPrompt = (
+      <div>
+        {userHasSignedOtherCampaign && (
+          <div>
+            <div className="sign-campaign-actions">
+              <p>
+                You have already signed a separate campaign. Go to
+                <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>
+                  signed campaign
+                </Link>
+              </p>
+            </div>
+            <ToolList />
+          </div>
+        )}
+      </div>
+    );
+
+    const renderSignOut = (
+      <div>
+        {signedIn && (
+          <div className="text-center">
             <Button className="logout-button-signature" onClick={this.handleSignOut} block>
               Sign Out
               <i className="fa fa-sign-out" />
             </Button>
-          </form>
-        </Col>
-      </Row>
-    );
-  };
-
-  renderSignButton = () => {
-    const campaignId =
-      this.props.activeCampaign &&
-      this.props.activeCampaign.campaign &&
-      this.props.activeCampaign.campaign._id;
-
-    if (!this.props.userSignatures._campaignID) {
-      return (
-        <div className="sign-campaign-actions">
-          <Button
-            className="remove-default sign-petition-button"
-            value="submit"
-            type="submit"
-            block
-          >
-            Sign the petition
-          </Button>
-        </div>
-      );
-    } else if (campaignId && this.props.userSignatures._campaignID === campaignId) {
-      return (
-        <div className="sign-campaign-actions">
-          <div className="text-center thanks-for-header">
-            <h4>Thanks for Signing</h4>
           </div>
-          <Button
-            className="remove-default sign-petition-button"
-            value="submit"
-            type="submit"
-            block
-          >
-            Remove signature from the petition
-          </Button>
-        </div>
-      );
-    }
-
+        )}
+      </div>
+    );
     return (
-      <div className="sign-campaign-actions">
-        <p>
-          You have already signed a separate campaign. Go to
-          <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>signed campaign</Link>
-        </p>
+      <div>
+        <Row>
+          <Col md={12}>
+            {renderSignIn}
+            {renderUserHasSignedOtherCampaignPrompt}
+            {renderRemoveSignaturePrompt}
+            {renderSignCampaignPrompt}
+            {renderSignOut}
+          </Col>
+        </Row>
       </div>
     );
   };
@@ -215,18 +230,11 @@ class SignCampaign extends Component {
 }
 
 SignCampaign.defaultProps = {
-  signatureObj: { signatures: [] },
   auth: {},
   userSignatures: {}
 };
 
 SignCampaign.propTypes = {
-  signatureObj: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    signatures: PropTypes.arrayOf(PropTypes.object),
-    error: PropTypes.objectOf(PropTypes.any)
-  }).isRequired,
   userSignatures: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     _userID: PropTypes.string.isRequired,
