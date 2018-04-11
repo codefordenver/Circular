@@ -31,27 +31,30 @@ module.exports = app => {
   app.post('/api/signatures', async (req, res) => {
     const { user_id, campaign_id, keepUpdated } = req.body;
 
+    // TODO - validate user has not already signed a camapgin
+    /*
     const currentSignature = await Signature.findOne({
       _userID: user_id,
       _campaignID: campaign_id
     });
 
     if (currentSignature._id) {
-      res.status(422).send('user can only sign one campaign');
+      res.status(422).send({ data: 'user can only sign one campaign' });
     } else {
-      try {
-        const signature = new Signature({
-          _userID: user_id,
-          _campaignID: campaign_id,
-          _keepUpdated: keepUpdated
-        });
-        const data = await signature.save();
+      */
+    try {
+      const signature = new Signature({
+        _userID: user_id,
+        _campaignID: campaign_id,
+        _keepUpdated: keepUpdated
+      });
+      const data = await signature.save();
 
-        res.send(data);
-      } catch (err) {
-        res.status(422).send(err);
-      }
+      res.send(data);
+    } catch (err) {
+      res.status(422).send(err);
     }
+    //}
   });
 
   app.delete('/api/signatures/:sigId', async (req, res) => {
