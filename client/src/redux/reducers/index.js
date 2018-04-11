@@ -9,7 +9,6 @@ import newCampaign from './newCampaign';
 import signature from './signature';
 import comments from './comments';
 import wasteProvider from './wasteProvider';
-import user from './user';
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -20,7 +19,6 @@ const reducers = combineReducers({
   activeCampaign,
   comments,
   signature,
-  user,
   wasteProvider
 });
 

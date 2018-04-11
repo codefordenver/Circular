@@ -33,7 +33,7 @@ const NavBar = props => {
             </MenuItem>
           </NavDropdown>
           <NavItem eventKey={3}>
-            <Link to="/my-campaign">My Campaign</Link>
+            <Link to="">My Campaign</Link>
           </NavItem>
           <NavItem eventKey={4}>
             <Link to="/who-are-we">Who Are We</Link>
