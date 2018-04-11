@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import GoogleButton from 'react-google-button';
 import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import Checkbox from './SignatureCheckbox';
 import ToolList from './ToolList';
-import { addSignatureToCampaign, logSignerOut } from '../redux/actions/signature';
+import {
+  addSignatureToCampaign,
+  removeSignatureFromCampaign,
+  fetchUserSignatures,
+  logSignerOut
+} from '../redux/actions/signature';
 
 class SignCampaign extends Component {
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (this.props.auth._id !== nextProps.auth._id) {
+      this.props.fetchUserSignatures(nextProps.auth._id);
+    }
   };
 
   toggleCheckbox = label => {
@@ -24,7 +36,7 @@ class SignCampaign extends Component {
     this.props.logSignerOut();
   };
 
-  handleFormSubmit = async formSubmitEvent => {
+  handleSignCampaign = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
     const campaignId =
@@ -37,6 +49,14 @@ class SignCampaign extends Component {
       this.selectedCheckboxes,
       campaignId
     );
+  };
+
+  handleRemoveSignature = async formSubmitEvent => {
+    formSubmitEvent.preventDefault();
+
+    const { _userID, _campaignID, _id } = this.props.userSignatures;
+
+    await this.props.removeSignatureFromCampaign(_userID, _campaignID, _id);
   };
 
   createCheckbox = label => (
@@ -84,9 +104,7 @@ class SignCampaign extends Component {
         <div>
           <Row>
             <Col md={12}>
-              <div className="text-center thanks-for-header">
-                <h4>Thanks for Signing</h4>
-              </div>
+              <form onSubmit={this.handleRemoveSignature}>{this.renderSignButton()}</form>
             </Col>
           </Row>
           <ToolList />
@@ -107,7 +125,7 @@ class SignCampaign extends Component {
     return (
       <Row>
         <Col md={12}>
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={this.handleSignCampaign}>
             <FormGroup controlId="signingBecause">
               <ControlLabel id="control-label">
                 <h4>I'm signing because...</h4>
@@ -118,16 +136,7 @@ class SignCampaign extends Component {
                 placeholder="Optional"
               />
               {this.createCheckboxes()}
-              <div className="sign-campaign-actions">
-                <Button
-                  className="remove-default sign-petition-button"
-                  value="submit"
-                  type="submit"
-                  block
-                >
-                  Sign the petition
-                </Button>
-              </div>
+              {this.renderSignButton()}
               <h5 className="content remove-margin text-center">OR</h5>
             </FormGroup>
             <Button className="logout-button-signature" onClick={this.handleSignOut} block>
@@ -139,6 +148,54 @@ class SignCampaign extends Component {
       </Row>
     );
   };
+
+  renderSignButton = () => {
+    const campaignId =
+      this.props.activeCampaign &&
+      this.props.activeCampaign.campaign &&
+      this.props.activeCampaign.campaign._id;
+
+    if (!this.props.userSignatures._campaignID) {
+      return (
+        <div className="sign-campaign-actions">
+          <Button
+            className="remove-default sign-petition-button"
+            value="submit"
+            type="submit"
+            block
+          >
+            Sign the petition
+          </Button>
+        </div>
+      );
+    } else if (campaignId && this.props.userSignatures._campaignID === campaignId) {
+      return (
+        <div className="sign-campaign-actions">
+          <div className="text-center thanks-for-header">
+            <h4>Thanks for Signing</h4>
+          </div>
+          <Button
+            className="remove-default sign-petition-button"
+            value="submit"
+            type="submit"
+            block
+          >
+            Remove signature from the petition
+          </Button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="sign-campaign-actions">
+        <p>
+          You have already signed a separate campaign. Go to
+          <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>signed campaign</Link>
+        </p>
+      </div>
+    );
+  };
+
   render() {
     return (
       <Row className="show-grid">
@@ -159,7 +216,8 @@ class SignCampaign extends Component {
 
 SignCampaign.defaultProps = {
   signatureObj: { signatures: [] },
-  auth: {}
+  auth: {},
+  userSignatures: {}
 };
 
 SignCampaign.propTypes = {
@@ -169,6 +227,11 @@ SignCampaign.propTypes = {
     signatures: PropTypes.arrayOf(PropTypes.object),
     error: PropTypes.objectOf(PropTypes.any)
   }).isRequired,
+  userSignatures: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    _userID: PropTypes.string.isRequired,
+    _campaignID: PropTypes.string.isRequired
+  }),
   auth: PropTypes.shape({
     _id: PropTypes.string,
     googleID: PropTypes.string,
@@ -184,10 +247,22 @@ SignCampaign.propTypes = {
     loaded: PropTypes.bool
   }).isRequired,
   addSignatureToCampaign: PropTypes.func.isRequired,
+  removeSignatureFromCampaign: PropTypes.func.isRequired,
+  fetchUserSignatures: PropTypes.func.isRequired,
   logSignerOut: PropTypes.func.isRequired
 };
 
-export default connect(({ auth, activeCampaign }) => ({ auth, activeCampaign }), {
+const mapStateToProps = state => ({
+  auth: state.auth,
+  userSignatures: {
+    ...state.signature.userSignatures
+  },
+  activeCampaign: state.activeCampaign
+});
+
+export default connect(mapStateToProps, {
   addSignatureToCampaign,
+  removeSignatureFromCampaign,
+  fetchUserSignatures,
   logSignerOut
 })(SignCampaign);

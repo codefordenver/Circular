@@ -22,10 +22,8 @@ module.exports = app => {
     );
   });
 
-  app.get('/api/signatures/user/:userId', async (req, res) => {
-    const signature = await Signature.findOne({ _userID: req.params.userId })
-      .populate('_userID', 'name _id')
-      .populate('_campaignID', 'name _id');
+  app.get('/api/signatures/users/:userId', async (req, res) => {
+    const signature = await Signature.findOne({ _userID: req.params.userId });
 
     res.send(signature);
   });

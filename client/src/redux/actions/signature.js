@@ -35,13 +35,15 @@ export function addSignatureToCampaign(userId, checkboxes, campaignId) {
   return async dispatch => {
     await dispatch(addsignature(data));
     dispatch(fetchCampaignSignatures(campaignId));
+    dispatch(fetchUserSignatures(userId));
   };
 }
 
-export function removeSignatureFromCampaign(campaignId, signatureId) {
+export function removeSignatureFromCampaign(userId, campaignId, signatureId) {
   return async dispatch => {
     await dispatch(removeSignature(signatureId));
     dispatch(fetchCampaignSignatures(campaignId));
+    dispatch(fetchUserSignatures(userId));
   };
 }
 

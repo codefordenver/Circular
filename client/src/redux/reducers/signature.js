@@ -64,8 +64,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         loading: true,
-        loaded: false,
-        error: null
+        loaded: false
       };
     case FETCH_CAMPAIGN_SIGNATURES_SUCCESS:
       return {
@@ -85,15 +84,14 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         loading: true,
-        loaded: false,
-        error: null
+        loaded: false
       };
     case FETCH_USER_SIGNATURES_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        signatures: response.data
+        userSignatures: response.data
       };
     case FETCH_USER_SIGNATURES_FAILURE:
       return {

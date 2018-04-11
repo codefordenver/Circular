@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
-import fetchSignatures from '../redux/actions/signature';
+import fetchCampaignSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
@@ -20,14 +20,14 @@ const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
-    this.props.fetchSignatures(this.props.params.id);
+    this.props.fetchCampaignSignatures(this.props.params.id);
     this.props.fetchApartmentsRequest();
   }
 
   componentWillUpdate(nextProps, nextState) {
     if (this.props.params.id !== nextProps.params.id) {
       nextProps.fetchCampaignById(nextProps.params.id);
-      nextProps.fetchSignatures(nextProps.params.id);
+      nextProps.fetchCampaignSignatures(nextProps.params.id);
     }
   }
 
@@ -185,7 +185,7 @@ CampaignPage.propTypes = {
     loaded: PropTypes.bool
   }).isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
-  fetchSignatures: PropTypes.func.isRequired,
+  fetchCampaignSignatures: PropTypes.func.isRequired,
   fetchApartmentsRequest: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
@@ -206,7 +206,7 @@ export default connect(
   }),
   {
     fetchCampaignById,
-    fetchSignatures,
+    fetchCampaignSignatures,
     fetchApartmentsRequest
   }
 )(withRouter(CampaignPage));
