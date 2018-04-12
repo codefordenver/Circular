@@ -133,7 +133,6 @@ class SignCampaign extends Component {
                     Sign the petition
                   </Button>
                 </div>
-                <h5 className="content remove-margin text-center">OR</h5>
               </FormGroup>
             </form>
           )}
