@@ -160,21 +160,22 @@ class SignCampaign extends Component {
     // user is signed in && is currently on a page different from their signed campaign page
     const renderUserHasSignedOtherCampaignPrompt = (
       <div className="user-has-signed-other-campaign-alert">
-        {userHasSignedOtherCampaign && (
-          <Alert bsStyle="warning" onDismiss={this.handleDismiss}>
-            <h4>You can only sign one campaign at a time.</h4>
-            <p>Looks like you have already signed a campaign, you little overachiever you.</p>
-            <Button
-              bsStyle="remove-default"
-              className="user-has-signed-other-campaign-button"
-              block
-            >
-              <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>
-                Go To My Campaign
-              </Link>
-            </Button>
-          </Alert>
-        )}
+        {this.props.activeCampaign.loaded &&
+          userHasSignedOtherCampaign && (
+            <Alert bsStyle="warning" onDismiss={this.handleDismiss}>
+              <h4>You can only sign one campaign at a time.</h4>
+              <p>Looks like you have already signed a campaign, you little overachiever you.</p>
+              <Button
+                bsStyle="remove-default"
+                className="user-has-signed-other-campaign-button"
+                block
+              >
+                <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>
+                  Go To My Campaign
+                </Link>
+              </Button>
+            </Alert>
+          )}
       </div>
     );
 
