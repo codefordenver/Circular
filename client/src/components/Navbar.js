@@ -7,14 +7,8 @@ import { logSignerOut } from '../redux/actions/signature';
 
 // RENDERS MyCampaignNavItem BASED ON AUTH STATUS
 function MyCampaignNavItem(props) {
-  const showMyCampaignNavItem = props.showMyCampaignNavItem;
-  if (!showMyCampaignNavItem) {
-    // if not logged it, don't render MyCampaignNavItem
-    return null;
-  }
-  // ** FUTURE LOGIC FOR IF SIGNED IN BUT HASN'T SIGNED A CAMPAIGN GOES HERE **
   return (
-    // if logged in, show MyCampaign
+    // if logged in and signed a campaign, show MyCampaign
     <NavItem eventKey={4}>
       <Link to="">My Campaign</Link>
     </NavItem>
@@ -27,11 +21,11 @@ function UserAuthNav(props) {
   if (props.auth && (!props.auth.googleID && !props.auth.facebookID)) {
     return (
       // if not logged in > show sign in options
-      <NavDropdown id="tools-dropdown" eventKey={4} title="Login">
-        <MenuItem eventKey={4.1} href="/auth/facebook">
+      <NavDropdown id="tools-dropdown" eventKey={5} title="Login">
+        <MenuItem eventKey={5.1} href="/auth/facebook">
           Sign in With Facebook
         </MenuItem>
-        <MenuItem eventKey={4.2} href="/auth/google">
+        <MenuItem eventKey={5.2} href="/auth/google">
           Sign in With Google
         </MenuItem>
       </NavDropdown>
@@ -42,20 +36,17 @@ function UserAuthNav(props) {
   const logOutUser = props.logOutUser;
   // if logged in > show sign out options
   return (
-    <NavItem eventKey={4} onClick={logOutUser}>
+    <NavItem eventKey={5} onClick={logOutUser}>
       Sign Out, {firstName}
     </NavItem>
   );
 }
 
 const NavBar = props => {
-  const showMyCampaignNavItem = props.auth && (!!props.auth.googleID || !!props.auth.facebookID);
+  // used "!!" to prevent undefined. In brief !undefined = true > !true = false
+  const userIsLoggedIn = props.auth && (!!props.auth.googleID || !!props.auth.facebookID);
   let homeText;
-  if (props.location.pathname === '/') {
-    homeText = 'RE:IMAGINE DENVER';
-  } else {
-    homeText = 'HOME';
-  }
+  props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
   return (
     <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>
@@ -80,8 +71,7 @@ const NavBar = props => {
           <NavItem eventKey={3}>
             <Link to="/who-are-we">Who Are We</Link>
           </NavItem>
-          {/* Conditional Render Based on Auth Status */}
-          <MyCampaignNavItem showMyCampaignNavItem={showMyCampaignNavItem} />
+          {userIsLoggedIn && <MyCampaignNavItem />}
           {/* UserAuthNav (Login/Logout) */}
           <UserAuthNav auth={props.auth} logOutUser={props.logSignerOut} />
         </Nav>
@@ -97,10 +87,6 @@ UserAuthNav.propTypes = {
     googleID: PropTypes.string,
     facebookID: PropTypes.string
   }).isRequired
-};
-
-MyCampaignNavItem.propTypes = {
-  showMyCampaignNavItem: PropTypes.bool.isRequired
 };
 
 NavBar.propTypes = {
