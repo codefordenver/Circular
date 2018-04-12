@@ -5,10 +5,8 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logSignerOut } from '../redux/actions/signature';
 
-// RENDERS MyCampaignNavItem BASED ON AUTH STATUS
 function MyCampaignNavItem(props) {
   return (
-    // if logged in and signed a campaign, show MyCampaign
     <NavItem eventKey={4}>
       <Link to="">My Campaign</Link>
     </NavItem>
@@ -43,7 +41,8 @@ function UserAuthNav(props) {
 }
 
 const NavBar = props => {
-  // used "!!" to prevent undefined. In brief !undefined = true > !true = false
+  // used "!!" to cast variable to boolean. Used to avoid the behavior of undefined in
+  // conditional logic. In brief !undefined = true > !true = false
   const userIsLoggedIn = props.auth && (!!props.auth.googleID || !!props.auth.facebookID);
   let homeText;
   props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
@@ -71,6 +70,7 @@ const NavBar = props => {
           <NavItem eventKey={3}>
             <Link to="/who-are-we">Who Are We</Link>
           </NavItem>
+          {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
           {userIsLoggedIn && <MyCampaignNavItem />}
           {/* UserAuthNav (Login/Logout) */}
           <UserAuthNav auth={props.auth} logOutUser={props.logSignerOut} />
