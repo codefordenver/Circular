@@ -162,11 +162,8 @@ class SignCampaign extends Component {
       <div className="user-has-signed-other-campaign-alert">
         {userHasSignedOtherCampaign && (
           <Alert bsStyle="warning" onDismiss={this.handleDismiss}>
-            <h4>Oh snap!</h4>
-            <p>
-              Looks like you have already signed a campaign, you little overachiever you. You can
-              only sign one campaign at a time.
-            </p>
+            <h4>You can only sign one campaign at a time.</h4>
+            <p>Looks like you have already signed a campaign, you little overachiever you.</p>
             <Button
               bsStyle="remove-default"
               className="user-has-signed-other-campaign-button"

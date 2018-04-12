@@ -50,7 +50,7 @@ export default function (state = defaultState, action) {
     case REMOVE_SIGNATURE_FROM_CAMPAIGN_SUCCESS:
       return {
         ...state,
-        laoding: false,
+        loading: false,
         loaded: true
       };
     case REMOVE_SIGNATURE_FROM_CAMPAIGN_FAILURE:

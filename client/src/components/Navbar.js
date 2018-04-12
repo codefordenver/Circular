@@ -42,8 +42,8 @@ function UserAuthNav(props) {
 
 class NavBar extends React.Component {
   componentWillReceiveProps = nextProps => {
-    if (this.props.auth._id !== nextProps.auth._id) {
-      this.props.fetchUserSignatures(nextProps.auth._id);
+    if (this.props.auth._userID !== nextProps.auth._userID) {
+      this.props.fetchUserSignatures(nextProps.auth._userID);
     }
   };
 
@@ -109,7 +109,7 @@ UserAuthNav.propTypes = {
 NavBar.propTypes = {
   logSignerOut: PropTypes.func.isRequired,
   auth: PropTypes.shape({
-    _id: PropTypes.string,
+    _userID: PropTypes.string,
     name: PropTypes.string,
     googleID: PropTypes.string,
     facebookID: PropTypes.string
@@ -124,7 +124,12 @@ NavBar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  auth: {
+    _userID: state.auth._id,
+    name: state.auth.name,
+    googleID: state.auth.googleID,
+    facebookID: state.auth.facebookID
+  },
   userSignatures: {
     ...state.signature.userSignatures
   }
