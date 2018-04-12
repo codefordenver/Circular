@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logSignerOut } from '../redux/actions/signature';
+import { logSignerOut, fetchUserSignatures } from '../redux/actions/signature';
 
 function MyCampaignNavItem(props) {
   return (
     <NavItem eventKey={4}>
-      <Link to="">My Campaign</Link>
+      <Link to={`/campaign/${props.campaignId}`}>My Campaign</Link>
     </NavItem>
   );
 }
@@ -40,44 +40,61 @@ function UserAuthNav(props) {
   );
 }
 
-const NavBar = props => {
-  // used "!!" to cast variable to boolean. Used to avoid the behavior of undefined in
-  // conditional logic. In brief !undefined = true > !true = false
-  const userIsLoggedIn = props.auth && (!!props.auth.googleID || !!props.auth.facebookID);
-  let homeText;
-  props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
-  return (
-    <Navbar bsStyle="remove-default" collapseOnSelect fluid>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">{homeText}</Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav pullRight>
-          <NavItem eventKey={1}>
-            <Link to="/denver-learn-more">Why</Link>
-          </NavItem>
-          <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
-            <MenuItem eventKey={2.1}>
-              <Link to="/manager-resources">Property Manager Resources</Link>
-            </MenuItem>
-            <MenuItem eventKey={2.2}>
-              <Link to="/tips-for-requesting">Tips for Requesting</Link>
-            </MenuItem>
-          </NavDropdown>
-          <NavItem eventKey={3}>
-            <Link to="/who-are-we">Who Are We</Link>
-          </NavItem>
-          {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
-          {userIsLoggedIn && <MyCampaignNavItem />}
-          {/* UserAuthNav (Login/Logout) */}
-          <UserAuthNav auth={props.auth} logOutUser={props.logSignerOut} />
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
+class NavBar extends React.Component {
+  componentWillReceiveProps = nextProps => {
+    if (this.props.auth._userID !== nextProps.auth._userID) {
+      this.props.fetchUserSignatures(nextProps.auth._userID);
+    }
+  };
+
+  render() {
+    // used "!!" to cast variable to boolean. Used to avoid the behavior of undefined in
+    // conditional logic. In brief !undefined = true > !true = false
+    const userIsLoggedIn =
+      this.props.auth && (!!this.props.auth.googleID || !!this.props.auth.facebookID);
+    const userHasSignedCampaign = userIsLoggedIn && this.props.userSignatures._campaignID;
+
+    let homeText;
+    this.props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
+    return (
+      <Navbar bsStyle="remove-default" collapseOnSelect fluid>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">{homeText}</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem eventKey={1}>
+              <Link to="/denver-learn-more">Why</Link>
+            </NavItem>
+            <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
+              <MenuItem eventKey={2.1}>
+                <Link to="/manager-resources">Property Manager Resources</Link>
+              </MenuItem>
+              <MenuItem eventKey={2.2}>
+                <Link to="/tips-for-requesting">Tips for Requesting</Link>
+              </MenuItem>
+            </NavDropdown>
+            <NavItem eventKey={3}>
+              <Link to="/who-are-we">Who Are We</Link>
+            </NavItem>
+            {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
+            {userHasSignedCampaign && (
+              <MyCampaignNavItem campaignId={this.props.userSignatures._campaignID} />
+            )}
+            {/* UserAuthNav (Login/Logout) */}
+            <UserAuthNav auth={this.props.auth} logOutUser={this.props.logSignerOut} />
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
+}
+
+MyCampaignNavItem.propTypes = {
+  campaignId: PropTypes.string.isRequired
 };
 
 UserAuthNav.propTypes = {
@@ -92,15 +109,33 @@ UserAuthNav.propTypes = {
 NavBar.propTypes = {
   logSignerOut: PropTypes.func.isRequired,
   auth: PropTypes.shape({
+    _userID: PropTypes.string,
     name: PropTypes.string,
     googleID: PropTypes.string,
     facebookID: PropTypes.string
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  userSignatures: PropTypes.shape({
+    _campaignID: PropTypes.string
+  }).isRequired,
+  fetchUserSignatures: PropTypes.func.isRequired
 };
 
-export default connect(({ auth }) => ({ auth }), {
-  logSignerOut
+const mapStateToProps = state => ({
+  auth: {
+    _userID: state.auth._id,
+    name: state.auth.name,
+    googleID: state.auth.googleID,
+    facebookID: state.auth.facebookID
+  },
+  userSignatures: {
+    ...state.signature.userSignatures
+  }
+});
+
+export default connect(mapStateToProps, {
+  logSignerOut,
+  fetchUserSignatures
 })(NavBar);

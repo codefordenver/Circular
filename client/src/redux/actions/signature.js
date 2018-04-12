@@ -7,10 +7,24 @@ export function addsignature(data) {
   };
 }
 
-export default function fetchSignatures(campaignId) {
+export function removeSignature(signatureId) {
   return {
-    type: 'FETCH_SIGNATURES',
-    promise: createApiRequest(`api/signatures/${campaignId}`, 'GET')
+    type: 'REMOVE_SIGNATURE_FROM_FROM_CAMPAIGN',
+    promise: createApiRequest(`api/signatures/${signatureId}`, 'DELETE')
+  };
+}
+
+export function fetchCampaignSignatures(campaignId) {
+  return {
+    type: 'FETCH_CAMPAIGN_SIGNATURES',
+    promise: createApiRequest(`api/signatures/campaigns/${campaignId}`, 'GET')
+  };
+}
+
+export function fetchUserSignatures(userId) {
+  return {
+    type: 'FETCH_USER_SIGNATURES',
+    promise: createApiRequest(`api/signatures/users/${userId}`, 'GET')
   };
 }
 
@@ -20,7 +34,16 @@ export function addSignatureToCampaign(userId, checkboxes, campaignId) {
   const data = { user_id: userId, campaign_id: campaignId, keepUpdated };
   return async dispatch => {
     await dispatch(addsignature(data));
-    dispatch(fetchSignatures(campaignId));
+    dispatch(fetchCampaignSignatures(campaignId));
+    dispatch(fetchUserSignatures(userId));
+  };
+}
+
+export function removeSignatureFromCampaign(userId, campaignId, signatureId) {
+  return async dispatch => {
+    await dispatch(removeSignature(signatureId));
+    dispatch(fetchCampaignSignatures(campaignId));
+    dispatch(fetchUserSignatures(userId));
   };
 }
 

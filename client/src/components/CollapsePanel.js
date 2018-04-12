@@ -30,7 +30,7 @@ class CollapsePanel extends Component {
         */
           bsStyle="remove-default"
           className="collapse-panel"
-          expanded={this.state.expanded}
+          defaultExpanded={this.state.expanded}
         >
           <Panel.Toggle className="collapse-panel-toggle">
             <Panel.Heading className={this.props.headingStyle}>
