@@ -53,10 +53,10 @@ module.exports = app => {
     }
   });
 
-  app.delete('/api/signatures/:sigId', async (req, res) => {
+  app.delete('/api/signatures/:signatureId', async (req, res) => {
     try {
       await Signature.deleteOne({
-        _id: req.params.sigId
+        _id: req.params.signatureId
       });
       res.send(200);
     } catch (err) {
