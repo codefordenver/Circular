@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import GoogleButton from 'react-google-button';
-import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
+import { Row, Col, FormGroup, Button, ControlLabel, FormControl, Alert } from 'react-bootstrap';
 import Checkbox from './SignatureCheckbox';
 import ToolList from './ToolList';
 import {
@@ -32,9 +32,9 @@ class SignCampaign extends Component {
     }
   };
 
-  handleSignOut = () => {
-    this.props.logSignerOut();
-  };
+  // handleSignOut = () => {
+  //   this.props.logSignerOut();
+  // };
 
   handleSignCampaign = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
@@ -75,6 +75,7 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
+    console.log(this.props.userSignatures);
     const campaignId =
       this.props.activeCampaign &&
       this.props.activeCampaign.campaign &&
@@ -86,6 +87,7 @@ class SignCampaign extends Component {
     const userHasSignedOtherCampaign =
       !!this.props.userSignatures._id && !userHasSignedThisCampaign;
     const userHasNotSignedAnyCampaign = !this.props.userSignatures._id;
+    console.log(userHasSignedOtherCampaign);
 
     // user is not signed in
     const renderSignIn = (
@@ -107,6 +109,7 @@ class SignCampaign extends Component {
       </div>
     );
 
+    // user is signed in && hasn't signed a campaign
     const renderSignCampaignPrompt = (
       <div>
         {signedIn &&
@@ -139,62 +142,47 @@ class SignCampaign extends Component {
       </div>
     );
 
+    // user is signed in && has signed campaign
     const renderRemoveSignaturePrompt = (
       <div>
         {signedIn &&
           userHasSignedThisCampaign && (
             <div>
-              <form onSubmit={this.handleRemoveSignature}>
-                <div className="sign-campaign-actions">
-                  <div className="text-center thanks-for-header">
-                    <h4>Thanks for Signing</h4>
-                  </div>
-                  <Button
-                    className="remove-default sign-petition-button"
-                    value="submit"
-                    type="submit"
-                    block
-                  >
-                    Remove signature from the petition
-                  </Button>
-                </div>
-              </form>
               <ToolList />
+              <div className="text-center">
+                <Button
+                  className="logout-button-signature"
+                  onClick={this.handleRemoveSignature}
+                  block
+                >
+                  <i className="fa fa-times-circle" />
+                  Unsign This Campaign
+                </Button>
+              </div>
             </div>
           )}
       </div>
     );
 
+    // user is signed in && is currently on a page different from their signed campaign page
     const renderUserHasSignedOtherCampaignPrompt = (
-      <div>
+      <div className="user-has-signed-other-campaign-alert">
         {userHasSignedOtherCampaign && (
-          <div>
-            <div className="sign-campaign-actions">
-              <p>
-                You have already signed a separate campaign. Go to
+          <Alert bsStyle="warning" onDismiss={this.handleDismiss}>
+            <h4>Oh snap!</h4>
+            <p>Looks like you have already signed a campaign, you little overachiever you.</p>
+            <p>
+              <Button className="remove-default user-has-signed-other-campaign-button">
                 <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>
-                  signed campaign
+                  Go To My Campaign
                 </Link>
-              </p>
-            </div>
-            <ToolList />
-          </div>
+              </Button>
+            </p>
+          </Alert>
         )}
       </div>
     );
 
-    const renderSignOut = (
-      <div>
-        {signedIn && (
-          <div className="text-center">
-            <Button className="logout-button-signature" onClick={this.handleSignOut} block>
-              Sign Out
-              <i className="fa fa-sign-out" />
-            </Button>
-          </div>
-        )}
-      </div>
-    );
     return (
       <div>
         <Row>
@@ -203,13 +191,11 @@ class SignCampaign extends Component {
             {renderUserHasSignedOtherCampaignPrompt}
             {renderRemoveSignaturePrompt}
             {renderSignCampaignPrompt}
-            {renderSignOut}
           </Col>
         </Row>
       </div>
     );
   };
-
   render() {
     return (
       <Row className="show-grid">
@@ -255,8 +241,7 @@ SignCampaign.propTypes = {
   }).isRequired,
   addSignatureToCampaign: PropTypes.func.isRequired,
   removeSignatureFromCampaign: PropTypes.func.isRequired,
-  fetchUserSignatures: PropTypes.func.isRequired,
-  logSignerOut: PropTypes.func.isRequired
+  fetchUserSignatures: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
