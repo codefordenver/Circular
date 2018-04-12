@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Well } from 'react-bootstrap';
 import { fetchComments, postComment } from '../redux/actions/comments';
 import Comment from './Comment';
 import PostBox from './PostBox';
@@ -33,7 +34,7 @@ class Discussion extends Component {
         />
       );
     }
-    return <div>Log in to join the discussion!</div>;
+    return <Well className="login-post-box">Log in to join the discussion!</Well>;
   }
 
   renderComments() {
@@ -58,14 +59,6 @@ class Discussion extends Component {
       );
     }
     return <div />;
-  }
-
-  renderError() {
-    return (
-      <div className="error-message">
-        {this.state.error ? 'You must be logged in to post!' : null}
-      </div>
-    );
   }
 
   render() {
