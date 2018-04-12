@@ -75,7 +75,6 @@ class SignCampaign extends Component {
   };
 
   checkSignIn = () => {
-    console.log(this.props.userSignatures);
     const campaignId =
       this.props.activeCampaign &&
       this.props.activeCampaign.campaign &&
@@ -87,7 +86,6 @@ class SignCampaign extends Component {
     const userHasSignedOtherCampaign =
       !!this.props.userSignatures._id && !userHasSignedThisCampaign;
     const userHasNotSignedAnyCampaign = !this.props.userSignatures._id;
-    console.log(userHasSignedOtherCampaign);
 
     // user is not signed in
     const renderSignIn = (
