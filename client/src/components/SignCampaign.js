@@ -32,10 +32,6 @@ class SignCampaign extends Component {
     }
   };
 
-  // handleSignOut = () => {
-  //   this.props.logSignerOut();
-  // };
-
   handleSignCampaign = async formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -133,7 +129,6 @@ class SignCampaign extends Component {
                     Sign the petition
                   </Button>
                 </div>
-                <h5 className="content remove-margin text-center">OR</h5>
               </FormGroup>
             </form>
           )}
@@ -168,14 +163,19 @@ class SignCampaign extends Component {
         {userHasSignedOtherCampaign && (
           <Alert bsStyle="warning" onDismiss={this.handleDismiss}>
             <h4>Oh snap!</h4>
-            <p>Looks like you have already signed a campaign, you little overachiever you.</p>
             <p>
-              <Button className="remove-default user-has-signed-other-campaign-button">
-                <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>
-                  Go To My Campaign
-                </Link>
-              </Button>
+              Looks like you have already signed a campaign, you little overachiever you. You can
+              only sign one campaign at a time.
             </p>
+            <Button
+              bsStyle="remove-default"
+              className="user-has-signed-other-campaign-button"
+              block
+            >
+              <Link to={`/campaign/${this.props.userSignatures._campaignID}`}>
+                Go To My Campaign
+              </Link>
+            </Button>
           </Alert>
         )}
       </div>
