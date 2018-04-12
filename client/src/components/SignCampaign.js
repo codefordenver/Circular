@@ -219,10 +219,10 @@ SignCampaign.defaultProps = {
 
 SignCampaign.propTypes = {
   userSignatures: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    _userID: PropTypes.string.isRequired,
-    _campaignID: PropTypes.string.isRequired
-  }),
+    _id: PropTypes.string,
+    _userID: PropTypes.string,
+    _campaignID: PropTypes.string
+  }).isRequired,
   auth: PropTypes.shape({
     _id: PropTypes.string,
     googleID: PropTypes.string,
