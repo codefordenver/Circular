@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
-import fetchSignatures from '../redux/actions/signature';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
@@ -20,14 +19,12 @@ const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
-    this.props.fetchSignatures(this.props.params.id);
     this.props.fetchApartmentsRequest();
   }
 
   componentWillUpdate(nextProps, nextState) {
     if (this.props.params.id !== nextProps.params.id) {
       nextProps.fetchCampaignById(nextProps.params.id);
-      nextProps.fetchSignatures(nextProps.params.id);
     }
   }
 
@@ -154,12 +151,12 @@ class CampaignPage extends Component {
             </Row>
           </Col>
           <Col md={3} xs={12} className="side-bar">
-            <SignCampaign signatureObj={this.props.signature} />
+            <SignCampaign />
             <div className="text-center sig-bar-collapse-panel">
               <CollapsePanel
                 defaultExpanded
                 titleText="See Who's Signed"
-                body={<SignatureList signatures={this.props.signature.signatures} />}
+                body={<SignatureList campaignID={this.props.params.id} />}
               />
             </div>
           </Col>
@@ -185,28 +182,19 @@ CampaignPage.propTypes = {
     loaded: PropTypes.bool
   }).isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
-  fetchSignatures: PropTypes.func.isRequired,
   fetchApartmentsRequest: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
-  }).isRequired,
-  signature: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    signatures: PropTypes.arrayOf(PropTypes.object),
-    error: PropTypes.objectOf(PropTypes.any)
   }).isRequired
 };
 
 export default connect(
-  ({ activeCampaign, signature, initialSearch }) => ({
+  ({ activeCampaign, initialSearch }) => ({
     activeCampaign,
-    signature,
     initialSearch
   }),
   {
     fetchCampaignById,
-    fetchSignatures,
     fetchApartmentsRequest
   }
 )(withRouter(CampaignPage));
