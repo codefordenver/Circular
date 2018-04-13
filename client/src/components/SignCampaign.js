@@ -86,27 +86,29 @@ class SignCampaign extends Component {
     // user is not signed in
     const renderSignIn = (
       <div>
-        {!signedIn && (
-          <div>
-            <h4>Sign In With:</h4>
-            <a className="login-button-signature" href="/auth/facebook">
-              <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
-                <i className="fa fa-facebook-square" />Login with Facebook
-              </Button>
-            </a>
-            <h5 className="content text-center">OR</h5>
-            <a className="login-button-signature" href="/auth/google">
-              <GoogleButton className="btn-google btn-login" />
-            </a>
-          </div>
-        )}
+        {this.props.activeCampaign.loaded &&
+          !signedIn && (
+            <div>
+              <h4>Sign In With:</h4>
+              <a className="login-button-signature" href="/auth/facebook">
+                <Button bsStyle="remove-default" className="btn btn-facebook btn-login" block>
+                  <i className="fa fa-facebook-square" />Login with Facebook
+                </Button>
+              </a>
+              <h5 className="content text-center">OR</h5>
+              <a className="login-button-signature" href="/auth/google">
+                <GoogleButton className="btn-google btn-login" />
+              </a>
+            </div>
+          )}
       </div>
     );
 
     // user is signed in && hasn't signed a campaign
     const renderSignCampaignPrompt = (
       <div>
-        {signedIn &&
+        {this.props.activeCampaign.loaded &&
+          signedIn &&
           userHasNotSignedAnyCampaign && (
             <form onSubmit={this.handleSignCampaign}>
               <FormGroup controlId="signingBecause">
@@ -138,9 +140,13 @@ class SignCampaign extends Component {
     // user is signed in && has signed campaign
     const renderRemoveSignaturePrompt = (
       <div>
-        {signedIn &&
+        {this.props.activeCampaign.loaded &&
+          signedIn &&
           userHasSignedThisCampaign && (
-            <div>
+            <div className="text-center thanks-for-alert">
+              <Alert bsStyle="success">
+                <h4>Thanks for Signing!</h4>
+              </Alert>
               <ToolList />
               <div className="text-center">
                 <Button
