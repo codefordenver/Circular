@@ -10,7 +10,6 @@ require('./models/Campaign');
 require('./models/Signature');
 require('./models/Comment');
 require('./models/WasteProvider');
-
 require('./services/passport');
 
 if (process.env.NODE_ENV === 'test') {
@@ -27,12 +26,18 @@ if (process.env.NODE_ENV === 'test') {
 
       console.log('HOST ' + config.host);
       console.log('PORT ' + config.port);
+      console.log('** SERVING MLAB TEST DATABASE **');
 
       var mongouri = mongoServerInstance.getMongouri('myDatabaseName');
       mongoose.connect(mongouri);
     }
   });
+} else if (process.env.NODE_ENV === 'dev') {
+  console.log('** SERVING MLAB DEV DATABASE **');
+  console.log(keys.mongoURI);
+  mongoose.connect(keys.mongoURI);
 } else {
+  console.log('** SERVING MLAB PROD DATABASE **');
   mongoose.connect(keys.mongoURI);
 }
 

@@ -19,4 +19,4 @@ const signatureSchema = new Schema({
 
 signatureSchema.index({ _userID: 1, _campaignID: -1 }, { unique: true });
 
-mongoose.model('Signature', signatureSchema);
+module.exports = mongoose.model('Signature', signatureSchema);
