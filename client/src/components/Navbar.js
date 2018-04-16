@@ -7,8 +7,8 @@ import { logSignerOut, fetchUserSignatures } from '../redux/actions/signature';
 
 function MyCampaignNavItem(props) {
   return (
-    <NavItem eventKey={4}>
-      <Link to={`/campaign/${props.campaignId}`}>My Campaign</Link>
+    <NavItem eventKey={4} href={`/campaign/${props.campaignId}`}>
+      My Campaign
     </NavItem>
   );
 }
@@ -66,19 +66,19 @@ class NavBar extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem eventKey={1}>
-              <Link to="/denver-learn-more">Why</Link>
+            <NavItem eventKey={1} href="/denver-learn-more">
+              Why
             </NavItem>
             <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
-              <MenuItem eventKey={2.1}>
-                <Link to="/manager-resources">Property Manager Resources</Link>
+              <MenuItem eventKey={2.1} href="/manager-resources">
+                Property Manager Resources
               </MenuItem>
-              <MenuItem eventKey={2.2}>
-                <Link to="/tips-for-requesting">Tips for Requesting</Link>
+              <MenuItem eventKey={2.2} href="/tips-for-requesting">
+                Tips for Requesting
               </MenuItem>
             </NavDropdown>
-            <NavItem eventKey={3}>
-              <Link to="/who-are-we">Who Are We</Link>
+            <NavItem eventKey={3} href="/who-are-we">
+              Who Are We
             </NavItem>
             {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
             {userHasSignedCampaign && (
