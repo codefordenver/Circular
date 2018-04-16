@@ -70,7 +70,6 @@
   border-radius: 2px;
   max-width: 530px;
   margin: auto;
-  z-index: 1000;
 }
 
 .autocomplete_container {
@@ -81,6 +80,8 @@
   border: 1px solid #e6e6e6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 2px 2px;
+  position: relative;
+  z-index: 1;
 }
 
 .form_group {
