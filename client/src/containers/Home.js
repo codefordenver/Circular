@@ -22,7 +22,7 @@ class Home extends Component {
       <div>
         <HeroCTA openMap={this.props.openMap} />
         <ApartmentMap isOpen={isOpen} markers={apartments} closeMap={this.props.closeMap} />
-        <Grid fluid>
+        <Grid fluid className="home-section-container">
           <StepByStep />
           <InfoAndLinks />
         </Grid>
