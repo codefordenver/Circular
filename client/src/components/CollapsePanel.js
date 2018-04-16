@@ -34,7 +34,7 @@ class CollapsePanel extends Component {
         >
           <Panel.Toggle className="collapse-panel-toggle">
             <Panel.Heading className={this.props.headingStyle}>
-              <Panel.Title className="collapse-panel-title" toggle>
+              <Panel.Title className="collapse-panel-title">
                 {titleText}
                 <i className="fa fa-chevron-down float-right" />
               </Panel.Title>
