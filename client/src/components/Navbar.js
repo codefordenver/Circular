@@ -30,7 +30,10 @@ function UserAuthNav(props) {
     );
   }
   const { auth: { name } } = props;
-  const firstName = name.substr(0, name.indexOf(' '));
+
+  const endOfFirstName = name.indexOf(' ') !== -1 ? name.indexOf(' ') : name.length;
+  const firstName = name.substr(0, endOfFirstName);
+
   const logOutUser = props.logOutUser;
   // if logged in > show sign out options
   return (
