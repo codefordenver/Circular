@@ -6,7 +6,7 @@ const PrivacyPolicy = () => (
     <Row>
       <Col xs={10} xsOffset={1}>
         <PageHeader className="info-page-header-overrides">Privacy Policy</PageHeader>
-        <p className="home-section-footer">
+        <p className="home-section-footer text-justify">
           Privacy Policy Eco-Cycle aims to be as responsible when it comes to your privacy rights as
           we are when it comes to the environment. To this end, Eco-Cycle will not trade, rent, or
           sell any piece of member information to any individual or organization. Eco-Cycle is the
@@ -35,10 +35,16 @@ const PrivacyPolicy = () => (
           or reuse of any text-based or graphic material from our website, publications, or other
           communications is strictly prohibited without express written consent from Eco-Cycle
           staff. Please contact Eco-Cycle for more information. Policy changes We reserve the right
-          to modify this privacy policy at any time by posting a new policy to this site. Contact
-          information For questions on this policy, please contact Eco-Cycle at Eco-Cycle, Inc. P.O.
-          Box 19006 Boulder, CO 80308 (303) 444-6634 recycle@ecocycle.org
+          to modify this privacy policy at any time by posting a new policy to this site.
         </p>
+        <PageHeader className="info-page-header-overrides">
+          For questions on this policy, please contact Eco-Cycle at:
+        </PageHeader>
+        <p>Eco-Cycle</p>
+        <p>Inc. P.O. Box 19006</p>
+        <p>Boulder, CO 80308</p>
+        <p>(303) 444-6634</p>
+        <p>recycle@ecocycle.org</p>
       </Col>
     </Row>
   </Grid>
