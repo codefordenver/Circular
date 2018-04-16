@@ -23,6 +23,12 @@ class Discussion extends Component {
     );
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (this.props.campaignID !== nextProps.campaignID) {
+      nextProps.fetchComments(nextProps.campaignID);
+    }
+  }
+
   renderMainPostBox() {
     if (this.props.auth && this.props.auth._id) {
       return (
