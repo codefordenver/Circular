@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, browserHistory } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
@@ -20,6 +20,10 @@ class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchApartmentsRequest();
+    const checkApts = this.props.initialSearch.apartments.map(apt => apt.id);
+    if (!checkApts.includes(this.props.params.id)) {
+      browserHistory.push('/');
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
