@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import Modal from 'react-modal';
+import { Button } from 'react-bootstrap';
+import ReactModal from 'react-modal';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import * as _ from 'lodash';
@@ -36,10 +37,12 @@ const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
 }`;
 
 const ApartmentMap = props => (
-  <Modal isOpen={props.isOpen} contentLabel="Modal">
-    <button className="close_map_button" onClick={props.closeMap}>
-      X
-    </button>
+  <ReactModal
+    isOpen={props.isOpen}
+    contentLabel="Modal"
+    onRequestClose={props.closeMap}
+    className="apartment-map-modal"
+  >
     <GettingStartedGoogleMap
       googleMapURL={mapUrl}
       loadingElement={
@@ -55,14 +58,14 @@ const ApartmentMap = props => (
               /> */}
         </div>
       }
-      containerElement={<div style={{ height: '50vh' }} />}
+      containerElement={<div style={{ height: '100%' }} />}
       mapElement={<div style={{ height: '100%' }} />}
       onMapLoad={_.noop}
       onMapClick={_.noop}
       markers={props.markers}
       onMarkerRightClick={_.noop}
     />
-  </Modal>
+  </ReactModal>
 );
 
 ApartmentMap.defaultProps = {
