@@ -7,4 +7,4 @@ const wasteProviderSchema = new Schema({
   email: { type: String }
 });
 
-mongoose.model('WasteProvider', wasteProviderSchema);
+module.exports = mongoose.model('WasteProvider', wasteProviderSchema);
