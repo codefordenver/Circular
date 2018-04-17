@@ -44,7 +44,6 @@ export default (
       />
     </Route>
     <Route
-      exact
       path="/campaign/:id"
       getComponent={(location, callback) => callback(null, CampaignPage)}
     />
