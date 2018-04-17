@@ -35,4 +35,4 @@ const campaignSchema = new Schema(
 
 campaignSchema.index({ latLng: '2dsphere' });
 
-mongoose.model('Campaign', campaignSchema);
+module.exports = mongoose.model('Campaign', campaignSchema);

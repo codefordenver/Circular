@@ -10,28 +10,14 @@ require('./models/Campaign');
 require('./models/Signature');
 require('./models/Comment');
 require('./models/WasteProvider');
-
 require('./services/passport');
 
-if (process.env.NODE_ENV === 'test') {
-  const MongoInMemory = require('mongo-in-memory');
-
-  var port = 8000;
-  var mongoServerInstance = new MongoInMemory(port); //DEFAULT PORT is 27017
-
-  mongoServerInstance.start((error, config) => {
-    if (error) {
-      console.error(error);
-    } else {
-      //callback when server has started successfully
-
-      console.log('HOST ' + config.host);
-      console.log('PORT ' + config.port);
-
-      var mongouri = mongoServerInstance.getMongouri('myDatabaseName');
-      mongoose.connect(mongouri);
-    }
-  });
+if (process.env.NODE_ENV === 'dev') {
+  console.log('PREPARING THE DEV ENVIRONMENT');
+  mongoose.connect(keys.mongoURI);
+} else if (process.env.NODE_ENV === 'staging') {
+  console.log('PREPARING THE STAGING ENVIRONMENT');
+  mongoose.connect(keys.mongoURI);
 } else {
   mongoose.connect(keys.mongoURI);
 }

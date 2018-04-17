@@ -8,24 +8,27 @@
     "yarn": ">=1.2"
   },
   "scripts": {
-    "start": "node backend/index.js",
-    "server": "nodemon backend/index.js",
-    "client": "(cd ./client && yarn start)",
-    "cypress": "cypress",
     "ci:start-app-for-test":
       "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run -s cypress/integration/simple_spec.js",
-    "lint": "eslint .",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "test-dev": "cross-env NODE_ENV=test yarn dev",
+    "client": "(cd ./client && yarn start)",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
+    "cypress": "cypress",
+    "db:seed": "cross-env NODE_ENV=dev node db:seeds/index.js",
+    "dev": "cross-env NODE_ENV=dev concurrently 'yarn server' 'yarn client' ",
+    "staging":
+      "cross-env NODE_ENV=staging concurrently 'yarn server' 'yarn client' ",
     "heroku-postbuild":
       "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
-    "postinstall": "yarn install --cwd client",
+    "lint": "eslint .",
     "lint-server": "yarn prettier-eslint backend/**/*.js --write",
     "lint-client": "yarn prettier-eslint client/src/**/*.js --write",
-    "precommit": "lint-staged"
+    "postinstall": "yarn install --cwd client",
+    "precommit": "lint-staged",
+    "start": "node backend/index.js",
+    "server": "nodemon backend/index.js",
+    "test-dev": "cross-env NODE_ENV=test yarn dev"
   },
   "lint-staged": {
     "*.{js,json}": ["prettier-eslint --write", "git add"]

@@ -30,4 +30,4 @@ commentSchema
   .pre('findOne', autoPopulateChildren)
   .pre('find', autoPopulateChildren);
 
-mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Comment', commentSchema);
