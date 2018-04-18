@@ -15,6 +15,7 @@
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
     "cypress": "cypress",
+    "db:seed": "cross-env NODE_ENV=dev node db:seeds/index.js",
     "dev": "cross-env NODE_ENV=dev concurrently 'yarn server' 'yarn client' ",
     "staging":
       "cross-env NODE_ENV=staging concurrently 'yarn server' 'yarn client' ",
@@ -25,7 +26,6 @@
     "lint-client": "yarn prettier-eslint client/src/**/*.js --write",
     "postinstall": "yarn install --cwd client",
     "precommit": "lint-staged",
-    "db:seed": "node backend/seeds/index.js",
     "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
     "test-dev": "cross-env NODE_ENV=test yarn dev"
