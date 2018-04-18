@@ -63,9 +63,9 @@ const seedUsersArray = [
     _id: '5ad27e30c0a61bf827d2fd56'
   },
   {
-    googleID: '105997181103069737103',
-    name: 'The_Ryan_Brooks.net',
-    email: 'The_Ryan_Brooks_net@net.com'
+    name: 'The_Ryan.net',
+    email: 'The_Ryan@net.com',
+    id: '5aa97763feb54159e122b7e5'
   }
 ];
 
