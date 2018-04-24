@@ -29,7 +29,9 @@ function UserAuthNav(props) {
       </NavDropdown>
     );
   }
-  const { auth: { name } } = props;
+  const {
+    auth: { name }
+  } = props;
 
   const endOfFirstName = name.indexOf(' ') !== -1 ? name.indexOf(' ') : name.length;
   const firstName = name.substr(0, endOfFirstName);
@@ -70,7 +72,7 @@ class NavBar extends React.Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavItem eventKey={1} href="/denver-learn-more">
-              Why
+              Why Recycle
             </NavItem>
             <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
               <MenuItem eventKey={2.1} href="/manager-resources">
