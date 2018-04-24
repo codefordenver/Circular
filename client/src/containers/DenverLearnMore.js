@@ -104,6 +104,13 @@ const DenverLearnMore = () => (
               <p>
                 Make sure your neighbors DON'T add "tanglers" like headphones or christmas lights.
               </p>
+            </div>
+          }
+        />
+        <CollapsePanel
+          titleText="FAQ's"
+          body={
+            <ol className="info-numeric-list">
               <p className="collapse-panel-bold-p">Why does recycling cost more?</p>
               <p>
                 There is a cost to provide recycling services to apartments, as well as to homes and
@@ -120,13 +127,7 @@ const DenverLearnMore = () => (
                 volume or frequency of services. This can help offset the costs of adding recycling
                 service.
               </p>
-            </div>
-          }
-        />
-        <CollapsePanel
-          titleText="FAQ's"
-          body={
-            <ol className="info-numeric-list">
+              <br />
               <p className="collapse-panel-bold-p">
                 I live in another city. How can I get recycling at my building? What happens if I
                 live in...?
