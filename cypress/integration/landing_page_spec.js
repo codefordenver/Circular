@@ -17,9 +17,9 @@ describe('The landing page', () => {
     });
   });
 
-  describe('why', () => {
-    it('navigates to the why page', () => {
-      cy.contains('Why').click();
+  describe('Why Recycle', () => {
+    it('navigates to the why recycle page', () => {
+      cy.contains('Why Recycle').click();
       cy.url().should('include', '/denver-learn-more');
     });
   });
