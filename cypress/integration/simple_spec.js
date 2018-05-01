@@ -16,4 +16,11 @@ describe('The landing page', () => {
       cy.url().should('include', '/choose-campaign');
     });
   });
+
+  describe('why', () => {
+    it('navigates to the why page', () => {
+      cy.contains('Why').click();
+      cy.url().should('include', '/denver-learn-more');
+    });
+  });
 });
