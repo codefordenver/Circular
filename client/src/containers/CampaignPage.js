@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
@@ -13,6 +13,7 @@ import CollapsePanel from '.././components/CollapsePanel';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import CampaignProgressBar from '../components/CampaignProgressBar';
 import CampaignStatus from '../components/CampaignStatus';
+import NotFound from '../containers/NotFound';
 
 const MIN_CAMPAIGN_DURATION = 21;
 const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
@@ -20,10 +21,6 @@ class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchApartmentsRequest();
-    const checkApts = this.props.initialSearch.apartments.map(apt => apt.id);
-    if (!checkApts.includes(this.props.params.id)) {
-      browserHistory.push('/');
-    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -47,7 +44,12 @@ class CampaignPage extends Component {
   render() {
     const { activeCampaign: { campaign }, initialSearch: { apartments } } = this.props;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
-
+    const noKnowApartmentFound = !this.props.initialSearch.apartments
+      .map(apt => apt.id)
+      .includes(this.props.params.id);
+    if (noKnowApartmentFound) {
+      return <NotFound />;
+    }
     return (
       <Grid>
         <Row className="full-height-side-bar">
