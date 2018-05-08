@@ -12,7 +12,6 @@ import RequestRecyclingTips from './containers/RequestRecyclingTips';
 import DenverInfo from './containers/DenverInfo';
 import ManagerResources from './containers/ManagerResources';
 import DenverLearnMore from './containers/DenverLearnMore';
-import Tools from './containers/Tools';
 import Collaboration from './containers/Collaboration';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './containers/NotFound';
@@ -63,7 +62,6 @@ export default (
       path="/denver-learn-more"
       getComponent={(location, callback) => callback(null, DenverLearnMore)}
     />
-    <Route path="/tools" getComponent={(location, callback) => callback(null, Tools)} />
     <Route
       path="/who-are-we"
       getComponent={(location, callback) => callback(null, Collaboration)}
