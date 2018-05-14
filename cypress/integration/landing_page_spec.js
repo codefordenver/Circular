@@ -39,4 +39,12 @@ describe('The landing page', () => {
       cy.url().should('include', '/manager-resources');
     });
   });
+
+  describe('Tips for Requesting link within Tools dropdown', () => {
+    it('navigates to Tips for Requesting page', () => {
+      cy.contains('Tools').click();
+      cy.contains('Tips for Requesting').click();
+      cy.url().should('include', '/tips-for-requesting');
+    });
+  });
 });
