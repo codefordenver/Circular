@@ -47,4 +47,11 @@ describe('The landing page', () => {
       cy.url().should('include', '/tips-for-requesting');
     });
   });
+
+  describe('Who Are We link', () => {
+    it('navigates to Who Are We page', () => {
+      cy.contains('Who Are We').click();
+      cy.url().should('include', '/who-are-we');
+    });
+  });
 });
