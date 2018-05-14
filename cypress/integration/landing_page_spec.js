@@ -31,4 +31,12 @@ describe('The landing page', () => {
       cy.url().should('include', '/denver-learn-more');
     });
   });
+
+  describe('Property Manager Resources link within Tools dropdown', () => {
+    it('navigates to Property Manager Resources page', () => {
+      cy.contains('Tools').click();
+      cy.contains('Property Manager Resources').click();
+      cy.url().should('include', '/manager-resources');
+    });
+  });
 });
