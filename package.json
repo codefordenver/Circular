@@ -13,8 +13,8 @@
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",
     "ci:start-app-for-test":
-      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
-    "ci:test": "cypress run",
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\" --browser chrome",
+    "ci:test": "cypress run --browser chrome",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
@@ -37,7 +37,6 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
-    "cypress-testing-library": "^2.0.0",
     "express": "^4.16.2",
     "mongoose": "^4.12.3",
     "mongoose-geojson-schema": "^2.1.2",
@@ -52,7 +51,8 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "cross-env": "^5.1.1",
-    "cypress": "^1.0.3",
+    "cypress": "^1.4.2",
+    "cypress-testing-library": "^2.0.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-react-app": "^2.0.1",
