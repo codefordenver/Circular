@@ -37,6 +37,7 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
+    "cypress-testing-library": "^2.0.0",
     "express": "^4.16.2",
     "mongoose": "^4.12.3",
     "mongoose-geojson-schema": "^2.1.2",
