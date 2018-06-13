@@ -1,18 +1,40 @@
 @import "../utils/placeholders";
 @import "../base/colors";
 
-.step-container {
-  display: block;
-  padding-bottom: 15px;
-  display: relative;
+.info-graphic-header {
+  padding-left: 55px;
+}
 
-  .step-emoji-icon {
-    position: absolute;
-    display: inline-block;
-    text-align: right;
-    top: 0px;
-    left: -1em;
-    padding-right: 3px;
-    font-size: 30px;
+.info-graphic {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $light-blue-background;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .box {
+    color: $dark-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+
+    i {
+      font-size: 36px;
+      margin-bottom: 7.5px;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: bold;
+    }
   }
 }
+
+

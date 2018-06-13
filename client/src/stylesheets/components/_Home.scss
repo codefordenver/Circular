@@ -6,7 +6,8 @@
 }
 
 .home-section-description {
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
   padding-bottom: 7px;
 }
 
@@ -14,22 +15,46 @@
   color: $mainwhite;
   border-bottom: none;
   margin-bottom: 5px;
+  
   h1 {
     font-size: 24px;
+    font-weight: 300;
   }
 }
 
 .home-section-link {
   display: inline-block;
-  text-align: center;
-  color: $maingreen;
+  color: $mainwhite;
   padding-top: 1em;
   &:hover {
-    color: $mainwhite;
+    color: $hovergreen;
     text-decoration: none;
   }
 }
 
+.info-and-links {
+  display: flex;
+}
+
+.vertical-line {
+  background-color: $mainwhite;
+  height: 250px;
+  align-self: center;
+  width: 1px;
+}
+
 .home-section-container {
   padding-bottom: 2em;
+
+  .home-section-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 320px;
+    padding: 0 40px;
+
+    &.recycling-info-div {
+      border-right: 1px solid black;
+    }
+  }
 }
