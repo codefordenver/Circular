@@ -19,7 +19,7 @@ function UserAuthNav(props) {
   if (props.auth && (!props.auth.googleID && !props.auth.facebookID)) {
     return (
       // if not logged in > show sign in options
-      <NavDropdown id="tools-dropdown" eventKey={5} title="Login">
+      <NavDropdown id="tools-dropdown" eventKey={5} title="LOGIN">
         <MenuItem eventKey={5.1} href="/auth/facebook">
           Sign in With Facebook
         </MenuItem>
@@ -29,9 +29,7 @@ function UserAuthNav(props) {
       </NavDropdown>
     );
   }
-  const {
-    auth: { name }
-  } = props;
+  const { auth: { name } } = props;
 
   const endOfFirstName = name.indexOf(' ') !== -1 ? name.indexOf(' ') : name.length;
   const firstName = name.substr(0, endOfFirstName);
@@ -72,9 +70,13 @@ class NavBar extends React.Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavItem eventKey={1} href="/denver-learn-more">
-              Why Recycle
+              WHY
             </NavItem>
-            <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
+
+            <NavItem eventKey={3} href="/who-are-we">
+              WHO WE ARE
+            </NavItem>
+            <NavDropdown id="tools-dropdown" eventKey={2} title="TOOLS">
               <MenuItem eventKey={2.1} href="/manager-resources">
                 Property Manager Resources
               </MenuItem>
@@ -82,9 +84,6 @@ class NavBar extends React.Component {
                 Tips for Requesting
               </MenuItem>
             </NavDropdown>
-            <NavItem eventKey={3} href="/who-are-we">
-              Who Are We
-            </NavItem>
             {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
             {userHasSignedCampaign && (
               <MyCampaignNavItem campaignId={this.props.userSignatures._campaignID} />

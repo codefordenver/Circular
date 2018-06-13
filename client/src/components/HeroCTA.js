@@ -9,14 +9,15 @@ const HeroCTA = ({ openMap }) => (
   <Grid fluid>
     <div className="tinted" />
     <Row className="hero-wrapper">
-      <Col xs={12}>
-        <h1 className="hero-page-header">
-          NEED RECYCLING
-          <br />
-          <span className="font-italic">-in-</span>
-          <br />
-          YOUR BUILDING?
-        </h1>
+      <Col className="hero-page-header" xs={12}>
+        <div className="opacity-div">
+          <h1>NEED RECYCLING?</h1>
+          <h2 className="font-italic">Recruit, Request, Recycle</h2>
+          <h3>
+            We have a mission to change Denver's low recycling rate by making it easy for you and
+            your neighbors to petition your landlord for recyling for your building.
+          </h3>
+        </div>
       </Col>
     </Row>
     <Row>
@@ -24,13 +25,9 @@ const HeroCTA = ({ openMap }) => (
         <form>
           <AutoSuggestInput />
           <div className="text-center">
-            <Button bsStyle="as-link" onClick={openMap}>
+            <Button className="map-btn" bsStyle="as-link" onClick={openMap}>
               Explore the map
             </Button>
-            <p className="vertical-text-divider">|</p>
-            <Link className="home-section-link" to="/denver-recycling-info">
-              Learn more first
-            </Link>
           </div>
         </form>
       </Col>
