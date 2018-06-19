@@ -7,3 +7,5 @@ log
 .vscode
 cypress/videos
 cypress/screenshots
+client/.env.production
+
