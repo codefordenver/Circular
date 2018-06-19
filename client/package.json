@@ -12,6 +12,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.28.4",
     "dateformat": "^3.0.3",
+    "firebase": "^5.0.4",
     "geocoder": "^0.2.3",
     "lodash": "latest",
     "node-sass-chokidar": "0.0.3",

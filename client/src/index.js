@@ -12,6 +12,9 @@ import './stylesheets/main.css';
 import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
 
+// firebase actions
+import { startListeningToAuthChanges } from './redux/actions/firebaseAuth';
+
 bootstrapUtils.addStyle(Panel, 'remove-default');
 bootstrapUtils.addStyle(Navbar, 'remove-default');
 bootstrapUtils.addStyle(ControlLabel, 'remove-default');
@@ -22,6 +25,8 @@ const store = configureStore();
 store.subscribe(() => {
   saveState({ initialSearch: store.getState().initialSearch });
 });
+
+store.dispatch(startListeningToAuthChanges());
 
 const history = syncHistoryWithStore(browserHistory, store);
 

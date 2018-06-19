@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 
-import authReducer from './authReducer';
+import firebaseAuth from './firebaseAuth';
 import initialSearch from './initialSearch';
 import googleMap from './googleMap';
 import activeCampaign from './activeCampaign';
@@ -11,7 +11,7 @@ import comments from './comments';
 import wasteProvider from './wasteProvider';
 
 const reducers = combineReducers({
-  auth: authReducer,
+  auth: firebaseAuth,
   routing,
   googleMap,
   newCampaign,
