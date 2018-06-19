@@ -67,10 +67,12 @@ describe('The landing page', () => {
     // SEARCH ADDRESS BAR
     describe('When Searching an Address', () => {
       it('Navigates to the choose campaign page', () => {
+        cy.get('.autocomplete_container').should('not.be.visible');
         cy
           .get('.search_input')
           .type('Denver')
           .should('have.value', 'Denver');
+        cy.get('.autocomplete_container').should('be.visible');
         cy.get('.search_button').click();
         cy.url().should('include', '/choose-campaign');
       });

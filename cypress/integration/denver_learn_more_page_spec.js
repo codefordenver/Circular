@@ -6,10 +6,23 @@ describe('The denver learn more page', () => {
   describe('Why Recycle? toggle panel', () => {
     it('Toggles panel', () => {
       cy
+        .get('.text-black.panel-body')
+        .contains('Recycling is known')
+        .should('not.be.visible');
+      cy
         .get('a.collapse-panel-toggle')
         .contains('Why Recycle?')
         .click();
-      cy.get('div.text-black.panel-body').should('be.visible');
+      cy
+        .get('.text-black.panel-body')
+        .contains('Recycling is known')
+        .should('be.visible');
     });
+  });
+
+  it('Should have link to "ecocycle"', () => {
+    cy
+      .get('a.info-link')
+      .should('have.attr', 'href', 'http://ecocycle.org/take-action/denver');
   });
 });
