@@ -9,8 +9,8 @@ const Application = ({ auth, signInFacebook, signInGoogle, signOut, userSignatur
       signOut={signOut}
       signInGoogle={signInGoogle}
       signInFacebook={signInFacebook}
-      location={'/'}
       userSignatures={userSignatures}
+      {...props}
     />
     {props.children}
   </div>

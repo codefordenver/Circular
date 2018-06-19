@@ -10,14 +10,17 @@ const MyCampaignNavItem = ({ campaignId }) => (
   </NavItem>
 );
 
-const NavBar = ({ auth, signInGoogle, signInFacebook, signOut, userSignatures }) => {
+const NavBar = ({ auth, signInGoogle, signInFacebook, signOut, userSignatures, ...props }) => {
   const { _campaignID } = userSignatures;
   const userHasSignedCampaign = auth.status === 'SIGNED_IN' && _campaignID;
+  let homeText;
+  homeText =
+    props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
   return (
     <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">Denver Re:Imagine</Link>
+          <Link to="/">{homeText}</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
@@ -66,7 +69,10 @@ NavBar.propTypes = {
   signOut: PropTypes.func.isRequired,
   signInGoogle: PropTypes.func.isRequired,
   signInFacebook: PropTypes.func.isRequired,
-  userSignatures: PropTypes.shape({}).isRequired
+  userSignatures: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default NavBar;
