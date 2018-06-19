@@ -52,11 +52,16 @@ module.exports = app => {
   });
 
   app.get('/api/campaigns/:id', async (req, res) => {
-    const campaign = await Campaign.find({ _id: req.params.id }).populate(
-      '_wasteProviderId'
-    );
-
-    res.send(campaign);
+    try {
+      const campaign = await Campaign.find({ _id: req.params.id }).populate(
+        '_wasteProviderId'
+      );
+      res.send(campaign);
+    } catch (error) {
+      if (error.message.indexOf('Cast to ObjectId failed') > -1) {
+        res.send('Campaign does not exist.', 404);
+      }
+    }
   });
 
   app.post('/api/campaigns', async (req, res) => {
