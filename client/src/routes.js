@@ -14,7 +14,7 @@ import ManagerResources from './containers/ManagerResources';
 import DenverLearnMore from './containers/DenverLearnMore';
 import Collaboration from './containers/Collaboration';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import NotFound from './containers/NotFound';
+import NotFound from './components/NotFound';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
