@@ -5748,9 +5748,9 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-google-button@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.4.0.tgz#e2981318336ee15014dc090c845e9b4ed14e8973"
+react-google-button@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.5.3.tgz#d8c76328e51b55f2835a4ebe23817906dac6a4f8"
   dependencies:
     prop-types "^15.5.8"
 
