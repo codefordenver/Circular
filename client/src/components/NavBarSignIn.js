@@ -2,16 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
-const NavBarSignIn = ({ auth, signOut, signInGoogle, signInFacebook }) => {
-  const { displayName } = auth;
-  //   const endOfFirstName =
-  //     displayName !== null && displayName.indexOf(' ') > -1
-  //       ? displayName.indexOf(' ')
-  //       : displayName.length;
-  //   const firstName = displayName.substr(0, endOfFirstName);
-  return auth.status === 'SIGNED_IN' ? (
+const NavBarSignIn = ({ auth, signOut, signInGoogle, signInFacebook }) =>
+  (auth.status === 'SIGNED_IN' ? (
     <NavItem eventKey={5} onClick={signOut}>
-      Sign Out, {displayName}
+      Sign Out, {auth.displayName}
     </NavItem>
   ) : (
     <NavDropdown id="tools-dropdown" eventKey={5} title="Login">
@@ -22,8 +16,7 @@ const NavBarSignIn = ({ auth, signOut, signInGoogle, signInFacebook }) => {
         Sign in With Google
       </MenuItem>
     </NavDropdown>
-  );
-};
+  ));
 
 NavBarSignIn.propTypes = {
   auth: PropTypes.shape({}).isRequired,
