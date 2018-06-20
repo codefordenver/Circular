@@ -36,7 +36,7 @@ class SignCampaign extends Component {
       this.props.activeCampaign.campaign._id;
 
     await this.props.addSignatureToCampaign(
-      this.props.auth._id,
+      this.props.auth.uid,
       this.selectedCheckboxes,
       campaignId
     );
@@ -93,7 +93,7 @@ class SignCampaign extends Component {
                   activeCampaign.campaign._id === userSignatures._campaignID && (
                     <RenderRemoveSignature handleRemoveSignature={this.handleRemoveSignature} />
                   )}
-                {/* user is signed in && is currently on a page different 
+                {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
                 {loaded &&
                   userSignatures._campaignID &&
@@ -133,7 +133,8 @@ SignCampaign.propTypes = {
   }).isRequired,
   removeSignatureFromCampaign: PropTypes.func.isRequired,
   signInGoogle: PropTypes.func.isRequired,
-  signInFacebook: PropTypes.func.isRequired
+  signInFacebook: PropTypes.func.isRequired,
+  addSignatureToCampaign: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

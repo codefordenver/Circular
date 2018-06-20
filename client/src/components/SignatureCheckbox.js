@@ -22,8 +22,9 @@ class Checkbox extends Component {
 
     return (
       <div className="checkbox">
-        <label>
+        <label htmlFor="signatureCheckbox">
           <input
+            id="signatureCheckbox"
             type="checkbox"
             value={label}
             checked={isChecked}
