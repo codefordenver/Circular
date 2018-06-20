@@ -38,7 +38,6 @@
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
-    "firebase": "^5.0.4",
     "mongoose": "^4.12.3",
     "mongoose-geojson-schema": "^2.1.2",
     "nodemon": "^1.12.1",
@@ -47,16 +46,15 @@
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
     "react-bootstrap": "^0.32.1",
-    "serve": "^9.1.0"
+    "serve": "^6.4.8"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "cross-env": "^5.1.1",
-    "cypress": "^3.0.1",
+    "cypress": "^1.4.2",
     "cypress-testing-library": "^2.0.0",
-    "eslint": "^4.19.1",
+    "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-config-prettier": "^2.9.0",
     "eslint-config-react-app": "^2.0.1",
     "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-import": "^2.6.1",
@@ -68,6 +66,6 @@
     "mongo-in-memory": "0.0.5",
     "prettier": "^1.10.0",
     "prettier-eslint": "^8.2.2",
-    "prettier-eslint-cli": "^4.7.1"
+    "prettier-eslint-cli": "^4.4.0"
   }
 }

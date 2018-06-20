@@ -5,6 +5,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
+mongoose.Promise = global.Promise;
 require('./models/User');
 require('./models/Campaign');
 require('./models/Signature');
@@ -33,7 +34,11 @@ if (process.env.NODE_ENV === 'test') {
     }
   });
 } else {
-  mongoose.connect(keys.mongoURI);
+  mongoose.connect(keys.mongoURI, { useMongoClient: true }, function(err) {
+    err === null
+      ? console.log('Connection to Mongo Successful')
+      : console.log(err);
+  });
 }
 
 const app = express();
