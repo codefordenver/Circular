@@ -13,6 +13,8 @@ import CollapsePanel from '.././components/CollapsePanel';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import CampaignProgressBar from '../components/CampaignProgressBar';
 import CampaignStatus from '../components/CampaignStatus';
+import { fetchUserSignatures } from '../redux/actions/signature';
+import { signInGoogle, signInFacebook, signOut } from '../redux/actions/firebaseAuth';
 
 const MIN_CAMPAIGN_DURATION = 21;
 const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
@@ -20,6 +22,7 @@ class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchApartmentsRequest();
+    this.props.fetchUserSignatures('5ad27d0d829e17f7343211f8');
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -41,7 +44,11 @@ class CampaignPage extends Component {
   };
 
   render() {
-    const { activeCampaign: { campaign }, initialSearch: { apartments } } = this.props;
+    const {
+      userSignatures,
+      activeCampaign: { campaign },
+      initialSearch: { apartments }
+    } = this.props;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
 
     return (
@@ -151,7 +158,12 @@ class CampaignPage extends Component {
             </Row>
           </Col>
           <Col md={3} xs={12} className="side-bar">
-            <SignCampaign />
+            <SignCampaign
+              signInFacebook={signInFacebook}
+              signInGoogle={signInGoogle}
+              signOut={signOut}
+              userSignatures={userSignatures}
+            />
             <div className="text-center sig-bar-collapse-panel">
               <CollapsePanel
                 defaultExpanded
@@ -181,7 +193,9 @@ CampaignPage.propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,
+  userSignatures: PropTypes.shape({}).isRequired,
   fetchCampaignById: PropTypes.func.isRequired,
+  fetchUserSignatures: PropTypes.func.isRequired,
   fetchApartmentsRequest: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
@@ -189,12 +203,19 @@ CampaignPage.propTypes = {
 };
 
 export default connect(
-  ({ activeCampaign, initialSearch }) => ({
+  ({ activeCampaign, initialSearch, signature }) => ({
     activeCampaign,
-    initialSearch
+    initialSearch,
+    userSignatures: {
+      ...signature.userSignatures
+    }
   }),
   {
+    signInGoogle,
+    signInFacebook,
     fetchCampaignById,
+    signOut,
+    fetchUserSignatures,
     fetchApartmentsRequest
   }
 )(withRouter(CampaignPage));
