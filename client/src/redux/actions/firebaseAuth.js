@@ -29,17 +29,26 @@ export const signOut = () => dispatch => {
 
 // when auth changes dispatch signedIn, then fetchUserSignatures
 export const startListeningToAuthChanges = () => dispatch => {
+  // Listens for authStateChange from firebase
   auth.onAuthStateChanged(user => {
+    const { uid, email, displayName } = user;
+    // If user, then set user
     if (user) {
       dispatch(signedIn(user));
       const userData = {
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName
+        uid,
+        email,
+        displayName
       };
-      usersRef.child(user.uid).set(userData);
-      dispatch(fetchUserSignatures(user.uid));
+      // TODO will set user in the database
+      usersRef.doc(uid).set(userData);
+      // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
+      // will needs to pass user.uid to fetchUserSignatures once signatures are stored in Firebase
+      // sample
+      // dispatch(fetchUserSignatures('5ad27d0d829e17f7343211f8'));
+      dispatch(fetchUserSignatures(uid));
     } else {
+      // if there is no user, signOut() resets to initial state
       dispatch(signedOut());
     }
   });

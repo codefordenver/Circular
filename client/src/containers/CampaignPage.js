@@ -22,7 +22,7 @@ class CampaignPage extends Component {
   componentDidMount() {
     this.props.fetchCampaignById(this.props.params.id);
     this.props.fetchApartmentsRequest();
-    this.props.fetchUserSignatures('5ad27d0d829e17f7343211f8');
+    this.props.fetchUserSignatures();
   }
 
   componentWillUpdate(nextProps, nextState) {

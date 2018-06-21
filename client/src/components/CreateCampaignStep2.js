@@ -12,6 +12,7 @@ import {
   FormControl,
   Button
 } from 'react-bootstrap';
+import stateNames from '../components/CreateCampaignSteps/stateNames';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 import { fetchWasteProviders } from '../redux/actions/firebaseWasteProviders';
 
@@ -22,7 +23,7 @@ class CreateCampaignStep2 extends React.Component {
     super(props);
 
     this.defaultProvider = {
-      _id: WASTE_PROVIDER_NOT_SET_ID,
+      id: WASTE_PROVIDER_NOT_SET_ID,
       name: 'Select your provider(Optional)',
       phone: '',
       email: ''
@@ -32,24 +33,26 @@ class CreateCampaignStep2 extends React.Component {
     };
   }
 
+  // TODO MOVES THIS TO CONTAINER TO PREVENT RELOAD OF DATA ON SELECTION OF WASTE PROVIDER
   componentDidMount() {
     this.props.fetchWasteProviders();
   }
 
   setOptionalInfo = async e => {
     e.preventDefault();
+    const { target: { name, email, phone, address, buildingCount, unitCount } } = e;
 
     const updateCampainInfo = {
       propertyManager: {
-        name: e.target.name.value,
-        address: e.target.address.value,
-        phone: e.target.phone.value,
-        email: e.target.email.value
+        name: name.value,
+        address: address.value,
+        phone: phone.value,
+        email: email.value
       },
       _wasteProviderId: undefined,
       buildingInfo: {
-        numBuildings: e.target.buildingCount.value,
-        numUnits: e.target.unitCount.value
+        numBuildings: buildingCount.value,
+        numUnits: unitCount.value
       }
     };
     const wasteProviderId = e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
@@ -65,8 +68,8 @@ class CreateCampaignStep2 extends React.Component {
     const wasteMgmtId = e.target.options[e.target.selectedIndex].id;
     let activeProvider = this.defaultProvider;
     if (wasteMgmtId !== WASTE_PROVIDER_NOT_SET_ID) {
-      activeProvider = this.props.wasteProvider.wasteProviders.find(
-        provider => provider._id === wasteMgmtId
+      activeProvider = this.props.firebaseWasteProviders.wasteProviders.find(
+        provider => provider.id === wasteMgmtId
       );
     }
 
@@ -75,12 +78,13 @@ class CreateCampaignStep2 extends React.Component {
 
   renderWasteProviderOptions = wasteProviders =>
     wasteProviders.map(provider => (
-      <option key={provider._id} id={provider._id}>
+      <option key={provider.id} id={provider.id}>
         {provider.name}
       </option>
     ));
   render() {
-    let { wasteProvider: { wasteProviders } } = this.props;
+    let { firebaseWasteProviders: { wasteProviders } } = this.props;
+    const { loaded } = this.props.firebaseWasteProviders;
     wasteProviders = [this.defaultProvider, ...(wasteProviders || [])];
     return (
       <Form onSubmit={this.setOptionalInfo} horizontal className="create-campaign-form">
@@ -104,17 +108,20 @@ class CreateCampaignStep2 extends React.Component {
           </Col>
           <Col xs={3}>
             <ControlLabel>STATE</ControlLabel>
-            <FormControl componentClass="select" name="state">
-              <option value="" selected="selected" />
-              {stateNames.map(state => {
-                const { abbr, name } = state;
-                return (
-                  <option key={abbr} value={abbr}>
-                    {name}
-                  </option>
-                );
-              })}
-            </FormControl>
+            {loaded && (
+              <FormControl componentClass="select" name="state">
+                <option value="state" />
+                {/* // TODO build sort function or return from firestore sorted */}
+                {stateNames.map(state => {
+                  const { abbr, name } = state;
+                  return (
+                    <option key={abbr} value={abbr}>
+                      {name}
+                    </option>
+                  );
+                })}
+              </FormControl>
+            )}
           </Col>
           <Col xs={3}>
             <ControlLabel>ZIP</ControlLabel>
@@ -155,7 +162,6 @@ class CreateCampaignStep2 extends React.Component {
             />
           </Col>
         </FormGroup>
-
         <FormGroup>
           <h2>Building Info:</h2>
           <Col xs={12}>
@@ -173,7 +179,6 @@ class CreateCampaignStep2 extends React.Component {
           </Col>
           <Col xs={10}>TOTAL UNITS</Col>
         </FormGroup>
-
         <FormGroup>
           <Col xs={12}>
             <Link to="/new-campaign/address" className="btn next-button fl">
@@ -189,73 +194,25 @@ class CreateCampaignStep2 extends React.Component {
   }
 }
 
-const stateNames = [
-  { name: 'Alabama', abbr: 'AL' },
-  { name: 'Alaska', abbr: 'AK' },
-  { name: 'Arizona', abbr: 'AZ' },
-  { name: 'Arkansas', abbr: 'AR' },
-  { name: 'California', abbr: 'CA' },
-  { name: 'Colorado', abbr: 'CO' },
-  { name: 'Connecticut', abbr: 'CT' },
-  { name: 'Delaware', abbr: 'DE' },
-  { name: 'District of Columbia', abbr: 'DC' },
-  { name: 'Florida', abbr: 'FL' },
-  { name: 'Georgia', abbr: 'GA' },
-  { name: 'Hawaii', abbr: 'HI' },
-  { name: 'Idaho', abbr: 'ID' },
-  { name: 'Illinois', abbr: 'IL' },
-  { name: 'Indiana', abbr: 'IN' },
-  { name: 'Iowa', abbr: 'IA' },
-  { name: 'Kansas', abbr: 'KS' },
-  { name: 'Kentucky', abbr: 'KY' },
-  { name: 'Louisiana', abbr: 'LA' },
-  { name: 'Maine', abbr: 'ME' },
-  { name: 'Maryland', abbr: 'MD' },
-  { name: 'Massachusetts', abbr: 'MA' },
-  { name: 'Michigan', abbr: 'MI' },
-  { name: 'Minnesota', abbr: 'MN' },
-  { name: 'Mississippi', abbr: 'MS' },
-  { name: 'Missouri', abbr: 'MO' },
-  { name: 'Montana', abbr: 'MT' },
-  { name: 'Nebraska', abbr: 'NE' },
-  { name: 'Nevada', abbr: 'NV' },
-  { name: 'New Hampshire', abbr: 'NH' },
-  { name: 'New Jersey', abbr: 'NJ' },
-  { name: 'New Mexico', abbr: 'NM' },
-  { name: 'New York', abbr: 'NY' },
-  { name: 'North Carolina', abbr: 'NC' },
-  { name: 'North Dakota', abbr: 'ND' },
-  { name: 'Ohio', abbr: 'OH' },
-  { name: 'Oklahoma', abbr: 'OK' },
-  { name: 'Oregon', abbr: 'OR' },
-  { name: 'Pennsylvania', abbr: 'PA' },
-  { name: 'Rhode Island', abbr: 'RI' },
-  { name: 'South Carolina', abbr: 'SC' },
-  { name: 'South Dakota', abbr: 'SD' },
-  { name: 'Tennessee', abbr: 'TN' },
-  { name: 'Texas', abbr: 'TX' },
-  { name: 'Utah', abbr: 'UT' },
-  { name: 'Vermont', abbr: 'VT' },
-  { name: 'Virginia', abbr: 'VA' },
-  { name: 'Washington', abbr: 'WA' },
-  { name: 'West Virginia', abbr: 'WV' },
-  { name: 'Wisconsin', abbr: 'WI' },
-  { name: 'Wyoming', abbr: 'WY' }
-];
-
 CreateCampaignStep2.propTypes = {
   updateNewCampaign: PropTypes.func.isRequired,
   fetchWasteProviders: PropTypes.func.isRequired,
-  wasteProvider: PropTypes.shape({
-    wasteProviders: PropTypes.arrayOf(PropTypes.object),
+  firebaseWasteProviders: PropTypes.arrayOf({
+    loaded: PropTypes.bool.isRequired,
+    wasteProviders: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired
+    }),
     error: PropTypes.objectOf(PropTypes.any)
   }).isRequired
 };
 
 export default connect(
-  ({ initialSearch, wasteProvider }) => ({
+  ({ initialSearch, firebaseWasteProviders }) => ({
     initialSearch,
-    wasteProvider
+    firebaseWasteProviders
   }),
   {
     updateNewCampaign,

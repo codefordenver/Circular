@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/firestore';
 
 const config = {
   apiKey: 'AIzaSyDCfhYmCmE0YQbJA-RGq6C0UpiGSSIM3S8',
@@ -12,11 +13,13 @@ const config = {
 };
 
 firebase.initializeApp(config);
+const firestore = firebase.firestore();
+const settings = { timestampsInSnapshots: true };
+firestore.settings(settings);
 
 export default firebase;
-
-export const database = firebase.database();
 export const auth = firebase.auth();
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-export const usersRef = database.ref('users/');
+export const usersRef = firestore.collection('users');
+export const wasteProvidersRef = firestore.collection('wasteProviders');
