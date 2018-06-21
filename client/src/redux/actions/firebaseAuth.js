@@ -40,7 +40,6 @@ export const startListeningToAuthChanges = () => dispatch => {
         email,
         displayName
       };
-      // TODO will set user in the database
       usersRef.doc(uid).set(userData);
       // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
       // will needs to pass user.uid to fetchUserSignatures once signatures are stored in Firebase
