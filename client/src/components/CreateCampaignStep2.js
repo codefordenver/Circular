@@ -13,7 +13,7 @@ import {
   Button
 } from 'react-bootstrap';
 import { updateNewCampaign } from '../redux/actions/newCampaign';
-import { fetchWasteProviders } from '../redux/actions/wasteProvider';
+import { fetchWasteProviders } from '../redux/actions/firebaseWasteProviders';
 
 const WASTE_PROVIDER_NOT_SET_ID = 'WASTE_PROVIDER_NOT_SET_ID';
 
@@ -106,57 +106,14 @@ class CreateCampaignStep2 extends React.Component {
             <ControlLabel>STATE</ControlLabel>
             <FormControl componentClass="select" name="state">
               <option value="" selected="selected" />
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DE">Delaware</option>
-              <option value="DC">District Of Columbia</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="IA">Iowa</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="ME">Maine</option>
-              <option value="MD">Maryland</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MS">Mississippi</option>
-              <option value="MO">Missouri</option>
-              <option value="MT">Montana</option>
-              <option value="NE">Nebraska</option>
-              <option value="NV">Nevada</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NY">New York</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VT">Vermont</option>
-              <option value="VA">Virginia</option>
-              <option value="WA">Washington</option>
-              <option value="WV">West Virginia</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WY">Wyoming</option>
+              {stateNames.map(state => {
+                const { abbr, name } = state;
+                return (
+                  <option key={abbr} value={abbr}>
+                    {name}
+                  </option>
+                );
+              })}
             </FormControl>
           </Col>
           <Col xs={3}>
@@ -231,6 +188,60 @@ class CreateCampaignStep2 extends React.Component {
     );
   }
 }
+
+const stateNames = [
+  { name: 'Alabama', abbr: 'AL' },
+  { name: 'Alaska', abbr: 'AK' },
+  { name: 'Arizona', abbr: 'AZ' },
+  { name: 'Arkansas', abbr: 'AR' },
+  { name: 'California', abbr: 'CA' },
+  { name: 'Colorado', abbr: 'CO' },
+  { name: 'Connecticut', abbr: 'CT' },
+  { name: 'Delaware', abbr: 'DE' },
+  { name: 'District of Columbia', abbr: 'DC' },
+  { name: 'Florida', abbr: 'FL' },
+  { name: 'Georgia', abbr: 'GA' },
+  { name: 'Hawaii', abbr: 'HI' },
+  { name: 'Idaho', abbr: 'ID' },
+  { name: 'Illinois', abbr: 'IL' },
+  { name: 'Indiana', abbr: 'IN' },
+  { name: 'Iowa', abbr: 'IA' },
+  { name: 'Kansas', abbr: 'KS' },
+  { name: 'Kentucky', abbr: 'KY' },
+  { name: 'Louisiana', abbr: 'LA' },
+  { name: 'Maine', abbr: 'ME' },
+  { name: 'Maryland', abbr: 'MD' },
+  { name: 'Massachusetts', abbr: 'MA' },
+  { name: 'Michigan', abbr: 'MI' },
+  { name: 'Minnesota', abbr: 'MN' },
+  { name: 'Mississippi', abbr: 'MS' },
+  { name: 'Missouri', abbr: 'MO' },
+  { name: 'Montana', abbr: 'MT' },
+  { name: 'Nebraska', abbr: 'NE' },
+  { name: 'Nevada', abbr: 'NV' },
+  { name: 'New Hampshire', abbr: 'NH' },
+  { name: 'New Jersey', abbr: 'NJ' },
+  { name: 'New Mexico', abbr: 'NM' },
+  { name: 'New York', abbr: 'NY' },
+  { name: 'North Carolina', abbr: 'NC' },
+  { name: 'North Dakota', abbr: 'ND' },
+  { name: 'Ohio', abbr: 'OH' },
+  { name: 'Oklahoma', abbr: 'OK' },
+  { name: 'Oregon', abbr: 'OR' },
+  { name: 'Pennsylvania', abbr: 'PA' },
+  { name: 'Rhode Island', abbr: 'RI' },
+  { name: 'South Carolina', abbr: 'SC' },
+  { name: 'South Dakota', abbr: 'SD' },
+  { name: 'Tennessee', abbr: 'TN' },
+  { name: 'Texas', abbr: 'TX' },
+  { name: 'Utah', abbr: 'UT' },
+  { name: 'Vermont', abbr: 'VT' },
+  { name: 'Virginia', abbr: 'VA' },
+  { name: 'Washington', abbr: 'WA' },
+  { name: 'West Virginia', abbr: 'WV' },
+  { name: 'Wisconsin', abbr: 'WI' },
+  { name: 'Wyoming', abbr: 'WY' }
+];
 
 CreateCampaignStep2.propTypes = {
   updateNewCampaign: PropTypes.func.isRequired,
