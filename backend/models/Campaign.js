@@ -7,7 +7,7 @@ var SchemaTypes = mongoose.Schema.Types;
 
 const campaignSchema = new Schema(
   {
-    name: { type: String, required: true, unique: true },
+    // name: { type: String, required: true, unique: true },
     address: { type: String, required: true },
     latLng: { type: SchemaTypes.GeoJSON, required: true },
     voteCount: { type: Number, default: 0 },

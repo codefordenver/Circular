@@ -39,11 +39,6 @@ const CreateCampaignStep1 = props => {
               <ControlLabel>Address</ControlLabel>
               <FormControl type="text" value={formattedAddress} name="address" readOnly />
             </FormGroup>
-            <FormGroup>
-              <ControlLabel className="create-campaign-control-label">Campaign Name</ControlLabel>
-              <div className="requiredtool" />
-              <FormControl type="text" name="campaignName" required />
-            </FormGroup>
             <br />
             <Button bsStyle="remove-default" className="next-button fr" type="submit">
               Next
