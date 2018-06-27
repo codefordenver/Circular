@@ -36,10 +36,9 @@ module.exports = app => {
     const campaigns = await Campaign.find({});
 
     const data = campaigns.map(
-      ({ _id, address, name, voteCount, latLng: { coordinates } }) => {
+      ({ _id, address, voteCount, latLng: { coordinates } }) => {
         return {
           address,
-          name,
           voteCount,
           lat: coordinates[1],
           lng: coordinates[0],
@@ -62,7 +61,6 @@ module.exports = app => {
   app.post('/api/campaigns', async (req, res) => {
     const {
       address,
-      name,
       lat,
       lng,
       _wasteProviderId,
@@ -71,7 +69,6 @@ module.exports = app => {
     } = req.body;
 
     const campaign = new Campaign({
-      name,
       address,
       latLng: {
         type: 'Point',
