@@ -1,5 +1,5 @@
 import { auth, googleAuthProvider, facebookAuthProvider, usersRef } from '../../firebase';
-import { fetchUserSignatures } from './signature';
+import { firebaseFetchUserSignatures } from './firebaseSignatures';
 
 const signedIn = user => ({
   type: 'SIGN_IN',
@@ -45,7 +45,7 @@ export const startListeningToAuthChanges = () => dispatch => {
       // will needs to pass user.uid to fetchUserSignatures once signatures are stored in Firebase
       // sample
       // dispatch(fetchUserSignatures('5ad27d0d829e17f7343211f8'));
-      dispatch(fetchUserSignatures(uid));
+      dispatch(firebaseFetchUserSignatures());
     } else {
       // if there is no user, signOut() resets to initial state
       dispatch(signedOut());

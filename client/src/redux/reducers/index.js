@@ -11,6 +11,7 @@ import comments from './comments';
 import firebaseAuth from './firebaseAuth';
 import firebaseWasteProviders from './firebaseWasteProvier';
 import wasteProvider from './wasteProvider';
+import firebaseSignaturesReducer from './firebaseSignatures';
 
 const reducers = combineReducers({
   auth: firebaseAuth,
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   comments,
   signature,
   firebaseWasteProviders,
+  firebaseSignatures: firebaseSignaturesReducer,
   wasteProvider
 });
 

@@ -2,7 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavBar from '../components/Navbar';
 
-const Application = ({ auth, signInFacebook, signInGoogle, signOut, userSignatures, ...props }) => (
+const Application = ({
+  auth,
+  signInFacebook,
+  signInGoogle,
+  signOut,
+  userSignatures,
+
+  ...props
+}) => (
   <div className="app-container">
     <NavBar
       auth={auth}

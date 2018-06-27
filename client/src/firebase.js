@@ -23,3 +23,4 @@ export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 export const usersRef = firestore.collection('users');
 export const wasteProvidersRef = firestore.collection('wasteProviders');
+export const signaturesRef = firestore.collection('signatures');
