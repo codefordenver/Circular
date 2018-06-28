@@ -23,7 +23,6 @@ const CreateCampaignStep1 = props => {
     e.preventDefault();
     await updateNewCampaign({
       address: searchedAddress.formatted_address,
-      name: e.target.campaignName.value,
       lat: searchedAddress.latLng.response.lat,
       lng: searchedAddress.latLng.response.lng
     });
