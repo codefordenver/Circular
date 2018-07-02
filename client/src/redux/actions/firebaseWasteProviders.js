@@ -39,7 +39,7 @@ export const fetchWasteProviders = () => dispatch => {
       dispatch(populateWasteProviders(allWasteProviders));
     })
     .catch(err => {
-      console.log('Error getting documents', err);
+      // console.log('Error getting documents', err);
     });
 };
 

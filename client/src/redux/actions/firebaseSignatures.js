@@ -24,11 +24,11 @@ export const firebaseFetchUserSignatures = () => dispatch => {
           campaignId: doc.data().campaignId
         })
       );
-      console.log('got to FBUser dispatch');
+      // console.log('got to FBUser dispatch');
       dispatch(populateFirebaseUserSignatures(firebaseUserSignatures));
     })
     .catch(err => {
-      console.log('Error getting documents', err);
+      // console.log('Error getting documents', err);
     });
 };
 
@@ -40,27 +40,6 @@ export const startListeningForSignatures = () => dispatch => {
       signatures.push(doc.data().userId);
     });
     dispatch(populateFirebaseUserSignatures(signatures));
-    console.log('current signatures ', signatures);
+    // console.log('current signatures ', signatures);
   });
 };
-
-// db.collection("cities").where("state", "==", "CA")
-//     .onSnapshot(function(querySnapshot) {
-//         var cities = [];
-//         querySnapshot.forEach(function(doc) {
-//             cities.push(doc.data().name);
-//         });
-//         console.log("Current cities in CA: ", cities.join(", "));
-//     });
-
-// dispatch key and message on add or remove
-// export const startListeningForMessages = () => {
-//   return dispatch => {
-//     messagesRef.on("child_added", snapshot => {
-//       dispatch(addMessage(snapshot.key, snapshot.val()));
-//     });
-//     messagesRef.on("child_removed", snapshot => {
-//       dispatch(removeMessage(snapshot.key));
-//     });
-//   };
-// };
