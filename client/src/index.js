@@ -14,6 +14,7 @@ import { saveState } from './redux/localStorage';
 
 // firebase actions
 import { startListeningToAuthChanges } from './redux/actions/firebaseAuth';
+import { startListeningForSignatures } from './redux/actions/firebaseSignatures';
 
 bootstrapUtils.addStyle(Panel, 'remove-default');
 bootstrapUtils.addStyle(Navbar, 'remove-default');
@@ -27,6 +28,7 @@ store.subscribe(() => {
 });
 
 store.dispatch(startListeningToAuthChanges());
+store.dispatch(startListeningForSignatures());
 
 const history = syncHistoryWithStore(browserHistory, store);
 

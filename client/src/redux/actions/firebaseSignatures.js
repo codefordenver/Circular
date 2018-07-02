@@ -32,7 +32,26 @@ export const firebaseFetchUserSignatures = () => dispatch => {
     });
 };
 
-//
+// start listening for new signatures
+export const startListeningForSignatures = () => dispatch => {
+  signaturesRef.onSnapshot(querySnapshot => {
+    const signatures = [];
+    querySnapshot.forEach(doc => {
+      signatures.push(doc.data().userId);
+    });
+    dispatch(populateFirebaseUserSignatures(signatures));
+    console.log('current signatures ', signatures);
+  });
+};
+
+// db.collection("cities").where("state", "==", "CA")
+//     .onSnapshot(function(querySnapshot) {
+//         var cities = [];
+//         querySnapshot.forEach(function(doc) {
+//             cities.push(doc.data().name);
+//         });
+//         console.log("Current cities in CA: ", cities.join(", "));
+//     });
 
 // dispatch key and message on add or remove
 // export const startListeningForMessages = () => {
