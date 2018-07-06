@@ -13,16 +13,13 @@ class ChooseCampaign extends Component {
     this.state = {
       selectedOption: null
     };
-    this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleOptionChange(e) {
+  handleOptionChange = e => {
     this.props.selectAddress(e.target.value);
-  }
+  };
 
-  handleFormSubmit(e) {
+  handleFormSubmit = e => {
     e.stopPropagation();
     e.preventDefault();
     const { selectedAddress } = this.props;
@@ -31,10 +28,10 @@ class ChooseCampaign extends Component {
     } else if (!selectedAddress || selectedAddress === 'none') {
       this.props.router.push('/new-campaign/address');
     } else {
-      this.props.fetchCampaignById(selectedAddress.id);
-      this.props.router.push(`/campaign/${selectedAddress.id}`);
+      this.props.fetchCampaignById(selectedAddress.campaignId);
+      this.props.router.push(`/campaign/${selectedAddress.campaignId}`);
     }
-  }
+  };
 
   noMatchAddress = {
     address: 'none',
@@ -180,7 +177,7 @@ class ChooseCampaign extends Component {
       searchedAddress,
       error
     } = this.props;
-
+    console.log(this.props);
     return (
       <Grid fluid>
         <Row>
@@ -193,8 +190,7 @@ class ChooseCampaign extends Component {
             {loaded &&
               nearbyCampaigns &&
               nearbyCampaigns.length !== 0 &&
-              nearbyCampaigns[0].address === searchedAddress.formatted_address &&
-              this.renderCampaignAlreadyExists(nearbyCampaigns, selectedAddress)}
+              nearbyCampaigns[0].address === searchedAddress.formatted_address && <h3> here</h3>}
             {loaded &&
               nearbyCampaigns &&
               nearbyCampaigns.length !== 0 &&

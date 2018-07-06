@@ -6,18 +6,17 @@ const inititalState = {
 export default function firebaseSignaturesReducer(state = inititalState, action) {
   const { response, type } = action;
   switch (type) {
-    case 'FETCH_FIREBASE_SIGNATURES_REQUEST':
+    case 'FETCH_FIREBASE_CAMPAIGNS_REQUEST':
       return {
         loading: true,
         loaded: false
       };
-    case 'FETCH_FIREBASE_SIGNATURES_SUCCESS':
+    case 'FETCH_FIREBASE_CAMPAIGNS_SUCCESS':
       return {
         loading: false,
         loaded: true,
-        firebaseUserSignatures: response
+        firebaseCampaigns: response
       };
-
     default:
       return state;
   }

@@ -13,7 +13,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
-const firestore = firebase.firestore();
+export const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);
 
@@ -24,3 +24,6 @@ export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 export const usersRef = firestore.collection('users');
 export const wasteProvidersRef = firestore.collection('wasteProviders');
 export const signaturesRef = firestore.collection('signatures');
+export const campaignsRef = firestore.collection('campaigns');
+// must export firestore without () to access GeoPoint constructor
+export const GeoPoint = firebase.firestore.GeoPoint;

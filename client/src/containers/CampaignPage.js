@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import fetchCampaignById from '../redux/actions/activeCampaign';
+import { populateActiveCampaign } from '../redux/actions/firebaseActiveCampaign';
 import Discussion from '../components/Discussion';
 import SignCampaign from '../components/SignCampaign';
 import SignatureList from '../components/SignatureList';
@@ -20,7 +21,7 @@ const MIN_CAMPAIGN_DURATION = 21;
 const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 class CampaignPage extends Component {
   componentDidMount() {
-    this.props.fetchCampaignById(this.props.params.id);
+    this.props.populateActiveCampaign(this.props.params.id);
     this.props.fetchApartmentsRequest();
     this.props.fetchUserSignatures();
   }
@@ -213,7 +214,7 @@ export default connect(
   {
     signInGoogle,
     signInFacebook,
-    fetchCampaignById,
+    populateActiveCampaign,
     signOut,
     fetchUserSignatures,
     fetchApartmentsRequest

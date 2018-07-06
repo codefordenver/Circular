@@ -49,14 +49,14 @@ export function clearSearchResults() {
 }
 
 export function searchAddressFlow(address, latLngHelper) {
-  return async (dispatch) => {
+  return async dispatch => {
     browserHistory.push('/choose-campaign');
     dispatch(beginAddressSearch());
     const latLng = await dispatch(getLatLong(address, latLngHelper));
     const addressWithLatlng = { ...address, latLng };
     dispatch(stashAddress(addressWithLatlng));
     if (latLng.error) {
-      return console.error(latLng);
+      return console.error('error latlng ', latLng);
     }
     return dispatch(fetchNearbyCampaigns(latLng.response));
   };

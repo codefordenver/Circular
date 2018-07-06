@@ -12,18 +12,22 @@ import firebaseAuth from './firebaseAuth';
 import firebaseWasteProviders from './firebaseWasteProvier';
 import wasteProvider from './wasteProvider';
 import firebaseSignaturesReducer from './firebaseSignatures';
+import firebaseCampaigns from './firebaseCampaigns';
+import firebaseInitialSearch from './firebaseInitialSearch';
+import firebaseActiveCampaign from './firebaseActiveCampaign';
 
 const reducers = combineReducers({
   auth: firebaseAuth,
   routing,
   googleMap,
   newCampaign,
-  initialSearch,
-  activeCampaign,
+  initialSearch: firebaseInitialSearch,
+  activeCampaign: firebaseActiveCampaign,
   comments,
   signature,
   firebaseWasteProviders,
   firebaseSignatures: firebaseSignaturesReducer,
+  firebaseCampaigns,
   wasteProvider
 });
 

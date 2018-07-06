@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
-
-import { searchAddressFlow, clearSearchResults } from '../redux/actions/initialSearch';
+import { GeoPoint } from '../firebase';
+import { clearSearchResults } from '../redux/actions/initialSearch';
+import { firebaseSearchAddressFlow } from '../redux/actions/firebaseInitialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -18,9 +19,13 @@ class AutoSuggestInput extends Component {
 
   handleSelect(address) {
     this.setState({ address });
+    // use address to get Lat Long
     geocodeByAddress(address)
-      .then(results => {
-        this.props.searchAddressFlow(results[0], getLatLng);
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        // convert searchCoordinates into Firestore GeoPoint
+        const searchedGeoPoint = new GeoPoint(lat, lng);
+        this.props.firebaseSearchAddressFlow(address, searchedGeoPoint);
       })
       .catch(error => this.setState({ error }));
   }
@@ -103,13 +108,13 @@ class AutoSuggestInput extends Component {
 }
 
 AutoSuggestInput.propTypes = {
-  searchAddressFlow: PropTypes.func.isRequired,
+  firebaseSearchAddressFlow: PropTypes.func.isRequired,
   clearSearchResults: PropTypes.func.isRequired,
   isScriptLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(({ initialSearch }) => ({ initialSearch }), {
-  searchAddressFlow,
+export default connect(({ firebaseInitialSearch }) => ({ firebaseInitialSearch }), {
+  firebaseSearchAddressFlow,
   clearSearchResults
 })(
   scriptLoader(

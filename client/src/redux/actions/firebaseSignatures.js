@@ -2,34 +2,19 @@ import { signaturesRef } from '../../firebase';
 
 // fetch firebase users signatures request
 export const firebaseFetchUserSignaturesRequest = () => ({
-  type: 'FETCH_FIREBASE_USERS_REQUEST'
+  type: 'FETCH_FIREBASE_SIGNATURES_REQUEST'
 });
 
 // populate firebase signatures
 export const populateFirebaseUserSignatures = firebaseUserSignatures => ({
-  type: 'FETCH_FIREBASE_USERS_SUCCESS',
+  type: 'FETCH_FIREBASE_SIGNATURES_SUCCESS',
   response: firebaseUserSignatures
 });
 
 // dispatch thunk for firebase users
-export const firebaseFetchUserSignatures = () => dispatch => {
+export const firebaseFetchUserSignatures = firebaseUserSignatures => dispatch => {
   dispatch(firebaseFetchUserSignaturesRequest());
-  signaturesRef
-    .get()
-    .then(snapshot => {
-      const firebaseUserSignatures = [];
-      snapshot.forEach(doc =>
-        firebaseUserSignatures.push({
-          userId: doc.userId,
-          campaignId: doc.data().campaignId
-        })
-      );
-      // console.log('got to FBUser dispatch');
-      dispatch(populateFirebaseUserSignatures(firebaseUserSignatures));
-    })
-    .catch(err => {
-      // console.log('Error getting documents', err);
-    });
+  dispatch(populateFirebaseUserSignatures(firebaseUserSignatures));
 };
 
 // start listening for new signatures
@@ -37,9 +22,28 @@ export const startListeningForSignatures = () => dispatch => {
   signaturesRef.onSnapshot(querySnapshot => {
     const signatures = [];
     querySnapshot.forEach(doc => {
-      signatures.push(doc.data().userId);
+      signatures.push({ userId: doc.data().userId, campaignId: doc.data().campaignId });
     });
-    dispatch(populateFirebaseUserSignatures(signatures));
-    // console.log('current signatures ', signatures);
+    console.log('signatures ', signatures);
+    dispatch(firebaseFetchUserSignatures(signatures));
   });
 };
+
+// export const startListeningForSignatures = () => dispatch => {
+//   signaturesRef.onSnapshot(snapshot => {
+//     snapshot.docChanges().forEach(change => {
+//       if (change.type === 'added') {
+//         const firebaseUserSignatures = change.doc.data();
+//         console.log('dispatching this bitch', firebaseUserSignatures);
+//         dispatch(populateFirebaseUserSignatures(firebaseUserSignatures));
+//         // do this thing change.doc.data()
+//       }
+//       // if (change.type === 'modified') {
+//       //   console.log('changed ', change.doc.data());
+//       // }
+//       // if (change.type === 'removed') {
+//       //   // do this thing change.doc.data()]}
+//       // }
+//     });
+//   });
+// };

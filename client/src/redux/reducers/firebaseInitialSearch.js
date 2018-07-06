@@ -1,0 +1,46 @@
+const defaultState = {
+  loading: false,
+  loaded: false,
+  searchedAddress: null,
+  error: null,
+  nearbyCampaigns: null
+};
+
+export default function (state = defaultState, action) {
+  const { response, error, type } = action;
+  switch (type) {
+    case 'FIREBASE_STASH_ADDRESS':
+      return {
+        ...state,
+        searchedAddress: response
+      };
+    case 'FIREBASE_STASH_LAT_LNG':
+      return {
+        ...state,
+        latLng: response
+      };
+    case 'FETCH_NEARBY_CAMPAIGNS_REQUEST':
+      return {
+        ...state,
+        loading: true
+      };
+    case 'FETCH_NEARBY_CAMPAIGNS_SUCESS':
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        nearbyCampaigns: response
+      };
+    case 'SELECT_ADDRESS': {
+      const selectedAddress =
+        state.nearbyCampaigns.find(c => c.address === action.value) || action.value;
+      return {
+        ...state,
+        selectedAddress,
+        error: null
+      };
+    }
+    default:
+      return state;
+  }
+}

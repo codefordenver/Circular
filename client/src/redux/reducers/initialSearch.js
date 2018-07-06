@@ -63,8 +63,7 @@ export default function (state = defaultState, action) {
         }
       };
     case SELECT_ADDRESS: {
-      const selectedAddress =
-        state.nearbyCampaigns.find(c => c.address === action.value) || action.value;
+      const selectedAddress = state.nearbyCampaigns.find(c => c.address === response) || response;
       return {
         ...state,
         selectedAddress,
