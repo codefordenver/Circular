@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexRoute, Route, IndexRedirect } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
-import ChooseCampaign from './containers/ChooseCampaign';
+import FirebaseChooseCampaign from './containers/FirebaseChooseCampaign';
 import NewCampaign from './containers/NewCampaign';
 import CreateCampaignStep1 from './components/CreateCampaignStep1';
 import CreateCampaignStep2 from './components/CreateCampaignStep2';
@@ -21,7 +21,7 @@ export default (
     <IndexRoute getComponent={(location, callback) => callback(null, Home)} />
     <Route
       path="/choose-campaign"
-      getComponent={(location, callback) => callback(null, ChooseCampaign)}
+      getComponent={(location, callback) => callback(null, FirebaseChooseCampaign)}
     />
     <Route
       path="/campaign"

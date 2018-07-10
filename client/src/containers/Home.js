@@ -3,25 +3,35 @@ import { Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
-import ApartmentMap from '../components/CampaignsMap';
+import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
 import InfoAndLinks from '../components/InfoAndLinks';
 import Footer from '../components/Footer';
-
-import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
+import {
+  firebaseSearchAddressFlow,
+  clearSearchResults
+} from '../redux/actions/firebaseInitialSearch';
+import { firebaseCreateNewCampaign } from '../redux/actions/firebaseActiveCampaign';
 import { openMap, closeMap } from '../redux/actions/googleMap';
 
 class Home extends Component {
-  componentWillMount() {
-    this.props.fetchApartmentsRequest();
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-
   render() {
-    const { initialSearch: { apartments }, googleMap: { isOpen } } = this.props;
+    const { firebaseCampaigns, googleMap: { isOpen } } = this.props;
+    const { campaigns } = firebaseCampaigns;
     return (
       <div>
-        <HeroCTA openMap={this.props.openMap} />
-        <ApartmentMap isOpen={isOpen} markers={apartments} closeMap={this.props.closeMap} />
+        <HeroCTA
+          openMap={this.props.openMap}
+          firebaseSearchAddressFlow={firebaseSearchAddressFlow}
+          clearSearchResults={clearSearchResults}
+          firebaseCampaigns={firebaseCampaigns}
+          router={this.props.router}
+        />
+        <CampaignsMap isOpen={isOpen} markers={campaigns} closeMap={this.props.closeMap} />
         <Grid fluid className="home-section-container">
           <StepByStep />
           <InfoAndLinks />
@@ -33,19 +43,41 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  fetchApartmentsRequest: PropTypes.func.isRequired,
-  initialSearch: PropTypes.shape({
-    apartments: PropTypes.array.isRequired
+  firebaseSearchAddressFlow: PropTypes.func.isRequired,
+  firebaseCampaigns: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
+    campaigns: PropTypes.arrayOf(
+      PropTypes.shape({
+        address: PropTypes.string.isRequired,
+        campaignId: PropTypes.string.isRequired,
+        createdAt: PropTypes.shape({}).isRequired,
+        modifiedAt: PropTypes.shape({}).isRequired,
+        latLng: PropTypes.shape({
+          _lat: PropTypes.string.isRequired,
+          _long: PropTypes.string.isRequired
+        }).isRequired
+      }).isRequired
+    ).isRequired
   }).isRequired,
   googleMap: PropTypes.shape({
     isOpen: PropTypes.bool.isRequired
   }).isRequired,
   openMap: PropTypes.func.isRequired,
-  closeMap: PropTypes.func.isRequired
+  closeMap: PropTypes.func.isRequired,
+  router: PropTypes.shape({}).isRequired
 };
 
-export default connect(({ initialSearch, googleMap }) => ({ initialSearch, googleMap }), {
-  fetchApartmentsRequest,
-  openMap,
-  closeMap
-})(Home);
+export default connect(
+  ({ initialSearch, googleMap, firebaseCampaigns, firebaseCreateNewCampaign }) => ({
+    ...initialSearch,
+    googleMap,
+    firebaseCampaigns
+  }),
+  {
+    firebaseSearchAddressFlow,
+    clearSearchResults,
+    openMap,
+    closeMap
+  }
+)(Home);

@@ -27,3 +27,4 @@ export const signaturesRef = firestore.collection('signatures');
 export const campaignsRef = firestore.collection('campaigns');
 // must export firestore without () to access GeoPoint constructor
 export const GeoPoint = firebase.firestore.GeoPoint;
+export const Timestamp = firebase.firestore.FieldValue.serverTimestamp();

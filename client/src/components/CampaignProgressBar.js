@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 class CampaignProgessBar extends React.Component {
   getPhaseCompletionDates = (startDate, numSteps, duration) => {
+    console.log(startDate);
     const phaseDates = [];
     for (let i = 0; i < numSteps; i += 1) {
       const phaseDate = new Date(startDate);

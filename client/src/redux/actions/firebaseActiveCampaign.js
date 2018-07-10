@@ -8,16 +8,19 @@ export const fetchCampaignByIdRequest = () => ({
 // find campaign by ID Success
 export const fetchCampaignByIdSuccess = matchedCampaign => ({
   type: 'FETCH_CAMPAIGN_BY_ID_SUCCESS',
-  response: matchedCampaign
+  response: matchedCampaign[0]
 });
 
 // fetch campaign thunk
 export const populateActiveCampaign = campaignId => async dispatch => {
   dispatch(fetchCampaignByIdRequest());
-  await campaignsRef.where('campaignId', '==', '40HkTeLTRFQwH4pTDhER').onSnapshot(querySnapshot => {
+  await campaignsRef.where('campaignId', '==', campaignId).onSnapshot(querySnapshot => {
     const matchedCampaign = [];
     querySnapshot.forEach(doc => {
-      matchedCampaign.push(doc.data());
+      matchedCampaign.push({
+        ...doc.data(),
+        createdAt: doc.data().createdAt.toDate()
+      });
     });
     dispatch(fetchCampaignByIdSuccess(matchedCampaign));
   });

@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button, ListGroup, ControlLabel, ListGroupItem } from 'react-bootstrap';
-import { selectAddress } from '../redux/actions/initialSearch';
+// import { selectAddress } from '../redux/actions/initialSearch';
+import { Grid, Row, Col, Button, ListGroup, ControlLabel, ListGroupItem } from 'react-bootstrap';
 import fetchCampaignById from '../redux/actions/activeCampaign';
 import AutoSuggestInput from '../components/AutoSuggestInput';
+import RenderLoading from '../components/RenderLoading';
 
 class ChooseCampaign extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class ChooseCampaign extends Component {
     } else if (!selectedAddress || selectedAddress === 'none') {
       this.props.router.push('/new-campaign/address');
     } else {
-      this.props.fetchCampaignById(selectedAddress.campaignId);
+      this.props.populateActiveCampaign(selectedAddress.campaignId);
       this.props.router.push(`/campaign/${selectedAddress.campaignId}`);
     }
   };
@@ -150,12 +152,7 @@ class ChooseCampaign extends Component {
       </Col>
     </Row>
   );
-  renderLoading = () => (
-    <div className="loader">
-      <h1 className="loading-header">Searching for nearby campaigns...</h1>
-      <i className="fa fa-recycle fa-4x slow-spin loading-spinner" />
-    </div>
-  );
+
   /* eslint-disable consistent-return */
   renderError = error => {
     /* eslint-enable */
@@ -177,12 +174,11 @@ class ChooseCampaign extends Component {
       searchedAddress,
       error
     } = this.props;
-    console.log(this.props);
     return (
       <Grid fluid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
-            {loading && this.renderLoading()}
+            {loading && <RenderLoading />}
             {!loading && error && this.renderError(error)}
             {/* if no longer loading and not erroring then
             render one of the following three depending
@@ -219,11 +215,14 @@ ChooseCampaign.propTypes = {
   loaded: PropTypes.bool.isRequired,
   searchedAddress: PropTypes.objectOf(PropTypes.any).isRequired,
   selectedAddress: PropTypes.string.isRequired,
-  fetchCampaignById: PropTypes.func.isRequired,
+  firebaseCreateNewCampaign: PropTypes.func.isRequired,
+  populateActiveCampaign: PropTypes.func.isRequired,
   router: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default connect(({ initialSearch }) => ({ ...initialSearch }), {
   selectAddress,
-  fetchCampaignById
+  fetchCampaignById,
+  populateActiveCampaign,
+  firebaseCreateNewCampaign
 })(withRouter(ChooseCampaign));

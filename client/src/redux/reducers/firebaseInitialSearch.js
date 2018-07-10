@@ -1,3 +1,5 @@
+import { CLEAR_SEARCH_RESULTS } from '../actions/firebaseInitialSearch';
+
 const defaultState = {
   loading: false,
   loaded: false,
@@ -24,7 +26,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: true
       };
-    case 'FETCH_NEARBY_CAMPAIGNS_SUCESS':
+    case 'FETCH_NEARBY_CAMPAIGNS_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -38,6 +40,11 @@ export default function (state = defaultState, action) {
         ...state,
         selectedAddress,
         error: null
+      };
+    }
+    case CLEAR_SEARCH_RESULTS: {
+      return {
+        ...defaultState
       };
     }
     default:

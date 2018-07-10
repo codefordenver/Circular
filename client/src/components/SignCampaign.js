@@ -33,7 +33,7 @@ class SignCampaign extends Component {
     const campaignId =
       this.props.activeCampaign &&
       this.props.activeCampaign.campaign &&
-      this.props.activeCampaign.campaign._id;
+      this.props.activeCampaign.campaign.campaignId;
 
     await this.props.addSignatureToCampaign(
       this.props.auth.uid,
@@ -97,7 +97,7 @@ class SignCampaign extends Component {
                 from their signed campaign page */}
                 {loaded &&
                   userSignatures._campaignID &&
-                  userSignatures._campaignID !== activeCampaign.campaign._id && (
+                  userSignatures._campaignID !== activeCampaign.campaignId && (
                     <RenderUserHasSignedOtherCampaign campaignID={userSignatures._campaignID} />
                   )}
               </Col>
