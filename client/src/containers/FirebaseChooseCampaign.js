@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
-import AutoSuggestInput from '../components/AutoSuggestInput';
+// import AutoSuggestInput from '../components/AutoSuggestInput';
 import { firebaseCreateNewCampaign } from '../redux/actions/firebaseCampaigns';
 import RenderLoading from '../components/ChooseCampaign/RenderLoading';
 import RenderError from '../components/ChooseCampaign/RenderError';

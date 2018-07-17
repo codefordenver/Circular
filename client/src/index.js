@@ -3,12 +3,13 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
 import { bootstrapUtils } from 'react-bootstrap/lib/utils';
 import { Panel, Navbar, Button, ControlLabel } from 'react-bootstrap';
-import routes from './routes';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 import './stylesheets/main.css';
+import routes from './routes';
+
 import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
 
@@ -32,7 +33,7 @@ store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForSignatures());
 store.dispatch(startListeningForCampaigns());
 
-const history = syncHistoryWithStore(browserHistory, store);
+export const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>

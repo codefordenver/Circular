@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router';
+import { push } from 'react-router-redux';
 import { campaignsRef } from '../../firebase';
 
 export const fetchNearbyCampaignsRequest = () => ({
@@ -33,13 +33,12 @@ export const stashLatLng = latLng => ({
 });
 
 export const firebaseSearchAddressFlow = (address, searchedGeoPoint) => async dispatch => {
-  console.log('########## address', address, 'searchedGeoPoint', searchedGeoPoint);
-  browserHistory.push('/choose-campaign');
-  await dispatch(firebaseStashAddress(address));
-  await dispatch(stashLatLng(searchedGeoPoint));
+  // await dispatch(firebaseStashAddress(address));
+  // await dispatch(stashLatLng(searchedGeoPoint));
+  dispatch(push('/choose-campaign'));
   // TODO need to handle latLng error
   // if (error) console.log('Latlng error ', error);
-  return dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
+  dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
 };
 
 export function selectAddress(selectedAddress) {

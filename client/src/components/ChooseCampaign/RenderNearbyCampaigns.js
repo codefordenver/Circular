@@ -5,11 +5,11 @@ import SubmitButton from './SubmitButton';
 
 const RenderNearbyCampaigns = ({ nearbyCampaigns, selectedAddress }) => (
   <div>
-    <form>
+    {/* <form>
       <RenderAddressHeading headingTitle={'We found some campaigns nearby!'} />
       {nearbyCampaigns} {selectedAddress}
       <SubmitButton buttonText={'JOIN CAMPAIGN'} />
-    </form>
+    </form> */}
   </div>
 );
 
