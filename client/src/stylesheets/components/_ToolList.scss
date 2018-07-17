@@ -1,4 +1,5 @@
 @import '../base/colors';
+@import '../utils/mixins';
 
 .tool-list-body {
   background-color: $mainwhite;
@@ -12,7 +13,7 @@
     text-align: left;
     font-size: 88%;
 
-    @media (max-width: 992px) {
+    @include breakpoint(md) {
       font-size: 100%;
     }
   }

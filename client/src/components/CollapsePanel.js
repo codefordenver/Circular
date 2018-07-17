@@ -19,19 +19,8 @@ class CollapsePanel extends Component {
   render() {
     const { body, titleText } = this.props;
     return (
-      /* eslint-disable */
-      <div onClick={this.togglePanelExpanded}>
-        {/* eslint-enable */}
-        <Panel
-          /*
-          bsStyle="remove-default" causes an console error but it
-          is the correct way to remove react-bootstrap defaults.
-          the console error is react-bootstraps fault.
-        */
-          bsStyle="remove-default"
-          className="collapse-panel"
-          defaultExpanded={this.state.expanded}
-        >
+      <div onClick={this.togglePanelExpanded} role="menuitem" tabIndex="0">
+        <Panel className="collapse-panel" defaultExpanded={this.state.expanded}>
           <Panel.Toggle className="collapse-panel-toggle">
             <Panel.Heading className={this.props.headingStyle}>
               <Panel.Title className="collapse-panel-title">
