@@ -2,6 +2,12 @@
 
 .collapse-panel {
   margin-bottom: 2em;
+  border: none;
+
+  a {
+    text-decoration: none;
+  }
+
   .collapse-panel-toggle {
     &:hover {
       color: inherit;
@@ -13,7 +19,10 @@
     color: $mainwhite;
     a {
       color: $mainwhite;
-      text-decoration: none;
+    }
+
+    i {
+      line-height: 30px;
     }
   }
 
