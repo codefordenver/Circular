@@ -5,7 +5,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import scriptLoader from 'react-async-script-loader';
 import { GeoPoint } from '../firebase';
 import { clearSearchResults } from '../redux/actions/initialSearch';
-import { populateActiveCampaign } from '../redux/actions/firebaseCampaigns';
+// import { populateActiveCampaign } from '../redux/actions/firebaseCampaigns';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -17,22 +17,17 @@ class AutoSuggestInput extends Component {
     this.onChange = address => this.setState({ address, error: '' });
   }
 
-  handleSelect(address) {
+  handleSelect = address => {
+    this.props.firebaseSearchAddressFlow(address, 1);
     this.setState({ address });
-    if (this.props.firebaseCampaigns.campaignsAddresses.includes(address)) {
-      console.log('that campaign already exists');
-    } else {
-      // use address to get Lat Long
-      this.geocodeAddress(address);
-    }
-  }
-
-  geocodeAddress = address => {
+    console.log('handle Select Hit');
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         // convert searchCoordinates into Firestore GeoPoint
         const searchedGeoPoint = new GeoPoint(lat, lng);
+        console.log(searchedGeoPoint);
+        console.log(address);
         this.props.firebaseSearchAddressFlow(address, searchedGeoPoint);
       })
       .catch(error => this.setState({ error }));

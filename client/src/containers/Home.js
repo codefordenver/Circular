@@ -11,7 +11,7 @@ import {
   firebaseSearchAddressFlow,
   clearSearchResults
 } from '../redux/actions/firebaseInitialSearch';
-import { firebaseCreateNewCampaign } from '../redux/actions/firebaseActiveCampaign';
+// import { firebaseCreateNewCampaign } from '../redux/actions/firebaseActiveCampaign';
 import { openMap, closeMap } from '../redux/actions/googleMap';
 
 class Home extends Component {
@@ -20,7 +20,7 @@ class Home extends Component {
     this.state = {};
   }
   render() {
-    const { firebaseCampaigns, googleMap: { isOpen } } = this.props;
+    const { firebaseCampaigns, googleMap: { isOpen }, firebaseSearchAddressFlow } = this.props;
     const { campaigns } = firebaseCampaigns;
     return (
       <div>
@@ -69,7 +69,7 @@ Home.propTypes = {
 };
 
 export default connect(
-  ({ initialSearch, googleMap, firebaseCampaigns, firebaseCreateNewCampaign }) => ({
+  ({ initialSearch, googleMap, firebaseCampaigns }) => ({
     ...initialSearch,
     googleMap,
     firebaseCampaigns

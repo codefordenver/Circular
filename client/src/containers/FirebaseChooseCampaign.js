@@ -56,6 +56,7 @@ class FirebaseChooseCampaign extends Component {
       <Grid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
+            <h1> Hello </h1>
             {loading && <RenderLoading />}
             {!loading && error && <RenderError error={error} />}
             {/* if no longer loading and not erroring then
@@ -95,7 +96,7 @@ FirebaseChooseCampaign.propTypes = {
   loaded: PropTypes.string.isRequired,
   nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedAddress: PropTypes.string.isRequired,
-  searchedAddress: PropTypes.objectOf(PropTypes.any).isRequired,
+  searchedAddress: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   latLng: PropTypes.objectOf(PropTypes.any).isRequired
 };

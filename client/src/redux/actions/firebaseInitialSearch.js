@@ -1,9 +1,6 @@
 import { browserHistory } from 'react-router';
-import { campaignsRef, GeoPoint } from '../../firebase';
+import { campaignsRef } from '../../firebase';
 
-export const beginAddressSearch = () => ({
-  type: 'FIREBASE_BEGIN_NEARBY_CAMPAGNS_SEARCH'
-});
 export const fetchNearbyCampaignsRequest = () => ({
   type: 'FETCH_NEARBY_CAMPAIGNS_REQUEST'
 });
@@ -25,23 +22,20 @@ export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch =
   });
 };
 
-export const stashAddress = address => ({
+export const firebaseStashAddress = address => ({
   type: 'FIREBASE_STASH_ADDRESS',
   response: address
 });
 
-export const stashLatLng = latLng => {
-  const newGeoPoint = new GeoPoint(latLng._lat, latLng._long);
-  return {
-    type: 'FIREBASE_STASH_LAT_LNG',
-    response: newGeoPoint
-  };
-};
+export const stashLatLng = latLng => ({
+  type: 'FIREBASE_STASH_LAT_LNG',
+  response: latLng
+});
 
 export const firebaseSearchAddressFlow = (address, searchedGeoPoint) => async dispatch => {
-  dispatch(beginAddressSearch());
+  console.log('########## address', address, 'searchedGeoPoint', searchedGeoPoint);
   browserHistory.push('/choose-campaign');
-  await dispatch(stashAddress(address));
+  await dispatch(firebaseStashAddress(address));
   await dispatch(stashLatLng(searchedGeoPoint));
   // TODO need to handle latLng error
   // if (error) console.log('Latlng error ', error);
