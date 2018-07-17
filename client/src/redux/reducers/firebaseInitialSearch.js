@@ -31,7 +31,14 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        nearbyCampaigns: response
+        exactMatch: response
+      };
+    case 'SET_EXACT_CAMPAIGN_MATCH':
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        exactMatch: response
       };
     case 'SELECT_ADDRESS': {
       const selectedAddress =

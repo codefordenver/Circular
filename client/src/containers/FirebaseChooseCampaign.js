@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
-// import AutoSuggestInput from '../components/AutoSuggestInput';
 import { firebaseCreateNewCampaign } from '../redux/actions/firebaseCampaigns';
 import RenderLoading from '../components/ChooseCampaign/RenderLoading';
 import RenderError from '../components/ChooseCampaign/RenderError';
@@ -22,18 +21,17 @@ class FirebaseChooseCampaign extends Component {
   handleSubmit = e => {
     e.stopPropagation();
     e.preventDefault();
-    const {
-      initialSearch: { searchedAddress },
-      latLng,
-      firebaseCampaigns: { firebaseCampaignsAddresses }
-    } = this.props;
-    console.log('firebaseAddresses ', firebaseCampaignsAddresses);
-    console.log('searchedAddress ', searchedAddress);
-    if (firebaseCampaignsAddresses.includes(searchedAddress)) {
+    const { searchedAddress, latLng, firebaseCampaigns: { campaignsAddresses } } = this.props;
+    // TODO make exisiting address unreachable
+    if (campaignsAddresses.includes(searchedAddress)) {
       alert('already exists');
     } else {
       this.makeNewCampaign(searchedAddress, latLng);
     }
+  };
+
+  redirectToExistingCampaign = (e, campaignId) => {
+    this.props.router.push(`/campaign/${this.props.exactMatch.campaignId}`);
   };
 
   makeNewCampaign = async (searchedAddress, latLng) => {
@@ -50,28 +48,30 @@ class FirebaseChooseCampaign extends Component {
       nearbyCampaigns,
       selectedAddress,
       searchedAddress,
+      exactMatch,
       error
     } = this.props;
     return (
       <Grid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
-            <h1> Hello </h1>
+            <h1> hi </h1>
             {loading && <RenderLoading />}
             {!loading && error && <RenderError error={error} />}
             {/* if no longer loading and not erroring then
             render one of the following three depending
              on the status of nearby campaign */}
             {loaded &&
-              nearbyCampaigns &&
-              nearbyCampaigns.length !== 0 &&
-              nearbyCampaigns[0].address === searchedAddress.formatted_address && (
+              exactMatch &&
+              exactMatch !== null &&
+              exactMatch.address && (
                 <RenderCampaignAlreadyExists
-                  nearbyCampaigns={nearbyCampaigns}
-                  selectedAddress={selectedAddress}
+                  exactMatchAddress={exactMatch.address}
+                  onClick={this.redirectToExistingCampaign}
                 />
               )}
-            {nearbyCampaigns &&
+            {loaded &&
+              nearbyCampaigns &&
               nearbyCampaigns.length !== 0 &&
               nearbyCampaigns[0].address !== searchedAddress.formatted_address && (
                 <RenderNearbyCampaigns
@@ -79,11 +79,7 @@ class FirebaseChooseCampaign extends Component {
                   selectedAddress={selectedAddress}
                 />
               )}
-            {!loading &&
-              nearbyCampaigns &&
-              nearbyCampaigns.length === 0 && (
-                <RenderNewCampaign handleSubmit={this.handleSubmit} />
-              )}
+            {!loading && <RenderNewCampaign handleSubmit={this.handleSubmit} />}
           </Col>
         </Row>
       </Grid>
@@ -91,11 +87,35 @@ class FirebaseChooseCampaign extends Component {
   }
 }
 
+FirebaseChooseCampaign.defaultProps = {
+  exactMatch: null
+};
+
 FirebaseChooseCampaign.propTypes = {
   loading: PropTypes.string.isRequired,
   loaded: PropTypes.string.isRequired,
   nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedAddress: PropTypes.string.isRequired,
+  exactMatch: PropTypes.shape({
+    campaignId: PropTypes.string.isRequired
+  }),
+  firebaseCampaigns: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
+    campaignsAddresses: PropTypes.arrayOf().isRequired,
+    campaigns: PropTypes.arrayOf(
+      PropTypes.shape({
+        address: PropTypes.string.isRequired,
+        campaignId: PropTypes.string.isRequired,
+        createdAt: PropTypes.shape({}).isRequired,
+        latLng: PropTypes.shape({
+          _lat: PropTypes.number.isRequired,
+          _long: PropTypes.number.isRequired
+        }).isRequired
+      }).isRequired
+    ).isRequired
+  }).isRequired,
+  router: PropTypes.shape({}).isRequired,
   searchedAddress: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   latLng: PropTypes.objectOf(PropTypes.any).isRequired

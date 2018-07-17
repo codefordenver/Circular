@@ -52,10 +52,9 @@ Home.propTypes = {
         address: PropTypes.string.isRequired,
         campaignId: PropTypes.string.isRequired,
         createdAt: PropTypes.shape({}).isRequired,
-        modifiedAt: PropTypes.shape({}).isRequired,
         latLng: PropTypes.shape({
-          _lat: PropTypes.string.isRequired,
-          _long: PropTypes.string.isRequired
+          _lat: PropTypes.number.isRequired,
+          _long: PropTypes.number.isRequired
         }).isRequired
       }).isRequired
     ).isRequired

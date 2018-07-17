@@ -105,5 +105,6 @@ export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => 
       console.error('Error writing document: ', error);
     });
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
-  dispatch(firebasePopulateActiveCampaign(newCampaignId.id));
+  dispatch(firebasePopulateActiveCampaign(newCampaignId.campaignId));
+  // TODO clear search information
 };
