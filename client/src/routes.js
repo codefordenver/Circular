@@ -15,6 +15,7 @@ import DenverLearnMore from './containers/DenverLearnMore';
 import Collaboration from './containers/Collaboration';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './containers/NotFound';
+import Instructions from './components/Instructions';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
@@ -69,6 +70,10 @@ export default (
     <Route
       path="/privacy-policy"
       getComponent={(location, callback) => callback(null, PrivacyPolicy)}
+    />
+    <Route
+      path="how-does-this-work"
+      getComponent={(location, callback) => callback(null, Instructions)}
     />
 
     <Route path="*" getComponent={(location, callback) => callback(null, NotFound)} />
