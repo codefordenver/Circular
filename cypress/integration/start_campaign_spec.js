@@ -1,9 +1,7 @@
 describe('Starting a new campaign', () => {
   it('prompts the user with about recycling', () => {
     cy.visit('http://localhost:3000');
-    cy.contains('NEED RECYCLING');
-    cy.contains('-in-');
-    cy.contains('YOUR BUILDING?');
+    cy.contains('NEED RECYCLING?');
   });
 
   describe('when searching an address', () => {
