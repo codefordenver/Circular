@@ -42,20 +42,12 @@ class FirebaseChooseCampaign extends Component {
   };
 
   render() {
-    const {
-      loading,
-      loaded,
-      nearbyCampaigns,
-      selectedAddress,
-      searchedAddress,
-      exactMatch,
-      error
-    } = this.props;
+    const { loading, loaded, nearbyCampaigns, selectedAddress, exactMatch, error } = this.props;
+
     return (
       <Grid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
-            <h1> hi </h1>
             {loading && <RenderLoading />}
             {!loading && error && <RenderError error={error} />}
             {/* if no longer loading and not erroring then
@@ -72,14 +64,13 @@ class FirebaseChooseCampaign extends Component {
               )}
             {loaded &&
               nearbyCampaigns &&
-              nearbyCampaigns.length !== 0 &&
-              nearbyCampaigns[0].address !== searchedAddress.formatted_address && (
+              nearbyCampaigns.length !== 0 && (
                 <RenderNearbyCampaigns
                   nearbyCampaigns={nearbyCampaigns}
                   selectedAddress={selectedAddress}
                 />
               )}
-            {!loading && <RenderNewCampaign handleSubmit={this.handleSubmit} />}
+            {!loading && !exactMatch && <RenderNewCampaign handleSubmit={this.handleSubmit} />}
           </Col>
         </Row>
       </Grid>
@@ -102,7 +93,7 @@ FirebaseChooseCampaign.propTypes = {
   firebaseCampaigns: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
-    campaignsAddresses: PropTypes.arrayOf().isRequired,
+    campaignsAddresses: PropTypes.arrayOf(PropTypes.string).isRequired,
     campaigns: PropTypes.arrayOf(
       PropTypes.shape({
         address: PropTypes.string.isRequired,

@@ -12,4 +12,6 @@ const Footer = () => (
   </Grid>
 );
 
+const Tree = (one, two) => {};
+
 export default Footer;

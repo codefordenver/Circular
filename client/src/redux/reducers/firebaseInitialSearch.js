@@ -31,7 +31,7 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         loaded: true,
-        exactMatch: response
+        nearbyCampaigns: response
       };
     case 'SET_EXACT_CAMPAIGN_MATCH':
       return {

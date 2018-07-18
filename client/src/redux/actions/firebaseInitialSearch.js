@@ -1,19 +1,77 @@
 import { push } from 'react-router-redux';
-import { campaignsRef } from '../../firebase';
+import { campaignsRef, GeoPoint } from '../../firebase';
 
 export const fetchNearbyCampaignsRequest = () => ({
   type: 'FETCH_NEARBY_CAMPAIGNS_REQUEST'
 });
 
-export const fetchNearbyCampaignsSuccess = exactAddressMatch => ({
+export const fetchNearbyCampaignsSuccess = nearbyCampaigns => ({
   type: 'FETCH_NEARBY_CAMPAIGNS_SUCCESS',
-  response: exactAddressMatch[0]
+  response: nearbyCampaigns
 });
 
 export const setExactCampaignMatch = exactAddressMatch => ({
   type: 'SET_EXACT_CAMPAIGN_MATCH',
   response: exactAddressMatch[0]
 });
+
+// Generate serachBoundry / default radius == 1
+const getGeoSearchBoundries = (geoPoint, radius = 1) => {
+  // set geoSpacial Params
+  const geoSpacial = {
+    oneLat: 0.0144927536231884,
+    oneLng: 0.0181818181818182,
+    searchRadius: radius
+  };
+  const { _lat, _long } = geoPoint;
+  // get upper and lower boundries of search box
+  const lowerLat = _lat - _lat * geoSpacial.oneLat * geoSpacial.searchRadius;
+  const lowerLng = _long - _long * geoSpacial.oneLng * geoSpacial.searchRadius;
+  const upperLat = _lat + _lat * geoSpacial.oneLat * geoSpacial.searchRadius;
+  const upperLng = _long + _long * geoSpacial.oneLng * geoSpacial.searchRadius;
+  // convert to Firestore GeoPoints
+  const lowerGeoPoint = new GeoPoint(lowerLat, lowerLng);
+  const upperGeoPoint = new GeoPoint(upperLat, upperLng);
+  const geoSearchBoundries = { lowerGeoPoint, upperGeoPoint };
+  return geoSearchBoundries;
+};
+
+const getGeoSearchResults = async geoSearchBoundries => {
+  // #####
+  // FIRESTORE HASN'T YET EXPOSED GEOQUERIES, THIS IS A WORK AROUND ;)
+  // TODO explore library GEOFirestore
+  // #####
+
+  // search lowerCampaigns
+  const lowerCampaigns = [];
+  const queryLower = campaignsRef.where('latLng', '>', geoSearchBoundries.lowerGeoPoint);
+  await queryLower.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+      lowerCampaigns.push({
+        campaignId: data.campaignId,
+        modifiedAt: data.modifiedAt,
+        createdAt: data.createdAt,
+        address: data.address,
+        latLng: data.latLng
+      });
+    });
+  });
+  // search upperCampaigns
+  const upperCampaigns = [];
+  const queryUpper = campaignsRef.where('latLng', '<', geoSearchBoundries.upperGeoPoint);
+  await queryUpper.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      upperCampaigns.push(doc.data().campaignId);
+    });
+  });
+
+  // return nearbyCampaigns;
+  const nearbyCampaigns = lowerCampaigns.filter(campaign =>
+    upperCampaigns.includes(campaign.campaignId)
+  );
+  return nearbyCampaigns;
+};
 
 export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch => {
   dispatch(fetchNearbyCampaignsRequest());
@@ -26,11 +84,12 @@ export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch =
     if (exactAddressMatch[0]) {
       // if exactMatch dispatch exactMatch
       dispatch(setExactCampaignMatch(exactAddressMatch));
-    } else {
-      // if no exactMatch dispatch fetchNearByCampaigns
-      dispatch(fetchNearbyCampaignsSuccess(exactAddressMatch));
     }
   });
+  // generate search coordinates & radius
+  const geoSearchBoundries = await getGeoSearchBoundries(searchedGeoPoint, 1);
+  const nearbyCampaigns = await getGeoSearchResults(geoSearchBoundries);
+  dispatch(fetchNearbyCampaignsSuccess(nearbyCampaigns));
 };
 
 export const firebaseStashAddress = address => ({

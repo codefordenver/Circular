@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import RenderAddressHeading from './RenderAddressHeading';
+import SubmitButton from './SubmitButton';
 
 const RenderCampaignAlreadyExists = ({ exactMatchAddress, onClick }) => (
-  <form>
-    <h3> Looks like this address already has a campaign, is this your address? </h3>
-    <h4>{exactMatchAddress}</h4>
-    <button onClick={onClick}>Yup! Sign me up! </button>
-  </form>
+  <div>
+    <RenderAddressHeading
+      headingTitle={'Looks like this address already has a campaign. Is this your address?'}
+      subTitle={exactMatchAddress}
+    />
+    <SubmitButton onClick={onClick} buttonText={'Yup! Sign me up!'} />
+  </div>
 );
 
 RenderCampaignAlreadyExists.propTypes = {
