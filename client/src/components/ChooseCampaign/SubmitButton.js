@@ -2,14 +2,15 @@ import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-const SubmitButton = ({ buttonText, handleFormSubmit }) => (
+const SubmitButton = ({ buttonText, handleSelection, name }) => (
   <Row>
     <Col xs={12}>
       <Button
         bsStyle="remove-default"
         className="join-campaign-button"
         type="submit"
-        onClick={handleFormSubmit}
+        name={name}
+        onClick={handleSelection}
         block
       >
         {buttonText} <i className="fa fa-arrow-right" />
@@ -20,7 +21,8 @@ const SubmitButton = ({ buttonText, handleFormSubmit }) => (
 
 SubmitButton.propTypes = {
   buttonText: PropTypes.string.isRequired,
-  handleFormSubmit: PropTypes.func.isRequired
+  handleSelection: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default SubmitButton;

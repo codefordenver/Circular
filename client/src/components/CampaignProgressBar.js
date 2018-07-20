@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import dateformat from 'dateformat';
 import { Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-class CampaignProgessBar extends React.Component {
+class CampaignProgessBar extends Component {
   getPhaseCompletionDates = (startDate, numSteps, duration) => {
-    console.log(startDate);
     const phaseDates = [];
     for (let i = 0; i < numSteps; i += 1) {
       const phaseDate = new Date(startDate);

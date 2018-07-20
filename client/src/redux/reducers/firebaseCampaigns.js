@@ -47,7 +47,6 @@ export default function firebaseSignaturesReducer(state = inititalState, action)
         loaded: true,
         activeCampaign: response
       };
-    // CREATE NEW CAMPAIGN
     case FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST:
       return {
         ...state,

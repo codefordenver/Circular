@@ -18,32 +18,31 @@ class FirebaseChooseCampaign extends Component {
     };
   }
 
-  handleSubmit = e => {
+  handleSelection = e => {
     e.stopPropagation();
     e.preventDefault();
-    const { searchedAddress, latLng, firebaseCampaigns: { campaignsAddresses } } = this.props;
-    // TODO make exisiting address unreachable
-    if (campaignsAddresses.includes(searchedAddress)) {
-      alert('already exists');
-    } else {
+    const { name } = e.target;
+    const { searchedAddress, latLng } = this.props;
+    if (name === 'EXISTING_CAMPAIGN') {
+      this.redirectToExistingCampaign();
+    } else if (name === 'NEW_CAMPAIGN') {
       this.makeNewCampaign(searchedAddress, latLng);
     }
   };
 
-  redirectToExistingCampaign = (e, campaignId) => {
+  redirectToExistingCampaign = () => {
     this.props.router.push(`/campaign/${this.props.exactMatch.campaignId}`);
   };
 
   makeNewCampaign = async (searchedAddress, latLng) => {
     await this.props.firebaseCreateNewCampaign(searchedAddress, latLng);
     const redirectCampaignId = await this.props.firebaseCampaigns.activeCampaign;
-    // get newly Created Dispatch to push router
+    // PUSH NEWLY CREATED CAMPAIGN TO ROUTER
     this.props.router.push(`/campaign/${redirectCampaignId}`);
   };
 
   render() {
     const { loading, loaded, nearbyCampaigns, selectedAddress, exactMatch, error } = this.props;
-
     return (
       <Grid>
         <Row>
@@ -55,11 +54,11 @@ class FirebaseChooseCampaign extends Component {
              on the status of nearby campaign */}
             {loaded &&
               exactMatch &&
-              exactMatch !== null &&
+              exactMatch.length !== 0 &&
               exactMatch.address && (
                 <RenderCampaignAlreadyExists
                   exactMatchAddress={exactMatch.address}
-                  onClick={this.redirectToExistingCampaign}
+                  handleSelection={this.handleSelection}
                 />
               )}
             {loaded &&
@@ -70,7 +69,8 @@ class FirebaseChooseCampaign extends Component {
                   selectedAddress={selectedAddress}
                 />
               )}
-            {!loading && !exactMatch && <RenderNewCampaign handleSubmit={this.handleSubmit} />}
+            {!loading &&
+              !exactMatch && <RenderNewCampaign handleSelection={this.handleSelection} />}
           </Col>
         </Row>
       </Grid>
@@ -106,7 +106,9 @@ FirebaseChooseCampaign.propTypes = {
       }).isRequired
     ).isRequired
   }).isRequired,
-  router: PropTypes.shape({}).isRequired,
+  router: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   searchedAddress: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   latLng: PropTypes.objectOf(PropTypes.any).isRequired

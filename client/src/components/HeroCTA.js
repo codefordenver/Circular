@@ -8,7 +8,7 @@ const HeroCTA = ({
   openMap,
   firebaseSearchAddressFlow,
   firebaseStashAddress,
-  clearSearchResults,
+  clearInitialSearchResults,
   firebaseCampaigns,
   router
 }) => (
@@ -31,7 +31,7 @@ const HeroCTA = ({
           <AutoSuggestInput
             firebaseSearchAddressFlow={firebaseSearchAddressFlow}
             firebaseStashAddress={firebaseStashAddress}
-            clearSearchResults={clearSearchResults}
+            clearInitialSearchResults={clearInitialSearchResults}
             firebaseCampaigns={firebaseCampaigns}
             router={router}
           />
@@ -52,7 +52,7 @@ const HeroCTA = ({
 
 HeroCTA.propTypes = {
   openMap: PropTypes.func.isRequired,
-  clearSearchResults: PropTypes.func.isRequired,
+  clearInitialSearchResults: PropTypes.func.isRequired,
   firebaseCampaigns: PropTypes.shape({}).isRequired,
   firebaseSearchAddressFlow: PropTypes.func.isRequired,
   router: PropTypes.shape({}).isRequired

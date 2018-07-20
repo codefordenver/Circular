@@ -9,9 +9,8 @@ import InfoAndLinks from '../components/InfoAndLinks';
 import Footer from '../components/Footer';
 import {
   firebaseSearchAddressFlow,
-  clearSearchResults
+  clearInitialSearchResults
 } from '../redux/actions/firebaseInitialSearch';
-// import { firebaseCreateNewCampaign } from '../redux/actions/firebaseActiveCampaign';
 import { openMap, closeMap } from '../redux/actions/googleMap';
 
 class Home extends Component {
@@ -27,7 +26,7 @@ class Home extends Component {
         <HeroCTA
           openMap={this.props.openMap}
           firebaseSearchAddressFlow={firebaseSearchAddressFlow}
-          clearSearchResults={clearSearchResults}
+          clearInitialSearchResults={clearInitialSearchResults}
           firebaseCampaigns={firebaseCampaigns}
           router={this.props.router}
         />
@@ -75,7 +74,7 @@ export default connect(
   }),
   {
     firebaseSearchAddressFlow,
-    clearSearchResults,
+    clearInitialSearchResults,
     openMap,
     closeMap
   }

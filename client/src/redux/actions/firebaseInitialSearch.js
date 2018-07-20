@@ -1,48 +1,55 @@
 import { push } from 'react-router-redux';
 import { campaignsRef, GeoPoint } from '../../firebase';
 
+// FETCH NEARBY CAMPAIGNS REQUEST
+export const FETCH_NEARBY_CAMPAIGNS_REQUEST = 'FETCH_NEARBY_CAMPAIGNS_REQUEST';
 export const fetchNearbyCampaignsRequest = () => ({
-  type: 'FETCH_NEARBY_CAMPAIGNS_REQUEST'
+  type: FETCH_NEARBY_CAMPAIGNS_REQUEST
 });
 
+// FETCH NEARBY CAMPAIGNS SUCCESS
+export const FETCH_NEARBY_CAMPAIGNS_SUCCESS = 'FETCH_NEARBY_CAMPAIGNS_SUCCESS';
 export const fetchNearbyCampaignsSuccess = nearbyCampaigns => ({
-  type: 'FETCH_NEARBY_CAMPAIGNS_SUCCESS',
+  type: FETCH_NEARBY_CAMPAIGNS_SUCCESS,
   response: nearbyCampaigns
 });
 
+// SET EXACT MATCH
+export const SET_EXACT_CAMPAIGN_MATCH = 'SET_EXACT_CAMPAIGN_MATCH';
 export const setExactCampaignMatch = exactAddressMatch => ({
-  type: 'SET_EXACT_CAMPAIGN_MATCH',
+  type: SET_EXACT_CAMPAIGN_MATCH,
   response: exactAddressMatch[0]
 });
 
-// Generate serachBoundry / default radius == 1
+// GENERATE GEOSEARCH BOUNDRIES / DEFAULT RADIUS == 1
 const getGeoSearchBoundries = (geoPoint, radius = 1) => {
-  // set geoSpacial Params
+  // SET GEOPOINT PARAMS
   const geoSpacial = {
     oneLat: 0.0144927536231884,
     oneLng: 0.0181818181818182,
     searchRadius: radius
   };
   const { _lat, _long } = geoPoint;
-  // get upper and lower boundries of search box
+  // GET UPPER AND LOWER BOUNDRIES
   const lowerLat = _lat - _lat * geoSpacial.oneLat * geoSpacial.searchRadius;
   const lowerLng = _long - _long * geoSpacial.oneLng * geoSpacial.searchRadius;
   const upperLat = _lat + _lat * geoSpacial.oneLat * geoSpacial.searchRadius;
   const upperLng = _long + _long * geoSpacial.oneLng * geoSpacial.searchRadius;
-  // convert to Firestore GeoPoints
+  // CONVERT TO FIRESTORE GEOPOINTS
   const lowerGeoPoint = new GeoPoint(lowerLat, lowerLng);
   const upperGeoPoint = new GeoPoint(upperLat, upperLng);
   const geoSearchBoundries = { lowerGeoPoint, upperGeoPoint };
   return geoSearchBoundries;
 };
 
+// GENERATE GEOSEARCH RESULTS
 const getGeoSearchResults = async geoSearchBoundries => {
   // #####
   // FIRESTORE HASN'T YET EXPOSED GEOQUERIES, THIS IS A WORK AROUND ;)
-  // TODO explore library GEOFirestore
+  // TODO EXPPLOE GEOFIRESTORE LIBRARY
   // #####
 
-  // search lowerCampaigns
+  // SEARCH LOWERCAMPAIGNS
   const lowerCampaigns = [];
   const queryLower = campaignsRef.where('latLng', '>', geoSearchBoundries.lowerGeoPoint);
   await queryLower.get().then(querySnapshot => {
@@ -57,7 +64,28 @@ const getGeoSearchResults = async geoSearchBoundries => {
       });
     });
   });
-  // search upperCampaigns
+
+  // ?? WHAT IN THE HECK ??
+  // search lowerCampaigns2
+  // const lowerCampaigns2 = [];
+  // await campaignsRef
+  //   .where('latLng', '>', geoSearchBoundries.lowerGeoPoint)
+  //   .onSnapshot(querySnapshot => {
+  //     querySnapshot.forEach(doc => {
+  //       const data = doc.data();
+  //       lowerCampaigns2.push({
+  //         campaignId: data.campaignId,
+  //         modifiedAt: data.modifiedAt,
+  //         createdAt: data.createdAt,
+  //         address: data.address,
+  //         latLng: data.latLng
+  //       });
+  //     });
+  //     console.log('lowerCampaigns2-inside-function-body: ', lowerCampaigns2);
+  //   });
+  // console.log('lowerCampaigns2-outside-function-body: ', lowerCampaigns2);
+
+  // SEARCH UPPERCAMPAIGNS
   const upperCampaigns = [];
   const queryUpper = campaignsRef.where('latLng', '<', geoSearchBoundries.upperGeoPoint);
   await queryUpper.get().then(querySnapshot => {
@@ -66,42 +94,49 @@ const getGeoSearchResults = async geoSearchBoundries => {
     });
   });
 
-  // return nearbyCampaigns;
+  // RETURN NEARBY CAMPAIGNS
   const nearbyCampaigns = lowerCampaigns.filter(campaign =>
     upperCampaigns.includes(campaign.campaignId)
   );
   return nearbyCampaigns;
 };
 
+// FETCH NEARBY CAMPAIGNS
 export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch => {
   dispatch(fetchNearbyCampaignsRequest());
-  // search the database for an exact match
+  // SEARCH THE DATABASE FOR AN EXACT MATCH
   await campaignsRef.where('latLng', '==', searchedGeoPoint).onSnapshot(querySnapshot => {
     const exactAddressMatch = [];
     querySnapshot.forEach(doc => {
       exactAddressMatch.push(doc.data());
     });
-    if (exactAddressMatch[0]) {
-      // if exactMatch dispatch exactMatch
+    console.log('exactAddressMatch ', exactAddressMatch);
+    if (exactAddressMatch) {
+      // IF EXACT MATCH, DISPATCH EXACTMATCH
       dispatch(setExactCampaignMatch(exactAddressMatch));
     }
   });
-  // generate search coordinates & radius
+  // GENERATE GEOSEARCH BOUNDRIES
   const geoSearchBoundries = await getGeoSearchBoundries(searchedGeoPoint, 1);
   const nearbyCampaigns = await getGeoSearchResults(geoSearchBoundries);
   dispatch(fetchNearbyCampaignsSuccess(nearbyCampaigns));
 };
 
+// STASH SEARCHED ADDRESS
+export const FIREBASE_STASH_ADDRESS = 'FIREBASE_STASH_ADDRESS';
 export const firebaseStashAddress = address => ({
-  type: 'FIREBASE_STASH_ADDRESS',
+  type: FIREBASE_STASH_ADDRESS,
   response: address
 });
 
+// STACHED SEARCHED LATLONG
+export const FIREBASE_STASH_LAT_LNG = 'FIREBASE_STASH_LAT_LNG';
 export const stashLatLng = latLng => ({
-  type: 'FIREBASE_STASH_LAT_LNG',
+  type: FIREBASE_STASH_LAT_LNG,
   response: latLng
 });
 
+// FIREBASE SEARCH ADDRESS FLOW
 export const firebaseSearchAddressFlow = (address, searchedGeoPoint) => async dispatch => {
   await dispatch(firebaseStashAddress(address));
   await dispatch(stashLatLng(searchedGeoPoint));
@@ -111,16 +146,19 @@ export const firebaseSearchAddressFlow = (address, searchedGeoPoint) => async di
   dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
 };
 
+// SELECT ADDRESS
+export const FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS = 'FIREBASE_SELECT_ADDRESS';
 export function selectAddress(selectedAddress) {
   return {
-    type: 'SELECT_ADDRESS',
+    type: FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS,
     response: selectedAddress
   };
 }
 
-export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
-export function clearSearchResults() {
+// CLEAR SERACH RESULTS
+export const CLEAR_INITIAL_SEARCH_RESULTS = 'CLEAR_INITIAL_SEARCH_RESULTS ';
+export function clearInitialSearchResults() {
   return {
-    type: CLEAR_SEARCH_RESULTS
+    type: CLEAR_INITIAL_SEARCH_RESULTS
   };
 }

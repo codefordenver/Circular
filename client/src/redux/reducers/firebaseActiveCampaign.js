@@ -1,3 +1,9 @@
+import {
+  FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST,
+  FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS,
+  FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR
+} from '../actions/firebaseActiveCampaign';
+
 const defaultState = {
   loading: false,
   loaded: false
@@ -6,18 +12,25 @@ const defaultState = {
 export default function (state = defaultState, action) {
   const { response, error, type } = action;
   switch (type) {
-    case 'FETCH_CAMPAIGN_BY_ID_REQUEST':
+    case FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST:
       return {
         ...state,
         loading: true,
         loaded: false
       };
-    case 'FETCH_CAMPAIGN_BY_ID_SUCCESS':
+    case FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        campaign: response
+        ...response
+      };
+    case FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error
       };
     // case FETCH_CAMPAIGN_FAILURE:
     //   return {

@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
 
 export function fetchApartmentsRequest() {

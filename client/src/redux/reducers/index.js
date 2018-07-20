@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-
-import initialSearch from './initialSearch';
+// import initialSearch from './initialSearch';
 import googleMap from './googleMap';
-import activeCampaign from './activeCampaign';
+// import activeCampaign from './activeCampaign';
 import newCampaign from './newCampaign';
 import signature from './signature';
 import comments from './comments';
