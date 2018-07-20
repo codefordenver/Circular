@@ -13,6 +13,7 @@ import CollapsePanel from '.././components/CollapsePanel';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import CampaignProgressBar from '../components/CampaignProgressBar';
 import CampaignStatus from '../components/CampaignStatus';
+import NotFound from '../containers/NotFound';
 
 const MIN_CAMPAIGN_DURATION = 21;
 const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
@@ -43,7 +44,12 @@ class CampaignPage extends Component {
   render() {
     const { activeCampaign: { campaign }, initialSearch: { apartments } } = this.props;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
-
+    const noKnowApartmentFound = !this.props.initialSearch.apartments
+      .map(apt => apt.id)
+      .includes(this.props.params.id);
+    if (noKnowApartmentFound) {
+      return <NotFound />;
+    }
     return (
       <Grid>
         <Row className="full-height-side-bar">
