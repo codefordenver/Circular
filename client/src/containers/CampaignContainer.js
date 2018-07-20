@@ -9,23 +9,24 @@ import { fetchUserSignatures } from '../redux/actions/signature';
 import { signInGoogle, signInFacebook, signOut } from '../redux/actions/firebaseAuth';
 // COMPONENTS
 import CampaignPage from '../components/ViewCampaign/CampaignPage';
-import Loader from '../components/FullScreenLoader';
-import NotFound from '../components/NotFound';
+import Loader from '../components/UtilComponents/FullScreenLoader';
+import NotFound from '../components/UtilComponents/NotFound';
 
 class CampaignContainer extends Component {
   componentDidMount() {
     this.props.firebasePopulateCampaignById(this.props.params.id);
   }
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps) {
     if (this.props.params.id !== nextProps.params.id) {
       nextProps.fetchCampaignById(nextProps.params.id);
     }
   }
 
   render() {
-    const { activeCampaign } = this.props;
+    const { activeCampaign, auth } = this.props;
     const { loading, loaded, error, campaignId } = activeCampaign;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
+    const signCampaignProps = { auth, activeCampaign, signInFacebook, signInGoogle, signOut };
     return (
       <div>
         {loading && <Loader />}
@@ -34,6 +35,7 @@ class CampaignContainer extends Component {
           activeCampaign &&
           !error && (
             <CampaignPage
+              signCampaignProps={signCampaignProps}
               activeCampaign={activeCampaign}
               hrefIsLocalhost={hrefIsLocalhost}
               campaignId={campaignId}
@@ -56,6 +58,7 @@ CampaignPage.defaultProps = {
 
 CampaignContainer.propTypes = {
   firebasePopulateCampaignById: PropTypes.func.isRequired,
+  auth: PropTypes.shape({}).isRequired,
   activeCampaign: PropTypes.shape({
     address: PropTypes.string,
     modifiedAt: PropTypes.string,
@@ -71,9 +74,10 @@ CampaignContainer.propTypes = {
 };
 
 export default connect(
-  ({ activeCampaign, initialSearch, signature }) => ({
+  ({ activeCampaign, initialSearch, signature, auth }) => ({
     activeCampaign,
     initialSearch,
+    auth,
     userSignatures: {
       ...signature.userSignatures
     }

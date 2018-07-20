@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import Application from '../components/Application';
-import { signInGoogle, signInFacebook, signOut } from '../redux/actions/firebaseAuth';
+import {
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseSignOut
+} from '../redux/actions/firebaseAuth';
 import { fetchUserSignatures } from '../redux/actions/signature';
 
 const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
@@ -13,7 +17,7 @@ const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
 
 export default connect(mapStateToProps, {
   fetchUserSignatures,
-  signInFacebook,
-  signInGoogle,
-  signOut
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseSignOut
 })(Application);

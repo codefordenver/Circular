@@ -64,7 +64,7 @@ class SignCampaign extends Component {
       userSignatures,
       activeCampaign,
       activeCampaign: { loaded }
-    } = this.props;
+    } = this.props.signCampaignProps;
     return (
       <Row className="show-grid">
         <Col md={12} className="sign-campaign-resets">
@@ -81,25 +81,26 @@ class SignCampaign extends Component {
                   )}
                 {/*  user is signed in && hasn't signed a campaign */}
                 {loaded &&
-                  userSignatures._campaignId === null && (
+                  auth.status === 'SIGNED_IN' && (
+                    // userSignatures._campaignId === null &&
                     <RenderSignCampaign
                       createCheckBoxes={this.createCheckBoxes}
                       handleSignCampaign={this.handleSignCampaign}
                     />
                   )}
                 {/*  user is signed in && has signed a campaign */}
-                {loaded &&
+                {/* {loaded &&
                   auth.status === 'SIGNED_IN' &&
                   activeCampaign.campaign._id === userSignatures._campaignID && (
                     <RenderRemoveSignature handleRemoveSignature={this.handleRemoveSignature} />
-                  )}
+                  )} */}
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
-                {loaded &&
+                {/* {loaded &&
                   userSignatures._campaignID &&
                   userSignatures._campaignID !== activeCampaign.campaignId && (
                     <RenderUserHasSignedOtherCampaign campaignID={userSignatures._campaignID} />
-                  )}
+                  )} */}
               </Col>
             </Row>
           </div>

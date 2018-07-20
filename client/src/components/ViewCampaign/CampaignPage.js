@@ -4,7 +4,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { calculateCampaignDuration } from '../../utils/calculateCampaignDuration';
 import Discussion from '../Discussion';
-// import SignCampaign from '../components/SignCampaign';
+import SignCampaign from '../../components/SignCampaign';
 import SignatureList from '../SignatureList';
 import MapCard from '../MapCard';
 import CollapsePanel from '../CollapsePanel';
@@ -14,7 +14,8 @@ import CampaignStatus from '../CampaignStatus';
 const CampaignPage = ({
   activeCampaign,
   activeCampaign: { address, campaignId },
-  hrefIsLocalhost
+  hrefIsLocalhost,
+  signCampaignProps
 }) => (
   <Grid>
     <Row className="full-height-side-bar">
@@ -113,19 +114,17 @@ const CampaignPage = ({
         </Row>
       </Col>
       <Col md={3} xs={12} className="side-bar">
-        {/* <SignCampaign
-                signInFacebook={signInFacebook}
-                signInGoogle={signInGoogle}
-                signOut={signOut}
-                userSignatures={userSignatures}
-                /> */}
+        {
+          <SignCampaign signCampaignProps={signCampaignProps} />
+          /*
         <div className="text-center sig-bar-collapse-panel">
           <CollapsePanel
             defaultExpanded
             titleText="See Who's Signed"
             body={<SignatureList campaignID={campaignId} />}
           />
-        </div>
+        </div> */
+        }
       </Col>
     </Row>
   </Grid>
@@ -141,7 +140,8 @@ CampaignPage.propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,
-  hrefIsLocalhost: PropTypes.func.isRequired
+  hrefIsLocalhost: PropTypes.func.isRequired,
+  signCampaignProps: PropTypes.shape({}).isRequired
 };
 
 export default CampaignPage;

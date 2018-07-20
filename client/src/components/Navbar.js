@@ -10,7 +10,14 @@ const MyCampaignNavItem = ({ campaignId }) => (
   </NavItem>
 );
 
-const NavBar = ({ auth, signInGoogle, signInFacebook, signOut, userSignatures, ...props }) => {
+const NavBar = ({
+  auth,
+  firebaseSignOut,
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  userSignatures,
+  ...props
+}) => {
   const { _campaignID } = userSignatures;
   const userHasSignedCampaign = auth.status === 'SIGNED_IN' && _campaignID;
   let homeText;
@@ -45,9 +52,9 @@ const NavBar = ({ auth, signInGoogle, signInFacebook, signOut, userSignatures, .
           {auth.status && (
             <NavBarSignIn
               auth={auth}
-              signOut={signOut}
-              signInFacebook={signInFacebook}
-              signInGoogle={signInGoogle}
+              firebaseSignOut={firebaseSignOut}
+              firebaseSignInGoogle={firebaseSignInGoogle}
+              firebaseSignInFacebook={firebaseSignInFacebook}
             />
           )}
         </Nav>
@@ -66,9 +73,9 @@ MyCampaignNavItem.propTypes = {
 
 NavBar.propTypes = {
   auth: PropTypes.shape({}).isRequired,
-  signOut: PropTypes.func.isRequired,
-  signInGoogle: PropTypes.func.isRequired,
-  signInFacebook: PropTypes.func.isRequired,
+  firebaseSignInGoogle: PropTypes.func.isRequired,
+  firebaseSignInFacebook: PropTypes.func.isRequired,
+  firebaseSignOut: PropTypes.func.isRequired,
   userSignatures: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
