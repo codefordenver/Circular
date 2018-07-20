@@ -133,14 +133,14 @@ const CampaignPage = ({
 CampaignPage.propTypes = {
   activeCampaign: PropTypes.shape({
     address: PropTypes.string.isRequired,
-    modifiedAt: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    modifiedAt: PropTypes.instanceOf(Date).isRequired,
+    createdAt: PropTypes.instanceOf(Date).isRequired,
     latLng: PropTypes.string.isRequired,
     error: PropTypes.string.isRequired,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,
-  hrefIsLocalhost: PropTypes.func.isRequired,
+  hrefIsLocalhost: PropTypes.bool.isRequired,
   signCampaignProps: PropTypes.shape({}).isRequired
 };
 

@@ -1,4 +1,4 @@
-import { campaignsRef, Timestamp } from '../../firebase';
+import { campaignsRef, Timestamp, signaturesRef } from '../../firebase';
 
 // POPULATE CAMPAIGNS REQUEST
 export const FETCH_FIREBASE_CAMPAIGNS_REQUEST = 'FETCH_FIREBASE_CAMPAIGNS_REQUEST';
@@ -91,17 +91,22 @@ export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => 
   // ADD NEW DOCUMENT IN COLLECTION 'CAMPAIGNS'
   // RETURNS FIRESTORE GENERATED ID
   const newCampaignRef = campaignsRef.doc();
+  const newSignatureRef = signaturesRef.doc();
   const newCampaignData = {
     campaignId: newCampaignRef.id,
     address,
     latLng,
     createdAt: Timestamp,
-    modifiedAt: Timestamp
+    modifiedAt: Timestamp,
+    signaturesRef: newSignatureRef
   };
   // SETS FIRESTORE RECORD WITH GENERATED ID
-  await newCampaignRef.set({ ...newCampaignData }).catch(error => {
-    console.error('Error writing document: ', error);
-  });
+  await newCampaignRef
+    .set({ ...newCampaignData })
+    .catch(error => {
+      console.error('Error writing document: ', error);
+    })
+    .then(newCampaignRef.doc(newCampaignRef.id).collection('signatures'));
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
   dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
   // TODO clear search information

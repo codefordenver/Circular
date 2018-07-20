@@ -6,7 +6,11 @@ import { withRouter } from 'react-router';
 import { firebasePopulateCampaignById } from '../redux/actions/firebaseActiveCampaign';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import { fetchUserSignatures } from '../redux/actions/signature';
-import { signInGoogle, signInFacebook, signOut } from '../redux/actions/firebaseAuth';
+import {
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseSignOut
+} from '../redux/actions/firebaseAuth';
 // COMPONENTS
 import CampaignPage from '../components/ViewCampaign/CampaignPage';
 import Loader from '../components/UtilComponents/FullScreenLoader';
@@ -26,7 +30,13 @@ class CampaignContainer extends Component {
     const { activeCampaign, auth } = this.props;
     const { loading, loaded, error, campaignId } = activeCampaign;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
-    const signCampaignProps = { auth, activeCampaign, signInFacebook, signInGoogle, signOut };
+    const signCampaignProps = {
+      auth,
+      activeCampaign,
+      firebaseSignInGoogle,
+      firebaseSignInFacebook,
+      firebaseSignOut
+    };
     return (
       <div>
         {loading && <Loader />}
@@ -83,10 +93,10 @@ export default connect(
     }
   }),
   {
-    signInGoogle,
-    signInFacebook,
+    firebaseSignInGoogle,
+    firebaseSignInFacebook,
+    firebaseSignOut,
     firebasePopulateCampaignById,
-    signOut,
     fetchUserSignatures,
     fetchApartmentsRequest
   }

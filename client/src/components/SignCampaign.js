@@ -8,7 +8,6 @@ import {
   removeSignatureFromCampaign,
   fetchUserSignatures
 } from '../redux/actions/signature';
-import { signOut } from '../redux/actions/firebaseAuth';
 import RenderSignIn from './SignCampaign/RenderSignIn';
 import RenderSignCampaign from './SignCampaign/RenderSignCampaign';
 import RenderRemoveSignature from './SignCampaign/RenderRemoveSignature';
@@ -58,8 +57,8 @@ class SignCampaign extends Component {
 
   render() {
     const {
-      signInGoogle,
-      signInFacebook,
+      firebaseSignInGoogle,
+      firebaseSignInFacebook,
       auth,
       userSignatures,
       activeCampaign,
@@ -77,7 +76,10 @@ class SignCampaign extends Component {
                 {/*  user isn't signed in */}
                 {loaded &&
                   auth.status === 'ANONYMOUS' && (
-                    <RenderSignIn signInGoogle={signInGoogle} signInFacebook={signInFacebook} />
+                    <RenderSignIn
+                      firebaseSignInGoogle={firebaseSignInGoogle}
+                      firebaseSignInFacebook={firebaseSignInFacebook}
+                    />
                   )}
                 {/*  user is signed in && hasn't signed a campaign */}
                 {loaded &&
@@ -120,22 +122,24 @@ SignCampaign.defaultProps = {
 };
 
 SignCampaign.propTypes = {
-  activeCampaign: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    campaign: PropTypes.shape({
-      _id: PropTypes.string.isRequired
-    })
-  }).isRequired,
-  auth: PropTypes.shape({
-    uid: PropTypes.string
+  signCampaignProps: PropTypes.shape({
+    activeCampaign: PropTypes.shape({
+      loaded: PropTypes.bool.isRequired,
+      campaign: PropTypes.shape({
+        _id: PropTypes.string.isRequired
+      })
+    }).isRequired,
+    auth: PropTypes.shape({
+      uid: PropTypes.string
+    }).isRequired,
+    firebaseSignInGoogle: PropTypes.func.isRequired,
+    firebaseSignInFacebook: PropTypes.func.isRequired
   }).isRequired,
   userSignatures: PropTypes.shape({
     _campaignId: PropTypes.string
   }).isRequired,
-  removeSignatureFromCampaign: PropTypes.func.isRequired,
-  signInGoogle: PropTypes.func.isRequired,
-  signInFacebook: PropTypes.func.isRequired,
-  addSignatureToCampaign: PropTypes.func.isRequired
+  removeSignatureFromCampaign: PropTypes.func.isRequired
+  // addSignatureToCampaign: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -149,6 +153,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   addSignatureToCampaign,
   removeSignatureFromCampaign,
-  fetchUserSignatures,
-  signOut
+  fetchUserSignatures
 })(SignCampaign);
