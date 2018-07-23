@@ -19,7 +19,7 @@ class Home extends Component {
     this.state = {};
   }
   render() {
-    /* eslint no-shadow: */ // TODO EXPLORE NO-SHADOW WITH FIREBASESERACHFLOW
+    /* eslint no-shadow: */
     const { firebaseCampaigns, googleMap: { isOpen }, firebaseSearchAddressFlow } = this.props;
     const { campaigns } = firebaseCampaigns;
     return (

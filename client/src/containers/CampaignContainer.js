@@ -6,11 +6,8 @@ import { withRouter } from 'react-router';
 import { firebasePopulateCampaignById } from '../redux/actions/firebaseActiveCampaign';
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import { fetchUserSignatures } from '../redux/actions/signature';
-import {
-  firebaseSignInGoogle,
-  firebaseSignInFacebook,
-  firebaseSignOut
-} from '../redux/actions/firebaseAuth';
+import { firebaseSignInGoogle, firebaseSignInFacebook } from '../redux/actions/firebaseAuth';
+import { firebaseAddSignatureToCampaign } from '../redux/actions/firebaseSignatures';
 // COMPONENTS
 import CampaignPage from '../components/ViewCampaign/CampaignPage';
 import Loader from '../components/UtilComponents/FullScreenLoader';
@@ -27,27 +24,31 @@ class CampaignContainer extends Component {
   }
 
   render() {
-    const { activeCampaign, auth } = this.props;
+    /* eslint-disable no-shadow */
+    const {
+      activeCampaign,
+      auth,
+      firebaseAddSignatureToCampaign,
+      firebaseSignInGoogle,
+      firebaseSignInFacebook
+    } = this.props;
     const { loading, loaded, error, campaignId } = activeCampaign;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
     const signCampaignProps = {
       auth,
       activeCampaign,
+      firebaseAddSignatureToCampaign,
       firebaseSignInGoogle,
-      firebaseSignInFacebook,
-      firebaseSignOut
+      firebaseSignInFacebook
     };
     return (
       <div>
-        <button onClick={firebaseSignInGoogle}>signin </button>
         {loading && <Loader />}
         {loaded && activeCampaign && error && <NotFound />}
         {loaded &&
           activeCampaign &&
           !error && (
             <CampaignPage
-              testFire={testFire}
-              firebaseSignInGoogle={firebaseSignInGoogle}
               signCampaignProps={signCampaignProps}
               activeCampaign={activeCampaign}
               hrefIsLocalhost={hrefIsLocalhost}
@@ -65,7 +66,8 @@ CampaignPage.defaultProps = {
     error: null,
     modifiedAt: null,
     createdAt: null,
-    latLng: null
+    latLng: null,
+    activeCampaignSigantures: []
   })
 };
 
@@ -80,10 +82,14 @@ CampaignContainer.propTypes = {
       _lat: PropTypes.number.isRequired,
       _long: PropTypes.number.isRequired
     }),
+    activeCampaignSigantures: PropTypes.arrayOf(),
     error: PropTypes.string,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,
+  firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+  firebaseSignInGoogle: PropTypes.func.isRequired,
+  firebaseSignInFacebook: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired
@@ -100,7 +106,9 @@ const mapStateToProps = ({ activeCampaign, initialSearch, signature, auth }) => 
 
 export default connect(mapStateToProps, {
   firebaseSignInGoogle,
+  firebaseSignInFacebook,
   firebasePopulateCampaignById,
   fetchUserSignatures,
-  fetchApartmentsRequest
+  fetchApartmentsRequest,
+  firebaseAddSignatureToCampaign
 })(withRouter(CampaignContainer));

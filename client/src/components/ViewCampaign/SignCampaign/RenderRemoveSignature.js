@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Alert, Button } from 'react-bootstrap';
-import * as ToolList from '../../UtilComponents/CollapsePanel';
+import ToolList from '../../UtilComponents/CollapsePanel';
 
-const RenderRemoveSignaturePrompt = ({ handleRemoveSignature }) => (
+const RenderRemoveSignature = () => (
   <div>
     <div className="text-center thanks-for-alert">
       <Alert bsStyle="success">
@@ -13,6 +12,7 @@ const RenderRemoveSignaturePrompt = ({ handleRemoveSignature }) => (
       <ToolList
         headingStyle="bg-blue-color text-center"
         titleText="Helpful tools:"
+        defaultExpanded
         body={
           <ul className="tool-list-body">
             <li>
@@ -29,7 +29,7 @@ const RenderRemoveSignaturePrompt = ({ handleRemoveSignature }) => (
         }
       />
       <div className="text-center">
-        <Button className="logout-button-signature" onClick={handleRemoveSignature} block>
+        <Button className="logout-button-signature" block>
           <i className="fa fa-times-circle" />
           Unsign This Campaign
         </Button>
@@ -38,8 +38,4 @@ const RenderRemoveSignaturePrompt = ({ handleRemoveSignature }) => (
   </div>
 );
 
-RenderRemoveSignaturePrompt.propTypes = {
-  handleRemoveSignature: PropTypes.func.isRequired
-};
-
-export default RenderRemoveSignaturePrompt;
+export default RenderRemoveSignature;

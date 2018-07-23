@@ -5,15 +5,15 @@ import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { calculateCampaignDuration } from '../../utils/calculateCampaignDuration';
 import Discussion from '../Discussion';
 import SignCampaign from './SignCampaign/SignCampaign';
-// import SignatureList from '../SignatureList';
+import SignatureList from './SignCampaign/SignatureList';
 import MapCard from '../MapCard';
-// import CollapsePanel from '../UtilComponents/CollapsePanel';
+import CollapsePanel from '../UtilComponents/CollapsePanel';
 import CampaignProgressBar from './CampaignProgressBar';
 import CampaignStatus from './CampaignStatus';
 
 const CampaignPage = ({
   activeCampaign,
-  activeCampaign: { address, campaignId },
+  activeCampaign: { loaded, address, campaignId, activeCampaignSignatures },
   hrefIsLocalhost,
   signCampaignProps
 }) => (
@@ -115,15 +115,26 @@ const CampaignPage = ({
       </Col>
       <Col md={3} xs={12} className="side-bar">
         {
-          <SignCampaign signCampaignProps={signCampaignProps} />
-          /*
-        <div className="text-center sig-bar-collapse-panel">
-          <CollapsePanel
-            defaultExpanded
-            titleText="See Who's Signed"
-            body={<SignatureList campaignID={campaignId} />}
-          />
-        </div> */
+          <div>
+            <SignCampaign signCampaignProps={signCampaignProps} />
+            <div className="text-center sig-bar-collapse-panel">
+              {activeCampaign &&
+                loaded &&
+                activeCampaignSignatures && (
+                  <CollapsePanel
+                    defaultExpanded
+                    titleText="See Who's Signed"
+                    body={
+                      <SignatureList
+                        activeCampaignSignatures={activeCampaignSignatures.map(
+                          signature => signature.displayName
+                        )}
+                      />
+                    }
+                  />
+                )}
+            </div>
+          </div>
         }
       </Col>
     </Row>
@@ -145,12 +156,30 @@ CampaignPage.propTypes = {
       _lat: PropTypes.number,
       _long: PropTypes.number
     }).isRequired,
+    activeCampaignSignatures: PropTypes.arrayOf(PropTypes.shape({})),
     error: PropTypes.string,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,
   hrefIsLocalhost: PropTypes.bool.isRequired,
-  signCampaignProps: PropTypes.shape({}).isRequired
+  signCampaignProps: PropTypes.shape({
+    firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+    firebaseSignInGoogle: PropTypes.func.isRequired,
+    firebaseSignInFacebook: PropTypes.func.isRequired,
+    auth: PropTypes.shape({}).isRequired,
+    activeCampaign: PropTypes.shape({
+      address: PropTypes.string,
+      modifiedAt: PropTypes.instanceOf(Date).isRequired,
+      createdAt: PropTypes.instanceOf(Date).isRequired,
+      latLng: PropTypes.shape({
+        _lat: PropTypes.number.isRequired,
+        _long: PropTypes.number.isRequired
+      }),
+      error: PropTypes.string,
+      loading: PropTypes.bool,
+      loaded: PropTypes.bool
+    }).isRequired
+  }).isRequired
 };
 
 export default CampaignPage;

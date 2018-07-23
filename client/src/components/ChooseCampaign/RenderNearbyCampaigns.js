@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RenderAddressHeading from './RenderAddressHeading';
-import SubmitButton from './SubmitButton';
+// import RenderAddressHeading from './RenderAddressHeading';
+// import SubmitButton from './SubmitButton';
 
 const RenderNearbyCampaigns = ({ nearbyCampaigns, selectedAddress }) => (
   <div>

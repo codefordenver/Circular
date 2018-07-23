@@ -1,69 +1,87 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col, FormGroup } from 'react-bootstrap';
-import Checkbox from './SignatureCheckbox';
-import {
-  addSignatureToCampaign,
-  removeSignatureFromCampaign,
-  fetchUserSignatures
-} from '../../../redux/actions/signature';
+import { Row, Col } from 'react-bootstrap';
+import { removeSignatureFromCampaign, fetchUserSignatures } from '../../../redux/actions/signature';
 import RenderSignIn from './RenderSignIn';
 import RenderSignCampaign from './RenderSignCampaign';
 import RenderRemoveSignature from './RenderRemoveSignature';
 import RenderUserHasSignedOtherCampaign from './RenderUserHasSignedOtherCampaign';
 
 class SignCampaign extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      keepMeUpdated: false,
+      signerMessage: ''
+    };
+  }
+
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
 
-  toggleCheckbox = label => {
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
-    } else {
-      this.selectedCheckboxes.add(label);
-    }
+  toggleKeepMeUpdatedCheckbox = () => {
+    this.setState({
+      keepMeUpdated: !this.state.keepMeUpdated
+    });
   };
 
-  handleSignCampaign = async formSubmitEvent => {
-    formSubmitEvent.preventDefault();
+  updateSignerMessage = e => {
+    const signerMessage = e.target.value;
+    this.setState({
+      signerMessage
+    });
+  };
 
-    const campaignId =
-      this.props.activeCampaign &&
-      this.props.activeCampaign.campaign &&
-      this.props.activeCampaign.campaign.campaignId;
-
-    await this.props.addSignatureToCampaign(
-      this.props.auth.uid,
-      this.selectedCheckboxes,
+  handleAddSignatureToCampaign = async () => {
+    /* eslint-disable no-unsued-vars */
+    const {
+      auth: { uid, displayName },
+      activeCampaign: { campaignId, activeCampaignSignatures }
+    } = this.props.signCampaignProps;
+    const { signerMessage, keepMeUpdated } = this.state;
+    const signatureObject = {
+      uid,
+      displayName,
+      signerMessage,
+      keepMeUpdated,
       campaignId
-    );
+    };
+    await this.props.signCampaignProps.firebaseAddSignatureToCampaign(signatureObject);
   };
 
-  handleRemoveSignature = async e => {
-    e.preventDefault();
-    const { _userID, _campaignID, _id } = this.props.userSignatures;
-    await this.props.removeSignatureFromCampaign(_userID, _campaignID, _id);
-  };
+  // handleSignCampaign = async formSubmitEvent => {
+  //   formSubmitEvent.preventDefault();
 
-  createCheckbox = label => (
-    <FormGroup key={label} className="text-center">
-      <h4>
-        <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} number="1" />
-      </h4>
-    </FormGroup>
-  );
+  //   const campaignId =
+  //     this.props.activeCampaign &&
+  //     this.props.activeCampaign.campaign &&
+  //     this.props.activeCampaign.campaign.campaignId;
+
+  //   await this.props.addSignatureToCampaign(
+  //     this.props.auth.uid,
+  //     this.selectedCheckboxes,
+  //     campaignId
+  //   );
+  // };
+
+  // handleRemoveSignature = async e => {
+  //   e.preventDefault();
+  //   const { _userID, _campaignID, _id } = this.props.userSignatures;
+  //   await this.props.removeSignatureFromCampaign(_userID, _campaignID, _id);
+  // };
 
   render() {
     const {
+      firebaseAddSignatureToCampaign,
       firebaseSignInGoogle,
       firebaseSignInFacebook,
       auth,
-      userSignatures,
       activeCampaign,
-      activeCampaign: { loaded }
+      activeCampaign: { loaded, activeCampaignSignatures }
     } = this.props.signCampaignProps;
+    const { keepMeUpdated, signerMessage } = this.state;
     return (
       <Row className="show-grid">
         <Col md={12} className="sign-campaign-resets">
@@ -83,19 +101,30 @@ class SignCampaign extends Component {
                   )}
                 {/*  user is signed in && hasn't signed a campaign */}
                 {loaded &&
-                  auth.status === 'SIGNED_IN' && (
+                  auth.status === 'SIGNED_IN' &&
+                  activeCampaign &&
+                  activeCampaignSignatures &&
+                  !activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid) && (
                     // userSignatures._campaignId === null &&
                     <RenderSignCampaign
-                      createCheckBoxes={this.createCheckBoxes}
-                      handleSignCampaign={this.handleSignCampaign}
+                      // createCheckBoxes={this.createCheckBoxes}
+                      firebaseAddSignatureToCampaign={firebaseAddSignatureToCampaign}
+                      handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
+                      keepMeUpdated={keepMeUpdated}
+                      keepMeUpdatedLabel={'Keep Me Updated On This Campaign'}
+                      signerMessage={signerMessage}
+                      toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
+                      updateSignerMessage={this.updateSignerMessage}
                     />
                   )}
                 {/*  user is signed in && has signed a campaign */}
-                {/* {loaded &&
+                {loaded &&
                   auth.status === 'SIGNED_IN' &&
-                  activeCampaign.campaign._id === userSignatures._campaignID && (
-                    <RenderRemoveSignature handleRemoveSignature={this.handleRemoveSignature} />
-                  )} */}
+                  activeCampaign &&
+                  activeCampaignSignatures &&
+                  activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid) && (
+                    <RenderRemoveSignature />
+                  )}
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
                 {/* {loaded &&
@@ -132,14 +161,10 @@ SignCampaign.propTypes = {
     auth: PropTypes.shape({
       uid: PropTypes.string
     }).isRequired,
+    firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
     firebaseSignInGoogle: PropTypes.func.isRequired,
     firebaseSignInFacebook: PropTypes.func.isRequired
-  }).isRequired,
-  userSignatures: PropTypes.shape({
-    _campaignId: PropTypes.string
-  }).isRequired,
-  removeSignatureFromCampaign: PropTypes.func.isRequired
-  // addSignatureToCampaign: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = state => ({
@@ -151,7 +176,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  addSignatureToCampaign,
   removeSignatureFromCampaign,
   fetchUserSignatures
 })(SignCampaign);

@@ -1,46 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { FormGroup } from 'react-bootstrap';
 
-class Checkbox extends Component {
-  state = {
-    isChecked: false
-  };
-
-  toggleCheckboxChange = () => {
-    const { handleCheckboxChange, label } = this.props;
-
-    this.setState(({ isChecked }) => ({
-      isChecked: !isChecked
-    }));
-
-    handleCheckboxChange(label);
-  };
-
-  render() {
-    const { label } = this.props;
-    const { isChecked } = this.state;
-
-    return (
+const SignatureCheckbox = ({ toggleKeepMeUpdatedCheckbox, keepMeUpdated, keepMeUpdatedLabel }) => (
+  <FormGroup key={keepMeUpdatedLabel} className="text-center">
+    <h4>
       <div className="checkbox">
         <label htmlFor="signatureCheckbox">
           <input
             id="signatureCheckbox"
             type="checkbox"
-            value={label}
-            checked={isChecked}
-            onChange={this.toggleCheckboxChange}
+            name="KeepMeUpdated"
+            checked={keepMeUpdated}
+            onChange={toggleKeepMeUpdatedCheckbox}
           />
 
-          {label}
+          {keepMeUpdatedLabel}
         </label>
       </div>
-    );
-  }
-}
+    </h4>
+  </FormGroup>
+);
 
-Checkbox.propTypes = {
-  label: PropTypes.string.isRequired,
-  handleCheckboxChange: PropTypes.func.isRequired
+SignatureCheckbox.propTypes = {
+  toggleKeepMeUpdatedCheckbox: PropTypes.func.isRequired,
+  keepMeUpdated: PropTypes.bool.isRequired,
+  keepMeUpdatedLabel: PropTypes.string.isRequired
 };
 
-export default Checkbox;
+export default SignatureCheckbox;
