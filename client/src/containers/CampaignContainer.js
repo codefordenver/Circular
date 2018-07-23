@@ -7,7 +7,10 @@ import { firebasePopulateCampaignById } from '../redux/actions/firebaseActiveCam
 import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
 import { fetchUserSignatures } from '../redux/actions/signature';
 import { firebaseSignInGoogle, firebaseSignInFacebook } from '../redux/actions/firebaseAuth';
-import { firebaseAddSignatureToCampaign } from '../redux/actions/firebaseSignatures';
+import {
+  firebaseAddSignatureToCampaign,
+  firebaseRemoveSignatureFromCampaign
+} from '../redux/actions/firebaseSignatures';
 // COMPONENTS
 import CampaignPage from '../components/ViewCampaign/CampaignPage';
 import Loader from '../components/UtilComponents/FullScreenLoader';
@@ -29,6 +32,7 @@ class CampaignContainer extends Component {
       activeCampaign,
       auth,
       firebaseAddSignatureToCampaign,
+      firebaseRemoveSignatureFromCampaign,
       firebaseSignInGoogle,
       firebaseSignInFacebook
     } = this.props;
@@ -38,6 +42,7 @@ class CampaignContainer extends Component {
       auth,
       activeCampaign,
       firebaseAddSignatureToCampaign,
+      firebaseRemoveSignatureFromCampaign,
       firebaseSignInGoogle,
       firebaseSignInFacebook
     };
@@ -88,6 +93,7 @@ CampaignContainer.propTypes = {
     loaded: PropTypes.bool
   }).isRequired,
   firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+  firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired,
   firebaseSignInFacebook: PropTypes.func.isRequired,
   params: PropTypes.shape({
@@ -105,10 +111,11 @@ const mapStateToProps = ({ activeCampaign, initialSearch, signature, auth }) => 
 });
 
 export default connect(mapStateToProps, {
-  firebaseSignInGoogle,
-  firebaseSignInFacebook,
-  firebasePopulateCampaignById,
   fetchUserSignatures,
   fetchApartmentsRequest,
-  firebaseAddSignatureToCampaign
+  firebaseAddSignatureToCampaign,
+  firebasePopulateCampaignById,
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseRemoveSignatureFromCampaign
 })(withRouter(CampaignContainer));

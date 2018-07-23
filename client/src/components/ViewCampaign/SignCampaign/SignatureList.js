@@ -7,7 +7,7 @@ const SignatureList = ({ activeCampaignSignatures }) => (
       <h2>
         ({activeCampaignSignatures.length}) Signature{activeCampaignSignatures.length > 1
           ? 's'
-          : ''}
+          : ' '}
         on the list!
       </h2>
     ) : (

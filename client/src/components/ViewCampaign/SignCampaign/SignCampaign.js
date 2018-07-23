@@ -38,7 +38,7 @@ class SignCampaign extends Component {
     /* eslint-disable no-unsued-vars */
     const {
       auth: { uid, displayName },
-      activeCampaign: { campaignId, activeCampaignSignatures }
+      activeCampaign: { campaignId }
     } = this.props.signCampaignProps;
     const { signerMessage, keepMeUpdated } = this.state;
     const signatureObject = {
@@ -49,6 +49,11 @@ class SignCampaign extends Component {
       campaignId
     };
     await this.props.signCampaignProps.firebaseAddSignatureToCampaign(signatureObject);
+  };
+
+  handleRemoveSignatureFromCamapaign = async () => {
+    const { activeCampaign: { campaignId }, auth: { uid } } = this.props.signCampaignProps;
+    await this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
   };
 
   // handleSignCampaign = async formSubmitEvent => {
@@ -74,7 +79,6 @@ class SignCampaign extends Component {
 
   render() {
     const {
-      firebaseAddSignatureToCampaign,
       firebaseSignInGoogle,
       firebaseSignInFacebook,
       auth,
@@ -105,10 +109,7 @@ class SignCampaign extends Component {
                   activeCampaign &&
                   activeCampaignSignatures &&
                   !activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid) && (
-                    // userSignatures._campaignId === null &&
                     <RenderSignCampaign
-                      // createCheckBoxes={this.createCheckBoxes}
-                      firebaseAddSignatureToCampaign={firebaseAddSignatureToCampaign}
                       handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
                       keepMeUpdated={keepMeUpdated}
                       keepMeUpdatedLabel={'Keep Me Updated On This Campaign'}
@@ -123,7 +124,9 @@ class SignCampaign extends Component {
                   activeCampaign &&
                   activeCampaignSignatures &&
                   activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid) && (
-                    <RenderRemoveSignature />
+                    <RenderRemoveSignature
+                      handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
+                    />
                   )}
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
@@ -162,6 +165,7 @@ SignCampaign.propTypes = {
       uid: PropTypes.string
     }).isRequired,
     firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+    firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
     firebaseSignInGoogle: PropTypes.func.isRequired,
     firebaseSignInFacebook: PropTypes.func.isRequired
   }).isRequired

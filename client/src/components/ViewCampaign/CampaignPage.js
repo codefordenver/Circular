@@ -164,6 +164,7 @@ CampaignPage.propTypes = {
   hrefIsLocalhost: PropTypes.bool.isRequired,
   signCampaignProps: PropTypes.shape({
     firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+    firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
     firebaseSignInGoogle: PropTypes.func.isRequired,
     firebaseSignInFacebook: PropTypes.func.isRequired,
     auth: PropTypes.shape({}).isRequired,

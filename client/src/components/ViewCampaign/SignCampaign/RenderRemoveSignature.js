@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Alert, Button } from 'react-bootstrap';
 import ToolList from '../../UtilComponents/CollapsePanel';
 
-const RenderRemoveSignature = () => (
+const RenderRemoveSignature = ({ handleRemoveSignatureFromCamapaign }) => (
   <div>
     <div className="text-center thanks-for-alert">
       <Alert bsStyle="success">
@@ -29,7 +30,11 @@ const RenderRemoveSignature = () => (
         }
       />
       <div className="text-center">
-        <Button className="logout-button-signature" block>
+        <Button
+          className="logout-button-signature"
+          onClick={handleRemoveSignatureFromCamapaign}
+          block
+        >
           <i className="fa fa-times-circle" />
           Unsign This Campaign
         </Button>
@@ -37,5 +42,9 @@ const RenderRemoveSignature = () => (
     </div>
   </div>
 );
+
+RenderRemoveSignature.propTypes = {
+  handleRemoveSignatureFromCamapaign: PropTypes.func.isRequired
+};
 
 export default RenderRemoveSignature;

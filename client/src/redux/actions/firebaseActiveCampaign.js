@@ -70,6 +70,7 @@ export const firebasePopulateCampaignById = campaignId => async dispatch => {
     })
     .catch(err => {
       // TODO ADD ERROR HANDELING FOR SIGNATURES ERRORS ONLY
+      /* eslint-disable no-console */
       console.log('Error fetching campaignSignatures', err);
     });
 };

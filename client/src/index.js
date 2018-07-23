@@ -14,7 +14,7 @@ import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
 
 // firebase actions
-import { startListeningToAuthChanges } from './redux/actions/firebaseAuth';
+// import { startListeningToAuthChanges } from './redux/actions/firebaseAuth';
 import { startListeningForSignatures } from './redux/actions/firebaseSignatures';
 import { startListeningForCampaigns } from './redux/actions/firebaseCampaigns';
 
@@ -29,7 +29,7 @@ store.subscribe(() => {
   saveState({ initialSearch: store.getState().initialSearch });
 });
 
-store.dispatch(startListeningToAuthChanges());
+// store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForSignatures());
 store.dispatch(startListeningForCampaigns());
 

@@ -39,9 +39,23 @@ export const firebaseSignInGoogleSuccess = () => ({
 
 // FIREBASE SIGN IN THUNKS
 // GOOGLE SIGN IN THUNK
-export const firebaseSignInGoogle = () => dispatch => {
+export const firebaseSignInGoogle = () => async dispatch => {
   dispatch(firebaseSignInGoogleRequest());
-  auth.signInWithPopup(googleAuthProvider);
+  const userId = await auth.signInWithPopup(googleAuthProvider).then(result => result.user.uid);
+  console.log('userId ', userId);
+  usersRef
+    .doc(userId)
+    .get()
+    .then(doc => {
+      console.log(...doc.data());
+      dispatch(firebaseSignIn(...doc.data()));
+    });
+  // usersRef
+  //   .doc(userAuthData.uid)
+  //   .get()
+  //   .then(userData => {
+  //     console.log(...userData);
+  //   })
 };
 
 // FACEBOOK SIGN IN THUNK
@@ -65,7 +79,6 @@ export const firebaseSignInFacebook = () => dispatch => {
 
 export const signInGoogle = () => dispatch => {
   dispatch({ type: 'ATTEMPTING_LOGIN_GOOGLE' });
-  auth.signInWithPopup(googleAuthProvider);
 };
 
 export const signInFacebook = () => dispatch => {
@@ -80,36 +93,33 @@ export const signOut = () => dispatch => {
 
 // FIREBASE AUTH LISTENER FUNCTIONS
 export const FIREBASE_SIGN_IN_SUCCESS = 'FIREBASE_SIGN_IN_SUCCESS';
-const firebaseSignIn = user => ({
+const firebaseSignIn = async user => ({
   type: FIREBASE_SIGN_IN_SUCCESS,
   email: user.email,
   displayName: user.displayName,
-  uid: user.uid
+  uid: user.uid,
+  signedCampaignId: user.signedCampaignId
 });
 
 // FIREBASE AUTH LISTENERS
 // WHEN AUTH CHANGES, DISPATCH `firebaseSignIn()`. THEN FETCH USER SIGNATUERS
-export const startListeningToAuthChanges = () => dispatch => {
-  // Listens for authStateChange from firebase
-  auth.onAuthStateChanged(user => {
-    // If user, then set user
-    if (user) {
-      const { uid, email, displayName } = user;
-      dispatch(firebaseSignIn(user));
-      const userData = {
-        uid,
-        email,
-        displayName
-      };
-      usersRef.doc(uid).set(userData);
-      // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
-      // will needs to pass user.uid to fetchUserSignatures once signatures are stored in Firebase
-      // sample
-      // dispatch(fetchUserSignatures('5ad27d0d829e17f7343211f8'));
-      dispatch(firebaseFetchUserSignatures());
-    } else {
-      // if there is no user, signOut() resets to initial state
+export const startListeningToAuthChanges = () => async dispatch => {
+  // LISTEN FOR AUTH STATE CHANGE FROM FIREBASE
+  await auth.onAuthStateChanged(user => {
+    // IF THERE IS NO USER, SIGNOUT() RESETS TO INITIAL STATE
+    if (!user) {
       dispatch(firebaseSignOut());
     }
+    // IF USER
+    const { uid, email, displayName } = user;
+    const updateUserData = {
+      uid,
+      email,
+      displayName
+    };
+    // ADD USER DATA TO FIRESTORE
+    usersRef.doc(uid).set(updateUserData, { merge: true });
+    // DISPATCH AUTH USER
+    dispatch(firebaseSignInGoogle(user));
   });
 };
