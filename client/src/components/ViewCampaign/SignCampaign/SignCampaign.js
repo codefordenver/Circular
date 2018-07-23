@@ -7,11 +7,11 @@ import {
   addSignatureToCampaign,
   removeSignatureFromCampaign,
   fetchUserSignatures
-} from '../redux/actions/signature';
-import RenderSignIn from './SignCampaign/RenderSignIn';
-import RenderSignCampaign from './SignCampaign/RenderSignCampaign';
-import RenderRemoveSignature from './SignCampaign/RenderRemoveSignature';
-import RenderUserHasSignedOtherCampaign from './SignCampaign/RenderUserHasSignedOtherCampaign';
+} from '../../../redux/actions/signature';
+import RenderSignIn from './RenderSignIn';
+import RenderSignCampaign from './RenderSignCampaign';
+import RenderRemoveSignature from './RenderRemoveSignature';
+import RenderUserHasSignedOtherCampaign from './RenderUserHasSignedOtherCampaign';
 
 class SignCampaign extends Component {
   componentWillMount = () => {

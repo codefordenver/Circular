@@ -35,7 +35,7 @@ class CampaignStatus extends React.Component {
 }
 
 CampaignStatus.propTypes = {
-  createdAt: PropTypes.string.isRequired, // date string
+  createdAt: PropTypes.instanceOf(Date).isRequired,
   duration: PropTypes.number.isRequired
 };
 

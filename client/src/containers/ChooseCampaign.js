@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import { Grid, Row, Col, Button, ListGroup, ControlLabel, ListGroupItem } from 'react-bootstrap';
 // import { selectAddress } from '../redux/actions/initialSearch';import fetchCampaignById from '../redux/actions/activeCampaign';
 import AutoSuggestInput from '../components/AutoSuggestInput';
-import RenderLoading from '../components/RenderLoading';
+import RenderLoading from '../components/UtilComponents/FullScreenLoader';
 
 class ChooseCampaign extends Component {
   constructor(props) {

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
 import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
-import InfoAndLinks from '../components/InfoAndLinks';
-import Footer from '../components/Footer';
+import InfoAndLinks from '../components/Informational/InfoAndLinks';
+import Footer from '../components/Footer/Footer';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
@@ -19,6 +19,7 @@ class Home extends Component {
     this.state = {};
   }
   render() {
+    /* eslint no-shadow: */ // TODO EXPLORE NO-SHADOW WITH FIREBASESERACHFLOW
     const { firebaseCampaigns, googleMap: { isOpen }, firebaseSearchAddressFlow } = this.props;
     const { campaigns } = firebaseCampaigns;
     return (

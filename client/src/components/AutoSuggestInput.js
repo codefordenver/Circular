@@ -19,14 +19,11 @@ class AutoSuggestInput extends Component {
 
   handleSelect = address => {
     this.setState({ address });
-    console.log('handle Select Hit');
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         // convert searchCoordinates into Firestore GeoPoint
         const searchedGeoPoint = new GeoPoint(lat, lng);
-        console.log(searchedGeoPoint);
-        console.log(address);
         this.props.firebaseSearchAddressFlow(address, searchedGeoPoint);
       })
       .catch(error => this.setState({ error }));

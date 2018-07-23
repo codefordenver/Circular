@@ -4,12 +4,12 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { calculateCampaignDuration } from '../../utils/calculateCampaignDuration';
 import Discussion from '../Discussion';
-import SignCampaign from '../../components/SignCampaign';
-import SignatureList from '../SignatureList';
+import SignCampaign from './SignCampaign/SignCampaign';
+// import SignatureList from '../SignatureList';
 import MapCard from '../MapCard';
-import CollapsePanel from '../CollapsePanel';
-import CampaignProgressBar from '../CampaignProgressBar';
-import CampaignStatus from '../CampaignStatus';
+// import CollapsePanel from '../UtilComponents/CollapsePanel';
+import CampaignProgressBar from './CampaignProgressBar';
+import CampaignStatus from './CampaignStatus';
 
 const CampaignPage = ({
   activeCampaign,
@@ -130,13 +130,22 @@ const CampaignPage = ({
   </Grid>
 );
 
+MapCard.defaultProps = {
+  activeCampaign: PropTypes.shape({
+    error: null
+  })
+};
+
 CampaignPage.propTypes = {
   activeCampaign: PropTypes.shape({
     address: PropTypes.string.isRequired,
     modifiedAt: PropTypes.instanceOf(Date).isRequired,
     createdAt: PropTypes.instanceOf(Date).isRequired,
-    latLng: PropTypes.string.isRequired,
-    error: PropTypes.string.isRequired,
+    latLng: PropTypes.shape({
+      _lat: PropTypes.number,
+      _long: PropTypes.number
+    }).isRequired,
+    error: PropTypes.string,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
   }).isRequired,

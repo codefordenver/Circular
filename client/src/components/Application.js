@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NavBar from '../components/Navbar';
+import NavBar from '../components/Navigation/Navbar';
 
 const Application = ({
   auth,

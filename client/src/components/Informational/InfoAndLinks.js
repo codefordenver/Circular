@@ -1,6 +1,6 @@
 import React from 'react';
-import RecyclingInfo from '../components/RecyclingInfo';
-import PropManagerLinks from '../components/PropManagerLinks';
+import RecyclingInfo from './RecyclingInfo';
+import PropManagerLinks from './PropManagerLinks';
 
 const InfoAndLinks = () => (
   <div>

@@ -49,7 +49,7 @@ class CampaignProgessBar extends Component {
 }
 
 CampaignProgessBar.propTypes = {
-  createdAt: PropTypes.string.isRequired, // Date string
+  createdAt: PropTypes.instanceOf(Date).isRequired,
   phases: PropTypes.arrayOf(PropTypes.string).isRequired,
   duration: PropTypes.number.isRequired
 };

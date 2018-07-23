@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Grid, PageHeader } from 'react-bootstrap';
-import CollapsePanel from '.././components/CollapsePanel';
+import CollapsePanel from '../UtilComponents/CollapsePanel';
 
 const ManagerResources = () => (
   <div>

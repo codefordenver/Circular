@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
-import CollapsePanel from '.././components/CollapsePanel';
+import CollapsePanel from '../UtilComponents/CollapsePanel';
 
 const RequestRecyclingTips = () => (
   <div>

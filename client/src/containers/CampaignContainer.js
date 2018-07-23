@@ -39,12 +39,15 @@ class CampaignContainer extends Component {
     };
     return (
       <div>
+        <button onClick={firebaseSignInGoogle}>signin </button>
         {loading && <Loader />}
         {loaded && activeCampaign && error && <NotFound />}
         {loaded &&
           activeCampaign &&
           !error && (
             <CampaignPage
+              testFire={testFire}
+              firebaseSignInGoogle={firebaseSignInGoogle}
               signCampaignProps={signCampaignProps}
               activeCampaign={activeCampaign}
               hrefIsLocalhost={hrefIsLocalhost}
@@ -71,9 +74,12 @@ CampaignContainer.propTypes = {
   auth: PropTypes.shape({}).isRequired,
   activeCampaign: PropTypes.shape({
     address: PropTypes.string,
-    modifiedAt: PropTypes.string,
-    createdAt: PropTypes.string,
-    latLng: PropTypes.string,
+    modifiedAt: PropTypes.instanceOf(Date).isRequired,
+    createdAt: PropTypes.instanceOf(Date).isRequired,
+    latLng: PropTypes.shape({
+      _lat: PropTypes.number.isRequired,
+      _long: PropTypes.number.isRequired
+    }),
     error: PropTypes.string,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
@@ -83,21 +89,18 @@ CampaignContainer.propTypes = {
   }).isRequired
 };
 
-export default connect(
-  ({ activeCampaign, initialSearch, signature, auth }) => ({
-    activeCampaign,
-    initialSearch,
-    auth,
-    userSignatures: {
-      ...signature.userSignatures
-    }
-  }),
-  {
-    firebaseSignInGoogle,
-    firebaseSignInFacebook,
-    firebaseSignOut,
-    firebasePopulateCampaignById,
-    fetchUserSignatures,
-    fetchApartmentsRequest
+const mapStateToProps = ({ activeCampaign, initialSearch, signature, auth }) => ({
+  activeCampaign,
+  initialSearch,
+  auth,
+  userSignatures: {
+    ...signature.userSignatures
   }
-)(withRouter(CampaignContainer));
+});
+
+export default connect(mapStateToProps, {
+  firebaseSignInGoogle,
+  firebasePopulateCampaignById,
+  fetchUserSignatures,
+  fetchApartmentsRequest
+})(withRouter(CampaignContainer));

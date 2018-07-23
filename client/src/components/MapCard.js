@@ -68,13 +68,22 @@ const MapCard = ({ activeCampaign }) => (
   </div>
 );
 
+MapCard.defaultProps = {
+  activeCampaign: PropTypes.shape({
+    error: null
+  })
+};
+
 MapCard.propTypes = {
-  activeCampaign: PropTypes.arrayOf({
+  activeCampaign: PropTypes.shape({
     address: PropTypes.string.isRequired,
-    modifiedAt: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    latLng: PropTypes.string.isRequired,
-    error: PropTypes.string.isRequired
+    modifiedAt: PropTypes.instanceOf(Date).isRequired,
+    createdAt: PropTypes.instanceOf(Date).isRequired,
+    latLng: PropTypes.shape({
+      _lat: PropTypes.number.isRequired,
+      _long: PropTypes.number.isRequired
+    }).isRequired,
+    error: PropTypes.string
   }).isRequired
 };
 

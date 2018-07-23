@@ -18,6 +18,7 @@ const RenderSignIn = ({ firebaseSignInFacebook, firebaseSignInGoogle }) => (
     </div>
     <h5 className="content text-center">OR</h5>
     <div className="login-button-signature">
+      <button onClick={firebaseSignInGoogle}>buttin </button>
       <GoogleButton onClick={firebaseSignInGoogle} className="btn-google btn-login" />
     </div>
   </div>

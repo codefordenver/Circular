@@ -8,12 +8,12 @@ import CreateCampaignStep1 from './components/CreateCampaignStep1';
 import CreateCampaignStep2 from './components/CreateCampaignStep2';
 import CreateCampaignStep3 from './components/CreateCampaignStep3';
 import CampaignContainer from './containers/CampaignContainer';
-import RequestRecyclingTips from './containers/RequestRecyclingTips';
-import DenverInfo from './containers/DenverInfo';
-import ManagerResources from './containers/ManagerResources';
+import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
+import DenverInfo from './components/Informational/DenverInfo';
+import ManagerResources from './components/Informational/ManagerResources';
 import DenverLearnMore from './containers/DenverLearnMore';
-import Collaboration from './containers/Collaboration';
-import PrivacyPolicy from './components/PrivacyPolicy';
+import Collaboration from './components/Informational/Collaboration';
+import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import NotFound from './components/UtilComponents/NotFound';
 
 export default (
