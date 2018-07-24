@@ -8,7 +8,7 @@ import { logSignerOut, fetchUserSignatures } from '../redux/actions/signature';
 function MyCampaignNavItem(props) {
   return (
     <NavItem eventKey={4} href={`/campaign/${props.campaignId}`}>
-      My Campaign
+      MY CAMPAIGN
     </NavItem>
   );
 }
@@ -38,7 +38,7 @@ function UserAuthNav(props) {
   // if logged in > show sign out options
   return (
     <NavItem eventKey={5} onClick={logOutUser}>
-      Sign Out, {firstName}
+      SIGN OUT, {firstName.toUpperCase()}
     </NavItem>
   );
 }
