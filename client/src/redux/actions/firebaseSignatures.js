@@ -27,15 +27,15 @@ export const firebaseFetchUserSignatures = firebaseUserSignatures => dispatch =>
 };
 
 // START LISTENING FOR NEW SIGNATURES
-export const startListeningForSignatures = () => dispatch => {
-  signaturesRef.onSnapshot(querySnapshot => {
-    const signatures = [];
-    querySnapshot.forEach(doc => {
-      signatures.push({ userId: doc.data().userId, campaignId: doc.data().campaignId });
-    });
-    dispatch(firebaseFetchUserSignatures(signatures));
-  });
-};
+// export const startListeningForSignatures = () => dispatch => {
+//   signaturesRef.onSnapshot(querySnapshot => {
+//     const signatures = [];
+//     querySnapshot.forEach(doc => {
+//       signatures.push({ userId: doc.data().userId, campaignId: doc.data().campaignId });
+//     });
+//     dispatch(firebaseFetchUserSignatures(signatures));
+//   });
+// };
 
 // ADD SIGNATURE ACTIONS
 // FIREBASE ADD SIGNATURE TO CAMPAIGN REQUEST

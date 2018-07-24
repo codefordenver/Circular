@@ -4,22 +4,22 @@ import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
 import NavBarSignIn from './NavBarSignIn';
 
-const MyCampaignNavItem = ({ campaignId }) => (
-  <NavItem eventKey={4} href={`/campaign/${campaignId}`}>
+const MyCampaignNavItem = ({ signedCampaignId }) => (
+  <NavItem eventKey={4} href={`/campaign/${signedCampaignId}`}>
     My Campaign
   </NavItem>
 );
 
 const NavBar = ({
   auth,
+  auth: { signedCampaignId },
   firebaseSignOut,
   firebaseSignInGoogle,
   firebaseSignInFacebook,
   userSignatures,
   ...props
 }) => {
-  const { _campaignID } = userSignatures;
-  const userHasSignedCampaign = auth.status === 'SIGNED_IN' && _campaignID;
+  const userHasSignedCampaign = auth.status === 'SIGNED_IN' && signedCampaignId !== null;
   let homeText;
   homeText =
     props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
@@ -48,7 +48,7 @@ const NavBar = ({
             Who Are We
           </NavItem>
           {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
-          {userHasSignedCampaign && <MyCampaignNavItem campaignId={_campaignID} />}
+          {userHasSignedCampaign && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}
           {auth.status && (
             <NavBarSignIn
               auth={auth}
@@ -64,15 +64,22 @@ const NavBar = ({
 };
 
 MyCampaignNavItem.defaultProps = {
-  campaignId: null
+  signedCampaignId: null
 };
 
 MyCampaignNavItem.propTypes = {
-  campaignId: PropTypes.string
+  signedCampaignId: PropTypes.string
+};
+
+NavBar.defaultProps = {
+  signedCampaignId: null
 };
 
 NavBar.propTypes = {
-  auth: PropTypes.shape({}).isRequired,
+  auth: PropTypes.shape({
+    signedCampaignId: PropTypes.string,
+    status: PropTypes.string.isRequired
+  }).isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired,
   firebaseSignInFacebook: PropTypes.func.isRequired,
   firebaseSignOut: PropTypes.func.isRequired,

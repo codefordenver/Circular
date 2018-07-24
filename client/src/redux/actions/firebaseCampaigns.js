@@ -87,7 +87,7 @@ export const firebaseCreateNewCampaignSuccess = newlyCreatedCampaign => ({
 
 // CREATE NEW CAMPAIGN THUNK
 export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => {
-  dispatch(firebaseCreateNewCampaignRequest);
+  dispatch(firebaseCreateNewCampaignRequest());
   // ADD NEW DOCUMENT IN COLLECTION 'CAMPAIGNS'
   // RETURNS FIRESTORE GENERATED ID
   const newCampaignRef = campaignsRef.doc();
