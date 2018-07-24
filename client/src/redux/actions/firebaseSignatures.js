@@ -1,4 +1,5 @@
 import { signaturesRef, campaignsRef, usersRef, Timestamp } from '../../firebase';
+import { firebaseFetchUserSignedCampaigns } from '../actions/firebaseAuth';
 import {
   firebasePopulateCampaignById,
   firebaseFetchCampaignByIdError
@@ -92,7 +93,7 @@ export const firebaseAddSignatureToCampaign = signatureObject => async dispatch 
       },
       { merge: true }
     )
-    .then(() => console.log('user updated'));
+    .then(dispatch(firebaseFetchUserSignedCampaigns(uid)));
 };
 
 // REMOVE SIGNATURE ACTIONS
@@ -120,7 +121,7 @@ export const firebaseRemoveSignatureFromCamaignError = () => ({
 // FIREBASE REMOVE SIGNATURE THUNK
 // TODO EXPLORE KEEP RECORD OF DELETED SIGNATURES
 export const firebaseRemoveSignatureFromCampaign = (campaignId, uid) => async dispatch => {
-  dispatch(firebaseRemoveSignatureFromCampaignRequest());
+  // dispatch(firebaseRemoveSignatureFromCampaignRequest());
   const campaignSignatureRef = campaignsRef.doc(campaignId).collection('signatures');
   let deleteSignatureRef;
   await campaignSignatureRef
@@ -145,10 +146,10 @@ export const firebaseRemoveSignatureFromCampaign = (campaignId, uid) => async di
   await removeSignatureUserRef
     .set(
       {
-        signedCampaignId: 'userRemovedSignature',
+        signedCampaignId: null,
         modifiedSignedCampaignTimestamp: Timestamp
       },
       { merge: true }
     )
-    .then(() => console.log('user updated'));
+    .then(dispatch(firebaseFetchUserSignedCampaigns(uid)));
 };

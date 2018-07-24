@@ -51,9 +51,9 @@ class SignCampaign extends Component {
     await this.props.signCampaignProps.firebaseAddSignatureToCampaign(signatureObject);
   };
 
-  handleRemoveSignatureFromCamapaign = async () => {
+  handleRemoveSignatureFromCamapaign = () => {
     const { activeCampaign: { campaignId }, auth: { uid } } = this.props.signCampaignProps;
-    await this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
+    return this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
   };
 
   // handleSignCampaign = async formSubmitEvent => {
@@ -82,10 +82,15 @@ class SignCampaign extends Component {
       firebaseSignInGoogle,
       firebaseSignInFacebook,
       auth,
+      auth: { signedCampaignId },
       activeCampaign,
       activeCampaign: { loaded, activeCampaignSignatures }
     } = this.props.signCampaignProps;
     const { keepMeUpdated, signerMessage } = this.state;
+    const activeCampaignIncludesUsersSignature =
+      activeCampaign &&
+      activeCampaignSignatures.length > 0 &&
+      activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid);
     return (
       <Row className="show-grid">
         <Col md={12} className="sign-campaign-resets">
@@ -107,8 +112,7 @@ class SignCampaign extends Component {
                 {loaded &&
                   auth.status === 'SIGNED_IN' &&
                   activeCampaign &&
-                  activeCampaignSignatures &&
-                  !activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid) && (
+                  signedCampaignId === null && (
                     <RenderSignCampaign
                       handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
                       keepMeUpdated={keepMeUpdated}
@@ -123,18 +127,21 @@ class SignCampaign extends Component {
                   auth.status === 'SIGNED_IN' &&
                   activeCampaign &&
                   activeCampaignSignatures &&
-                  activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid) && (
+                  activeCampaignIncludesUsersSignature && (
                     <RenderRemoveSignature
                       handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
                     />
                   )}
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
-                {/* {loaded &&
-                  userSignatures._campaignID &&
-                  userSignatures._campaignID !== activeCampaign.campaignId && (
-                    <RenderUserHasSignedOtherCampaign campaignID={userSignatures._campaignID} />
-                  )} */}
+                {loaded &&
+                  auth.status === 'SIGNED_IN' &&
+                  signedCampaignId &&
+                  signedCampaignId !== null &&
+                  signedCampaignId !== 'userRemovedSignature' &&
+                  !activeCampaignIncludesUsersSignature && (
+                    <RenderUserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />
+                  )}
               </Col>
             </Row>
           </div>

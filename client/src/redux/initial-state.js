@@ -3,7 +3,8 @@ const initialState = {
     status: 'ANONYMOUS',
     email: null,
     displayName: null,
-    uid: null
+    uid: null,
+    signedUserCampaign: null
   }
 };
 

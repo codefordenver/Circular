@@ -21,8 +21,10 @@ class CampaignContainer extends Component {
     this.props.firebasePopulateCampaignById(this.props.params.id);
   }
   componentWillUpdate(nextProps) {
+    console.log('PARAMS ', this.props.params.id);
+    console.log('NEXTPROPS ', nextProps.params.id);
     if (this.props.params.id !== nextProps.params.id) {
-      nextProps.fetchCampaignById(nextProps.params.id);
+      nextProps.firebasePopulateCampaignById(nextProps.params.id);
     }
   }
 
@@ -30,6 +32,7 @@ class CampaignContainer extends Component {
     /* eslint-disable no-shadow */
     const {
       activeCampaign,
+      activeCampaign: { activeCampaignSignatures },
       auth,
       firebaseAddSignatureToCampaign,
       firebaseRemoveSignatureFromCampaign,
@@ -38,6 +41,7 @@ class CampaignContainer extends Component {
     } = this.props;
     const { loading, loaded, error, campaignId } = activeCampaign;
     const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
+
     const signCampaignProps = {
       auth,
       activeCampaign,

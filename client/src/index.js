@@ -13,9 +13,8 @@ import routes from './routes';
 import configureStore from './redux/configureStore';
 import { saveState } from './redux/localStorage';
 
-// firebase actions
-// import { startListeningToAuthChanges } from './redux/actions/firebaseAuth';
-import { startListeningForSignatures } from './redux/actions/firebaseSignatures';
+// FIREBASE LISTENERS / ACTIONS
+import { startListeningToAuthChanges } from './redux/actions/firebaseAuth';
 import { startListeningForCampaigns } from './redux/actions/firebaseCampaigns';
 
 bootstrapUtils.addStyle(Panel, 'remove-default');
@@ -29,8 +28,7 @@ store.subscribe(() => {
   saveState({ initialSearch: store.getState().initialSearch });
 });
 
-// store.dispatch(startListeningToAuthChanges());
-store.dispatch(startListeningForSignatures());
+store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForCampaigns());
 
 export const history = syncHistoryWithStore(browserHistory, store);

@@ -1,7 +1,12 @@
 import { auth, googleAuthProvider, facebookAuthProvider, usersRef } from '../../firebase';
-import { firebaseFetchUserSignatures } from './firebaseSignatures';
 
 // SIGN OUT
+// FIREBASE SINGOUT REQUEST
+export const FIREBASE_SIGN_OUT_REQUEST = 'FIREBASE_SIGN_OUT_REQUEST';
+export const firebaseSignOutRequest = () => ({
+  type: FIREBASE_SIGN_OUT_REQUEST
+});
+
 // FIREBASE SIGNOUT SUCCESS
 export const FIREBASE_SIGN_OUT_SUCCESS = 'FIREBASE_SIGN_OUT_SUCCESS';
 export const firebaseSignOutSuccess = () => ({
@@ -10,7 +15,7 @@ export const firebaseSignOutSuccess = () => ({
 
 // FIREBASE SIGN OUT THUNK
 export const firebaseSignOut = () => dispatch => {
-  // dispatch(firebaseSignOutRequest());
+  dispatch(firebaseSignOutRequest());
   // TODO EXPLORE ERROR HANDELING
   auth.signOut();
   dispatch(firebaseSignOutSuccess());
@@ -39,23 +44,9 @@ export const firebaseSignInGoogleSuccess = () => ({
 
 // FIREBASE SIGN IN THUNKS
 // GOOGLE SIGN IN THUNK
-export const firebaseSignInGoogle = () => async dispatch => {
+export const firebaseSignInGoogle = () => dispatch => {
   dispatch(firebaseSignInGoogleRequest());
-  const userId = await auth.signInWithPopup(googleAuthProvider).then(result => result.user.uid);
-  console.log('userId ', userId);
-  usersRef
-    .doc(userId)
-    .get()
-    .then(doc => {
-      console.log(...doc.data());
-      dispatch(firebaseSignIn(...doc.data()));
-    });
-  // usersRef
-  //   .doc(userAuthData.uid)
-  //   .get()
-  //   .then(userData => {
-  //     console.log(...userData);
-  //   })
+  auth.signInWithPopup(googleAuthProvider);
 };
 
 // FACEBOOK SIGN IN THUNK
@@ -64,62 +55,70 @@ export const firebaseSignInFacebook = () => dispatch => {
   firebaseSignOut();
 };
 
-// FIREBASE SIGN IN FACEBOOK SUCCESS
-
-// FIREBASE SIGN IN THUNK
-
-// const signedOut = () => ({
-//   type: 'SIGN_OUT'
-// });
-
-// export const FIREBASE_SIGN_OUT_REQUEST = 'FIREBASE_SIGN_OUT_REQUEST';
-// export const firebaseSignOutRequest = () => ({
-//   type: 'FIREBASE_SIGN_OUT_REQUEST'
-// });
-
-export const signInGoogle = () => dispatch => {
-  dispatch({ type: 'ATTEMPTING_LOGIN_GOOGLE' });
-};
-
-export const signInFacebook = () => dispatch => {
-  dispatch({ type: 'ATTEMPTING_LOGIN_FACEBOOK' });
-  auth.signInWithPopup(facebookAuthProvider);
-};
-
-export const signOut = () => dispatch => {
-  dispatch({ type: 'ATTEMPTING_SIGN_OUT' });
-  auth.signOut();
-};
-
-// FIREBASE AUTH LISTENER FUNCTIONS
+// FIREBASE AUTH LISTENER FUNCTION
 export const FIREBASE_SIGN_IN_SUCCESS = 'FIREBASE_SIGN_IN_SUCCESS';
-const firebaseSignIn = async user => ({
+const firebaseSignIn = user => ({
   type: FIREBASE_SIGN_IN_SUCCESS,
   email: user.email,
   displayName: user.displayName,
-  uid: user.uid,
-  signedCampaignId: user.signedCampaignId
+  uid: user.uid
 });
+
+// FIREBASE ADD SIGNATURES TO AUTH OBJECT
+// FIREBASE FETCH USER SIGNED CAMPAIGNS REQUEST
+export const FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST =
+  'FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST';
+export const firebaseFetchUserSignedCampaignsRequest = () => ({
+  type: FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST
+});
+
+// FIREBASE FETCH USER SIGNED CAMPAIGNS SUCCESS
+export const FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS =
+  'FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS';
+export const firebaseFetchUserSignedCampaignsSuccess = signedCampaignId => ({
+  type: FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS,
+  signedCampaignId
+});
+
+// FIREBASE FETCH USER SIGNED CAMPAIGNS THUNK
+export const firebaseFetchUserSignedCampaigns = uid => async dispatch => {
+  dispatch(firebaseFetchUserSignedCampaignsRequest());
+  // SEARCHED FOR MATCHING DATABASE USER DOC AND RETURNS THEIR SIGNED CAMPAIGN INFORMATION
+  usersRef
+    .doc(uid)
+    .get()
+    .then(user => {
+      const signedCampaignId = user.data().signedCampaignId;
+      // DISPATCHED TO ADD SIGNEDCAMPAIGNID TO USER AUTH OBJECT
+      dispatch(firebaseFetchUserSignedCampaignsSuccess(signedCampaignId));
+    })
+    .catch(error => {
+      // TODO IMPROVE ERROR HANDELING
+      console.log('error fetching user signed campaign', error);
+    });
+};
 
 // FIREBASE AUTH LISTENERS
 // WHEN AUTH CHANGES, DISPATCH `firebaseSignIn()`. THEN FETCH USER SIGNATUERS
-export const startListeningToAuthChanges = () => async dispatch => {
-  // LISTEN FOR AUTH STATE CHANGE FROM FIREBASE
-  await auth.onAuthStateChanged(user => {
-    // IF THERE IS NO USER, SIGNOUT() RESETS TO INITIAL STATE
-    if (!user) {
+export const startListeningToAuthChanges = () => dispatch => {
+  // Listens for authStateChange from firebase
+  auth.onAuthStateChanged(user => {
+    // If user, then set user
+    if (user) {
+      const { uid, email, displayName } = user;
+      dispatch(firebaseSignIn(user));
+      const userData = {
+        uid,
+        email,
+        displayName
+      };
+      // ADDS OR MERGES AUTH INFORMATION TO USERS COLLECTION
+      usersRef.doc(uid).set(userData, { merge: true });
+      // DISPATCHES FETCH USER SIGNED CAMPAIGN
+      dispatch(firebaseFetchUserSignedCampaigns(userData.uid));
+    } else {
+      // if there is no user, signOut() resets to initial state
       dispatch(firebaseSignOut());
     }
-    // IF USER
-    const { uid, email, displayName } = user;
-    const updateUserData = {
-      uid,
-      email,
-      displayName
-    };
-    // ADD USER DATA TO FIRESTORE
-    usersRef.doc(uid).set(updateUserData, { merge: true });
-    // DISPATCH AUTH USER
-    dispatch(firebaseSignInGoogle(user));
   });
 };
