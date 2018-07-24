@@ -27,6 +27,8 @@ class FirebaseChooseCampaign extends Component {
       this.redirectToExistingCampaign();
     } else if (name === 'NEW_CAMPAIGN') {
       this.makeNewCampaign(searchedAddress, latLng);
+    } else if (name === 'GO BACK') {
+      this.props.router.goBack();
     }
   };
 
@@ -107,7 +109,8 @@ FirebaseChooseCampaign.propTypes = {
     ).isRequired
   }).isRequired,
   router: PropTypes.shape({
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired
   }).isRequired,
   searchedAddress: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -115,7 +118,7 @@ FirebaseChooseCampaign.propTypes = {
 };
 
 export default connect(
-  ({ initialSearch, firebaseCampaigns }) => ({ ...initialSearch, firebaseCampaigns }),
+  ({ initialSearch, firebaseCampaigns, auth }) => ({ ...initialSearch, firebaseCampaigns, auth }),
   {
     firebaseCreateNewCampaign
   }

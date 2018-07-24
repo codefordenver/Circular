@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-const SubmitButton = ({ buttonText, handleSelection, name }) => (
+const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection }) => (
   <Row>
     <Col xs={12}>
       <Button
@@ -13,16 +13,24 @@ const SubmitButton = ({ buttonText, handleSelection, name }) => (
         onClick={handleSelection}
         block
       >
-        {buttonText} <i className="fa fa-arrow-right" />
+        {faArrowDirection === 'left' && <i className={`fa fa-arrow-${faArrowDirection}`} />}
+        {buttonText}
+        {'   '}
+        {faArrowDirection === 'right' && <i className={`fa fa-arrow-${faArrowDirection}`} />}
       </Button>
     </Col>
   </Row>
 );
 
+SubmitButton.defaultProps = {
+  faArrowDirection: 'right'
+};
+
 SubmitButton.propTypes = {
   buttonText: PropTypes.string.isRequired,
   handleSelection: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  faArrowDirection: PropTypes.string
 };
 
 export default SubmitButton;

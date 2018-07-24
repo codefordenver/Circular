@@ -5,7 +5,6 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import scriptLoader from 'react-async-script-loader';
 import { GeoPoint } from '../firebase';
 import { clearSearchResults } from '../redux/actions/initialSearch';
-// import { populateActiveCampaign } from '../redux/actions/firebaseCampaigns';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -18,13 +17,16 @@ class AutoSuggestInput extends Component {
   }
 
   handleSelect = address => {
+    // IF USER HAS ALREADY SIGNED A CAMPAIGN, SKIP SELECTION PROCESS
+    // TODO HANDLE USER SEARCH FLOW FOR ALREADY SIGNED USERS
+    const userHasSignedCampaign = this.props.auth.signedCampaignId;
     this.setState({ address });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        // convert searchCoordinates into Firestore GeoPoint
+        // CONVERY GEOCOORDINATES IN FIRESTORE GEOPOINT
         const searchedGeoPoint = new GeoPoint(lat, lng);
-        this.props.firebaseSearchAddressFlow(address, searchedGeoPoint);
+        this.props.firebaseSearchAddressFlow(address, searchedGeoPoint, userHasSignedCampaign);
       })
       .catch(error => this.setState({ error }));
   };
@@ -108,12 +110,14 @@ class AutoSuggestInput extends Component {
 
 AutoSuggestInput.propTypes = {
   firebaseSearchAddressFlow: PropTypes.func.isRequired,
-  firebaseCampaigns: PropTypes.shape({}).isRequired,
+  auth: PropTypes.shape({
+    signedCampaignId: PropTypes.string.isRequired
+  }).isRequired,
   clearSearchResults: PropTypes.func.isRequired,
   isScriptLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(null, {
+export default connect(({ auth }) => ({ auth }), {
   clearSearchResults
 })(
   scriptLoader(

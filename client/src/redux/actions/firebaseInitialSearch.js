@@ -110,7 +110,6 @@ export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch =
     querySnapshot.forEach(doc => {
       exactAddressMatch.push(doc.data());
     });
-    console.log('exactAddressMatch ', exactAddressMatch);
     if (exactAddressMatch) {
       // IF EXACT MATCH, DISPATCH EXACTMATCH
       dispatch(setExactCampaignMatch(exactAddressMatch));
@@ -137,13 +136,17 @@ export const stashLatLng = latLng => ({
 });
 
 // FIREBASE SEARCH ADDRESS FLOW
-export const firebaseSearchAddressFlow = (address, searchedGeoPoint) => async dispatch => {
+export const firebaseSearchAddressFlow = (
+  address,
+  searchedGeoPoint,
+  userHasSignedCampaign
+) => async dispatch => {
   await dispatch(firebaseStashAddress(address));
   await dispatch(stashLatLng(searchedGeoPoint));
   dispatch(push({ pathname: '/choose-campaign', state: { address } }));
+  dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
   // TODO need to handle latLng error
   // if (error) console.log('Latlng error ', error);
-  dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
 };
 
 // SELECT ADDRESS
