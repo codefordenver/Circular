@@ -3,7 +3,7 @@ import { Col, PageHeader } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 const PropManagerLinks = () => (
-  <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="home-section-container">
+  <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="property-manager-links-wrapper">
     <div className="home-section-div">
       <PageHeader className="home-section-page-header">Property Manager</PageHeader>
 

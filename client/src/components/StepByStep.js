@@ -1,24 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Col, PageHeader } from 'react-bootstrap';
-
-const Step = props => (
-  <Col xs={12} className="step-container">
-    <div className="step-emoji-icon">
-      <p>{props.emojiIcon}</p>
-    </div>
-    <h3 className="home-section-title">{props.title}</h3>
-    <p className="home-section-description">{props.description}</p>
-  </Col>
-);
-Step.propTypes = {
-  emojiIcon: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
-};
+import { PageHeader } from 'react-bootstrap';
 
 const StepByStep = () => (
-  <div className="StepByStep">
+  <div className="stepbystep-wrapper">
     <PageHeader className="home-section-page-header info-graphic-header">
       HOW DOES THIS WORK?
     </PageHeader>

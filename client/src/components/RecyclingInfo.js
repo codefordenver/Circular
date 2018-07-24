@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Col, PageHeader } from 'react-bootstrap';
 
 const RecyclingInfo = () => (
-  <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="home-section-container">
+  <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="recycling-info-wrapper">
     <div className="home-section-div">
       <PageHeader className="home-section-page-header">
         Denver's recycling rate is only 23%, while the national average is 35%.

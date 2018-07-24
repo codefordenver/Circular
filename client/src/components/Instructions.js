@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Instructions = () => (
-  <div className="Instructions">
+  <div className="instructions-wrapper">
     <header className="instructions-header">Instructions go here</header>
     <div className="steps">
       <div className="step create">
