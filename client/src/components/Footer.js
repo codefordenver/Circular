@@ -5,7 +5,9 @@ import { Link } from 'react-router';
 const Footer = () => (
   <Grid fluid className="footer-container">
     <Col xs={12}>
-      <p>Questions? Reach out to us!</p>
+      <a href="mailto:jasmin@ecocycle.org">
+        <p>Questions? Reach out to us!</p>
+      </a>
       <i className="fa fa-copyright" />
       2018 Eco-Cycle Inc & Code for Denver | All Rights Reserved |
       <Link className="footer-link" to="/privacy-policy">
