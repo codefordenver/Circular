@@ -65,3 +65,31 @@
     }
   }
 }
+
+@media screen and (max-width: 850px) {
+  .hero-wrapper {
+    .opacity-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0 50px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .hero-page-header {
+    h1 {
+      font-size: 40px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+  }
+}

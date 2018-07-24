@@ -32,7 +32,7 @@
   }
 }
 
-.info-and-links {
+.info-and-links-wrapper {
   display: flex;
 }
 
@@ -43,18 +43,40 @@
   width: 1px;
 }
 
-.home-section-container {
+.recycling-info-wrapper,
+.property-manager-links-wrapper {
   padding-bottom: 2em;
+  margin: 0;
 
   .home-section-div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 320px;
-    padding: 0 40px;
+    padding: 0 20px;
 
     &.recycling-info-div {
       border-right: 1px solid black;
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .info-and-links-wrapper {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .vertical-line {
+    display: none;
+  }
+
+  .recycling-info-wrapper,
+  .property-manager-links-wrapper {
+    padding: 0 0 2em 0;
+    .home-section-div {
+      min-height: 0px;
+      padding: 0 5px;
     }
   }
 }
