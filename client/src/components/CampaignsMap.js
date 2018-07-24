@@ -6,6 +6,7 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 // TODO import only what lodash files we need
 import * as _ from 'lodash';
+import Loader from '../components/UtilComponents/FullScreenLoader';
 
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // and name it GettingStartedGoogleMap
@@ -47,15 +48,15 @@ const CampaignsMap = props => (
       googleMapURL={mapUrl}
       loadingElement={
         <div style={{ height: '100%' }}>
-          {/* <FaSpinner
-                style={{
-                  display: `block`,
-                  width: `80px`,
-                  height: `80px`,
-                  margin: `150px auto`,
-                  animation: `fa-spin 2s infinite linear`,
-                }}
-              /> */}
+          <Loader
+            style={{
+              display: 'block',
+              width: '80px',
+              height: '80px',
+              margin: '150px auto',
+              animation: 'fa-spin 2s infinite linear'
+            }}
+          />
         </div>
       }
       containerElement={<div style={{ height: '100%' }} />}

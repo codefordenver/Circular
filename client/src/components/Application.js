@@ -4,6 +4,7 @@ import NavBar from '../components/Navigation/Navbar';
 
 const Application = ({
   auth,
+  closeMap,
   firebaseSignInGoogle,
   firebaseSignInFacebook,
   firebaseSignOut,
@@ -13,6 +14,7 @@ const Application = ({
   <div className="app-container">
     <NavBar
       auth={auth}
+      closeMap={closeMap}
       firebaseSignOut={firebaseSignOut}
       firebaseSignInGoogle={firebaseSignInGoogle}
       firebaseSignInFacebook={firebaseSignInFacebook}
@@ -27,12 +29,13 @@ Application.propTypes = {
   auth: PropTypes.shape({
     status: PropTypes.string.isRequried
   }).isRequired,
+  children: PropTypes.shape({}).isRequired,
+  closeMap: PropTypes.func.isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired,
   firebaseSignInFacebook: PropTypes.func.isRequired,
   firebaseSignOut: PropTypes.func.isRequired,
-  children: PropTypes.shape({}).isRequired,
-  userSignatures: PropTypes.shape({}).isRequired,
-  fetchUserSignatures: PropTypes.func.isRequired
+  fetchUserSignatures: PropTypes.func.isRequired,
+  userSignatures: PropTypes.shape({}).isRequired
 };
 
 export default Application;

@@ -20,7 +20,12 @@ class Home extends Component {
   }
   render() {
     /* eslint no-shadow: */
-    const { firebaseCampaigns, googleMap: { isOpen }, firebaseSearchAddressFlow } = this.props;
+    const {
+      firebaseCampaigns,
+      firebaseSearchAddressFlow,
+      googleMap: { isOpen },
+      router
+    } = this.props;
     const { campaigns } = firebaseCampaigns;
     return (
       <div>
@@ -29,7 +34,7 @@ class Home extends Component {
           firebaseSearchAddressFlow={firebaseSearchAddressFlow}
           clearInitialSearchResults={clearInitialSearchResults}
           firebaseCampaigns={firebaseCampaigns}
-          router={this.props.router}
+          router={router}
         />
         <CampaignsMap isOpen={isOpen} markers={campaigns} closeMap={this.props.closeMap} />
         <Grid fluid className="home-section-container">

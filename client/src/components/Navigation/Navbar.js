@@ -13,6 +13,7 @@ const MyCampaignNavItem = ({ signedCampaignId }) => (
 const NavBar = ({
   auth,
   auth: { signedCampaignId },
+  closeMap,
   firebaseSignOut,
   firebaseSignInGoogle,
   firebaseSignInFacebook,
@@ -29,7 +30,9 @@ const NavBar = ({
     <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">{homeText}</Link>
+          <Link onClick={closeMap} to="/">
+            {homeText}
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
@@ -82,13 +85,14 @@ NavBar.propTypes = {
     signedCampaignId: PropTypes.string,
     status: PropTypes.string.isRequired
   }).isRequired,
+  closeMap: PropTypes.func.isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired,
   firebaseSignInFacebook: PropTypes.func.isRequired,
   firebaseSignOut: PropTypes.func.isRequired,
-  userSignatures: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  userSignatures: PropTypes.shape({}).isRequired
 };
 
 export default NavBar;

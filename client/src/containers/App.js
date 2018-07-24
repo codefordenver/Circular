@@ -5,10 +5,12 @@ import {
   firebaseSignInFacebook,
   firebaseSignOut
 } from '../redux/actions/firebaseAuth';
+import { closeMap } from '../redux/actions/googleMap';
 import { fetchUserSignatures } from '../redux/actions/signature';
 
 const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
   auth,
+  closeMap,
   userSignatures: {
     ...signature.userSignatures
   },
@@ -16,6 +18,7 @@ const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
 });
 
 export default connect(mapStateToProps, {
+  closeMap,
   fetchUserSignatures,
   firebaseSignInGoogle,
   firebaseSignInFacebook,
