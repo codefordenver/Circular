@@ -108,10 +108,16 @@ class AutoSuggestInput extends Component {
   }
 }
 
+AutoSuggestInput.defaultProps = {
+  auth: PropTypes.shape({
+    signedCampaignId: null
+  })
+};
+
 AutoSuggestInput.propTypes = {
   firebaseSearchAddressFlow: PropTypes.func.isRequired,
   auth: PropTypes.shape({
-    signedCampaignId: PropTypes.string.isRequired
+    signedCampaignId: PropTypes.string
   }).isRequired,
   clearSearchResults: PropTypes.func.isRequired,
   isScriptLoaded: PropTypes.bool.isRequired

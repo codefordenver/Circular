@@ -20,6 +20,8 @@ const NavBar = ({
   ...props
 }) => {
   const userHasSignedCampaign = auth.status === 'SIGNED_IN' && signedCampaignId !== null;
+  const showMyCampaignNavItem =
+    `/campaign/${signedCampaignId}` !== props.location.pathname && userHasSignedCampaign;
   let homeText;
   homeText =
     props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
@@ -47,8 +49,8 @@ const NavBar = ({
           <NavItem eventKey={3} href="/who-are-we">
             Who Are We
           </NavItem>
-          {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS */}
-          {userHasSignedCampaign && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}
+          {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS and location */}
+          {showMyCampaignNavItem && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}
           {auth.status && (
             <NavBarSignIn
               auth={auth}
