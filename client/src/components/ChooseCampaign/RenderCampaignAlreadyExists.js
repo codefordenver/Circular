@@ -14,7 +14,7 @@ const RenderCampaignAlreadyExists = ({ exactMatchAddress, handleSelection }) => 
       buttonText={'Yup! Show Me!'}
       name={'EXISTING_CAMPAIGN'}
     />
-    <div style={{ 'margin-top': '1em' }} />
+    <div style={{ marginTop: '1em' }} />
     <SubmitButton
       handleSelection={handleSelection}
       buttonText={'Nope, Take Me Back'}

@@ -7,7 +7,6 @@ import AutoSuggestInput from './AutoSuggestInput';
 const HeroCTA = ({
   openMap,
   firebaseSearchAddressFlow,
-  firebaseStashAddress,
   clearInitialSearchResults,
   firebaseCampaigns,
   router
@@ -30,7 +29,6 @@ const HeroCTA = ({
         <form>
           <AutoSuggestInput
             firebaseSearchAddressFlow={firebaseSearchAddressFlow}
-            firebaseStashAddress={firebaseStashAddress}
             clearInitialSearchResults={clearInitialSearchResults}
             firebaseCampaigns={firebaseCampaigns}
             router={router}

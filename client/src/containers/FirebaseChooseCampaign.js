@@ -22,11 +22,11 @@ class FirebaseChooseCampaign extends Component {
     e.stopPropagation();
     e.preventDefault();
     const { name } = e.target;
-    const { searchedAddress, latLng } = this.props;
+    const { searchedAddress, searchedGeoPoint } = this.props.firebaseInitialSearch;
     if (name === 'EXISTING_CAMPAIGN') {
       this.redirectToExistingCampaign();
     } else if (name === 'NEW_CAMPAIGN') {
-      this.makeNewCampaign(searchedAddress, latLng);
+      this.makeNewCampaign(searchedAddress, searchedGeoPoint);
     } else if (name === 'GO BACK') {
       this.props.router.goBack();
     }
@@ -44,7 +44,10 @@ class FirebaseChooseCampaign extends Component {
   };
 
   render() {
-    const { loading, loaded, nearbyCampaigns, selectedAddress, exactMatch, error } = this.props;
+    const {
+      exactMatch,
+      firebaseInitialSearch: { error, loading, loaded, nearbyCampaigns, selectedAddress }
+    } = this.props;
     return (
       <Grid>
         <Row>
@@ -85,13 +88,10 @@ FirebaseChooseCampaign.defaultProps = {
 };
 
 FirebaseChooseCampaign.propTypes = {
-  error: PropTypes.objectOf(PropTypes.any).isRequired,
   exactMatch: PropTypes.shape({
     campaignId: PropTypes.string.isRequired
   }),
   firebaseCampaigns: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    loaded: PropTypes.bool.isRequired,
     campaignsAddresses: PropTypes.arrayOf(PropTypes.string).isRequired,
     campaigns: PropTypes.arrayOf(
       PropTypes.shape({
@@ -103,17 +103,23 @@ FirebaseChooseCampaign.propTypes = {
           _long: PropTypes.number.isRequired
         }).isRequired
       }).isRequired
-    ).isRequired
+    ).isRequired,
+    error: PropTypes.objectOf(PropTypes.any),
+    loading: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired
   }).isRequired,
-  latLng: PropTypes.objectOf({
-    _lat: PropTypes.string.isRequired,
-    _long: PropTypes.string.isRequired
+  firebaseInitialSearch: PropTypes.shape({
+    error: PropTypes.objectOf(PropTypes.any),
+    loading: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
+    nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
+    searchedAddress: PropTypes.string.isRequired,
+    searchedGeoPoint: PropTypes.shape({
+      _lat: PropTypes.number.isRequired,
+      _long: PropTypes.number.isRequired
+    }).isRequired
   }).isRequired,
-  loading: PropTypes.string.isRequired,
-  loaded: PropTypes.string.isRequired,
-  nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
   searchedAddress: PropTypes.string.isRequired,
-  selectedAddress: PropTypes.string.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired
@@ -121,7 +127,11 @@ FirebaseChooseCampaign.propTypes = {
 };
 
 export default connect(
-  ({ initialSearch, firebaseCampaigns, auth }) => ({ ...initialSearch, firebaseCampaigns, auth }),
+  ({ firebaseInitialSearch, firebaseCampaigns, auth }) => ({
+    firebaseInitialSearch,
+    firebaseCampaigns,
+    auth
+  }),
   {
     firebaseCreateNewCampaign
   }

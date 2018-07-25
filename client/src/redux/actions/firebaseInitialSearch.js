@@ -46,7 +46,7 @@ const getGeoSearchBoundries = (geoPoint, radius = 1) => {
 const getGeoSearchResults = async geoSearchBoundries => {
   // #####
   // FIRESTORE HASN'T YET EXPOSED GEOQUERIES, THIS IS A WORK AROUND ;)
-  // TODO EXPPLOE GEOFIRESTORE LIBRARY
+  // TODO EXPLORE GEOFIRESTORE LIBRARY
   // #####
 
   // SEARCH LOWERCAMPAIGNS
@@ -123,27 +123,19 @@ export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch =
 
 // STASH SEARCHED ADDRESS
 export const FIREBASE_STASH_ADDRESS = 'FIREBASE_STASH_ADDRESS';
-export const firebaseStashAddress = address => ({
+export const firebaseStashAddress = (searchedAddress, searchedGeoPoint) => ({
   type: FIREBASE_STASH_ADDRESS,
-  response: address
-});
-
-// STACHED SEARCHED LATLONG
-export const FIREBASE_STASH_LAT_LNG = 'FIREBASE_STASH_LAT_LNG';
-export const stashLatLng = latLng => ({
-  type: FIREBASE_STASH_LAT_LNG,
-  response: latLng
+  response: { searchedAddress, searchedGeoPoint }
 });
 
 // FIREBASE SEARCH ADDRESS FLOW
 export const firebaseSearchAddressFlow = (
-  address,
+  searchedAddress,
   searchedGeoPoint,
   userHasSignedCampaign
 ) => async dispatch => {
-  await dispatch(firebaseStashAddress(address));
-  await dispatch(stashLatLng(searchedGeoPoint));
-  dispatch(push({ pathname: '/choose-campaign', state: { address } }));
+  await dispatch(firebaseStashAddress(searchedAddress, searchedGeoPoint));
+  dispatch(push({ pathname: '/choose-campaign', state: { searchedAddress } }));
   dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
   // TODO need to handle latLng error
   // if (error) console.log('Latlng error ', error);

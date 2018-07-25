@@ -1,7 +1,6 @@
 import {
   // INITIAL SEARCH
   FIREBASE_STASH_ADDRESS,
-  FIREBASE_STASH_LAT_LNG,
   CLEAR_INITIAL_SEARCH_RESULTS,
   // CHOOSE CAMPAIGN FROM OPTIONS
   FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS,
@@ -33,19 +32,18 @@ export default function (state = defaultState, action) {
     }
     case CLEAR_INITIAL_SEARCH_RESULTS: {
       return {
-        ...state,
-        ...defaultState
+        loading: false,
+        loaded: false,
+        searchedAddress: null,
+        error: null,
+        nearbyCampaigns: null
       };
     }
     case FIREBASE_STASH_ADDRESS:
       return {
         ...state,
-        searchedAddress: response
-      };
-    case FIREBASE_STASH_LAT_LNG:
-      return {
-        ...state,
-        latLng: response
+        searchedAddress: response.searchedAddress,
+        searchedGeoPoint: response.searchedGeoPoint
       };
     case FETCH_NEARBY_CAMPAIGNS_REQUEST:
       return {

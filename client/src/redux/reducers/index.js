@@ -20,7 +20,7 @@ const reducers = combineReducers({
   routing,
   googleMap,
   newCampaign,
-  initialSearch: firebaseInitialSearch,
+  firebaseInitialSearch,
   activeCampaign: firebaseActiveCampaign,
   comments,
   signature,

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // TODO CAN WE DELETE THIS?
 
 // import { browserHistory } from 'react-router';
