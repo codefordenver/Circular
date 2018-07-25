@@ -9,17 +9,9 @@ export const firebaseSignOutRequest = () => ({
 
 // FIREBASE SIGN OUT SUCCESS
 export const FIREBASE_SIGN_OUT_SUCCESS = 'FIREBASE_SIGN_OUT_SUCCESS';
-export const firebaseSignOutSuccess = () => ({
+export const firebaseSignOut = () => ({
   type: FIREBASE_SIGN_OUT_SUCCESS
 });
-
-// FIREBASE SIGN OUT THUNK
-export const firebaseSignOut = () => dispatch => {
-  dispatch(firebaseSignOutRequest());
-  // TODO EXPLORE ERROR HANDELING
-  auth.signOut();
-  dispatch(firebaseSignOutSuccess());
-};
 
 // SIGNIN REQUESTS
 // GOOGLE
@@ -96,10 +88,10 @@ export const firebaseFetchUserSignedCampaigns = uid => async dispatch => {
     .then(user => {
       // TODO RESOLVE THIS ESLINT ERROR FOR NO UNSED VARS
       // eslint-disable-next-line no-unused-vars
-      let signedCampaignId = user.data().signedCampaignId;
+      const signedCampaignId = user.data().signedCampaignId ? user.data().signedCampaignId : null;
       // DISPATCHED TO ADD SIGNEDCAMPAIGNID TO USER AUTH OBJECT
       // If SIGNEDCAMPAIGNID === undefined, PASS NULL IN ARGUMENT
-      dispatch(firebaseFetchUserSignedCampaignsSuccess((signedCampaignId = null)));
+      dispatch(firebaseFetchUserSignedCampaignsSuccess(signedCampaignId));
     })
     .catch(error => {
       // TODO IMPROVE ERROR HANDELING
@@ -115,8 +107,9 @@ export const startListeningToAuthChanges = () => dispatch => {
   auth.onAuthStateChanged(user => {
     // IF USER, SET USER
     if (user) {
-      // DECONSTRUCT RETURNED USER OBJECT
-      const { uid, email, displayName, providerId, photoURL } = user.providerData[0];
+      // DECONSTRUCT FIREBASE USER OBJECT
+      const { uid } = user;
+      const { email, displayName, providerId, photoURL } = user.providerData[0];
       // DISPATCH LOGGED IN USER
       dispatch(firebaseSignIn(user));
       // BUILD OBJECT AND PASS TO FIRESTORE
@@ -130,7 +123,7 @@ export const startListeningToAuthChanges = () => dispatch => {
       // ADDS OR MERGES AUTH INFORMATION TO USERS COLLECTION
       usersRef.doc(uid).set(userData, { merge: true });
       // DISPATCHES FETCH USER SIGNED CAMPAIGN
-      dispatch(firebaseFetchUserSignedCampaigns(userData.uid));
+      dispatch(firebaseFetchUserSignedCampaigns(uid));
     } else {
       // if there is no user, signOut() resets to initial state
       dispatch(firebaseSignOut());

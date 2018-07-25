@@ -66,7 +66,7 @@ export const populateActiveCampaignSuccess = activeCampaign => ({
   response: activeCampaign
 });
 
-// POPULATE ACTIVE CAMPAIGN
+// POPULATE ACTIVE CAMPAIGN THUNK
 export const firebasePopulateActiveCampaign = activeCampaign => async dispatch => {
   dispatch(populateActiveCampaignRequest());
   dispatch(populateActiveCampaignSuccess(activeCampaign));

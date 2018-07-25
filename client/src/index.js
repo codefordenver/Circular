@@ -31,6 +31,7 @@ store.subscribe(() => {
 store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForCampaigns());
 
+// eslint-disable-next-line
 export const history = syncHistoryWithStore(browserHistory, store);
 
 render(

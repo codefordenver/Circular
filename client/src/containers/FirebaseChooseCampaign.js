@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { firebaseCreateNewCampaign } from '../redux/actions/firebaseCampaigns';
 import RenderLoading from '../components/ChooseCampaign/RenderLoading';
-import RenderError from '../components/ChooseCampaign/RenderError';
+// import RenderError from '../components/ChooseCampaign/RenderError';
 import RenderCampaignAlreadyExists from '../components/ChooseCampaign/RenderCampaignAlreadyExists';
 import RenderNewCampaign from '../components/ChooseCampaign/RenderNewCampaign';
 import RenderNearbyCampaigns from '../components/ChooseCampaign/RenderNearbyCampaigns';
@@ -46,14 +46,14 @@ class FirebaseChooseCampaign extends Component {
   render() {
     const {
       exactMatch,
-      firebaseInitialSearch: { error, loading, loaded, nearbyCampaigns, selectedAddress }
+      firebaseInitialSearch: { loading, loaded, nearbyCampaigns, selectedAddress }
     } = this.props;
     return (
       <Grid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
             {loading && <RenderLoading />}
-            {!loading && error && <RenderError error={error} />}
+            {/* {!loading && error && <RenderError error={error} />} */}
             {/* if no longer loading and not erroring then
             render one of the following three depending
              on the status of nearby campaign */}
@@ -84,7 +84,8 @@ class FirebaseChooseCampaign extends Component {
 }
 
 FirebaseChooseCampaign.defaultProps = {
-  exactMatch: null
+  exactMatch: null,
+  firebaseCampaigns: { activeCampaign: null }
 };
 
 FirebaseChooseCampaign.propTypes = {
@@ -92,22 +93,9 @@ FirebaseChooseCampaign.propTypes = {
     campaignId: PropTypes.string.isRequired
   }),
   firebaseCampaigns: PropTypes.shape({
-    campaignsAddresses: PropTypes.arrayOf(PropTypes.string).isRequired,
-    campaigns: PropTypes.arrayOf(
-      PropTypes.shape({
-        address: PropTypes.string.isRequired,
-        campaignId: PropTypes.string.isRequired,
-        createdAt: PropTypes.shape({}).isRequired,
-        latLng: PropTypes.shape({
-          _lat: PropTypes.number.isRequired,
-          _long: PropTypes.number.isRequired
-        }).isRequired
-      }).isRequired
-    ).isRequired,
-    error: PropTypes.objectOf(PropTypes.any),
-    loading: PropTypes.bool.isRequired,
-    loaded: PropTypes.bool.isRequired
-  }).isRequired,
+    activeCampaign: PropTypes.string
+  }),
+  firebaseCreateNewCampaign: PropTypes.func.isRequired,
   firebaseInitialSearch: PropTypes.shape({
     error: PropTypes.objectOf(PropTypes.any),
     loading: PropTypes.bool.isRequired,
@@ -127,10 +115,11 @@ FirebaseChooseCampaign.propTypes = {
 };
 
 export default connect(
-  ({ firebaseInitialSearch, firebaseCampaigns, auth }) => ({
-    firebaseInitialSearch,
+  ({ auth, firebaseCampaigns, activeCampaign, firebaseInitialSearch }) => ({
+    auth,
     firebaseCampaigns,
-    auth
+    activeCampaign,
+    firebaseInitialSearch
   }),
   {
     firebaseCreateNewCampaign
