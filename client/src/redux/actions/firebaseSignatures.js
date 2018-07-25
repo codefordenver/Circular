@@ -1,4 +1,4 @@
-import { signaturesRef, campaignsRef, usersRef, Timestamp } from '../../firebase';
+import { campaignsRef, usersRef, Timestamp } from '../../firebase';
 import { firebaseFetchUserSignedCampaigns } from '../actions/firebaseAuth';
 import {
   firebasePopulateCampaignById,

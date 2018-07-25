@@ -85,10 +85,7 @@ FirebaseChooseCampaign.defaultProps = {
 };
 
 FirebaseChooseCampaign.propTypes = {
-  loading: PropTypes.string.isRequired,
-  loaded: PropTypes.string.isRequired,
-  nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedAddress: PropTypes.string.isRequired,
+  error: PropTypes.objectOf(PropTypes.any).isRequired,
   exactMatch: PropTypes.shape({
     campaignId: PropTypes.string.isRequired
   }),
@@ -108,13 +105,19 @@ FirebaseChooseCampaign.propTypes = {
       }).isRequired
     ).isRequired
   }).isRequired,
+  latLng: PropTypes.objectOf({
+    _lat: PropTypes.string.isRequired,
+    _long: PropTypes.string.isRequired
+  }).isRequired,
+  loading: PropTypes.string.isRequired,
+  loaded: PropTypes.string.isRequired,
+  nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchedAddress: PropTypes.string.isRequired,
+  selectedAddress: PropTypes.string.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired
-  }).isRequired,
-  searchedAddress: PropTypes.string.isRequired,
-  error: PropTypes.objectOf(PropTypes.any).isRequired,
-  latLng: PropTypes.objectOf(PropTypes.any).isRequired
+  }).isRequired
 };
 
 export default connect(
