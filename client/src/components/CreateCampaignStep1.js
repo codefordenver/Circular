@@ -23,7 +23,6 @@ const CreateCampaignStep1 = props => {
     e.preventDefault();
     await updateNewCampaign({
       address: searchedAddress.formatted_address,
-      name: e.target.campaignName.value,
       lat: searchedAddress.latLng.response.lat,
       lng: searchedAddress.latLng.response.lng
     });
@@ -38,11 +37,6 @@ const CreateCampaignStep1 = props => {
             <FormGroup controlId="addressAndName">
               <ControlLabel>Address</ControlLabel>
               <FormControl type="text" value={formattedAddress} name="address" readOnly />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel className="create-campaign-control-label">Campaign Name</ControlLabel>
-              <div className="requiredtool" />
-              <FormControl type="text" name="campaignName" required />
             </FormGroup>
             <br />
             <Button bsStyle="remove-default" className="next-button fr" type="submit">

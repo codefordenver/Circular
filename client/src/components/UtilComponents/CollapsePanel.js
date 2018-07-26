@@ -19,7 +19,6 @@ class CollapsePanel extends Component {
   render() {
     const { body, titleText } = this.props;
     return (
-      /* eslint-disable */
       <div onClick={this.togglePanelExpanded} role="menuitem" tabIndex="0">
         <Panel className="collapse-panel" defaultExpanded={this.state.expanded}>
           <Panel.Toggle className="collapse-panel-toggle">
