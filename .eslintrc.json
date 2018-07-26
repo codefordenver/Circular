@@ -6,6 +6,7 @@
   "env": {
     "node": true
   },
+  "plugins": ["prettier"],
   "rules": {
     "no-shadow": ["error"],
     "no-unused-vars": [
@@ -16,6 +17,7 @@
         "ignoreRestSiblings": true
       }
     ],
-    "quotes": [2, "single"]
+    "quotes": [2, "single"],
+    "indent": ["error", 2]
   }
 }
