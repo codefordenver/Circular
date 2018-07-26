@@ -19,7 +19,7 @@
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
     "client-install": "(cd ./client && yarn install)",
-    "client-build": "(cd ./client && yarn run build)",
+    "client-build-dev": "(cd ./client && yarn run build-dev)",
     "heroku-postbuild":
       "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
     "postinstall": "yarn install --cwd client",

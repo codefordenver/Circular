@@ -16,7 +16,6 @@
         "ignoreRestSiblings": true
       }
     ],
-    "quotes": [2, "single"],
-    "indent": ["error", 2]
+    "quotes": [2, "single"]
   }
 }

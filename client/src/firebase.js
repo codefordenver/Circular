@@ -2,17 +2,22 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import { development } from './firebaseKeys';
+// import { staging } from './firebaseKeys';
+// import { production } from './firebaseKeys';
 
-const config = {
-  apiKey: 'AIzaSyDCfhYmCmE0YQbJA-RGq6C0UpiGSSIM3S8',
-  authDomain: 're-imagine-prod.firebaseapp.com',
-  databaseURL: 'https://re-imagine-prod.firebaseio.com',
-  projectId: 're-imagine-prod',
-  storageBucket: 're-imagine-prod.appspot.com',
-  messagingSenderId: '164611064308'
-};
+// SET ENVIRONMENTAL KEYS
+// let firebaseConfig;
+// if (process.env.NODE_ENV === 'development') {
+//   firebaseConfig = development;
+// } else if (process.env.NODE_ENV === 'staging') {
+//   firebaseConfig = staging;
+// } else if (process.env.NODE_ENV === 'production') {
+//   firebaseConfig = production;
+// }
 
-firebase.initializeApp(config);
+firebase.initializeApp(development);
+
 export const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);

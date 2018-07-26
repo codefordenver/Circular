@@ -5,7 +5,9 @@ coverage
 tmp
 log
 .vscode
-cypress/videos
+cypress/videosg
 cypress/screenshots
 client/.env.production
+client/src/firebaseKeys.js
+
 
