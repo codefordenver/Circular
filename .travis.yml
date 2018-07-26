@@ -19,4 +19,4 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
 
-script: "yarn lint && yarn run ci:test"
+script: "yarn lint --fix && yarn run ci:test"
