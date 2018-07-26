@@ -16,7 +16,7 @@
       "concurrently \"yarn start\" \"serve -s client/build -p 3000\" --browser chrome",
     "ci:test": "cypress run --browser chrome",
     "lint": "eslint .",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "dev": "concurrently \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
