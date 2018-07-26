@@ -8,9 +8,11 @@ const RenderUserHasSignedOtherCampaign = ({ signedCampaignId }) => (
     <Alert bsStyle="warning">
       <h4>You can only sign one campaign at a time.</h4>
       <p>Looks like you have already signed a campaign, you little overachiever you.</p>
-      <Button bsStyle="remove-default" className="user-has-signed-other-campaign-button" block>
-        <Link to={`/campaign/${signedCampaignId}`}>Go To My Campaign</Link>
-      </Button>
+      <Link to={`/campaign/${signedCampaignId}`}>
+        <Button bsStyle="remove-default" className="user-has-signed-other-campaign-button" block>
+          Go To My Campaign
+        </Button>
+      </Link>
     </Alert>
   </div>
 );
