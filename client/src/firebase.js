@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
-import { development } from './firebaseKeys';
+// import { development } from './firebaseKeys';
 // import { staging } from './firebaseKeys';
 // import { production } from './firebaseKeys';
 
@@ -16,7 +16,14 @@ import { development } from './firebaseKeys';
 //   firebaseConfig = production;
 // }
 
-firebase.initializeApp(development);
+firebase.initializeApp({
+  apiKey: 'AIzaSyDCfhYmCmE0YQbJA-RGq6C0UpiGSSIM3S8',
+  authDomain: 're-imagine-prod.firebaseapp.com',
+  databaseURL: 'https://re-imagine-prod.firebaseio.com',
+  projectId: 're-imagine-prod',
+  storageBucket: 're-imagine-prod.appspot.com',
+  messagingSenderId: '164611064308'
+});
 
 export const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
