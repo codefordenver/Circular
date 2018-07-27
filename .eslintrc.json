@@ -6,9 +6,7 @@
   "env": {
     "node": true
   },
-  "plugins": ["prettier"],
   "rules": {
-    "no-shadow": ["error"],
     "no-unused-vars": [
       "error",
       {

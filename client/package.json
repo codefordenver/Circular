@@ -14,7 +14,7 @@
     "dateformat": "^3.0.3",
     "firebase": "^5.0.4",
     "geocoder": "^0.2.3",
-    "lodash": "latest",
+    "lodash.noop": "^3.0.1",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "prop-types": "^15.5.10",
@@ -39,7 +39,6 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2"
   },
-  "devDependencies": {},
   "scripts": {
     "build-css":
       "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
@@ -51,15 +50,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": {
-    "/auth/google": {
-      "target": "http://localhost:5000"
-    },
-    "/auth/facebook": {
-      "target": "http://localhost:5000"
-    },
-    "/api/*": {
-      "target": "http://localhost:5000"
-    }
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-react-app": "^2.0.1"
   }
 }

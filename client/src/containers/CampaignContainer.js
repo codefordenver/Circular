@@ -1,30 +1,50 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 // import fetchCampaignById from '../redux/actions/activeCampaign';
-import { firebasePopulateCampaignById } from '../redux/actions/firebaseActiveCampaign';
-import { fetchApartmentsRequest } from '../redux/actions/initialSearch';
-import { fetchUserSignatures } from '../redux/actions/signature';
-import { firebaseSignInGoogle, firebaseSignInFacebook } from '../redux/actions/firebaseAuth';
+import { firebasePopulateCampaignById } from "../redux/actions/firebaseActiveCampaign";
+import { fetchApartmentsRequest } from "../redux/actions/initialSearch";
+import { fetchUserSignatures } from "../redux/actions/signature";
+import {
+  firebaseSignInGoogle,
+  firebaseSignInFacebook
+} from "../redux/actions/firebaseAuth";
 import {
   firebaseAddSignatureToCampaign,
   firebaseRemoveSignatureFromCampaign
-} from '../redux/actions/firebaseSignatures';
+} from "../redux/actions/firebaseSignatures";
 // COMPONENTS
-import CampaignPage from '../components/ViewCampaign/CampaignPage';
-import Loader from '../components/UtilComponents/FullScreenLoader';
-import NotFound from '../components/UtilComponents/NotFound';
+import CampaignPage from "../components/ViewCampaign/CampaignPage";
+import Loader from "../components/UtilComponents/FullScreenLoader";
+import NotFound from "../components/UtilComponents/NotFound";
 
 class CampaignContainer extends Component {
+  state = {
+    isNewCampaign: false
+  };
+
   componentDidMount() {
     this.props.firebasePopulateCampaignById(this.props.params.id);
+    // IF REDIRECTED FROM CREATE NEW CAMPAIGN ROUTER LOCATION WILL CONTAIN STATE OF ISNEWCAMPAIGN
+    if (
+      this.props.location.state &&
+      this.props.location.state.isNewCampaign !== undefined
+    ) {
+      this.setState({ isNewCampaign: this.props.location.state.isNewCampaign });
+    }
   }
   componentWillUpdate(nextProps) {
     if (this.props.params.id !== nextProps.params.id) {
       nextProps.firebasePopulateCampaignById(nextProps.params.id);
     }
   }
+
+  handleChangeIsNewCampaign = () => {
+    this.setState({
+      isNewCampaign: false
+    });
+  };
 
   render() {
     /* eslint-disable no-shadow */
@@ -36,9 +56,10 @@ class CampaignContainer extends Component {
       firebaseSignInGoogle,
       firebaseSignInFacebook
     } = this.props;
-    const { loading, loaded, error, campaignId } = activeCampaign;
-    const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
-
+    const { campaignId, error, loading, loaded } = activeCampaign;
+    const hrefIsLocalhost = window.location.href
+      .toLowerCase()
+      .includes("localhost");
     const signCampaignProps = {
       auth,
       activeCampaign,
@@ -55,7 +76,9 @@ class CampaignContainer extends Component {
           activeCampaign &&
           !error && (
             <CampaignPage
+              handleChangeIsNewCampaign={this.handleChangeIsNewCampaign}
               signCampaignProps={signCampaignProps}
+              isNewCampaign={this.state.isNewCampaign}
               activeCampaign={activeCampaign}
               hrefIsLocalhost={hrefIsLocalhost}
               campaignId={campaignId}
@@ -73,7 +96,8 @@ CampaignPage.defaultProps = {
     modifiedAt: null,
     createdAt: null,
     latLng: null,
-    activeCampaignSigantures: []
+    activeCampaignSigantures: [],
+    isNewCampaign: false
   })
 };
 
@@ -81,17 +105,18 @@ CampaignContainer.propTypes = {
   firebasePopulateCampaignById: PropTypes.func.isRequired,
   auth: PropTypes.shape({}).isRequired,
   activeCampaign: PropTypes.shape({
+    activeCampaignSigantures: PropTypes.arrayOf(),
     address: PropTypes.string,
-    modifiedAt: PropTypes.instanceOf(Date).isRequired,
-    createdAt: PropTypes.instanceOf(Date).isRequired,
+    createdAt: PropTypes.instanceOf(Date),
+    error: PropTypes.string,
+    isNewCampaign: PropTypes.bool,
     latLng: PropTypes.shape({
       _lat: PropTypes.number.isRequired,
       _long: PropTypes.number.isRequired
     }),
-    activeCampaignSigantures: PropTypes.arrayOf(),
-    error: PropTypes.string,
+    loaded: PropTypes.bool,
     loading: PropTypes.bool,
-    loaded: PropTypes.bool
+    modifiedAt: PropTypes.instanceOf(Date)
   }).isRequired,
   firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
   firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
@@ -102,7 +127,12 @@ CampaignContainer.propTypes = {
   }).isRequired
 };
 
-const mapStateToProps = ({ activeCampaign, initialSearch, signature, auth }) => ({
+const mapStateToProps = ({
+  activeCampaign,
+  initialSearch,
+  signature,
+  auth
+}) => ({
   activeCampaign,
   initialSearch,
   auth,

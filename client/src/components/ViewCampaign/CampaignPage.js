@@ -1,33 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
-import { FacebookShareButton, TwitterShareButton } from 'react-share';
-import { calculateCampaignDuration } from '../../utils/calculateCampaignDuration';
-import Discussion from '../Discussion';
-import SignCampaign from './SignCampaign/SignCampaign';
-import SignatureList from './SignCampaign/SignatureList';
-import MapCard from '../MapCard';
-import CollapsePanel from '../UtilComponents/CollapsePanel';
-import CampaignProgressBar from './CampaignProgressBar';
-import CampaignStatus from './CampaignStatus';
+import React from "react";
+import PropTypes from "prop-types";
+import { Grid, Row, Col, Button } from "react-bootstrap";
+import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { calculateCampaignDuration } from "../../utils/calculateCampaignDuration";
+import Discussion from "../Discussion";
+import SignCampaign from "./SignCampaign/SignCampaign";
+import SignatureList from "./SignCampaign/SignatureList";
+import MapCard from "../MapCard";
+import CollapsePanel from "../UtilComponents/CollapsePanel";
+import CampaignProgressBar from "./CampaignProgressBar";
+import CampaignStatus from "./CampaignStatus";
+import NewCampaignWelcomeModal from "./NewCampaignWelcomeModal";
 
 const CampaignPage = ({
   activeCampaign,
-  activeCampaign: { loaded, address, campaignId, activeCampaignSignatures },
+  activeCampaign: { address, activeCampaignSignatures, campaignId, loaded },
   hrefIsLocalhost,
+  handleChangeIsNewCampaign,
+  isNewCampaign,
   signCampaignProps
 }) => (
   <Grid>
+    <NewCampaignWelcomeModal className="new-campaign-welcome-modal-wrapper" />
     <Row className="full-height-side-bar">
       <Col md={9} xs={12} className="campaign-wrapper">
         <Row className="show-grid top">
           <Col md={6} xs={12} className="center-block">
             <div className="map-wrapper">
-              {activeCampaign && address && <MapCard activeCampaign={activeCampaign} />}
+              {activeCampaign &&
+                address && <MapCard activeCampaign={activeCampaign} />}
             </div>
           </Col>
           <Col className="center-block" md={6} xs={12}>
             <Row>
+              {isNewCampaign && (
+                <NewCampaignWelcomeModal
+                  onHide={handleChangeIsNewCampaign}
+                  show={isNewCampaign}
+                />
+              )}
               <Col className="status-bar" xs={12}>
                 {activeCampaign &&
                   activeCampaign.createdAt && (
@@ -35,12 +46,14 @@ const CampaignPage = ({
                       <CampaignProgressBar
                         createdAt={activeCampaign.createdAt}
                         phases={[
-                          'Campaign Created',
-                          'Print Flyers',
-                          'Final Signatures',
-                          'Request Recycling'
+                          "Campaign Created",
+                          "Print Flyers",
+                          "Final Signatures",
+                          "Request Recycling"
                         ]}
-                        duration={calculateCampaignDuration(activeCampaign.createdAt)}
+                        duration={calculateCampaignDuration(
+                          activeCampaign.createdAt
+                        )}
                       />
                     </Row>
                   )}
@@ -56,16 +69,20 @@ const CampaignPage = ({
                     <FacebookShareButton
                       quote="Support my recycling request!"
                       /*
-                        facebook url errors on localhost, it has to be able to
-                        connect to something.  so if its on dev link it to the heroku page.
-                        */
+                                              facebook url errors on localhost, it has to be able to
+                                              connect to something.  so if its on dev link it to the heroku page.
+                                              */
                       url={
                         hrefIsLocalhost
                           ? `https://denver-reimagine.herokuapp.com/campaign/${campaignId}`
                           : window.location.href
                       }
                     >
-                      <Button bsStyle="remove-default" className="btn btn-facebook" block>
+                      <Button
+                        bsStyle="remove-default"
+                        className="btn btn-facebook"
+                        block
+                      >
                         <i className="fa fa-facebook-square " />Facebook
                       </Button>
                     </FacebookShareButton>
@@ -75,9 +92,13 @@ const CampaignPage = ({
                       url={window.location.href}
                       title="Support my recycling request!"
                       via="EcoCycle"
-                      hashtags={['ZeroWasteDenver', 'Recycle']}
+                      hashtags={["ZeroWasteDenver", "Recycle"]}
                     >
-                      <Button bsStyle="remove-default" className="btn btn-twitter" block>
+                      <Button
+                        bsStyle="remove-default"
+                        className="btn btn-twitter"
+                        block
+                      >
                         <i className="fa fa-twitter-square" />Tweet
                       </Button>
                     </TwitterShareButton>
@@ -87,6 +108,7 @@ const CampaignPage = ({
                       className="btn btn-flyer btn-block"
                       href={`${process.env.PUBLIC_URL}/flyer.pdf`}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <i className="fa fa-download" /> Download Flyer
                     </a>
@@ -100,7 +122,9 @@ const CampaignPage = ({
                   activeCampaign.createdAt && (
                     <CampaignStatus
                       createdAt={activeCampaign.createdAt}
-                      duration={calculateCampaignDuration(activeCampaign.createdAt)}
+                      duration={calculateCampaignDuration(
+                        activeCampaign.createdAt
+                      )}
                     />
                   )}
               </Col>
@@ -149,19 +173,21 @@ MapCard.defaultProps = {
 
 CampaignPage.propTypes = {
   activeCampaign: PropTypes.shape({
-    address: PropTypes.string.isRequired,
-    modifiedAt: PropTypes.instanceOf(Date).isRequired,
-    createdAt: PropTypes.instanceOf(Date).isRequired,
-    latLng: PropTypes.shape({
-      _lat: PropTypes.number,
-      _long: PropTypes.number
-    }).isRequired,
-    activeCampaignSignatures: PropTypes.arrayOf(PropTypes.shape({})),
+    activeCampaignSigantures: PropTypes.arrayOf(),
+    address: PropTypes.string,
+    createdAt: PropTypes.instanceOf(Date),
     error: PropTypes.string,
+    isNewCampaign: PropTypes.bool,
+    latLng: PropTypes.shape({
+      _lat: PropTypes.number.isRequired,
+      _long: PropTypes.number.isRequired
+    }),
+    loaded: PropTypes.bool,
     loading: PropTypes.bool,
-    loaded: PropTypes.bool
+    modifiedAt: PropTypes.instanceOf(Date)
   }).isRequired,
   hrefIsLocalhost: PropTypes.bool.isRequired,
+  isNewCampaign: PropTypes.bool.isRequired,
   signCampaignProps: PropTypes.shape({
     firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
     firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,

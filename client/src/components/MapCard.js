@@ -1,10 +1,9 @@
-import React from 'react';
-import { withRouter } from 'react-router';
-import PropTypes from 'prop-types';
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
-// TODO FIGURE OUT WHAT LODASH PACKAGE AND ONLY IMPORT WHAT'S NEEDED
-import * as _ from 'lodash';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import React from "react";
+import { withRouter } from "react-router";
+import PropTypes from "prop-types";
+import withScriptjs from "react-google-maps/lib/async/withScriptjs";
+import noop from "lodash.noop";
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 const MapWithAMarker = withRouter(
   withScriptjs(
@@ -22,7 +21,9 @@ const MapWithAMarker = withRouter(
             lng: props.activeCampaign.latLng._long
           }}
           onRightClick={() => props.onMarkerRightClick(props.activeCampaign)}
-          onClick={() => props.router.push(`/campaign/${props.activeCampaign.campaignId}`)}
+          onClick={() =>
+            props.router.push(`/campaign/${props.activeCampaign.campaignId}`)
+          }
           title={props.activeCampaign.address}
         />
       </GoogleMap>
@@ -41,27 +42,27 @@ const MapCard = ({ activeCampaign }) => (
           googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
             process.env.REACT_APP_GOOGLE_MAPS_KEY
           }`}
-          loadingElement={<div style={{ height: '100%' }} />}
+          loadingElement={<div style={{ height: "100%" }} />}
           containerElement={
             <div
               style={{
-                width: '100%',
-                height: '300px',
-                position: 'relative',
+                width: "100%",
+                height: "300px",
+                position: "relative",
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                justifyContent: 'flex-end',
-                alignItems: 'center'
+                justifyContent: "flex-end",
+                alignItems: "center"
               }}
             />
           }
-          mapElement={<div style={{ height: '100%' }} />}
-          onMapLoad={_.noop}
-          onMapClick={_.noop}
+          mapElement={<div style={{ height: "100%" }} />}
+          onMapLoad={noop}
+          onMapClick={noop}
           activeCampaign={activeCampaign}
-          onMarkerRightClick={_.noop}
+          onMarkerRightClick={noop}
         />
       </div>
     </div>

@@ -9,17 +9,38 @@
     "consistent-return": "warn",
     "import/extensions": "off",
     "import/no-unresolved": "warn",
-    "jsx-a11y/anchor-is-valid": ["warn", { "components": [] }],
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        "components": []
+      }
+    ],
     "jsx-a11y/label-has-for": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
     "max-len": "warn",
-    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error", "info"]
+      }
+    ],
     "no-debugger": "off",
     "no-underscore-dangle": "off",
-    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
     "react/no-unescaped-entities": "off",
     "react/prefer-stateless-function": "warn",
-    "indent": ["error", 2, { "SwitchCase": 1 }]
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ]
   },
   "globals": {
     "fetch": true
