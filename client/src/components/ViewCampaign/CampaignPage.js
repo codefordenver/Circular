@@ -21,7 +21,6 @@ const CampaignPage = ({
   signCampaignProps
 }) => (
   <Grid>
-    <NewCampaignWelcomeModal className="new-campaign-welcome-modal-wrapper" />
     <Row className="full-height-side-bar">
       <Col md={9} xs={12} className="campaign-wrapper">
         <Row className="show-grid top">
@@ -33,12 +32,10 @@ const CampaignPage = ({
           </Col>
           <Col className="center-block" md={6} xs={12}>
             <Row>
-              {isNewCampaign && (
-                <NewCampaignWelcomeModal
-                  onHide={handleChangeIsNewCampaign}
-                  show={isNewCampaign}
-                />
-              )}
+              <NewCampaignWelcomeModal
+                onHide={handleChangeIsNewCampaign}
+                show={isNewCampaign}
+              />
               <Col className="status-bar" xs={12}>
                 {activeCampaign &&
                   activeCampaign.createdAt && (
@@ -189,10 +186,6 @@ CampaignPage.propTypes = {
   hrefIsLocalhost: PropTypes.bool.isRequired,
   isNewCampaign: PropTypes.bool.isRequired,
   signCampaignProps: PropTypes.shape({
-    firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
-    firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
-    firebaseSignInGoogle: PropTypes.func.isRequired,
-    firebaseSignInFacebook: PropTypes.func.isRequired,
     auth: PropTypes.shape({}).isRequired,
     activeCampaign: PropTypes.shape({
       address: PropTypes.string,
@@ -205,7 +198,12 @@ CampaignPage.propTypes = {
       error: PropTypes.string,
       loading: PropTypes.bool,
       loaded: PropTypes.bool
-    }).isRequired
+    }).isRequired,
+    firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+    firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
+    firebaseSignInGoogle: PropTypes.func.isRequired,
+    firebaseSignInFacebook: PropTypes.func.isRequired,
+    firebaseUpdateCampaign: PropTypes.func.isRequired
   }).isRequired
 };
 

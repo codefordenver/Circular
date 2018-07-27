@@ -84,7 +84,7 @@ export const startListeningForCampaigns = () => dispatch => {
   });
 };
 
-// POPULATE CAMPAIGNS
+// POPULATE CAMPAIGNS FROM LISTENER
 // POPULATE CAMPAIGNS REQUEST
 export const FETCH_FIREBASE_CAMPAIGNS_REQUEST =
   "FETCH_FIREBASE_CAMPAIGNS_REQUEST";
@@ -140,4 +140,51 @@ export const populateActiveCampaignSuccess = activeCampaign => {
 export const firebasePopulateActiveCampaign = activeCampaign => async dispatch => {
   dispatch(populateActiveCampaignRequest());
   dispatch(populateActiveCampaignSuccess(activeCampaign));
+};
+
+// UPDATE CAMPAIGN
+// UPDATE CAMPAIGN REQUEST
+export const FIREBASE_UPDATE_CAMPAIGN_REQUEST =
+  "FIREBASE_UPDATE_CAMPAIGN_REQUEST";
+const firebaseUpdateCampaignRequest = () => ({
+  type: FIREBASE_UPDATE_CAMPAIGN_REQUEST
+});
+
+// UPDATE CAMPAIGN SUCESS
+export const FIREBASE_UPDATE_CAMPAIGN_SUCCESS =
+  "FIREBASE_UPDATE_CAMPAIGN_SUCCESS";
+const firebaseUpdateCampaignSuccess = () => ({
+  type: FIREBASE_UPDATE_CAMPAIGN_SUCCESS
+});
+
+// UPDATE CAMPAIGN ERROR
+export const FIREBASE_UPDATE_CAMPAIGN_ERROR = "FIREBASE_UPDATE_CAMPAIGN_ERROR";
+const firebaseUpdateCampaignError = error => ({
+  type: FIREBASE_UPDATE_CAMPAIGN_ERROR,
+  response: error
+});
+
+// UPDATE CAMPAIGN THUNK
+export const firebaseUpdateCampaign = (
+  campaignId,
+  updates
+) => async dispatch => {
+  dispatch(firebaseUpdateCampaignRequest());
+  // CHECK FOR WHICH DATA WAS UPDATED
+  const { wasterProvider, propertyManager, buildingInfo } = updates;
+  campaignsRef
+    .doc(campaignId)
+    .update({
+      wasterProvider,
+      propertyManager,
+      buildingInfo
+    })
+    .then(result => {
+      console.log("Data Sucessfully Udated, refreshing campaign");
+      dispatch(firebasePopulateActiveCampaign(campaignId));
+    })
+    .catch(error => {
+      console.log("oops, something when wrong", error);
+      dispatch(firebaseUpdateCampaignError(error));
+    });
 };

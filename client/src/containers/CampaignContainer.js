@@ -2,23 +2,24 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-// import fetchCampaignById from '../redux/actions/activeCampaign';
+// ACTIVE CAMPAIGN FUNCTIONS
 import { firebasePopulateCampaignById } from "../redux/actions/firebaseActiveCampaign";
-import { fetchApartmentsRequest } from "../redux/actions/initialSearch";
-import { fetchUserSignatures } from "../redux/actions/signature";
+// AUTH FUNCTIONS
 import {
   firebaseSignInGoogle,
   firebaseSignInFacebook
 } from "../redux/actions/firebaseAuth";
+// SIGNATURE FUNCTIONS
 import {
   firebaseAddSignatureToCampaign,
   firebaseRemoveSignatureFromCampaign
 } from "../redux/actions/firebaseSignatures";
+// CAMPAIGN UPATES
+import { firebaseUpdateCampaign } from "../redux/actions/firebaseCampaigns";
 // COMPONENTS
 import CampaignPage from "../components/ViewCampaign/CampaignPage";
 import Loader from "../components/UtilComponents/FullScreenLoader";
 import NotFound from "../components/UtilComponents/NotFound";
-
 class CampaignContainer extends Component {
   state = {
     isNewCampaign: false
@@ -66,7 +67,8 @@ class CampaignContainer extends Component {
       firebaseAddSignatureToCampaign,
       firebaseRemoveSignatureFromCampaign,
       firebaseSignInGoogle,
-      firebaseSignInFacebook
+      firebaseSignInFacebook,
+      firebaseUpdateCampaign
     };
     return (
       <div>
@@ -102,7 +104,6 @@ CampaignPage.defaultProps = {
 };
 
 CampaignContainer.propTypes = {
-  firebasePopulateCampaignById: PropTypes.func.isRequired,
   auth: PropTypes.shape({}).isRequired,
   activeCampaign: PropTypes.shape({
     activeCampaignSigantures: PropTypes.arrayOf(),
@@ -119,9 +120,11 @@ CampaignContainer.propTypes = {
     modifiedAt: PropTypes.instanceOf(Date)
   }).isRequired,
   firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+  firebasePopulateCampaignById: PropTypes.func.isRequired,
   firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired,
   firebaseSignInFacebook: PropTypes.func.isRequired,
+  firebaseUpdateCampaign: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired
@@ -142,11 +145,10 @@ const mapStateToProps = ({
 });
 
 export default connect(mapStateToProps, {
-  fetchUserSignatures,
-  fetchApartmentsRequest,
   firebaseAddSignatureToCampaign,
   firebasePopulateCampaignById,
+  firebaseRemoveSignatureFromCampaign,
   firebaseSignInGoogle,
   firebaseSignInFacebook,
-  firebaseRemoveSignatureFromCampaign
+  firebaseUpdateCampaign
 })(withRouter(CampaignContainer));

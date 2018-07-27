@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import {
   removeSignatureFromCampaign,
   fetchUserSignatures
@@ -10,19 +10,22 @@ import RenderSignIn from "./RenderSignIn";
 import RenderSignCampaign from "./RenderSignCampaign";
 import RenderRemoveSignature from "./RenderRemoveSignature";
 import RenderUserHasSignedOtherCampaign from "./RenderUserHasSignedOtherCampaign";
+import UpdateCampaignModal from "../UpdateCampaign/UpdateCampaignModal";
+import {
+  buildingInformation,
+  propertyManager,
+  wasteProvider
+} from "../UpdateCampaign/UpdateCampaignModalData";
 
 class SignCampaign extends Component {
   constructor(props) {
     super(props);
     this.state = {
       keepMeUpdated: false,
-      signerMessage: ""
+      signerMessage: "",
+      showUpdateCampaignModal: false
     };
   }
-
-  componentWillMount = () => {
-    this.selectedCheckboxes = new Set();
-  };
 
   toggleKeepMeUpdatedCheckbox = () => {
     this.setState({
@@ -67,6 +70,15 @@ class SignCampaign extends Component {
     );
   };
 
+  toggleShowUpdateCampaignModal = () => {
+    console.log("clicked");
+    this.setState(prevState => {
+      return {
+        showUpdateCampaignModal: !prevState.showUpdateCampaignModal
+      };
+    });
+  };
+
   render() {
     const {
       firebaseSignInGoogle,
@@ -76,7 +88,11 @@ class SignCampaign extends Component {
       activeCampaign,
       activeCampaign: { loaded, activeCampaignSignatures }
     } = this.props.signCampaignProps;
-    const { keepMeUpdated, signerMessage } = this.state;
+    const {
+      keepMeUpdated,
+      showUpdateCampaignModal,
+      signerMessage
+    } = this.state;
     const activeCampaignIncludesUsersSignature =
       activeCampaign &&
       activeCampaignSignatures !== undefined &&
@@ -92,6 +108,18 @@ class SignCampaign extends Component {
           </div>
           <div className="side-wrap">
             <Row>
+              {this.state.showUpdateCampaignModal && (
+                <UpdateCampaignModal
+                  onHide={this.toggleShowUpdateCampaignModal}
+                  show={this.state.showUpdateCampaignModal}
+                  buttonText="Submit Updates"
+                  title="Update Your Campaign Details"
+                  show={showUpdateCampaignModal}
+                  buildingInformation={buildingInformation}
+                  propertyManager={propertyManager}
+                  wasteProvider={wasteProvider}
+                />
+              )}
               <Col md={12}>
                 {/*  user isn't signed in */}
                 {loaded &&
@@ -119,7 +147,10 @@ class SignCampaign extends Component {
                       updateSignerMessage={this.updateSignerMessage}
                     />
                   )}
-                {/*  user is signed in && has signed a campaign */}
+                {/*  USER AHS SIGNED CAMPAIGN AND IS SIGNED IN*/}
+                {/* SHOW UPDATE CAMPAIGN MODAL */}
+
+                {/* RENDER REMOVE SIGNATURE FEATURES */}
                 {loaded &&
                   auth.status === "SIGNED_IN" &&
                   activeCampaign &&
@@ -131,6 +162,11 @@ class SignCampaign extends Component {
                       }
                     />
                   )}
+                {
+                  <Button onClick={this.toggleShowUpdateCampaignModal}>
+                    Toggle
+                  </Button>
+                }
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
                 {loaded &&
