@@ -5,7 +5,9 @@ import {
   HelpBlock,
   FormControl,
   FormGroup,
-  Modal
+  Modal,
+  Tab,
+  Tabs
 } from "react-bootstrap";
 import merge from "lodash.merge";
 import { buildingInformation } from "./UpdateCampaignModalData";
@@ -29,13 +31,21 @@ class UpdateCampaignModal extends Component {
     this.state = {
       buildingInformation: { ...buildingInformation },
       propertyManager: { ...propertyManager },
-      wasteProvider: { ...wasteProvider }
+      wasteProvider: { ...wasteProvider },
+      key: 1
     };
   }
 
   handleFormSubmit = () => {
-    this.props.handleUpdateCampaign({ ...this.state });
+    const { buildingInformation, propertyManager, wasteProvider } = this.state;
+    const buildingUpdates = {
+      buildingInformation,
+      propertyManager,
+      wasteProvider
+    };
+    this.props.handleUpdateCampaign({ ...buildingUpdates });
     this.props.toggleShowUpdateCampaignModal();
+    this.setState({ activeTab: 1 });
   };
 
   handleBuildingInformationChange = e => {
@@ -74,84 +84,112 @@ class UpdateCampaignModal extends Component {
     })();
   };
 
+  handleTabSwitch = key => {
+    this.setState({ key });
+  };
+
   render() {
     const {
+      activeCampaign: { address },
       buildingInformation,
       buttonText,
       onHide,
       propertyManager,
       show,
-      title,
       wasteProvider
     } = this.props;
     return (
       <div>
         <Modal keyboard={true} show={show} onHide={onHide}>
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "black" }}>{title}</Modal.Title>
+            <Modal.Title style={{ color: "black" }}>
+              Update details for {address}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ color: "black" }}>
             <form>
-              <ControlLabel>Building Information</ControlLabel>
-              {this.state.buildingInformation &&
-                buildingInformation.map(info => {
-                  const { id, label, placeHolder, type, name } = info;
-                  return (
-                    <FormGroup controlId={id} key={id}>
-                      <ControlLabel>{label}</ControlLabel>
-                      <FormControl
-                        name={name}
-                        type={type}
-                        value={this.state.buildingInformation[name]}
-                        placeholder={placeHolder}
-                        onChange={this.handleBuildingInformationChange}
-                      />
-                      {/* {help && <HelpBlock>{help}</HelpBlock>} */}
-                    </FormGroup>
-                  );
-                })}
-              <ControlLabel>Property Manager Information</ControlLabel>
-              {this.state.propertyManager &&
-                propertyManager.map(info => {
-                  const { id, label, placeHolder, type, name } = info;
-                  return (
-                    <FormGroup controlId={id} key={id}>
-                      <ControlLabel>{label}</ControlLabel>
-                      <FormControl
-                        name={name}
-                        type={type}
-                        value={this.state.propertyManager[name]}
-                        placeholder={placeHolder}
-                        onChange={this.handlePropertyManagerChange}
-                      />
-                      {/* {help && <HelpBlock>{help}</HelpBlock>} */}
-                    </FormGroup>
-                  );
-                })}
-              <ControlLabel>Waster Provider Information</ControlLabel>
-              {this.state.wasteProvider &&
-                wasteProvider.map(info => {
-                  const { id, label, placeHolder, type, name } = info;
-                  return (
-                    <FormGroup controlId={id} key={id}>
-                      <ControlLabel>{label}</ControlLabel>
-                      <FormControl
-                        name={name}
-                        type={type}
-                        value={this.state.wasteProvider[name]}
-                        placeholder={placeHolder}
-                        onChange={this.handleWasteProviderChange}
-                      />
-                      {/* {help && <HelpBlock>{help}</HelpBlock>} */}
-                    </FormGroup>
-                  );
-                })}
+              <Tabs
+                activeKey={this.state.key}
+                onSelect={this.handleTabSwitch}
+                id="updateCampaignModalForm"
+              >
+                <Tab eventKey={1} title="Building">
+                  {this.state.buildingInformation &&
+                    buildingInformation.map(info => {
+                      const { id, label, placeHolder, type, name } = info;
+                      return (
+                        <FormGroup
+                          style={{ marginTop: "1em" }}
+                          controlId={id}
+                          key={id}
+                        >
+                          <ControlLabel>{label}</ControlLabel>
+                          <FormControl
+                            name={name}
+                            type={type}
+                            value={this.state.buildingInformation[name]}
+                            placeholder={placeHolder}
+                            onChange={this.handleBuildingInformationChange}
+                          />
+                          {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                        </FormGroup>
+                      );
+                    })}
+                </Tab>
+                <Tab
+                  style={{ marginTop: "1em" }}
+                  eventKey={2}
+                  title="Property Manager"
+                >
+                  {this.state.propertyManager &&
+                    propertyManager.map(info => {
+                      const { id, label, placeHolder, type, name } = info;
+                      return (
+                        <FormGroup controlId={id} key={id}>
+                          <ControlLabel>{label}</ControlLabel>
+                          <FormControl
+                            name={name}
+                            type={type}
+                            value={this.state.propertyManager[name]}
+                            placeholder={placeHolder}
+                            onChange={this.handlePropertyManagerChange}
+                          />
+                          {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                        </FormGroup>
+                      );
+                    })}
+                </Tab>
+                <Tab
+                  style={{ marginTop: "1em" }}
+                  eventKey={3}
+                  title="Waste Provider"
+                >
+                  {this.state.wasteProvider &&
+                    wasteProvider.map(info => {
+                      const { id, label, placeHolder, type, name } = info;
+                      return (
+                        <FormGroup controlId={id} key={id}>
+                          <ControlLabel>{label}</ControlLabel>
+                          <FormControl
+                            name={name}
+                            type={type}
+                            value={this.state.wasteProvider[name]}
+                            placeholder={placeHolder}
+                            onChange={this.handleWasteProviderChange}
+                          />
+                          {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                        </FormGroup>
+                      );
+                    })}
+                </Tab>
+              </Tabs>
             </form>
           </Modal.Body>
-          <Modal.Footer />
-          <Button onClick={this.handleFormSubmit} style={btnStyle}>
-            {buttonText}
-          </Button>
+          <Modal.Footer>
+            <Button onClick={this.handleFormSubmit} style={btnStyle}>
+              {buttonText}
+            </Button>
+          </Modal.Footer>
         </Modal>
       </div>
     );

@@ -128,7 +128,6 @@ class SignCampaign extends Component {
                   onHide={this.toggleShowUpdateCampaignModal}
                   propertyManager={propertyManager}
                   show={showUpdateCampaignModal}
-                  title="Update Your Campaign Details"
                   toggleShowUpdateCampaignModal={
                     this.toggleShowUpdateCampaignModal
                   }
