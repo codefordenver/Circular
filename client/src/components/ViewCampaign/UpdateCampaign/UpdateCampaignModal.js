@@ -7,6 +7,9 @@ import {
   FormGroup,
   Modal
 } from "react-bootstrap";
+import merge from "lodash.merge";
+import { buildingInformation } from "./UpdateCampaignModalData";
+// import { Timestamp } from '../../../firebase';
 
 const btnStyle = {
   background: "#164c5f",
@@ -14,54 +17,61 @@ const btnStyle = {
   outline: "none"
 };
 
-const FieldGroup = ({ id, help, label, ...props }) => (
-  <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-  </FormGroup>
-);
-
 class UpdateCampaignModal extends Component {
-  state = {
-    buildingInformation: {
-      numBuildings: "",
-      numUnits: ""
-    },
-    wasteProvider: {
-      address: "",
-      email: "",
-      phone: "",
-      name: ""
-    },
-    propertyManager: {
-      address: "",
-      email: "",
-      phone: "",
-      name: ""
-    }
+  constructor(props) {
+    super(props);
+    const {
+      buildingInformation,
+      propertyManager,
+      wasteProvider
+    } = props.activeCampaign;
+    // SETS STATE OF THE FORM FROM PROPS.ACTIVECAMPAIGN
+    this.state = {
+      buildingInformation: { ...buildingInformation },
+      propertyManager: { ...propertyManager },
+      wasteProvider: { ...wasteProvider }
+    };
+  }
+
+  handleFormSubmit = () => {
+    this.props.handleUpdateCampaign({ ...this.state });
+    this.props.toggleShowUpdateCampaignModal();
   };
 
   handleBuildingInformationChange = e => {
     const { name, value } = e.target;
-    console.log("name: ", name);
-    this.setState({
-      buildingInformation: { [name]: value }
-    });
+    // const newBuildingData = merge({}, this.state.buildingInformation, { [name]: value });
+    // (() => {
+    //   this.setState({ buildingInformation: newBuildingData });
+    // })();
+    (() =>
+      this.setState(prevState => ({
+        ...prevState,
+        buildingInformation: {
+          ...prevState.buildingInformation,
+          [name]: value
+        }
+      })))();
   };
 
   handlePropertyManagerChange = e => {
     const { name, value } = e.target;
-    this.setState({
-      propertyManager: { [name]: value }
+    const newPropertyManagerData = merge({}, this.state.propertyManager, {
+      [name]: value
     });
+    (() => {
+      this.setState({ propertyManager: newPropertyManagerData });
+    })();
   };
 
   handleWasteProviderChange = e => {
     const { name, value } = e.target;
-    this.setState({
-      wasteProvider: { [name]: value }
+    const newWasteProviderData = merge({}, this.state.wasteProvider, {
+      [name]: value
     });
+    (() => {
+      this.setState({ wasteProvider: newWasteProviderData });
+    })();
   };
 
   render() {
@@ -83,57 +93,65 @@ class UpdateCampaignModal extends Component {
           <Modal.Body style={{ color: "black" }}>
             <form>
               <ControlLabel>Building Information</ControlLabel>
-              {buildingInformation.map(info => {
-                const { id, label, placeHolder, type, name } = info;
-                return (
-                  <FieldGroup
-                    id={id}
-                    label={label}
-                    placeholder={placeHolder}
-                    type={type}
-                    name={name}
-                    value={this.state.buildingInformation[name]}
-                    onChange={this.handleBuildingInformationChange}
-                  />
-                );
-              })}
+              {this.state.buildingInformation &&
+                buildingInformation.map(info => {
+                  const { id, label, placeHolder, type, name } = info;
+                  return (
+                    <FormGroup controlId={id} key={id}>
+                      <ControlLabel>{label}</ControlLabel>
+                      <FormControl
+                        name={name}
+                        type={type}
+                        value={this.state.buildingInformation[name]}
+                        placeholder={placeHolder}
+                        onChange={this.handleBuildingInformationChange}
+                      />
+                      {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                    </FormGroup>
+                  );
+                })}
               <ControlLabel>Property Manager Information</ControlLabel>
-              {propertyManager.map(info => {
-                const { id, label, placeHolder, type, name } = info;
-                return (
-                  <FieldGroup
-                    id={id}
-                    label={label}
-                    placeholder={placeHolder}
-                    type={type}
-                    name={name}
-                    value={this.state.propertyManager[name]}
-                    onChange={this.handlePropertyManagerChange}
-                  />
-                );
-              })}
+              {this.state.propertyManager &&
+                propertyManager.map(info => {
+                  const { id, label, placeHolder, type, name } = info;
+                  return (
+                    <FormGroup controlId={id} key={id}>
+                      <ControlLabel>{label}</ControlLabel>
+                      <FormControl
+                        name={name}
+                        type={type}
+                        value={this.state.propertyManager[name]}
+                        placeholder={placeHolder}
+                        onChange={this.handlePropertyManagerChange}
+                      />
+                      {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                    </FormGroup>
+                  );
+                })}
               <ControlLabel>Waster Provider Information</ControlLabel>
-              {wasteProvider.map(info => {
-                const { id, label, placeHolder, type, name } = info;
-                return (
-                  <FieldGroup
-                    id={id}
-                    label={label}
-                    placeholder={placeHolder}
-                    type={type}
-                    name={name}
-                    value={this.state.wasteProvider[name]}
-                    onChange={this.handleWasteProviderChange}
-                  />
-                );
-              })}
+              {this.state.wasteProvider &&
+                wasteProvider.map(info => {
+                  const { id, label, placeHolder, type, name } = info;
+                  return (
+                    <FormGroup controlId={id} key={id}>
+                      <ControlLabel>{label}</ControlLabel>
+                      <FormControl
+                        name={name}
+                        type={type}
+                        value={this.state.wasteProvider[name]}
+                        placeholder={placeHolder}
+                        onChange={this.handleWasteProviderChange}
+                      />
+                      {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                    </FormGroup>
+                  );
+                })}
             </form>
           </Modal.Body>
-          <Modal.Footer>
-            <Button style={btnStyle} onClick={onHide}>
-              {buttonText}
-            </Button>
-          </Modal.Footer>
+          <Modal.Footer />
+          <Button onClick={this.handleFormSubmit} style={btnStyle}>
+            {buttonText}
+          </Button>
         </Modal>
       </div>
     );

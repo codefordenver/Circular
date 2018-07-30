@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Col, Row } from "react-bootstrap";
+import { firebaseUpdateCampaign } from "../../../redux/actions/firebaseCampaigns";
 import {
   removeSignatureFromCampaign,
   fetchUserSignatures
 } from "../../../redux/actions/signature";
-import RenderSignIn from "./RenderSignIn";
 import RenderSignCampaign from "./RenderSignCampaign";
 import RenderRemoveSignature from "./RenderRemoveSignature";
+import RenderSignIn from "./RenderSignIn";
 import RenderUserHasSignedOtherCampaign from "./RenderUserHasSignedOtherCampaign";
 import UpdateCampaignModal from "../UpdateCampaign/UpdateCampaignModal";
 import {
@@ -16,7 +17,6 @@ import {
   propertyManager,
   wasteProvider
 } from "../UpdateCampaign/UpdateCampaignModalData";
-
 class SignCampaign extends Component {
   constructor(props) {
     super(props);
@@ -71,12 +71,19 @@ class SignCampaign extends Component {
   };
 
   toggleShowUpdateCampaignModal = () => {
-    console.log("clicked");
     this.setState(prevState => {
       return {
         showUpdateCampaignModal: !prevState.showUpdateCampaignModal
       };
     });
+  };
+
+  handleUpdateCampaign = updatedCampaignData => {
+    console.log("hit the clicker", updatedCampaignData);
+    this.props.firebaseUpdateCampaign(
+      this.props.activeCampaign.campaignId,
+      updatedCampaignData
+    );
   };
 
   render() {
@@ -108,15 +115,24 @@ class SignCampaign extends Component {
           </div>
           <div className="side-wrap">
             <Row>
+              {
+                <Button onClick={this.toggleShowUpdateCampaignModal}>
+                  Toggle
+                </Button>
+              }
               {this.state.showUpdateCampaignModal && (
                 <UpdateCampaignModal
-                  onHide={this.toggleShowUpdateCampaignModal}
-                  show={this.state.showUpdateCampaignModal}
-                  buttonText="Submit Updates"
-                  title="Update Your Campaign Details"
-                  show={showUpdateCampaignModal}
+                  activeCampaign={activeCampaign}
                   buildingInformation={buildingInformation}
+                  buttonText="Submit Updates"
+                  onHide={this.toggleShowUpdateCampaignModal}
                   propertyManager={propertyManager}
+                  show={showUpdateCampaignModal}
+                  title="Update Your Campaign Details"
+                  toggleShowUpdateCampaignModal={
+                    this.toggleShowUpdateCampaignModal
+                  }
+                  handleUpdateCampaign={this.handleUpdateCampaign}
                   wasteProvider={wasteProvider}
                 />
               )}
@@ -162,11 +178,6 @@ class SignCampaign extends Component {
                       }
                     />
                   )}
-                {
-                  <Button onClick={this.toggleShowUpdateCampaignModal}>
-                    Toggle
-                  </Button>
-                }
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
                 {loaded &&
@@ -224,6 +235,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  removeSignatureFromCampaign,
-  fetchUserSignatures
+  firebaseUpdateCampaign,
+  fetchUserSignatures,
+  removeSignatureFromCampaign
 })(SignCampaign);

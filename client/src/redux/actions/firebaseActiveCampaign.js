@@ -44,7 +44,9 @@ export const firebasePopulateCampaignById = campaignId => async dispatch => {
         createdAt: data.createdAt.toDate(),
         address: data.address,
         latLng: data.latLng,
-        isNewCampaign: data.isNewCampaign
+        wasteProvider: data.wasteProvider,
+        buildingInformation: data.buildingInformation,
+        propertyManager: data.propertyManager
       };
       // RETURN FOUND CAMPAIGN AND CAMPAIGN DATA
       return matchedCampaign;

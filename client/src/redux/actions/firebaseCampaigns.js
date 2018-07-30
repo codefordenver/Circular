@@ -1,4 +1,5 @@
 import { campaignsRef, Timestamp } from "../../firebase";
+import { firebasePopulateCampaignById } from "./firebaseActiveCampaign";
 
 // CREATE NEW CAMPAIGN REQUEST
 export const FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST =
@@ -30,21 +31,21 @@ export const firebaseCreateNewCampaign = (
     latLng,
     createdAt: Timestamp,
     modifiedAt: Timestamp,
-    wasterProvider: {
-      name: null,
-      address: null,
-      phone: null,
-      email: null
+    wasteProvider: {
+      name: "",
+      address: "",
+      phone: "",
+      email: ""
     },
     propertyManager: {
-      name: null,
-      address: null,
-      phone: null,
-      email: null
+      name: "",
+      address: "",
+      phone: "",
+      email: ""
     },
-    buildingInfo: {
-      numBuldings: null,
-      numUnits: null
+    buildingInformation: {
+      numBuldings: "",
+      numUnits: ""
     }
   };
   // SETS FIRESTORE RECORD WITH GENERATED ID
@@ -52,7 +53,7 @@ export const firebaseCreateNewCampaign = (
     console.error("Error writing document: ", error);
   });
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
-  dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
+  // dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
   // TODO clear search information
 };
 
@@ -64,7 +65,6 @@ export const startListeningForCampaigns = () => dispatch => {
     querySnapshot.forEach(doc => {
       //  EACH CAMPAIGN'S DATA
       const data = doc.data();
-      console.log(data);
       // SPLIT OUT ADDRESS FOR FUTURE USE
       const address = data.address;
       // PUSH EACH CAMPAIGN OBJECT TO FIREBASECAMPAIGNS
@@ -125,11 +125,11 @@ export const populateActiveCampaignRequest = () => ({
   type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_REQUEST
 });
 
-// POPULATE POPULATE ACTIVE CAMPAIGN SUCCESS
+// // POPULATE POPULATE ACTIVE CAMPAIGN SUCCESS
 export const FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS =
   "FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS";
 export const populateActiveCampaignSuccess = activeCampaign => {
-  console.log("popualteactive ", activeCampaign);
+  console.log("populateActiceCampaign ", activeCampaign);
   return {
     type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS,
     response: activeCampaign
@@ -167,21 +167,29 @@ const firebaseUpdateCampaignError = error => ({
 // UPDATE CAMPAIGN THUNK
 export const firebaseUpdateCampaign = (
   campaignId,
-  updates
+  updatedCampaignData
 ) => async dispatch => {
+  console.log("got to dispatch", updatedCampaignData);
   dispatch(firebaseUpdateCampaignRequest());
   // CHECK FOR WHICH DATA WAS UPDATED
-  const { wasterProvider, propertyManager, buildingInfo } = updates;
+  const {
+    wasteProvider,
+    propertyManager,
+    buildingInformation
+  } = updatedCampaignData;
+  // FIRESTORE UPDATE METHOD UPDATES WIHTOUT OVERWIRITING DOCUMENT
+  // https://firebase.google.com/docs/firestore/manage-data/add-data
   campaignsRef
     .doc(campaignId)
     .update({
-      wasterProvider,
+      buildingInformation,
       propertyManager,
-      buildingInfo
+      wasteProvider
     })
-    .then(result => {
-      console.log("Data Sucessfully Udated, refreshing campaign");
-      dispatch(firebasePopulateActiveCampaign(campaignId));
+    .then(() => {
+      console.log("Data Sucessfully Updated, refreshing campaign");
+      dispatch(firebasePopulateCampaignById(campaignId));
+      dispatch(firebaseUpdateCampaignSuccess());
     })
     .catch(error => {
       console.log("oops, something when wrong", error);

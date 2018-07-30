@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
-import 'firebase/firestore';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
+import "firebase/firestore";
 // import { development } from './firebaseKeys';
 // import { staging } from './firebaseKeys';
 // import { production } from './firebaseKeys';
@@ -16,14 +16,25 @@ import 'firebase/firestore';
 //   firebaseConfig = production;
 // }
 
+// FIREBASE DEV
 firebase.initializeApp({
-  apiKey: 'AIzaSyDCfhYmCmE0YQbJA-RGq6C0UpiGSSIM3S8',
-  authDomain: 're-imagine-prod.firebaseapp.com',
-  databaseURL: 'https://re-imagine-prod.firebaseio.com',
-  projectId: 're-imagine-prod',
-  storageBucket: 're-imagine-prod.appspot.com',
-  messagingSenderId: '164611064308'
+  apiKey: "AIzaSyD3Ot2BrEc595ost38YzkKEKS66xwn3MkE",
+  authDomain: "re-imagine-dev.firebaseapp.com",
+  databaseURL: "https://re-imagine-dev.firebaseio.com",
+  projectId: "re-imagine-dev",
+  storageBucket: "re-imagine-dev.appspot.com",
+  messagingSenderId: "86888468802"
 });
+
+// FIREBASE PROD
+// firebase.initializeApp({
+//   apiKey: 'AIzaSyDCfhYmCmE0YQbJA-RGq6C0UpiGSSIM3S8',
+//   authDomain: 're-imagine-prod.firebaseapp.com',
+//   databaseURL: 'https://re-imagine-prod.firebaseio.com',
+//   projectId: 're-imagine-prod',
+//   storageBucket: 're-imagine-prod.appspot.com',
+//   messagingSenderId: '164611064308'
+// });
 
 export const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
@@ -33,9 +44,9 @@ export default firebase;
 export const auth = firebase.auth();
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-export const usersRef = firestore.collection('users');
-export const wasteProvidersRef = firestore.collection('wasteProviders');
-export const campaignsRef = firestore.collection('campaigns');
+export const usersRef = firestore.collection("users");
+export const wasteProvidersRef = firestore.collection("wasteProviders");
+export const campaignsRef = firestore.collection("campaigns");
 // must export firestore without () to access GeoPoint constructor
 export const GeoPoint = firebase.firestore.GeoPoint;
 export const Timestamp = firebase.firestore.FieldValue.serverTimestamp();
