@@ -34,7 +34,8 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.5.0",
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
