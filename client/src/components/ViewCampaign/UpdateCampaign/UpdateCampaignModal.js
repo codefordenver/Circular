@@ -178,18 +178,14 @@ class UpdateCampaignModal extends Component {
                         </Panel.Title>
                       </Panel.Heading>
                       <Panel.Body>
-                        <h5>{`Name:    ${
-                          activeCampaign.wasteProvider.name
-                        }`}</h5>
-                        <h5>{`Email:   ${
-                          activeCampaign.wasteProvider.email
-                        }`}</h5>
-                        <h5>{`Phone:   ${
-                          activeCampaign.wasteProvider.phone
-                        }`}</h5>
-                        <h5>{`Address: ${
-                          activeCampaign.wasteProvider.address
-                        }`}</h5>
+                        <h5>{`Name:    ${activeCampaign.wasteProvider.name ||
+                          ""}`}</h5>
+                        <h5>{`Email:   ${activeCampaign.wasteProvider.email ||
+                          ""}`}</h5>
+                        <h5>{`Phone:   ${activeCampaign.wasteProvider.phone ||
+                          ""}`}</h5>
+                        <h5>{`Address: ${activeCampaign.wasteProvider.address ||
+                          ""}`}</h5>
                       </Panel.Body>
                     </Panel>
                   ) : (

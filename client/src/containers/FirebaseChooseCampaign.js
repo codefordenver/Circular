@@ -88,7 +88,7 @@ class FirebaseChooseCampaign extends Component {
                   selectedAddress={selectedAddress}
                 />
               )}
-            {!loading &&
+            {loaded &&
               !exactMatch && (
                 <RenderNewCampaign handleSelection={this.handleSelection} />
               )}
