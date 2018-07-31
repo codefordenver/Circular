@@ -49,7 +49,7 @@ describe('The landing page', () => {
       // WHO WE ARE LINK
       describe('Who Are We link', () => {
         it('Navigates to Who Are We page', () => {
-          cy.contains('WHO WE ARE ').click();
+          cy.contains('WHO WE ARE').click();
           cy.url().should('include', '/who-are-we');
         });
       });
