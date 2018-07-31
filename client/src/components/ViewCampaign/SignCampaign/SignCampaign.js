@@ -26,7 +26,7 @@ class SignCampaign extends Component {
     this.state = {
       keepMeUpdated: false,
       signerMessage: "",
-      showUpdateCampaignModal: false
+      showUpdateCampaignModal: true
     };
   }
 

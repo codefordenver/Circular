@@ -7,11 +7,19 @@ import {
   FormGroup,
   Panel,
   Modal,
+  OverlayTrigger,
   Tab,
-  Tabs
+  Tabs,
+  Tooltip
 } from "react-bootstrap";
 import merge from "lodash.merge";
 
+const wasteProviderToolTip = (
+  <Tooltip id="tooltip">
+    Normally there is a logo on the trash bin where you can find out who your
+    waste service provider is!
+  </Tooltip>
+);
 class UpdateCampaignModal extends Component {
   constructor(props) {
     super(props);
@@ -187,12 +195,20 @@ class UpdateCampaignModal extends Component {
                     </Panel>
                   ) : (
                     <FormGroup name="wasteProviders" controlId="wasteProviders">
-                      <ControlLabel>Current Waste Provider</ControlLabel>
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={wasteProviderToolTip}
+                      >
+                        <ControlLabel>
+                          Current Waste Provider <span>ℹ️</span>
+                        </ControlLabel>
+                      </OverlayTrigger>
                       <FormControl
                         onChange={this.handleWasteProviderChange}
                         componentClass="select"
                         placeholder="Choose Your Current Waste Provider"
                       >
+                        <option>Select Your Provider</option>
                         {firebaseWasteProviders.wasteProviders.map(provider => {
                           return (
                             <option
