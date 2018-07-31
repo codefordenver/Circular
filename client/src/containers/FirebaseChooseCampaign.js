@@ -36,7 +36,9 @@ class FirebaseChooseCampaign extends Component {
   };
 
   redirectToExistingCampaign = () => {
-    this.props.router.push(`/campaign/${this.props.exactMatch.campaignId}`);
+    this.props.router.push(
+      `/campaign/${this.props.firebaseInitialSearch.exactMatch.campaignId}`
+    );
   };
 
   makeNewCampaign = async (searchedAddress, latLng) => {
@@ -52,8 +54,8 @@ class FirebaseChooseCampaign extends Component {
 
   render() {
     const {
-      exactMatch,
       firebaseInitialSearch: {
+        exactMatch,
         loading,
         loaded,
         nearbyCampaigns,
@@ -129,10 +131,10 @@ FirebaseChooseCampaign.propTypes = {
 };
 
 export default connect(
-  ({ auth, firebaseCampaigns, activeCampaign, firebaseInitialSearch }) => ({
+  ({ auth, activeCampaign, firebaseCampaigns, firebaseInitialSearch }) => ({
+    activeCampaign,
     auth,
     firebaseCampaigns,
-    activeCampaign,
     firebaseInitialSearch
   }),
   {

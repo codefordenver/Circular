@@ -129,7 +129,6 @@ export const populateActiveCampaignRequest = () => ({
 export const FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS =
   "FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS";
 export const populateActiveCampaignSuccess = activeCampaign => {
-  console.log("populateActiceCampaign ", activeCampaign);
   return {
     type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS,
     response: activeCampaign
