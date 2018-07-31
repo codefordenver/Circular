@@ -169,62 +169,68 @@ class UpdateCampaignModal extends Component {
                   title="Waste Provider"
                 >
                   {activeCampaign &&
-                  activeCampaign.wasteProvider &&
-                  activeCampaign.wasteProvider.id ? (
-                    <Panel>
-                      <Panel.Heading>
-                        <Panel.Title componentClass="h3">
-                          Current Waste Provider
-                        </Panel.Title>
-                      </Panel.Heading>
-                      <Panel.Body>
-                        <h5>{`Name:    ${activeCampaign.wasteProvider.name ||
-                          ""}`}</h5>
-                        <h5>{`Email:   ${activeCampaign.wasteProvider.email ||
-                          ""}`}</h5>
-                        <h5>{`Phone:   ${activeCampaign.wasteProvider.phone ||
-                          ""}`}</h5>
-                        <h5>{`Address: ${activeCampaign.wasteProvider.address ||
-                          ""}`}</h5>
-                      </Panel.Body>
-                    </Panel>
-                  ) : (
-                    <FormGroup name="wasteProviders" controlId="wasteProviders">
-                      <OverlayTrigger
-                        placement="right"
-                        overlay={wasteProviderToolTip}
-                      >
-                        <ControlLabel>
-                          Current Waste Provider{" "}
-                          <span
-                            role="img"
-                            aria-label="info to find waste provider"
+                    activeCampaign.wasteProvider &&
+                    activeCampaign.wasteProvider.id && (
+                      <div>
+                        <Panel>
+                          <Panel.Heading>
+                            <Panel.Title componentClass="h3">
+                              Current Waste Provider
+                            </Panel.Title>
+                          </Panel.Heading>
+                          <Panel.Body>
+                            <h5>{`Name:    ${activeCampaign.wasteProvider
+                              .name || ""}`}</h5>
+                            <h5>{`Email:   ${activeCampaign.wasteProvider
+                              .email || ""}`}</h5>
+                            <h5>{`Phone:   ${activeCampaign.wasteProvider
+                              .phone || ""}`}</h5>
+                            <h5>{`Address: ${activeCampaign.wasteProvider
+                              .address || ""}`}</h5>
+                          </Panel.Body>
+                        </Panel>
+                        <FormGroup
+                          name="wasteProviders"
+                          controlId="wasteProviders"
+                        >
+                          <OverlayTrigger
+                            placement="right"
+                            overlay={wasteProviderToolTip}
                           >
-                            {" "}
-                            ℹ️
-                          </span>
-                        </ControlLabel>
-                      </OverlayTrigger>
-                      <FormControl
-                        onChange={this.handleWasteProviderChange}
-                        componentClass="select"
-                        placeholder="Choose Your Current Waste Provider"
-                      >
-                        <option>Select Your Provider</option>
-                        {firebaseWasteProviders.wasteProviders.map(provider => {
-                          return (
-                            <option
-                              key={provider.id}
-                              value={provider.name}
-                              id={provider.id}
-                            >
-                              {provider.name}
-                            </option>
-                          );
-                        })}
-                      </FormControl>
-                    </FormGroup>
-                  )}
+                            <ControlLabel>
+                              Update Waste Provider{" "}
+                              <span
+                                role="img"
+                                aria-label="info to find waste provider"
+                              >
+                                {" "}
+                                ℹ️
+                              </span>
+                            </ControlLabel>
+                          </OverlayTrigger>
+                          <FormControl
+                            onChange={this.handleWasteProviderChange}
+                            componentClass="select"
+                            placeholder="Choose Your Current Waste Provider"
+                          >
+                            <option>Select Your Provider</option>
+                            {firebaseWasteProviders.wasteProviders.map(
+                              provider => {
+                                return (
+                                  <option
+                                    key={provider.id}
+                                    value={provider.name}
+                                    id={provider.id}
+                                  >
+                                    {provider.name}
+                                  </option>
+                                );
+                              }
+                            )}
+                          </FormControl>
+                        </FormGroup>
+                      </div>
+                    )}
                 </Tab>
               </Tabs>
             </form>

@@ -2,13 +2,13 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore";
-// import { development } from "./firebaseKeys";
+import { development } from "./firebaseKeys";
 // import { staging } from './firebaseKeys';
-import { production } from "./firebaseKeys";
+// import { production } from "./firebaseKeys";
 
 // FIREBASE DEV
 firebase.initializeApp({
-  ...production
+  ...development
 });
 
 export const firestore = firebase.firestore();
