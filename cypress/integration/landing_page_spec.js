@@ -10,7 +10,7 @@ describe('The landing page', () => {
   describe('Navigation Bar', () => {
     describe('Home link', () => {
       it('Navigates to root page', () => {
-        cy.contains('Why Recycle').click();
+        cy.contains('WHY').click();
         cy.contains('HOME').click();
         cy.url().should('include', 'http://localhost:3000');
       });
