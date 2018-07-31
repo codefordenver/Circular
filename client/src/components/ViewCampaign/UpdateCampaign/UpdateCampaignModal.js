@@ -111,23 +111,22 @@ class UpdateCampaignModal extends Component {
               Update details for {address}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body style={{ color: "black" }}>
+          <Modal.Body
+            className="update-campaign-modal-body"
+            style={{ color: "black" }}
+          >
             <form>
               <Tabs
                 activeKey={this.state.key}
                 onSelect={this.handleTabSwitch}
                 id="updateCampaignModalForm"
               >
-                <Tab eventKey={1} title="Building">
+                <Tab style={{ marginTop: "1em" }} eventKey={1} title="Building">
                   {this.state.buildingInformation &&
                     buildingInformation.map(info => {
                       const { id, label, placeHolder, type, name } = info;
                       return (
-                        <FormGroup
-                          style={{ marginTop: "1em" }}
-                          controlId={id}
-                          key={id}
-                        >
+                        <FormGroup controlId={id} key={id}>
                           <ControlLabel>{label}</ControlLabel>
                           <FormControl
                             name={name}
@@ -200,7 +199,14 @@ class UpdateCampaignModal extends Component {
                         overlay={wasteProviderToolTip}
                       >
                         <ControlLabel>
-                          Current Waste Provider <span>ℹ️</span>
+                          Current Waste Provider{" "}
+                          <span
+                            role="img"
+                            aria-label="info to find waste provider"
+                          >
+                            {" "}
+                            ℹ️
+                          </span>
                         </ControlLabel>
                       </OverlayTrigger>
                       <FormControl
