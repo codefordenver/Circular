@@ -88,7 +88,7 @@ describe('The landing page', () => {
     describe('Learn More First Button', () => {
       it('Navigates to Denver Recycling Info', () => {
         cy.contains('LEARN MORE').click();
-        cy.url().should('include', '/denver-recycling-info');
+        cy.url().should('include', '/denver-learn-more');
       });
     });
   });
