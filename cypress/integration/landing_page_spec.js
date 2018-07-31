@@ -87,7 +87,7 @@ describe('The landing page', () => {
     // LEARN MORE BUTTON
     describe('Learn More First Button', () => {
       it('Navigates to Denver Recycling Info', () => {
-        cy.contains('Learn more first').click();
+        cy.contains('LEARN MORE').click();
         cy.url().should('include', '/denver-recycling-info');
       });
     });
@@ -97,13 +97,13 @@ describe('The landing page', () => {
   describe('Bottom Features', () => {
     describe('Wait, But Why?', () => {
       it('Navigates to Learn More', () => {
-        cy.contains('Learn More').click();
+        cy.contains('LEARN MORE').click();
         cy.url().should('include', '/denver-learn-more');
       });
     });
     describe('Tips and Resources', () => {
       it('Navigates to Manager Resources', () => {
-        cy.contains('Tips and Resources').click();
+        cy.contains('TIPS AND RESOURCES').click();
         cy.url().should('include', '/manager-resources');
       });
     });
