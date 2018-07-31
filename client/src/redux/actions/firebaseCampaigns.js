@@ -44,7 +44,7 @@ export const firebaseCreateNewCampaign = (
       email: ""
     },
     buildingInformation: {
-      numBuldings: "",
+      numBuildings: "",
       numUnits: ""
     }
   };
@@ -53,7 +53,7 @@ export const firebaseCreateNewCampaign = (
     console.error("Error writing document: ", error);
   });
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
-  // dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
+  dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
   // TODO clear search information
 };
 
@@ -184,7 +184,8 @@ export const firebaseUpdateCampaign = (
     .update({
       buildingInformation,
       propertyManager,
-      wasteProvider
+      wasteProvider,
+      modifiedAt: Timestamp
     })
     .then(() => {
       console.log("Data Sucessfully Updated, refreshing campaign");
