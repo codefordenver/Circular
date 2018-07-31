@@ -16,6 +16,8 @@ import {
 } from "../redux/actions/firebaseSignatures";
 // CAMPAIGN UPATES
 import { firebaseUpdateCampaign } from "../redux/actions/firebaseCampaigns";
+// WASTE PROVIDERS
+import { firebaseFetchWasteProviders } from "../redux/actions/firebaseWasteProviders";
 // COMPONENTS
 import CampaignPage from "../components/ViewCampaign/CampaignPage";
 import Loader from "../components/UtilComponents/FullScreenLoader";
@@ -26,6 +28,9 @@ class CampaignContainer extends Component {
   };
 
   componentDidMount() {
+    if (!this.props.firebaseWasteProviders.firebaseWasteProviders) {
+      this.props.firebaseFetchWasteProviders();
+    }
     this.props.firebasePopulateCampaignById(this.props.params.id);
     // IF REDIRECTED FROM CREATE NEW CAMPAIGN ROUTER LOCATION WILL CONTAIN STATE OF ISNEWCAMPAIGN
     if (
@@ -55,7 +60,8 @@ class CampaignContainer extends Component {
       firebaseAddSignatureToCampaign,
       firebaseRemoveSignatureFromCampaign,
       firebaseSignInGoogle,
-      firebaseSignInFacebook
+      firebaseSignInFacebook,
+      firebaseWasteProviders
     } = this.props;
     const { campaignId, error, loading, loaded } = activeCampaign;
     const hrefIsLocalhost = window.location.href
@@ -68,7 +74,8 @@ class CampaignContainer extends Component {
       firebaseRemoveSignatureFromCampaign,
       firebaseSignInGoogle,
       firebaseSignInFacebook,
-      firebaseUpdateCampaign
+      firebaseUpdateCampaign,
+      firebaseWasteProviders
     };
     return (
       <div>
@@ -132,13 +139,15 @@ CampaignContainer.propTypes = {
 
 const mapStateToProps = ({
   activeCampaign,
+  auth,
+  firebaseWasteProviders,
   initialSearch,
-  signature,
-  auth
+  signature
 }) => ({
   activeCampaign,
-  initialSearch,
   auth,
+  firebaseWasteProviders,
+  initialSearch,
   userSignatures: {
     ...signature.userSignatures
   }
@@ -146,6 +155,7 @@ const mapStateToProps = ({
 
 export default connect(mapStateToProps, {
   firebaseAddSignatureToCampaign,
+  firebaseFetchWasteProviders,
   firebasePopulateCampaignById,
   firebaseRemoveSignatureFromCampaign,
   firebaseSignInGoogle,

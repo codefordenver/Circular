@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types, no-shadow */ /* - TODO: Fix and remove this line */
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router';
-import PropTypes from 'prop-types';
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router";
+import PropTypes from "prop-types";
 import {
   Col,
   PageHeader,
@@ -11,12 +11,12 @@ import {
   ControlLabel,
   FormControl,
   Button
-} from 'react-bootstrap';
-import stateNames from '../components/CreateCampaignSteps/stateNames';
-import { updateNewCampaign } from '../redux/actions/newCampaign';
-import { fetchWasteProviders } from '../redux/actions/firebaseWasteProviders';
+} from "react-bootstrap";
+import stateNames from "../components/CreateCampaignSteps/stateNames";
+import { updateNewCampaign } from "../redux/actions/newCampaign";
+import { firebaseFetchWasteProviders } from "../redux/actions/firebaseWasteProviders";
 
-const WASTE_PROVIDER_NOT_SET_ID = 'WASTE_PROVIDER_NOT_SET_ID';
+const WASTE_PROVIDER_NOT_SET_ID = "WASTE_PROVIDER_NOT_SET_ID";
 
 class CreateCampaignStep2 extends React.Component {
   constructor(props) {
@@ -24,9 +24,9 @@ class CreateCampaignStep2 extends React.Component {
 
     this.defaultProvider = {
       id: WASTE_PROVIDER_NOT_SET_ID,
-      name: 'Select your provider(Optional)',
-      phone: '',
-      email: ''
+      name: "Select your provider(Optional)",
+      phone: "",
+      email: ""
     };
     this.state = {
       activeProvider: this.defaultProvider
@@ -35,12 +35,14 @@ class CreateCampaignStep2 extends React.Component {
 
   // TODO MOVES THIS TO CONTAINER TO PREVENT RELOAD OF DATA ON SELECTION OF WASTE PROVIDER
   componentDidMount() {
-    this.props.fetchWasteProviders();
+    this.props.firebaseFetchWasteProviders();
   }
 
   setOptionalInfo = async e => {
     e.preventDefault();
-    const { target: { name, email, phone, address, buildingCount, unitCount } } = e;
+    const {
+      target: { name, email, phone, address, buildingCount, unitCount }
+    } = e;
 
     const updateCampainInfo = {
       propertyManager: {
@@ -55,13 +57,14 @@ class CreateCampaignStep2 extends React.Component {
         numUnits: unitCount.value
       }
     };
-    const wasteProviderId = e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
+    const wasteProviderId =
+      e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
     if (wasteProviderId !== WASTE_PROVIDER_NOT_SET_ID) {
       updateCampainInfo._wasteProviderId = wasteProviderId;
     }
     await this.props.updateNewCampaign(updateCampainInfo);
 
-    this.props.router.push('/new-campaign/activate');
+    this.props.router.push("/new-campaign/activate");
   };
 
   handleWasteMgmtChange = async e => {
@@ -87,7 +90,11 @@ class CreateCampaignStep2 extends React.Component {
     const { loaded } = this.props.firebaseWasteProviders;
     wasteProviders = [this.defaultProvider, ...(wasteProviders || [])];
     return (
-      <Form onSubmit={this.setOptionalInfo} horizontal className="create-campaign-form">
+      <Form
+        onSubmit={this.setOptionalInfo}
+        horizontal
+        className="create-campaign-form"
+      >
         <PageHeader>OPTIONAL INFO</PageHeader>
         <FormGroup>
           <h2>Property Manager or Company:</h2>
@@ -168,14 +175,26 @@ class CreateCampaignStep2 extends React.Component {
             <ControlLabel>THIS PROPERTY CONSISTS OF:</ControlLabel>
           </Col>
           <Col xs={2}>
-            <FormControl type="Number" min="0" max="100" name="buildingCount" placeholder={0} />
+            <FormControl
+              type="Number"
+              min="0"
+              max="100"
+              name="buildingCount"
+              placeholder={0}
+            />
           </Col>
           <Col xs={10}>BUILDING(S)</Col>
           <Col xs={12}>
             <ControlLabel>THIS BUILDING HAS APPROXIMATELY:</ControlLabel>
           </Col>
           <Col xs={2}>
-            <FormControl type="number" min="0" max="500" name="unitCount" placeholder={0} />
+            <FormControl
+              type="number"
+              min="0"
+              max="500"
+              name="unitCount"
+              placeholder={0}
+            />
           </Col>
           <Col xs={10}>TOTAL UNITS</Col>
         </FormGroup>
@@ -184,7 +203,11 @@ class CreateCampaignStep2 extends React.Component {
             <Link to="/new-campaign/address" className="btn next-button fl">
               Back
             </Link>
-            <Button bsStyle="remove-default" className="next-button fr" type="submit">
+            <Button
+              bsStyle="remove-default"
+              className="next-button fr"
+              type="submit"
+            >
               Next
             </Button>
           </Col>
@@ -196,7 +219,7 @@ class CreateCampaignStep2 extends React.Component {
 
 CreateCampaignStep2.propTypes = {
   updateNewCampaign: PropTypes.func.isRequired,
-  fetchWasteProviders: PropTypes.func.isRequired,
+  firebaseFetchWasteProviders: PropTypes.func.isRequired,
   firebaseWasteProviders: PropTypes.arrayOf({
     loaded: PropTypes.bool.isRequired,
     wasteProviders: PropTypes.shape({
@@ -216,6 +239,6 @@ export default connect(
   }),
   {
     updateNewCampaign,
-    fetchWasteProviders
+    firebaseFetchWasteProviders
   }
 )(withRouter(CreateCampaignStep2));

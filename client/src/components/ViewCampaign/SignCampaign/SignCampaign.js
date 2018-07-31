@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Col, Row } from "react-bootstrap";
+// REDUX ACTIONS
 import { firebaseUpdateCampaign } from "../../../redux/actions/firebaseCampaigns";
 import {
   removeSignatureFromCampaign,
   fetchUserSignatures
 } from "../../../redux/actions/signature";
+// COMPONENTS
 import RenderSignCampaign from "./RenderSignCampaign";
 import RenderRemoveSignature from "./RenderRemoveSignature";
 import RenderSignIn from "./RenderSignIn";
@@ -88,13 +90,14 @@ class SignCampaign extends Component {
   };
 
   render() {
+    const { firebaseWasteProviders } = this.props;
     const {
-      firebaseSignInGoogle,
-      firebaseSignInFacebook,
       auth,
       auth: { signedCampaignId },
       activeCampaign,
-      activeCampaign: { loaded, activeCampaignSignatures }
+      activeCampaign: { loaded, activeCampaignSignatures },
+      firebaseSignInFacebook,
+      firebaseSignInGoogle
     } = this.props.signCampaignProps;
     const {
       keepMeUpdated,
@@ -116,21 +119,25 @@ class SignCampaign extends Component {
           </div>
           <div className="side-wrap">
             <Row>
-              {this.state.showUpdateCampaignModal && (
-                <UpdateCampaignModal
-                  activeCampaign={activeCampaign}
-                  buildingInformation={buildingInformation}
-                  buttonText="Submit Updates"
-                  onHide={this.toggleShowUpdateCampaignModal}
-                  propertyManager={propertyManager}
-                  show={showUpdateCampaignModal}
-                  toggleShowUpdateCampaignModal={
-                    this.toggleShowUpdateCampaignModal
-                  }
-                  handleUpdateCampaign={this.handleUpdateCampaign}
-                  wasteProvider={wasteProvider}
-                />
-              )}
+              {this.state.showUpdateCampaignModal &&
+                firebaseWasteProviders &&
+                activeCampaign &&
+                activeCampaign.wasteProvider && (
+                  <UpdateCampaignModal
+                    activeCampaign={activeCampaign}
+                    buildingInformation={buildingInformation}
+                    buttonText="Submit Updates"
+                    onHide={this.toggleShowUpdateCampaignModal}
+                    propertyManager={propertyManager}
+                    show={showUpdateCampaignModal}
+                    toggleShowUpdateCampaignModal={
+                      this.toggleShowUpdateCampaignModal
+                    }
+                    handleUpdateCampaign={this.handleUpdateCampaign}
+                    wasteProvider={wasteProvider}
+                    firebaseWasteProviders={firebaseWasteProviders}
+                  />
+                )}
               <Col md={12}>
                 {/*  user isn't signed in */}
                 {loaded &&
@@ -230,10 +237,11 @@ SignCampaign.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  activeCampaign: state.activeCampaign,
   userSignatures: {
     ...state.signature.userSignatures
   },
-  activeCampaign: state.activeCampaign
+  firebaseWasteProviders: state.firebaseWasteProviders
 });
 
 export default connect(mapStateToProps, {

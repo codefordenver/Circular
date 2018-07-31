@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import {
   Button,
   ControlLabel,
-  HelpBlock,
+  // HelpBlock,
   FormControl,
   FormGroup,
+  Panel,
   Modal,
   Tab,
   Tabs
 } from "react-bootstrap";
 import merge from "lodash.merge";
-import wasteProviders from "../../../utils/wasteProviders";
 
 class UpdateCampaignModal extends Component {
   constructor(props) {
@@ -43,10 +43,6 @@ class UpdateCampaignModal extends Component {
 
   handleBuildingInformationChange = e => {
     const { name, value } = e.target;
-    // const newBuildingData = merge({}, this.state.buildingInformation, { [name]: value });
-    // (() => {
-    //   this.setState({ buildingInformation: newBuildingData });
-    // })();
     (() =>
       this.setState(prevState => ({
         ...prevState,
@@ -68,13 +64,20 @@ class UpdateCampaignModal extends Component {
   };
 
   handleWasteProviderChange = e => {
-    const { name, value } = e.target;
-    const newWasteProviderData = merge({}, this.state.wasteProvider, {
-      [name]: value
-    });
-    (() => {
-      this.setState({ wasteProvider: newWasteProviderData });
-    })();
+    const { options } = e.target;
+    const { selectedIndex } = options;
+    const selectedWasteProviderId = options[selectedIndex].id;
+    const selectedWasteProviderData = this.props.firebaseWasteProviders.wasteProviders.find(
+      provider => provider.id === selectedWasteProviderId
+    );
+    (() =>
+      this.setState(prevState => ({
+        ...prevState,
+        wasteProvider: {
+          ...prevState.wasteProvider,
+          ...selectedWasteProviderData
+        }
+      })))();
   };
 
   handleTabSwitch = key => {
@@ -90,16 +93,8 @@ class UpdateCampaignModal extends Component {
       onHide,
       propertyManager,
       show,
-      wasteProvider
+      firebaseWasteProviders
     } = this.props;
-    const wasteProvidersSelect = wasteProviders.map(provider => {
-      <FormControl>
-        <option key={provider.phone} id={provider.phone}>
-          {provider.name}
-        </option>;
-      </FormControl>;
-    });
-    console.log(activeCampaign.wasteProvider.name === "");
     return (
       <div>
         <Modal keyboard={true} show={show} onHide={onHide}>
@@ -166,25 +161,52 @@ class UpdateCampaignModal extends Component {
                   eventKey={3}
                   title="Waste Provider"
                 >
-                  {this.state.wasteProvider &&
-                    wasteProvider.map(info => {
-                      const { id, label, placeHolder, type, name } = info;
-                      return (
-                        <FormGroup controlId={id} key={id}>
-                          <ControlLabel>{label}</ControlLabel>
-
-                          <FormControl
-                            name={name}
-                            type={type}
-                            value={this.state.wasteProvider[name]}
-                            placeholder={placeHolder}
-                            onChange={this.handleWasteProviderChange}
-                          />
-
-                          {/* {help && <HelpBlock>{help}</HelpBlock>} */}
-                        </FormGroup>
-                      );
-                    })}
+                  {activeCampaign &&
+                  activeCampaign.wasteProvider &&
+                  activeCampaign.wasteProvider.id ? (
+                    <Panel>
+                      <Panel.Heading>
+                        <Panel.Title componentClass="h3">
+                          Current Waste Provider
+                        </Panel.Title>
+                      </Panel.Heading>
+                      <Panel.Body>
+                        <h5>{`Name:    ${
+                          activeCampaign.wasteProvider.name
+                        }`}</h5>
+                        <h5>{`Email:   ${
+                          activeCampaign.wasteProvider.email
+                        }`}</h5>
+                        <h5>{`Phone:   ${
+                          activeCampaign.wasteProvider.phone
+                        }`}</h5>
+                        <h5>{`Address: ${
+                          activeCampaign.wasteProvider.address
+                        }`}</h5>
+                      </Panel.Body>
+                    </Panel>
+                  ) : (
+                    <FormGroup name="wasteProviders" controlId="wasteProviders">
+                      <ControlLabel>Current Waste Provider</ControlLabel>
+                      <FormControl
+                        onChange={this.handleWasteProviderChange}
+                        componentClass="select"
+                        placeholder="Choose Your Current Waste Provider"
+                      >
+                        {firebaseWasteProviders.wasteProviders.map(provider => {
+                          return (
+                            <option
+                              key={provider.id}
+                              value={provider.name}
+                              id={provider.id}
+                            >
+                              {provider.name}
+                            </option>
+                          );
+                        })}
+                      </FormControl>
+                    </FormGroup>
+                  )}
                 </Tab>
               </Tabs>
             </form>
