@@ -2,6 +2,12 @@ language: node_js
 node_js:
   - 8.3.0
 
+deploy:
+  provider: firebase
+  token:
+    secure: "DgUsDKHgVC53dl9UExcgIo1IdUJD3M2r+uiJX0JXugfO1ZjAob6+WJ+5y4NyRtWgVQ7Mz0Z8pNNF6+ROYovn3m4EBw/YaV1ECqtCJpVsRI2YfEKEwQFHWMSfHAPFBRfIlqvvB5wiZQRZ/I2/TbjdHfYhzllq/ldqbSNvIP2kHzl165hAZCtnUNnvtW4sV9V8pj53M31YbB94f7ThofA7UW2HBrVSOSlN34VSZ++06msWs/052cWvN4oYV4GluA1SLPe2IZkNrDWmfPWAsAtf8tu2txdzyRqbV7bbrkX8AJH750hGVTWKVPQUdQld+rEMz6W9AUxRXEhLIjtSkJpjTivLyp5VxmLRws9B81SfcnI12o2j90WGqq0QnhsrnBXqVf6V2UEbKrDrqed3l1UjF31lcPnbfvTW7870DBKC4sf6zkRs+RxqHlEwrdOfaYSf4ufOVqmrnm47nubbjMFWxxR+n/mpkaD0FQiyu58LlweWe1X9R2iextTtK8xNr9Tb4egmTsILrdvMcmA1VVLyds6rBTEQN3c9zjyUl3ROlu2+S8IuBtjWZ0BQ3eqWsGiFkOz5t0viPO32c46wnRU0e06cdpsuxoV4IRtVaH+28NpHxldkYpzdZ3PbxDsOhbgAxpBKR+xjTiFeWxeFrYIHetrh46ChqbAaWIdSqbt2ezI="
+  project: "re-imagine-dev"
+
 cache:
   directories:
     - node_modules
@@ -16,7 +22,10 @@ install:
 before_script:
   - NODE_ENV=test yarn run client-build
   - NODE_ENV=test yarn ci:start-app-for-test &
-  - "sh -e /etc/init.d/xvfb start"
+  - "sh -e /etc/init.d/xvfb start
   - sleep 3
 
 script: "yarn lint && yarn run ci:test"
+env:
+  global:
+    secure: DgUsDKHgVC53dl9UExcgIo1IdUJD3M2r+uiJX0JXugfO1ZjAob6+WJ+5y4NyRtWgVQ7Mz0Z8pNNF6+ROYovn3m4EBw/YaV1ECqtCJpVsRI2YfEKEwQFHWMSfHAPFBRfIlqvvB5wiZQRZ/I2/TbjdHfYhzllq/ldqbSNvIP2kHzl165hAZCtnUNnvtW4sV9V8pj53M31YbB94f7ThofA7UW2HBrVSOSlN34VSZ++06msWs/052cWvN4oYV4GluA1SLPe2IZkNrDWmfPWAsAtf8tu2txdzyRqbV7bbrkX8AJH750hGVTWKVPQUdQld+rEMz6W9AUxRXEhLIjtSkJpjTivLyp5VxmLRws9B81SfcnI12o2j90WGqq0QnhsrnBXqVf6V2UEbKrDrqed3l1UjF31lcPnbfvTW7870DBKC4sf6zkRs+RxqHlEwrdOfaYSf4ufOVqmrnm47nubbjMFWxxR+n/mpkaD0FQiyu58LlweWe1X9R2iextTtK8xNr9Tb4egmTsILrdvMcmA1VVLyds6rBTEQN3c9zjyUl3ROlu2+S8IuBtjWZ0BQ3eqWsGiFkOz5t0viPO32c46wnRU0e06cdpsuxoV4IRtVaH+28NpHxldkYpzdZ3PbxDsOhbgAxpBKR+xjTiFeWxeFrYIHetrh46ChqbAaWIdSqbt2ezI=
