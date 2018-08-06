@@ -128,12 +128,10 @@ export const populateActiveCampaignRequest = () => ({
 // // POPULATE POPULATE ACTIVE CAMPAIGN SUCCESS
 export const FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS =
   "FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS";
-export const populateActiveCampaignSuccess = activeCampaign => {
-  return {
-    type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS,
-    response: activeCampaign
-  };
-};
+export const populateActiveCampaignSuccess = activeCampaign => ({
+  type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS,
+  response: activeCampaign
+});
 
 // POPULATE ACTIVE CAMPAIGN THUNK
 export const firebasePopulateActiveCampaign = activeCampaign => async dispatch => {
@@ -168,7 +166,6 @@ export const firebaseUpdateCampaign = (
   campaignId,
   updatedCampaignData
 ) => async dispatch => {
-  console.log("got to dispatch", updatedCampaignData);
   dispatch(firebaseUpdateCampaignRequest());
   // CHECK FOR WHICH DATA WAS UPDATED
   const {
@@ -187,12 +184,10 @@ export const firebaseUpdateCampaign = (
       modifiedAt: Timestamp
     })
     .then(() => {
-      console.log("Data Sucessfully Updated, refreshing campaign");
       dispatch(firebasePopulateCampaignById(campaignId));
       dispatch(firebaseUpdateCampaignSuccess());
     })
     .catch(error => {
-      console.log("oops, something when wrong", error);
       dispatch(firebaseUpdateCampaignError(error));
     });
 };

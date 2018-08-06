@@ -8,18 +8,15 @@
     "yarn": ">=1.2"
   },
   "scripts": {
-    "ci:start-app-for-test":
-      "concurrently \"yarn start\" \"serve -s client/build -p 3000\" --browser chrome",
+    "ci:start-app-for-test": "concurrently \"serve -s client/build -p 3000\" --browser chrome",
     "ci:test": "cypress run --browser chrome",
     "client": "(cd ./client && yarn start)",
     "client-build": "(cd ./client && yarn run build)",
     "client-install": "(cd ./client && yarn install)",
     "cypress": "cypress",
     "dev": "concurrently \"yarn client\"",
-    "eslint-check":
-      "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "heroku-postbuild":
-      "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
     "lint": "eslint . ",
     "lint-server": "yarn prettier-eslint backend/**/*.js --write",
     "lint-client": "yarn prettier-eslint client/src/**/*.js --write",
@@ -28,14 +25,17 @@
     "test-dev": "cross-env NODE_ENV=test yarn dev"
   },
   "lint-staged": {
-    "*.{js,json}": ["prettier-eslint --write", "git add"]
+    "*.{js,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^2.5.0",
     "concurrently": "^3.5.1",
-    "lodash.merge": "^4.6.1"
+    "eslint-config-react-app": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

@@ -2,15 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Button } from "react-bootstrap";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
-import { calculateCampaignDuration } from "../../utils/calculateCampaignDuration";
-import Discussion from "../Discussion";
-import SignCampaign from "./SignCampaign/SignCampaign";
-import SignatureList from "./SignCampaign/SignatureList";
-import MapCard from "../MapCard";
-import CollapsePanel from "../UtilComponents/CollapsePanel";
+// COMPONENTS
 import CampaignProgressBar from "./CampaignProgressBar";
 import CampaignStatus from "./CampaignStatus";
+import CollapsePanel from "../UtilComponents/CollapsePanel";
+import Discussion from "../Discussion";
 import NewCampaignWelcomeModal from "./NewCampaignWelcomeModal";
+import MapCard from "../MapCard";
+import SignCampaign from "./SignCampaign/SignCampaign";
+import SignatureList from "./SignCampaign/SignatureList";
+// FUNCTIONS
+import { calculateCampaignDuration } from "../../utils/calculateCampaignDuration";
 
 const CampaignPage = ({
   activeCampaign,
@@ -183,6 +185,7 @@ CampaignPage.propTypes = {
     loading: PropTypes.bool,
     modifiedAt: PropTypes.instanceOf(Date)
   }).isRequired,
+  handleChangeIsNewCampaign: PropTypes.func.isRequired,
   hrefIsLocalhost: PropTypes.bool.isRequired,
   isNewCampaign: PropTypes.bool.isRequired,
   signCampaignProps: PropTypes.shape({

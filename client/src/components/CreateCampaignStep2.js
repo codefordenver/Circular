@@ -86,7 +86,9 @@ class CreateCampaignStep2 extends React.Component {
       </option>
     ));
   render() {
-    let { firebaseWasteProviders: { wasteProviders } } = this.props;
+    let {
+      firebaseWasteProviders: { wasteProviders }
+    } = this.props;
     const { loaded } = this.props.firebaseWasteProviders;
     wasteProviders = [this.defaultProvider, ...(wasteProviders || [])];
     return (

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   ControlLabel,
@@ -7,47 +8,11 @@ import {
   FormGroup,
   Panel,
   Modal,
-  OverlayTrigger,
   Tab,
-  Tabs,
-  Tooltip
+  Tabs
 } from "react-bootstrap";
-import merge from "lodash.merge";
+import UpdateWasteProvider from "./UpdateWasteProvider";
 
-const wasteProviderToolTip = (
-  <Tooltip id="tooltip">
-    Normally there is a logo on the trash bin where you can find out who your
-    waste service provider is!
-  </Tooltip>
-);
-
-const UpdateWasteProvider = ({ handleWasteProviderChange, wasteProviders }) => (
-  <FormGroup name="wasteProviders" controlId="wasteProviders">
-    <OverlayTrigger placement="right" overlay={wasteProviderToolTip}>
-      <ControlLabel>
-        Update Waste Provider{" "}
-        <span role="img" aria-label="info to find waste provider">
-          {" "}
-          ℹ️
-        </span>
-      </ControlLabel>
-    </OverlayTrigger>
-    <FormControl
-      onChange={handleWasteProviderChange}
-      componentClass="select"
-      placeholder="Choose Your Current Waste Provider"
-    >
-      <option>Select Your Provider</option>
-      {wasteProviders.map(provider => {
-        return (
-          <option key={provider.id} value={provider.name} id={provider.id}>
-            {provider.name}
-          </option>
-        );
-      })}
-    </FormControl>
-  </FormGroup>
-);
 class UpdateCampaignModal extends Component {
   constructor(props) {
     super(props);
@@ -91,12 +56,14 @@ class UpdateCampaignModal extends Component {
 
   handlePropertyManagerChange = e => {
     const { name, value } = e.target;
-    const newPropertyManagerData = merge({}, this.state.propertyManager, {
-      [name]: value
-    });
-    (() => {
-      this.setState({ propertyManager: newPropertyManagerData });
-    })();
+    (() =>
+      this.setState(prevState => ({
+        ...prevState,
+        propertyManager: {
+          ...prevState.propertyManager,
+          [name]: value
+        }
+      })))();
   };
 
   handleWasteProviderChange = e => {
@@ -133,7 +100,7 @@ class UpdateCampaignModal extends Component {
     } = this.props;
     return (
       <div>
-        <Modal keyboard={true} show={show} onHide={onHide}>
+        <Modal keyboard show={show} onHide={onHide}>
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "black" }}>
               Update details for {address}
@@ -244,5 +211,65 @@ class UpdateCampaignModal extends Component {
     );
   }
 }
+
+UpdateCampaignModal.defaultProps = {
+  firebaseWasteProviders: [
+    {
+      email: "",
+      id: "",
+      name: "",
+      phone: ""
+    }
+  ],
+  wasteProviders: []
+};
+
+UpdateCampaignModal.propTypes = {
+  activeCampaign: PropTypes.shape({}).isRequired,
+  buildingInformation: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      placeHolder: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  buttonText: PropTypes.string.isRequired,
+  firebaseWasteProviders: PropTypes.shape({
+    loading: PropTypes.bool,
+    loaded: PropTypes.bool,
+    wasteProviders: PropTypes.arrayOf(
+      PropTypes.shape({
+        email: PropTypes.string,
+        id: PropTypes.string,
+        name: PropTypes.string,
+        phone: PropTypes.string
+      })
+    )
+  }),
+  handleUpdateCampaign: PropTypes.func.isRequired,
+  onHide: PropTypes.func.isRequired,
+  propertyManager: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      placeHolder: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  show: PropTypes.bool.isRequired,
+  toggleShowUpdateCampaignModal: PropTypes.func.isRequired,
+  wasteProviders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      placeHolder: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
 
 export default UpdateCampaignModal;

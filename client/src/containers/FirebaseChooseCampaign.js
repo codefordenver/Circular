@@ -105,15 +105,15 @@ FirebaseChooseCampaign.defaultProps = {
 };
 
 FirebaseChooseCampaign.propTypes = {
-  exactMatch: PropTypes.shape({
-    campaignId: PropTypes.string.isRequired
-  }),
   firebaseCampaigns: PropTypes.shape({
     activeCampaign: PropTypes.string
   }),
   firebaseCreateNewCampaign: PropTypes.func.isRequired,
   firebaseInitialSearch: PropTypes.shape({
     error: PropTypes.objectOf(PropTypes.any),
+    exactMatch: PropTypes.shape({
+      campaignId: PropTypes.string.isRequired
+    }),
     loading: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
     nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,

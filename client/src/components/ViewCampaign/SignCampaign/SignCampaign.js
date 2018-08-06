@@ -5,8 +5,8 @@ import { Button, Col, Row } from "react-bootstrap";
 // REDUX ACTIONS
 import { firebaseUpdateCampaign } from "../../../redux/actions/firebaseCampaigns";
 import {
-  removeSignatureFromCampaign,
-  fetchUserSignatures
+  fetchUserSignatures,
+  removeSignatureFromCampaign
 } from "../../../redux/actions/signature";
 // COMPONENTS
 import RenderSignCampaign from "./RenderSignCampaign";
@@ -74,17 +74,14 @@ class SignCampaign extends Component {
   };
 
   toggleShowUpdateCampaignModal = () => {
-    this.setState(prevState => {
-      return {
-        showUpdateCampaignModal: !prevState.showUpdateCampaignModal
-      };
-    });
+    this.setState(prevState => ({
+      showUpdateCampaignModal: !prevState.showUpdateCampaignModal
+    }));
   };
 
   handleUpdateCampaign = updatedCampaignData => {
-    console.log("hit the clicker", updatedCampaignData);
     this.props.firebaseUpdateCampaign(
-      this.props.activeCampaign.campaignId,
+      this.props.signCampaignProps.activeCampaign.campaignId,
       updatedCampaignData
     );
   };
@@ -127,15 +124,16 @@ class SignCampaign extends Component {
                     activeCampaign={activeCampaign}
                     buildingInformation={buildingInformation}
                     buttonText="Submit Updates"
+                    firebaseWasteProviders={firebaseWasteProviders}
+                    handleUpdateCampaign={this.handleUpdateCampaign}
                     onHide={this.toggleShowUpdateCampaignModal}
                     propertyManager={propertyManager}
                     show={showUpdateCampaignModal}
                     toggleShowUpdateCampaignModal={
                       this.toggleShowUpdateCampaignModal
                     }
-                    handleUpdateCampaign={this.handleUpdateCampaign}
+                    // FROM DATA.JS
                     wasteProvider={wasteProvider}
-                    firebaseWasteProviders={firebaseWasteProviders}
                   />
                 )}
               <Col md={12}>
@@ -165,7 +163,7 @@ class SignCampaign extends Component {
                       updateSignerMessage={this.updateSignerMessage}
                     />
                   )}
-                {/*  USER AHS SIGNED CAMPAIGN AND IS SIGNED IN*/}
+                {/*  USER AHS SIGNED CAMPAIGN AND IS SIGNED IN */}
                 {/* RENDER REMOVE SIGNATURE FEATURES */}
                 {loaded &&
                   auth.status === "SIGNED_IN" &&
@@ -218,12 +216,12 @@ SignCampaign.defaultProps = {
 };
 
 SignCampaign.propTypes = {
+  firebaseUpdateCampaign: PropTypes.func.isRequired,
+  firebaseWasteProviders: PropTypes.shape({}).isRequired,
   signCampaignProps: PropTypes.shape({
     activeCampaign: PropTypes.shape({
       loaded: PropTypes.bool.isRequired,
-      campaign: PropTypes.shape({
-        _id: PropTypes.string.isRequired
-      })
+      campaignId: PropTypes.string.isRequired
     }).isRequired,
     auth: PropTypes.shape({
       uid: PropTypes.string
@@ -244,8 +242,11 @@ const mapStateToProps = state => ({
   firebaseWasteProviders: state.firebaseWasteProviders
 });
 
-export default connect(mapStateToProps, {
-  firebaseUpdateCampaign,
-  fetchUserSignatures,
-  removeSignatureFromCampaign
-})(SignCampaign);
+export default connect(
+  mapStateToProps,
+  {
+    firebaseUpdateCampaign,
+    fetchUserSignatures,
+    removeSignatureFromCampaign
+  }
+)(SignCampaign);

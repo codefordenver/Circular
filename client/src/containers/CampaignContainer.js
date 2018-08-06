@@ -22,6 +22,7 @@ import { firebaseFetchWasteProviders } from "../redux/actions/firebaseWasteProvi
 import CampaignPage from "../components/ViewCampaign/CampaignPage";
 import Loader from "../components/UtilComponents/FullScreenLoader";
 import NotFound from "../components/UtilComponents/NotFound";
+
 class CampaignContainer extends Component {
   state = {
     isNewCampaign: false
@@ -37,7 +38,11 @@ class CampaignContainer extends Component {
       this.props.location.state &&
       this.props.location.state.isNewCampaign !== undefined
     ) {
-      this.setState({ isNewCampaign: this.props.location.state.isNewCampaign });
+      this.onMount(() => {
+        this.setState({
+          isNewCampaign: this.props.location.state.isNewCampaign
+        });
+      });
     }
   }
   componentWillUpdate(nextProps) {
@@ -100,14 +105,19 @@ class CampaignContainer extends Component {
 
 CampaignPage.defaultProps = {
   activeCampaign: PropTypes.shape({
-    address: null,
-    error: null,
-    modifiedAt: null,
-    createdAt: null,
-    latLng: null,
     activeCampaignSigantures: [],
-    isNewCampaign: false
-  })
+    address: null,
+    createdAt: null,
+    error: null,
+    isNewCampaign: false,
+    latLng: null,
+    modifiedAt: null
+  }),
+  firebaseWasteProviders: {
+    loading: false,
+    loaded: false,
+    firebaseWasteProviders: []
+  }
 };
 
 CampaignContainer.propTypes = {
@@ -127,11 +137,19 @@ CampaignContainer.propTypes = {
     modifiedAt: PropTypes.instanceOf(Date)
   }).isRequired,
   firebaseAddSignatureToCampaign: PropTypes.func.isRequired,
+  firebaseFetchWasteProviders: PropTypes.func.isRequired,
   firebasePopulateCampaignById: PropTypes.func.isRequired,
   firebaseRemoveSignatureFromCampaign: PropTypes.func.isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired,
   firebaseSignInFacebook: PropTypes.func.isRequired,
-  firebaseUpdateCampaign: PropTypes.func.isRequired,
+  firebaseWasteProviders: PropTypes.shape({
+    firebaseWasteProviders: PropTypes.arrayOf()
+  }).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      isNewCampaign: PropTypes.string
+    })
+  }).isRequired,
   params: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired
@@ -153,12 +171,15 @@ const mapStateToProps = ({
   }
 });
 
-export default connect(mapStateToProps, {
-  firebaseAddSignatureToCampaign,
-  firebaseFetchWasteProviders,
-  firebasePopulateCampaignById,
-  firebaseRemoveSignatureFromCampaign,
-  firebaseSignInGoogle,
-  firebaseSignInFacebook,
-  firebaseUpdateCampaign
-})(withRouter(CampaignContainer));
+export default connect(
+  mapStateToProps,
+  {
+    firebaseAddSignatureToCampaign,
+    firebaseFetchWasteProviders,
+    firebasePopulateCampaignById,
+    firebaseRemoveSignatureFromCampaign,
+    firebaseSignInGoogle,
+    firebaseSignInFacebook,
+    firebaseUpdateCampaign
+  }
+)(withRouter(CampaignContainer));

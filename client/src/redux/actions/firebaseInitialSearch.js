@@ -121,7 +121,6 @@ export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch =
         exactAddressMatch.push(doc.data());
       });
       if (exactAddressMatch) {
-        console.log(exactAddressMatch, "exactmatch");
         // IF EXACT MATCH, DISPATCH EXACTMATCH
         dispatch(setExactCampaignMatch(exactAddressMatch));
       }

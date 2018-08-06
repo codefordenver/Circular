@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const btnStyle = {
   background: "#164c5f",
@@ -14,7 +15,7 @@ const NewCampaignWelcomeModal = ({ onHide, show }) => {
 
   return (
     <div>
-      <Modal keyboard={true} show={show} onHide={onHide}>
+      <Modal keyboard show={show} onHide={onHide}>
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "black" }}>
             You've activated your campaign!
@@ -50,6 +51,11 @@ const NewCampaignWelcomeModal = ({ onHide, show }) => {
       </Modal>
     </div>
   );
+};
+
+NewCampaignWelcomeModal.propTypes = {
+  onHide: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired
 };
 
 export default NewCampaignWelcomeModal;
