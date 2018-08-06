@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormGroup } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import { FormGroup } from "react-bootstrap";
 
 const SignatureCheckbox = ({ toggleKeepMeUpdatedCheckbox, keepMeUpdated, keepMeUpdatedLabel }) => (
   <FormGroup key={keepMeUpdatedLabel} className="text-center">

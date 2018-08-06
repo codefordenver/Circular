@@ -57,8 +57,7 @@ class CreateCampaignStep2 extends React.Component {
         numUnits: unitCount.value
       }
     };
-    const wasteProviderId =
-      e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
+    const wasteProviderId = e.target.wasteMgmtName.options[e.target.wasteMgmtName.selectedIndex].id;
     if (wasteProviderId !== WASTE_PROVIDER_NOT_SET_ID) {
       updateCampainInfo._wasteProviderId = wasteProviderId;
     }
@@ -92,11 +91,7 @@ class CreateCampaignStep2 extends React.Component {
     const { loaded } = this.props.firebaseWasteProviders;
     wasteProviders = [this.defaultProvider, ...(wasteProviders || [])];
     return (
-      <Form
-        onSubmit={this.setOptionalInfo}
-        horizontal
-        className="create-campaign-form"
-      >
+      <Form onSubmit={this.setOptionalInfo} horizontal className="create-campaign-form">
         <PageHeader>OPTIONAL INFO</PageHeader>
         <FormGroup>
           <h2>Property Manager or Company:</h2>
@@ -177,26 +172,14 @@ class CreateCampaignStep2 extends React.Component {
             <ControlLabel>THIS PROPERTY CONSISTS OF:</ControlLabel>
           </Col>
           <Col xs={2}>
-            <FormControl
-              type="Number"
-              min="0"
-              max="100"
-              name="buildingCount"
-              placeholder={0}
-            />
+            <FormControl type="Number" min="0" max="100" name="buildingCount" placeholder={0} />
           </Col>
           <Col xs={10}>BUILDING(S)</Col>
           <Col xs={12}>
             <ControlLabel>THIS BUILDING HAS APPROXIMATELY:</ControlLabel>
           </Col>
           <Col xs={2}>
-            <FormControl
-              type="number"
-              min="0"
-              max="500"
-              name="unitCount"
-              placeholder={0}
-            />
+            <FormControl type="number" min="0" max="500" name="unitCount" placeholder={0} />
           </Col>
           <Col xs={10}>TOTAL UNITS</Col>
         </FormGroup>
@@ -205,11 +188,7 @@ class CreateCampaignStep2 extends React.Component {
             <Link to="/new-campaign/address" className="btn next-button fl">
               Back
             </Link>
-            <Button
-              bsStyle="remove-default"
-              className="next-button fr"
-              type="submit"
-            >
+            <Button bsStyle="remove-default" className="next-button fr" type="submit">
               Next
             </Button>
           </Col>

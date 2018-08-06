@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
+import React from "react";
+import { Grid, Row, Col, PageHeader } from "react-bootstrap";
 
 const Collaboration = () => (
   <Grid fluid>
@@ -9,13 +9,13 @@ const Collaboration = () => (
         <p className="info-text">
           <a className="info-link" href="https://www.codefordenver.org/">
             Code For Denver
-          </a>{' '}
+          </a>{" "}
           is volunteer-driven, community outreach that improves people’s lives through technology.
         </p>
         <p className="info-text">
           <a className="info-link" href="https://www.ecocycle.org">
             Eco-Cycle
-          </a>{' '}
+          </a>{" "}
           is a Zero Waste non-profit based in Boulder Colorado. They started working in Denver in
           2016 as a commitment at the Denver Sustainable Summit to increase Denver’s diversion rate
           to 34%.

@@ -9,8 +9,7 @@ describe('Starting a new campaign', () => {
   describe('when searching an address', () => {
     it('navigates to the choose campaign page', () => {
       cy.visit('http://localhost:3000');
-      cy
-        .get('.search_input')
+      cy.get('.search_input')
         .type('Denver')
         .should('have.value', 'Denver');
       cy.get('.search_button').click();

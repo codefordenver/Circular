@@ -2,25 +2,20 @@ import { campaignsRef, Timestamp } from "../../firebase";
 import { firebasePopulateCampaignById } from "./firebaseActiveCampaign";
 
 // CREATE NEW CAMPAIGN REQUEST
-export const FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST =
-  "FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST";
+export const FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST = "FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST";
 export const firebaseCreateNewCampaignRequest = () => ({
   type: FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST
 });
 
 // CREATE NEW CAMPAIGN SUCCESS
-export const FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS =
-  "FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS";
+export const FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS = "FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS";
 export const firebaseCreateNewCampaignSuccess = newlyCreatedCampaign => ({
   type: FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS,
   response: newlyCreatedCampaign
 });
 
 // CREATE NEW CAMPAIGN THUNK
-export const firebaseCreateNewCampaign = (
-  address,
-  latLng
-) => async dispatch => {
+export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => {
   dispatch(firebaseCreateNewCampaignRequest());
   // ADD NEW DOCUMENT IN COLLECTION 'CAMPAIGNS'
   // RETURNS FIRESTORE GENERATED ID
@@ -78,23 +73,19 @@ export const startListeningForCampaigns = () => dispatch => {
       // PUSH ADDRESS TO FIREBASECAMPAIGNSADDRESS
       firebaseCampaignsAddresses.push(address);
     });
-    dispatch(
-      firebaseFetchCampaigns(firebaseCampaigns, firebaseCampaignsAddresses)
-    );
+    dispatch(firebaseFetchCampaigns(firebaseCampaigns, firebaseCampaignsAddresses));
   });
 };
 
 // POPULATE CAMPAIGNS FROM LISTENER
 // POPULATE CAMPAIGNS REQUEST
-export const FETCH_FIREBASE_CAMPAIGNS_REQUEST =
-  "FETCH_FIREBASE_CAMPAIGNS_REQUEST";
+export const FETCH_FIREBASE_CAMPAIGNS_REQUEST = "FETCH_FIREBASE_CAMPAIGNS_REQUEST";
 export const firebaseFetchCampaignsRequest = () => ({
   type: FETCH_FIREBASE_CAMPAIGNS_REQUEST
 });
 
 // POPULATE CAMPAIGNS SUCCESS
-export const FETCH_FIREBASE_CAMPAIGNS_SUCCESS =
-  "FETCH_FIREBASE_CAMPAIGNS_SUCCESS";
+export const FETCH_FIREBASE_CAMPAIGNS_SUCCESS = "FETCH_FIREBASE_CAMPAIGNS_SUCCESS";
 export const firebasePopulateCampaignsSuccess = (
   firebaseCampaigns,
   firebaseCampaignsAddresses
@@ -109,12 +100,7 @@ export const firebaseFetchCampaigns = (
   firebaseCampaignsAddresses
 ) => dispatch => {
   dispatch(firebaseFetchCampaignsRequest());
-  dispatch(
-    firebasePopulateCampaignsSuccess(
-      firebaseCampaigns,
-      firebaseCampaignsAddresses
-    )
-  );
+  dispatch(firebasePopulateCampaignsSuccess(firebaseCampaigns, firebaseCampaignsAddresses));
 };
 
 // POPUATED ON NEW CAMPAIGN CREATION
@@ -141,15 +127,13 @@ export const firebasePopulateActiveCampaign = activeCampaign => async dispatch =
 
 // UPDATE CAMPAIGN
 // UPDATE CAMPAIGN REQUEST
-export const FIREBASE_UPDATE_CAMPAIGN_REQUEST =
-  "FIREBASE_UPDATE_CAMPAIGN_REQUEST";
+export const FIREBASE_UPDATE_CAMPAIGN_REQUEST = "FIREBASE_UPDATE_CAMPAIGN_REQUEST";
 const firebaseUpdateCampaignRequest = () => ({
   type: FIREBASE_UPDATE_CAMPAIGN_REQUEST
 });
 
 // UPDATE CAMPAIGN SUCESS
-export const FIREBASE_UPDATE_CAMPAIGN_SUCCESS =
-  "FIREBASE_UPDATE_CAMPAIGN_SUCCESS";
+export const FIREBASE_UPDATE_CAMPAIGN_SUCCESS = "FIREBASE_UPDATE_CAMPAIGN_SUCCESS";
 const firebaseUpdateCampaignSuccess = () => ({
   type: FIREBASE_UPDATE_CAMPAIGN_SUCCESS
 });
@@ -162,17 +146,10 @@ const firebaseUpdateCampaignError = error => ({
 });
 
 // UPDATE CAMPAIGN THUNK
-export const firebaseUpdateCampaign = (
-  campaignId,
-  updatedCampaignData
-) => async dispatch => {
+export const firebaseUpdateCampaign = (campaignId, updatedCampaignData) => async dispatch => {
   dispatch(firebaseUpdateCampaignRequest());
   // CHECK FOR WHICH DATA WAS UPDATED
-  const {
-    wasteProvider,
-    propertyManager,
-    buildingInformation
-  } = updatedCampaignData;
+  const { wasteProvider, propertyManager, buildingInformation } = updatedCampaignData;
   // FIRESTORE UPDATE METHOD UPDATES WIHTOUT OVERWIRITING DOCUMENT
   // https://firebase.google.com/docs/firestore/manage-data/add-data
   campaignsRef

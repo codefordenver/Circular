@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { Col, PageHeader } from 'react-bootstrap';
+import React from "react";
+import { Link } from "react-router";
+import { Col, PageHeader } from "react-bootstrap";
 
 const RecyclingInfo = () => (
   <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="home-section-container">

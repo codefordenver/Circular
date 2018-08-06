@@ -1,6 +1,6 @@
-import React from 'react';
-import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
-import CollapsePanel from '../UtilComponents/CollapsePanel';
+import React from "react";
+import { Grid, Row, Col, PageHeader } from "react-bootstrap";
+import CollapsePanel from "../UtilComponents/CollapsePanel";
 
 const RequestRecyclingTips = () => (
   <div>
@@ -11,7 +11,7 @@ const RequestRecyclingTips = () => (
             Tips for Requesting Service
           </PageHeader>
           <CollapsePanel
-            titleText={'Tips for approaching your landlord'}
+            titleText={"Tips for approaching your landlord"}
             body={
               <ul>
                 <li>
@@ -28,16 +28,16 @@ const RequestRecyclingTips = () => (
             }
           />
           <CollapsePanel
-            titleText={'Our Landlord ignored or denied our request'}
+            titleText={"Our Landlord ignored or denied our request"}
             body={
               <p>
-                Boo! Why? Fill out{' '}
+                Boo! Why? Fill out{" "}
                 <a
                   className="info-link"
                   href="https://docs.google.com/spreadsheets/u/2/d/1LjlhDV17ciP0v_vn3Q5K4CJRm6ENgcZMrv5XTIXzLwY/edit?usp=drive_web&ouid=111725726550951812389"
                 >
                   this survey
-                </a>{' '}
+                </a>{" "}
                 and tell us what the roadblockers towards getting recycling services were.
               </p>
             }

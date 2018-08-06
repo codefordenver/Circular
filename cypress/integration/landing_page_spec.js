@@ -67,8 +67,7 @@ describe('The landing page', () => {
     // SEARCH ADDRESS BAR
     describe('When Searching an Address', () => {
       it('Navigates to the choose campaign page', () => {
-        cy
-          .get('.search_input')
+        cy.get('.search_input')
           .type('Denver')
           .should('have.value', 'Denver');
         cy.get('.search_button').click();

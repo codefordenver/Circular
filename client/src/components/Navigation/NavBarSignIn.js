@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import { NavItem, NavDropdown, MenuItem } from "react-bootstrap";
 
 const NavBarSignIn = ({ auth, firebaseSignOut, firebaseSignInGoogle, firebaseSignInFacebook }) =>
-  (auth.status === 'SIGNED_IN' ? (
+  auth.status === "SIGNED_IN" ? (
     <NavItem eventKey={5} onClick={firebaseSignOut}>
       Sign Out, {auth.displayName}
     </NavItem>
@@ -16,7 +16,7 @@ const NavBarSignIn = ({ auth, firebaseSignOut, firebaseSignInGoogle, firebaseSig
         Sign in With Google
       </MenuItem>
     </NavDropdown>
-  ));
+  );
 
 NavBarSignIn.propTypes = {
   auth: PropTypes.shape({}).isRequired,

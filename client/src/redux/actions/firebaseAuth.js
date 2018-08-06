@@ -1,14 +1,14 @@
-import { auth, googleAuthProvider, facebookAuthProvider, usersRef } from '../../firebase';
+import { auth, googleAuthProvider, facebookAuthProvider, usersRef } from "../../firebase";
 
 // SIGN OUT
 // FIREBASE SINGOUT REQUEST
-export const FIREBASE_SIGN_OUT_REQUEST = 'FIREBASE_SIGN_OUT_REQUEST';
+export const FIREBASE_SIGN_OUT_REQUEST = "FIREBASE_SIGN_OUT_REQUEST";
 export const firebaseSignOutRequest = () => ({
   type: FIREBASE_SIGN_OUT_REQUEST
 });
 
 // FIREBASE SIGN OUT SUCCESS
-export const FIREBASE_SIGN_OUT_SUCCESS = 'FIREBASE_SIGN_OUT_SUCCESS';
+export const FIREBASE_SIGN_OUT_SUCCESS = "FIREBASE_SIGN_OUT_SUCCESS";
 export const firebaseSignOut = () => ({
   type: FIREBASE_SIGN_OUT_SUCCESS
 });
@@ -16,14 +16,14 @@ export const firebaseSignOut = () => ({
 // SIGNIN REQUESTS
 // GOOGLE
 // FIREBASE SIGN IN GOOGLE REQUEST
-export const FIREBASE_SIGN_IN_GOOGLE_REQUEST = 'FIREBASE_SIGN_IN_GOOGLE_REQUEST';
+export const FIREBASE_SIGN_IN_GOOGLE_REQUEST = "FIREBASE_SIGN_IN_GOOGLE_REQUEST";
 export const firebaseSignInGoogleRequest = () => ({
   type: FIREBASE_SIGN_IN_GOOGLE_REQUEST
 });
 
 // SIGNIN SUCCESS
 // FIREBASE SIGN IN GOOGLE SUCCESS
-export const FIREBASE_SIGN_IN_GOOGLE_SUCCESS = 'FIREBASE_SIGN_IN_GOOGLE_SUCCESS';
+export const FIREBASE_SIGN_IN_GOOGLE_SUCCESS = "FIREBASE_SIGN_IN_GOOGLE_SUCCESS";
 export const firebaseSignInGoogleSuccess = () => ({
   type: FIREBASE_SIGN_IN_GOOGLE_SUCCESS
 });
@@ -36,13 +36,13 @@ export const firebaseSignInGoogle = () => dispatch => {
 };
 
 // FIREBASE SIGN IN FACEBOOK REQUEST
-export const FIREBASE_SIGN_IN_FACEBOOK_REQUEST = 'FIREBASE_SIGN_IN_FACEBOOK_REQUEST';
+export const FIREBASE_SIGN_IN_FACEBOOK_REQUEST = "FIREBASE_SIGN_IN_FACEBOOK_REQUEST";
 export const firebaseSignInFacebookRequest = () => ({
   type: FIREBASE_SIGN_IN_FACEBOOK_REQUEST
 });
 
 // FIREBASE SIGN IN FACEBOOK SUCCESS
-export const FIREBASE_SIGN_IN_FACEBOOK_SUCCESS = 'FIREBASE_SIGN_IN_FACEBOOK_SUCCESS';
+export const FIREBASE_SIGN_IN_FACEBOOK_SUCCESS = "FIREBASE_SIGN_IN_FACEBOOK_SUCCESS";
 export const firebaseSignInFacebookSuccess = () => ({
   type: FIREBASE_SIGN_IN_FACEBOOK_SUCCESS
 });
@@ -54,7 +54,7 @@ export const firebaseSignInFacebook = () => dispatch => {
 };
 
 // FIREBASE AUTH LISTENER FUNCTION
-export const FIREBASE_SIGN_IN_SUCCESS = 'FIREBASE_SIGN_IN_SUCCESS';
+export const FIREBASE_SIGN_IN_SUCCESS = "FIREBASE_SIGN_IN_SUCCESS";
 const firebaseSignIn = user => ({
   type: FIREBASE_SIGN_IN_SUCCESS,
   email: user.email,
@@ -65,14 +65,14 @@ const firebaseSignIn = user => ({
 // FIREBASE ADD SIGNATURES TO AUTH OBJECT
 // FIREBASE FETCH USER SIGNED CAMPAIGNS REQUEST
 export const FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST =
-  'FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST';
+  "FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST";
 export const firebaseFetchUserSignedCampaignsRequest = () => ({
   type: FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST
 });
 
 // FIREBASE FETCH USER SIGNED CAMPAIGNS SUCCESS
 export const FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS =
-  'FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS';
+  "FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS";
 export const firebaseFetchUserSignedCampaignsSuccess = signedCampaignId => ({
   type: FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS,
   signedCampaignId
@@ -96,7 +96,7 @@ export const firebaseFetchUserSignedCampaigns = uid => async dispatch => {
     .catch(error => {
       // TODO IMPROVE ERROR HANDELING
       /* eslint-disable no-console */
-      console.log('error fetching user signed campaign', error);
+      console.log("error fetching user signed campaign", error);
     });
 };
 

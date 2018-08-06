@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { Link } from 'react-router';
-import NavBarSignIn from './NavBarSignIn';
+import React from "react";
+import PropTypes from "prop-types";
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
+import { Link } from "react-router";
+import NavBarSignIn from "./NavBarSignIn";
 
 const MyCampaignNavItem = ({ signedCampaignId }) => (
   <NavItem eventKey={4} href={`/campaign/${signedCampaignId}`}>
@@ -20,12 +20,12 @@ const NavBar = ({
   userSignatures,
   ...props
 }) => {
-  const userHasSignedCampaign = auth.status === 'SIGNED_IN' && signedCampaignId !== null;
+  const userHasSignedCampaign = auth.status === "SIGNED_IN" && signedCampaignId !== null;
   const showMyCampaignNavItem =
     `/campaign/${signedCampaignId}` !== props.location.pathname && userHasSignedCampaign;
   let homeText;
   homeText =
-    props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
+    props.location.pathname === "/" ? (homeText = "RE:IMAGINE DENVER") : (homeText = "HOME");
   return (
     <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>

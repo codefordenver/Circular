@@ -17,9 +17,7 @@ const NewCampaignWelcomeModal = ({ onHide, show }) => {
     <div>
       <Modal keyboard show={show} onHide={onHide}>
         <Modal.Header closeButton>
-          <Modal.Title style={{ color: "black" }}>
-            You've activated your campaign!
-          </Modal.Title>
+          <Modal.Title style={{ color: "black" }}>You've activated your campaign!</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ color: "black" }}>
           <h4 style={{ color: "black" }}>Here are some pro tips</h4>

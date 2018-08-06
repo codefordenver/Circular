@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 import { Button, Col, Row } from "react-bootstrap";
 // REDUX ACTIONS
 import { firebaseUpdateCampaign } from "../../../redux/actions/firebaseCampaigns";
-import {
-  fetchUserSignatures,
-  removeSignatureFromCampaign
-} from "../../../redux/actions/signature";
+import { fetchUserSignatures, removeSignatureFromCampaign } from "../../../redux/actions/signature";
 // COMPONENTS
 import RenderSignCampaign from "./RenderSignCampaign";
 import RenderRemoveSignature from "./RenderRemoveSignature";
@@ -57,9 +54,7 @@ class SignCampaign extends Component {
       keepMeUpdated,
       campaignId
     };
-    await this.props.signCampaignProps.firebaseAddSignatureToCampaign(
-      signatureObject
-    );
+    await this.props.signCampaignProps.firebaseAddSignatureToCampaign(signatureObject);
   };
 
   handleRemoveSignatureFromCamapaign = () => {
@@ -67,10 +62,7 @@ class SignCampaign extends Component {
       activeCampaign: { campaignId },
       auth: { uid }
     } = this.props.signCampaignProps;
-    return this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(
-      campaignId,
-      uid
-    );
+    return this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
   };
 
   toggleShowUpdateCampaignModal = () => {
@@ -96,18 +88,12 @@ class SignCampaign extends Component {
       firebaseSignInFacebook,
       firebaseSignInGoogle
     } = this.props.signCampaignProps;
-    const {
-      keepMeUpdated,
-      showUpdateCampaignModal,
-      signerMessage
-    } = this.state;
+    const { keepMeUpdated, showUpdateCampaignModal, signerMessage } = this.state;
     const activeCampaignIncludesUsersSignature =
       activeCampaign &&
       activeCampaignSignatures !== undefined &&
       activeCampaignSignatures.length > 0 &&
-      activeCampaignSignatures
-        .map(signature => signature.uid)
-        .includes(auth.uid);
+      activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid);
     return (
       <Row className="show-grid">
         <Col md={12} className="sign-campaign-resets">
@@ -129,9 +115,7 @@ class SignCampaign extends Component {
                     onHide={this.toggleShowUpdateCampaignModal}
                     propertyManager={propertyManager}
                     show={showUpdateCampaignModal}
-                    toggleShowUpdateCampaignModal={
-                      this.toggleShowUpdateCampaignModal
-                    }
+                    toggleShowUpdateCampaignModal={this.toggleShowUpdateCampaignModal}
                     // FROM DATA.JS
                     wasteProvider={wasteProvider}
                   />
@@ -151,15 +135,11 @@ class SignCampaign extends Component {
                   activeCampaign &&
                   signedCampaignId === null && (
                     <RenderSignCampaign
-                      handleAddSignatureToCampaign={
-                        this.handleAddSignatureToCampaign
-                      }
+                      handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
                       keepMeUpdated={keepMeUpdated}
                       keepMeUpdatedLabel={"Keep Me Updated On This Campaign"}
                       signerMessage={signerMessage}
-                      toggleKeepMeUpdatedCheckbox={
-                        this.toggleKeepMeUpdatedCheckbox
-                      }
+                      toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
                       updateSignerMessage={this.updateSignerMessage}
                     />
                   )}
@@ -171,9 +151,7 @@ class SignCampaign extends Component {
                   activeCampaignSignatures &&
                   activeCampaignIncludesUsersSignature && (
                     <RenderRemoveSignature
-                      handleRemoveSignatureFromCamapaign={
-                        this.handleRemoveSignatureFromCamapaign
-                      }
+                      handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
                     />
                   ) && (
                     <Button
@@ -193,9 +171,7 @@ class SignCampaign extends Component {
                   signedCampaignId !== null &&
                   signedCampaignId !== "userRemovedSignature" &&
                   !activeCampaignIncludesUsersSignature && (
-                    <RenderUserHasSignedOtherCampaign
-                      signedCampaignId={signedCampaignId}
-                    />
+                    <RenderUserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />
                   )}
               </Col>
             </Row>

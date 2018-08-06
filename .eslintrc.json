@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaVersion": 2017
   },
@@ -7,6 +7,7 @@
     "node": true
   },
   "rules": {
+    "indent": ["error", 2],
     "no-unused-vars": [
       "error",
       {
@@ -15,7 +16,6 @@
         "ignoreRestSiblings": true
       }
     ],
-    "quotes": [2, "single"],
-    "indent": ["error", 2]
+    "quotes": [2, "single"]
   }
 }

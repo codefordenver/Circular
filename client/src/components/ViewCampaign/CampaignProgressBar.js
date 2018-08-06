@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import dateformat from 'dateformat';
-import { Col } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import dateformat from "dateformat";
+import { Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 class CampaignProgessBar extends Component {
   getPhaseCompletionDates = (startDate, numSteps, duration) => {
     const phaseDates = [];
     for (let i = 0; i < numSteps; i += 1) {
       const phaseDate = new Date(startDate);
-      phaseDate.setDate(phaseDate.getDate() + i * duration / (numSteps - 1));
+      phaseDate.setDate(phaseDate.getDate() + (i * duration) / (numSteps - 1));
       phaseDates.push(phaseDate);
     }
 
     return phaseDates;
   };
 
-  getMonthAndDay = date => dateformat(date, 'mmm dS');
+  getMonthAndDay = date => dateformat(date, "mmm dS");
 
   renderProgressPhase = (phaseCompletionDate, phaseTitle) => {
     const phaseComplete = Date.now() > phaseCompletionDate.getTime();
-    const iconClasses = phaseComplete ? 'fa-check-circle-o complete' : 'fa-circle-o';
+    const iconClasses = phaseComplete ? "fa-check-circle-o complete" : "fa-circle-o";
     return (
       <Col md={3} xs={6} className="status" key={phaseTitle}>
         <div className="text-center">

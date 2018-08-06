@@ -21,9 +21,7 @@ const MapWithAMarker = withRouter(
             lng: props.activeCampaign.latLng._long
           }}
           onRightClick={() => props.onMarkerRightClick(props.activeCampaign)}
-          onClick={() =>
-            props.router.push(`/campaign/${props.activeCampaign.campaignId}`)
-          }
+          onClick={() => props.router.push(`/campaign/${props.activeCampaign.campaignId}`)}
           title={props.activeCampaign.address}
         />
       </GoogleMap>

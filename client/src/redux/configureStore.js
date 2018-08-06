@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { browserHistory } from 'react-router';
-import { routerMiddleware } from 'react-router-redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from "redux";
+import { browserHistory } from "react-router";
+import { routerMiddleware } from "react-router-redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 // import apiMiddleware from './middleware/api
-import rootReducer from './reducers/index';
-import { loadState } from './localStorage';
+import rootReducer from "./reducers/index";
+import { loadState } from "./localStorage";
 
 export default function configureStore() {
   const middleware = routerMiddleware(browserHistory);

@@ -51,11 +51,7 @@ const getGeoSearchResults = async geoSearchBoundries => {
 
   // SEARCH LOWERCAMPAIGNS
   const lowerCampaigns = [];
-  const queryLower = campaignsRef.where(
-    "latLng",
-    ">",
-    geoSearchBoundries.lowerGeoPoint
-  );
+  const queryLower = campaignsRef.where("latLng", ">", geoSearchBoundries.lowerGeoPoint);
   await queryLower.get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
       const data = doc.data();
@@ -91,11 +87,7 @@ const getGeoSearchResults = async geoSearchBoundries => {
 
   // SEARCH UPPERCAMPAIGNS
   const upperCampaigns = [];
-  const queryUpper = campaignsRef.where(
-    "latLng",
-    "<",
-    geoSearchBoundries.upperGeoPoint
-  );
+  const queryUpper = campaignsRef.where("latLng", "<", geoSearchBoundries.upperGeoPoint);
   await queryUpper.get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
       upperCampaigns.push(doc.data().campaignId);
@@ -113,18 +105,16 @@ const getGeoSearchResults = async geoSearchBoundries => {
 export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch => {
   dispatch(fetchNearbyCampaignsRequest());
   // SEARCH THE DATABASE FOR AN EXACT MATCH
-  await campaignsRef
-    .where("latLng", "==", searchedGeoPoint)
-    .onSnapshot(querySnapshot => {
-      const exactAddressMatch = [];
-      querySnapshot.forEach(doc => {
-        exactAddressMatch.push(doc.data());
-      });
-      if (exactAddressMatch) {
-        // IF EXACT MATCH, DISPATCH EXACTMATCH
-        dispatch(setExactCampaignMatch(exactAddressMatch));
-      }
+  await campaignsRef.where("latLng", "==", searchedGeoPoint).onSnapshot(querySnapshot => {
+    const exactAddressMatch = [];
+    querySnapshot.forEach(doc => {
+      exactAddressMatch.push(doc.data());
     });
+    if (exactAddressMatch) {
+      // IF EXACT MATCH, DISPATCH EXACTMATCH
+      dispatch(setExactCampaignMatch(exactAddressMatch));
+    }
+  });
 
   // GENERATE GEOSEARCH BOUNDRIES
   const geoSearchBoundries = await getGeoSearchBoundries(searchedGeoPoint, 1);

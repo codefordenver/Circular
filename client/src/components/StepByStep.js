@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Row, Col, PageHeader } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import { Row, Col, PageHeader } from "react-bootstrap";
 
 const Step = props => (
   <Col xs={12} className="step-container">

@@ -5,10 +5,7 @@ import { withRouter } from "react-router";
 // ACTIVE CAMPAIGN FUNCTIONS
 import { firebasePopulateCampaignById } from "../redux/actions/firebaseActiveCampaign";
 // AUTH FUNCTIONS
-import {
-  firebaseSignInGoogle,
-  firebaseSignInFacebook
-} from "../redux/actions/firebaseAuth";
+import { firebaseSignInGoogle, firebaseSignInFacebook } from "../redux/actions/firebaseAuth";
 // SIGNATURE FUNCTIONS
 import {
   firebaseAddSignatureToCampaign,
@@ -34,10 +31,7 @@ class CampaignContainer extends Component {
     }
     this.props.firebasePopulateCampaignById(this.props.params.id);
     // IF REDIRECTED FROM CREATE NEW CAMPAIGN ROUTER LOCATION WILL CONTAIN STATE OF ISNEWCAMPAIGN
-    if (
-      this.props.location.state &&
-      this.props.location.state.isNewCampaign !== undefined
-    ) {
+    if (this.props.location.state && this.props.location.state.isNewCampaign !== undefined) {
       this.onMount(() => {
         this.setState({
           isNewCampaign: this.props.location.state.isNewCampaign
@@ -69,9 +63,7 @@ class CampaignContainer extends Component {
       firebaseWasteProviders
     } = this.props;
     const { campaignId, error, loading, loaded } = activeCampaign;
-    const hrefIsLocalhost = window.location.href
-      .toLowerCase()
-      .includes("localhost");
+    const hrefIsLocalhost = window.location.href.toLowerCase().includes("localhost");
     const signCampaignProps = {
       auth,
       activeCampaign,

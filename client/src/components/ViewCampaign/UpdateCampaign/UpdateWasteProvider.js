@@ -1,17 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  ControlLabel,
-  FormControl,
-  FormGroup,
-  OverlayTrigger,
-  Tooltip
-} from "react-bootstrap";
+import { ControlLabel, FormControl, FormGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const wasteProviderToolTip = (
   <Tooltip id="tooltip">
-    Normally there is a logo on the trash bin where you can find out who your
-    waste service provider is!
+    Normally there is a logo on the trash bin where you can find out who your waste service provider
+    is!
   </Tooltip>
 );
 

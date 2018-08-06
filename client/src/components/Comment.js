@@ -14,9 +14,7 @@ class Comment extends Component {
   }
 
   findTime() {
-    const seconds = Math.floor(
-      (new Date() - new Date(this.props.dateAdded)) / 1000
-    );
+    const seconds = Math.floor((new Date() - new Date(this.props.dateAdded)) / 1000);
     const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
     const ONE_MONTH_IN_SECONDS = 30 * 24 * 60 * 60;
     const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
@@ -93,9 +91,7 @@ class Comment extends Component {
     return (
       <div className="comment">
         <span className="comment-name">{this.props.userName}</span>
-        <span className="comment-time">
-          &nbsp;&bull;&nbsp;{this.findTime()}
-        </span>
+        <span className="comment-time">&nbsp;&bull;&nbsp;{this.findTime()}</span>
         <p className="posted-message">{this.props.message}</p>
         {this.state.replyClicked === false &&
           this.props.authorized && (

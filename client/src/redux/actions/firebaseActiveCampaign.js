@@ -1,23 +1,20 @@
 import { campaignsRef } from "../../firebase";
 
 // FETCH CAMPAIGN BY ID REQUEST
-export const FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST =
-  "FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST";
+export const FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST = "FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST";
 export const firebaseFetchCampaignByIdRequest = () => ({
   type: FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST
 });
 
 // FETCH CAMPAIGN BY ID SUCCESS
-export const FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS =
-  "FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS";
+export const FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS = "FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS";
 export const firebaseFetchCampaignByIdSuccess = matchedCampaign => ({
   type: FIREBASE_FETCH_CAMPAIGN_BY_ID_SUCCESS,
   response: matchedCampaign
 });
 
 // FETCH CAMPAIGN BY ID ERROR
-export const FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR =
-  "FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR";
+export const FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR = "FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR";
 export const firebaseFetchCampaignByIdError = error => ({
   type: FIREBASE_FETCH_CAMPAIGN_BY_ID_ERROR,
   error
@@ -56,9 +53,7 @@ export const firebasePopulateCampaignById = campaignId => async dispatch => {
       dispatch(firebaseFetchCampaignByIdSuccess(err));
     });
   // SET DOCUMENT REFERENCE FOR FOUNDCAMPAIGN SIGNATURES
-  const campaignSignaturesRef = campaignsRef
-    .doc(campaignId)
-    .collection("signatures");
+  const campaignSignaturesRef = campaignsRef.doc(campaignId).collection("signatures");
   // DEFINE SIGNEE DISPLAY NAMES ARRAY
   const activeCampaignSignatures = [];
   // MAKE FIREBASE CALL TO POPULATE SIGNEE DISPLAY NAMES ARRAY

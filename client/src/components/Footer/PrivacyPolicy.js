@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
+import React from "react";
+import { Grid, Row, Col, PageHeader } from "react-bootstrap";
 
 const PrivacyPolicy = () => (
   <Grid fluid>

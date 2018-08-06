@@ -28,16 +28,12 @@ const CampaignPage = ({
         <Row className="show-grid top">
           <Col md={6} xs={12} className="center-block">
             <div className="map-wrapper">
-              {activeCampaign &&
-                address && <MapCard activeCampaign={activeCampaign} />}
+              {activeCampaign && address && <MapCard activeCampaign={activeCampaign} />}
             </div>
           </Col>
           <Col className="center-block" md={6} xs={12}>
             <Row>
-              <NewCampaignWelcomeModal
-                onHide={handleChangeIsNewCampaign}
-                show={isNewCampaign}
-              />
+              <NewCampaignWelcomeModal onHide={handleChangeIsNewCampaign} show={isNewCampaign} />
               <Col className="status-bar" xs={12}>
                 {activeCampaign &&
                   activeCampaign.createdAt && (
@@ -50,9 +46,7 @@ const CampaignPage = ({
                           "Final Signatures",
                           "Request Recycling"
                         ]}
-                        duration={calculateCampaignDuration(
-                          activeCampaign.createdAt
-                        )}
+                        duration={calculateCampaignDuration(activeCampaign.createdAt)}
                       />
                     </Row>
                   )}
@@ -77,11 +71,7 @@ const CampaignPage = ({
                           : window.location.href
                       }
                     >
-                      <Button
-                        bsStyle="remove-default"
-                        className="btn btn-facebook"
-                        block
-                      >
+                      <Button bsStyle="remove-default" className="btn btn-facebook" block>
                         <i className="fa fa-facebook-square " />Facebook
                       </Button>
                     </FacebookShareButton>
@@ -93,11 +83,7 @@ const CampaignPage = ({
                       via="EcoCycle"
                       hashtags={["ZeroWasteDenver", "Recycle"]}
                     >
-                      <Button
-                        bsStyle="remove-default"
-                        className="btn btn-twitter"
-                        block
-                      >
+                      <Button bsStyle="remove-default" className="btn btn-twitter" block>
                         <i className="fa fa-twitter-square" />Tweet
                       </Button>
                     </TwitterShareButton>
@@ -121,9 +107,7 @@ const CampaignPage = ({
                   activeCampaign.createdAt && (
                     <CampaignStatus
                       createdAt={activeCampaign.createdAt}
-                      duration={calculateCampaignDuration(
-                        activeCampaign.createdAt
-                      )}
+                      duration={calculateCampaignDuration(activeCampaign.createdAt)}
                     />
                   )}
               </Col>

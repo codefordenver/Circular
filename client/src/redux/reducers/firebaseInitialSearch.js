@@ -8,7 +8,7 @@ import {
   FETCH_NEARBY_CAMPAIGNS_REQUEST,
   FETCH_NEARBY_CAMPAIGNS_SUCCESS,
   SET_EXACT_CAMPAIGN_MATCH
-} from '../actions/firebaseInitialSearch';
+} from "../actions/firebaseInitialSearch";
 
 const defaultState = {
   loading: false,
@@ -18,7 +18,7 @@ const defaultState = {
   nearbyCampaigns: null
 };
 
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   const { response, type } = action;
   switch (type) {
     case FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS: {

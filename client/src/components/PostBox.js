@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { postComment, fetchComments } from '../redux/actions/comments';
+import { postComment, fetchComments } from "../redux/actions/comments";
 
 class PostBox extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      message: '',
+      message: "",
       selected: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -28,16 +28,16 @@ class PostBox extends Component {
   }
 
   handleBlur() {
-    if (this.state.message === '') {
+    if (this.state.message === "") {
       this.setState({ selected: false });
     }
   }
 
   handleChange(e) {
     const formattedText = e.target.innerText
-      .replace(/ +/g, ' ') // deletes extra spaces
-      .replace(/[\r\n]{3,}/g, '\n\n') // deletes > 2 carriage returns
-      .replace(/^[\r\n]+|\.|[\r\n]+$/g, ''); // deletes leading and trailing carriage returns
+      .replace(/ +/g, " ") // deletes extra spaces
+      .replace(/[\r\n]{3,}/g, "\n\n") // deletes > 2 carriage returns
+      .replace(/^[\r\n]+|\.|[\r\n]+$/g, ""); // deletes leading and trailing carriage returns
     this.setState({ message: formattedText });
   }
 
@@ -63,8 +63,8 @@ class PostBox extends Component {
         if (this.props.isAReply) {
           this.props.handleCloseReply();
         } else {
-          this.textElement.innerText = '';
-          this.setState({ message: '', selected: false });
+          this.textElement.innerText = "";
+          this.setState({ message: "", selected: false });
         }
       } else {
         this.setState({ error: true });
@@ -84,9 +84,9 @@ class PostBox extends Component {
             ref={input => {
               this.textElement = input;
             }}
-            className={'post-box-message'}
+            className={"post-box-message"}
             style={{
-              minHeight: this.state.selected || this.props.isAReply ? '100px' : '20px'
+              minHeight: this.state.selected || this.props.isAReply ? "100px" : "20px"
             }}
             contentEditable="true"
             onInput={this.handleChange}
@@ -131,7 +131,10 @@ PostBox.propTypes = {
   postComment: PropTypes.func.isRequired
 };
 
-export default connect(({ activeCampaign, auth }) => ({ activeCampaign, auth }), {
-  postComment,
-  fetchComments
-})(PostBox);
+export default connect(
+  ({ activeCampaign, auth }) => ({ activeCampaign, auth }),
+  {
+    postComment,
+    fetchComments
+  }
+)(PostBox);

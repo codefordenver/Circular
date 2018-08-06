@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Well } from 'react-bootstrap';
-import { fetchComments, postComment } from '../redux/actions/comments';
-import Comment from './Comment';
-import PostBox from './PostBox';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Well } from "react-bootstrap";
+import { fetchComments, postComment } from "../redux/actions/comments";
+import Comment from "./Comment";
+import PostBox from "./PostBox";
 
 class Discussion extends Component {
   constructor(props) {

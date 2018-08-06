@@ -22,10 +22,7 @@ class FirebaseChooseCampaign extends Component {
     e.stopPropagation();
     e.preventDefault();
     const { name } = e.target;
-    const {
-      searchedAddress,
-      searchedGeoPoint
-    } = this.props.firebaseInitialSearch;
+    const { searchedAddress, searchedGeoPoint } = this.props.firebaseInitialSearch;
     if (name === "EXISTING_CAMPAIGN") {
       this.redirectToExistingCampaign();
     } else if (name === "NEW_CAMPAIGN") {
@@ -36,15 +33,12 @@ class FirebaseChooseCampaign extends Component {
   };
 
   redirectToExistingCampaign = () => {
-    this.props.router.push(
-      `/campaign/${this.props.firebaseInitialSearch.exactMatch.campaignId}`
-    );
+    this.props.router.push(`/campaign/${this.props.firebaseInitialSearch.exactMatch.campaignId}`);
   };
 
   makeNewCampaign = async (searchedAddress, latLng) => {
     await this.props.firebaseCreateNewCampaign(searchedAddress, latLng);
-    const redirectCampaignId = await this.props.firebaseCampaigns
-      .activeCampaign;
+    const redirectCampaignId = await this.props.firebaseCampaigns.activeCampaign;
     // PUSH NEWLY CREATED CAMPAIGN TO ROUTER
     browserHistory.push({
       pathname: `/campaign/${redirectCampaignId}`,
@@ -54,13 +48,7 @@ class FirebaseChooseCampaign extends Component {
 
   render() {
     const {
-      firebaseInitialSearch: {
-        exactMatch,
-        loading,
-        loaded,
-        nearbyCampaigns,
-        selectedAddress
-      }
+      firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, selectedAddress }
     } = this.props;
     return (
       <Grid>
@@ -88,10 +76,7 @@ class FirebaseChooseCampaign extends Component {
                   selectedAddress={selectedAddress}
                 />
               )}
-            {loaded &&
-              !exactMatch && (
-                <RenderNewCampaign handleSelection={this.handleSelection} />
-              )}
+            {loaded && !exactMatch && <RenderNewCampaign handleSelection={this.handleSelection} />}
           </Col>
         </Row>
       </Grid>

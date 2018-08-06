@@ -1,6 +1,6 @@
-import React from 'react';
-import { Col, PageHeader } from 'react-bootstrap';
-import { Link } from 'react-router';
+import React from "react";
+import { Col, PageHeader } from "react-bootstrap";
+import { Link } from "react-router";
 
 const PropManagerLinks = () => (
   <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="home-section-container">

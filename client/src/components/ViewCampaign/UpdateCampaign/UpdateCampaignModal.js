@@ -16,11 +16,7 @@ import UpdateWasteProvider from "./UpdateWasteProvider";
 class UpdateCampaignModal extends Component {
   constructor(props) {
     super(props);
-    const {
-      buildingInformation,
-      propertyManager,
-      wasteProvider
-    } = props.activeCampaign;
+    const { buildingInformation, propertyManager, wasteProvider } = props.activeCampaign;
     // SETS STATE OF THE FORM FROM PROPS.ACTIVECAMPAIGN
     this.state = {
       buildingInformation: { ...buildingInformation },
@@ -102,14 +98,9 @@ class UpdateCampaignModal extends Component {
       <div>
         <Modal keyboard show={show} onHide={onHide}>
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "black" }}>
-              Update details for {address}
-            </Modal.Title>
+            <Modal.Title style={{ color: "black" }}>Update details for {address}</Modal.Title>
           </Modal.Header>
-          <Modal.Body
-            className="update-campaign-modal-body"
-            style={{ color: "black" }}
-          >
+          <Modal.Body className="update-campaign-modal-body" style={{ color: "black" }}>
             <form>
               <Tabs
                 activeKey={this.state.key}
@@ -135,11 +126,7 @@ class UpdateCampaignModal extends Component {
                       );
                     })}
                 </Tab>
-                <Tab
-                  style={{ marginTop: "1em" }}
-                  eventKey={2}
-                  title="Property Manager"
-                >
+                <Tab style={{ marginTop: "1em" }} eventKey={2} title="Property Manager">
                   {this.state.propertyManager &&
                     propertyManager.map(info => {
                       const { id, label, placeHolder, type, name } = info;
@@ -158,45 +145,33 @@ class UpdateCampaignModal extends Component {
                       );
                     })}
                 </Tab>
-                <Tab
-                  style={{ marginTop: "1em" }}
-                  eventKey={3}
-                  title="Waste Provider"
-                >
+                <Tab style={{ marginTop: "1em" }} eventKey={3} title="Waste Provider">
                   {activeCampaign &&
                   activeCampaign.wasteProvider &&
                   activeCampaign.wasteProvider.id ? (
                     <div>
-                      <Panel>
+                        <Panel>
                         <Panel.Heading>
-                          <Panel.Title componentClass="h3">
-                            Current Waste Provider
-                          </Panel.Title>
-                        </Panel.Heading>
+                            <Panel.Title componentClass="h3">Current Waste Provider</Panel.Title>
+                          </Panel.Heading>
                         <Panel.Body>
-                          <h5>{`Name:    ${activeCampaign.wasteProvider.name ||
-                            ""}`}</h5>
-                          <h5>{`Email:   ${activeCampaign.wasteProvider.email ||
-                            ""}`}</h5>
-                          <h5>{`Phone:   ${activeCampaign.wasteProvider.phone ||
-                            ""}`}</h5>
-                          <h5>{`Address: ${activeCampaign.wasteProvider
-                            .address || ""}`}</h5>
-                        </Panel.Body>
+                            <h5>{`Name:    ${activeCampaign.wasteProvider.name || ""}`}</h5>
+                            <h5>{`Email:   ${activeCampaign.wasteProvider.email || ""}`}</h5>
+                            <h5>{`Phone:   ${activeCampaign.wasteProvider.phone || ""}`}</h5>
+                            <h5>{`Address: ${activeCampaign.wasteProvider.address || ""}`}</h5>
+                          </Panel.Body>
                       </Panel>
-                      <UpdateWasteProvider
-                        handleWasteProviderChange={
-                          this.handleWasteProviderChange
-                        }
+                        <UpdateWasteProvider
+                        handleWasteProviderChange={this.handleWasteProviderChange}
                         wasteProviders={firebaseWasteProviders.wasteProviders}
                       />
-                    </div>
-                  ) : (
-                    <UpdateWasteProvider
-                      handleWasteProviderChange={this.handleWasteProviderChange}
-                      wasteProviders={firebaseWasteProviders.wasteProviders}
-                    />
-                  )}
+                      </div>
+                    ) : (
+                      <UpdateWasteProvider
+                        handleWasteProviderChange={this.handleWasteProviderChange}
+                        wasteProviders={firebaseWasteProviders.wasteProviders}
+                      />
+                    )}
                 </Tab>
               </Tabs>
             </form>
