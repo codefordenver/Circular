@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Button } from "react-bootstrap";
-import GoogleButton from "react-google-button";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
+import GoogleButton from 'react-google-button';
 
 const RenderSignIn = ({ firebaseSignInFacebook, firebaseSignInGoogle }) => (
   <div>

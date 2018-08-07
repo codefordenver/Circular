@@ -2,24 +2,24 @@
 // WASTE PROVIDER ACTIONS
 // *******
 
-import { wasteProvidersRef } from "../../firebase";
-import wasteProviders from "../../utils/wasteProviders";
+import { wasteProvidersRef } from '../../firebase';
+import wasteProviders from '../../utils/wasteProviders';
 
 // FETCH WASTE PROVIDERS REQUEST
-export const FETCH_WASTE_PROVIDERS_REQUEST = "FETCH_WASTE_PROVIDERS_REQUEST";
+export const FETCH_WASTE_PROVIDERS_REQUEST = 'FETCH_WASTE_PROVIDERS_REQUEST';
 export const firebaseFetchWasteProvidersRequest = () => ({
   type: FETCH_WASTE_PROVIDERS_REQUEST
 });
 
 // POPULATE WASTE PROVIDERS
-export const FETCH_WASTE_PROVIDERS_SUCCESS = "FETCH_WASTE_PROVIDERS_SUCCESS";
+export const FETCH_WASTE_PROVIDERS_SUCCESS = 'FETCH_WASTE_PROVIDERS_SUCCESS';
 export const firebasePopulateWasteProviders = allWasteProviders => ({
   type: FETCH_WASTE_PROVIDERS_SUCCESS,
   response: allWasteProviders
 });
 
 // FETCH WASTE PROVIDERS ERROR
-export const FETCH_WASTE_PROVIDERS_ERROR = "FETCH_WASTE_PROVIDERS_ERROR";
+export const FETCH_WASTE_PROVIDERS_ERROR = 'FETCH_WASTE_PROVIDERS_ERROR';
 export const firebaseErrorFetchWasteProviders = error => ({
   type: FETCH_WASTE_PROVIDERS_ERROR,
   error
@@ -29,7 +29,7 @@ export const firebaseErrorFetchWasteProviders = error => ({
 export const firebaseFetchWasteProviders = () => dispatch => {
   dispatch(firebaseFetchWasteProvidersRequest());
   wasteProvidersRef
-    .orderBy("name", "asc")
+    .orderBy('name', 'asc')
     .get()
     .then(snapshot => {
       const allWasteProviders = [];

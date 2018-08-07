@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { ControlLabel, FormControl, FormGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ControlLabel, FormControl, FormGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const wasteProviderToolTip = (
   <Tooltip id="tooltip">
@@ -13,9 +13,9 @@ const UpdateWasteProvider = ({ handleWasteProviderChange, wasteProviders }) => (
   <FormGroup name="wasteProviders" controlId="wasteProviders">
     <OverlayTrigger placement="right" overlay={wasteProviderToolTip}>
       <ControlLabel>
-        Update Waste Provider{" "}
+        Update Waste Provider{' '}
         <span role="img" aria-label="info to find waste provider">
-          {" "}
+          {' '}
           ℹ️
         </span>
       </ControlLabel>
@@ -38,10 +38,10 @@ const UpdateWasteProvider = ({ handleWasteProviderChange, wasteProviders }) => (
 UpdateWasteProvider.defaultProps = {
   wasteProviders: [
     {
-      email: "",
-      id: "",
-      name: "",
-      phone: ""
+      email: '',
+      id: '',
+      name: '',
+      phone: ''
     }
   ]
 };

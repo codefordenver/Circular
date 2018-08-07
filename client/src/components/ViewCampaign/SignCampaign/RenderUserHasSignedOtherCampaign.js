@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Alert, Button } from "react-bootstrap";
-import { Link } from "react-router";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Alert, Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 const RenderUserHasSignedOtherCampaign = ({ signedCampaignId }) => (
   <div className="user-has-signed-other-campaign-alert">

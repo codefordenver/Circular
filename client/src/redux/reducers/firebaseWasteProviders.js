@@ -2,14 +2,14 @@ import {
   FETCH_WASTE_PROVIDERS_REQUEST,
   FETCH_WASTE_PROVIDERS_SUCCESS,
   FETCH_WASTE_PROVIDERS_ERROR
-} from "../actions/firebaseWasteProviders";
+} from '../actions/firebaseWasteProviders';
 
 const DEFAUT_STATE = {
   loading: false,
   loaded: false
 };
 
-export default function(state = DEFAUT_STATE, action) {
+export default function (state = DEFAUT_STATE, action) {
   const { response, error, type } = action;
   switch (type) {
     case FETCH_WASTE_PROVIDERS_REQUEST:

@@ -1,20 +1,20 @@
-import React from "react";
-import { IndexRoute, Route, IndexRedirect } from "react-router";
-import App from "./containers/App";
-import Home from "./containers/Home";
-import FirebaseChooseCampaign from "./containers/FirebaseChooseCampaign";
-import NewCampaign from "./containers/NewCampaign";
-import CreateCampaignStep1 from "./components/CreateCampaignStep1";
-import CreateCampaignStep2 from "./components/CreateCampaignStep2";
-import CreateCampaignStep3 from "./components/CreateCampaignStep3";
-import CampaignContainer from "./containers/CampaignContainer";
-import RequestRecyclingTips from "./components/Informational/RequestRecyclingTips";
-import DenverInfo from "./components/Informational/DenverInfo";
-import ManagerResources from "./components/Informational/ManagerResources";
-import DenverLearnMore from "./containers/DenverLearnMore";
-import Collaboration from "./components/Informational/Collaboration";
-import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
-import NotFound from "./components/UtilComponents/NotFound";
+import React from 'react';
+import { IndexRoute, Route, IndexRedirect } from 'react-router';
+import App from './containers/App';
+import Home from './containers/Home';
+import FirebaseChooseCampaign from './containers/FirebaseChooseCampaign';
+import NewCampaign from './containers/NewCampaign';
+import CreateCampaignStep1 from './components/CreateCampaignStep1';
+import CreateCampaignStep2 from './components/CreateCampaignStep2';
+import CreateCampaignStep3 from './components/CreateCampaignStep3';
+import CampaignContainer from './containers/CampaignContainer';
+import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
+import DenverInfo from './components/Informational/DenverInfo';
+import ManagerResources from './components/Informational/ManagerResources';
+import DenverLearnMore from './containers/DenverLearnMore';
+import Collaboration from './components/Informational/Collaboration';
+import PrivacyPolicy from './components/Footer/PrivacyPolicy';
+import NotFound from './components/UtilComponents/NotFound';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
@@ -25,7 +25,7 @@ export default (
     />
     <Route
       path="/campaign"
-      onEnter={(nextState, replace) => !nextState.params.id && replace("/new-campaign")}
+      onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
     />
     <Route path="/new-campaign" getComponent={(location, callback) => callback(null, NewCampaign)}>
       <IndexRedirect to="address" />

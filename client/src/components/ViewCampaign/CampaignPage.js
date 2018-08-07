@@ -1,18 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Grid, Row, Col, Button } from "react-bootstrap";
-import { FacebookShareButton, TwitterShareButton } from "react-share";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 // COMPONENTS
-import CampaignProgressBar from "./CampaignProgressBar";
-import CampaignStatus from "./CampaignStatus";
-import CollapsePanel from "../UtilComponents/CollapsePanel";
-import Discussion from "../Discussion";
-import NewCampaignWelcomeModal from "./NewCampaignWelcomeModal";
-import MapCard from "../MapCard";
-import SignCampaign from "./SignCampaign/SignCampaign";
-import SignatureList from "./SignCampaign/SignatureList";
+import CampaignProgressBar from './CampaignProgressBar';
+import CampaignStatus from './CampaignStatus';
+import CollapsePanel from '../UtilComponents/CollapsePanel';
+import Discussion from '../Discussion';
+import NewCampaignWelcomeModal from './NewCampaignWelcomeModal';
+import MapCard from '../MapCard';
+import SignCampaign from './SignCampaign/SignCampaign';
+import SignatureList from './SignCampaign/SignatureList';
 // FUNCTIONS
-import { calculateCampaignDuration } from "../../utils/calculateCampaignDuration";
+import { calculateCampaignDuration } from '../../utils/calculateCampaignDuration';
 
 const CampaignPage = ({
   activeCampaign,
@@ -41,10 +41,10 @@ const CampaignPage = ({
                       <CampaignProgressBar
                         createdAt={activeCampaign.createdAt}
                         phases={[
-                          "Campaign Created",
-                          "Print Flyers",
-                          "Final Signatures",
-                          "Request Recycling"
+                          'Campaign Created',
+                          'Print Flyers',
+                          'Final Signatures',
+                          'Request Recycling'
                         ]}
                         duration={calculateCampaignDuration(activeCampaign.createdAt)}
                       />
@@ -81,7 +81,7 @@ const CampaignPage = ({
                       url={window.location.href}
                       title="Support my recycling request!"
                       via="EcoCycle"
-                      hashtags={["ZeroWasteDenver", "Recycle"]}
+                      hashtags={['ZeroWasteDenver', 'Recycle']}
                     >
                       <Button bsStyle="remove-default" className="btn btn-twitter" block>
                         <i className="fa fa-twitter-square" />Tweet

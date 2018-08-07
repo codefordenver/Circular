@@ -1,21 +1,21 @@
-import { push } from "react-router-redux";
-import { campaignsRef, GeoPoint } from "../../firebase";
+import { push } from 'react-router-redux';
+import { campaignsRef, GeoPoint } from '../../firebase';
 
 // FETCH NEARBY CAMPAIGNS REQUEST
-export const FETCH_NEARBY_CAMPAIGNS_REQUEST = "FETCH_NEARBY_CAMPAIGNS_REQUEST";
+export const FETCH_NEARBY_CAMPAIGNS_REQUEST = 'FETCH_NEARBY_CAMPAIGNS_REQUEST';
 export const fetchNearbyCampaignsRequest = () => ({
   type: FETCH_NEARBY_CAMPAIGNS_REQUEST
 });
 
 // FETCH NEARBY CAMPAIGNS SUCCESS
-export const FETCH_NEARBY_CAMPAIGNS_SUCCESS = "FETCH_NEARBY_CAMPAIGNS_SUCCESS";
+export const FETCH_NEARBY_CAMPAIGNS_SUCCESS = 'FETCH_NEARBY_CAMPAIGNS_SUCCESS';
 export const fetchNearbyCampaignsSuccess = nearbyCampaigns => ({
   type: FETCH_NEARBY_CAMPAIGNS_SUCCESS,
   response: nearbyCampaigns
 });
 
 // SET EXACT MATCH
-export const SET_EXACT_CAMPAIGN_MATCH = "SET_EXACT_CAMPAIGN_MATCH";
+export const SET_EXACT_CAMPAIGN_MATCH = 'SET_EXACT_CAMPAIGN_MATCH';
 export const setExactCampaignMatch = exactAddressMatch => ({
   type: SET_EXACT_CAMPAIGN_MATCH,
   response: exactAddressMatch[0]
@@ -51,7 +51,7 @@ const getGeoSearchResults = async geoSearchBoundries => {
 
   // SEARCH LOWERCAMPAIGNS
   const lowerCampaigns = [];
-  const queryLower = campaignsRef.where("latLng", ">", geoSearchBoundries.lowerGeoPoint);
+  const queryLower = campaignsRef.where('latLng', '>', geoSearchBoundries.lowerGeoPoint);
   await queryLower.get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
       const data = doc.data();
@@ -87,7 +87,7 @@ const getGeoSearchResults = async geoSearchBoundries => {
 
   // SEARCH UPPERCAMPAIGNS
   const upperCampaigns = [];
-  const queryUpper = campaignsRef.where("latLng", "<", geoSearchBoundries.upperGeoPoint);
+  const queryUpper = campaignsRef.where('latLng', '<', geoSearchBoundries.upperGeoPoint);
   await queryUpper.get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
       upperCampaigns.push(doc.data().campaignId);
@@ -105,7 +105,7 @@ const getGeoSearchResults = async geoSearchBoundries => {
 export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch => {
   dispatch(fetchNearbyCampaignsRequest());
   // SEARCH THE DATABASE FOR AN EXACT MATCH
-  await campaignsRef.where("latLng", "==", searchedGeoPoint).onSnapshot(querySnapshot => {
+  await campaignsRef.where('latLng', '==', searchedGeoPoint).onSnapshot(querySnapshot => {
     const exactAddressMatch = [];
     querySnapshot.forEach(doc => {
       exactAddressMatch.push(doc.data());
@@ -123,7 +123,7 @@ export const firebaseFetchNearbyCampaigns = searchedGeoPoint => async dispatch =
 };
 
 // STASH SEARCHED ADDRESS
-export const FIREBASE_STASH_ADDRESS = "FIREBASE_STASH_ADDRESS";
+export const FIREBASE_STASH_ADDRESS = 'FIREBASE_STASH_ADDRESS';
 export const firebaseStashAddress = (searchedAddress, searchedGeoPoint) => ({
   type: FIREBASE_STASH_ADDRESS,
   response: { searchedAddress, searchedGeoPoint }
@@ -136,14 +136,14 @@ export const firebaseSearchAddressFlow = (
   userHasSignedCampaign
 ) => async dispatch => {
   await dispatch(firebaseStashAddress(searchedAddress, searchedGeoPoint));
-  dispatch(push({ pathname: "/choose-campaign", state: { searchedAddress } }));
+  dispatch(push({ pathname: '/choose-campaign', state: { searchedAddress } }));
   dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
   // TODO need to handle latLng error
   // if (error) console.log('Latlng error ', error);
 };
 
 // SELECT ADDRESS
-export const FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS = "FIREBASE_SELECT_ADDRESS";
+export const FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS = 'FIREBASE_SELECT_ADDRESS';
 export function selectAddress(selectedAddress) {
   return {
     type: FIREBASE_SELECT_INITIAL_SEARCH_ADDRESS,
@@ -152,7 +152,7 @@ export function selectAddress(selectedAddress) {
 }
 
 // CLEAR SERACH RESULTS
-export const CLEAR_INITIAL_SEARCH_RESULTS = "CLEAR_INITIAL_SEARCH_RESULTS ";
+export const CLEAR_INITIAL_SEARCH_RESULTS = 'CLEAR_INITIAL_SEARCH_RESULTS ';
 export function clearInitialSearchResults() {
   return {
     type: CLEAR_INITIAL_SEARCH_RESULTS

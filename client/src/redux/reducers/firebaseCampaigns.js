@@ -12,7 +12,7 @@ import {
   FIREBASE_UPDATE_CAMPAIGN_REQUEST,
   FIREBASE_UPDATE_CAMPAIGN_SUCCESS,
   FIREBASE_UPDATE_CAMPAIGN_ERROR
-} from "../actions/firebaseCampaigns.js";
+} from '../actions/firebaseCampaigns.js';
 
 const inititalState = {
   loading: false,

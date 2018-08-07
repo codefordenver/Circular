@@ -1,6 +1,6 @@
-import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Row, Col, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection }) => (
   <Row>
@@ -13,17 +13,17 @@ const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection }) =
         onClick={handleSelection}
         block
       >
-        {faArrowDirection === "left" && <i className={`fa fa-arrow-${faArrowDirection}`} />}
+        {faArrowDirection === 'left' && <i className={`fa fa-arrow-${faArrowDirection}`} />}
         {buttonText}
-        {"   "}
-        {faArrowDirection === "right" && <i className={`fa fa-arrow-${faArrowDirection}`} />}
+        {'   '}
+        {faArrowDirection === 'right' && <i className={`fa fa-arrow-${faArrowDirection}`} />}
       </Button>
     </Col>
   </Row>
 );
 
 SubmitButton.defaultProps = {
-  faArrowDirection: "right"
+  faArrowDirection: 'right'
 };
 
 SubmitButton.propTypes = {

@@ -1,12 +1,12 @@
-import { connect } from "react-redux";
-import Application from "../components/Application";
+import { connect } from 'react-redux';
+import Application from '../components/Application';
 import {
   firebaseSignInGoogle,
   firebaseSignInFacebook,
   firebaseSignOut
-} from "../redux/actions/firebaseAuth";
-import { closeMap } from "../redux/actions/googleMap";
-import { fetchUserSignatures } from "../redux/actions/signature";
+} from '../redux/actions/firebaseAuth';
+import { closeMap } from '../redux/actions/googleMap';
+import { fetchUserSignatures } from '../redux/actions/signature';
 
 const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
   auth,

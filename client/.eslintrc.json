@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "react-app", "prettier"],
+  "extends": ["airbnb", "react-app"],
   "plugins": ["react"],
   "parser": "babel-eslint",
   "rules": {
@@ -9,7 +9,7 @@
     "consistent-return": "warn",
     "import/extensions": "off",
     "import/no-unresolved": "warn",
-    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "indent": ["off"],
     "jsx-a11y/anchor-is-valid": ["warn", { "components": [] }],
     "jsx-a11y/label-has-for": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",

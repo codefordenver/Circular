@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { withRouter, browserHistory } from "react-router";
-import { Grid, Row, Col } from "react-bootstrap";
-import { firebaseCreateNewCampaign } from "../redux/actions/firebaseCampaigns";
-import RenderLoading from "../components/ChooseCampaign/RenderLoading";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter, browserHistory } from 'react-router';
+import { Grid, Row, Col } from 'react-bootstrap';
+import { firebaseCreateNewCampaign } from '../redux/actions/firebaseCampaigns';
+import RenderLoading from '../components/ChooseCampaign/RenderLoading';
 // import RenderError from '../components/ChooseCampaign/RenderError';
-import RenderCampaignAlreadyExists from "../components/ChooseCampaign/RenderCampaignAlreadyExists";
-import RenderNewCampaign from "../components/ChooseCampaign/RenderNewCampaign";
-import RenderNearbyCampaigns from "../components/ChooseCampaign/RenderNearbyCampaigns";
+import RenderCampaignAlreadyExists from '../components/ChooseCampaign/RenderCampaignAlreadyExists';
+import RenderNewCampaign from '../components/ChooseCampaign/RenderNewCampaign';
+import RenderNearbyCampaigns from '../components/ChooseCampaign/RenderNearbyCampaigns';
 
 class FirebaseChooseCampaign extends Component {
   constructor(props) {
@@ -23,11 +23,11 @@ class FirebaseChooseCampaign extends Component {
     e.preventDefault();
     const { name } = e.target;
     const { searchedAddress, searchedGeoPoint } = this.props.firebaseInitialSearch;
-    if (name === "EXISTING_CAMPAIGN") {
+    if (name === 'EXISTING_CAMPAIGN') {
       this.redirectToExistingCampaign();
-    } else if (name === "NEW_CAMPAIGN") {
+    } else if (name === 'NEW_CAMPAIGN') {
       this.makeNewCampaign(searchedAddress, searchedGeoPoint);
-    } else if (name === "GO BACK") {
+    } else if (name === 'GO BACK') {
       this.props.router.goBack();
     }
   };

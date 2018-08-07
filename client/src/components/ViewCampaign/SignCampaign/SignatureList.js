@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const SignatureList = ({ activeCampaignSignatures }) => (
   <div>
     {activeCampaignSignatures.length > 0 ? (
       <h2>
         ({activeCampaignSignatures.length}) Signature{activeCampaignSignatures.length > 1
-          ? "s"
-          : " "}
+          ? 's'
+          : ' '}
         on the list!
       </h2>
     ) : (
