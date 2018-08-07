@@ -66,7 +66,7 @@ describe('The landing page', () => {
   describe('Main Search Block', () => {
     // SEARCH ADDRESS BAR
     describe('When Searching an Address', () => {
-      it('Should fill out address and click search', () => {
+      it('Should fill out search box and click search and visit choose campaign page', () => {
         cy
           .get('.search_input')
           .type('Denver')

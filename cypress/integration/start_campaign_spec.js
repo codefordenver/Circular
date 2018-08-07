@@ -6,15 +6,17 @@ describe('Starting a new campaign', () => {
     cy.contains('YOUR BUILDING?');
   });
 
-  describe('when searching an address', () => {
-    it('navigates to the choose campaign page', () => {
-      cy.visit('http://localhost:3000');
+  describe('When Searching an Address', () => {
+    it('Should fill out search box and click search and visit choose campaign page', () => {
       cy
         .get('.search_input')
         .type('Denver')
-        .should('have.value', 'Denver');
-      cy.get('.search_button').click();
-      cy.url().should('eq', 'http://localhost:3000/choose-campaign');
+        .should('have.value', 'Denver')
+        .then(() => {
+          cy.get('.search_button').click(() => {
+            cy.visit('/choose-campaign');
+          });
+        });
     });
   });
 });
