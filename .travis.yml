@@ -4,14 +4,14 @@ node_js:
 
 cache:
   directories:
-    - node_modules
+    - ~/.cache
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-- yarn
+- yarn install --frozen-lockfile
 
 before_script:
   - NODE_ENV=test yarn run client-build
