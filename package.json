@@ -38,13 +38,7 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
-    "express": "^4.16.2",
-    "mongoose": "^4.12.3",
-    "mongoose-geojson-schema": "^2.1.2",
     "nodemon": "^1.12.1",
-    "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
-    "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
     "react-bootstrap": "^0.32.1",
     "serve": "^6.4.8"
@@ -64,7 +58,6 @@
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
-    "mongo-in-memory": "0.0.5",
     "prettier": "^1.10.0",
     "prettier-eslint": "^8.2.2",
     "prettier-eslint-cli": "^4.4.0"

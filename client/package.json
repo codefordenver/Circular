@@ -7,7 +7,6 @@
     "yarn": ">=1.2"
   },
   "dependencies": {
-    "axios": "^0.17.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "css-loader": "^0.28.4",
