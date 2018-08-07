@@ -72,7 +72,7 @@ describe('The landing page', () => {
           .type('Denver')
           .should('have.value', 'Denver');
         cy.get('.search_button').click();
-        cy.url().should('include', '/choose-campaign');
+        cy.url().should('eq', 'http://localhost:3000/choose-campaign');
       });
     });
     // Map modal
