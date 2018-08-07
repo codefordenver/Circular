@@ -23,6 +23,8 @@ src/**/*.css
 .env.development.local
 .env.test.local
 .env.production.local
+.env.staging
+.env.development
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
