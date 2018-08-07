@@ -12,10 +12,14 @@ const HeroCTA = ({ openMap }) => (
         <div className="opacity-div">
           <h1>NEED RECYCLING?</h1>
           <h2 className="font-italic">Recruit, Request, Recycle</h2>
-          <h3>
-            We have a mission to change Denver's low recycling rate by making it easy for you and
-            your neighbors to petition your landlord for recyling for your building.
-          </h3>
+          <Row>
+            <Col xs={10} xsOffset={1}>
+              <h3>
+                We have a mission to change Denver's low recycling rate by making it easy for you
+                and your neighbors to petition your landlord for recyling for your building.
+              </h3>
+            </Col>
+          </Row>
         </div>
       </Col>
     </Row>
@@ -25,7 +29,7 @@ const HeroCTA = ({ openMap }) => (
           <AutoSuggestInput />
           <div className="text-center">
             <Button className="map-btn" bsStyle="as-link" onClick={openMap}>
-              Explore the map
+              Explore Nearby Campaigns
             </Button>
           </div>
         </form>
