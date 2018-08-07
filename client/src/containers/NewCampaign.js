@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */ /* - TODO: Fix and remove this line */
-import React from "react";
+import React from 'react';
 // import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import { Link } from "react-router";
-import { Grid, Row, Col } from "react-bootstrap";
-import cx from "classnames";
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { Grid, Row, Col } from 'react-bootstrap';
+import cx from 'classnames';
 
 function NewCampaign(props) {
   const { childRoutes } = props.route;
@@ -20,8 +20,8 @@ function NewCampaign(props) {
                 key={childRoute.path}
                 to={`/new-campaign/${childRoute.path}`}
                 className={cx(
-                  "breadcrumb",
-                  pathname === `/new-campaign/${childRoute.path}` && "active_route"
+                  'breadcrumb',
+                  pathname === `/new-campaign/${childRoute.path}` && 'active_route'
                 )}
               />
             ))}

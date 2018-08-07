@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types, no-shadow */ /* - TODO: Fix and remove this line */
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import {
   Row,
   Col,
@@ -10,9 +10,9 @@ import {
   FormControl,
   ControlLabel,
   Button
-} from "react-bootstrap";
+} from 'react-bootstrap';
 // import PropTypes from 'prop-types';
-import { updateNewCampaign } from "../redux/actions/newCampaign";
+import { updateNewCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep1 = props => {
   const {
@@ -30,7 +30,7 @@ const CreateCampaignStep1 = props => {
       lat: searchedAddress.latLng.response.lat,
       lng: searchedAddress.latLng.response.lng
     });
-    router.push("/new-campaign/optional-info");
+    router.push('/new-campaign/optional-info');
   };
   return (
     <Row>
@@ -52,7 +52,7 @@ const CreateCampaignStep1 = props => {
           <div className="text-center">
             <p>
               {
-                "There was an issue with the address you provided. It may be associated with a preexisting campaign."
+                'There was an issue with the address you provided. It may be associated with a preexisting campaign.'
               }
             </p>
             <br />
@@ -61,7 +61,7 @@ const CreateCampaignStep1 = props => {
         {!formattedAddress && (
           <div className="text-center">
             <p>
-              {"Add an address to start. "}
+              {'Add an address to start. '}
               <Link className="about-link" to="/">
                 Click here
               </Link>

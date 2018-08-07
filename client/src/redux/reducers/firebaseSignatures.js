@@ -10,7 +10,7 @@ import {
   FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_REQUEST,
   FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_SUCCESS,
   FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_ERROR
-} from "../actions/firebaseSignatures";
+} from '../actions/firebaseSignatures';
 
 const inititalState = {
   loading: false,

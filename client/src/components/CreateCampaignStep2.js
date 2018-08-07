@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types, no-shadow */ /* - TODO: Fix and remove this line */
-import React from "react";
-import { connect } from "react-redux";
-import { withRouter, Link } from "react-router";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router';
+import PropTypes from 'prop-types';
 import {
   Col,
   PageHeader,
@@ -11,12 +11,12 @@ import {
   ControlLabel,
   FormControl,
   Button
-} from "react-bootstrap";
-import stateNames from "../components/CreateCampaignSteps/stateNames";
-import { updateNewCampaign } from "../redux/actions/newCampaign";
-import { firebaseFetchWasteProviders } from "../redux/actions/firebaseWasteProviders";
+} from 'react-bootstrap';
+import stateNames from '../components/CreateCampaignSteps/stateNames';
+import { updateNewCampaign } from '../redux/actions/newCampaign';
+import { firebaseFetchWasteProviders } from '../redux/actions/firebaseWasteProviders';
 
-const WASTE_PROVIDER_NOT_SET_ID = "WASTE_PROVIDER_NOT_SET_ID";
+const WASTE_PROVIDER_NOT_SET_ID = 'WASTE_PROVIDER_NOT_SET_ID';
 
 class CreateCampaignStep2 extends React.Component {
   constructor(props) {
@@ -24,9 +24,9 @@ class CreateCampaignStep2 extends React.Component {
 
     this.defaultProvider = {
       id: WASTE_PROVIDER_NOT_SET_ID,
-      name: "Select your provider(Optional)",
-      phone: "",
-      email: ""
+      name: 'Select your provider(Optional)',
+      phone: '',
+      email: ''
     };
     this.state = {
       activeProvider: this.defaultProvider
@@ -63,7 +63,7 @@ class CreateCampaignStep2 extends React.Component {
     }
     await this.props.updateNewCampaign(updateCampainInfo);
 
-    this.props.router.push("/new-campaign/activate");
+    this.props.router.push('/new-campaign/activate');
   };
 
   handleWasteMgmtChange = async e => {

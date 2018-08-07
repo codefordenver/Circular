@@ -1,24 +1,24 @@
 /* eslint-disable react/prop-types, no-shadow, no-console */ /* - TODO: Fix and remove this line */
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router";
-import { Button, PageHeader } from "react-bootstrap";
-import { createCampaign } from "../redux/actions/newCampaign";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { Button, PageHeader } from 'react-bootstrap';
+import { createCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep3 = props => {
   const { createCampaign, newCampaign, router } = props;
 
   const makeNewCampaign = async e => {
     e.preventDefault();
-    console.log("newCampaign:", newCampaign);
+    console.log('newCampaign:', newCampaign);
     const { response } = await createCampaign(newCampaign);
     router.push(`/campaign/${response.data._id}`);
   };
 
   return (
     <div>
-      <PageHeader>{"Last step!"}</PageHeader>
-      <h2 className="text-center">{"Sign your own petition to activate your new campaign!"}</h2>
+      <PageHeader>{'Last step!'}</PageHeader>
+      <h2 className="text-center">{'Sign your own petition to activate your new campaign!'}</h2>
       <br />
       <Button className="next-button fr" onClick={makeNewCampaign}>
         Activate your Campaign

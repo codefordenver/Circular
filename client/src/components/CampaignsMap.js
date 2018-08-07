@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router";
-import ReactModal from "react-modal";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import withScriptjs from "react-google-maps/lib/async/withScriptjs";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import ReactModal from 'react-modal';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 // TODO import only what lodash files we need
-import * as noop from "lodash.noop";
+import * as noop from 'lodash.noop';
 // import * as _ from 'lodash';
-import Loader from "../components/UtilComponents/FullScreenLoader";
+import Loader from '../components/UtilComponents/FullScreenLoader';
 
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // and name it GettingStartedGoogleMap
@@ -48,20 +48,20 @@ const CampaignsMap = props => (
     <GettingStartedGoogleMap
       googleMapURL={mapUrl}
       loadingElement={
-        <div style={{ height: "100%" }}>
+        <div style={{ height: '100%' }}>
           <Loader
             style={{
-              display: "block",
-              width: "80px",
-              height: "80px",
-              margin: "150px auto",
-              animation: "fa-spin 2s infinite linear"
+              display: 'block',
+              width: '80px',
+              height: '80px',
+              margin: '150px auto',
+              animation: 'fa-spin 2s infinite linear'
             }}
           />
         </div>
       }
-      containerElement={<div style={{ height: "100%" }} />}
-      mapElement={<div style={{ height: "100%" }} />}
+      containerElement={<div style={{ height: '100%' }} />}
+      mapElement={<div style={{ height: '100%' }} />}
       onMapLoad={noop}
       onMapClick={noop}
       markers={props.markers}

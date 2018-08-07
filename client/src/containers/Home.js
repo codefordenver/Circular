@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Grid } from "react-bootstrap";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import HeroCTA from "../components/HeroCTA";
-import CampaignsMap from "../components/CampaignsMap";
-import StepByStep from "../components/StepByStep";
-import InfoAndLinks from "../components/Informational/InfoAndLinks";
-import Footer from "../components/Footer/Footer";
+import React, { Component } from 'react';
+import { Grid } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import HeroCTA from '../components/HeroCTA';
+import CampaignsMap from '../components/CampaignsMap';
+import StepByStep from '../components/StepByStep';
+import InfoAndLinks from '../components/Informational/InfoAndLinks';
+import Footer from '../components/Footer/Footer';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
-} from "../redux/actions/firebaseInitialSearch";
-import { openMap, closeMap } from "../redux/actions/googleMap";
+} from '../redux/actions/firebaseInitialSearch';
+import { openMap, closeMap } from '../redux/actions/googleMap';
 
 class Home extends Component {
   constructor(props) {

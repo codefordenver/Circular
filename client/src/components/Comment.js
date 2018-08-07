@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import PostBox from "./PostBox";
+import PostBox from './PostBox';
 
 class Comment extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class Comment extends Component {
       }
       return `${interval} minutes`;
     }
-    return "Less than a minute ago";
+    return 'Less than a minute ago';
   }
 
   handleCloseReply() {

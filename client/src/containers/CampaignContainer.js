@@ -1,44 +1,45 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 // ACTIVE CAMPAIGN FUNCTIONS
-import { firebasePopulateCampaignById } from "../redux/actions/firebaseActiveCampaign";
+import { firebasePopulateCampaignById } from '../redux/actions/firebaseActiveCampaign';
 // AUTH FUNCTIONS
-import { firebaseSignInGoogle, firebaseSignInFacebook } from "../redux/actions/firebaseAuth";
+import { firebaseSignInGoogle, firebaseSignInFacebook } from '../redux/actions/firebaseAuth';
 // SIGNATURE FUNCTIONS
 import {
   firebaseAddSignatureToCampaign,
   firebaseRemoveSignatureFromCampaign
-} from "../redux/actions/firebaseSignatures";
+} from '../redux/actions/firebaseSignatures';
 // CAMPAIGN UPATES
-import { firebaseUpdateCampaign } from "../redux/actions/firebaseCampaigns";
+import { firebaseUpdateCampaign } from '../redux/actions/firebaseCampaigns';
 // WASTE PROVIDERS
-import { firebaseFetchWasteProviders } from "../redux/actions/firebaseWasteProviders";
+import { firebaseFetchWasteProviders } from '../redux/actions/firebaseWasteProviders';
 // COMPONENTS
-import CampaignPage from "../components/ViewCampaign/CampaignPage";
-import Loader from "../components/UtilComponents/FullScreenLoader";
-import NotFound from "../components/UtilComponents/NotFound";
+import CampaignPage from '../components/ViewCampaign/CampaignPage';
+import Loader from '../components/UtilComponents/FullScreenLoader';
+import NotFound from '../components/UtilComponents/NotFound';
 
 class CampaignContainer extends Component {
-  state = {
-    isNewCampaign: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isNewCampaign: false
+    };
+    if (this.props.location.state && this.props.location.state.isNewCampaign !== undefined) {
+      // eslint-disable-next-line react/no-direct-mutation-state
+      this.state.isNewCampaign = this.props.location.state.isNewCampaign;
+    }
+  }
 
   componentDidMount() {
     if (!this.props.firebaseWasteProviders.firebaseWasteProviders) {
       this.props.firebaseFetchWasteProviders();
     }
     this.props.firebasePopulateCampaignById(this.props.params.id);
-    // IF REDIRECTED FROM CREATE NEW CAMPAIGN ROUTER LOCATION WILL CONTAIN STATE OF ISNEWCAMPAIGN
-    if (this.props.location.state && this.props.location.state.isNewCampaign !== undefined) {
-      this.onMount(() => {
-        this.setState({
-          isNewCampaign: this.props.location.state.isNewCampaign
-        });
-      });
-    }
   }
+
   componentWillUpdate(nextProps) {
     if (this.props.params.id !== nextProps.params.id) {
       nextProps.firebasePopulateCampaignById(nextProps.params.id);
@@ -63,7 +64,7 @@ class CampaignContainer extends Component {
       firebaseWasteProviders
     } = this.props;
     const { campaignId, error, loading, loaded } = activeCampaign;
-    const hrefIsLocalhost = window.location.href.toLowerCase().includes("localhost");
+    const hrefIsLocalhost = window.location.href.toLowerCase().includes('localhost');
     const signCampaignProps = {
       auth,
       activeCampaign,

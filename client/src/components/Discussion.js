@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Well } from "react-bootstrap";
-import { fetchComments, postComment } from "../redux/actions/comments";
-import Comment from "./Comment";
-import PostBox from "./PostBox";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Well } from 'react-bootstrap';
+import { fetchComments, postComment } from '../redux/actions/comments';
+import Comment from './Comment';
+import PostBox from './PostBox';
 
 class Discussion extends Component {
   constructor(props) {
@@ -89,7 +89,9 @@ Discussion.propTypes = {
     googleID: PropTypes.string
   }),
   comments: PropTypes.shape({
-    campaignComments: PropTypes.Object
+    campaignComments: PropTypes.Object,
+    commentsLoaded: PropTypes.bool,
+    fetchError: PropTypes.Object
   }).isRequired,
   campaignID: PropTypes.string.isRequired,
   fetchComments: PropTypes.func.isRequired

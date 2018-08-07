@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Button, Col, Row } from "react-bootstrap";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Button, Col, Row } from 'react-bootstrap';
 // REDUX ACTIONS
-import { firebaseUpdateCampaign } from "../../../redux/actions/firebaseCampaigns";
-import { fetchUserSignatures, removeSignatureFromCampaign } from "../../../redux/actions/signature";
+import { firebaseUpdateCampaign } from '../../../redux/actions/firebaseCampaigns';
+import { fetchUserSignatures, removeSignatureFromCampaign } from '../../../redux/actions/signature';
 // COMPONENTS
-import RenderSignCampaign from "./RenderSignCampaign";
-import RenderRemoveSignature from "./RenderRemoveSignature";
-import RenderSignIn from "./RenderSignIn";
-import RenderUserHasSignedOtherCampaign from "./RenderUserHasSignedOtherCampaign";
-import UpdateCampaignModal from "../UpdateCampaign/UpdateCampaignModal";
+import RenderSignCampaign from './RenderSignCampaign';
+import RenderRemoveSignature from './RenderRemoveSignature';
+import RenderSignIn from './RenderSignIn';
+import RenderUserHasSignedOtherCampaign from './RenderUserHasSignedOtherCampaign';
+import UpdateCampaignModal from '../UpdateCampaign/UpdateCampaignModal';
 import {
   buildingInformation,
   propertyManager,
   wasteProvider
-} from "../UpdateCampaign/UpdateCampaignModalData";
+} from '../UpdateCampaign/UpdateCampaignModalData';
 
 class SignCampaign extends Component {
   constructor(props) {
     super(props);
     this.state = {
       keepMeUpdated: false,
-      signerMessage: "",
+      signerMessage: '',
       showUpdateCampaignModal: true
     };
   }
@@ -123,7 +123,7 @@ class SignCampaign extends Component {
               <Col md={12}>
                 {/*  user isn't signed in */}
                 {loaded &&
-                  auth.status === "ANONYMOUS" && (
+                  auth.status === 'ANONYMOUS' && (
                     <RenderSignIn
                       firebaseSignInGoogle={firebaseSignInGoogle}
                       firebaseSignInFacebook={firebaseSignInFacebook}
@@ -131,13 +131,13 @@ class SignCampaign extends Component {
                   )}
                 {/*  user is signed in && hasn't signed a campaign */}
                 {loaded &&
-                  auth.status === "SIGNED_IN" &&
+                  auth.status === 'SIGNED_IN' &&
                   activeCampaign &&
                   signedCampaignId === null && (
                     <RenderSignCampaign
                       handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
                       keepMeUpdated={keepMeUpdated}
-                      keepMeUpdatedLabel={"Keep Me Updated On This Campaign"}
+                      keepMeUpdatedLabel={'Keep Me Updated On This Campaign'}
                       signerMessage={signerMessage}
                       toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
                       updateSignerMessage={this.updateSignerMessage}
@@ -146,7 +146,7 @@ class SignCampaign extends Component {
                 {/*  USER AHS SIGNED CAMPAIGN AND IS SIGNED IN */}
                 {/* RENDER REMOVE SIGNATURE FEATURES */}
                 {loaded &&
-                  auth.status === "SIGNED_IN" &&
+                  auth.status === 'SIGNED_IN' &&
                   activeCampaign &&
                   activeCampaignSignatures &&
                   activeCampaignIncludesUsersSignature && (
@@ -155,7 +155,7 @@ class SignCampaign extends Component {
                     />
                   ) && (
                     <Button
-                      style={{ marginTop: "1em" }}
+                      style={{ marginTop: '1em' }}
                       bsStyle="info"
                       block
                       onClick={this.toggleShowUpdateCampaignModal}
@@ -166,10 +166,10 @@ class SignCampaign extends Component {
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
                 {loaded &&
-                  auth.status === "SIGNED_IN" &&
+                  auth.status === 'SIGNED_IN' &&
                   signedCampaignId &&
                   signedCampaignId !== null &&
-                  signedCampaignId !== "userRemovedSignature" &&
+                  signedCampaignId !== 'userRemovedSignature' &&
                   !activeCampaignIncludesUsersSignature && (
                     <RenderUserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />
                   )}

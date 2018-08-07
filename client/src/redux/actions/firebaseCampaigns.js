@@ -1,14 +1,14 @@
-import { campaignsRef, Timestamp } from "../../firebase";
-import { firebasePopulateCampaignById } from "./firebaseActiveCampaign";
+import { campaignsRef, Timestamp } from '../../firebase';
+import { firebasePopulateCampaignById } from './firebaseActiveCampaign';
 
 // CREATE NEW CAMPAIGN REQUEST
-export const FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST = "FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST";
+export const FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST = 'FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST';
 export const firebaseCreateNewCampaignRequest = () => ({
   type: FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST
 });
 
 // CREATE NEW CAMPAIGN SUCCESS
-export const FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS = "FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS";
+export const FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS = 'FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS';
 export const firebaseCreateNewCampaignSuccess = newlyCreatedCampaign => ({
   type: FIREBASE_CREATE_NEW_CAMPAIGN_SUCCESS,
   response: newlyCreatedCampaign
@@ -27,25 +27,25 @@ export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => 
     createdAt: Timestamp,
     modifiedAt: Timestamp,
     wasteProvider: {
-      name: "",
-      address: "",
-      phone: "",
-      email: ""
+      name: '',
+      address: '',
+      phone: '',
+      email: ''
     },
     propertyManager: {
-      name: "",
-      address: "",
-      phone: "",
-      email: ""
+      name: '',
+      address: '',
+      phone: '',
+      email: ''
     },
     buildingInformation: {
-      numBuildings: "",
-      numUnits: ""
+      numBuildings: '',
+      numUnits: ''
     }
   };
   // SETS FIRESTORE RECORD WITH GENERATED ID
   await newCampaignRef.set({ ...newCampaignData }).catch(error => {
-    console.error("Error writing document: ", error);
+    console.error('Error writing document: ', error);
   });
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
   dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
@@ -79,13 +79,13 @@ export const startListeningForCampaigns = () => dispatch => {
 
 // POPULATE CAMPAIGNS FROM LISTENER
 // POPULATE CAMPAIGNS REQUEST
-export const FETCH_FIREBASE_CAMPAIGNS_REQUEST = "FETCH_FIREBASE_CAMPAIGNS_REQUEST";
+export const FETCH_FIREBASE_CAMPAIGNS_REQUEST = 'FETCH_FIREBASE_CAMPAIGNS_REQUEST';
 export const firebaseFetchCampaignsRequest = () => ({
   type: FETCH_FIREBASE_CAMPAIGNS_REQUEST
 });
 
 // POPULATE CAMPAIGNS SUCCESS
-export const FETCH_FIREBASE_CAMPAIGNS_SUCCESS = "FETCH_FIREBASE_CAMPAIGNS_SUCCESS";
+export const FETCH_FIREBASE_CAMPAIGNS_SUCCESS = 'FETCH_FIREBASE_CAMPAIGNS_SUCCESS';
 export const firebasePopulateCampaignsSuccess = (
   firebaseCampaigns,
   firebaseCampaignsAddresses
@@ -106,14 +106,14 @@ export const firebaseFetchCampaigns = (
 // POPUATED ON NEW CAMPAIGN CREATION
 // POPULATE ACTIVE CAMPAIGN REQUEST
 export const FIREBASE_POPULATE_ACTIVE_CAMPAIGN_REQUEST =
-  "FIREBASE_POPULATE_ACTIVE_CAMPAIGN_REQUEST";
+  'FIREBASE_POPULATE_ACTIVE_CAMPAIGN_REQUEST';
 export const populateActiveCampaignRequest = () => ({
   type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_REQUEST
 });
 
 // // POPULATE POPULATE ACTIVE CAMPAIGN SUCCESS
 export const FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS =
-  "FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS";
+  'FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS';
 export const populateActiveCampaignSuccess = activeCampaign => ({
   type: FIREBASE_POPULATE_ACTIVE_CAMPAIGN_SUCCESS,
   response: activeCampaign
@@ -127,19 +127,19 @@ export const firebasePopulateActiveCampaign = activeCampaign => async dispatch =
 
 // UPDATE CAMPAIGN
 // UPDATE CAMPAIGN REQUEST
-export const FIREBASE_UPDATE_CAMPAIGN_REQUEST = "FIREBASE_UPDATE_CAMPAIGN_REQUEST";
+export const FIREBASE_UPDATE_CAMPAIGN_REQUEST = 'FIREBASE_UPDATE_CAMPAIGN_REQUEST';
 const firebaseUpdateCampaignRequest = () => ({
   type: FIREBASE_UPDATE_CAMPAIGN_REQUEST
 });
 
 // UPDATE CAMPAIGN SUCESS
-export const FIREBASE_UPDATE_CAMPAIGN_SUCCESS = "FIREBASE_UPDATE_CAMPAIGN_SUCCESS";
+export const FIREBASE_UPDATE_CAMPAIGN_SUCCESS = 'FIREBASE_UPDATE_CAMPAIGN_SUCCESS';
 const firebaseUpdateCampaignSuccess = () => ({
   type: FIREBASE_UPDATE_CAMPAIGN_SUCCESS
 });
 
 // UPDATE CAMPAIGN ERROR
-export const FIREBASE_UPDATE_CAMPAIGN_ERROR = "FIREBASE_UPDATE_CAMPAIGN_ERROR";
+export const FIREBASE_UPDATE_CAMPAIGN_ERROR = 'FIREBASE_UPDATE_CAMPAIGN_ERROR';
 const firebaseUpdateCampaignError = error => ({
   type: FIREBASE_UPDATE_CAMPAIGN_ERROR,
   response: error

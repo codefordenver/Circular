@@ -1,6 +1,6 @@
-import React from "react";
-import { Grid, Row, Col, PageHeader } from "react-bootstrap";
-import CollapsePanel from "../components/UtilComponents/CollapsePanel";
+import React from 'react';
+import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
+import CollapsePanel from '../components/UtilComponents/CollapsePanel';
 
 const DenverLearnMore = () => (
   <Grid fluid>
@@ -27,10 +27,10 @@ const DenverLearnMore = () => (
 
           <p>
             It's time to speak up and make better recycling and composting a priority for Denver!
-            Get involved by{" "}
+            Get involved by{' '}
             <a className="info-link" href="http://ecocycle.org/take-action/denver">
               signing our letter
-            </a>{" "}
+            </a>{' '}
             to Mayor Hancock.
           </p>
         </div>

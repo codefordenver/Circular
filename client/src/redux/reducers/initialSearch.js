@@ -11,7 +11,7 @@ import {
   APARTMENTS_SUCCESS,
   APARTMENTS_FAILURE,
   CREATE_CAMPAIGN_FAILURE
-} from "../constants/initialSearch";
+} from '../constants/initialSearch';
 
 const defaultState = {
   loading: false,
@@ -21,7 +21,7 @@ const defaultState = {
   nearbyCampaigns: null
 };
 
-export default function(state = defaultState, action) {
+export default function (state = defaultState, action) {
   const { response, error, type } = action;
   switch (type) {
     case FETCH_NEARBY_CAMPAIGNS_REQUEST:
@@ -58,7 +58,7 @@ export default function(state = defaultState, action) {
         loading: false,
         loaded: false,
         error: {
-          userMessage: "Sorry, but something went wrong.",
+          userMessage: 'Sorry, but something went wrong.',
           dbResponse: error
         }
       };
@@ -70,12 +70,12 @@ export default function(state = defaultState, action) {
         error: null
       };
     }
-    case "STASH_ADDRESS":
+    case 'STASH_ADDRESS':
       return {
         ...state,
         searchedAddress: action.address
       };
-    case "STASH_LAT_LNG":
+    case 'STASH_LAT_LNG':
       return {
         ...state,
         latLng: action.latLng

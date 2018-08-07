@@ -1,6 +1,6 @@
-import React from "react";
-import { Col } from "react-bootstrap";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 // miliseconds in a day
 const ONE_DAY = 1000 * 60 * 60 * 24;
