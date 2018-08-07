@@ -47,6 +47,12 @@ class Home extends Component {
   }
 }
 
+Home.defaultProps = {
+  firebaseCampaigns: PropTypes.shape({
+    campaigns: PropTypes.arrayOf()
+  })
+};
+
 Home.propTypes = {
   firebaseSearchAddressFlow: PropTypes.func.isRequired,
   firebaseCampaigns: PropTypes.shape({
@@ -62,7 +68,7 @@ Home.propTypes = {
           _long: PropTypes.number.isRequired
         }).isRequired
       }).isRequired
-    ).isRequired
+    )
   }).isRequired,
   googleMap: PropTypes.shape({
     isOpen: PropTypes.bool.isRequired
