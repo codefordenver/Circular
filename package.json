@@ -13,7 +13,7 @@
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",
     "ci:start-app-for-test":
-      "concurrently \"yarn start\" \"serve -s client/build -p 3000\" --browser chrome",
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run --browser chrome",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
