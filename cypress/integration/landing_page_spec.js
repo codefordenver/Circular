@@ -66,15 +66,19 @@ describe('The landing page', () => {
   describe('Main Search Block', () => {
     // SEARCH ADDRESS BAR
     describe('When Searching an Address', () => {
-      it('Navigates to the choose campaign page', () => {
+      it('Should fill out address and click search', () => {
         cy
           .get('.search_input')
           .type('Denver')
-          .should('have.value', 'Denver');
-        cy.get('.search_button').click();
-        cy.url().should('eq', 'http://localhost:3000/choose-campaign');
+          .should('have.value', 'Denver')
+          .then(() => {
+            cy.get('.search_button').click(() => {
+              cy.visit('/choose-campaign');
+            });
+          });
       });
     });
+
     // Map modal
     describe('Explore the Map Modal', () => {
       it('Opens the map modal', () => {
