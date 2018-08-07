@@ -11,11 +11,7 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-<<<<<<< HEAD
-- yarn
-=======
 - yarn install --frozen-lockfile
->>>>>>> remove-/client.env.prod
 
 before_script:
   - NODE_ENV=test yarn run client-build
