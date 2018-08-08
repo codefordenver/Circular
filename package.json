@@ -11,10 +11,10 @@
     "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
     "client": "(cd ./client && yarn start)",
-    "cypress": "cypress",
+    "cypress": "cypress --browser chrome",
     "ci:start-app-for-test":
-      "concurrently \"yarn start\" \"serve -s client/build -p 3000\" --browser chrome",
-    "ci:test": "cypress run --browser chrome",
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
+    "ci:test": "cypress run",
     "lint": "eslint .",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
@@ -51,7 +51,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "cross-env": "^5.1.1",
-    "cypress": "^1.4.2",
+    "cypress": "^3.0.3",
     "cypress-testing-library": "^2.0.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^15.0.1",
