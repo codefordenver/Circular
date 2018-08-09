@@ -12,6 +12,7 @@ import RequestRecyclingTips from './components/Informational/RequestRecyclingTip
 import DenverInfo from './components/Informational/DenverInfo';
 import ManagerResources from './components/Informational/ManagerResources';
 import DenverLearnMore from './containers/DenverLearnMore';
+import Instructions from './components/Instructions';
 import Collaboration from './components/Informational/Collaboration';
 import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import NotFound from './components/UtilComponents/NotFound';
@@ -69,6 +70,10 @@ export default (
     <Route
       path="/privacy-policy"
       getComponent={(location, callback) => callback(null, PrivacyPolicy)}
+    />
+    <Route
+      path="how-does-this-work"
+      getComponent={(location, callback) => callback(null, Instructions)}
     />
 
     <Route path="*" getComponent={(location, callback) => callback(null, NotFound)} />

@@ -10,7 +10,7 @@ describe('The landing page', () => {
   describe('Navigation Bar', () => {
     describe('Home link', () => {
       it('Navigates to root page', () => {
-        cy.contains('Why Recycle').click();
+        cy.contains('WHY').click();
         cy.contains('HOME').click();
         cy.url().should('include', 'http://localhost:3000');
       });
@@ -19,7 +19,7 @@ describe('The landing page', () => {
     // WHY RECYCLE
     describe('Why Recycle link', () => {
       it('Navigates to the why recycle page', () => {
-        cy.contains('Why Recycle').click();
+        cy.contains('WHY').click();
         cy.url().should('include', '/denver-learn-more');
       });
     });
@@ -28,7 +28,10 @@ describe('The landing page', () => {
       // PROPERTY MANAGER LINKS
       describe('Property Manager Resources link', () => {
         it('Navigates to Property Manager Resources page', () => {
-          cy.contains('Tools').click();
+          cy.contains('TOOLS').click();
+          cy.contains('Tips for Requesting').click();
+          cy.url().should('include', '/tips-for-requesting');
+          cy.contains('TOOLS').click();
           cy.contains('Property Manager Resources').click();
           cy.url().should('include', '/manager-resources');
         });
@@ -37,7 +40,7 @@ describe('The landing page', () => {
       // TIPS FOR REQUESTING
       describe('Tips for Requesting link ', () => {
         it('Navigates to Tips for Requesting page', () => {
-          cy.contains('Tools').click();
+          cy.contains('TOOLS').click();
           cy.contains('Tips for Requesting').click();
           cy.url().should('include', '/tips-for-requesting');
         });
@@ -46,7 +49,7 @@ describe('The landing page', () => {
       // WHO WE ARE LINK
       describe('Who Are We link', () => {
         it('Navigates to Who Are We page', () => {
-          cy.contains('Who Are We').click();
+          cy.contains('WHO WE ARE').click();
           cy.url().should('include', '/who-are-we');
         });
       });
@@ -54,7 +57,7 @@ describe('The landing page', () => {
       // WILL NEED TO ADDRESS CORS ISSUES TO TEST AUTH
       describe('Check login navigation toggle', () => {
         it('Opens Dropdown Toggles to Login', () => {
-          cy.contains('Login').click();
+          cy.contains('LOGIN').click();
           cy.contains('Sign in With Facebook');
           cy.contains('Sign in With Google');
         });
@@ -77,18 +80,10 @@ describe('The landing page', () => {
           });
       });
     });
-
-    // Map modal
+    // MAP MODAL
     describe('Explore the Map Modal', () => {
       it('Opens the map modal', () => {
-        cy.contains('Explore the map').click({ isOpen: true });
-      });
-    });
-    // LEARN MORE BUTTON
-    describe('Learn More First Button', () => {
-      it('Navigates to Denver Recycling Info', () => {
-        cy.contains('Learn more first').click();
-        cy.url().should('include', '/denver-recycling-info');
+        cy.contains('Explore Nearby Campaigns').click({ isOpen: true });
       });
     });
   });
@@ -97,13 +92,13 @@ describe('The landing page', () => {
   describe('Bottom Features', () => {
     describe('Wait, But Why?', () => {
       it('Navigates to Learn More', () => {
-        cy.contains('Learn More').click();
+        cy.contains('LEARN MORE').click();
         cy.url().should('include', '/denver-learn-more');
       });
     });
     describe('Tips and Resources', () => {
       it('Navigates to Manager Resources', () => {
-        cy.contains('Tips and Resources').click();
+        cy.contains('TIPS AND RESOURCES').click();
         cy.url().should('include', '/manager-resources');
       });
     });

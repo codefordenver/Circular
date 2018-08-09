@@ -1,17 +1,24 @@
 @import '../base/colors';
 
 .footer-container {
-  background-color: $secondary-color;
+  background-color: $light-blue-background;
+  color: $dark-blue;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
+
+  a:hover {
+    text-decoration: none;
+    color: $comment-black;
+  }
 }
 
 .footer-link {
   display: inline-block;
-  color: $light-gray;
+  color: $dark-blue;
   &:hover {
-    color: $mainwhite;
+    color: $comment-black;
     text-decoration: none;
   }
 }

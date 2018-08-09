@@ -7,6 +7,9 @@ log
 .vscode
 cypress/videosg
 cypress/screenshots
+.env
+client/.env.development
+client/.env.staging
 client/.env.production
 client/src/firebaseKeys.js
 

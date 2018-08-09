@@ -4,10 +4,27 @@
 .hero-page-header {
   text-align: center;
   color: $mainwhite;
-  font-size: 54px;
+
+  h1 {
+    font-size: 70px;
+    letter-spacing: 3px;
+    text-shadow: 30px 30px 30px 30px #000;
+    margin: 10px 0;
+  }
+
+  h2,
+  h3 {
+    @include font($display_stack, 30px, 200);
+    line-height: 1.2em;
+    margin: 10px 0;
+  }
+
+  h2 {
+    @include font('Dancing Script', 50px, regular);
+  }
 
   @media #{$information-phone} {
-    font-size: 36px;
+    font-size: 32px;
   }
 }
 .hero-wrapper {
@@ -17,7 +34,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: padding-box;
-  padding: 2rem;
+
+  .opacity-div {
+    background-color: rgba(0, 0, 0, 0.35);
+    padding: 2rem 150px;
+    width: 100vw;
+  }
 
   @media #{$information-phone} {
     background-image: url($mobile-hero-image);
@@ -29,17 +51,45 @@
     width: 100%;
     top: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.25);
   }
 }
 .hero-search {
   padding-top: 0px;
   margin-top: -3em;
+
+  .map-btn {
+    color: $mainwhite;
+    &:hover {
+      color: $hovergreen;
+    }
+  }
 }
 
-.vertical-text-divider {
-  display: inline-block;
-  text-align: center;
-  padding-left: 10px;
-  padding-right: 10px;
+@media screen and (max-width: 850px) {
+  .hero-wrapper {
+    .opacity-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0 50px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .hero-page-header {
+    h1 {
+      font-size: 40px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+  }
 }
