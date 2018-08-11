@@ -14,7 +14,6 @@ class ChooseCampaign extends Component {
       selectedOption: null
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
@@ -124,12 +123,30 @@ class ChooseCampaign extends Component {
   );
 
   renderNewCampaign = () => (
-    <div>
+    <div className="new-campaign">
       {this.renderAddressHeading(
         "You're the first to support recycling for your building!",
         "Launch your building's request for recycling! (We promise it will only take a minute)"
       )}
       {this.renderSubmitButton('CREATE CAMPAIGN')}
+      <ul className="advantages">
+        <li>
+          <i className="fa fa-check" />
+          Organize with fellow tenants
+        </li>
+        <li>
+          <i className="fa fa-check" />
+          Generate a petition
+        </li>
+        <li>
+          <i className="fa fa-check" />
+          Discover tools for approaching your landlord
+        </li>
+        <li>
+          <i className="fa fa-check" />
+          ...And more!
+        </li>
+      </ul>
     </div>
   );
   renderAddressHeading = (headingTitle, subTitle) => (
@@ -184,7 +201,15 @@ class ChooseCampaign extends Component {
     return (
       <Grid fluid>
         <Row>
-          <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
+          <Col
+            xs={10}
+            xsOffset={1}
+            sm={6}
+            smOffset={3}
+            md={4}
+            mdOffset={4}
+            className="p-0 text-white"
+          >
             {loading && this.renderLoading()}
             {!loading && error && this.renderError(error)}
             {/* if no longer loading and not erroring then
