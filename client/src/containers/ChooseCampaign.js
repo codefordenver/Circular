@@ -77,7 +77,6 @@ class ChooseCampaign extends Component {
                     <i className={`fa ${checkedClass}`} />
                   </Col>
                   <Col xs={10} className="nearby-address-info mx-10">
-                    {c.name ? <div>{c.name}</div> : ''}
                     {showAddress && c.address}
                   </Col>
                 </Row>
