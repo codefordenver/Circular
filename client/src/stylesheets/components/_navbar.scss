@@ -52,4 +52,16 @@
 .nav .open > a:hover, 
 .nav .open > a:focus {
   color: $hovergreen;
+  background-color: $dark-blue;
+}
+
+.dropdown.open {
+  background-color: magenta;
+}
+
+.dropdown.open .dropdown-toggle a,
+.dropdown.open .dropdown-toggle a:hover,
+.dropdown.open .dropdown-toggle a:focus {
+  color: magenta;
+  background-color: $dark-blue;
 }
