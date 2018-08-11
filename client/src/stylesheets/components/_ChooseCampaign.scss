@@ -103,3 +103,18 @@
     color: inherit;
   }
 }
+
+.new-campaign {
+  .advantages {
+    margin-left: 25px;
+    margin-top: 40px;
+    
+    li {
+      margin-bottom: 20px;
+      
+      i.fa {
+        margin-right: 15px;
+      }
+    }
+  }
+}
