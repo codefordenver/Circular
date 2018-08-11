@@ -1,3 +1,7 @@
+.container-fluid {
+  padding: 0;
+}
+
 .navbar {
   background-color: $dark-blue;
   color: $mainwhite;
@@ -5,14 +9,17 @@
   border-radius: 0;
   margin-bottom: 0;
 
+  .dropdown-toggle,
   .dropdown-menu {
     background-color: $dark-blue;
   }
+
   .navbar-nav li a {
     color: $mainwhite;
     cursor: pointer;
     &:hover {
       color: $hovergreen;
+      background-color: $dark-blue;
       text-decoration: none;
     }
     a {
@@ -22,6 +29,7 @@
 
   .navbar-brand {
     color: $mainwhite;
+    padding-left: 30px;
     &:hover {
       color: $hovergreen;
     }
@@ -38,4 +46,22 @@
       background-color: $mainwhite;
     }
   }
+}
+
+.nav .open > a, 
+.nav .open > a:hover, 
+.nav .open > a:focus {
+  color: $hovergreen;
+  background-color: $dark-blue;
+}
+
+.dropdown.open {
+  background-color: magenta;
+}
+
+.dropdown.open .dropdown-toggle a,
+.dropdown.open .dropdown-toggle a:hover,
+.dropdown.open .dropdown-toggle a:focus {
+  color: magenta;
+  background-color: $dark-blue;
 }
