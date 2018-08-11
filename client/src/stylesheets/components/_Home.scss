@@ -15,7 +15,7 @@
   color: $mainwhite;
   border-bottom: none;
   margin-bottom: 5px;
-  
+
   h1 {
     font-size: 24px;
     font-weight: 300;
@@ -79,4 +79,8 @@
       padding: 0 5px;
     }
   }
+}
+
+.how-it-works-banner {
+  background: $light-gray;
 }

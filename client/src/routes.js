@@ -16,6 +16,7 @@ import Collaboration from './containers/Collaboration';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './containers/NotFound';
 import Instructions from './components/Instructions';
+import HowItWorks from './containers/HowItWorks';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
@@ -73,7 +74,7 @@ export default (
     />
     <Route
       path="how-does-this-work"
-      getComponent={(location, callback) => callback(null, Instructions)}
+      getComponent={(location, callback) => callback(null, HowItWorks)}
     />
 
     <Route path="*" getComponent={(location, callback) => callback(null, NotFound)} />

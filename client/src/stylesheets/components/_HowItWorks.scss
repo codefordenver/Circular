@@ -1,0 +1,33 @@
+@import "../utils/placeholders";
+@import "../base/colors";
+
+.how-it-works-banner {
+  background: $light-gray;
+  h1 {
+    color: #176682;
+  }
+}
+
+.how-it-works-content-section {
+  padding: 1em;
+}
+
+.how-it-works-sections-slices {
+  display: flex;
+   > h2 {
+    align-self: flex-end;
+    margin-bottom: .2em;
+  }
+  > p {
+    font-weight: 200;
+  }
+  i {
+    width: 100%;
+  }
+  margin-bottom: .5em;
+}
+
+.how-it-works-logo {
+  font-size: 2em;
+  font-weight:
+}
