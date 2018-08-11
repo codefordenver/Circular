@@ -1,0 +1,83 @@
+.welcome-modal-wrapper{
+  height: 100%;
+  width:  100vw;
+  // background-color: rgba(23, 102, 103, 0.8);
+  background-color: rgba(22, 76, 95, 0.9);
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .welcome-modal-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+
+    .welcome-header{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      h1{
+        text-decoration: underline;
+      }
+      h1, h2{
+        margin: 5px 0;
+      }
+    }
+
+    .sign-with-box{
+      background-color: $light-gray;
+      display: flex;
+      flex-direction: column;
+      padding: 25px;
+      margin: 10px 0;
+      h3{
+        color: $dark-blue;
+      }
+      .google-btn{
+        background-color: $google-red;
+        padding: 5px;
+        border: none;
+      }
+      .facebook-btn{
+        background-color: $facebook-blue;
+        padding: 5px;
+        border: none;
+      }
+      h4{
+        align-self: center;
+        color: $comment-gray;
+      }
+      .user-email-form{
+        display: flex;
+        flex-direction: column;
+        color: $comment-gray;
+
+        .checkbox{
+          padding-left: 25px;
+          label{
+            @include body-12;
+            padding: 0;
+            color: $comment-gray;
+          }
+        }
+        p{
+          @include body-12;
+          color: $comment-gray;
+          // text-align:center;
+        }
+        .submit-btn{
+          padding: 5px;
+          margin: 10px 0;
+          background-color: green;
+          color: white;
+          border: none;
+        }
+      }
+    }
+  }
+}
