@@ -11,7 +11,7 @@ import CampaignContainer from './containers/CampaignContainer';
 import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
 import DenverInfo from './components/Informational/DenverInfo';
 import ManagerResources from './components/Informational/ManagerResources';
-import DenverLearnMore from './containers/DenverLearnMore';
+import DenverLearnMore from './components/Informational/DenverLearnMore';
 import Instructions from './components/Instructions';
 import Collaboration from './components/Informational/Collaboration';
 import PrivacyPolicy from './components/Footer/PrivacyPolicy';

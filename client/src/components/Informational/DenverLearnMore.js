@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
-import CollapsePanel from '../components/UtilComponents/CollapsePanel';
+import CollapsePanel from '../UtilComponents/CollapsePanel';
 
 const DenverLearnMore = () => (
   <Grid fluid>
