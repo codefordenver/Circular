@@ -26,6 +26,7 @@ const RequestRecyclingTips = () => (
                 <li>Let us know what they said!</li>
               </ul>
             }
+            defaultExpanded
           />
           <CollapsePanel
             titleText={'Our Landlord ignored or denied our request'}
