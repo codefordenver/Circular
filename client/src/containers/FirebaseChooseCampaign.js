@@ -48,8 +48,10 @@ class FirebaseChooseCampaign extends Component {
 
   render() {
     const {
+      location: { isNewCampaign },
       firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, selectedAddress }
     } = this.props;
+
     return (
       <Grid>
         <Row>
@@ -62,7 +64,8 @@ class FirebaseChooseCampaign extends Component {
             {loaded &&
               exactMatch &&
               exactMatch.length !== 0 &&
-              exactMatch.address && (
+              exactMatch.address &&
+              !isNewCampaign && (
                 <RenderCampaignAlreadyExists
                   exactMatchAddress={exactMatch.address}
                   handleSelection={this.handleSelection}
@@ -86,7 +89,8 @@ class FirebaseChooseCampaign extends Component {
 
 FirebaseChooseCampaign.defaultProps = {
   exactMatch: null,
-  firebaseCampaigns: { activeCampaign: null }
+  firebaseCampaigns: { activeCampaign: null },
+  location: { state: { isNewCampaign: '' } }
 };
 
 FirebaseChooseCampaign.propTypes = {
@@ -108,6 +112,11 @@ FirebaseChooseCampaign.propTypes = {
       _long: PropTypes.number.isRequired
     }).isRequired
   }).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      isNewCampaign: PropTypes.bool
+    })
+  }),
   searchedAddress: PropTypes.string.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,

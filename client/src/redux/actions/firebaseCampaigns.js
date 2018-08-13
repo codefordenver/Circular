@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import { campaignsRef, Timestamp } from '../../firebase';
 import { firebasePopulateCampaignById } from './firebaseActiveCampaign';
 
@@ -49,6 +50,7 @@ export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => 
   });
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
   dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
+  dispatch(push({ pathname: `${newCampaignRef.id}`, state: { isNewCampaign: true } }));
   // TODO clear search information
 };
 

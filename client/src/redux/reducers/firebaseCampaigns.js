@@ -19,7 +19,7 @@ const inititalState = {
   loaded: false
 };
 
-export default function firebaseSignaturesReducer(state = inititalState, action) {
+export default function firebaseCampaignReducer(state = inititalState, action) {
   const { response, type } = action;
   switch (type) {
     // CREATE NEW CAMPAIGNS

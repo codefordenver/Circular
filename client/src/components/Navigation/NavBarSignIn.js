@@ -5,10 +5,10 @@ import { NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 const NavBarSignIn = ({ auth, firebaseSignOut, firebaseSignInGoogle, firebaseSignInFacebook }) =>
   (auth.status === 'SIGNED_IN' ? (
     <NavItem eventKey={5} onClick={firebaseSignOut}>
-      Sign Out, {auth.displayName}
+      SIGN OUT, {auth.displayName.toUpperCase()}
     </NavItem>
   ) : (
-    <NavDropdown id="tools-dropdown" eventKey={5} title="Login">
+    <NavDropdown id="tools-dropdown" eventKey={5} title="LOGIN">
       <MenuItem eventKey={5.1} onClick={firebaseSignInFacebook}>
         Sign in With Facebook
       </MenuItem>

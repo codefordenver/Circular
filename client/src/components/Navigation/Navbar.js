@@ -6,7 +6,7 @@ import NavBarSignIn from './NavBarSignIn';
 
 const MyCampaignNavItem = ({ signedCampaignId }) => (
   <NavItem eventKey={4} href={`/campaign/${signedCampaignId}`}>
-    My Campaign
+    MY CAMPAIGN
   </NavItem>
 );
 
@@ -39,9 +39,9 @@ const NavBar = ({
       <Navbar.Collapse>
         <Nav pullRight>
           <NavItem eventKey={1} href="/denver-learn-more">
-            Why Recycle
+            WHY
           </NavItem>
-          <NavDropdown id="tools-dropdown" eventKey={2} title="Tools">
+          <NavDropdown id="tools-dropdown" eventKey={2} title="TOOLS">
             <MenuItem eventKey={2.1} href="/manager-resources">
               Property Manager Resources
             </MenuItem>
@@ -50,7 +50,7 @@ const NavBar = ({
             </MenuItem>
           </NavDropdown>
           <NavItem eventKey={3} href="/who-are-we">
-            Who Are We
+            WHO WE ARE
           </NavItem>
           {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS and location */}
           {showMyCampaignNavItem && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}

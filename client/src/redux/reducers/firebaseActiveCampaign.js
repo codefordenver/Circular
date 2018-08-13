@@ -14,7 +14,6 @@ export default function (state = defaultState, action) {
   switch (type) {
     case FIREBASE_FETCH_CAMPAIGN_BY_ID_REQUEST:
       return {
-        ...state,
         loading: true,
         loaded: false
       };

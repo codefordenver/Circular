@@ -140,7 +140,7 @@ CampaignContainer.propTypes = {
   }).isRequired,
   location: PropTypes.shape({
     state: PropTypes.shape({
-      isNewCampaign: PropTypes.string
+      isNewCampaign: PropTypes.bool
     })
   }).isRequired,
   params: PropTypes.shape({
