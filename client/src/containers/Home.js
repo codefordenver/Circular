@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -23,7 +24,9 @@ class Home extends Component {
         <HeroCTA openMap={this.props.openMap} />
         <ApartmentMap isOpen={isOpen} markers={apartments} closeMap={this.props.closeMap} />
         <Grid fluid className="home-section-container">
-          <StepByStep />
+          <Link to="/how-does-this-work">
+            <StepByStep />
+          </Link>
           <InfoAndLinks />
         </Grid>
         <Footer />

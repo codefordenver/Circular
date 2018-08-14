@@ -73,7 +73,7 @@ export default (
       getComponent={(location, callback) => callback(null, PrivacyPolicy)}
     />
     <Route
-      path="how-does-this-work"
+      path="/how-does-this-work"
       getComponent={(location, callback) => callback(null, HowItWorks)}
     />
 
