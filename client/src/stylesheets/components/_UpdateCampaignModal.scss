@@ -1,0 +1,29 @@
+@import '../base/breakpoints';
+
+.update-campaign-modal-body {
+    select#wasteProviders.form-control, ::placeholder {
+        padding: .1rem;
+    }
+    @include breakpoint(md) {
+        select#wasteProviders.form-control, ::placeholder {
+            font-size: small;
+            padding: .1rem;
+        }
+    }
+    @include breakpoint(sm) {
+        select#wasteProviders.form-control, ::placeholder {
+            font-size: small;
+            padding: .1rem;
+        }
+    }
+    @include breakpoint(xs) {
+        .nav-tabs > li > a {
+            padding: 5px;
+            font-size: small;
+        }
+        select#wasteProviders.form-control, ::placeholder {
+            font-size: small;
+            padding: .1rem;
+        }
+    }
+}

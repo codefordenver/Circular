@@ -4,7 +4,10 @@ import { withRouter } from 'react-router';
 import ReactModal from 'react-modal';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
-import * as _ from 'lodash';
+// TODO import only what lodash files we need
+import * as noop from 'lodash.noop';
+// import * as _ from 'lodash';
+import Loader from '../components/UtilComponents/FullScreenLoader';
 
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // and name it GettingStartedGoogleMap
@@ -19,11 +22,11 @@ const GettingStartedGoogleMap = withRouter(
       >
         {props.markers.map(marker => (
           <Marker
-            key={marker.id}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            key={marker.campaignId}
+            position={{ lat: marker.latLng._lat, lng: marker.latLng._long }}
             onRightClick={() => props.onMarkerRightClick(marker)}
-            onClick={() => props.router.push(`/campaign/${marker.id}`)}
-            title={marker.street_address}
+            onClick={() => props.router.push(`/campaign/${marker.campaignId}`)}
+            title={marker.address}
           />
         ))}
       </GoogleMap>
@@ -35,7 +38,7 @@ const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
   process.env.REACT_APP_GOOGLE_MAPS_KEY
 }`;
 
-const ApartmentMap = props => (
+const CampaignsMap = props => (
   <ReactModal
     isOpen={props.isOpen}
     contentLabel="Modal"
@@ -46,35 +49,35 @@ const ApartmentMap = props => (
       googleMapURL={mapUrl}
       loadingElement={
         <div style={{ height: '100%' }}>
-          {/* <FaSpinner
-                style={{
-                  display: `block`,
-                  width: `80px`,
-                  height: `80px`,
-                  margin: `150px auto`,
-                  animation: `fa-spin 2s infinite linear`,
-                }}
-              /> */}
+          <Loader
+            style={{
+              display: 'block',
+              width: '80px',
+              height: '80px',
+              margin: '150px auto',
+              animation: 'fa-spin 2s infinite linear'
+            }}
+          />
         </div>
       }
       containerElement={<div style={{ height: '100%' }} />}
       mapElement={<div style={{ height: '100%' }} />}
-      onMapLoad={_.noop}
-      onMapClick={_.noop}
+      onMapLoad={noop}
+      onMapClick={noop}
       markers={props.markers}
-      onMarkerRightClick={_.noop}
+      onMarkerRightClick={noop}
     />
   </ReactModal>
 );
 
-ApartmentMap.defaultProps = {
+CampaignsMap.defaultProps = {
   markers: []
 };
 
-ApartmentMap.propTypes = {
+CampaignsMap.propTypes = {
   markers: PropTypes.arrayOf(PropTypes.object),
   isOpen: PropTypes.bool.isRequired,
   closeMap: PropTypes.func.isRequired
 };
 
-export default ApartmentMap;
+export default CampaignsMap;

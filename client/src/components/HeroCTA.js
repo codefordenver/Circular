@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
-
 import AutoSuggestInput from './AutoSuggestInput';
 
-const HeroCTA = ({ openMap }) => (
+const HeroCTA = ({
+  openMap,
+  firebaseSearchAddressFlow,
+  clearInitialSearchResults,
+  firebaseCampaigns,
+  router
+}) => (
   <Grid fluid>
     <div className="tinted" />
     <Row className="hero-wrapper">
@@ -26,7 +31,12 @@ const HeroCTA = ({ openMap }) => (
     <Row>
       <Col xs={12} className="hero-search">
         <form>
-          <AutoSuggestInput />
+          <AutoSuggestInput
+            firebaseSearchAddressFlow={firebaseSearchAddressFlow}
+            clearInitialSearchResults={clearInitialSearchResults}
+            firebaseCampaigns={firebaseCampaigns}
+            router={router}
+          />
           <div className="text-center">
             <Button className="map-btn" bsStyle="as-link" onClick={openMap}>
               Explore Nearby Campaigns
@@ -39,7 +49,11 @@ const HeroCTA = ({ openMap }) => (
 );
 
 HeroCTA.propTypes = {
-  openMap: PropTypes.func.isRequired
+  openMap: PropTypes.func.isRequired,
+  clearInitialSearchResults: PropTypes.func.isRequired,
+  firebaseCampaigns: PropTypes.shape({}).isRequired,
+  firebaseSearchAddressFlow: PropTypes.func.isRequired,
+  router: PropTypes.shape({}).isRequired
 };
 
 export default HeroCTA;

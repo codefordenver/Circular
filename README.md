@@ -1,6 +1,6 @@
 
 # Denver Re:Imagine
-Denver recycles 18% and composts 2%. Leading cities like San Fransisco are diverting as high as 80% while Denver is falling behind with diverting 20%.
+Denver recycles 20% and composts 2%. Leading cities like San Fransisco are diverting as high as 80% while Denver is falling behind with diverting ~22%.
 
 Denverites believe they can do better! As a tenant in a Denver Multi-Family Complex (MFC) with 8 or more units, your property manager or landlord is NOT required to provide recycling or composting waste services. Many tenants in Denver have resorted to illegally dumping their recyclables in a neighbor’s recycling dumpster, or driving out of their way to a transfer station or parent’s home.
 
@@ -11,14 +11,15 @@ It’s time to organize and request better waste services from property managers
 1. Install [node 8.3](https://nodejs.org/) and [yarn 1.2.1](https://yarnpkg.com)
 2. Clone the repo
 3. Run `yarn install` in the root of the repo
-4. create a backend/config/dev.js file by getting one from another developer or getting keys for
-    - googleClientId
-    - googleClientSecret:
-    - mongoURI
-    - cookieKey
-    - redirectDomain (usually `http://localhost:3000`)
+4. create a client/.env.development file by getting one from another developer or getting keys for
+    - REACT_APP_apiKey
+    - REACT_APP_authDomain
+    - REACT_APP_databaseURL
+    - REACT_APP_projectId
+    - REACT_APP_storageBucket
+    - REACT_APP_messagingSenderId
 5. create a client/.env.local file also from another developer or adding a line like
-    - REACT_APP_GOOGLE_MAPS_KEY=GOGLKEY
+    - REACT_APP_GOOGLE_MAPS_KEY=GOOGLKEY
 
 ## Local Development
 
@@ -42,13 +43,7 @@ It is highly recommended that you configure your editor to display eslint errors
 10. You can then play around in the debugger in your inspect window!
 
 ## Checkout the database
-We use mLab to host our dev and production databases so even when we are running our servers locally, we're all sharing the same remote development database. To query the database during local development, ask Danny to get you a login to our mLab account. Once you've signed in, you can the instructions to get into the database with this shell prompt command: `mongo ds243335.mlab.com:43335/reimagine-dev -u <user> -p <password>`
-
-## Develop with docker
-Rather than trying to mess with yarn and the node dependencies required, it is possible to run Denver Re:Imagine in a docker container.
-1. run `docker image build -t react:app .` to build the docker container image
-2. run `docker container run -it -p 3000:3000 react:app` to make the app available in browser at `http://localhost:3000`
-3. alternatively, to use warm reloading run `docker container run -it -p 3000:3000 -p 35729:35729 -v $(pwd):/ react:app` which should force a webpage reload on document changes
+We use Firebase to host our dev and production databases so even when we are running our servers locally, we're all sharing the same remote development database. If you need access to the database, ask Matt, Jasmin or Katie for auth privileges to our Firebase database so that we can add you as a collaborator.
 
 ## End to End testing with cypress
 In order to run and develop cypress tests, first run:

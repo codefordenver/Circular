@@ -2,27 +2,27 @@ import React from 'react';
 import { IndexRoute, Route, IndexRedirect } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
-import ChooseCampaign from './containers/ChooseCampaign';
+import FirebaseChooseCampaign from './containers/FirebaseChooseCampaign';
 import NewCampaign from './containers/NewCampaign';
 import CreateCampaignStep1 from './components/CreateCampaignStep1';
 import CreateCampaignStep2 from './components/CreateCampaignStep2';
 import CreateCampaignStep3 from './components/CreateCampaignStep3';
-import CampaignPage from './containers/CampaignPage';
-import RequestRecyclingTips from './containers/RequestRecyclingTips';
-import DenverInfo from './containers/DenverInfo';
-import ManagerResources from './containers/ManagerResources';
-import DenverLearnMore from './containers/DenverLearnMore';
-import Collaboration from './containers/Collaboration';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import NotFound from './containers/NotFound';
+import CampaignContainer from './containers/CampaignContainer';
+import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
+import DenverInfo from './components/Informational/DenverInfo';
+import ManagerResources from './components/Informational/ManagerResources';
+import DenverLearnMore from './components/Informational/DenverLearnMore';
 import Instructions from './components/Instructions';
+import Collaboration from './components/Informational/Collaboration';
+import PrivacyPolicy from './components/Footer/PrivacyPolicy';
+import NotFound from './components/UtilComponents/NotFound';
 
 export default (
   <Route path="/" getComponent={(location, callback) => callback(null, App)}>
     <IndexRoute getComponent={(location, callback) => callback(null, Home)} />
     <Route
       path="/choose-campaign"
-      getComponent={(location, callback) => callback(null, ChooseCampaign)}
+      getComponent={(location, callback) => callback(null, FirebaseChooseCampaign)}
     />
     <Route
       path="/campaign"
@@ -45,7 +45,7 @@ export default (
     </Route>
     <Route
       path="/campaign/:id"
-      getComponent={(location, callback) => callback(null, CampaignPage)}
+      getComponent={(location, callback) => callback(null, CampaignContainer)}
     />
     <Route
       path="/tips-for-requesting"
