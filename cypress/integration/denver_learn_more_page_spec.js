@@ -5,8 +5,7 @@ describe('The denver learn more page', () => {
 
   describe('Why Recycle? toggle panel', () => {
     it('Toggles panel', () => {
-      cy
-        .get('a.collapse-panel-toggle')
+      cy.get('a.collapse-panel-toggle')
         .contains('Why Recycle?')
         .click();
       cy.get('div.text-black.panel-body').should('be.visible');

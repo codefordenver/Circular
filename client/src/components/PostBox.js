@@ -131,7 +131,10 @@ PostBox.propTypes = {
   postComment: PropTypes.func.isRequired
 };
 
-export default connect(({ activeCampaign, auth }) => ({ activeCampaign, auth }), {
-  postComment,
-  fetchComments
-})(PostBox);
+export default connect(
+  ({ activeCampaign, auth }) => ({ activeCampaign, auth }),
+  {
+    postComment,
+    fetchComments
+  }
+)(PostBox);

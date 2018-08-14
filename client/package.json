@@ -7,13 +7,13 @@
     "yarn": ">=1.2"
   },
   "dependencies": {
-    "axios": "^0.17.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "css-loader": "^0.28.4",
     "dateformat": "^3.0.3",
+    "firebase": "^5.0.4",
     "geocoder": "^0.2.3",
-    "lodash": "latest",
+    "lodash.noop": "^3.0.1",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "prop-types": "^15.5.10",
@@ -21,7 +21,7 @@
     "react-async-script-loader": "^0.3.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.5.4",
-    "react-google-button": "^0.4.0",
+    "react-google-button": "^0.5.3",
     "react-google-maps": "^6.3.0",
     "react-modal": "^2.2.0",
     "react-places-autocomplete": "^5.3.1",
@@ -38,27 +38,13 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "build-css":
-      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css":
-      "yarn run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "yarn run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "yarn build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "proxy": {
-    "/auth/google": {
-      "target": "http://localhost:5000"
-    },
-    "/auth/facebook": {
-      "target": "http://localhost:5000"
-    },
-    "/api/*": {
-      "target": "http://localhost:5000"
-    }
   }
 }

@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "re-imagine-dev",
+    "staging": "re-imagine-staging",
+    "production": "re-imagine-prod"
+  }
+}

@@ -29,7 +29,9 @@ function UserAuthNav(props) {
       </NavDropdown>
     );
   }
-  const { auth: { name } } = props;
+  const {
+    auth: { name }
+  } = props;
 
   const endOfFirstName = name.indexOf(' ') !== -1 ? name.indexOf(' ') : name.length;
   const firstName = name.substr(0, endOfFirstName);
@@ -139,7 +141,10 @@ const mapStateToProps = state => ({
   }
 });
 
-export default connect(mapStateToProps, {
-  logSignerOut,
-  fetchUserSignatures
-})(NavBar);
+export default connect(
+  mapStateToProps,
+  {
+    logSignerOut,
+    fetchUserSignatures
+  }
+)(NavBar);

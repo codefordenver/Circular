@@ -10,8 +10,7 @@ describe('Starting a new campaign', () => {
 
   describe('When Searching an Address', () => {
     it('Should fill out search box and click search and visit choose campaign page', () => {
-      cy
-        .get('.search_input')
+      cy.get('.search_input')
         .type('Denver')
         .should('have.value', 'Denver')
         .then(() => {
