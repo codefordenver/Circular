@@ -15,7 +15,6 @@ import DenverLearnMore from './containers/DenverLearnMore';
 import Collaboration from './containers/Collaboration';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './containers/NotFound';
-import Instructions from './components/Instructions';
 import HowItWorks from './containers/HowItWorks';
 
 export default (

@@ -48,10 +48,11 @@ class HowItWorks extends React.Component {
     return (
       <div className="how-it-works-container">
         <div className="how-it-works-banner">
-          <h1 className="blue-color" style={{ marginLeft: '1em' }}>
-            {' '}
-            HOW DOES IT WORK?{' '}
-          </h1>
+          <div>
+            <h1 className="blue-color" style={{ marginLeft: '1em' }}>
+              HOW DOES IT WORK ?
+            </h1>
+          </div>
         </div>
         <div className="how-it-works-content-section">
           <Grid>
