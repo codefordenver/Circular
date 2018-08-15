@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import fetchUser from '../redux/actions/authorization';
-import NavBar from '../components/Navbar';
+import Application from '../components/Application';
+import {
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseSignOut
+} from '../redux/actions/firebaseAuth';
+import { closeMap } from '../redux/actions/googleMap';
+import { fetchUserSignatures } from '../redux/actions/signature';
 
-class App extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
+const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
+  auth,
+  closeMap,
+  userSignatures: {
+    ...signature.userSignatures
+  },
+  firebaseUserSignatures
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    closeMap,
+    fetchUserSignatures,
+    firebaseSignInGoogle,
+    firebaseSignInFacebook,
+    firebaseSignOut
   }
-
-  render() {
-    return (
-      <div className="app-container">
-        <NavBar {...this.props} />
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-App.propTypes = {
-  children: PropTypes.node.isRequired,
-  fetchUser: PropTypes.func.isRequired
-};
-
-export default connect(null, { fetchUser })(App);
+)(Application);

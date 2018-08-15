@@ -27,6 +27,8 @@ export default function (state = defaultState, action) {
     case FETCH_CAMPAIGN_SUCCESS:
       return {
         ...state,
+        // returns null to clear previous errors
+        error: null,
         loading: false,
         loaded: true,
         campaign: response.data[0]

@@ -9,6 +9,7 @@
     "consistent-return": "warn",
     "import/extensions": "off",
     "import/no-unresolved": "warn",
+    "indent": ["off"],
     "jsx-a11y/anchor-is-valid": ["warn", { "components": [] }],
     "jsx-a11y/label-has-for": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
@@ -18,8 +19,7 @@
     "no-underscore-dangle": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/no-unescaped-entities": "off",
-    "react/prefer-stateless-function": "warn",
-    "indent": ["error", 2, { "SwitchCase": 1 }]
+    "react/prefer-stateless-function": "warn"
   },
   "globals": {
     "fetch": true

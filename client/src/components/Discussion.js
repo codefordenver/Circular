@@ -89,7 +89,9 @@ Discussion.propTypes = {
     googleID: PropTypes.string
   }),
   comments: PropTypes.shape({
-    campaignComments: PropTypes.Object
+    campaignComments: PropTypes.Object,
+    commentsLoaded: PropTypes.bool,
+    fetchError: PropTypes.Object
   }).isRequired,
   campaignID: PropTypes.string.isRequired,
   fetchComments: PropTypes.func.isRequired

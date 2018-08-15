@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
-
-import { searchAddressFlow, clearSearchResults } from '../redux/actions/initialSearch';
+import { GeoPoint } from '../firebase';
+import { clearSearchResults } from '../redux/actions/initialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {
@@ -16,14 +16,20 @@ class AutoSuggestInput extends Component {
     this.onChange = address => this.setState({ address, error: '' });
   }
 
-  handleSelect(address) {
+  handleSelect = address => {
+    // IF USER HAS ALREADY SIGNED A CAMPAIGN, SKIP SELECTION PROCESS
+    // TODO HANDLE USER SEARCH FLOW FOR ALREADY SIGNED USERS
+    const userHasSignedCampaign = this.props.auth.signedCampaignId;
     this.setState({ address });
     geocodeByAddress(address)
-      .then((results) => {
-        this.props.searchAddressFlow(results[0], getLatLng);
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        // CONVERY GEOCOORDINATES IN FIRESTORE GEOPOINT
+        const searchedGeoPoint = new GeoPoint(lat, lng);
+        this.props.firebaseSearchAddressFlow(address, searchedGeoPoint, userHasSignedCampaign);
       })
       .catch(error => this.setState({ error }));
-  }
+  };
 
   handleSearchClick(e) {
     e.stopPropagation();
@@ -56,7 +62,7 @@ class AutoSuggestInput extends Component {
     );
 
     const inputProps = {
-      ref: (input) => {
+      ref: input => {
         this.addressInput = input;
       },
       type: 'text',
@@ -102,16 +108,27 @@ class AutoSuggestInput extends Component {
   }
 }
 
+AutoSuggestInput.defaultProps = {
+  auth: PropTypes.shape({
+    signedCampaignId: null
+  })
+};
+
 AutoSuggestInput.propTypes = {
-  searchAddressFlow: PropTypes.func.isRequired,
+  firebaseSearchAddressFlow: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    signedCampaignId: PropTypes.string
+  }).isRequired,
   clearSearchResults: PropTypes.func.isRequired,
   isScriptLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(({ initialSearch }) => ({ initialSearch }), {
-  searchAddressFlow,
-  clearSearchResults
-})(
+export default connect(
+  ({ auth }) => ({ auth }),
+  {
+    clearSearchResults
+  }
+)(
   scriptLoader(
     `https://maps.googleapis.com/maps/api/js?key=${
       process.env.REACT_APP_GOOGLE_MAPS_KEY

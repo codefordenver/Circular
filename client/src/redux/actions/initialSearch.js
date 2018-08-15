@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import createApiRequest from '../../utils/createApiRequest';
 
 export function fetchApartmentsRequest() {
@@ -49,14 +48,17 @@ export function clearSearchResults() {
 }
 
 export function searchAddressFlow(address, latLngHelper) {
-  return async (dispatch) => {
-    browserHistory.push('/choose-campaign');
+  return async dispatch => {
+    // dispatch(push('/choose-campaign))
+    dispatch.push('/choose-campaign');
+
+    // dispatch(push({ path: '/choose-campaign', state: {term: 'foo'}}))
     dispatch(beginAddressSearch());
     const latLng = await dispatch(getLatLong(address, latLngHelper));
     const addressWithLatlng = { ...address, latLng };
     dispatch(stashAddress(addressWithLatlng));
     if (latLng.error) {
-      return console.error(latLng);
+      return console.error('error latlng ', latLng);
     }
     return dispatch(fetchNearbyCampaigns(latLng.response));
   };
