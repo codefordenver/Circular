@@ -3,7 +3,7 @@ import { Grid, Row, Col, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AutoSuggestInput from '../components/AutoSuggestInput';
 import '../stylesheets/components/_HowItWorks.scss';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer/Footer';
 import screenShot from '../images/screen-shot.png';
 import list from '../images/list.png';
 import letter from '../images/letter.png';
