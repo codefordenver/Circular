@@ -74,7 +74,9 @@ class NavBar extends React.Component {
             <NavItem eventKey={1} href="/denver-learn-more">
               WHY
             </NavItem>
-
+            <NavItem eventKey={6} href="how-does-this-work">
+              HOW IT WORKS
+            </NavItem>
             <NavItem eventKey={3} href="/who-are-we">
               WHO WE ARE
             </NavItem>

@@ -7,12 +7,12 @@ import NewCampaign from './containers/NewCampaign';
 import CreateCampaignStep1 from './components/CreateCampaignStep1';
 import CreateCampaignStep2 from './components/CreateCampaignStep2';
 import CreateCampaignStep3 from './components/CreateCampaignStep3';
+import HowItWorks from './containers/HowItWorks';
 import CampaignContainer from './containers/CampaignContainer';
 import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
 import DenverInfo from './components/Informational/DenverInfo';
 import ManagerResources from './components/Informational/ManagerResources';
 import DenverLearnMore from './components/Informational/DenverLearnMore';
-import Instructions from './components/Instructions';
 import Collaboration from './components/Informational/Collaboration';
 import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import NotFound from './components/UtilComponents/NotFound';
@@ -72,8 +72,8 @@ export default (
       getComponent={(location, callback) => callback(null, PrivacyPolicy)}
     />
     <Route
-      path="how-does-this-work"
-      getComponent={(location, callback) => callback(null, Instructions)}
+      path="/how-does-this-work"
+      getComponent={(location, callback) => callback(null, HowItWorks)}
     />
 
     <Route path="*" getComponent={(location, callback) => callback(null, NotFound)} />

@@ -1,0 +1,53 @@
+@import "../utils/placeholders";
+@import "../base/colors";
+
+.how-it-works-banner {
+  background: $light-gray;
+}
+
+.blue-color {
+  color: $dark-blue;
+}
+.how-it-works-content-section-grey {
+  background: $light-gray;
+  margin: 0;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+
+.how-it-works-container:nth-child(odd) .how-it-works-content-section {
+  background: $light-gray;
+}
+
+.slices-container {
+    margin-top: 8em;
+    padding-right: 30px;
+}
+
+.how-it-works-sections-slices {
+  h2 {
+    margin-bottom: .2em;
+  }
+   p {
+    font-weight: 200;
+  }
+  i {
+    width: 100%;
+  }
+  margin-bottom: 2.5em;
+}
+
+.how-it-works-logo {
+  font-size: 2em;
+  margin-left: 1em;
+  margin-top: 2em;
+  &.how-it-works-logo-grey {
+    > i {color: $dark-blue;}
+    > h1 {color: $dark-blue;}
+  }
+}
+
+.top-spacing {
+  margin-top: 3em;
+}
