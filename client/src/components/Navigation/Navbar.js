@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import NavBarSignIn from './NavBarSignIn';
 
 const MyCampaignNavItem = ({ signedCampaignId }) => (
@@ -38,20 +39,20 @@ const NavBar = ({
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <NavItem eventKey={1} href="/denver-learn-more">
-            WHY
-          </NavItem>
+          <LinkContainer to="/denver-learn-more">
+            <NavItem eventKey={1}>WHY</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/who-are-we">
+            <NavItem eventKey={3}>WHO WE ARE</NavItem>
+          </LinkContainer>
           <NavDropdown id="tools-dropdown" eventKey={2} title="TOOLS">
-            <MenuItem eventKey={2.1} href="/manager-resources">
-              Property Manager Resources
-            </MenuItem>
-            <MenuItem eventKey={2.2} href="/tips-for-requesting">
-              Tips for Requesting
-            </MenuItem>
+            <LinkContainer to="/manager-resources">
+              <MenuItem eventKey={2.1}>Property Manager Resources</MenuItem>
+            </LinkContainer>
+            <LinkContainer to="/tips-for-requesting">
+              <MenuItem eventKey={2.2}>Tips for Requesting</MenuItem>
+            </LinkContainer>
           </NavDropdown>
-          <NavItem eventKey={3} href="/who-are-we">
-            WHO WE ARE
-          </NavItem>
           {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS and location */}
           {showMyCampaignNavItem && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}
           {auth.status && (
