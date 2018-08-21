@@ -8,7 +8,8 @@ describe('The who are we page', () => {
 
   describe('Code for Denver link', () => {
     it('Navigates to the Code for Denver website', () => {
-      cy.get('a')
+      cy
+        .get('a')
         .contains('Code For Denver')
         .should('have.attr', 'href', 'https://www.codefordenver.org/');
     });
@@ -16,7 +17,8 @@ describe('The who are we page', () => {
 
   describe('Eco-Cycle link', () => {
     it('Navigates to the Eco Cycle website', () => {
-      cy.get('a')
+      cy
+        .get('a')
         .contains('Eco-Cycle')
         .should('have.attr', 'href', 'https://www.ecocycle.org');
     });

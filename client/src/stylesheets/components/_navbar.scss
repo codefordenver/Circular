@@ -55,13 +55,9 @@
   background-color: $dark-blue;
 }
 
-.dropdown.open {
-  background-color: magenta;
-}
-
 .dropdown.open .dropdown-toggle a,
 .dropdown.open .dropdown-toggle a:hover,
-.dropdown.open .dropdown-toggle a:focus {
-  color: magenta;
+.dropdown.open .dropdown-toggle a:focus,
+.navbar li a:hover {
   background-color: $dark-blue;
 }

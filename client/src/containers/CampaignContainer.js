@@ -164,15 +164,12 @@ const mapStateToProps = ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    firebaseAddSignatureToCampaign,
-    firebaseFetchWasteProviders,
-    firebasePopulateCampaignById,
-    firebaseRemoveSignatureFromCampaign,
-    firebaseSignInGoogle,
-    firebaseSignInFacebook,
-    firebaseUpdateCampaign
-  }
-)(withRouter(CampaignContainer));
+export default connect(mapStateToProps, {
+  firebaseAddSignatureToCampaign,
+  firebaseFetchWasteProviders,
+  firebasePopulateCampaignById,
+  firebaseRemoveSignatureFromCampaign,
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseUpdateCampaign
+})(withRouter(CampaignContainer));

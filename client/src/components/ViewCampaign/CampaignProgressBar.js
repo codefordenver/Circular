@@ -8,7 +8,7 @@ class CampaignProgessBar extends Component {
     const phaseDates = [];
     for (let i = 0; i < numSteps; i += 1) {
       const phaseDate = new Date(startDate);
-      phaseDate.setDate(phaseDate.getDate() + (i * duration) / (numSteps - 1));
+      phaseDate.setDate(phaseDate.getDate() + i * duration / (numSteps - 1));
       phaseDates.push(phaseDate);
     }
 

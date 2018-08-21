@@ -40,9 +40,7 @@ class CreateCampaignStep2 extends React.Component {
 
   setOptionalInfo = async e => {
     e.preventDefault();
-    const {
-      target: { name, email, phone, address, buildingCount, unitCount }
-    } = e;
+    const { target: { name, email, phone, address, buildingCount, unitCount } } = e;
 
     const updateCampainInfo = {
       propertyManager: {
@@ -85,9 +83,7 @@ class CreateCampaignStep2 extends React.Component {
       </option>
     ));
   render() {
-    let {
-      firebaseWasteProviders: { wasteProviders }
-    } = this.props;
+    let { firebaseWasteProviders: { wasteProviders } } = this.props;
     const { loaded } = this.props.firebaseWasteProviders;
     wasteProviders = [this.defaultProvider, ...(wasteProviders || [])];
     return (

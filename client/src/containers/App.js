@@ -17,13 +17,10 @@ const mapStateToProps = ({ auth, signature, firebaseUserSignatures }) => ({
   firebaseUserSignatures
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    closeMap,
-    fetchUserSignatures,
-    firebaseSignInGoogle,
-    firebaseSignInFacebook,
-    firebaseSignOut
-  }
-)(Application);
+export default connect(mapStateToProps, {
+  closeMap,
+  fetchUserSignatures,
+  firebaseSignInGoogle,
+  firebaseSignInFacebook,
+  firebaseSignOut
+})(Application);

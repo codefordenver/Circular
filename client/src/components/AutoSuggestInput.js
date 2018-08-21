@@ -123,12 +123,9 @@ AutoSuggestInput.propTypes = {
   isScriptLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(
-  ({ auth }) => ({ auth }),
-  {
-    clearSearchResults
-  }
-)(
+export default connect(({ auth }) => ({ auth }), {
+  clearSearchResults
+})(
   scriptLoader(
     `https://maps.googleapis.com/maps/api/js?key=${
       process.env.REACT_APP_GOOGLE_MAPS_KEY

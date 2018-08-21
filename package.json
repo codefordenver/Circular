@@ -10,23 +10,22 @@
   "scripts": {
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress --browser chrome",
-    "ci:start-app-for-test": "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
+    "ci:start-app-for-test":
+      "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run",
     "lint": "eslint .",
     "dev": "concurrently \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+    "heroku-postbuild":
+      "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
     "postinstall": "yarn install --cwd client",
     "lint-client": "yarn prettier-eslint client/src/**/*.js --write",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json}": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "*.{js,json}": ["prettier-eslint --write", "git add"]
   },
   "author": "",
   "license": "ISC",

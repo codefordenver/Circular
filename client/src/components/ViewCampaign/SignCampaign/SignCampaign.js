@@ -58,10 +58,7 @@ class SignCampaign extends Component {
   };
 
   handleRemoveSignatureFromCamapaign = () => {
-    const {
-      activeCampaign: { campaignId },
-      auth: { uid }
-    } = this.props.signCampaignProps;
+    const { activeCampaign: { campaignId }, auth: { uid } } = this.props.signCampaignProps;
     return this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
   };
 
@@ -218,11 +215,8 @@ const mapStateToProps = state => ({
   firebaseWasteProviders: state.firebaseWasteProviders
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    firebaseUpdateCampaign,
-    fetchUserSignatures,
-    removeSignatureFromCampaign
-  }
-)(SignCampaign);
+export default connect(mapStateToProps, {
+  firebaseUpdateCampaign,
+  fetchUserSignatures,
+  removeSignatureFromCampaign
+})(SignCampaign);

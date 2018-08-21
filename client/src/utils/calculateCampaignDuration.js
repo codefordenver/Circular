@@ -6,7 +6,7 @@ export const calculateCampaignDuration = creationDateString => {
   const expireDate = new Date(creationDateString);
   // the campaign is set to expire the first Monday 3-weeks after campaign creation
   expireDate.setDate(expireDate.getDate() + MIN_CAMPAIGN_DURATION);
-  expireDate.setDate(expireDate.getDate() + ((1 + 7 - expireDate.getDay()) % 7));
+  expireDate.setDate(expireDate.getDate() + (1 + 7 - expireDate.getDay()) % 7);
 
   const timeDiff = Math.abs(expireDate.getTime() - creationDate.getTime());
   const diffDays = Math.ceil(timeDiff / ONE_DAY_IN_MILLISECONDS);

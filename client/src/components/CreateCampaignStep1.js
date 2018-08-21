@@ -15,11 +15,7 @@ import {
 import { updateNewCampaign } from '../redux/actions/newCampaign';
 
 const CreateCampaignStep1 = props => {
-  const {
-    initialSearch: { searchedAddress, error },
-    updateNewCampaign,
-    router
-  } = props;
+  const { initialSearch: { searchedAddress, error }, updateNewCampaign, router } = props;
 
   const formattedAddress = searchedAddress && searchedAddress.formatted_address;
 
@@ -73,9 +69,6 @@ const CreateCampaignStep1 = props => {
   );
 };
 
-export default connect(
-  ({ initialSearch }) => ({ initialSearch }),
-  {
-    updateNewCampaign
-  }
-)(CreateCampaignStep1);
+export default connect(({ initialSearch }) => ({ initialSearch }), {
+  updateNewCampaign
+})(CreateCampaignStep1);

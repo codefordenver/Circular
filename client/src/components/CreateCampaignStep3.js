@@ -30,9 +30,6 @@ const CreateCampaignStep3 = props => {
   );
 };
 
-export default connect(
-  ({ activeCampaign, newCampaign }) => ({ activeCampaign, newCampaign }),
-  {
-    createCampaign
-  }
-)(CreateCampaignStep3);
+export default connect(({ activeCampaign, newCampaign }) => ({ activeCampaign, newCampaign }), {
+  createCampaign
+})(CreateCampaignStep3);
