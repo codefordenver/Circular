@@ -39,12 +39,13 @@
     "style-loader": "^0.18.2"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "yarn run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
     "build": "yarn build-css && react-scripts build",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "eject": "react-scripts eject",
+    "staging": "REACT_APP_STAGE=staging && yarn start",
+    "start": "npm-run-all -p watch-css start-js",
+    "start-js": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "watch-css": "yarn run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   }
 }

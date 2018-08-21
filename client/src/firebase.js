@@ -3,6 +3,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
 
+console.log(process.env);
 // FIREBASE KEYS IMPORT BASED ON ENV
 firebase.initializeApp({
   apiKey: `${process.env.REACT_APP_apiKey}`,
