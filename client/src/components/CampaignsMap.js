@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import ReactModal from 'react-modal';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 // TODO import only what lodash files we need
 import * as noop from 'lodash.noop';
 // import * as _ from 'lodash';
