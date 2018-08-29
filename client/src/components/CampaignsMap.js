@@ -37,6 +37,10 @@ const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
   process.env.REACT_APP_GOOGLE_MAPS_KEY
 }`;
 
+// The following code fixes an accessibility issue as per the react-modal docs:
+// https://github.com/reactjs/react-modal/tree/master/docs/accessibility
+ReactModal.setAppElement('#root');
+
 const CampaignsMap = props => (
   <ReactModal
     isOpen={props.isOpen}
