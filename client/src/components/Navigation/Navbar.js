@@ -41,7 +41,7 @@ const NavBar = ({
           <NavItem eventKey={1} href="/denver-learn-more">
             WHY
           </NavItem>
-          <NavItem eventKey={4} href="/how-does-it-work">
+          <NavItem eventKey={4} href="/how-does-this-work">
             HOW IT WORKS
           </NavItem>
           <NavDropdown id="tools-dropdown" eventKey={2} title="TOOLS">

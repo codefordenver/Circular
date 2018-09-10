@@ -7,7 +7,7 @@ import NewCampaign from './containers/NewCampaign';
 import CreateCampaignStep1 from './components/CreateCampaignStep1';
 import CreateCampaignStep2 from './components/CreateCampaignStep2';
 import CreateCampaignStep3 from './components/CreateCampaignStep3';
-import HowItWorks from './containers/HowItWorks';
+import HowItWorks from './components/HowItWorks/HowItWorks';
 import CampaignContainer from './containers/CampaignContainer';
 import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
 import DenverInfo from './components/Informational/DenverInfo';
