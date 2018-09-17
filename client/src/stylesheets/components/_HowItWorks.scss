@@ -1,5 +1,7 @@
 @import "../utils/placeholders";
 @import "../base/colors";
+@import '../base/fonts';
+
 
 .how-it-works-banner {
   background: $light-gray;
@@ -8,46 +10,75 @@
 .blue-color {
   color: $dark-blue;
 }
-.how-it-works-content-section-grey {
-  background: $light-gray;
-  margin: 0;
-  padding: 1em;
-  margin-bottom: 2em;
-}
 
+.how-it-works-container {
 
-.how-it-works-container:nth-child(odd) .how-it-works-content-section {
-  background: $light-gray;
-}
+  .step-icon-and-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
 
-.slices-container {
-    margin-top: 8em;
-    padding-right: 30px;
-}
+  i.how-icon {
+    font-size: 3rem;
+    padding: 1rem;
+  }
 
-.how-it-works-sections-slices {
   h2 {
-    margin-bottom: .2em;
+    @include display-24-med;
   }
-   p {
-    font-weight: 200;
-  }
-  i {
-    width: 100%;
-  }
-  margin-bottom: 2.5em;
-}
 
-.how-it-works-logo {
-  font-size: 2em;
-  margin-left: 1em;
-  margin-top: 2em;
-  &.how-it-works-logo-grey {
-    > i {color: $dark-blue;}
-    > h1 {color: $dark-blue;}
+  h3 {
+    @include display-20-reg;
   }
-}
 
-.top-spacing {
-  margin-top: 3em;
+  p {
+    margin: 0.7rem 0 1rem 0;
+    opacity: 0.8;
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  ul {
+    margin: 0.7rem 0 1rem 1.2rem;
+
+    > li {
+      opacity: 0.8;
+      list-style: initial;
+    }
+  }
+
+  @media only screen and (min-width: 480px) {
+    .step-icon-and-title-container {
+      padding-bottom: 3rem;
+    }
+
+    i.how-icon {
+      font-size: 4rem;
+      padding: 1rem;
+    }
+
+    h2 {
+      @include display-36-med;
+    }
+
+    h3 {
+      @include display-24-reg;
+    }
+
+    p {
+      margin: 1rem 0 1.5rem 0;
+    }
+
+    ul {
+      margin: 1rem 0 1.5rem 1.2rem;
+    }
+
+
+  }
+
+  
 }

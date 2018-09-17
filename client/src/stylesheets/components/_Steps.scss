@@ -1,0 +1,200 @@
+@import "../base/colors";
+
+.steps-container {
+  position: relative;
+  padding-bottom: 4rem;
+
+
+  .steps-content-container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+
+    .single-step-content {
+      display: inline-block;
+      flex-shrink: 0;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+  }
+
+  .step-end-buttons {
+
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+
+    .step-button {
+      display: flex;
+      flex: 1;
+      color: $maingreen;
+      opacity: 0.8;
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        color: $hovergreen;
+        opacity: 1;
+      }
+
+      &.disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+    }
+
+    .take-space {
+      display: flex;
+      flex: 100;
+    }
+  }
+
+
+  .step-selectors-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .step-selector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.2rem 0;
+      align-self: stretch;
+      cursor: pointer;
+
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2rem;
+        width: 2rem;
+        border: 2px solid white;
+        border-radius: 2rem;
+        opacity: 0.7;
+      }
+
+      @media only screen and (min-width: 700px) {
+        .circle {
+          height: 3rem;
+          width: 3rem;
+          border-radius: 3rem;
+          border: 3px solid white;
+        }
+      }
+
+      &.highlighted {
+        .circle {
+          color: $maingreen;
+          opacity: 0.7;
+          border: 2px solid $maingreen;
+        }
+      }
+
+      &.selected {
+        .circle {
+          color: $maingreen;
+          height: 2.5rem;
+          width: 2.5rem;
+          border-radius: 2.5rem;
+          border: 3px solid $maingreen;
+          opacity: 1;
+          font-weight: bold;
+        }
+      }
+
+
+      &.not-selected {
+        
+        .circle {
+          &:hover {
+            // color: white;
+            // border: 2px solid white;
+            opacity: 1;
+          }
+        }
+
+        &.highlighted {
+          .circle {
+            &:hover {
+              color: $hovergreen;
+              border: 2px solid $hovergreen;
+              opacity: 1;
+            }
+          }
+        }
+
+      }
+
+      @media only screen and (min-width: 700px) {
+        &.highlighted {
+          .circle {
+            border: 3px solid $maingreen;
+          }
+        }
+
+        &.selected {
+          .circle {
+            height: 3.5rem;
+            width: 3.5rem;
+            border-radius: 3.5rem;
+            border: 4px solid $maingreen;
+          }
+        }
+
+        &.not-selected {
+          .circle {
+            &:hover {
+              // color: white;
+              border: 3px solid white;
+            }
+          }
+
+          &.highlighted {
+            .circle {
+              &:hover {
+                border: 3px solid $hovergreen;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+     
+    .half-spacer {
+      display: flex;
+      flex: 1;
+    }
+
+    .spacer-line {
+      display: flex; 
+      flex: 2;
+      height: 2px;
+      background: white;
+      opacity: 0.7;
+
+      &.highlighted {
+        opacity: 0.7;
+        background: $maingreen;
+      }
+    }
+
+    @media only screen and (min-width: 700px) {
+      .step-selector {
+        padding: 2rem 0;
+      }
+
+      .spacer-line {
+        height: 3px;
+      }
+    }
+
+  }
+
+}
