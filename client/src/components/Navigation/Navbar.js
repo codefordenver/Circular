@@ -27,7 +27,7 @@ const NavBar = ({
   homeText =
     props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
   return (
-    <Navbar bsStyle="remove-default" collapseOnSelect fluid>
+    <Navbar bsStyle="remove-default" collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
           <Link onClick={closeMap} to="/">
