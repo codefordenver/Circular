@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
-import { campaignsRef, Timestamp } from '../../firebase';
+import { auth, campaignsRef, Timestamp } from '../../firebase';
 import { firebasePopulateCampaignById } from './firebaseActiveCampaign';
+import { firebaseUpdateUserCreatedCampaignId } from './firebaseAuth';
 
 // CREATE NEW CAMPAIGN REQUEST
 export const FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST = 'FIREBASE_CREATE_NEW_CAMPAIGN_REQUEST';
@@ -48,6 +49,8 @@ export const firebaseCreateNewCampaign = (address, latLng) => async dispatch => 
   await newCampaignRef.set({ ...newCampaignData }).catch(error => {
     console.error('Error writing document: ', error);
   });
+  // UPDATES USER CREATED CAMPAIGN ID
+  dispatch(firebaseUpdateUserCreatedCampaignId(auth.currentUser, newCampaignRef.id));
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
   dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
   dispatch(push({ pathname: `${newCampaignRef.id}`, state: { isNewCampaign: true } }));

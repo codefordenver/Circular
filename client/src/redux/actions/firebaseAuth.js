@@ -1,7 +1,7 @@
 import { auth, googleAuthProvider, facebookAuthProvider, usersRef } from '../../firebase';
 
 // SIGN OUT
-// FIREBASE SINGOUT REQUEST
+// FIREBASE SIGN OUT REQUEST
 export const FIREBASE_SIGN_OUT_REQUEST = 'FIREBASE_SIGN_OUT_REQUEST';
 export const firebaseSignOutRequest = () => ({
   type: FIREBASE_SIGN_OUT_REQUEST
@@ -118,7 +118,9 @@ export const startListeningToAuthChanges = () => dispatch => {
         email,
         displayName,
         providerId,
-        photoURL
+        photoURL,
+        createdCampaignId: null,
+        signedCampaignId: null
       };
       // ADDS OR MERGES AUTH INFORMATION TO USERS COLLECTION
       usersRef.doc(uid).set(userData, { merge: true });
@@ -129,4 +131,23 @@ export const startListeningToAuthChanges = () => dispatch => {
       dispatch(firebaseSignOut());
     }
   });
+};
+
+// UPDATE USER CREATED CAMPAIGN ID THUNK
+export const firebaseUpdateUserCreatedCampaignId = (user, createdCampaignId) => {
+  console.log(user);
+
+  const userRef = usersRef.doc(user.uid);
+
+  userRef
+    .update({
+      createdCampaignId
+    })
+    .then(() => {
+      console.log('User createdCampaignId successfully updated!');
+    })
+    .catch(error => {
+      // The document probably doesn't exist.
+      console.error('Error updating user createdCampaignId: ', error);
+    });
 };
