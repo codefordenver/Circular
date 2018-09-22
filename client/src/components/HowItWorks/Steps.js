@@ -32,7 +32,7 @@ class Steps extends Component {
     const a = [];
     a.push(<div className={'half-spacer'} key={'halfSpacer-start'} />);
     for (let i = 0; i < numSteps; i++) {
-      let stepSelectorClasses = 'step-selector';
+      let stepSelectorClasses = `step-selector-${i}`;
       let stepSpacerClasses = 'spacer-line';
       if (selectedStep === i) {
         stepSelectorClasses += ' selected';

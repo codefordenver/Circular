@@ -59,7 +59,8 @@
     flex-direction: row;
     align-items: center;
 
-    .step-selector {
+    div[class^='step-selector-'],
+    div[class*=' step-selector-'] {
       display: flex;
       justify-content: center;
       align-items: center;
