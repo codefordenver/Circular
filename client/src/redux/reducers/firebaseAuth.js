@@ -23,7 +23,7 @@ export default function authReducer(state = initialState.auth, action) {
       };
     case FIREBASE_SIGN_OUT_SUCCESS:
       return {
-        ...initialState
+        ...initialState.auth
       };
     // FIREBASE SIGN IN
     case FIREBASE_SIGN_IN_GOOGLE_REQUEST:
@@ -49,8 +49,8 @@ export default function authReducer(state = initialState.auth, action) {
       return {
         ...state,
         loading: false,
-        signedCampaignId: response.signedCampaignId,
-        createdCampaignId: response.createdCampaignId
+        signedCampaignId: response.signedCampaignId || null,
+        createdCampaignId: response.createdCampaignId || null
       };
     case FIREBASE_FETCH_USER_DATA_ERROR:
       return {

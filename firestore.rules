@@ -9,11 +9,15 @@ service cloud.firestore {
     }
     
     function isAdmin(campaignId) {
-     // does user has createdCampaignId == requested campaignId
+     // does user have createdCampaignId == requested campaignId
      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == campaignId
     }
     
+    function signedCampaign() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.signedCampaignId == null
 
+    }
+    
     match /users/{userId} {
       // User can read, update, or delete their own data
       allow read, update, delete: if request.auth.uid == userId;
@@ -33,17 +37,17 @@ service cloud.firestore {
       											&& isAdmin(campaignId)
                             
                             
-      match /signatures/{signature} {
-      allow read;
-      
-        // Only authenticated users can sign a campaign and only one campaign
-        allow create: if signedIn()
-                      && currentUser().data.signedCampaignId == null;
-                      
-        // Only user can update or delete their own signature
-        allow update, delete: if signedIn()
-        											&& request.auth.uid == currentUser().data.uid;
-      }
+        match /signatures/{signature} {
+        allow read;
+
+          // Only authenticated users can sign a campaign and only one campaign
+          allow create: if signedIn()
+                        && signedCampaign()
+
+          // Only user can update or delete their own signature
+          allow update, delete: if signedIn()
+          											&& request.auth.uid == currentUser().data.uid;
+        }
     }
 
     match /wasteProviders/{wasteProvider} {
