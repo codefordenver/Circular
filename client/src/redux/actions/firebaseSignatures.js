@@ -1,5 +1,5 @@
 import { campaignsRef, usersRef, Timestamp } from '../../firebase';
-import { firebaseFetchUserSignedCampaigns } from '../actions/firebaseAuth';
+import { firebaseFetchUserData } from '../actions/firebaseAuth';
 import {
   firebasePopulateCampaignById,
   firebaseFetchCampaignByIdError
@@ -22,7 +22,7 @@ export const populateFirebaseUserSignatures = firebaseUserSignatures => ({
 
 // THUNK FOR FIREBASE SIGNATURES
 export const firebaseFetchUserSignatures = firebaseUserSignatures => dispatch => {
-  dispatch(firebaseFetchUserSignaturesRequest());
+  dispatch(firebaseFetchUserData());
   dispatch(populateFirebaseUserSignatures(firebaseUserSignatures));
 };
 
@@ -93,7 +93,7 @@ export const firebaseAddSignatureToCampaign = signatureObject => async dispatch 
       },
       { merge: true }
     )
-    .then(dispatch(firebaseFetchUserSignedCampaigns(uid)));
+    .then(dispatch(firebaseFetchUserData(uid)));
 };
 
 // REMOVE SIGNATURE ACTIONS
@@ -151,5 +151,5 @@ export const firebaseRemoveSignatureFromCampaign = (campaignId, uid) => async di
       },
       { merge: true }
     )
-    .then(dispatch(firebaseFetchUserSignedCampaigns(uid)));
+    .then(dispatch(firebaseFetchUserData(uid)));
 };

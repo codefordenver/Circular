@@ -55,48 +55,58 @@ export const firebaseSignInFacebook = () => dispatch => {
 
 // FIREBASE AUTH LISTENER FUNCTION
 export const FIREBASE_SIGN_IN_SUCCESS = 'FIREBASE_SIGN_IN_SUCCESS';
-const firebaseSignIn = user => ({
-  type: FIREBASE_SIGN_IN_SUCCESS,
-  email: user.email,
-  displayName: user.displayName,
-  uid: user.uid
-});
+const firebaseSignIn = user => {
+  const { email, displayName, uid } = user;
+  return {
+    type: FIREBASE_SIGN_IN_SUCCESS,
+    response: { email, displayName, uid }
+  };
+};
 
 // FIREBASE ADD SIGNATURES TO AUTH OBJECT
-// FIREBASE FETCH USER SIGNED CAMPAIGNS REQUEST
-export const FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST =
-  'FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST';
-export const firebaseFetchUserSignedCampaignsRequest = () => ({
-  type: FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST
+// FIREBASE FETCH USER DATA REQUEST
+export const FIREBASE_FETCH_USER_DATA_REQUEST = 'FIREBASE_FETCH_USER_DATA_REQUEST';
+const firebaseFetchUserDataRequest = () => ({
+  type: FIREBASE_FETCH_USER_DATA_REQUEST
 });
 
-// FIREBASE FETCH USER SIGNED CAMPAIGNS SUCCESS
-export const FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS =
-  'FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS';
-export const firebaseFetchUserSignedCampaignsSuccess = signedCampaignId => ({
-  type: FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS,
-  signedCampaignId
+// FIREBASE FETCH USER DATA SUCCESS
+export const FIREBASE_FETCH_USER_DATA_SUCCESS = 'FIREBASE_FETCH_USER_DATA_SUCCESS';
+const firebaseFetchUserDataSuccess = (createdCampaignId, signedCampaignId) => ({
+  type: FIREBASE_FETCH_USER_DATA_SUCCESS,
+  response: {
+    signedCampaignId,
+    createdCampaignId
+  }
 });
 
-// FIREBASE FETCH USER SIGNED CAMPAIGNS THUNK
-export const firebaseFetchUserSignedCampaigns = uid => async dispatch => {
-  dispatch(firebaseFetchUserSignedCampaignsRequest());
+// FIREBASE FETCH USER DATA ERROR
+export const FIREBASE_FETCH_USER_DATA_ERROR = 'FIREBASE_FETCH_USER_DATA_ERROR';
+const firebaseFetchUserDataError = error => ({
+  type: FIREBASE_FETCH_USER_DATA_ERROR,
+  error
+});
+
+// FIREBASE FETCH USER DATA THUNK
+export const firebaseFetchUserData = uid => async dispatch => {
+  dispatch(firebaseFetchUserDataRequest());
   // SEARCHED FOR MATCHING DATABASE USER DOC AND RETURNS THEIR SIGNED CAMPAIGN INFORMATION
   usersRef
     .doc(uid)
     .get()
     .then(user => {
+      const { createdCampaignId, signedCampaignId } = user.data();
       // TODO RESOLVE THIS ESLINT ERROR FOR NO UNSED VARS
       // eslint-disable-next-line no-unused-vars
-      const signedCampaignId = user.data().signedCampaignId ? user.data().signedCampaignId : null;
       // DISPATCHED TO ADD SIGNEDCAMPAIGNID TO USER AUTH OBJECT
       // If SIGNEDCAMPAIGNID === undefined, PASS NULL IN ARGUMENT
-      dispatch(firebaseFetchUserSignedCampaignsSuccess(signedCampaignId));
+      dispatch(firebaseFetchUserDataSuccess(createdCampaignId, signedCampaignId));
     })
     .catch(error => {
       // TODO IMPROVE ERROR HANDELING
       /* eslint-disable no-console */
       console.log('error fetching user signed campaign', error);
+      dispatch(firebaseFetchUserDataError(error));
     });
 };
 
@@ -118,14 +128,12 @@ export const startListeningToAuthChanges = () => dispatch => {
         email,
         displayName,
         providerId,
-        photoURL,
-        createdCampaignId: null,
-        signedCampaignId: null
+        photoURL
       };
       // ADDS OR MERGES AUTH INFORMATION TO USERS COLLECTION
       usersRef.doc(uid).set(userData, { merge: true });
-      // DISPATCHES FETCH USER SIGNED CAMPAIGN
-      dispatch(firebaseFetchUserSignedCampaigns(uid));
+      // DISPATCHES FETCH USER DATA
+      dispatch(firebaseFetchUserData(uid));
     } else {
       // if there is no user, signOut() resets to initial state
       dispatch(firebaseSignOut());
