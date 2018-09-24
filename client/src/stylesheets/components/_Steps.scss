@@ -2,7 +2,7 @@
 
 .steps-container {
   position: relative;
-  padding-bottom: 4rem;
+  overflow: hidden;
 
 
   .steps-content-container {
@@ -22,11 +22,32 @@
 
   }
 
+  &.vertical {
+    display: flex;
+    flex-direction: row;
+
+    .steps-content-container {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    .single-step-content {
+      height: 100%;
+
+      div.container,
+      div.row,
+      div[class^='col-'],
+      div[class*=' col-'] {
+        height: 100%;
+      }
+    }
+  }
+
   .step-end-buttons {
 
     display: flex;
     align-items: center;
-    margin-top: 2rem;
+    margin: 3rem 0 4rem 0;
 
     .step-button {
       display: flex;
@@ -59,6 +80,11 @@
     flex-direction: row;
     align-items: center;
 
+    &.vertical {
+      display: flex;
+      flex-direction: column;
+    }
+
     div[class^='step-selector-'],
     div[class*=' step-selector-'] {
       display: flex;
@@ -67,6 +93,10 @@
       padding: 1.2rem 0;
       align-self: stretch;
       cursor: pointer;
+
+      &.vertical {
+        padding: 0 0;
+      }
 
       .circle {
         display: flex;
@@ -80,6 +110,11 @@
       }
 
       @media only screen and (min-width: 700px) {
+
+        &.vertical {
+          padding: 0 1rem;
+        }
+
         .circle {
           height: 3rem;
           width: 3rem;
@@ -171,6 +206,10 @@
     .half-spacer {
       display: flex;
       flex: 1;
+
+      // &.vertical {
+      //   min-height: 15px;
+      // }
     }
 
     .spacer-line {
@@ -179,6 +218,11 @@
       height: 2px;
       background: white;
       opacity: 0.7;
+
+      &.vertical {
+        // min-height: 30px;
+        width: 2px;
+      }
 
       &.highlighted {
         opacity: 0.7;
@@ -193,6 +237,11 @@
 
       .spacer-line {
         height: 3px;
+
+        &.vertical {
+          // min-height: 30px;
+          width: 3px;
+        }
       }
     }
 

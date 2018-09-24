@@ -30,10 +30,19 @@ class Steps extends Component {
     const numSteps = this.props.children.length;
     const selectedStep = this.state.selectedStep;
     const a = [];
-    a.push(<div className={'half-spacer'} key={'halfSpacer-start'} />);
+    let halfSpacerClasses = 'half-spacer';
+    if (this.props.vertical) {
+      halfSpacerClasses += ' vertical';
+    }
+    a.push(<div className={halfSpacerClasses} key={'halfSpacer-start'} />);
+
     for (let i = 0; i < numSteps; i++) {
       let stepSelectorClasses = `step-selector-${i}`;
       let stepSpacerClasses = 'spacer-line';
+      if (this.props.vertical) {
+        stepSpacerClasses += ' vertical';
+        stepSelectorClasses += ' vertical';
+      }
       if (selectedStep === i) {
         stepSelectorClasses += ' selected';
       } else {
@@ -62,7 +71,7 @@ class Steps extends Component {
         a.push(stepSpacerLine);
       }
     }
-    a.push(<div className={'half-spacer'} key={'halfSpacer-end'} />);
+    a.push(<div className={halfSpacerClasses} key={'halfSpacer-end'} />);
     return a;
   }
 
@@ -90,42 +99,62 @@ class Steps extends Component {
       nextStepBtnClassNames += ' disabled';
     }
 
-    return (
-      <div className="steps-container">
-        <div className="step-selectors-container">{this._renderStepSelectors()}</div>
+    const vertical = this.props.vertical ? this.props.vertical : false;
+    console.log(this.props);
+    console.log(vertical);
 
-        <div
-          className={'steps-content-container'}
-          style={{ left: `-${this.state.selectedStep * 100}%` }}
-        >
+    let containerClasses = 'steps-container';
+    let selectorsContainerClasses = 'step-selectors-container';
+    let stepsContentPositioningStyles;
+    if (vertical) {
+      containerClasses += ' vertical';
+      selectorsContainerClasses += ' vertical';
+      stepsContentPositioningStyles = {
+        left: '0px',
+        top: `-${this.state.selectedStep * 100}%`
+      };
+    } else {
+      stepsContentPositioningStyles = {
+        left: `-${this.state.selectedStep * 100}%`,
+        top: '0px'
+      };
+    }
+
+    return (
+      <div className={containerClasses} style={{ height: this.props.height }}>
+        <div className={selectorsContainerClasses}>{this._renderStepSelectors()}</div>
+
+        <div className={'steps-content-container'} style={stepsContentPositioningStyles}>
           {this._renderChildren()}
         </div>
 
-        <div className="container">
-          <Row>
-            <Col xs={12} md={10} mdOffset={1}>
-              <div className="step-end-buttons">
-                <div
-                  className={prevStepBtnClassNames}
-                  onClick={() => {
-                    this._prevStep();
-                  }}
-                >
-                  PREVIOUS
+        {this.props.showPrevNextButtons && (
+          <div className="container">
+            <Row>
+              <Col xs={12} md={10} mdOffset={1}>
+                <div className="step-end-buttons">
+                  <div
+                    className={prevStepBtnClassNames}
+                    onClick={() => {
+                      this._prevStep();
+                    }}
+                  >
+                    PREVIOUS
+                  </div>
+                  <div className="take-space" />
+                  <div
+                    className={nextStepBtnClassNames}
+                    onClick={() => {
+                      this._nextStep();
+                    }}
+                  >
+                    NEXT
+                  </div>
                 </div>
-                <div className="take-space" />
-                <div
-                  className={nextStepBtnClassNames}
-                  onClick={() => {
-                    this._nextStep();
-                  }}
-                >
-                  NEXT
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </div>
+              </Col>
+            </Row>
+          </div>
+        )}
       </div>
     );
   }

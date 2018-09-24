@@ -8,11 +8,15 @@ import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
 import InfoAndLinks from '../components/Informational/InfoAndLinks';
 import Footer from '../components/Footer/Footer';
+import Steps from '../components/HowItWorks/Steps';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
 } from '../redux/actions/firebaseInitialSearch';
 import { openMap, closeMap } from '../redux/actions/googleMap';
+
+import CircularProgressBar from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 class Home extends Component {
   constructor(props) {
@@ -39,9 +43,7 @@ class Home extends Component {
         />
         <CampaignsMap isOpen={isOpen} markers={campaigns} closeMap={this.props.closeMap} />
         <Grid fluid className="home-section-container">
-          <Link to="/how-does-this-work">
-            <StepByStep />
-          </Link>
+          <StepByStep />
           <InfoAndLinks />
         </Grid>
         <Footer />

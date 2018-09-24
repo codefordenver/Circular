@@ -1,0 +1,32 @@
+@import "../base/colors";
+
+.outer-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  border-radius: 4px;
+  overflow: hidden;
+
+
+  .main-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-image: url($crushed_can);
+    background-repeat: repeat-x;
+    background-size: contain;
+    @include display-20-thin;
+    color: $dark-blue;
+  }
+
+  .space {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    @include display-20-thin;
+  }
+
+}

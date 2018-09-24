@@ -16,6 +16,11 @@ $body_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
   line-height: normal;
 }
 
+@mixin display-28-med () {
+  @include font($display_stack, 28px, 500);
+  line-height: 1.25;
+}
+
 @mixin display-24-med () {
   @include font($display_stack, 24px, 500);
   line-height: 1.25;
@@ -26,8 +31,18 @@ $body_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
   line-height: 1.25;
 }
 
+@mixin display-24-thin () {
+  @include font($display_stack, 24px, 300);
+  line-height: 1.25;
+}
+
 @mixin display-20-reg () {
   @include font($display_stack, 20px, 400);
+  line-height: 1.33;
+}
+
+@mixin display-20-thin () {
+  @include font($display_stack, 20px, 300);
   line-height: 1.33;
 }
 
