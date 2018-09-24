@@ -64,10 +64,13 @@ export const firebaseAddSignatureToCampaignError = addSignatureError => ({
 export const firebaseAddSignatureToCampaign = signatureObject => async dispatch => {
   dispatch(firebaseAddSignatureToCampaignRequest());
   const { campaignId, uid, displayName, signerMessage, keepMeUpdated } = signatureObject;
-  const addSignatureRef = campaignsRef.doc(campaignId).collection('signatures');
-  // .add GETS A GENERATED ID FROM FIREBASE
+  const addSignatureRef = campaignsRef
+    .doc(campaignId)
+    .collection('signatures')
+    .doc(uid);
+  //  USE UID TO DEFINE SIGNATURE DOC
   addSignatureRef
-    .add(
+    .set(
       // IF DOCUMENT EXISTS, OVERWRITE, IF DOESN'T EXIST, CREATE
       {
         uid,

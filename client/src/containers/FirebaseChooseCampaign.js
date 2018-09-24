@@ -37,7 +37,7 @@ class FirebaseChooseCampaign extends Component {
   };
 
   makeNewCampaign = async (searchedAddress, latLng) => {
-    await this.props.firebaseCreateNewCampaign(searchedAddress, latLng);
+    await this.props.firebaseCreateNewCampaign(searchedAddress, latLng, this.props.auth.uid);
     const redirectCampaignId = await this.props.firebaseCampaigns.activeCampaign;
     // PUSH NEWLY CREATED CAMPAIGN TO ROUTER
     browserHistory.push({
@@ -94,6 +94,7 @@ FirebaseChooseCampaign.defaultProps = {
 };
 
 FirebaseChooseCampaign.propTypes = {
+  auth: PropTypes.string.isRequired,
   firebaseCampaigns: PropTypes.shape({
     activeCampaign: PropTypes.string
   }),

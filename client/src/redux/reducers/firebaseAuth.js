@@ -14,7 +14,7 @@ import {
 } from '../actions/firebaseAuth';
 
 export default function authReducer(state = initialState.auth, action) {
-  const { response, type } = action;
+  const { displayName, email, uid, response, type } = action;
   switch (type) {
     // FIREBASE SIGNOUT
     case FIREBASE_SIGN_OUT_REQUEST:
@@ -37,8 +37,10 @@ export default function authReducer(state = initialState.auth, action) {
     case FIREBASE_SIGN_IN_SUCCESS:
       return {
         ...state,
+        displayName,
+        email,
         status: 'SIGNED_IN',
-        ...response
+        uid
       };
     case FIREBASE_FETCH_USER_DATA_REQUEST:
       return {

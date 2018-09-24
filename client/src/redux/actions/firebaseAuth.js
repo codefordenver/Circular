@@ -59,7 +59,9 @@ const firebaseSignIn = user => {
   const { email, displayName, uid } = user;
   return {
     type: FIREBASE_SIGN_IN_SUCCESS,
-    response: { email, displayName, uid }
+    email,
+    displayName,
+    uid
   };
 };
 
@@ -73,11 +75,7 @@ const firebaseFetchUserDataRequest = () => ({
 // FIREBASE FETCH USER DATA SUCCESS
 export const FIREBASE_FETCH_USER_DATA_SUCCESS = 'FIREBASE_FETCH_USER_DATA_SUCCESS';
 const firebaseFetchUserDataSuccess = (createdCampaignId, signedCampaignId) => ({
-  type: FIREBASE_FETCH_USER_DATA_SUCCESS,
-  response: {
-    signedCampaignId,
-    createdCampaignId
-  }
+  type: FIREBASE_FETCH_USER_DATA_SUCCESS
 });
 
 // FIREBASE FETCH USER DATA ERROR
@@ -94,13 +92,12 @@ export const firebaseFetchUserData = uid => async dispatch => {
   usersRef
     .doc(uid)
     .get()
-    .then(user => {
-      const { createdCampaignId, signedCampaignId } = user.data();
+    .then(() => {
       // TODO RESOLVE THIS ESLINT ERROR FOR NO UNSED VARS
       // eslint-disable-next-line no-unused-vars
       // DISPATCHED TO ADD SIGNEDCAMPAIGNID TO USER AUTH OBJECT
       // If SIGNEDCAMPAIGNID === undefined, PASS NULL IN ARGUMENT
-      dispatch(firebaseFetchUserDataSuccess(createdCampaignId, signedCampaignId));
+      dispatchEvent(firebaseFetchUserDataSuccess());
     })
     .catch(error => {
       // TODO IMPROVE ERROR HANDELING
@@ -115,6 +112,7 @@ export const firebaseFetchUserData = uid => async dispatch => {
 export const startListeningToAuthChanges = () => dispatch => {
   // LISTENS FOR AUTH CHANGES
   auth.onAuthStateChanged(user => {
+    console.log(user);
     // IF USER, SET USER
     if (user) {
       // DECONSTRUCT FIREBASE USER OBJECT
@@ -141,11 +139,31 @@ export const startListeningToAuthChanges = () => dispatch => {
   });
 };
 
-// UPDATE USER CREATED CAMPAIGN ID THUNK
-export const firebaseUpdateUserCreatedCampaignId = (user, createdCampaignId) => {
-  console.log(user);
+// UPDATE USER CREATED CAMAPAIGN ID REQUEST
+export const UPDATE_USER_CREATED_CAMPAIGN_ID_REQUEST = 'UPDATE_USER_CREATED_CAMPAIGN_ID_REQUEST';
+const updateUserCreatedCampaignIdRequest = () => ({
+  type: UPDATE_USER_CREATED_CAMPAIGN_ID_REQUEST
+});
 
-  const userRef = usersRef.doc(user.uid);
+// UPDATE USER CREATED CAMAPAIGN ID SUCCESS
+export const UPDATE_USER_CREATED_CAMPAIGN_ID_SUCCESS = 'UPDATE_USER_CREATED_CAMPAIGN_ID_SUCCESS';
+const updateUserCreatedCampaignIdSuccess = user => ({
+  type: UPDATE_USER_CREATED_CAMPAIGN_ID_SUCCESS,
+  response: user
+});
+
+// UPDATE USER CREATED CAMAPAIGN ID ERROR
+export const UPDATE_USER_CREATED_CAMPAIGN_ID_ERROR = 'UPDATE_USER_CREATED_CAMPAIGN_ID_ERROR';
+const updateUserCreatedCampaignIdError = error => ({
+  type: UPDATE_USER_CREATED_CAMPAIGN_ID_ERROR,
+  error
+});
+
+// UPDATE USER CREATED CAMPAIGN ID THUNK
+export const firebaseUpdateUserCreatedCampaignId = (uid, createdCampaignId) => dispatch => {
+  dispatch(updateUserCreatedCampaignIdRequest);
+
+  const userRef = usersRef.doc(uid);
 
   userRef
     .update({
@@ -153,9 +171,12 @@ export const firebaseUpdateUserCreatedCampaignId = (user, createdCampaignId) => 
     })
     .then(() => {
       console.log('User createdCampaignId successfully updated!');
+      dispatch(updateUserCreatedCampaignIdSuccess());
+      dispatch(firebaseFetchUserData());
     })
     .catch(error => {
       // The document probably doesn't exist.
       console.error('Error updating user createdCampaignId: ', error);
+      dispatch(updateUserCreatedCampaignIdError(error));
     });
 };
