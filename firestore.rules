@@ -3,10 +3,16 @@ service cloud.firestore {
     function currentUser() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid));
     }
-
+    
     function signedIn() {
-      return request.auth.uid != null;
+    	return request.auth.uid != null;
     }
+    
+    function isAdmin(campaignId) {
+     // does user has createdCampaignId == requested campaignId
+     return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == campaignId
+    }
+    
 
     match /users/{userId} {
       // User can read, update, or delete their own data
@@ -20,20 +26,23 @@ service cloud.firestore {
 
       // Only authenticated users can create a campaign and only one campaign
       allow create: if signedIn()
-                    && currentUser().data.createdCampaignId == null;
-
+      							&& currentUser().data.createdCampaignId == null;
+			
       // Only authenticated users and campaign owner can update or delete campaign
       allow update, delete: if signedIn()
-                            && campaignId == currentUser().data.createdCampaignId;
-
+      											&& isAdmin(campaignId)
+                            
+                            
       match /signatures/{signature} {
+      allow read;
+      
         // Only authenticated users can sign a campaign and only one campaign
         allow create: if signedIn()
                       && currentUser().data.signedCampaignId == null;
-
+                      
         // Only user can update or delete their own signature
         allow update, delete: if signedIn()
-                              && request.auth.uid == currentUser().data.uid;
+        											&& request.auth.uid == currentUser().data.uid;
       }
     }
 
