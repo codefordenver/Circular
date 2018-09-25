@@ -9,7 +9,7 @@
   },
   "scripts": {
     "client": "(cd ./client && yarn start)",
-    "cypress": "cypress --browser chrome",
+    "cypress": "cypress",
     "ci:start-app-for-test": "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run",
     "lint": "eslint .",
