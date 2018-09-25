@@ -7,6 +7,7 @@ import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
 import InfoAndLinks from '../components/Informational/InfoAndLinks';
 import Footer from '../components/Footer/Footer';
+import RecyclingInfo from '../components/Informational/RecyclingInfo';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
@@ -37,8 +38,12 @@ class Home extends Component {
           router={router}
         />
         <CampaignsMap isOpen={isOpen} markers={campaigns} closeMap={this.props.closeMap} />
-        <Grid fluid className="home-section-container">
-          <StepByStep />
+
+        <Grid className="home-section-container">
+          <RecyclingInfo />
+        </Grid>
+        <StepByStep />
+        <Grid>
           <InfoAndLinks />
         </Grid>
         <Footer />

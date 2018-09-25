@@ -4,32 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 
 import Steps from './HowItWorks/Steps';
 
-// const StepByStep = () => (
-//   <div className="stepbystep-wrapper">
-//     <PageHeader className="home-section-page-header info-graphic-header">
-//       HOW DOES THIS WORK?
-//     </PageHeader>
-//     <div className="info-graphic">
-//       <div className="box">
-//         <i className="fa fa-bullhorn" />
-//         <p>1. CREATE</p>
-//       </div>
-//       <div className="box">
-//         <i className="fa fa-users" />
-//         <p>2. RECRUIT</p>
-//       </div>
-//       <div className="box">
-//         <i className="fa fa-comment" />
-//         <p>3. REQUEST</p>
-//       </div>
-//       <div className="box">
-//         <i className="fa fa-recycle" />
-//         <p>4. RECYCLE</p>
-//       </div>
-//     </div>
-//   </div>
-// );
-
 const StepByStep = () => (
   <div className="step-by-step-container">
     <h2 className="home-section-title">HOW DOES THIS WORK?</h2>
