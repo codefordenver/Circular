@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Col, PageHeader } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import SingleGraphBar from '../SingleGraphBar';
 
 const RecyclingInfo = () => (

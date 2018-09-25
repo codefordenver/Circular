@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
-// import { Transition, animated } from 'react-spring';
+import { Spring, animated } from 'react-spring';
 
 class Steps extends Component {
   constructor(props) {
@@ -77,11 +77,20 @@ class Steps extends Component {
 
   _renderChildren() {
     const wrappedChildren = [];
+    const selectedStep = this.state.selectedStep;
     for (let i = 0; i < this.props.children.length; i++) {
+      let springTo = { opacity: 0.2 };
+      if (selectedStep === i) {
+        springTo = { opacity: 1 };
+      }
       const wrappedChild = (
-        <div className="single-step-content" key={`step-content-${i}`}>
-          <div className="container">{this.props.children[i]}</div>
-        </div>
+        <Spring native to={springTo} key={`animated-step-content-${i}`}>
+          {style => (
+            <animated.div className="single-step-content" style={{ ...style }}>
+              <div className="container">{this.props.children[i]}</div>
+            </animated.div>
+          )}
+        </Spring>
       );
       wrappedChildren.push(wrappedChild);
     }
@@ -100,33 +109,29 @@ class Steps extends Component {
     }
 
     const vertical = this.props.vertical ? this.props.vertical : false;
-    console.log(this.props);
-    console.log(vertical);
 
     let containerClasses = 'steps-container';
     let selectorsContainerClasses = 'step-selectors-container';
-    let stepsContentPositioningStyles;
+    let springTo;
     if (vertical) {
       containerClasses += ' vertical';
       selectorsContainerClasses += ' vertical';
-      stepsContentPositioningStyles = {
-        left: '0px',
-        top: `-${this.state.selectedStep * 100}%`
-      };
+      springTo = { left: 0, top: `-${this.state.selectedStep * 100}%` };
     } else {
-      stepsContentPositioningStyles = {
-        left: `-${this.state.selectedStep * 100}%`,
-        top: '0px'
-      };
+      springTo = { left: `-${this.state.selectedStep * 100}%`, top: 0 };
     }
 
     return (
       <div className={containerClasses} style={{ height: this.props.height }}>
         <div className={selectorsContainerClasses}>{this._renderStepSelectors()}</div>
 
-        <div className={'steps-content-container'} style={stepsContentPositioningStyles}>
-          {this._renderChildren()}
-        </div>
+        <Spring native to={springTo}>
+          {style => (
+            <animated.div className={'steps-content-container'} style={{ ...style }}>
+              {this._renderChildren()}
+            </animated.div>
+          )}
+        </Spring>
 
         {this.props.showPrevNextButtons && (
           <div className="container">

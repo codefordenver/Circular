@@ -21,7 +21,7 @@ import Footer from '../Footer/Footer';
 
 const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, router, ...props }) => {
   let selectedStep = 0;
-  if (props.location.state) {
+  if (props.location.state && props.location.action === 'PUSH') {
     selectedStep = props.location.state.selectedStep || 0;
   }
 
@@ -85,7 +85,7 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
                     Now it's time to spread the word about your building's new recycling campaign to
                     your neighbors. Gathering signatures from your fellow tenants let's your
                     landlord know just how important recycling services are to your community!{' '}
-                    {/* Each signature also shows a tenant's pledge to 
+                    {/* Each signature also shows a tenant's pledge to
                                           make <em> proper </em> use of any provided recycling services. */}
                   </p>
                 </div>

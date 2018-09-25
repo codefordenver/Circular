@@ -38,7 +38,6 @@
     "nodemon": "^1.12.1",
     "path-parser": "^2.0.2",
     "react-bootstrap": "^0.32.1",
-    "react-circular-progressbar": "^1.0.0",
     "serve": "^6.4.8"
   },
   "devDependencies": {

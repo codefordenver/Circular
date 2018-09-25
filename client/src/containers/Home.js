@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,15 +7,11 @@ import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
 import InfoAndLinks from '../components/Informational/InfoAndLinks';
 import Footer from '../components/Footer/Footer';
-import Steps from '../components/HowItWorks/Steps';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
 } from '../redux/actions/firebaseInitialSearch';
 import { openMap, closeMap } from '../redux/actions/googleMap';
-
-import CircularProgressBar from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 
 class Home extends Component {
   constructor(props) {
