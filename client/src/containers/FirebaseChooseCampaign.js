@@ -49,7 +49,7 @@ class FirebaseChooseCampaign extends Component {
   render() {
     const {
       location: { isNewCampaign },
-      firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, selectedAddress }
+      firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, searchedAddress }
     } = this.props;
 
     return (
@@ -76,7 +76,7 @@ class FirebaseChooseCampaign extends Component {
               nearbyCampaigns.length !== 0 && (
                 <RenderNearbyCampaigns
                   nearbyCampaigns={nearbyCampaigns}
-                  selectedAddress={selectedAddress}
+                  selectedAddress={searchedAddress}
                 />
               )}
             {loaded && !exactMatch && <RenderNewCampaign handleSelection={this.handleSelection} />}
@@ -118,7 +118,7 @@ FirebaseChooseCampaign.propTypes = {
       isNewCampaign: PropTypes.bool
     })
   }),
-  searchedAddress: PropTypes.string.isRequired,
+  // searchedAddress: PropTypes.string.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired
