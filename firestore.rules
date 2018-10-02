@@ -26,7 +26,7 @@ service cloud.firestore {
     }
 
     match /campaigns/{campaignId} {
-      allow read;
+      allow read, write;
 
       // Only authenticated users can create a campaign and only one campaign
       allow create: if signedIn()
