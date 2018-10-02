@@ -103,7 +103,8 @@ FirebaseChooseCampaign.defaultProps = {
 FirebaseChooseCampaign.propTypes = {
   auth: PropTypes.shape({
     status: PropTypes.string.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    uid: PropTypes.string
   }).isRequired,
   firebaseCampaigns: PropTypes.shape({
     activeCampaign: PropTypes.string

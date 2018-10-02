@@ -94,7 +94,6 @@ export const firebaseFetchUserData = uid => async dispatch => {
     .doc(uid)
     .get()
     .then(user => {
-      console.log(user.data());
       const { createdCampaignId, signedCampaignId } = user.data();
       const userInfo = { createdCampaignId, signedCampaignId };
       // TODO RESOLVE THIS ESLINT ERROR FOR NO UNSED VARS
@@ -116,7 +115,6 @@ export const firebaseFetchUserData = uid => async dispatch => {
 export const startListeningToAuthChanges = () => dispatch => {
   // LISTENS FOR AUTH CHANGES
   auth.onAuthStateChanged(user => {
-    console.log(user);
     // IF USER, SET USER
     if (user) {
       // DECONSTRUCT FIREBASE USER OBJECT
