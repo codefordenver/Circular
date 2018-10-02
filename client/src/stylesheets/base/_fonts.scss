@@ -11,6 +11,13 @@ $body_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
   color: $mainwhite;
 }
 
+
+@mixin display-72-med () {
+  @include font($display_stack, 72px, 500);
+  line-height: normal;
+}
+
+
 @mixin display-36-med () {
   @include font($display_stack, 36px, 500);
   line-height: normal;

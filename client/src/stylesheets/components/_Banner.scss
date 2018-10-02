@@ -1,0 +1,20 @@
+@import "../base/colors";
+
+.row.banner-row {
+  background-color: $light-blue-background;
+  margin-top: 4rem;
+
+  .banner-content {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #164c5f;
+
+    strong {
+      font-weight: 600;
+    }
+
+  }
+}

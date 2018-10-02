@@ -8,6 +8,7 @@ import StepByStep from '../components/StepByStep';
 import InfoAndLinks from '../components/Informational/InfoAndLinks';
 import Footer from '../components/Footer/Footer';
 import RecyclingInfo from '../components/Informational/RecyclingInfo';
+import Banner from '../components/Banner';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
@@ -39,8 +40,14 @@ class Home extends Component {
         />
         <CampaignsMap isOpen={isOpen} markers={campaigns} closeMap={this.props.closeMap} />
 
-        <Grid className="home-section-container">
+        <Grid>
           <RecyclingInfo />
+          <Banner>
+            <div>
+              Many people in multi-family units have <strong>no access</strong> to recycling.
+            </div>
+            <div>Here's our solution for how you can help us increase recycling.</div>
+          </Banner>
         </Grid>
         <StepByStep />
         <Grid>
