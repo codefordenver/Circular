@@ -74,8 +74,9 @@ const firebaseFetchUserDataRequest = () => ({
 
 // FIREBASE FETCH USER DATA SUCCESS
 export const FIREBASE_FETCH_USER_DATA_SUCCESS = 'FIREBASE_FETCH_USER_DATA_SUCCESS';
-const firebaseFetchUserDataSuccess = (createdCampaignId, signedCampaignId) => ({
-  type: FIREBASE_FETCH_USER_DATA_SUCCESS
+const firebaseFetchUserDataSuccess = userInfo => ({
+  type: FIREBASE_FETCH_USER_DATA_SUCCESS,
+  response: { ...userInfo }
 });
 
 // FIREBASE FETCH USER DATA ERROR
@@ -92,12 +93,15 @@ export const firebaseFetchUserData = uid => async dispatch => {
   usersRef
     .doc(uid)
     .get()
-    .then(() => {
+    .then(user => {
+      console.log(user.data());
+      const { createdCampaignId, signedCampaignId } = user.data();
+      const userInfo = { createdCampaignId, signedCampaignId };
       // TODO RESOLVE THIS ESLINT ERROR FOR NO UNSED VARS
       // eslint-disable-next-line no-unused-vars
       // DISPATCHED TO ADD SIGNEDCAMPAIGNID TO USER AUTH OBJECT
       // If SIGNEDCAMPAIGNID === undefined, PASS NULL IN ARGUMENT
-      dispatchEvent(firebaseFetchUserDataSuccess());
+      dispatch(firebaseFetchUserDataSuccess(userInfo));
     })
     .catch(error => {
       // TODO IMPROVE ERROR HANDELING
