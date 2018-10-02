@@ -4,7 +4,9 @@ const initialState = {
     email: null,
     displayName: null,
     uid: null,
-    signedUserCampaign: null
+    signedCampaignId: null,
+    createdCampaignId: null,
+    loading: false
   }
 };
 
