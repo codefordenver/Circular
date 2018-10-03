@@ -1,10 +1,9 @@
 @import "../utils/placeholders";
 @import "../base/colors";
 
-
-
 .step-by-step-container {
-  padding: 2rem 15px 1rem 15px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 
   h2.home-section-title {
     padding: 0 0;
@@ -15,10 +14,6 @@
   h3 {
     text-align: center;
     @include display-20-thin;
-  }
-
-  .col-xs-12.no-right-pad {
-    padding-right: 0;
   }
 
   .step-icon-and-title-container {
@@ -58,11 +53,20 @@
     justify-content: center;
     align-items: center;
 
+    > div:first-child {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 700px;
+      padding: 0 0.5rem;
+    }
 
     a.more-step-details-link {
       color: $maingreen;
       opacity: 0.7;
       align-self: center;
+      margin-bottom: 2rem;
     }
 
     a.more-step-details-link:hover {
@@ -74,22 +78,19 @@
 }
 
 
-
 @media only screen and (min-width: 480px) {
   .step-by-step-container {
-    padding: 3rem 35px;
   
     .inner-content-container {
       padding: 0 1rem;
-      align-items: flex-start;
 
       a.more-step-details-link {
         align-self: flex-end;
+        margin-bottom: 0;
       }
     }
 
     .step-icon-and-title-container {
-      // padding-bottom: 3rem;
       flex-direction: row;
     }
 
@@ -103,9 +104,6 @@
     }
 
     h2.home-section-title {
-      position: relative;
-      left: 10%;
-      // padding: 0 1rem;
       text-align: left;
       @include display-28-med;
     }
@@ -130,11 +128,9 @@
 
 @media only screen and (min-width: 1200px) {
   .step-by-step-container {
-    padding: 3rem 35px;
   
     .inner-content-container {
       padding: 0 1rem;
-      align-items: flex-start;
 
       a.more-step-details-link {
         align-self: flex-end;
@@ -142,19 +138,15 @@
 
       p {
         align-self: center;
-        margin-right: 150px;
       }
 
       .step-icon-and-title-container {
-        align-self: center;
-        flex-direction: row;
-        margin-right: 150px;
+        align-self: flex-start;
       }
     }
     
   }
 }
-
 
 
 .info-graphic-header {

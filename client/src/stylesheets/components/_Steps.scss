@@ -3,6 +3,7 @@
 .steps-container {
   position: relative;
   overflow: hidden;
+  margin-top: 1rem;
 
 
   .steps-content-container {
@@ -27,8 +28,21 @@
     flex-direction: row;
 
     .steps-content-container {
+
       flex-direction: column;
       flex-wrap: nowrap;
+
+      flex: 10;
+    }
+
+    .centering-space {
+      flex: 0;
+    }
+
+    @media only screen and (min-width: 700px) {
+      .centering-space {
+        flex: 1;
+      }
     }
 
     .single-step-content {
@@ -82,6 +96,7 @@
 
     &.vertical {
       display: flex;
+      flex: 1;
       flex-direction: column;
     }
 
@@ -148,8 +163,6 @@
         
         .circle {
           &:hover {
-            // color: white;
-            // border: 2px solid white;
             opacity: 1;
           }
         }
@@ -185,7 +198,6 @@
         &.not-selected {
           .circle {
             &:hover {
-              // color: white;
               border: 3px solid white;
             }
           }
@@ -206,10 +218,6 @@
     .half-spacer {
       display: flex;
       flex: 1;
-
-      // &.vertical {
-      //   min-height: 15px;
-      // }
     }
 
     .spacer-line {
@@ -220,7 +228,6 @@
       opacity: 0.7;
 
       &.vertical {
-        // min-height: 30px;
         width: 2px;
       }
 
@@ -239,7 +246,6 @@
         height: 3px;
 
         &.vertical {
-          // min-height: 30px;
           width: 3px;
         }
       }

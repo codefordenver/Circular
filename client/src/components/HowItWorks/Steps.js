@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { Spring, animated } from 'react-spring';
 
 class Steps extends Component {
@@ -87,7 +87,7 @@ class Steps extends Component {
         <Spring native to={springTo} key={`animated-step-content-${i}`}>
           {style => (
             <animated.div className="single-step-content" style={{ ...style }}>
-              <div className="container">{this.props.children[i]}</div>
+              {this.props.children[i]}
             </animated.div>
           )}
         </Spring>
@@ -133,33 +133,36 @@ class Steps extends Component {
           )}
         </Spring>
 
-        {this.props.showPrevNextButtons && (
-          <div className="container">
-            <Row>
-              <Col xs={12} md={10} mdOffset={1}>
-                <div className="step-end-buttons">
-                  <div
-                    className={prevStepBtnClassNames}
-                    onClick={() => {
-                      this._prevStep();
-                    }}
-                  >
-                    PREVIOUS
+        {vertical ? <div className="centering-space" /> : null}
+
+        {this.props.showPrevNextButtons &&
+          !vertical && (
+            <Grid>
+              <Row>
+                <Col xs={12} md={10} mdOffset={1}>
+                  <div className="step-end-buttons">
+                    <div
+                      className={prevStepBtnClassNames}
+                      onClick={() => {
+                        this._prevStep();
+                      }}
+                    >
+                      PREVIOUS
+                    </div>
+                    <div className="take-space" />
+                    <div
+                      className={nextStepBtnClassNames}
+                      onClick={() => {
+                        this._nextStep();
+                      }}
+                    >
+                      NEXT
+                    </div>
                   </div>
-                  <div className="take-space" />
-                  <div
-                    className={nextStepBtnClassNames}
-                    onClick={() => {
-                      this._nextStep();
-                    }}
-                  >
-                    NEXT
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        )}
+                </Col>
+              </Row>
+            </Grid>
+          )}
       </div>
     );
   }
