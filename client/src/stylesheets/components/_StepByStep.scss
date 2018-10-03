@@ -2,11 +2,17 @@
 @import "../base/colors";
 
 .step-by-step-container {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  margin-bottom: 6rem;
+
+  &.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   h2.home-section-title {
     padding: 0 0;
+    margin-top: 6rem;
+
     text-align: center;
     @include display-24-med;
   }
@@ -14,6 +20,14 @@
   h3 {
     text-align: center;
     @include display-20-thin;
+  }
+
+  .tinted {
+    background-color: rgba(255,255,255,0.25);
+  }
+
+  .pad-bottom {
+    padding-bottom: 6rem;
   }
 
   .step-icon-and-title-container {
@@ -58,7 +72,7 @@
       flex: 1;
       flex-direction: column;
       justify-content: center;
-      max-width: 700px;
+      max-width: 800px;
       padding: 0 0.5rem;
     }
 
@@ -92,6 +106,7 @@
 
     .step-icon-and-title-container {
       flex-direction: row;
+      justify-content: center;
     }
 
     .col-xs-12.no-right-pad {
@@ -106,6 +121,7 @@
     h2.home-section-title {
       text-align: left;
       @include display-28-med;
+      margin-left: 1rem;
     }
 
     h3 {
@@ -114,7 +130,6 @@
     }
 
     p {
-      text-align: left;
       margin: 1rem 0 1.5rem 0;
     }
 
@@ -122,6 +137,27 @@
       margin: 1rem 0 1.5rem 1.2rem;
     }
 
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .step-by-step-container {
+    .inner-content-container {
+      i.how-icon {
+        font-size: 4rem;
+        padding: 0 2rem 0 0;
+      }
+
+      h3 {
+        text-align: left;
+        @include display-48-thin;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    
   }
 }
 
@@ -138,10 +174,6 @@
 
       p {
         align-self: center;
-      }
-
-      .step-icon-and-title-container {
-        align-self: flex-start;
       }
     }
     

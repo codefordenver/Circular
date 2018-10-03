@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Grid } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
-import CampaignsMap from '../components/CampaignsMap';
+// import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
-import InfoAndLinks from '../components/Informational/InfoAndLinks';
+// import InfoAndLinks from '../components/Informational/InfoAndLinks';
 import Footer from '../components/Footer/Footer';
 import RecyclingInfo from '../components/Informational/RecyclingInfo';
 import Banner from '../components/Banner';
@@ -31,27 +32,47 @@ class Home extends Component {
     const { campaigns } = firebaseCampaigns;
     return (
       <div>
-        <HeroCTA
-          openMap={this.props.openMap}
-          firebaseSearchAddressFlow={firebaseSearchAddressFlow}
-          clearInitialSearchResults={clearInitialSearchResults}
-          firebaseCampaigns={firebaseCampaigns}
-          router={router}
-        />
-        <CampaignsMap isOpen={isOpen} markers={campaigns} closeMap={this.props.closeMap} />
-
+        <HeroCTA />
         <Grid>
           <RecyclingInfo />
           <Banner>
             <div>
-              Many people in multi-family units have <strong>no access</strong> to recycling.
+              <strong>Most Denver apartments don't have recycling on site.</strong>
             </div>
-            <div>Here's our solution for how you can help us increase recycling.</div>
+            <div>We can help you get recycling at your building.</div>
           </Banner>
         </Grid>
         <StepByStep />
-        <Grid>
-          <InfoAndLinks />
+        <Grid className="call-to-action-section">
+          <Row>
+            <Col xs={12} lg={10} lgOffset={1}>
+              <div>
+                <h2>Ready? Let's improve recycling together!</h2>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} lg={10} lgOffset={1}>
+              <div>
+                <p>
+                  You deserve convenient recycling. Apartment or condo managers are not required to
+                  provide recycling services for residents, but there is something you can do.
+                  Organize your neighbors and request recycling from your buliding manager. Together
+                  we can make Denver a sustainability leader!
+                </p>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <div className="buttons-wrapper">
+                <div>
+                  <Link to="how-does-this-work">I'm a tenant</Link>
+                  <Link to="how-does-this-work">I'm a property manager</Link>
+                </div>
+              </div>
+            </Col>
+          </Row>
         </Grid>
         <Footer />
       </div>

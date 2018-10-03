@@ -5,15 +5,15 @@ import { Row, Col, Grid } from 'react-bootstrap';
 import Steps from './HowItWorks/Steps';
 
 const StepByStep = () => (
-  <Grid className="step-by-step-container">
-    <Row>
-      <Col xs={12} lg={10} lgOffset={2}>
+  <Grid fluid className="step-by-step-container">
+    <Row className="tinted">
+      <Col xs={12} lg={10} lgOffset={1}>
         <h2 className="home-section-title">HOW DOES THIS WORK?</h2>
       </Col>
     </Row>
 
-    <Row>
-      <Col xs={12} lg={10} lgOffset={1}>
+    <Row className="tinted">
+      <Col xs={12} lg={10} lgOffset={1} className="pad-bottom">
         <Steps showPrevNextButtons={false} vertical height={400}>
           {/* ----------- STEP 1 ------------*/}
 
@@ -21,7 +21,9 @@ const StepByStep = () => (
             <div>
               <div className="step-icon-and-title-container">
                 <i className="fa fa-bullhorn how-icon" />
-                <h3>1. Create or Join a Campaign</h3>
+                <h3>
+                  <span className="number">1.</span> Create or Join a Campaign
+                </h3>
               </div>
               <p>
                 Look up your address in the search bar above to create a new recycling campaign for
