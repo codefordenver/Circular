@@ -37,7 +37,7 @@ class FirebaseChooseCampaign extends Component {
   };
 
   makeNewCampaign = async (searchedAddress, latLng) => {
-    await this.props.firebaseCreateNewCampaign(searchedAddress, latLng);
+    await this.props.firebaseCreateNewCampaign(searchedAddress, latLng, this.props.auth.uid);
     const redirectCampaignId = await this.props.firebaseCampaigns.activeCampaign;
     // PUSH NEWLY CREATED CAMPAIGN TO ROUTER
     browserHistory.push({
@@ -49,7 +49,7 @@ class FirebaseChooseCampaign extends Component {
   render() {
     const {
       location: { isNewCampaign },
-      firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, selectedAddress }
+      firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, searchedAddress }
     } = this.props;
 
     return (
@@ -76,7 +76,7 @@ class FirebaseChooseCampaign extends Component {
               nearbyCampaigns.length !== 0 && (
                 <RenderNearbyCampaigns
                   nearbyCampaigns={nearbyCampaigns}
-                  selectedAddress={selectedAddress}
+                  selectedAddress={searchedAddress}
                 />
               )}
             {loaded && !exactMatch && <RenderNewCampaign handleSelection={this.handleSelection} />}
@@ -88,12 +88,24 @@ class FirebaseChooseCampaign extends Component {
 }
 
 FirebaseChooseCampaign.defaultProps = {
+  auth: {
+    email: '',
+    displayName: '',
+    uid: '',
+    signedCampaignId: '',
+    createdCampaignId: ''
+  },
   exactMatch: null,
   firebaseCampaigns: { activeCampaign: null },
   location: { state: { isNewCampaign: '' } }
 };
 
 FirebaseChooseCampaign.propTypes = {
+  auth: PropTypes.shape({
+    status: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
+    uid: PropTypes.string
+  }).isRequired,
   firebaseCampaigns: PropTypes.shape({
     activeCampaign: PropTypes.string
   }),
@@ -105,7 +117,6 @@ FirebaseChooseCampaign.propTypes = {
     }),
     loading: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
-    nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
     searchedAddress: PropTypes.string.isRequired,
     searchedGeoPoint: PropTypes.shape({
       _lat: PropTypes.number.isRequired,
@@ -117,7 +128,7 @@ FirebaseChooseCampaign.propTypes = {
       isNewCampaign: PropTypes.bool
     })
   }),
-  searchedAddress: PropTypes.string.isRequired,
+  // searchedAddress: PropTypes.string.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired

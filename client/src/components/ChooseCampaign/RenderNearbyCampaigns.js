@@ -14,7 +14,7 @@ const RenderNearbyCampaigns = ({ nearbyCampaigns, selectedAddress }) => (
 );
 
 RenderNearbyCampaigns.propTypes = {
-  nearbyCampaigns: PropTypes.arrayOf().isRequired,
+  nearbyCampaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedAddress: PropTypes.string.isRequired
 };
 
