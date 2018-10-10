@@ -6,7 +6,8 @@ import ToolList from '../../UtilComponents/CollapsePanel';
 
 const RenderRemoveSignatureAndUpdateCampaign = ({
   handleRemoveSignatureFromCamapaign,
-  toggleShowUpdateCampaignModal
+  toggleShowUpdateCampaignModal,
+  userIsAdmin
 }) => (
   <div>
     <div className="text-center thanks-for-alert">
@@ -41,14 +42,16 @@ const RenderRemoveSignatureAndUpdateCampaign = ({
           <i className="fa fa-times-circle" />
           Unsign This Campaign
         </Button>
-        <Button
-          style={{ marginTop: '1em' }}
-          bsStyle="info"
-          block
-          onClick={toggleShowUpdateCampaignModal}
-        >
-          Update Campaign Info
-        </Button>
+        {userIsAdmin && (
+          <Button
+            style={{ marginTop: '1em' }}
+            bsStyle="info"
+            block
+            onClick={toggleShowUpdateCampaignModal}
+          >
+            Update Campaign Info
+          </Button>
+        )}
       </div>
     </div>
   </div>
@@ -56,7 +59,8 @@ const RenderRemoveSignatureAndUpdateCampaign = ({
 
 RenderRemoveSignatureAndUpdateCampaign.propTypes = {
   handleRemoveSignatureFromCamapaign: PropTypes.func.isRequired,
-  toggleShowUpdateCampaignModal: PropTypes.func.isRequired
+  toggleShowUpdateCampaignModal: PropTypes.func.isRequired,
+  userIsAdmin: PropTypes.bool.isRequired
 };
 
 export default RenderRemoveSignatureAndUpdateCampaign;

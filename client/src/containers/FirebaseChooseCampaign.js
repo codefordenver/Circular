@@ -74,6 +74,7 @@ class FirebaseChooseCampaign extends Component {
     if (loaded && !exactMatch) {
       return <RenderNewCampaign handleSelection={this.handleSelection} />;
     }
+    return null;
   };
 
   render() {
