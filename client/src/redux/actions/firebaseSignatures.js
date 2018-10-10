@@ -92,7 +92,8 @@ export const firebaseAddSignatureToCampaign = signatureObject => async dispatch 
     .set(
       {
         signedCampaignId: campaignId,
-        signedCampaignTimestamp: Timestamp
+        signedCampaignTimestamp: Timestamp,
+        keepMeUpdated
       },
       { merge: true }
     )
