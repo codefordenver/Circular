@@ -46,40 +46,57 @@ class FirebaseChooseCampaign extends Component {
     });
   };
 
+  handleRedirectToExistingCampaign = (exactMatch, isNewCampaign, loaded) => {
+    if (loaded && exactMatch && exactMatch.length !== 0 && exactMatch.address && !isNewCampaign) {
+      return (
+        <RenderCampaignAlreadyExists
+          exactMatchAddress={exactMatch.address}
+          handleSelection={this.handleSelection}
+        />
+      );
+    }
+    return null;
+  };
+
+  handleRenderNearbyCampaigns = (loaded, nearbyCampaigns, searchedAddress) => {
+    if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
+      return (
+        <RenderNearbyCampaigns
+          nearbyCampaigns={nearbyCampaigns}
+          selectedAddress={searchedAddress}
+        />
+      );
+    }
+    return null;
+  };
+
+  handleRenderNewCampaign = (exactMatch, loaded) => {
+    if (loaded && !exactMatch) {
+      return <RenderNewCampaign handleSelection={this.handleSelection} />;
+    }
+    return null;
+  };
+
   render() {
     const {
       location: { isNewCampaign },
       firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, searchedAddress }
     } = this.props;
+    if (loading) {
+      return <RenderLoading />;
+    }
 
     return (
       <Grid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
-            {loading && <RenderLoading />}
             {/* {!loading && error && <RenderError error={error} />} */}
             {/* if no longer loading and not erroring then
             render one of the following three depending
              on the status of nearby campaign */}
-            {loaded &&
-              exactMatch &&
-              exactMatch.length !== 0 &&
-              exactMatch.address &&
-              !isNewCampaign && (
-                <RenderCampaignAlreadyExists
-                  exactMatchAddress={exactMatch.address}
-                  handleSelection={this.handleSelection}
-                />
-              )}
-            {loaded &&
-              nearbyCampaigns &&
-              nearbyCampaigns.length !== 0 && (
-                <RenderNearbyCampaigns
-                  nearbyCampaigns={nearbyCampaigns}
-                  selectedAddress={searchedAddress}
-                />
-              )}
-            {loaded && !exactMatch && <RenderNewCampaign handleSelection={this.handleSelection} />}
+            {this.handleRedirectToExistingCampaign(exactMatch, isNewCampaign, loaded)}
+            {this.handleRenderNearbyCampaigns(loaded, nearbyCampaigns, searchedAddress)}
+            {this.handleRenderNewCampaign(exactMatch, loaded)}
           </Col>
         </Row>
       </Grid>
