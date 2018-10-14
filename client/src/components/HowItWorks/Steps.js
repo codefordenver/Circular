@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Spring, animated } from 'react-spring';
+import { TimingAnimation, Easing } from 'react-spring/dist/addons.cjs';
 
 class Steps extends Component {
   constructor(props) {
@@ -80,11 +81,20 @@ class Steps extends Component {
     const selectedStep = this.state.selectedStep;
     for (let i = 0; i < this.props.children.length; i++) {
       let springTo = { opacity: 0.2 };
+      let springFrom = { opacity: 1 };
       if (selectedStep === i) {
         springTo = { opacity: 1 };
+        springFrom = { opacity: 0.2 };
       }
       const wrappedChild = (
-        <Spring native to={springTo} key={`animated-step-content-${i}`}>
+        <Spring
+          native
+          from={springFrom}
+          to={springTo}
+          key={`animated-step-content-${i}`}
+          impl={TimingAnimation}
+          config={{ duration: 900, easing: Easing.out(Easing.cubic) }}
+        >
           {style => (
             <animated.div className="single-step-content" style={{ ...style }}>
               {this.props.children[i]}
@@ -125,7 +135,12 @@ class Steps extends Component {
       <div className={containerClasses} style={{ height: this.props.height }}>
         <div className={selectorsContainerClasses}>{this._renderStepSelectors()}</div>
 
-        <Spring native to={springTo}>
+        <Spring
+          native
+          to={springTo}
+          impl={TimingAnimation}
+          config={{ duration: 625, easing: Easing.out(Easing.cubic) }}
+        >
           {style => (
             <animated.div className={'steps-content-container'} style={{ ...style }}>
               {this._renderChildren()}

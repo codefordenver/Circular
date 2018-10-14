@@ -14,7 +14,7 @@ const HeroCTA = ({
       <div className="hero-page-header">
         <div className="opacity-div">
           <h1>NEED RECYCLING IN YOUR APARTMENT OR CONDO?</h1>
-          <h2 className="font-italic">Recruit, Request, Recycle</h2>
+          <div className="font-italic">Recruit, Request, Recycle</div>
         </div>
       </div>
     </div>
