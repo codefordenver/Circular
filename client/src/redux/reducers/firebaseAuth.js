@@ -7,6 +7,7 @@ import {
   FIREBASE_SIGN_IN_GOOGLE_REQUEST,
   FIREBASE_SIGN_IN_FACEBOOK_REQUEST,
   FIREBASE_SIGN_IN_SUCCESS,
+  FIREBASE_SIGN_IN_FACEBOOK_ERROR,
   // FIREBASE FETCH USER SIGNED CAMPAIGNS
   FIREBASE_FETCH_USER_DATA_REQUEST,
   FIREBASE_FETCH_USER_DATA_SUCCESS,
@@ -14,7 +15,7 @@ import {
 } from '../actions/firebaseAuth';
 
 export default function authReducer(state = initialState.auth, action) {
-  const { displayName, email, uid, response, type } = action;
+  const { displayName, email, uid, response, type, error } = action;
   switch (type) {
     // FIREBASE SIGNOUT
     case FIREBASE_SIGN_OUT_REQUEST:
@@ -23,7 +24,8 @@ export default function authReducer(state = initialState.auth, action) {
       };
     case FIREBASE_SIGN_OUT_SUCCESS:
       return {
-        ...initialState.auth
+        ...initialState.auth,
+        loading: false
       };
     // FIREBASE SIGN IN
     case FIREBASE_SIGN_IN_GOOGLE_REQUEST:
@@ -41,6 +43,12 @@ export default function authReducer(state = initialState.auth, action) {
         email,
         status: 'SIGNED_IN',
         uid
+      };
+    case FIREBASE_SIGN_IN_FACEBOOK_ERROR:
+      return {
+        ...initialState.auth,
+        loading: false,
+        error
       };
     case FIREBASE_FETCH_USER_DATA_REQUEST:
       return {
