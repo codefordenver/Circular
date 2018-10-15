@@ -8,9 +8,9 @@ import NavBarSignIn from './NavBarSignIn';
 // Wrap all Bootstrap Links in LinkContainer to user React-Router
 
 const MyCampaignNavItem = ({ signedCampaignId }) => (
-  <NavItem eventKey={4} href={`/campaign/${signedCampaignId}`}>
-    MY CAMPAIGN
-  </NavItem>
+  <LinkContainer to={`/campaign/${signedCampaignId}`}>
+    <NavItem eventKey={4}>MY CAMPAIGN</NavItem>
+  </LinkContainer>
 );
 
 const NavBar = ({
