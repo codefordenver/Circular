@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Footer = () => (
   <Grid fluid className="footer-container">
@@ -10,9 +11,9 @@ const Footer = () => (
       </a>
       <i className="fa fa-copyright" />
       2018 Eco-Cycle Inc & Code for Denver | All Rights Reserved |
-      <Link className="footer-link" to="/privacy-policy">
-        Privacy Policy
-      </Link>
+      <LinkContainer to="/privacy-policy">
+        <Link className="footer-link">Privacy Policy</Link>
+      </LinkContainer>
     </Col>
   </Grid>
 );

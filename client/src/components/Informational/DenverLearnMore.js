@@ -28,7 +28,12 @@ const DenverLearnMore = () => (
           <p>
             It's time to speak up and make better recycling and composting a priority for Denver!
             Get involved by{' '}
-            <a className="info-link" href="http://ecocycle.org/take-action/denver">
+            <a
+              className="info-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="http://ecocycle.org/take-action/denver"
+            >
               signing our letter
             </a>{' '}
             to Mayor Hancock.

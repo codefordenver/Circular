@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Col, PageHeader } from 'react-bootstrap';
 
 const RecyclingInfo = () => (
@@ -14,9 +15,9 @@ const RecyclingInfo = () => (
         mandated to provide recycling service, but you and your neighbors can request recycling
         service from your landlord today!
       </p>
-      <Link to="/denver-learn-more" className="home-section-link">
-        LEARN MORE
-      </Link>
+      <LinkContainer to="/denver-learn-more">
+        <Link className="home-section-link">LEARN MORE</Link>
+      </LinkContainer>
     </div>
   </Col>
 );
