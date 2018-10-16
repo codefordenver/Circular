@@ -161,7 +161,7 @@ const updateUserCreatedCampaignIdError = error => ({
   error
 });
 
-// UPDATE USER CREATED CAMPAIGN ID THUNK
+// UPDATE USER CREATED CAMPAIGN ID
 export const firebaseUpdateUserCreatedCampaignId = (uid, createdCampaignId) => dispatch => {
   dispatch(updateUserCreatedCampaignIdRequest);
 
@@ -174,7 +174,7 @@ export const firebaseUpdateUserCreatedCampaignId = (uid, createdCampaignId) => d
     .then(() => {
       console.log('User createdCampaignId successfully updated!');
       dispatch(updateUserCreatedCampaignIdSuccess());
-      dispatch(firebaseFetchUserData());
+      dispatch(firebaseFetchUserData(uid));
     })
     .catch(error => {
       // The document probably doesn't exist.
