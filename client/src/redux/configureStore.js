@@ -1,19 +1,26 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
+// maintain redux state on page reload
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-// import apiMiddleware from './middleware/api
 import rootReducer from './reducers/index';
-import { loadState } from './localStorage';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['routing'] // routing is not persisted
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default function configureStore() {
   const middleware = routerMiddleware(browserHistory);
-  const persistedState = loadState();
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
-    rootReducer,
-    persistedState,
+    persistedReducer,
     composeEnhancers(applyMiddleware(logger, thunk, middleware))
   );
 
