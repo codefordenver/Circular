@@ -6,6 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 import { firebaseUpdateCampaign } from '../../../redux/actions/firebaseCampaigns';
 import { fetchUserSignatures, removeSignatureFromCampaign } from '../../../redux/actions/signature';
 // COMPONENTS
+import AdminAddSignatureModal from './AdminAddSignatureModal';
 import RenderSignCampaign from './RenderSignCampaign';
 import RenderRemoveSignatureAndUpdateCampaign from './RenderRemoveSignatureAndUpdateCampaign';
 import RenderSignIn from './RenderSignIn';
@@ -21,14 +22,20 @@ class SignCampaign extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      adminAddSignatureData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        signerMessage: ''
+      },
       keepMeUpdated: false,
       signerMessage: '',
+      showAdminAddSignatureModal: true,
       showUpdateCampaignModal: false
     };
   }
 
   handleAddSignatureToCampaign = async () => {
-    /* eslint-disable no-unsued-vars */
     const {
       auth: { uid, displayName },
       activeCampaign: { campaignId }
@@ -42,6 +49,34 @@ class SignCampaign extends Component {
       campaignId
     };
     await this.props.signCampaignProps.firebaseAddSignatureToCampaign(signatureObject);
+  };
+
+  handleAdminAddSignatureModalDataChange = (field, updatedData) => {
+    this.setState(prevState => ({
+      adminAddSignatureData: { ...prevState.adminAddSignatureData, [field]: updatedData }
+    }));
+  };
+
+  handleAdminAddSignature = async () => {
+    const {
+      auth: { uid },
+      activeCampaign: { campaignId }
+    } = this.props.signCampaignProps;
+    const {
+      adminAddSignatureData: { email, firstName, lastName, signerMessage },
+      keepMeUpdated
+    } = this.state;
+    const adminAddSignatureObject = {
+      campaignId,
+      email,
+      firstName,
+      keepMeUpdated,
+      lastName,
+      signerMessage,
+      adminUid: uid
+    };
+    console.log(adminAddSignatureObject);
+    // await this.props.signCampaignProps.firebaseAddSignatureToCampaign(adminAddSignatureObject);
   };
 
   handleRemoveSignatureFromCamapaign = () => {
@@ -81,6 +116,12 @@ class SignCampaign extends Component {
     });
   };
 
+  toggleShowAdminAddSignatureModal = () => {
+    this.setState(prevState => ({
+      showAdminAddSignatureModal: !prevState.showAdminAddSignatureModal
+    }));
+  };
+
   toggleShowUpdateCampaignModal = () => {
     this.setState(prevState => ({
       showUpdateCampaignModal: !prevState.showUpdateCampaignModal
@@ -106,6 +147,7 @@ class SignCampaign extends Component {
       return (
         <RenderRemoveSignatureAndUpdateCampaign
           handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
+          toggleShowAdminAddSignatureModal={this.toggleShowAdminAddSignatureModal}
           toggleShowUpdateCampaignModal={this.toggleShowUpdateCampaignModal}
           userIsAdmin={userIsAdmin}
         />
@@ -137,7 +179,13 @@ class SignCampaign extends Component {
       firebaseSignInFacebook,
       firebaseSignInGoogle
     } = this.props.signCampaignProps;
-    const { keepMeUpdated, showUpdateCampaignModal, signerMessage } = this.state;
+    const {
+      adminAddSignatureData,
+      keepMeUpdated,
+      showAdminAddSignatureModal,
+      showUpdateCampaignModal,
+      signerMessage
+    } = this.state;
     const userIsAdmin = this.userIsAdmin(activeCampaign, auth);
     const userHasSignedThisCampaign = this.userHasSignedThisCampaign(
       activeCampaign,
@@ -172,6 +220,24 @@ class SignCampaign extends Component {
                     wasteProvider={wasteProvider}
                   />
                 )}
+              {this.state.showAdminAddSignatureModal &&
+                activeCampaign && (
+                  <AdminAddSignatureModal
+                    adminAddSignatureData={adminAddSignatureData}
+                    handleAdminAddSignature={this.handleAdminAddSignature}
+                    handleAdminAddSignatureModalDataChange={updatedData =>
+                      this.handleAdminAddSignatureModalDataChange(
+                        updatedData.name,
+                        updatedData.value
+                      )
+                    }
+                    keepMeUpdated={keepMeUpdated}
+                    onHide={this.toggleShowAdminAddSignatureModal}
+                    signerMessage={signerMessage}
+                    show={showAdminAddSignatureModal}
+                    toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
+                  />
+                )}
               <Col md={12}>
                 {/*  user isn't signed in */}
                 {loaded &&
@@ -190,7 +256,7 @@ class SignCampaign extends Component {
                   signerMessage
                 )}
                 {/*  USER AHS SIGNED CAMPAIGN AND IS SIGNED IN */}
-                {/* RENDER REMOVE SIGNATURE FEATURES */}
+                {/* Render remove signature, add signatures, update campaign */}
                 {this.userHasSignedThisCampaign(
                   activeCampaign,
                   loaded,

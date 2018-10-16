@@ -14,7 +14,6 @@ const SignatureCheckbox = ({ toggleKeepMeUpdatedCheckbox, keepMeUpdated, keepMeU
             checked={keepMeUpdated}
             onChange={toggleKeepMeUpdatedCheckbox}
           />
-
           {keepMeUpdatedLabel}
         </label>
       </div>
