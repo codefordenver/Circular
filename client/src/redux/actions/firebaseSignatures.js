@@ -100,6 +100,46 @@ export const firebaseAddSignatureToCampaign = signatureObject => async dispatch 
     .then(dispatch(firebaseFetchUserData(uid)));
 };
 
+// ADMIN ADD SIGNATURE
+// ADMIN ADD SIGNATURE REQUEST
+export const FIREBASE_ADMIN_ADD_SIGNATURE_REQUEST = 'FIREBASE_ADMIN_ADD_SIGNATURE_REQUEST ';
+const firebaseAdminAddSignatureRequest = () => ({
+  type: FIREBASE_ADD_SIGNATURE_TO_CAMPAIGN_REQUEST
+});
+
+// ADMIN ADD SIGNATURE SUCCESS
+export const FIREBASE_ADMIN_ADD_SIGNATURE_SUCCESS = 'FIREBASE_ADMIN_ADD_SIGNATURE_SUCCESS';
+const firebaseAdminAddSignatureSuccess = () => ({
+  type: FIREBASE_ADMIN_ADD_SIGNATURE_SUCCESS
+});
+
+// ADMIN ADD SIGNATURE ERROR
+export const FIREBASE_ADMIN_ADD_SIGNATURE_ERROR = 'FIREBASE_ADMIN_ADD_SIGNATURE_ERROR';
+const firebaseAdminAddSignatureError = error => ({
+  type: FIREBASE_ADMIN_ADD_SIGNATURE_ERROR,
+  error
+});
+
+// ADMIN ADD SIGNATURE
+export const firebaseAdminAddSignature = adminAddSignatureObject => async dispatch => {
+  dispatch(firebaseAdminAddSignatureRequest());
+  try {
+    const campaignSignatureRef = campaignsRef
+      .doc(adminAddSignatureObject.campaignId)
+      .collection('signatures')
+      .doc();
+    console.log(campaignSignatureRef);
+    await campaignSignatureRef.set({
+      ...adminAddSignatureObject,
+      createdAt: Timestamp,
+      modifiedAt: Timestamp
+    });
+    dispatch(firebaseAdminAddSignatureSuccess());
+  } catch (error) {
+    dispatch(firebaseAdminAddSignatureError(error));
+  }
+};
+
 // REMOVE SIGNATURE ACTIONS
 // FIREBASE REMOVE SIGNATURE REQUEST
 export const FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_REQUEST =

@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 // REDUX ACTIONS
 import { firebaseUpdateCampaign } from '../../../redux/actions/firebaseCampaigns';
 import { fetchUserSignatures, removeSignatureFromCampaign } from '../../../redux/actions/signature';
+import { firebaseAdminAddSignature } from '../../../redux/actions/firebaseSignatures';
 // COMPONENTS
 import AdminAddSignatureModal from './AdminAddSignatureModal';
 import RenderSignCampaign from './RenderSignCampaign';
@@ -18,19 +19,23 @@ import {
   wasteProvider
 } from '../UpdateCampaign/UpdateCampaignModalData';
 
+const ADMIN_ADD_SIGNATURE_DATA_INITIAL_STATE = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  signerMessage: ''
+};
+
 class SignCampaign extends Component {
   constructor(props) {
     super(props);
     this.state = {
       adminAddSignatureData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        signerMessage: ''
+        ...ADMIN_ADD_SIGNATURE_DATA_INITIAL_STATE
       },
       keepMeUpdated: false,
       signerMessage: '',
-      showAdminAddSignatureModal: true,
+      showAdminAddSignatureModal: false,
       showUpdateCampaignModal: false
     };
   }
@@ -67,16 +72,20 @@ class SignCampaign extends Component {
       keepMeUpdated
     } = this.state;
     const adminAddSignatureObject = {
+      adminUid: uid,
       campaignId,
       email,
       firstName,
       keepMeUpdated,
       lastName,
-      signerMessage,
-      adminUid: uid
+      signerMessage
     };
-    console.log(adminAddSignatureObject);
-    // await this.props.signCampaignProps.firebaseAddSignatureToCampaign(adminAddSignatureObject);
+    await this.props.firebaseAdminAddSignature(adminAddSignatureObject);
+    this.setState({
+      adminAddSignatureData: { ...ADMIN_ADD_SIGNATURE_DATA_INITIAL_STATE },
+      keepMeUpdated: false,
+      showAdminAddSignatureModal: false
+    });
   };
 
   handleRemoveSignatureFromCamapaign = () => {
@@ -290,6 +299,7 @@ SignCampaign.defaultProps = {
 };
 
 SignCampaign.propTypes = {
+  firebaseAdminAddSignature: PropTypes.func.isRequired,
   firebaseUpdateCampaign: PropTypes.func.isRequired,
   firebaseWasteProviders: PropTypes.shape({}).isRequired,
   signCampaignProps: PropTypes.shape({
@@ -319,6 +329,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
+    firebaseAdminAddSignature,
     firebaseUpdateCampaign,
     fetchUserSignatures,
     removeSignatureFromCampaign
