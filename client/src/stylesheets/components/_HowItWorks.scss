@@ -3,14 +3,6 @@
 @import '../base/fonts';
 
 
-.circular-progress-wrapper {
-  height: 100px;
-  width: 100px;
-}
-
-
-
-
 .how-it-works-banner {
   background: $light-gray;
   display: flex;
@@ -60,6 +52,15 @@
     > li {
       opacity: 0.8;
       list-style: initial;
+    }
+  }
+
+  .search-container {
+    margin-bottom: 4rem;
+
+    .call-to-action {
+      text-align: center;
+      padding-bottom: 1rem;
     }
   }
 

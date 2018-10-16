@@ -60,14 +60,6 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
                   the on screen instructions to either create a brand new campaign or sign the
                   online petition for an existing one.
                 </p>
-                <AutoSuggestInput
-                  firebaseSearchAddressFlow={firebaseSearchAddressFlow}
-                  clearInitialSearchResults={clearInitialSearchResults}
-                  router={router}
-                />
-                <p style={{ 'text-align': 'center' }}>
-                  Feel free to explore the other steps first!
-                </p>
               </div>
             </Col>
           </Row>
@@ -161,6 +153,31 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
           </Row>
         </Grid>
       </Steps>
+
+      <Grid className="search-container">
+        <Row>
+          <Col xs={12} md={10} mdOffset={1}>
+            <h3 className="call-to-action">Ready? Enter your address</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={10} mdOffset={1}>
+            <div style={{ textAlign: 'center' }}>
+              Start a campaign to bring recycling to your property! Search your address below to get
+              started.
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={10} mdOffset={1}>
+            <AutoSuggestInput
+              firebaseSearchAddressFlow={firebaseSearchAddressFlow}
+              clearInitialSearchResults={clearInitialSearchResults}
+              router={router}
+            />
+          </Col>
+        </Row>
+      </Grid>
 
       <Footer />
     </div>
