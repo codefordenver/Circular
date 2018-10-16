@@ -63,24 +63,30 @@ class SignCampaign extends Component {
   };
 
   handleAdminAddSignature = async () => {
+    // get uid of person signed in and campaign id
     const {
       auth: { uid },
       activeCampaign: { campaignId }
     } = this.props.signCampaignProps;
+    // get data from adminAddSignature form
     const {
       adminAddSignatureData: { email, firstName, lastName, signerMessage },
       keepMeUpdated
     } = this.state;
+    // make signature object and build displayName
     const adminAddSignatureObject = {
       adminUid: uid,
       campaignId,
       email,
-      firstName,
+      displayName: `${firstName} ${lastName}`,
       keepMeUpdated,
       lastName,
       signerMessage
     };
+    // wait for response from database
+    // TODO add error handeling for failed addition
     await this.props.firebaseAdminAddSignature(adminAddSignatureObject);
+    // reset form and close modal
     this.setState({
       adminAddSignatureData: { ...ADMIN_ADD_SIGNATURE_DATA_INITIAL_STATE },
       keepMeUpdated: false,
@@ -95,6 +101,27 @@ class SignCampaign extends Component {
     } = this.props.signCampaignProps;
     return this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
   };
+
+  handleRenderAdminAddSignature = (
+    activeCampaign,
+    adminAddSignatureData,
+    keepMeUpdated,
+    showAdminAddSignatureModal
+  ) =>
+    activeCampaign &&
+    showAdminAddSignatureModal && (
+      <AdminAddSignatureModal
+        adminAddSignatureData={adminAddSignatureData}
+        handleAdminAddSignature={this.handleAdminAddSignature}
+        handleAdminAddSignatureModalDataChange={updatedData =>
+          this.handleAdminAddSignatureModalDataChange(updatedData.name, updatedData.value)
+        }
+        keepMeUpdated={keepMeUpdated}
+        onHide={this.toggleShowAdminAddSignatureModal}
+        show={showAdminAddSignatureModal}
+        toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
+      />
+    );
 
   handleRenderSignCampaign = (auth, activeCampaign, keepMeUpdated, loaded, signerMessage) => {
     if (loaded && auth.status === 'SIGNED_IN' && activeCampaign && auth.signedCampaignId === null) {
@@ -229,24 +256,13 @@ class SignCampaign extends Component {
                     wasteProvider={wasteProvider}
                   />
                 )}
-              {this.state.showAdminAddSignatureModal &&
-                activeCampaign && (
-                  <AdminAddSignatureModal
-                    adminAddSignatureData={adminAddSignatureData}
-                    handleAdminAddSignature={this.handleAdminAddSignature}
-                    handleAdminAddSignatureModalDataChange={updatedData =>
-                      this.handleAdminAddSignatureModalDataChange(
-                        updatedData.name,
-                        updatedData.value
-                      )
-                    }
-                    keepMeUpdated={keepMeUpdated}
-                    onHide={this.toggleShowAdminAddSignatureModal}
-                    signerMessage={signerMessage}
-                    show={showAdminAddSignatureModal}
-                    toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
-                  />
-                )}
+              {/* Logic to show AdminAddSignature */}
+              {this.handleRenderAdminAddSignature(
+                activeCampaign,
+                adminAddSignatureData,
+                keepMeUpdated,
+                showAdminAddSignatureModal
+              )}
               <Col md={12}>
                 {/*  user isn't signed in */}
                 {loaded &&
