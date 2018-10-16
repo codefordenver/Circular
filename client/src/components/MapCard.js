@@ -1,9 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import noop from 'lodash.noop';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
 const MapWithAMarker = withRouter(
   withScriptjs(

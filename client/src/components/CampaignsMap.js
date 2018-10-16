@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import ReactModal from 'react-modal';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 // TODO import only what lodash files we need
 import * as noop from 'lodash.noop';
 // import * as _ from 'lodash';
@@ -37,6 +36,10 @@ const GettingStartedGoogleMap = withRouter(
 const mapUrl = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
   process.env.REACT_APP_GOOGLE_MAPS_KEY
 }`;
+
+// The following code fixes an accessibility issue as per the react-modal docs:
+// https://github.com/reactjs/react-modal/tree/master/docs/accessibility
+ReactModal.setAppElement('#root');
 
 const CampaignsMap = props => (
   <ReactModal
