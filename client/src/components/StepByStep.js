@@ -14,7 +14,7 @@ const StepByStep = () => (
 
     <Row className="tinted">
       <Col xs={12} lg={10} lgOffset={1} className="pad-bottom">
-        <Steps showPrevNextButtons={false} vertical height={400}>
+        <Steps vertical height={400}>
           {/* ----------- STEP 1 ------------*/}
 
           <div className="inner-content-container">

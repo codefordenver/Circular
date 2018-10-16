@@ -21,6 +21,46 @@ import HeroCTA from '../HeroCTA';
 import Steps from './Steps';
 import Footer from '../Footer/Footer';
 
+let stepsRef = null;
+
+const prevStepBtnDisabled = (
+  <div className="step-nav prev disabled">
+    <i className="fa fa-angle-left arrow-btn" />
+  </div>
+);
+
+const nextStepBtnDisabled = (
+  <div className="step-nav next disabled">
+    <i className="fa fa-angle-right arrow-btn" />
+  </div>
+);
+
+const prevStepBtn = (
+  <div className="step-nav prev">
+    <i
+      className="fa fa-angle-left arrow-btn"
+      onClick={() => {
+        if (stepsRef != null) {
+          stepsRef.prevStep();
+        }
+      }}
+    />
+  </div>
+);
+
+const nextStepBtn = (
+  <div className="step-nav next">
+    <i
+      className="fa fa-angle-right arrow-btn"
+      onClick={() => {
+        if (stepsRef != null) {
+          stepsRef.nextStep();
+        }
+      }}
+    />
+  </div>
+);
+
 const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, router, ...props }) => {
   let selectedStep = 0;
   if (props.location.state && props.location.action === 'PUSH') {
@@ -38,14 +78,23 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
         </div>
       </div>
 
-      <Steps selectedStep={selectedStep} showPrevNextButtons={false}>
+      <Steps
+        selectedStep={selectedStep}
+        ref={steps => {
+          stepsRef = steps;
+        }}
+      >
         {/* ----------- SECTION 1 ------------*/}
         <Grid>
           <Row>
             <Col xs={12} md={10} mdOffset={1}>
-              <div className="step-icon-and-title-container">
-                <i className="fa fa-bullhorn how-icon" />
-                <h2>1. Create or Join a Campaign</h2>
+              <div className="step-header">
+                {prevStepBtnDisabled}
+                <div className="step-icon-and-title-container">
+                  <i className="fa fa-bullhorn how-icon" />
+                  <h2>1. Create or Join a Campaign</h2>
+                </div>
+                {nextStepBtn}
               </div>
             </Col>
           </Row>
@@ -69,9 +118,13 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
         <Grid>
           <Row>
             <Col xs={12} md={10} mdOffset={1}>
-              <div className="step-icon-and-title-container">
-                <i className="fa fa-users how-icon" />
-                <h2>2. Recruit Your Neighbors</h2>
+              <div className="step-header">
+                {prevStepBtn}
+                <div className="step-icon-and-title-container">
+                  <i className="fa fa-users how-icon" />
+                  <h2>2. Recruit Your Neighbors</h2>
+                </div>
+                {nextStepBtn}
               </div>
             </Col>
           </Row>
@@ -108,9 +161,13 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
         <Grid>
           <Row>
             <Col xs={12} md={10} mdOffset={1}>
-              <div className="step-icon-and-title-container">
-                <i className="fa fa-comment how-icon" />
-                <h2>3. Request Recyling From Your Landlord</h2>
+              <div className="step-header">
+                {prevStepBtn}
+                <div className="step-icon-and-title-container">
+                  <i className="fa fa-comment how-icon" />
+                  <h2>3. Request Recyling From Your Landlord</h2>
+                </div>
+                {nextStepBtn}
               </div>
             </Col>
           </Row>
@@ -130,9 +187,13 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
         <Grid>
           <Row>
             <Col xs={12} md={10} mdOffset={1}>
-              <div className="step-icon-and-title-container">
-                <i className="fa fa-recycle how-icon" />
-                <h2>4. Recycle!</h2>
+              <div className="step-header">
+                {prevStepBtn}
+                <div className="step-icon-and-title-container">
+                  <i className="fa fa-recycle how-icon" />
+                  <h2>4. Recycle!</h2>
+                </div>
+                {nextStepBtnDisabled}
               </div>
             </Col>
           </Row>

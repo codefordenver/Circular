@@ -17,6 +17,56 @@
 
 .how-it-works-container {
 
+  .step-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .step-nav {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 1rem;
+      font-size: 5rem;
+
+
+
+      &.prev {
+        justify-content: flex-start;
+      }
+
+      &.next {
+        justify-content: flex-end;
+      }
+
+      .arrow-btn {
+        color: $maingreen;
+        opacity: 0.8;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+          color: $hovergreen;
+          opacity: 1;
+        }
+      }
+
+      &.disabled {
+        .arrow-btn {
+          opacity: 0.2;
+          cursor: default;
+          &:hover {
+            color: $maingreen;
+            opacity: 0.2;
+          }
+
+        }
+      }
+    }
+
+  }
+
   .step-icon-and-title-container {
     display: flex;
     flex-direction: column;
@@ -31,6 +81,7 @@
 
   h2 {
     @include display-24-med;
+    text-align: center;
   }
 
   h3 {

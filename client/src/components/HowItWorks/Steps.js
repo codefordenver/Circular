@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Spring, animated } from 'react-spring';
 import { TimingAnimation, Easing } from 'react-spring/dist/addons.cjs';
@@ -11,17 +12,17 @@ class Steps extends Component {
     };
   }
 
-  _goToStep(i) {
+  goToStep(i) {
     this.setState({ selectedStep: i });
   }
 
-  _nextStep() {
+  nextStep() {
     if (this.state.selectedStep + 1 < this.props.children.length) {
       this.setState({ selectedStep: this.state.selectedStep + 1 });
     }
   }
 
-  _prevStep() {
+  prevStep() {
     if (this.state.selectedStep - 1 > -1) {
       this.setState({ selectedStep: this.state.selectedStep - 1 });
     }
@@ -59,7 +60,7 @@ class Steps extends Component {
           className={stepSelectorClasses}
           key={`step-selector-${i}`}
           onClick={() => {
-            this._goToStep(i);
+            this.goToStep(i);
           }}
         >
           <div className="circle">{i + 1}</div>
@@ -167,7 +168,7 @@ class Steps extends Component {
                     <div
                       className={prevStepBtnClassNames}
                       onClick={() => {
-                        this._prevStep();
+                        this.prevStep();
                       }}
                     >
                       PREVIOUS
@@ -176,7 +177,7 @@ class Steps extends Component {
                     <div
                       className={nextStepBtnClassNames}
                       onClick={() => {
-                        this._nextStep();
+                        this.nextStep();
                       }}
                     >
                       NEXT
@@ -190,5 +191,14 @@ class Steps extends Component {
     );
   }
 }
+
+Steps.defaultProps = {
+  showPrevNextButtons: false
+};
+
+Steps.propTypes = {
+  showPrevNextButtons: PropTypes.bool,
+  height: PropTypes.number
+};
 
 export default Steps;
