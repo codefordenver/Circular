@@ -46,7 +46,6 @@ class FirebaseChooseCampaign extends Component {
     });
   };
 
-
   handleRedirectToExistingCampaign = (exactMatch, searchedAddress, loaded) => {
     if (
       loaded &&

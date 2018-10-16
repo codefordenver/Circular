@@ -3,33 +3,46 @@ import { auth, googleAuthProvider, facebookAuthProvider, usersRef } from '../../
 // SIGN OUT
 // FIREBASE SIGN OUT REQUEST
 export const FIREBASE_SIGN_OUT_REQUEST = 'FIREBASE_SIGN_OUT_REQUEST';
-export const firebaseSignOutRequest = () => ({
+const firebaseSignOutRequest = () => ({
   type: FIREBASE_SIGN_OUT_REQUEST
 });
 
 // FIREBASE SIGN OUT SUCCESS
 export const FIREBASE_SIGN_OUT_SUCCESS = 'FIREBASE_SIGN_OUT_SUCCESS';
-export const firebaseSignOut = () => ({
+const firebaseSignOutSuccess = () => ({
   type: FIREBASE_SIGN_OUT_SUCCESS
 });
+
+export const firebaseSignOut = () => dispatch => {
+  dispatch(firebaseSignOutRequest());
+  try {
+    auth.signOut().then(() => {
+      dispatch(firebaseSignOutSuccess());
+    });
+  } catch (error) {
+    // TODO improve error handeling
+    // eslint-disable-next-line
+    console.log('there was an error signing out');
+  }
+};
 
 // SIGNIN REQUESTS
 // GOOGLE
 // FIREBASE SIGN IN GOOGLE REQUEST
 export const FIREBASE_SIGN_IN_GOOGLE_REQUEST = 'FIREBASE_SIGN_IN_GOOGLE_REQUEST';
-export const firebaseSignInGoogleRequest = () => ({
+const firebaseSignInGoogleRequest = () => ({
   type: FIREBASE_SIGN_IN_GOOGLE_REQUEST
 });
 
 // SIGNIN SUCCESS
 // FIREBASE SIGN IN GOOGLE SUCCESS
-export const FIREBASE_SIGN_IN_GOOGLE_SUCCESS = 'FIREBASE_SIGN_IN_GOOGLE_SUCCESS';
-export const firebaseSignInGoogleSuccess = () => ({
-  type: FIREBASE_SIGN_IN_GOOGLE_SUCCESS
-});
+// export const FIREBASE_SIGN_IN_GOOGLE_SUCCESS = 'FIREBASE_SIGN_IN_GOOGLE_SUCCESS';
+// export const firebaseSignInGoogleSuccess = () => ({
+//   type: FIREBASE_SIGN_IN_GOOGLE_SUCCESS
+// });
 
-// FIREBASE SIGN IN THUNKS
-// GOOGLE SIGN IN THUNK
+// FIREBASE SIGN IN
+// GOOGLE SIGN IN
 export const firebaseSignInGoogle = () => dispatch => {
   dispatch(firebaseSignInGoogleRequest());
   auth.signInWithPopup(googleAuthProvider);
@@ -37,20 +50,34 @@ export const firebaseSignInGoogle = () => dispatch => {
 
 // FIREBASE SIGN IN FACEBOOK REQUEST
 export const FIREBASE_SIGN_IN_FACEBOOK_REQUEST = 'FIREBASE_SIGN_IN_FACEBOOK_REQUEST';
-export const firebaseSignInFacebookRequest = () => ({
+const firebaseSignInFacebookRequest = () => ({
   type: FIREBASE_SIGN_IN_FACEBOOK_REQUEST
 });
 
 // FIREBASE SIGN IN FACEBOOK SUCCESS
 export const FIREBASE_SIGN_IN_FACEBOOK_SUCCESS = 'FIREBASE_SIGN_IN_FACEBOOK_SUCCESS';
-export const firebaseSignInFacebookSuccess = () => ({
+const firebaseSignInFacebookSuccess = () => ({
   type: FIREBASE_SIGN_IN_FACEBOOK_SUCCESS
 });
 
-// FACEBOOK SIGN IN THUNK
+// FIREBASE SIGN IN FACEBOOK SUCCESS
+export const FIREBASE_SIGN_IN_FACEBOOK_ERROR = 'FIREBASE_SIGN_IN_FACEBOOK_ERROR';
+const firebaseSignInFacebookError = error => ({
+  type: FIREBASE_SIGN_IN_FACEBOOK_ERROR,
+  error
+});
+
+// FACEBOOK SIGN IN
 export const firebaseSignInFacebook = () => dispatch => {
   dispatch(firebaseSignInFacebookRequest());
-  auth.signInWithPopup(facebookAuthProvider);
+  auth
+    .signInWithPopup(facebookAuthProvider)
+    .then(() => {
+      dispatch(firebaseSignInFacebookSuccess());
+    })
+    .catch(error => {
+      dispatch(firebaseSignInFacebookError(error));
+    });
 };
 
 // FIREBASE AUTH LISTENER FUNCTION
@@ -63,6 +90,37 @@ const firebaseSignIn = user => {
     displayName,
     uid
   };
+};
+
+// FIREBASE AUTH LISTENERS
+// WHEN AUTH CHANGES, DISPATCH `firebaseSignIn()`. THEN FETCH USER SIGNATUERS
+export const startListeningToAuthChanges = () => dispatch => {
+  // LISTENS FOR AUTH CHANGES
+  auth.onAuthStateChanged(user => {
+    // IF USER, SET USER
+    if (user) {
+      // DECONSTRUCT FIREBASE USER OBJECT
+      const { uid } = user;
+      const { email, displayName, providerId, photoURL } = user.providerData[0];
+      // DISPATCH LOGGED IN USER
+      dispatch(firebaseSignIn(user));
+      // BUILD OBJECT AND PASS TO FIRESTORE
+      const userData = {
+        uid,
+        email,
+        displayName,
+        providerId,
+        photoURL
+      };
+      // ADDS OR MERGES AUTH INFORMATION TO USERS COLLECTION
+      usersRef.doc(uid).set(userData, { merge: true });
+      // DISPATCHES FETCH USER DATA
+      dispatch(firebaseFetchUserData(uid));
+    } else {
+      // if there is no user, signOut() resets to initial state
+      dispatch(firebaseSignOut());
+    }
+  });
 };
 
 // FIREBASE ADD SIGNATURES TO AUTH OBJECT
@@ -108,37 +166,6 @@ export const firebaseFetchUserData = uid => async dispatch => {
       console.log('error fetching user signed campaign', error);
       dispatch(firebaseFetchUserDataError(error));
     });
-};
-
-// FIREBASE AUTH LISTENERS
-// WHEN AUTH CHANGES, DISPATCH `firebaseSignIn()`. THEN FETCH USER SIGNATUERS
-export const startListeningToAuthChanges = () => dispatch => {
-  // LISTENS FOR AUTH CHANGES
-  auth.onAuthStateChanged(user => {
-    // IF USER, SET USER
-    if (user) {
-      // DECONSTRUCT FIREBASE USER OBJECT
-      const { uid } = user;
-      const { email, displayName, providerId, photoURL } = user.providerData[0];
-      // DISPATCH LOGGED IN USER
-      dispatch(firebaseSignIn(user));
-      // BUILD OBJECT AND PASS TO FIRESTORE
-      const userData = {
-        uid,
-        email,
-        displayName,
-        providerId,
-        photoURL
-      };
-      // ADDS OR MERGES AUTH INFORMATION TO USERS COLLECTION
-      usersRef.doc(uid).set(userData, { merge: true });
-      // DISPATCHES FETCH USER DATA
-      dispatch(firebaseFetchUserData(uid));
-    } else {
-      // if there is no user, signOut() resets to initial state
-      dispatch(firebaseSignOut());
-    }
-  });
 };
 
 // UPDATE USER CREATED CAMAPAIGN ID REQUEST
