@@ -46,8 +46,14 @@ class FirebaseChooseCampaign extends Component {
     });
   };
 
-  handleRedirectToExistingCampaign = (exactMatch, isNewCampaign, loaded) => {
-    if (loaded && exactMatch && exactMatch.length !== 0 && exactMatch.address && !isNewCampaign) {
+  handleRedirectToExistingCampaign = (exactMatch, searchedAddress, loaded) => {
+    if (
+      loaded &&
+      exactMatch &&
+      exactMatch.length !== 0 &&
+      exactMatch.address &&
+      exactMatch.address !== searchedAddress
+    ) {
       return (
         <RenderCampaignAlreadyExists
           exactMatchAddress={exactMatch.address}
@@ -79,7 +85,7 @@ class FirebaseChooseCampaign extends Component {
 
   render() {
     const {
-      location: { isNewCampaign },
+      location: { state },
       firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, searchedAddress }
     } = this.props;
     if (loading) {
@@ -94,7 +100,7 @@ class FirebaseChooseCampaign extends Component {
             {/* if no longer loading and not erroring then
             render one of the following three depending
              on the status of nearby campaign */}
-            {this.handleRedirectToExistingCampaign(exactMatch, isNewCampaign, loaded)}
+            {this.handleRedirectToExistingCampaign(exactMatch, state.searchedAddress, loaded)}
             {this.handleRenderNearbyCampaigns(loaded, nearbyCampaigns, searchedAddress)}
             {this.handleRenderNewCampaign(exactMatch, loaded)}
           </Col>
