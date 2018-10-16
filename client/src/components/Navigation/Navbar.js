@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import NavBarSignIn from './NavBarSignIn';
 
+// Wrap all Bootstrap Links in LinkContainer to user React-Router
+
 const MyCampaignNavItem = ({ signedCampaignId }) => (
-  <NavItem eventKey={4} href={`/campaign/${signedCampaignId}`}>
-    MY CAMPAIGN
-  </NavItem>
+  <LinkContainer to={`/campaign/${signedCampaignId}`}>
+    <NavItem eventKey={4}>MY CAMPAIGN</NavItem>
+  </LinkContainer>
 );
 
 const NavBar = ({
@@ -30,28 +33,28 @@ const NavBar = ({
     <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link onClick={closeMap} to="/">
-            {homeText}
-          </Link>
+          <LinkContainer to="/">
+            <Link onClick={closeMap}>{homeText}</Link>
+          </LinkContainer>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <NavItem eventKey={1} href="/denver-learn-more">
-            WHY
-          </NavItem>
+          <LinkContainer to="/denver-learn-more">
+            <NavItem eventKey={1}>WHY</NavItem>
+          </LinkContainer>
           <NavDropdown id="tools-dropdown" eventKey={2} title="TOOLS">
-            <MenuItem eventKey={2.1} href="/manager-resources">
-              Property Manager Resources
-            </MenuItem>
-            <MenuItem eventKey={2.2} href="/tips-for-requesting">
-              Tips for Requesting
-            </MenuItem>
+            <LinkContainer to="/manager-resources">
+              <MenuItem eventKey={2.1}>Property Manager Resources</MenuItem>
+            </LinkContainer>
+            <LinkContainer to="/tips-for-requesting">
+              <MenuItem eventKey={2.2}>Tips for Requesting</MenuItem>
+            </LinkContainer>
           </NavDropdown>
-          <NavItem eventKey={3} href="/who-are-we">
-            WHO WE ARE
-          </NavItem>
+          <LinkContainer to="/who-are-we">
+            <NavItem eventKey={3}>WHO WE ARE</NavItem>
+          </LinkContainer>
           {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS and location */}
           {showMyCampaignNavItem && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}
           {auth.status && (
