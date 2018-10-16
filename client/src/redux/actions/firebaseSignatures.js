@@ -41,7 +41,7 @@ export const firebaseFetchUserSignatures = firebaseUserSignatures => dispatch =>
 // FIREBASE ADD SIGNATURE TO CAMPAIGN REQUEST
 export const FIREBASE_ADD_SIGNATURE_TO_CAMPAIGN_REQUEST =
   'FIREBASE_ADD_SIGNATURE_TO_CAMPAIGN_REQUEST';
-export const firebaseAddSignatureToCampaignRequest = firebaseUserSignatures => ({
+export const firebaseAddSignatureToCampaignRequest = () => ({
   type: FIREBASE_ADD_SIGNATURE_TO_CAMPAIGN_REQUEST
 });
 
@@ -104,7 +104,7 @@ export const firebaseAddSignatureToCampaign = signatureObject => async dispatch 
 // ADMIN ADD SIGNATURE REQUEST
 export const FIREBASE_ADMIN_ADD_SIGNATURE_REQUEST = 'FIREBASE_ADMIN_ADD_SIGNATURE_REQUEST ';
 const firebaseAdminAddSignatureRequest = () => ({
-  type: FIREBASE_ADD_SIGNATURE_TO_CAMPAIGN_REQUEST
+  type: FIREBASE_ADMIN_ADD_SIGNATURE_REQUEST
 });
 
 // ADMIN ADD SIGNATURE SUCCESS
@@ -135,6 +135,7 @@ export const firebaseAdminAddSignature = adminAddSignatureObject => async dispat
       modifiedAt: Timestamp
     });
     dispatch(firebaseAdminAddSignatureSuccess());
+    dispatch(firebasePopulateCampaignById(adminAddSignatureObject.campaignId));
   } catch (error) {
     dispatch(firebaseAdminAddSignatureError(error));
   }
@@ -158,7 +159,7 @@ export const firebaseRemoveSignatureFromCampaignSuccess = () => ({
 // FIREBASE REMOVE SIGNATURE ERROR
 export const FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_ERROR =
   'FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_ERROR';
-export const firebaseRemoveSignatureFromCamaignError = () => ({
+export const firebaseRemoveSignatureFromCampaignError = () => ({
   type: FIREBASE_REMOVE_SIGNATURE_FROM_CAMPAIGN_ERROR
 });
 
