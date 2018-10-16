@@ -5,7 +5,6 @@
   overflow: hidden;
   margin-top: 1rem;
 
-
   .steps-content-container {
     width: 100%;
     position: relative;
@@ -20,7 +19,6 @@
       flex-grow: 1;
       width: 100%;
     }
-
   }
 
   &.vertical {
@@ -28,10 +26,8 @@
     flex-direction: row;
 
     .steps-content-container {
-
       flex-direction: column;
       flex-wrap: nowrap;
-
       flex: 10;
     }
 

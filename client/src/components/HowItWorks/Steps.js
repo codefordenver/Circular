@@ -76,15 +76,23 @@ class Steps extends Component {
     return a;
   }
 
-  _renderChildren() {
+  _renderChildren(vertical) {
     const wrappedChildren = [];
     const selectedStep = this.state.selectedStep;
     for (let i = 0; i < this.props.children.length; i++) {
       let springTo = { opacity: 0.2 };
       let springFrom = { opacity: 1 };
+      if (!vertical) {
+        springTo.height = 0;
+        springFrom.height = 'auto';
+      }
       if (selectedStep === i) {
         springTo = { opacity: 1 };
         springFrom = { opacity: 0.2 };
+        if (!vertical) {
+          springTo.height = 'auto';
+          springFrom.height = 200;
+        }
       }
       const wrappedChild = (
         <Spring
@@ -143,7 +151,7 @@ class Steps extends Component {
         >
           {style => (
             <animated.div className={'steps-content-container'} style={{ ...style }}>
-              {this._renderChildren()}
+              {this._renderChildren(vertical)}
             </animated.div>
           )}
         </Spring>

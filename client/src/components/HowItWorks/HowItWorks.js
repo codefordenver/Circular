@@ -38,7 +38,7 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
         </div>
       </div>
 
-      <Steps selectedStep={selectedStep} showPrevNextButtons>
+      <Steps selectedStep={selectedStep} showPrevNextButtons={false}>
         {/* ----------- SECTION 1 ------------*/}
         <Grid>
           <Row>
