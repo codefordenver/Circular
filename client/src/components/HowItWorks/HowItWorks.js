@@ -219,7 +219,7 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
       <Grid className="search-container">
         <Row>
           <Col xs={12} md={10} mdOffset={1}>
-            <h3 className="call-to-action">Ready? Enter your address</h3>
+            <h3 className="call-to-action">Ready? Enter your address!</h3>
           </Col>
         </Row>
         <Row>
