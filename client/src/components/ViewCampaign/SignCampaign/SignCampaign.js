@@ -75,12 +75,11 @@ class SignCampaign extends Component {
     } = this.state;
     // make signature object and build displayName
     const adminAddSignatureObject = {
-      adminUid: uid,
+      addedByAdminUid: uid,
       campaignId,
       email,
       displayName: `${firstName} ${lastName}`,
       keepMeUpdated,
-      lastName,
       signerMessage
     };
     // wait for response from database

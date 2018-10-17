@@ -123,17 +123,40 @@ const firebaseAdminAddSignatureError = error => ({
 // ADMIN ADD SIGNATURE
 export const firebaseAdminAddSignature = adminAddSignatureObject => async dispatch => {
   dispatch(firebaseAdminAddSignatureRequest());
+  const {
+    addedByAdminUid,
+    campaignId,
+    email,
+    displayName,
+    keepMeUpdated,
+    signerMessage
+  } = adminAddSignatureObject;
   try {
-    const campaignSignatureRef = campaignsRef
+    const newSignerRef = usersRef.doc();
+    console.log(newSignerRef.id);
+    await newSignerRef.set({
+      addedByAdminUid,
+      createdAt: Timestamp,
+      displayName,
+      email,
+      keepMeUpdated,
+      modifiedAt: Timestamp,
+      providerId: null,
+      signedCampaignId: campaignId,
+      signerMessage
+    });
+
+    await campaignsRef
       .doc(adminAddSignatureObject.campaignId)
       .collection('signatures')
-      .doc();
-    console.log(campaignSignatureRef);
-    await campaignSignatureRef.set({
-      ...adminAddSignatureObject,
-      createdAt: Timestamp,
-      modifiedAt: Timestamp
-    });
+      .doc(newSignerRef.id)
+      .set({
+        createdAt: Timestamp,
+        displayName,
+        keepMeUpdated,
+        modifiedAt: Timestamp,
+        signerMessage
+      });
     dispatch(firebaseAdminAddSignatureSuccess());
     dispatch(firebasePopulateCampaignById(adminAddSignatureObject.campaignId));
   } catch (error) {
