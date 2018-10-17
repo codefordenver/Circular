@@ -79,6 +79,7 @@ const HowItWorks = ({ firebaseSearchAddressFlow, clearInitialSearchResults, rout
       </div>
 
       <Steps
+        pulseNextStep
         selectedStep={selectedStep}
         ref={steps => {
           stepsRef = steps;

@@ -8,8 +8,22 @@ class Steps extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStep: props.selectedStep || 0
+      selectedStep: props.selectedStep || 0,
+      pulseOpacity: 1.0,
+      pulseColor: 'rgba(249, 199, 100, 1)'
     };
+  }
+
+  componentDidMount() {
+    if (this.props.pulseNextStep) {
+      setInterval(() => {
+        if (this.state.pulseOpacity === 1.0) {
+          this.setState({ pulseOpacity: 0.8, pulseColor: 'rgba(255,255,255,1)' });
+        } else {
+          this.setState({ pulseOpacity: 1.0, pulseColor: 'rgba(249,199,100,1)' });
+        }
+      }, 600);
+    }
   }
 
   goToStep(i) {
@@ -54,18 +68,49 @@ class Steps extends Component {
         stepSelectorClasses += ' highlighted';
         stepSpacerClasses += ' highlighted';
       }
+      let selector;
+      if (i === selectedStep + 1) {
+        const duration = this.state.pulseOpacity === 1.0 ? 300 : 600;
+        selector = (
+          <div
+            className={stepSelectorClasses}
+            key={`step-selector-${i}`}
+            onClick={() => {
+              this.goToStep(i);
+            }}
+          >
+            <Spring
+              native
+              to={{
+                opacity: this.state.pulseOpacity,
+                color: this.state.pulseColor,
+                borderColor: this.state.pulseColor
+              }}
+              impl={TimingAnimation}
+              config={{ duration, easing: Easing.linear }}
+            >
+              {style => (
+                <animated.div className="circle" style={{ ...style }}>
+                  {i + 1}
+                </animated.div>
+              )}
+            </Spring>
+          </div>
+        );
+      } else {
+        selector = (
+          <div
+            className={stepSelectorClasses}
+            key={`step-selector-${i}`}
+            onClick={() => {
+              this.goToStep(i);
+            }}
+          >
+            <div className="circle">{i + 1}</div>
+          </div>
+        );
+      }
 
-      const selector = (
-        <div
-          className={stepSelectorClasses}
-          key={`step-selector-${i}`}
-          onClick={() => {
-            this.goToStep(i);
-          }}
-        >
-          <div className="circle">{i + 1}</div>
-        </div>
-      );
       a.push(selector);
 
       if (i !== numSteps - 1) {
@@ -193,12 +238,14 @@ class Steps extends Component {
 }
 
 Steps.defaultProps = {
-  showPrevNextButtons: false
+  showPrevNextButtons: false,
+  pulseNextStep: false
 };
 
 Steps.propTypes = {
   showPrevNextButtons: PropTypes.bool,
-  height: PropTypes.number
+  height: PropTypes.number,
+  pulseNextStep: PropTypes.bool
 };
 
 export default Steps;
