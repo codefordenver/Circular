@@ -52,7 +52,7 @@ class FirebaseChooseCampaign extends Component {
       exactMatch &&
       exactMatch.length !== 0 &&
       exactMatch.address &&
-      exactMatch.address !== searchedAddress
+      exactMatch.address === searchedAddress
     ) {
       return (
         <RenderCampaignAlreadyExists
