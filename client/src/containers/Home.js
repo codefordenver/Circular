@@ -8,7 +8,6 @@ import HeroCTA from '../components/HeroCTA';
 import StepByStep from '../components/StepByStep';
 // import InfoAndLinks from '../components/Informational/InfoAndLinks';
 import Footer from '../components/Footer/Footer';
-import RecyclingInfo from '../components/Informational/RecyclingInfo';
 import Banner from '../components/Banner';
 import {
   firebaseSearchAddressFlow,
@@ -34,7 +33,6 @@ class Home extends Component {
       <div>
         <HeroCTA />
         <Grid>
-          <RecyclingInfo />
           <Banner>
             <div>
               <strong>Most Denver apartments don't have recycling on site.</strong>
