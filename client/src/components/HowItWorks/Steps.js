@@ -17,7 +17,7 @@ class Steps extends Component {
 
   componentDidMount() {
     if (this.props.pulseNextStep) {
-      setInterval(() => {
+      this.pulseInterval = setInterval(() => {
         if (this.state.pulseOpacity === 1.0) {
           this.setState({ pulseOpacity: 0.8, pulseColor: 'rgba(255,255,255,1)' });
         } else {
@@ -27,12 +27,21 @@ class Steps extends Component {
     }
 
     if (this.state.autoSlide) {
-      setInterval(() => {
+      this.autoSlideInterval = setInterval(() => {
         if (this.state.autoSlide) {
           const nextStep = (this.state.selectedStep + 1) % this.props.children.length;
           this.autoSlideToStep(nextStep);
         }
       }, this.props.autoSlideDelay);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.pulseNextStep) {
+      clearInterval(this.pulseInterval);
+    }
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
     }
   }
 
