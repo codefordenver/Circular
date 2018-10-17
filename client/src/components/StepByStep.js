@@ -26,8 +26,15 @@ const StepByStep = () => (
                 </h3>
               </div>
               <p>
-                Look up your address in the search bar above to create a new recycling campaign for
-                your building or join an existing one!
+                Look up your address{' '}
+                <Link
+                  className="more-step-details-link"
+                  to={{ pathname: 'how-does-this-work', state: { selectedStep: 0 } }}
+                >
+                  {' '}
+                  here{' '}
+                </Link>{' '}
+                to create a new recycling campaign for your building or join an existing one!
               </p>
             </div>
             <Link
