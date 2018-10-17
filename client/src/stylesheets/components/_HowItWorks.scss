@@ -30,8 +30,6 @@
       margin: 0 1rem;
       font-size: 5rem;
 
-
-
       &.prev {
         justify-content: flex-start;
       }
@@ -60,11 +58,9 @@
             color: $maingreen;
             opacity: 0.2;
           }
-
         }
       }
     }
-
   }
 
   .step-icon-and-title-container {

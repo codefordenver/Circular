@@ -10,7 +10,8 @@ class Steps extends Component {
     this.state = {
       selectedStep: props.selectedStep || 0,
       pulseOpacity: 1.0,
-      pulseColor: 'rgba(249, 199, 100, 1)'
+      pulseColor: 'rgba(249, 199, 100, 1)',
+      autoSlide: props.autoSlide
     };
   }
 
@@ -24,21 +25,46 @@ class Steps extends Component {
         }
       }, 600);
     }
-  }
 
-  goToStep(i) {
-    this.setState({ selectedStep: i });
-  }
-
-  nextStep() {
-    if (this.state.selectedStep + 1 < this.props.children.length) {
-      this.setState({ selectedStep: this.state.selectedStep + 1 });
+    if (this.state.autoSlide) {
+      setInterval(() => {
+        if (this.state.autoSlide) {
+          const nextStep = (this.state.selectedStep + 1) % this.props.children.length;
+          this.autoSlideToStep(nextStep);
+        }
+      }, this.props.autoSlideDelay);
     }
   }
 
-  prevStep() {
+  autoSlideToStep(i) {
+    this.setState({ selectedStep: i });
+  }
+
+  goToStep(i, stopAutoSliding = true) {
+    if (stopAutoSliding) {
+      this.setState({ selectedStep: i, autoSlide: false });
+    } else {
+      this.setState({ selectedStep: i });
+    }
+  }
+
+  nextStep(stopAutoSliding = true) {
+    if (this.state.selectedStep + 1 < this.props.children.length) {
+      if (stopAutoSliding) {
+        this.setState({ selectedStep: this.state.selectedStep + 1, autoSlide: false });
+      } else {
+        this.setState({ selectedStep: this.state.selectedStep + 1 });
+      }
+    }
+  }
+
+  prevStep(stopAutoSliding = true) {
     if (this.state.selectedStep - 1 > -1) {
-      this.setState({ selectedStep: this.state.selectedStep - 1 });
+      if (stopAutoSliding) {
+        this.setState({ selectedStep: this.state.selectedStep - 1, autoSlide: false });
+      } else {
+        this.setState({ selectedStep: this.state.selectedStep - 1 });
+      }
     }
   }
 
@@ -239,13 +265,17 @@ class Steps extends Component {
 
 Steps.defaultProps = {
   showPrevNextButtons: false,
-  pulseNextStep: false
+  pulseNextStep: false,
+  autoSlide: false,
+  autoSlideDelay: 3000
 };
 
 Steps.propTypes = {
   showPrevNextButtons: PropTypes.bool,
   height: PropTypes.number,
-  pulseNextStep: PropTypes.bool
+  pulseNextStep: PropTypes.bool,
+  autoSlide: PropTypes.bool,
+  autoSlideDelay: PropTypes.number
 };
 
 export default Steps;
