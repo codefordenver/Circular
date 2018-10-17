@@ -267,7 +267,7 @@ Steps.defaultProps = {
   showPrevNextButtons: false,
   pulseNextStep: false,
   autoSlide: false,
-  autoSlideDelay: 3000
+  autoSlideDelay: 4000
 };
 
 Steps.propTypes = {
