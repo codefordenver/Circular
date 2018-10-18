@@ -5,7 +5,8 @@ import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import NavBarSignIn from './NavBarSignIn';
 
-// Wrap all Bootstrap Links in LinkContainer to user React-Router
+// Wrap all Bootstrap Links (eg. MenuItem, NavItem) in LinkContainer to use React-Router
+// (No need to wrap react-router's <Link> components)
 
 const MyCampaignNavItem = ({ signedCampaignId }) => (
   <LinkContainer to={`/campaign/${signedCampaignId}`}>
@@ -33,9 +34,9 @@ const NavBar = ({
     <Navbar bsStyle="remove-default" collapseOnSelect fluid>
       <Navbar.Header>
         <Navbar.Brand>
-          <LinkContainer to="/">
-            <Link onClick={closeMap}>{homeText}</Link>
-          </LinkContainer>
+          <Link to="/" onClick={closeMap}>
+            {homeText}
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
