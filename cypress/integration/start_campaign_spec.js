@@ -1,11 +1,9 @@
 describe('Starting a new campaign', () => {
   it('prompts the user with about recycling', () => {
-    cy.visit('http://localhost:3000');
-    cy.contains('NEED RECYCLING?');
+    cy.visit('http://localhost:3000/how-does-this-work');
+    cy.contains('NEED RECYCLING IN YOUR APARTMENT OR CONDO?');
     cy.contains('Recruit, Request, Recycle');
-    cy.contains(
-      'We have a mission to change Denver\'s low recycling rate by making it easy for you and your neighbors to petition your landlord for recyling for your building.'
-    );
+    cy.contains('Follow these easy steps!');
   });
 
   describe('When Searching an Address', () => {
