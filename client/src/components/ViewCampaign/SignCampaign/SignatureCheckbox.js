@@ -26,8 +26,12 @@ const SignatureCheckbox = ({
   </FormGroup>
 );
 
+SignatureCheckbox.defaultProps = {
+  className: ''
+};
+
 SignatureCheckbox.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   keepMeUpdated: PropTypes.bool.isRequired,
   keepMeUpdatedLabel: PropTypes.string.isRequired,
   toggleKeepMeUpdatedCheckbox: PropTypes.func.isRequired
