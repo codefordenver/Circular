@@ -1,33 +1,15 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-
-  
+   
+    // ##########################
+    // ##### GENERAL UTILS ######
+    
     // current user object
     function currentUser() {
       return request.auth
     }
     
-    // check if user is signed in
-    function signedIn() {
-    	return currentUser() != null;
-    }
-
-    // check if user exists
-    function userExists(userId) {
-      return exists(/databases/$(database)/documents/users/$(userId))
-    }
-    
-    // check if email exists in users collection
-    function emailExists() {
-    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == request.resource.data.email
-    }
-    
-    // check if user is admin of requested campaign 
-    function userIsAdminOfRequestedCampaign() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == request.resource.data.createdCampaignId
-    }
-        
-      // get requesting users data
+    // get requesting users data
     function getUserData() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data
     }
@@ -37,6 +19,29 @@ service cloud.firestore {
       return request.resource.data
     }
 
+    // ##### GENERAL UTILS ######
+    // ##########################
+    
+    // check if user is signed in
+    function signedIn() {
+    	return currentUser() != null;
+    }
+    
+    // check if user exists
+    function userExists(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId))
+    }
+    
+    // check if email exists in users collection
+    function emailExists() {
+    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == incomingData().email
+    }
+    
+    // check if user is admin of requested campaign 
+    function userIsAdminOfRequestedCampaign() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId
+    }
+    
     // check if request is made by campaign owner
     // need more robust rules here
     function isCampaignOwner() {
@@ -45,7 +50,7 @@ service cloud.firestore {
 
     // check if it's the user's own data
     function isUsersData(userId) {
-      return request.auth.uid == userId
+      return currentUser().uid == userId
     } 
 
     match /wasteProviders/{wasteProvider} {

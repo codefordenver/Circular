@@ -23,7 +23,7 @@ const AdminAddSignatureModalData = [
     label: 'Email',
     name: 'email',
     placeholder: 'sandra@recyclemore.net',
-    type: 'text'
+    type: 'email'
   },
   {
     id: 'signerMessage',
@@ -75,7 +75,11 @@ const AdminAddSignatureModal = ({
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button bsStyle="info" onClick={handleAdminAddSignature}>
+        <Button
+          disabled={!adminAddSignatureData.formIsValid}
+          bsStyle="info"
+          onClick={handleAdminAddSignature}
+        >
           Add Signature To List
         </Button>
       </Modal.Footer>

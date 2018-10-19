@@ -21,6 +21,7 @@ import {
 
 const ADMIN_ADD_SIGNATURE_DATA_INITIAL_STATE = {
   firstName: '',
+  formIsValid: false,
   lastName: '',
   email: '',
   signerMessage: ''
@@ -57,8 +58,13 @@ class SignCampaign extends Component {
   };
 
   handleAdminAddSignatureModalDataChange = (field, updatedData) => {
+    const formIsValid = this.handleValidateAdminAddSignatureToCampaignData();
     this.setState(prevState => ({
-      adminAddSignatureData: { ...prevState.adminAddSignatureData, [field]: updatedData }
+      adminAddSignatureData: {
+        ...prevState.adminAddSignatureData,
+        [field]: updatedData,
+        formIsValid
+      }
     }));
   };
 
@@ -143,6 +149,17 @@ class SignCampaign extends Component {
       this.props.signCampaignProps.activeCampaign.campaignId,
       updatedCampaignData
     );
+  };
+
+  handleValidateAdminAddSignatureToCampaignData = () => {
+    const reEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const {
+      adminAddSignatureData: { firstName, lastName, email }
+    } = this.state;
+    if (firstName !== '' && lastName !== '' && reEmail.test(email)) {
+      return true;
+    }
+    return false;
   };
 
   toggleKeepMeUpdatedCheckbox = () => {
