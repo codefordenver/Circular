@@ -135,6 +135,7 @@ export const firebaseAdminAddSignature = adminAddSignatureObject => async dispat
     const newSignerRef = usersRef.doc();
     await newSignerRef.set({
       addedByAdminUid,
+      campaignId,
       createdAt: Timestamp,
       displayName,
       email,

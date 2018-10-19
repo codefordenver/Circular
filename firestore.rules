@@ -44,8 +44,12 @@ service cloud.firestore {
     
     // check if user is admin of requested campaign 
     function userIsAdminOfRequestedCampaign() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId 
+    }
+
+    function userIsAdmin(campaign) {
       return 
-      get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId }
+    }
 
     // check if request is made by campaign owner
     // need more robust rules here
