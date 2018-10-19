@@ -188,19 +188,10 @@ export const firebaseRemoveSignatureFromCampaignError = () => ({
 // FIREBASE REMOVE SIGNATURE THUNK
 // TODO EXPLORE KEEP RECORD OF DELETED SIGNATURES
 export const firebaseRemoveSignatureFromCampaign = (campaignId, uid) => async dispatch => {
-  // dispatch(firebaseRemoveSignatureFromCampaignRequest());
+  dispatch(firebaseRemoveSignatureFromCampaignRequest());
   const campaignSignatureRef = campaignsRef.doc(campaignId).collection('signatures');
-  let deleteSignatureRef;
   await campaignSignatureRef
-    .where('uid', '==', uid)
-    .get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        deleteSignatureRef = doc.id;
-      });
-    });
-  await campaignSignatureRef
-    .doc(deleteSignatureRef)
+    .doc(uid)
     .delete()
     .then(() => {
       dispatch(firebasePopulateCampaignById(campaignId));

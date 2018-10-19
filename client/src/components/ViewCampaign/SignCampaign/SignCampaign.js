@@ -21,7 +21,7 @@ import {
 
 const ADMIN_ADD_SIGNATURE_DATA_INITIAL_STATE = {
   firstName: '',
-  formIsValid: false,
+  formIsValid: true,
   lastName: '',
   email: '',
   signerMessage: ''

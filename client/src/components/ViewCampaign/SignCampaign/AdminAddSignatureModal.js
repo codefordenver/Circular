@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ControlLabel, FormControl, FormGroup, Modal } from 'react-bootstrap';
+import { Button, ControlLabel, FormControl, FormGroup, HelpBlock, Modal } from 'react-bootstrap';
 import SignatureCheckbox from './SignatureCheckbox';
 
 const AdminAddSignatureModalData = [
@@ -9,21 +9,24 @@ const AdminAddSignatureModalData = [
     label: 'First Name',
     name: 'firstName',
     placeholder: 'Sandra',
-    type: 'text'
+    type: 'text',
+    validation: 'Must include a first name'
   },
   {
     id: 'lastName',
     label: 'Last Name',
     name: 'lastName',
     placeholder: 'Recyleson',
-    type: 'text'
+    type: 'text',
+    validation: 'Must include a last name'
   },
   {
     id: 'email',
     label: 'Email',
     name: 'email',
     placeholder: 'sandra@recyclemore.net',
-    type: 'email'
+    type: 'email',
+    validation: 'Must include a valid email'
   },
   {
     id: 'signerMessage',
@@ -36,6 +39,7 @@ const AdminAddSignatureModalData = [
 
 const AdminAddSignatureModal = ({
   adminAddSignatureData,
+  adminAddSignatureData: { formIsValid },
   handleAdminAddSignature,
   handleAdminAddSignatureModalDataChange,
   keepMeUpdated,
@@ -51,7 +55,7 @@ const AdminAddSignatureModal = ({
       <Modal.Body className="update-campaign-modal-body" style={{ color: 'black' }}>
         <form>
           {AdminAddSignatureModalData.map(field => {
-            const { id, label, name, type, placeholder } = field;
+            const { id, label, name, type, placeholder, validation } = field;
             return (
               <FormGroup key={id} controlId={id}>
                 <ControlLabel>{label}</ControlLabel>
@@ -62,7 +66,7 @@ const AdminAddSignatureModal = ({
                   value={adminAddSignatureData[id]}
                   onChange={e => handleAdminAddSignatureModalDataChange(e.target)}
                 />
-                {/* {help && <HelpBlock>{help}</HelpBlock>} */}
+                {!formIsValid && <HelpBlock>{validation}</HelpBlock>}
               </FormGroup>
             );
           })}
@@ -75,11 +79,7 @@ const AdminAddSignatureModal = ({
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          disabled={!adminAddSignatureData.formIsValid}
-          bsStyle="info"
-          onClick={handleAdminAddSignature}
-        >
+        <Button disabled={!formIsValid} bsStyle="info" onClick={handleAdminAddSignature}>
           Add Signature To List
         </Button>
       </Modal.Footer>
