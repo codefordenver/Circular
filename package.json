@@ -10,6 +10,7 @@
   "scripts": {
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",
+    "jest": "jest",
     "ci:start-app-for-test": "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
     "ci:test": "cypress run",
     "lint": "eslint .",
@@ -42,6 +43,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "cross-env": "^5.1.1",
     "cypress": "^3.0.3",
     "cypress-testing-library": "^2.0.0",
@@ -54,6 +58,7 @@
     "eslint-plugin-node": "4.2.2",
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
+    "jest": "^23.6.0",
     "lint-staged": "^5.0.0",
     "prettier": "^1.10.0",
     "prettier-eslint": "^8.2.2",
