@@ -15,7 +15,7 @@ install:
   - yarn install --frozen-lockfile
 
 before_script:
-  - yarn run client"build
+  - yarn run client:build
   - yarn ci:start-app-for-test &
   - 'sh -e /etc/init.d/xvfb start'
   - sleep 3
