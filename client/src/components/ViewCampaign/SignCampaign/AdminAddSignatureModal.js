@@ -67,6 +67,7 @@ const AdminAddSignatureModal = ({
             );
           })}
           <SignatureCheckbox
+            className="admin-add-signature"
             keepMeUpdated={keepMeUpdated}
             keepMeUpdatedLabel="Opt signer in to email updates"
             toggleKeepMeUpdatedCheckbox={toggleKeepMeUpdatedCheckbox}

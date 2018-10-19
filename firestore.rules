@@ -1,11 +1,53 @@
 service cloud.firestore {
   match /databases/{database}/documents {
 
-  // check if user is signed in
-    function signedIn() {
-    	return request.auth.uid != null;
+  
+    // current user object
+    function currentUser() {
+      return request.auth
     }
     
+    // check if user is signed in
+    function signedIn() {
+    	return currentUser() != null;
+    }
+
+    // check if user exists
+    function userExists(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId))
+    }
+    
+    // check if email exists in users collection
+    function emailExists() {
+    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == request.resource.data.email
+    }
+    
+    // check if user is admin of requested campaign 
+    function userIsAdminOfRequestedCampaign() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == request.resource.data.createdCampaignId
+    }
+        
+      // get requesting users data
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+    }
+    
+    // icoming data object
+    function incomingData() {
+      return request.resource.data
+    }
+
+    // check if request is made by campaign owner
+    // need more robust rules here
+    function isCampaignOwner() {
+      return getUserData().createdCampaignId != null;
+    }
+
+    // check if it's the user's own data
+    function isUsersData(userId) {
+      return request.auth.uid == userId
+    } 
+
     match /wasteProviders/{wasteProvider} {
       allow read: if true;
       allow write: if signedIn();
@@ -22,10 +64,8 @@ service cloud.firestore {
 
     match /users/{userId} {
       // no one can read user data - signature user data is stored in campaigns/signatures
-       allow write: if true;
-       // add logic for is campaignOwner()
-       allow read: if false;
-    
+      allow create: if signedIn() && userExists(userId) || signedIn() && !emailExists() && userIsAdminOfRequestedCampaign()
+      allow read: if signedIn() && isUsersData(userId)
     }
   }
 }
