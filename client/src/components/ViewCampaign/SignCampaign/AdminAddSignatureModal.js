@@ -53,7 +53,7 @@ const AdminAddSignatureModal = ({
           {AdminAddSignatureModalData.map(field => {
             const { id, label, name, type, placeholder } = field;
             return (
-              <FormGroup controlId={id}>
+              <FormGroup key={id} controlId={id}>
                 <ControlLabel>{label}</ControlLabel>
                 <FormControl
                   name={name}
@@ -84,7 +84,7 @@ const AdminAddSignatureModal = ({
 );
 
 AdminAddSignatureModal.propTypes = {
-  adminAddSignatureData: PropTypes.func.isRequired,
+  adminAddSignatureData: PropTypes.shape({}).isRequired,
   handleAdminAddSignature: PropTypes.func.isRequired,
   handleAdminAddSignatureModalDataChange: PropTypes.func.isRequired,
   keepMeUpdated: PropTypes.bool.isRequired,
