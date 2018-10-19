@@ -46,14 +46,6 @@ describe('The landing page', () => {
         });
       });
 
-      // WHO WE ARE LINK
-      describe('Who Are We link', () => {
-        it('Navigates to Who Are We page', () => {
-          cy.contains('WHO WE ARE').click();
-          cy.url().should('include', '/who-are-we');
-        });
-      });
-
       // WILL NEED TO ADDRESS CORS ISSUES TO TEST AUTH
       describe('Check login navigation toggle', () => {
         it('Opens Dropdown Toggles to Login', () => {
@@ -62,6 +54,14 @@ describe('The landing page', () => {
           cy.contains('Sign in With Google');
         });
       });
+    });
+  });
+
+  // WHO WE ARE LINK
+  describe('Who Are We link', () => {
+    it('Navigates to Who Are We page', () => {
+      cy.contains('WHO WE ARE').click();
+      cy.url().should('include', '/who-are-we');
     });
   });
 
