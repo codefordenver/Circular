@@ -40,12 +40,21 @@
     "style-loader": "^0.18.2"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "yarn run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
     "build": "yarn build-css && react-scripts build",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "dev:start": "BUILD_ENV=development yarn middle-start",
+    "dev:build": "BUILD_ENV=development yarn middle-build",
+    "eject": "react-scripts eject",
+    "middle-build": "react-app-env --env-file=./src/config/${BUILD_ENV}.env build",
+    "middle-start": "react-app-env --env-file=./src/config/${BUILD_ENV}.env start",
+    "start": "npm-run-all -p watch-css start-js -p ",
+    "start-js": "react-scripts start",
+    "staging:start": "BUILD_ENV=staging yarn middle-start",
+    "staging:build": "BUILD_ENV=staging yarn middle-build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "watch-css": "yarn run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
+  },
+  "devDependencies": {
+    "react-app-env": "^1.2.3"
   }
 }

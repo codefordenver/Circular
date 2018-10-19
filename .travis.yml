@@ -11,12 +11,17 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-- yarn install --frozen-lockfile
+  - yarn install -g firebase-tools
+  - yarn install --frozen-lockfile
 
 before_script:
-  - NODE_ENV=test yarn run client-build
-  - NODE_ENV=test yarn ci:start-app-for-test &
-  - "sh -e /etc/init.d/xvfb start"
+  - yarn run staging:build
+  - yarn ci:start-app-for-test &
+  - 'sh -e /etc/init.d/xvfb start'
   - sleep 3
 
-script: "yarn lint && yarn run ci:test"
+script: 'yarn lint && yarn run ci:test'
+
+after_success:
+  - firebase use staging --token $FIREBASE_TOKEN
+  - firebase deploy --token $FIREBASE_TOKEN

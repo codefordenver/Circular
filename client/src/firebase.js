@@ -5,12 +5,12 @@ import 'firebase/firestore';
 
 // FIREBASE KEYS IMPORT BASED ON ENV
 firebase.initializeApp({
-  apiKey: 'AIzaSyD3Ot2BrEc595ost38YzkKEKS66xwn3MkE',
-  authDomain: 're-imagine-dev.firebaseapp.com',
-  databaseURL: 'https://re-imagine-dev.firebaseio.com',
-  projectId: 're-imagine-dev',
-  storageBucket: 're-imagine-dev.appspot.com',
-  messagingSenderId: '86888468802'
+  apiKey: `${process.env.REACT_APP_apiKey}`,
+  authDomain: `${process.env.REACT_APP_authDomain}`,
+  databaseURL: `${process.env.REACT_APP_databaseURL}`,
+  projectId: `${process.env.REACT_APP_projectId}`,
+  storageBucket: `${process.env.REACT_APP_storageBucket}`,
+  messagingSenderId: `${process.env.REACT_APP_messagingSenderId}`
 });
 
 export const firestore = firebase.firestore();
