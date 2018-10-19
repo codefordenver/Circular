@@ -11,7 +11,7 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-  - yarn install -g firebase-tools
+  - yarn add -g firebase-tools
   - yarn install --frozen-lockfile
 
 before_script:
