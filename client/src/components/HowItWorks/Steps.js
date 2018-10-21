@@ -111,6 +111,7 @@ class Steps extends Component {
             className={stepSelectorClasses}
             key={`step-selector-${i}`}
             role="button"
+            tabIndex="0"
             onClick={() => {
               this.goToStep(i);
             }}
@@ -139,6 +140,7 @@ class Steps extends Component {
             className={stepSelectorClasses}
             key={`step-selector-${i}`}
             role="button"
+            tabIndex="0"
             onClick={() => {
               this.goToStep(i);
             }}
@@ -240,37 +242,6 @@ class Steps extends Component {
         </Spring>
 
         {vertical ? <div className="centering-space" /> : null}
-
-        {this.props.showPrevNextButtons &&
-          !vertical && (
-            <Grid>
-              <Row>
-                <Col xs={12} md={10} mdOffset={1}>
-                  <div className="step-end-buttons">
-                    <div
-                      className={prevStepBtnClassNames}
-                      role="button"
-                      onClick={() => {
-                        this.prevStep();
-                      }}
-                    >
-                      PREVIOUS
-                    </div>
-                    <div className="take-space" />
-                    <div
-                      className={nextStepBtnClassNames}
-                      role="button"
-                      onClick={() => {
-                        this.nextStep();
-                      }}
-                    >
-                      NEXT
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Grid>
-          )}
       </div>
     );
   }
@@ -279,7 +250,6 @@ class Steps extends Component {
 Steps.defaultProps = {
   selectedStep: 0,
   vertical: false,
-  showPrevNextButtons: false,
   pulseNextStep: false,
   autoSlide: false,
   autoSlideDelay: 4000,
@@ -289,7 +259,6 @@ Steps.defaultProps = {
 Steps.propTypes = {
   selectedStep: PropTypes.number,
   vertical: PropTypes.bool,
-  showPrevNextButtons: PropTypes.bool,
   height: PropTypes.number,
   pulseNextStep: PropTypes.bool,
   autoSlide: PropTypes.bool,

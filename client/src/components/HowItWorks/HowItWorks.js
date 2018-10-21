@@ -38,6 +38,7 @@ const prevStepBtn = (
     <i
       className="fa fa-angle-left arrow-btn"
       role="button"
+      tabIndex="-1"
       onClick={() => {
         if (stepsRef != null) {
           stepsRef.prevStep();
@@ -52,6 +53,7 @@ const nextStepBtn = (
     <i
       className="fa fa-angle-right arrow-btn"
       role="button"
+      tabIndex="-1"
       onClick={() => {
         if (stepsRef != null) {
           stepsRef.nextStep();
@@ -261,7 +263,9 @@ HowItWorks.propTypes = {
       selectedStep: PropTypes.number
     }).isRequired,
     action: PropTypes.shape({}).isRequired
-  }).isRequired
+  }).isRequired,
+  firebaseSearchAddressFlow: PropTypes.func.isRequired,
+  clearInitialSearchResults: PropTypes.func.isRequired
 };
 
 export default connect(
