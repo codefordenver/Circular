@@ -261,8 +261,8 @@ HowItWorks.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       selectedStep: PropTypes.number
-    }).isRequired,
-    action: PropTypes.shape({}).isRequired
+    }),
+    action: PropTypes.string.isRequired
   }).isRequired,
   firebaseSearchAddressFlow: PropTypes.func.isRequired,
   clearInitialSearchResults: PropTypes.func.isRequired

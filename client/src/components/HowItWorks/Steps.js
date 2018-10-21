@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
 import { Spring, animated } from 'react-spring';
 import { TimingAnimation, Easing } from 'react-spring/dist/addons.cjs';
 
@@ -77,6 +76,12 @@ class Steps extends Component {
     }
   }
 
+  _buildHandleEnterKeyPress = onClick => ({ key }) => {
+    if (key === 'Enter') {
+      onClick();
+    }
+  };
+
   _renderStepSelectors() {
     const numSteps = this.props.children.length;
     const selectedStep = this.state.selectedStep;
@@ -112,7 +117,10 @@ class Steps extends Component {
             key={`step-selector-${i}`}
             role="button"
             tabIndex="0"
-            onClick={() => {
+            onKeyPress={this._buildHandleEnterKeyPress(e => {
+              this.goToStep(i);
+            })}
+            onClick={e => {
               this.goToStep(i);
             }}
           >
@@ -141,7 +149,10 @@ class Steps extends Component {
             key={`step-selector-${i}`}
             role="button"
             tabIndex="0"
-            onClick={() => {
+            onKeyPress={this._buildHandleEnterKeyPress(e => {
+              this.goToStep(i);
+            })}
+            onClick={e => {
               this.goToStep(i);
             }}
           >
@@ -201,16 +212,6 @@ class Steps extends Component {
   }
 
   render() {
-    let prevStepBtnClassNames = 'step-button prev';
-    if (this.state.selectedStep === 0) {
-      prevStepBtnClassNames += ' disabled';
-    }
-
-    let nextStepBtnClassNames = 'step-button next';
-    if (this.state.selectedStep === this.props.children.length - 1) {
-      nextStepBtnClassNames += ' disabled';
-    }
-
     const vertical = this.props.vertical;
 
     let containerClasses = 'steps-container';
@@ -259,7 +260,7 @@ Steps.defaultProps = {
 Steps.propTypes = {
   selectedStep: PropTypes.number,
   vertical: PropTypes.bool,
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   pulseNextStep: PropTypes.bool,
   autoSlide: PropTypes.bool,
   autoSlideDelay: PropTypes.number,

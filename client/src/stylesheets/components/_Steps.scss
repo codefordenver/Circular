@@ -105,6 +105,11 @@
       align-self: stretch;
       cursor: pointer;
 
+      &:focus {
+        outline: none;
+      }
+
+
       &.vertical {
         padding: 0 0;
       }
