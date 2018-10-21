@@ -1,14 +1,11 @@
 import React from 'react';
-import { Grid, Row, Col, Image } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import AutoSuggestInput from '../AutoSuggestInput';
 import {
   firebaseSearchAddressFlow,
   clearInitialSearchResults
 } from '../../redux/actions/firebaseInitialSearch';
-
-// import SectionSlice from './SectionSlice';
-// import '../../stylesheets/components/_HowItWorks.scss';
 
 // import screenShot from '../../images/screen-shot.png';
 // import list from '../../images/list.png';
