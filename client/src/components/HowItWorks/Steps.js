@@ -8,7 +8,7 @@ class Steps extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStep: props.selectedStep || 0,
+      selectedStep: props.selectedStep,
       pulseOpacity: 1.0,
       pulseColor: 'rgba(249, 199, 100, 1)',
       autoSlide: props.autoSlide
@@ -87,7 +87,7 @@ class Steps extends Component {
     }
     a.push(<div className={halfSpacerClasses} key={'halfSpacer-start'} />);
 
-    for (let i = 0; i < numSteps; i++) {
+    for (let i = 0; i < numSteps; i += 1) {
       let stepSelectorClasses = `step-selector-${i}`;
       let stepSpacerClasses = 'spacer-line';
       if (this.props.vertical) {
@@ -110,6 +110,7 @@ class Steps extends Component {
           <div
             className={stepSelectorClasses}
             key={`step-selector-${i}`}
+            role="button"
             onClick={() => {
               this.goToStep(i);
             }}
@@ -137,6 +138,7 @@ class Steps extends Component {
           <div
             className={stepSelectorClasses}
             key={`step-selector-${i}`}
+            role="button"
             onClick={() => {
               this.goToStep(i);
             }}
@@ -160,7 +162,7 @@ class Steps extends Component {
   _renderChildren(vertical) {
     const wrappedChildren = [];
     const selectedStep = this.state.selectedStep;
-    for (let i = 0; i < this.props.children.length; i++) {
+    for (let i = 0; i < this.props.children.length; i += 1) {
       let springTo = { opacity: 0.2 };
       let springFrom = { opacity: 1 };
       if (!vertical) {
@@ -207,7 +209,7 @@ class Steps extends Component {
       nextStepBtnClassNames += ' disabled';
     }
 
-    const vertical = this.props.vertical ? this.props.vertical : false;
+    const vertical = this.props.vertical;
 
     let containerClasses = 'steps-container';
     let selectorsContainerClasses = 'step-selectors-container';
@@ -247,6 +249,7 @@ class Steps extends Component {
                   <div className="step-end-buttons">
                     <div
                       className={prevStepBtnClassNames}
+                      role="button"
                       onClick={() => {
                         this.prevStep();
                       }}
@@ -256,6 +259,7 @@ class Steps extends Component {
                     <div className="take-space" />
                     <div
                       className={nextStepBtnClassNames}
+                      role="button"
                       onClick={() => {
                         this.nextStep();
                       }}
@@ -273,18 +277,24 @@ class Steps extends Component {
 }
 
 Steps.defaultProps = {
+  selectedStep: 0,
+  vertical: false,
   showPrevNextButtons: false,
   pulseNextStep: false,
   autoSlide: false,
-  autoSlideDelay: 4000
+  autoSlideDelay: 4000,
+  height: 'auto'
 };
 
 Steps.propTypes = {
+  selectedStep: PropTypes.number,
+  vertical: PropTypes.bool,
   showPrevNextButtons: PropTypes.bool,
   height: PropTypes.number,
   pulseNextStep: PropTypes.bool,
   autoSlide: PropTypes.bool,
-  autoSlideDelay: PropTypes.number
+  autoSlideDelay: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };
 
 export default Steps;

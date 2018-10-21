@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import HeroCTA from '../components/HeroCTA';
 // import CampaignsMap from '../components/CampaignsMap';
 import StepByStep from '../components/StepByStep';
@@ -26,21 +25,7 @@ const Home = () => (
   </div>
 );
 
-Home.defaultProps = {
-  firebaseCampaigns: PropTypes.shape({
-    campaigns: PropTypes.arrayOf()
-  })
-};
-
-Home.propTypes = {
-  router: PropTypes.shape({}).isRequired
-};
-
 export default connect(
-  ({ initialSearch, googleMap, firebaseCampaigns }) => ({
-    ...initialSearch,
-    googleMap,
-    firebaseCampaigns
-  }),
+  null,
   null
 )(Home);

@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Transition, animated } from 'react-spring';
 import { TimingAnimation, Easing } from 'react-spring/dist/addons';
 
-const SingleGraphBar = ({ vertical = false, num, denom, barColor, bgColor, thickness }) => {
+const SingleGraphBar = ({ num, denom, barColor, bgColor, thickness }) => {
   if (barColor && barColor.length > 0) {
     return (
       <div className="outer-bar" style={{ height: thickness, width: '100%', background: bgColor }}>
-        <div className="main-bar" style={{ flex: num /* , background: barColor */, color: bgColor }}>
+        <div
+          className="main-bar"
+          style={{ flex: num /* , background: barColor */, color: bgColor }}
+        >
           <Transition
             native
             impl={TimingAnimation}
@@ -45,6 +49,19 @@ const SingleGraphBar = ({ vertical = false, num, denom, barColor, bgColor, thick
       </div>
     </div>
   );
+};
+
+SingleGraphBar.defaultProps = {
+  barColor: '',
+  bgColor: 'transparent'
+};
+
+SingleGraphBar.propTypes = {
+  num: PropTypes.number.isRequired,
+  denom: PropTypes.number.isRequired,
+  barColor: PropTypes.string,
+  bgColor: PropTypes.string,
+  thickness: PropTypes.number.isRequired
 };
 
 export default SingleGraphBar;

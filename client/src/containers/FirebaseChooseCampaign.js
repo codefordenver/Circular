@@ -84,8 +84,6 @@ class FirebaseChooseCampaign extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     const {
       location: { state },
       firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, searchedAddress }

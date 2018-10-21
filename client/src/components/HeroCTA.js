@@ -1,14 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Grid } from 'react-bootstrap';
 
-const HeroCTA = ({
-  openMap,
-  firebaseSearchAddressFlow,
-  clearInitialSearchResults,
-  firebaseCampaigns,
-  router
-}) => (
+const HeroCTA = () => (
   <Grid fluid>
     <div className="hero-wrapper">
       <div className="hero-page-header">
@@ -20,13 +13,5 @@ const HeroCTA = ({
     </div>
   </Grid>
 );
-
-HeroCTA.propTypes = {
-  openMap: PropTypes.func, // .isRequired,
-  clearInitialSearchResults: PropTypes.func, // .isRequired,
-  firebaseCampaigns: PropTypes.shape({}), // .isRequired,
-  firebaseSearchAddressFlow: PropTypes.func, // .isRequired,
-  router: PropTypes.shape({}) // .isRequired
-};
 
 export default HeroCTA;
