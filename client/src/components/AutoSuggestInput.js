@@ -68,7 +68,7 @@ class AutoSuggestInput extends Component {
       type: 'text',
       value: this.state.address,
       onChange: this.onChange,
-      autoFocus: true,
+      autoFocus: false,
       placeholder: 'Search your address'
     };
 
