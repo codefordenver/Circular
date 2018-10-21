@@ -26,21 +26,7 @@ const Home = () => (
   </div>
 );
 
-Home.defaultProps = {
-  firebaseCampaigns: PropTypes.shape({
-    campaigns: PropTypes.arrayOf()
-  })
-};
-
-Home.propTypes = {
-  router: PropTypes.shape({}).isRequired
-};
-
 export default connect(
-  ({ initialSearch, googleMap, firebaseCampaigns }) => ({
-    ...initialSearch,
-    googleMap,
-    firebaseCampaigns
-  }),
+  null,
   null
 )(Home);
