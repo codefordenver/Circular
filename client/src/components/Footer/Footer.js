@@ -10,7 +10,7 @@ const Footer = () => (
       </a>
       <i className="fa fa-copyright" />
       2018 Eco-Cycle Inc & Code for Denver | All Rights Reserved |
-      <Link className="footer-link" to="/privacy-policy">
+      <Link to="/privacy-policy" className="footer-link">
         Privacy Policy
       </Link>
     </Col>

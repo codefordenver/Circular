@@ -40,7 +40,9 @@ const ManagerResources = () => (
                 around for different haulers that offer recycling services in your area.
                 <a
                   className="info-link"
-                  href="http://www.denvergov.org/content/denvergov/en/trash-and-recycling/recycling/business-and-multi-family-recycling.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.denvergov.org/content/denvergov/en/trash-and-recycling/recycling/business-and-multi-family-recycling.html"
                 >
                   <br />
                   See a list of registered haulers here

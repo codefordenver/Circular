@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 // REDUX ACTIONS
 import { firebaseUpdateCampaign } from '../../../redux/actions/firebaseCampaigns';
 import { fetchUserSignatures, removeSignatureFromCampaign } from '../../../redux/actions/signature';
 // COMPONENTS
 import RenderSignCampaign from './RenderSignCampaign';
-import RenderRemoveSignature from './RenderRemoveSignature';
+import RenderRemoveSignatureAndUpdateCampaign from './RenderRemoveSignatureAndUpdateCampaign';
 import RenderSignIn from './RenderSignIn';
 import RenderUserHasSignedOtherCampaign from './RenderUserHasSignedOtherCampaign';
 import UpdateCampaignModal from '../UpdateCampaign/UpdateCampaignModal';
@@ -26,19 +26,6 @@ class SignCampaign extends Component {
       showUpdateCampaignModal: false
     };
   }
-
-  toggleKeepMeUpdatedCheckbox = () => {
-    this.setState({
-      keepMeUpdated: !this.state.keepMeUpdated
-    });
-  };
-
-  updateSignerMessage = e => {
-    const signerMessage = e.target.value;
-    this.setState({
-      signerMessage
-    });
-  };
 
   handleAddSignatureToCampaign = async () => {
     /* eslint-disable no-unsued-vars */
@@ -65,10 +52,20 @@ class SignCampaign extends Component {
     return this.props.signCampaignProps.firebaseRemoveSignatureFromCampaign(campaignId, uid);
   };
 
-  toggleShowUpdateCampaignModal = () => {
-    this.setState(prevState => ({
-      showUpdateCampaignModal: !prevState.showUpdateCampaignModal
-    }));
+  handleRenderSignCampaign = (auth, activeCampaign, keepMeUpdated, loaded, signerMessage) => {
+    if (loaded && auth.status === 'SIGNED_IN' && activeCampaign && auth.signedCampaignId === null) {
+      return (
+        <RenderSignCampaign
+          handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
+          keepMeUpdated={keepMeUpdated}
+          keepMeUpdatedLabel={'Keep Me Updated On This Campaign'}
+          signerMessage={signerMessage}
+          toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
+          updateSignerMessage={this.updateSignerMessage}
+        />
+      );
+    }
+    return null;
   };
 
   handleUpdateCampaign = updatedCampaignData => {
@@ -78,22 +75,77 @@ class SignCampaign extends Component {
     );
   };
 
+  toggleKeepMeUpdatedCheckbox = () => {
+    this.setState({
+      keepMeUpdated: !this.state.keepMeUpdated
+    });
+  };
+
+  toggleShowUpdateCampaignModal = () => {
+    this.setState(prevState => ({
+      showUpdateCampaignModal: !prevState.showUpdateCampaignModal
+    }));
+  };
+
+  updateSignerMessage = e => {
+    const signerMessage = e.target.value;
+    this.setState({
+      signerMessage
+    });
+  };
+
+  userIsAdmin = (activeCampaign, auth) => {
+    if (activeCampaign.campaignId === auth.createdCampaignId) {
+      return true;
+    }
+    return false;
+  };
+
+  userHasSignedThisCampaign = (activeCampaign, loaded, signedCampaignId, userIsAdmin) => {
+    if (loaded && activeCampaign.campaignId === signedCampaignId) {
+      return (
+        <RenderRemoveSignatureAndUpdateCampaign
+          handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
+          toggleShowUpdateCampaignModal={this.toggleShowUpdateCampaignModal}
+          userIsAdmin={userIsAdmin}
+        />
+      );
+    }
+    return false;
+  };
+
+  userHasSignedAnotherCampaign = (auth, loaded, signedCampaignId, userHasSignedThisCampaign) => {
+    if (
+      loaded &&
+      auth.status === 'SIGNED_IN' &&
+      signedCampaignId &&
+      signedCampaignId !== null &&
+      !userHasSignedThisCampaign
+    ) {
+      return <RenderUserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />;
+    }
+    return false;
+  };
+
   render() {
     const { firebaseWasteProviders } = this.props;
     const {
       auth,
       auth: { signedCampaignId },
       activeCampaign,
-      activeCampaign: { loaded, activeCampaignSignatures },
+      activeCampaign: { loaded },
       firebaseSignInFacebook,
       firebaseSignInGoogle
     } = this.props.signCampaignProps;
     const { keepMeUpdated, showUpdateCampaignModal, signerMessage } = this.state;
-    const activeCampaignIncludesUsersSignature =
-      activeCampaign &&
-      activeCampaignSignatures !== undefined &&
-      activeCampaignSignatures.length > 0 &&
-      activeCampaignSignatures.map(signature => signature.uid).includes(auth.uid);
+    const userIsAdmin = this.userIsAdmin(activeCampaign, auth);
+    const userHasSignedThisCampaign = this.userHasSignedThisCampaign(
+      activeCampaign,
+      loaded,
+      signedCampaignId,
+      userIsAdmin
+    );
+
     return (
       <Row className="show-grid">
         <Col md={12} className="sign-campaign-resets">
@@ -130,49 +182,29 @@ class SignCampaign extends Component {
                     />
                   )}
                 {/*  user is signed in && hasn't signed a campaign */}
-                {loaded &&
-                  auth.status === 'SIGNED_IN' &&
-                  activeCampaign &&
-                  signedCampaignId === null && (
-                    <RenderSignCampaign
-                      handleAddSignatureToCampaign={this.handleAddSignatureToCampaign}
-                      keepMeUpdated={keepMeUpdated}
-                      keepMeUpdatedLabel={'Keep Me Updated On This Campaign'}
-                      signerMessage={signerMessage}
-                      toggleKeepMeUpdatedCheckbox={this.toggleKeepMeUpdatedCheckbox}
-                      updateSignerMessage={this.updateSignerMessage}
-                    />
-                  )}
+                {this.handleRenderSignCampaign(
+                  auth,
+                  activeCampaign,
+                  keepMeUpdated,
+                  loaded,
+                  signerMessage
+                )}
                 {/*  USER AHS SIGNED CAMPAIGN AND IS SIGNED IN */}
                 {/* RENDER REMOVE SIGNATURE FEATURES */}
-                {loaded &&
-                  auth.status === 'SIGNED_IN' &&
-                  activeCampaign &&
-                  activeCampaignSignatures &&
-                  activeCampaignIncludesUsersSignature && (
-                    <RenderRemoveSignature
-                      handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
-                    />
-                  ) && (
-                    <Button
-                      style={{ marginTop: '1em' }}
-                      bsStyle="info"
-                      block
-                      onClick={this.toggleShowUpdateCampaignModal}
-                    >
-                      Update Campaign Info
-                    </Button>
-                  )}
+                {this.userHasSignedThisCampaign(
+                  activeCampaign,
+                  loaded,
+                  signedCampaignId,
+                  userIsAdmin
+                )}
                 {/* user is signed in && is currently on a page different
                 from their signed campaign page */}
-                {loaded &&
-                  auth.status === 'SIGNED_IN' &&
-                  signedCampaignId &&
-                  signedCampaignId !== null &&
-                  signedCampaignId !== 'userRemovedSignature' &&
-                  !activeCampaignIncludesUsersSignature && (
-                    <RenderUserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />
-                  )}
+                {this.userHasSignedAnotherCampaign(
+                  auth,
+                  loaded,
+                  signedCampaignId,
+                  userHasSignedThisCampaign
+                )}
               </Col>
             </Row>
           </div>

@@ -7,13 +7,23 @@ const Collaboration = () => (
       <Col xs={12} md={10} mdOffset={1}>
         <PageHeader className="info-page-header-overrides">Who Are We</PageHeader>
         <p className="info-text">
-          <a className="info-link" href="https://www.codefordenver.org/">
+          <a
+            className="info-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.codefordenver.org/"
+          >
             Code For Denver
           </a>{' '}
           is volunteer-driven, community outreach that improves people’s lives through technology.
         </p>
         <p className="info-text">
-          <a className="info-link" href="https://www.ecocycle.org">
+          <a
+            className="info-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.ecocycle.org"
+          >
             Eco-Cycle
           </a>{' '}
           is a Zero Waste non-profit based in Boulder Colorado. They started working in Denver in

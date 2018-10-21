@@ -4,7 +4,10 @@ import { Link } from 'react-router';
 import { Alert, Button } from 'react-bootstrap';
 import ToolList from '../../UtilComponents/CollapsePanel';
 
-const RenderRemoveSignature = ({ handleRemoveSignatureFromCamapaign }) => (
+const RenderRemoveSignatureAndUpdateCampaign = ({
+  handleRemoveSignatureFromCamapaign,
+  toggleShowUpdateCampaignModal
+}) => (
   <div>
     <div className="text-center thanks-for-alert">
       <Alert bsStyle="success">
@@ -38,13 +41,22 @@ const RenderRemoveSignature = ({ handleRemoveSignatureFromCamapaign }) => (
           <i className="fa fa-times-circle" />
           Unsign This Campaign
         </Button>
+        <Button
+          style={{ marginTop: '1em' }}
+          bsStyle="info"
+          block
+          onClick={toggleShowUpdateCampaignModal}
+        >
+          Update Campaign Info
+        </Button>
       </div>
     </div>
   </div>
 );
 
-RenderRemoveSignature.propTypes = {
-  handleRemoveSignatureFromCamapaign: PropTypes.func.isRequired
+RenderRemoveSignatureAndUpdateCampaign.propTypes = {
+  handleRemoveSignatureFromCamapaign: PropTypes.func.isRequired,
+  toggleShowUpdateCampaignModal: PropTypes.func.isRequired
 };
 
-export default RenderRemoveSignature;
+export default RenderRemoveSignatureAndUpdateCampaign;

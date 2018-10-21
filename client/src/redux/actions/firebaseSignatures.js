@@ -1,5 +1,5 @@
 import { campaignsRef, usersRef, Timestamp } from '../../firebase';
-import { firebaseFetchUserSignedCampaigns } from '../actions/firebaseAuth';
+import { firebaseFetchUserData } from '../actions/firebaseAuth';
 import {
   firebasePopulateCampaignById,
   firebaseFetchCampaignByIdError
@@ -22,7 +22,7 @@ export const populateFirebaseUserSignatures = firebaseUserSignatures => ({
 
 // THUNK FOR FIREBASE SIGNATURES
 export const firebaseFetchUserSignatures = firebaseUserSignatures => dispatch => {
-  dispatch(firebaseFetchUserSignaturesRequest());
+  dispatch(firebaseFetchUserData());
   dispatch(populateFirebaseUserSignatures(firebaseUserSignatures));
 };
 
@@ -64,10 +64,13 @@ export const firebaseAddSignatureToCampaignError = addSignatureError => ({
 export const firebaseAddSignatureToCampaign = signatureObject => async dispatch => {
   dispatch(firebaseAddSignatureToCampaignRequest());
   const { campaignId, uid, displayName, signerMessage, keepMeUpdated } = signatureObject;
-  const addSignatureRef = campaignsRef.doc(campaignId).collection('signatures');
-  // .add GETS A GENERATED ID FROM FIREBASE
+  const addSignatureRef = campaignsRef
+    .doc(campaignId)
+    .collection('signatures')
+    .doc(uid);
+  //  USE UID TO DEFINE SIGNATURE DOC
   addSignatureRef
-    .add(
+    .set(
       // IF DOCUMENT EXISTS, OVERWRITE, IF DOESN'T EXIST, CREATE
       {
         uid,
@@ -89,11 +92,12 @@ export const firebaseAddSignatureToCampaign = signatureObject => async dispatch 
     .set(
       {
         signedCampaignId: campaignId,
-        signedCampaignTimestamp: Timestamp
+        signedCampaignTimestamp: Timestamp,
+        keepMeUpdated
       },
       { merge: true }
     )
-    .then(dispatch(firebaseFetchUserSignedCampaigns(uid)));
+    .then(dispatch(firebaseFetchUserData(uid)));
 };
 
 // REMOVE SIGNATURE ACTIONS
@@ -151,5 +155,5 @@ export const firebaseRemoveSignatureFromCampaign = (campaignId, uid) => async di
       },
       { merge: true }
     )
-    .then(dispatch(firebaseFetchUserSignedCampaigns(uid)));
+    .then(dispatch(firebaseFetchUserData(uid)));
 };

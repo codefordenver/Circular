@@ -1,7 +1,60 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
+    function currentUser() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    
+    function signedIn() {
+    	return request.auth.uid != null;
+    }
+    
+    function isAdmin(campaignId) {
+     // does user have createdCampaignId == requested campaignId
+     return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == campaignId
+    }
+    
+    function signedCampaign() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.signedCampaignId == null
+
+    }
+    
+    match /users/{userId} {
+      // User can read, update, or delete their own data
+      allow read, update, delete: if request.auth.uid == userId;
+
+      allow create: if signedIn();
+    }
+
+    match /campaigns/{campaignId} {
       allow read, write;
+
+      // Only authenticated users can create a campaign and only one campaign
+      allow create: if signedIn()
+      							&& currentUser().data.createdCampaignId == null;
+			
+      // Only authenticated users and campaign owner can update or delete campaign
+      allow update, delete: if signedIn()
+      											&& isAdmin(campaignId)
+                            
+                            
+        match /signatures/{signature} {
+        allow read;
+
+          // Only authenticated users can sign a campaign and only one campaign
+          allow create: if signedIn()
+                        && signedCampaign()
+
+          // Only user can update or delete their own signature
+          allow update, delete: if signedIn()
+          											&& request.auth.uid == currentUser().data.uid;
+        }
+    }
+
+    match /wasteProviders/{wasteProvider} {
+      allow read;
+
+      // Maybe add 'appAdmin' boolean field to user?
+      allow write: if currentUser().data.appAdmin == true;
     }
   }
 }

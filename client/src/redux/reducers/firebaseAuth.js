@@ -7,13 +7,15 @@ import {
   FIREBASE_SIGN_IN_GOOGLE_REQUEST,
   FIREBASE_SIGN_IN_FACEBOOK_REQUEST,
   FIREBASE_SIGN_IN_SUCCESS,
+  FIREBASE_SIGN_IN_FACEBOOK_ERROR,
   // FIREBASE FETCH USER SIGNED CAMPAIGNS
-  FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST,
-  FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS
+  FIREBASE_FETCH_USER_DATA_REQUEST,
+  FIREBASE_FETCH_USER_DATA_SUCCESS,
+  FIREBASE_FETCH_USER_DATA_ERROR
 } from '../actions/firebaseAuth';
 
 export default function authReducer(state = initialState.auth, action) {
-  const { email, displayName, uid, type, signedCampaignId } = action;
+  const { displayName, email, uid, response, type, error } = action;
   switch (type) {
     // FIREBASE SIGNOUT
     case FIREBASE_SIGN_OUT_REQUEST:
@@ -22,11 +24,8 @@ export default function authReducer(state = initialState.auth, action) {
       };
     case FIREBASE_SIGN_OUT_SUCCESS:
       return {
-        status: 'ANONYMOUS',
-        email: null,
-        displayName: null,
-        uid: null,
-        signedCampaignId: null
+        ...initialState.auth,
+        loading: false
       };
     // FIREBASE SIGN IN
     case FIREBASE_SIGN_IN_GOOGLE_REQUEST:
@@ -39,19 +38,35 @@ export default function authReducer(state = initialState.auth, action) {
       };
     case FIREBASE_SIGN_IN_SUCCESS:
       return {
-        status: 'SIGNED_IN',
-        email,
+        ...state,
         displayName,
+        email,
+        status: 'SIGNED_IN',
         uid
       };
-    case FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_REQUEST:
+    case FIREBASE_SIGN_IN_FACEBOOK_ERROR:
       return {
-        ...state
+        ...initialState.auth,
+        loading: false,
+        error
       };
-    case FIREBASE_FETCH_USER_SIGNED_CAMPAIGNS_SUCCESS:
+    case FIREBASE_FETCH_USER_DATA_REQUEST:
       return {
         ...state,
-        signedCampaignId
+        loading: true
+      };
+    case FIREBASE_FETCH_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        signedCampaignId: response.signedCampaignId || null,
+        createdCampaignId: response.createdCampaignId || null
+      };
+    case FIREBASE_FETCH_USER_DATA_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: response
       };
     default:
       return state;
