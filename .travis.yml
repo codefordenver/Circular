@@ -24,4 +24,4 @@ script: 'yarn lint && yarn run ci:test'
 
 after_success:
   - firebase use staging --token $FIREBASE_TOKEN
-  - firebase deploy --token $FIREBASE_TOKEN
+  - firebase deploy -m "PR| $TRAVIS_PULL_REQUEST Build Id| $TRAVIS_BUILD_ID" --token $FIREBASE_TOKEN
