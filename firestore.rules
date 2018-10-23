@@ -58,18 +58,20 @@ service cloud.firestore {
       allow write: if signedIn();
     }
 
-    match /campaigns/{campaign} {
+    match /campaigns/{campaignId} {
       allow read: if true;
       allow create, update: if request.auth.uid != null;
       
-      match /signatures/{signature} {
+      match /signatures/{signatureId} {
         allow read, create: if true;
+        allow delete: if signedIn() && isUsersData(signatureId)
       }
     }
 
     match /users/{userId} {
       // no one can read user data - signature user data is stored in campaigns/signatures
-      allow create: if signedIn() && userExists(userId) || signedIn() && !emailExists() && userIsAdminOfRequestedCampaign()
+      allow create: if signedIn() && !userExists(userId) || signedIn() && !emailExists() && userIsAdminOfRequestedCampaign()
+      allow update: if signedIn() && isUsersData(userId)
       allow read: if signedIn() && isUsersData(userId)
     }
   }
