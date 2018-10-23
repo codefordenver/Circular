@@ -19,11 +19,9 @@ service cloud.firestore {
       return request.resource.data
     }
 
-    // exisiting data object 
-     function existingData() {
-      return resource.data
-    }
-
+    // ##### GENERAL UTILS ######
+    // ##########################
+    
     // check if user is signed in
     function signedIn() {
     	return currentUser() != null;
@@ -33,9 +31,6 @@ service cloud.firestore {
     function userExists(userId) {
       return exists(/databases/$(database)/documents/users/$(userId))
     }
-
-    // ##### GENERAL UTILS ######
-    // ##########################
     
     // check if email exists in users collection
     function emailExists() {
@@ -44,13 +39,9 @@ service cloud.firestore {
     
     // check if user is admin of requested campaign 
     function userIsAdminOfRequestedCampaign() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId 
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId
     }
-
-    function userIsAdmin(campaign) {
-      return 
-    }
-
+    
     // check if request is made by campaign owner
     // need more robust rules here
     function isCampaignOwner() {
@@ -67,21 +58,21 @@ service cloud.firestore {
       allow write: if signedIn();
     }
 
-    match /campaigns/{campaign} {
+    match /campaigns/{campaignId} {
       allow read: if true;
-      allow create: if currentUser().uid != null;
-      allow update: if currentUser().uid != null && userIsAdminOfRequestedCampaign();
+      allow create, update: if request.auth.uid != null;
       
-      match /signatures/{signature} {
+      match /signatures/{signatureId} {
         allow read, create: if true;
-        allow delete: if signedIn() && isUsersData(signature)
+        allow delete: if signedIn() && isUsersData(signatureId)
       }
     }
 
     match /users/{userId} {
       // no one can read user data - signature user data is stored in campaigns/signatures
       allow create: if signedIn() && !userExists(userId) || signedIn() && !emailExists() && userIsAdminOfRequestedCampaign()
-      allow read, update: if signedIn() && isUsersData(userId)
+      allow update: if signedIn() && isUsersData(userId)
+      allow read: if signedIn() && isUsersData(userId)
     }
   }
 }
