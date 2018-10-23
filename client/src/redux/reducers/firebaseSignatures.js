@@ -1,5 +1,5 @@
 import {
-  // Firbase fetch signatures
+  // Firebase fetch signatures
   FETCH_FIREBASE_SIGNATURES_REQUEST,
   FETCH_FIREBASE_SIGNATURES_SUCCESS,
   // Firebase add signature
@@ -24,7 +24,7 @@ const inititalState = {
 export default function firebaseSignaturesReducer(state = inititalState, action) {
   const { error, response, type } = action;
   switch (type) {
-    // Firbase fetch signatures
+    // Firebase fetch signatures
     case FETCH_FIREBASE_SIGNATURES_REQUEST:
       return {
         loading: true,

@@ -15,7 +15,7 @@ const AdminAddSignatureModalData = [
     id: 'lastName',
     label: 'Last Name',
     name: 'lastName',
-    placeholder: 'Recyleson',
+    placeholder: 'Recycleson',
     type: 'text'
   },
   {
