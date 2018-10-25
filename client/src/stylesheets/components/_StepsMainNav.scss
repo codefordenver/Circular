@@ -1,0 +1,146 @@
+.step-selectors-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .half-spacer {
+    display: flex;
+    flex: 1;
+  }
+  .spacer-line {
+    display: flex; 
+    flex: 2;
+    height: 2px;
+    background: white;
+    opacity: 0.7;
+
+    &.highlighted {
+      opacity: 0.7;
+      background: $maingreen;
+    }
+  }
+  @media only screen and (min-width: 700px) {
+    .spacer-line {
+      height: 3px;
+    }
+  }
+  div[class^='step-selector-'],
+  div[class*=' step-selector-'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.2rem 0;
+    align-self: stretch;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+    .circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 2rem;
+      width: 2rem;
+      border: 2px solid white;
+      border-radius: 2rem;
+      opacity: 0.7;
+    }
+    &.highlighted {
+      .circle {
+        color: $maingreen;
+        opacity: 0.7;
+        border: 2px solid $maingreen;
+      }
+    }
+    &.selected {
+      .circle {
+        color: $maingreen;
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 2.5rem;
+        border: 3px solid $maingreen;
+        opacity: 1;
+        font-weight: bold;
+      }
+    }
+    &.not-selected {
+      .circle {
+        &:hover {
+          opacity: 1 !important;
+          color: white !important;
+          border-color: white !important;
+        }
+      }
+      &.highlighted {
+        .circle {
+          &:hover {
+            color: $hovergreen;
+            border: 2px solid $hovergreen;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    @media only screen and (min-width: 700px) {
+      .circle {
+        height: 3rem;
+        width: 3rem;
+        border-radius: 3rem;
+        border: 3px solid white;
+      }
+      &.highlighted {
+        .circle {
+          border: 3px solid $maingreen;
+        }
+      }
+      &.selected {
+        .circle {
+          height: 3.5rem;
+          width: 3.5rem;
+          border-radius: 3.5rem;
+          border: 4px solid $maingreen;
+        }
+      }
+      &.not-selected {
+        .circle {
+          &:hover {
+            border: 3px solid white;
+          }
+        }
+        &.highlighted {
+          .circle {
+            &:hover {
+              border: 3px solid $hovergreen;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.vertical {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    div[class^='step-selector-'],
+    div[class*=' step-selector-'] {
+      padding: 0 0;
+    }
+    .spacer-line {
+      width: 2px;
+    }
+
+    @media only screen and (min-width: 700px) {
+      div[class^='step-selector-'],
+      div[class*=' step-selector-'] {
+        padding: 0 1rem;
+      }
+      .spacer-line {
+        width: 3px;
+      }
+    }
+  }
+}
