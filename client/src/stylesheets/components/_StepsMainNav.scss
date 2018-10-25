@@ -24,14 +24,17 @@
       height: 3px;
     }
   }
-  div[class^='step-selector-'],
-  div[class*=' step-selector-'] {
+  button[class^='step-selector-'],
+  button[class*=' step-selector-'] {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1.2rem 0;
+    margin: 1.2rem 0;
+    padding: 0;
     align-self: stretch;
     cursor: pointer;
+    background: transparent;
+    border: none;
 
     &:focus {
       outline: none;
@@ -127,16 +130,16 @@
 
     div[class^='step-selector-'],
     div[class*=' step-selector-'] {
-      padding: 0 0;
+      margin: 0 0;
     }
     .spacer-line {
       width: 2px;
     }
 
     @media only screen and (min-width: 700px) {
-      div[class^='step-selector-'],
-      div[class*=' step-selector-'] {
-        padding: 0 1rem;
+      button[class^='step-selector-'],
+      button[class*=' step-selector-'] {
+        margin: 0 1rem;
       }
       .spacer-line {
         width: 3px;

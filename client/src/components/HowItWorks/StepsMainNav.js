@@ -30,99 +30,75 @@ class StepsMainNav extends Component {
     }
   }
 
-  _buildHandleEnterKeyPress = onClick => ({ key }) => {
-    if (key === 'Enter') {
-      onClick();
+  _createStepSelector(stepNum, isSelected, isHighlighted, isPulsing) {
+    let classes = `step-selector-${stepNum}`;
+    const animationDuration = this.state.pulseOpacity === 1.0 ? 300 : 600;
+    if (isSelected) {
+      classes += ' selected';
+    } else {
+      classes += 'not-selected';
     }
-  };
+    if (isHighlighted) {
+      classes += ' highlighted';
+    }
+    return (
+      <button
+        className={classes}
+        key={`step-selector-${stepNum}`}
+        onClick={e => {
+          this.props.onClick(stepNum);
+        }}
+      >
+        {isPulsing ? (
+          <Spring
+            native
+            to={{
+              opacity: this.state.pulseOpacity,
+              color: this.state.pulseColor,
+              borderColor: this.state.pulseColor
+            }}
+            impl={TimingAnimation}
+            config={{ animationDuration, easing: Easing.linear }}
+          >
+            {style => (
+              <animated.div className="circle" style={{ ...style }}>
+                {stepNum + 1}
+              </animated.div>
+            )}
+          </Spring>
+        ) : (
+          <div className="circle">{stepNum + 1}</div>
+        )}
+      </button>
+    );
+  }
 
-  _stepSelectors() {
+  _createStepSelectors() {
     const numSteps = this.props.totalNumSteps;
     const currentStep = this.props.currentStep;
     const a = [];
     a.push(<div className="half-spacer" key="half-spacer-start" />);
 
     for (let i = 0; i < numSteps; i += 1) {
-      let stepSelectorClasses = `step-selector-${i}`;
-      let stepSpacerClasses = 'spacer-line';
-      if (currentStep === i) {
-        stepSelectorClasses += ' selected';
-      } else {
-        stepSelectorClasses += ' not-selected';
-      }
-      if (i < currentStep) {
-        stepSelectorClasses += ' highlighted';
-        stepSpacerClasses += ' highlighted';
-      }
-      let selector;
-      if (i === currentStep + 1) {
-        const duration = this.state.pulseOpacity === 1.0 ? 300 : 600;
-        selector = (
-          <div
-            className={stepSelectorClasses}
-            key={`step-selector-${i}`}
-            role="button"
-            tabIndex="0"
-            onKeyPress={this._buildHandleEnterKeyPress(e => {
-              this.props.onClick(i);
-            })}
-            onClick={e => {
-              this.props.onClick(i);
-            }}
-          >
-            <Spring
-              native
-              to={{
-                opacity: this.state.pulseOpacity,
-                color: this.state.pulseColor,
-                borderColor: this.state.pulseColor
-              }}
-              impl={TimingAnimation}
-              config={{ duration, easing: Easing.linear }}
-            >
-              {style => (
-                <animated.div className="circle" style={{ ...style }}>
-                  {i + 1}
-                </animated.div>
-              )}
-            </Spring>
-          </div>
-        );
-      } else {
-        selector = (
-          <div
-            className={stepSelectorClasses}
-            key={`step-selector-${i}`}
-            role="button"
-            tabIndex="0"
-            onKeyPress={this._buildHandleEnterKeyPress(e => {
-              this.props.onClick(i);
-            })}
-            onClick={e => {
-              this.props.onClick(i);
-            }}
-          >
-            <div className="circle">{i + 1}</div>
-          </div>
-        );
-      }
-
-      a.push(selector);
+      const stepSpacerClasses = i < currentStep ? 'spacer-line highlighted' : 'spacer-line';
+      a.push(
+        this._createStepSelector(i, i === currentStep, i < currentStep, i === currentStep + 1)
+      );
       if (i !== numSteps - 1) {
-        const stepSpacerLine = <div className={stepSpacerClasses} key={`step-spacer-${i}`} />;
-        a.push(stepSpacerLine);
+        a.push(<div className={stepSpacerClasses} key={`step-spacer-${i}`} />);
       }
     }
+
     a.push(<div className="half-spacer" key="half-spacer-end" />);
     return a;
   }
 
   render() {
-    let selectorsContainerClasses = 'step-selectors-container';
+    let containerClasses = 'step-selectors-container';
     if (this.props.vertical) {
-      selectorsContainerClasses += ' vertical';
+      containerClasses += ' vertical';
     }
-    return <div className={selectorsContainerClasses}>{this._stepSelectors()}</div>;
+    return <div className={containerClasses}>{this._createStepSelectors()}</div>;
   }
 }
 
