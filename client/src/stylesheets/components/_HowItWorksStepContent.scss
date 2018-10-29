@@ -1,0 +1,50 @@
+.how-it-works-step-content-wrapper {
+  h3 {
+    @include display-20-reg;
+    margin-top: 1.2rem;
+  }
+
+  p {
+    margin-top: 0.7rem;
+    opacity: 0.8;
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  p:first-child {
+    margin-top: 1.2rem;
+  }
+
+  ul {
+    margin: 0.7rem 0 1rem 1.2rem;
+
+    > li {
+      opacity: 0.8;
+      list-style: initial;
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .how-it-works-step-content-wrapper {
+
+    h3 {
+      @include display-24-reg;
+      margin-top: 2.5rem;
+    }
+
+    p {
+      margin-top: 1rem;
+    }
+
+    p:first-child {
+      margin-top: 2.5rem;
+    }
+
+    ul {
+      margin: 1rem 0 1.5rem 1.2rem;
+    }
+  }
+}

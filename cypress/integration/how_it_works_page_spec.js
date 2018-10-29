@@ -11,7 +11,7 @@ describe('The how does it work page', () => {
 
   describe('Clicking Step 1', () => {
     it('Sets left position of steps-content-container to make 1st step visible', () => {
-      cy.get('.step-selector-0').click();
+      cy.get('.step-selector-btn-0').click();
       cy.wait(700);
       cy.get('.steps-content-container').then($el => {
         expect($el).to.have.css('left', '0px');
@@ -21,7 +21,7 @@ describe('The how does it work page', () => {
 
   describe('Clicking Step 2', () => {
     it('Sets left position of steps-content-container to make 2nd step visible', () => {
-      cy.get('.step-selector-1').click();
+      cy.get('.step-selector-btn-1').click();
       cy.wait(700);
       cy.get('.steps-content-container').then($el => {
         const width = $el.css('width');
@@ -32,7 +32,7 @@ describe('The how does it work page', () => {
 
   describe('Clicking Step 3', () => {
     it('Sets left position of steps-content-container to make 3rd step visible', () => {
-      cy.get('.step-selector-2').click();
+      cy.get('.step-selector-btn-2').click();
       cy.wait(700);
       cy.get('.steps-content-container').then($el => {
         let width = $el.css('width');
@@ -44,7 +44,7 @@ describe('The how does it work page', () => {
 
   describe('Clicking Step 4', () => {
     it('Sets left position of steps-content-container to make 4th step visible', () => {
-      cy.get('.step-selector-3').click();
+      cy.get('.step-selector-btn-3').click();
       cy.wait(700);
       cy.get('.steps-content-container').then($el => {
         let width = $el.css('width');

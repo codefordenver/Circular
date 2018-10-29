@@ -18,6 +18,13 @@
       flex-shrink: 0;
       flex-grow: 1;
       width: 100%;
+
+      .step-header-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 
@@ -43,45 +50,6 @@
 
     .single-step-content {
       height: 100%;
-
-      div.container,
-      div.row,
-      div[class^='col-'],
-      div[class*=' col-'] {
-        height: 100%;
-      }
     }
   }
-
-  .step-end-buttons {
-
-    display: flex;
-    align-items: center;
-    margin: 3rem 0 4rem 0;
-
-    .step-button {
-      display: flex;
-      flex: 1;
-      color: $maingreen;
-      opacity: 0.8;
-      cursor: pointer;
-      user-select: none;
-
-      &:hover {
-        color: $hovergreen;
-        opacity: 1;
-      }
-
-      &.disabled {
-        opacity: 0.3;
-        cursor: default;
-      }
-    }
-
-    .take-space {
-      display: flex;
-      flex: 100;
-    }
-  }
-
 }

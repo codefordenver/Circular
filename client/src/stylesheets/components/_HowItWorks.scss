@@ -2,7 +2,6 @@
 @import "../base/colors";
 @import '../base/fonts';
 
-
 .how-it-works-banner {
   background: $light-gray;
   display: flex;
@@ -16,92 +15,6 @@
 }
 
 .how-it-works-container {
-
-  .step-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .step-nav {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin: 0 1rem;
-      font-size: 5rem;
-
-      &.prev {
-        justify-content: flex-start;
-      }
-
-      &.next {
-        justify-content: flex-end;
-      }
-
-      .arrow-btn {
-        color: $maingreen;
-        opacity: 0.8;
-        cursor: pointer;
-        user-select: none;
-
-        &:hover {
-          color: $hovergreen;
-          opacity: 1;
-        }
-      }
-
-      &.disabled {
-        .arrow-btn {
-          opacity: 0.2;
-          cursor: default;
-          &:hover {
-            color: $maingreen;
-            opacity: 0.2;
-          }
-        }
-      }
-    }
-  }
-
-  .step-icon-and-title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 2rem;
-  }
-
-  i.how-icon {
-    font-size: 3rem;
-    padding: 1rem;
-  }
-
-  h2 {
-    @include display-24-med;
-    text-align: center;
-  }
-
-  h3 {
-    @include display-20-reg;
-  }
-
-  p {
-    margin: 0.7rem 0 1rem 0;
-    opacity: 0.8;
-
-    em {
-      font-style: italic;
-    }
-  }
-
-  ul {
-    margin: 0.7rem 0 1rem 1.2rem;
-
-    > li {
-      opacity: 0.8;
-      list-style: initial;
-    }
-  }
-
   .search-container {
     padding-bottom: 4rem;
     padding-top: 3.5rem;
@@ -113,35 +26,4 @@
       padding-bottom: 1rem;
     }
   }
-
-  @media only screen and (min-width: 480px) {
-    .step-icon-and-title-container {
-      padding-bottom: 3rem;
-    }
-
-    i.how-icon {
-      font-size: 4rem;
-      padding: 1rem;
-    }
-
-    h2 {
-      @include display-36-med;
-    }
-
-    h3 {
-      @include display-24-reg;
-    }
-
-    p {
-      margin: 1rem 0 1.5rem 0;
-    }
-
-    ul {
-      margin: 1rem 0 1.5rem 1.2rem;
-    }
-
-
-  }
-
-  
 }

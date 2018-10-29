@@ -12,14 +12,8 @@
   h2.home-section-title {
     padding: 0 0;
     margin-top: 6rem;
-
     text-align: center;
     @include display-24-med;
-  }
-
-  h3 {
-    text-align: center;
-    @include display-20-thin;
   }
 
   .tinted {
@@ -28,36 +22,6 @@
 
   .pad-bottom {
     padding-bottom: 6rem;
-  }
-
-  .step-icon-and-title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  i.how-icon {
-    font-size: 2rem;
-    padding: 0 0 0.5rem 0;
-  }
-
-  p {
-    text-align: center;
-    margin: 0.7rem 0 1rem 0;
-    opacity: 0.8;
-
-    em {
-      font-style: italic;
-    }
-  }
-
-  ul {
-    margin: 0.7rem 0 1rem 1.2rem;
-
-    > li {
-      opacity: 0.8;
-      list-style: initial;
-    }
   }
 
   .inner-content-container {
@@ -74,6 +38,7 @@
       justify-content: center;
       max-width: 800px;
       padding: 0 0.5rem;
+      margin-top: 2rem;
     }
 
     a.more-step-details-link {
@@ -87,10 +52,16 @@
       color: $hovergreen;
       opacity: 1;
     }
+
+    p {
+      text-align: center;
+    }
+
+    p:first-child {
+      margin-top: 0.7rem;
+    }
   }
-
 }
-
 
 @media only screen and (min-width: 480px) {
   .step-by-step-container {
@@ -100,22 +71,11 @@
 
       a.more-step-details-link {
         align-self: flex-end;
-        margin-bottom: 0;
       }
-    }
 
-    .step-icon-and-title-container {
-      flex-direction: row;
-      justify-content: center;
-    }
-
-    .col-xs-12.no-right-pad {
-      padding-right: 15px;
-    }
-
-    i.how-icon {
-      font-size: 3rem;
-      padding: 0 2rem 0 0;
+      p:first-child {
+        margin-top: 1rem;
+      }
     }
 
     h2.home-section-title {
@@ -123,48 +83,21 @@
       @include display-28-med;
       margin-left: 1rem;
     }
-
-    h3 {
-      text-align: left;
-      @include display-24-thin;
-    }
-
-    p {
-      margin: 1rem 0 1.5rem 0;
-    }
-
-    ul {
-      margin: 1rem 0 1.5rem 1.2rem;
-    }
-
   }
 }
 
 @media only screen and (min-width: 750px) {
   .step-by-step-container {
     .inner-content-container {
-      i.how-icon {
-        font-size: 4rem;
-        padding: 0 2rem 0 0;
-      }
-
-      h3 {
-        text-align: left;
-        @include display-48-thin;
-      }
-
       p {
         font-size: 1.2rem;
       }
     }
-    
   }
 }
 
-
 @media only screen and (min-width: 1200px) {
   .step-by-step-container {
-  
     .inner-content-container {
       padding: 0 1rem;
 
@@ -176,45 +109,5 @@
         align-self: center;
       }
     }
-    
   }
 }
-
-
-.info-graphic-header {
-  padding-left: 55px;
-}
-
-.info-graphic {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
-  background-color: $light-blue-background;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  .box {
-    color: $dark-blue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 20px;
-
-    i {
-      font-size: 36px;
-      margin-bottom: 7.5px;
-    }
-
-    p {
-      font-size: 16px;
-      font-weight: bold;
-    }
-  }
-}
-
-
