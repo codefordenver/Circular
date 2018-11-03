@@ -31,7 +31,7 @@ const NavBar = ({
   homeText =
     props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
   return (
-    <Navbar bsStyle="remove-default" collapseOnSelect fluid>
+    <Navbar bsStyle="remove-default" collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/" onClick={closeMap}>
@@ -44,6 +44,9 @@ const NavBar = ({
         <Nav pullRight>
           <LinkContainer to="/denver-learn-more">
             <NavItem eventKey={1}>WHY</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/how-does-this-work">
+            <NavItem eventKey={4}>HOW IT WORKS</NavItem>
           </LinkContainer>
           <NavDropdown id="tools-dropdown" eventKey={2} title="TOOLS">
             <LinkContainer to="/manager-resources">

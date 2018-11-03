@@ -1,24 +1,65 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { Col, PageHeader } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import SingleGraphBar from '../SingleGraphBar';
 
 const RecyclingInfo = () => (
-  <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="recycling-info-wrapper">
-    <div className="home-section-div">
-      <PageHeader className="home-section-page-header">
-        Denver's recycling rate is only 23%, while the national average is 35%.
-      </PageHeader>
-      <p className="home-section-description">
-        The City of Denver only provides recycling service to single-family residential homes and
-        buildings with seven or fewer units. Furthermore, multi-family building managers are not
-        mandated to provide recycling service, but you and your neighbors can request recycling
-        service from your landlord today!
-      </p>
-      <Link to="/denver-learn-more" className="home-section-link">
-        LEARN MORE
-      </Link>
-    </div>
-  </Col>
+  <Row>
+    <Col xs={12} sm={8} smOffset={2} md={12} mdOffset={0}>
+      <div className="recycling-info">
+        <div className="text-content">
+          <div>
+            <div>
+              <span>
+                Colorado <strong>buries</strong> more than
+              </span>
+              <span className="large">$265M</span>
+              <span>worth of resources every year.</span>
+            </div>
+          </div>
+
+          <div>
+            Be a part of the solution! We can help you and your neighbors request recycling from
+            your landlord in 3 easy steps.
+          </div>
+        </div>
+
+        <div className="bar-graphs">
+          <div className="bar-and-label">
+            <span className="bar-label">Denver's recycling rate:</span>
+            <SingleGraphBar
+              num={23}
+              denom={100}
+              barColor="#FC8D8D" // "#F16767"
+              bgColor="#164c5f"
+              thickness="32px"
+            />
+          </div>
+
+          <div className="bar-and-label">
+            <span className="bar-label">National recycling rate:</span>
+            <SingleGraphBar
+              num={35}
+              denom={100}
+              barColor="#f9c764"
+              bgColor="#164c5f"
+              thickness="32px"
+            />
+          </div>
+
+          <div className="bar-and-label">
+            <span className="bar-label">San Francisco's recycling rate:</span>
+            <SingleGraphBar
+              num={85}
+              denom={100}
+              barColor="#00c78b"
+              bgColor="#164c5f"
+              thickness="32px"
+            />
+          </div>
+        </div>
+      </div>
+    </Col>
+  </Row>
 );
 
 export default RecyclingInfo;

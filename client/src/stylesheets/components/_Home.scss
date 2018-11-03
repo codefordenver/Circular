@@ -15,7 +15,7 @@
   color: $mainwhite;
   border-bottom: none;
   margin-bottom: 5px;
-  
+
   h1 {
     font-size: 24px;
     font-weight: 300;
@@ -80,3 +80,26 @@
     }
   }
 }
+
+.how-it-works-banner {
+  background: $light-gray;
+}
+
+.banner-content {
+  > div {
+    @include display-24-thin;
+    color: #164c5f;
+    text-align: center;
+  }
+
+  > div:first-child {
+    margin-bottom: 0.5rem;
+    @include display-24-reg;
+    color: #164c5f;
+  }
+}
+
+
+
+  
+

@@ -1,0 +1,45 @@
+.step-selectors-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .half-spacer {
+    display: flex;
+    flex: 1;
+  }
+  .spacer-line {
+    display: flex; 
+    flex: 2;
+    height: 2px;
+    background: white;
+    opacity: 0.7;
+
+    &.highlighted {
+      opacity: 0.7;
+      background: $maingreen;
+    }
+  }
+
+  &.vertical {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .spacer-line {
+      width: 2px;
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    .spacer-line {
+      height: 3px;
+    }
+
+    &.vertical {
+      .spacer-line {
+        width: 3px;
+        height: auto;
+      }
+    }
+  }
+}

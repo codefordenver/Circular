@@ -45,6 +45,14 @@ describe('The landing page', () => {
           cy.url().should('include', '/tips-for-requesting');
         });
       });
+      
+      // WHO WE ARE LINK
+      describe('Who Are We link', () => {
+        it('Navigates to Who Are We page', () => {
+          cy.contains('WHO WE ARE').click();
+          cy.url().should('include', '/who-are-we');
+        });
+      });
 
       // WILL NEED TO ADDRESS CORS ISSUES TO TEST AUTH
       describe('Check login navigation toggle', () => {
@@ -53,53 +61,6 @@ describe('The landing page', () => {
           cy.contains('Sign in With Facebook');
           cy.contains('Sign in With Google');
         });
-      });
-    });
-  });
-
-  // WHO WE ARE LINK
-  describe('Who Are We link', () => {
-    it('Navigates to Who Are We page', () => {
-      cy.contains('WHO WE ARE').click();
-      cy.url().should('include', '/who-are-we');
-    });
-  });
-
-  // MAIN SEARCH FEATURES
-  describe('Main Search Block', () => {
-    // SEARCH ADDRESS BAR
-    describe('When Searching an Address', () => {
-      it('Should fill out search box and click search and visit choose campaign page', () => {
-        cy.get('.search_input')
-          .type('Denver')
-          .should('have.value', 'Denver')
-          .then(() => {
-            cy.get('.search_button').click(() => {
-              cy.visit('/choose-campaign');
-            });
-          });
-      });
-    });
-    // MAP MODAL
-    describe('Explore the Map Modal', () => {
-      it('Opens the map modal', () => {
-        cy.contains('Explore Nearby Campaigns').click({ isOpen: true });
-      });
-    });
-  });
-
-  //BOTTOM FEATURES
-  describe('Bottom Features', () => {
-    describe('Wait, But Why?', () => {
-      it('Navigates to Learn More', () => {
-        cy.contains('LEARN MORE').click();
-        cy.url().should('include', '/denver-learn-more');
-      });
-    });
-    describe('Tips and Resources', () => {
-      it('Navigates to Manager Resources', () => {
-        cy.contains('TIPS AND RESOURCES').click();
-        cy.url().should('include', '/manager-resources');
       });
     });
   });

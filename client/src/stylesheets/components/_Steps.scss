@@ -1,0 +1,55 @@
+@import "../base/colors";
+
+.steps-container {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+
+  .steps-content-container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+
+    .single-step-content {
+      display: inline-block;
+      flex-shrink: 0;
+      flex-grow: 1;
+      width: 100%;
+
+      .step-header-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  &.vertical {
+    display: flex;
+    flex-direction: row;
+
+    .steps-content-container {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      flex: 10;
+    }
+
+    .centering-space {
+      flex: 0;
+    }
+
+    @media only screen and (min-width: 700px) {
+      .centering-space {
+        flex: 1;
+      }
+    }
+
+    .single-step-content {
+      height: 100%;
+    }
+  }
+}

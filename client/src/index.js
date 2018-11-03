@@ -34,7 +34,7 @@ export const history = syncHistoryWithStore(browserHistory, store);
 render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Router history={history} routes={routes} />
+      <Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={routes} />
     </PersistGate>
   </Provider>,
   document.getElementById('root')
