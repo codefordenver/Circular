@@ -27,31 +27,33 @@ class PulsedStepSelectorButton extends Component {
   }
 
   render() {
-    let classes = `step-selector-btn-${this.props.stepNum}`;
-    if (this.props.vertical) {
+    const { onClick, stepNum, vertical } = this.props;
+    const { pulseOpacity, pulseColor } = this.state;
+    let classes = `step-selector-btn-${stepNum}`;
+    if (vertical) {
       classes += ' vertical';
     }
-    const animationDuration = this.state.pulseOpacity === 1.0 ? 300 : 600;
+    const animationDuration = pulseOpacity === 1.0 ? 300 : 600;
     return (
       <button
         className={classes}
         onClick={e => {
-          this.props.onClick(this.props.stepNum);
+          onClick(stepNum);
         }}
       >
         <Spring
           native
           to={{
-            opacity: this.state.pulseOpacity,
-            color: this.state.pulseColor,
-            borderColor: this.state.pulseColor
+            opacity: pulseOpacity,
+            color: pulseColor,
+            borderColor: pulseColor
           }}
           impl={TimingAnimation}
           config={{ animationDuration, easing: Easing.linear }}
         >
           {style => (
             <animated.div className="circle" style={{ ...style }}>
-              {this.props.stepNum + 1}
+              {stepNum + 1}
             </animated.div>
           )}
         </Spring>

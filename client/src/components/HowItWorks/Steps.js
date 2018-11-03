@@ -14,17 +14,18 @@ class Steps extends Component {
       currentStep: props.currentStep,
       autoSlide: props.autoSlide
     };
-    this.goToStep = this.goToStep.bind(this);
   }
 
   componentDidMount() {
-    if (this.state.autoSlide) {
+    const { autoSlide, currentStep } = this.state;
+    const { steps, autoSlideDelay } = this.props;
+    if (autoSlide) {
       this.autoSlideInterval = setInterval(() => {
-        if (this.state.autoSlide) {
-          const nextStep = (this.state.currentStep + 1) % this.props.steps.length;
+        if (autoSlide) {
+          const nextStep = (currentStep + 1) % steps.length;
           this.setState({ currentStep: nextStep });
         }
-      }, this.props.autoSlideDelay);
+      }, autoSlideDelay);
     }
   }
 
@@ -34,7 +35,7 @@ class Steps extends Component {
     }
   }
 
-  goToStep(i, stopAutoSliding = true) {
+  goToStep = (i, stopAutoSliding = true) => {
     if (i < this.props.steps.length && i > -1) {
       if (stopAutoSliding) {
         this.setState({ currentStep: i, autoSlide: false });
@@ -42,23 +43,24 @@ class Steps extends Component {
         this.setState({ currentStep: i });
       }
     }
-  }
+  };
 
-  _createSteps() {
-    const numSteps = this.props.steps.length;
+  createSteps = () => {
+    const { vertical, steps } = this.props;
+    const numSteps = steps.length;
     const stepsComponents = [];
     const currentStep = this.state.currentStep;
     for (let i = 0; i < numSteps; i += 1) {
       let springTo = { opacity: 0.2 };
       let springFrom = { opacity: 1 };
-      if (!this.props.vertical) {
+      if (!vertical) {
         springTo.height = 0;
         springFrom.height = 'auto';
       }
       if (currentStep === i) {
         springTo = { opacity: 1 };
         springFrom = { opacity: 0.2 };
-        if (!this.props.vertical) {
+        if (!vertical) {
           springTo.height = 'auto';
           springFrom.height = 200;
         }
@@ -75,32 +77,32 @@ class Steps extends Component {
           {style => (
             <animated.div className="single-step-content" style={{ ...style }}>
               <div className="step-header-wrapper">
-                {this.props.steps[i].prevStepBtn && (
+                {steps[i].prevStepBtn && (
                   <StepHeaderNavButton
                     isReachableByKeyboard={i === currentStep}
                     isDisabled={i === 0}
                     targetStep={i - 1}
                     onClick={this.goToStep}
                   >
-                    {this.props.steps[i].prevStepBtn}
+                    {steps[i].prevStepBtn}
                   </StepHeaderNavButton>
                 )}
 
-                {this.props.steps[i].headerContent}
+                {steps[i].headerContent}
 
-                {this.props.steps[i].nextStepBtn && (
+                {steps[i].nextStepBtn && (
                   <StepHeaderNavButton
                     isReachableByKeyboard={i === currentStep}
                     isDisabled={i === numSteps - 1}
                     targetStep={i + 1}
                     onClick={this.goToStep}
                   >
-                    {this.props.steps[i].nextStepBtn}
+                    {steps[i].nextStepBtn}
                   </StepHeaderNavButton>
                 )}
               </div>
 
-              {this.props.steps[i].content}
+              {steps[i].content}
             </animated.div>
           )}
         </Spring>
@@ -108,26 +110,27 @@ class Steps extends Component {
       stepsComponents.push(step);
     }
     return stepsComponents;
-  }
+  };
 
   render() {
     let containerClasses = 'steps-container';
     let springTo;
-    if (this.props.vertical) {
+    const { currentStep } = this.state;
+    const { height, pulseNextStep, vertical, steps } = this.props;
+    if (vertical) {
       containerClasses += ' vertical';
-      springTo = { left: 0, top: `-${this.state.currentStep * 100}%` };
+      springTo = { left: 0, top: `-${currentStep * 100}%` };
     } else {
-      springTo = { left: `-${this.state.currentStep * 100}%`, top: 0 };
+      springTo = { left: `-${currentStep * 100}%`, top: 0 };
     }
-
     return (
-      <div className={containerClasses} style={{ height: this.props.height }}>
+      <div className={containerClasses} style={{ height }}>
         <StepsMainNav
-          currentStep={this.state.currentStep}
-          totalNumSteps={this.props.steps.length}
+          currentStep={currentStep}
+          totalNumSteps={steps.length}
           onClick={this.goToStep}
-          vertical={this.props.vertical}
-          pulseNextStep={this.props.pulseNextStep}
+          vertical={vertical}
+          pulseNextStep={pulseNextStep}
         />
 
         <Spring
@@ -138,12 +141,12 @@ class Steps extends Component {
         >
           {style => (
             <animated.div className={'steps-content-container'} style={{ ...style }}>
-              {this._createSteps()}
+              {this.createSteps()}
             </animated.div>
           )}
         </Spring>
 
-        {this.props.vertical ? <div className="centering-space" /> : null}
+        {vertical ? <div className="centering-space" /> : null}
       </div>
     );
   }
