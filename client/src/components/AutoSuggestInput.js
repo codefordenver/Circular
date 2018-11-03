@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import scriptLoader from 'react-async-script-loader';
 import { GeoPoint } from '../firebase';
-import { clearSearchResults } from '../redux/actions/initialSearch';
+import { clearSearchResults } from '../redux/actions/firebaseInitialSearch';
 
 class AutoSuggestInput extends Component {
   constructor(props) {

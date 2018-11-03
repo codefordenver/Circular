@@ -136,7 +136,7 @@ export const firebaseSearchAddressFlow = (
   userHasSignedCampaign
 ) => async dispatch => {
   await dispatch(firebaseStashAddress(searchedAddress, searchedGeoPoint));
-  dispatch(push({ pathname: '/choose-campaign', state: { searchedAddress } }));
+  dispatch(push({ pathname: '/search-campaign', state: { searchedAddress } }));
   dispatch(firebaseFetchNearbyCampaigns(searchedGeoPoint));
   // TODO need to handle latLng error
   // if (error) console.log('Latlng error ', error);
@@ -151,10 +151,16 @@ export function selectAddress(selectedAddress) {
   };
 }
 
-// CLEAR SERACH RESULTS
+// CLEAR SEARCH RESULTS
 export const CLEAR_INITIAL_SEARCH_RESULTS = 'CLEAR_INITIAL_SEARCH_RESULTS ';
 export function clearInitialSearchResults() {
   return {
     type: CLEAR_INITIAL_SEARCH_RESULTS
+  };
+}
+
+export function clearSearchResults() {
+  return {
+    type: 'CLEAR_SEARCH_RESULTS'
   };
 }

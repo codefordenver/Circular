@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection }) => (
+const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection, disabled }) => (
   <Row>
     <Col xs={12}>
       <Button
@@ -12,6 +12,7 @@ const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection }) =
         name={name}
         onClick={handleSelection}
         block
+        disabled={disabled}
       >
         {faArrowDirection === 'left' && <i className={`fa fa-arrow-${faArrowDirection}`} />}
         {buttonText}

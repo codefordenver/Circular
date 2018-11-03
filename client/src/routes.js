@@ -1,12 +1,12 @@
 import React from 'react';
-import { IndexRoute, Route, IndexRedirect } from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
-import FirebaseChooseCampaign from './containers/FirebaseChooseCampaign';
-import NewCampaign from './containers/NewCampaign';
-import CreateCampaignStep1 from './components/CreateCampaignStep1';
-import CreateCampaignStep2 from './components/CreateCampaignStep2';
-import CreateCampaignStep3 from './components/CreateCampaignStep3';
+import CampaignSearchContainer from './containers/CampaignSearchContainer';
+// import NewCampaign from './containers/NewCampaign';
+// import CreateCampaignStep1 from './components/CreateCampaignStep1';
+// import CreateCampaignStep2 from './components/CreateCampaignStep2';
+// import CreateCampaignStep3 from './components/CreateCampaignStep3';
 import HowItWorks from './components/HowItWorks/HowItWorks';
 import CampaignContainer from './containers/CampaignContainer';
 import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
@@ -15,26 +15,33 @@ import ManagerResources from './components/Informational/ManagerResources';
 import DenverLearnMore from './components/Informational/DenverLearnMore';
 import Collaboration from './components/Informational/Collaboration';
 import PrivacyPolicy from './components/Footer/PrivacyPolicy';
+import CampaignAlreadyExistsContainer from './containers/CampaignAlreadyExistsContainer';
+import NewCampaignContainer from './containers/NewCampaignContainer';
 import NotFound from './components/UtilComponents/NotFound';
+import AuthenticatedRoutesContainer from './containers/AuthenticatedRoutesContainer';
+import LoginContainer from './containers/LoginContainer';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
-    <Route path="/choose-campaign" component={FirebaseChooseCampaign} />
-    {/* handleRedirectToExistingCampaign
-handleRenderNearbyCampaigns
-handleRenderNewCampaign */}
+    <Route path="/search-campaign" component={CampaignSearchContainer} />
+    <Route path="/existing-campaign" component={CampaignAlreadyExistsContainer} />
     <Route
       path="/campaign"
-      onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
+      onEnter={(nextState, replace) => !nextState.params.id && replace('/create-campaign')}
     />
-    <Route path="/new-campaign" component={NewCampaign}>
+    <Route path="/campaign/:id" component={CampaignContainer} />
+
+    <Route path="/login" component={LoginContainer} />
+    <Route component={AuthenticatedRoutesContainer}>
+      <Route path="/create-campaign" component={NewCampaignContainer} />
+    </Route>
+    {/* <Route path="/new-campaign" component={NewCampaign}>
       <IndexRedirect to="address" />
       <Route path="address" component={CreateCampaignStep1} />
       <Route path="optional-info" component={CreateCampaignStep2} />
       <Route path="activate" component={CreateCampaignStep3} />
-    </Route>
-    <Route path="/campaign/:id" component={CampaignContainer} />
+    </Route> */}
     <Route path="/tips-for-requesting" component={RequestRecyclingTips} />
     <Route path="/denver-recycling-info" component={DenverInfo} />
     <Route path="/manager-resources" component={ManagerResources} />
@@ -46,13 +53,3 @@ handleRenderNewCampaign */}
     <Route path="*" component={NotFound} />
   </Route>
 );
-
-// Wanted flow eventually
-// search address
-// if campaign for exact address
-//   page: campaign already exists -> visit campaign
-// else if campaign doesn't exist
-//   if signedIn:
-//     page: choose or create new campaign -> create campaign
-//   else:
-//     page: sign in -> choose or create new campaign -> create campaign
