@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { withRouter, browserHistory } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { firebaseCreateNewCampaign } from '../redux/actions/firebaseCampaigns';
-import RenderLoading from '../components/ChooseCampaign/RenderLoading';
-// import RenderError from '../components/ChooseCampaign/RenderError';
-import RenderCampaignAlreadyExists from '../components/ChooseCampaign/RenderCampaignAlreadyExists';
-import RenderNewCampaign from '../components/ChooseCampaign/RenderNewCampaign';
-import RenderNearbyCampaigns from '../components/ChooseCampaign/RenderNearbyCampaigns';
+import Loading from '../components/ChooseCampaign/Loading';
+// import Error from '../components/ChooseCampaign/RenderError';
+import CampaignAlreadyExists from '../components/ChooseCampaign/CampaignAlreadyExists';
+import NewCampaign from '../components/ChooseCampaign/NewCampaign';
+import NearbyCampaigns from '../components/ChooseCampaign/NearbyCampaigns';
 
 class FirebaseChooseCampaign extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class FirebaseChooseCampaign extends Component {
       exactMatch.address === searchedAddress
     ) {
       return (
-        <RenderCampaignAlreadyExists
+        <CampaignAlreadyExists
           exactMatchAddress={exactMatch.address}
           handleSelection={this.handleSelection}
         />
@@ -67,10 +67,7 @@ class FirebaseChooseCampaign extends Component {
   handleRenderNearbyCampaigns = (loaded, nearbyCampaigns, searchedAddress) => {
     if (loaded && nearbyCampaigns && nearbyCampaigns.length !== 0) {
       return (
-        <RenderNearbyCampaigns
-          nearbyCampaigns={nearbyCampaigns}
-          selectedAddress={searchedAddress}
-        />
+        <NearbyCampaigns nearbyCampaigns={nearbyCampaigns} selectedAddress={searchedAddress} />
       );
     }
     return null;
@@ -78,7 +75,7 @@ class FirebaseChooseCampaign extends Component {
 
   handleRenderNewCampaign = (exactMatch, loaded) => {
     if (loaded && !exactMatch) {
-      return <RenderNewCampaign handleSelection={this.handleSelection} />;
+      return <NewCampaign handleSelection={this.handleSelection} />;
     }
     return null;
   };
@@ -89,14 +86,14 @@ class FirebaseChooseCampaign extends Component {
       firebaseInitialSearch: { exactMatch, loading, loaded, nearbyCampaigns, searchedAddress }
     } = this.props;
     if (loading) {
-      return <RenderLoading />;
+      return <Loading />;
     }
 
     return (
       <Grid>
         <Row>
           <Col xs={12} md={4} mdOffset={4} className="p-0 text-white">
-            {/* {!loading && error && <RenderError error={error} />} */}
+            {/* {!loading && error && <Error error={error} />} */}
             {/* if no longer loading and not erroring then
             render one of the following three depending
              on the status of nearby campaign */}

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RenderAddressHeading from './RenderAddressHeading';
+import AddressHeading from './AddressHeading';
 import SubmitButton from './SubmitButton';
 
-const RenderCampaignAlreadyExists = ({ exactMatchAddress, handleSelection }) => (
+const CampaignAlreadyExists = ({ exactMatchAddress, handleSelection }) => (
   <div>
-    <RenderAddressHeading
+    <AddressHeading
       headingTitle={'Looks like this address already has a campaign. Is this your address?'}
       subTitle={exactMatchAddress}
     />
@@ -24,9 +24,9 @@ const RenderCampaignAlreadyExists = ({ exactMatchAddress, handleSelection }) => 
   </div>
 );
 
-RenderCampaignAlreadyExists.propTypes = {
+CampaignAlreadyExists.propTypes = {
   exactMatchAddress: PropTypes.string.isRequired,
   handleSelection: PropTypes.func.isRequired
 };
 
-export default RenderCampaignAlreadyExists;
+export default CampaignAlreadyExists;

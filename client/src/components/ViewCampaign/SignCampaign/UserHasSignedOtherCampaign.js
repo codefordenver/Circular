@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-const RenderUserHasSignedOtherCampaign = ({ signedCampaignId }) => (
+const UserHasSignedOtherCampaign = ({ signedCampaignId }) => (
   <div className="user-has-signed-other-campaign-alert">
     <Alert bsStyle="warning">
       <h4>You can only sign one campaign at a time.</h4>
@@ -16,8 +16,8 @@ const RenderUserHasSignedOtherCampaign = ({ signedCampaignId }) => (
     </Alert>
   </div>
 );
-RenderUserHasSignedOtherCampaign.propTypes = {
+UserHasSignedOtherCampaign.propTypes = {
   signedCampaignId: PropTypes.string.isRequired
 };
 
-export default RenderUserHasSignedOtherCampaign;
+export default UserHasSignedOtherCampaign;

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { Alert, Button } from 'react-bootstrap';
 import ToolList from '../../UtilComponents/CollapsePanel';
 
-const RenderRemoveSignatureAndUpdateCampaign = ({
+const RemoveSignatureAndUpdateCampaign = ({
   handleRemoveSignatureFromCamapaign,
   toggleShowAdminAddSignatureModal,
   toggleShowUpdateCampaignModal,
@@ -68,11 +68,11 @@ const RenderRemoveSignatureAndUpdateCampaign = ({
   </div>
 );
 
-RenderRemoveSignatureAndUpdateCampaign.propTypes = {
+RemoveSignatureAndUpdateCampaign.propTypes = {
   handleRemoveSignatureFromCamapaign: PropTypes.func.isRequired,
   toggleShowAdminAddSignatureModal: PropTypes.func.isRequired,
   toggleShowUpdateCampaignModal: PropTypes.func.isRequired,
   userIsAdmin: PropTypes.bool.isRequired
 };
 
-export default RenderRemoveSignatureAndUpdateCampaign;
+export default RemoveSignatureAndUpdateCampaign;

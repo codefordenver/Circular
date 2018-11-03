@@ -21,6 +21,9 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
     <Route path="/choose-campaign" component={FirebaseChooseCampaign} />
+    {/* handleRedirectToExistingCampaign
+handleRenderNearbyCampaigns
+handleRenderNewCampaign */}
     <Route
       path="/campaign"
       onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
@@ -43,3 +46,13 @@ export default (
     <Route path="*" component={NotFound} />
   </Route>
 );
+
+// Wanted flow eventually
+// search address
+// if campaign for exact address
+//   page: campaign already exists -> visit campaign
+// else if campaign doesn't exist
+//   if signedIn:
+//     page: choose or create new campaign -> create campaign
+//   else:
+//     page: sign in -> choose or create new campaign -> create campaign

@@ -9,9 +9,9 @@ import { firebaseAdminAddSignature } from '../../../redux/actions/firebaseSignat
 // COMPONENTS
 import AdminAddSignatureModal from './AdminAddSignatureModal';
 import RenderSignCampaign from './RenderSignCampaign';
-import RenderRemoveSignatureAndUpdateCampaign from './RenderRemoveSignatureAndUpdateCampaign';
-import RenderSignIn from './RenderSignIn';
-import RenderUserHasSignedOtherCampaign from './RenderUserHasSignedOtherCampaign';
+import RemoveSignatureAndUpdateCampaign from './RemoveSignatureAndUpdateCampaign';
+import SignIn from './SignIn';
+import UserHasSignedOtherCampaign from './UserHasSignedOtherCampaign';
 import UpdateCampaignModal from '../UpdateCampaign/UpdateCampaignModal';
 import {
   buildingInformation,
@@ -197,7 +197,7 @@ class SignCampaign extends Component {
   userHasSignedThisCampaign = (activeCampaign, loaded, signedCampaignId, userIsAdmin) => {
     if (loaded && activeCampaign.campaignId === signedCampaignId) {
       return (
-        <RenderRemoveSignatureAndUpdateCampaign
+        <RemoveSignatureAndUpdateCampaign
           handleRemoveSignatureFromCamapaign={this.handleRemoveSignatureFromCamapaign}
           toggleShowAdminAddSignatureModal={this.toggleShowAdminAddSignatureModal}
           toggleShowUpdateCampaignModal={this.toggleShowUpdateCampaignModal}
@@ -216,7 +216,7 @@ class SignCampaign extends Component {
       signedCampaignId !== null &&
       !userHasSignedThisCampaign
     ) {
-      return <RenderUserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />;
+      return <UserHasSignedOtherCampaign signedCampaignId={signedCampaignId} />;
     }
     return false;
   };
@@ -283,7 +283,7 @@ class SignCampaign extends Component {
                 {/*  user isn't signed in */}
                 {loaded &&
                   auth.status === 'ANONYMOUS' && (
-                    <RenderSignIn
+                    <SignIn
                       firebaseSignInGoogle={firebaseSignInGoogle}
                       firebaseSignInFacebook={firebaseSignInFacebook}
                     />
