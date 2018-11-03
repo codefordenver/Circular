@@ -18,64 +18,28 @@ import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import NotFound from './components/UtilComponents/NotFound';
 
 export default (
-  <Route path="/" getComponent={(location, callback) => callback(null, App)}>
-    <IndexRoute getComponent={(location, callback) => callback(null, Home)} />
-    <Route
-      path="/choose-campaign"
-      getComponent={(location, callback) => callback(null, FirebaseChooseCampaign)}
-    />
+  <Route path="/" component={App}>
+    <IndexRoute component={Home} />
+    <Route path="/choose-campaign" component={FirebaseChooseCampaign} />
     <Route
       path="/campaign"
       onEnter={(nextState, replace) => !nextState.params.id && replace('/new-campaign')}
     />
-    <Route path="/new-campaign" getComponent={(location, callback) => callback(null, NewCampaign)}>
+    <Route path="/new-campaign" component={NewCampaign}>
       <IndexRedirect to="address" />
-      <Route
-        path="address"
-        getComponent={(location, callback) => callback(null, CreateCampaignStep1)}
-      />
-      <Route
-        path="optional-info"
-        getComponent={(location, callback) => callback(null, CreateCampaignStep2)}
-      />
-      <Route
-        path="activate"
-        getComponent={(location, callback) => callback(null, CreateCampaignStep3)}
-      />
+      <Route path="address" component={CreateCampaignStep1} />
+      <Route path="optional-info" component={CreateCampaignStep2} />
+      <Route path="activate" component={CreateCampaignStep3} />
     </Route>
-    <Route
-      path="/campaign/:id"
-      getComponent={(location, callback) => callback(null, CampaignContainer)}
-    />
-    <Route
-      path="/tips-for-requesting"
-      getComponent={(location, callback) => callback(null, RequestRecyclingTips)}
-    />
-    <Route
-      path="/denver-recycling-info"
-      getComponent={(location, callback) => callback(null, DenverInfo)}
-    />
-    <Route
-      path="/manager-resources"
-      getComponent={(location, callback) => callback(null, ManagerResources)}
-    />
-    <Route
-      path="/denver-learn-more"
-      getComponent={(location, callback) => callback(null, DenverLearnMore)}
-    />
-    <Route
-      path="/who-are-we"
-      getComponent={(location, callback) => callback(null, Collaboration)}
-    />
-    <Route
-      path="/privacy-policy"
-      getComponent={(location, callback) => callback(null, PrivacyPolicy)}
-    />
-    <Route
-      path="/how-does-this-work"
-      getComponent={(location, callback) => callback(null, HowItWorks)}
-    />
+    <Route path="/campaign/:id" component={CampaignContainer} />
+    <Route path="/tips-for-requesting" component={RequestRecyclingTips} />
+    <Route path="/denver-recycling-info" component={DenverInfo} />
+    <Route path="/manager-resources" component={ManagerResources} />
+    <Route path="/denver-learn-more" component={DenverLearnMore} />
+    <Route path="/who-are-we" component={Collaboration} />
+    <Route path="/privacy-policy" component={PrivacyPolicy} />
+    <Route path="/how-does-this-work" component={HowItWorks} />
 
-    <Route path="*" getComponent={(location, callback) => callback(null, NotFound)} />
+    <Route path="*" component={NotFound} />
   </Route>
 );
