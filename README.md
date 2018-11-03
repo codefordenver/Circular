@@ -6,6 +6,8 @@ Denverites believe they can do better! As a tenant in a Denver Multi-Family Comp
 
 It’s time to organize and request better waste services from property managers in Denver. There’s power in numbers, by participating and gathering momentum with the Denver Recycling Request tool, property managers know this is important to you and your neighbors.
 
+![](./screen_shot_2018-10-29.png)
+
 ## Install Dependencies
 
 1. Install [node 8.3](https://nodejs.org/) and [yarn 1.2.1](https://yarnpkg.com)

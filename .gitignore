@@ -12,5 +12,6 @@ client/.env.development
 client/.env.staging
 client/.env.production
 client/src/firebaseKeys.js
+client/src/config
 
 
