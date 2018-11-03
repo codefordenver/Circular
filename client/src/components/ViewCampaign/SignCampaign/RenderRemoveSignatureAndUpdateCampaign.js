@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Alert, Button } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import ToolList from '../../UtilComponents/CollapsePanel';
 
 const RenderRemoveSignatureAndUpdateCampaign = ({
   handleRemoveSignatureFromCamapaign,
+  toggleShowAdminAddSignatureModal,
   toggleShowUpdateCampaignModal,
   userIsAdmin
 }) => (
@@ -43,14 +44,24 @@ const RenderRemoveSignatureAndUpdateCampaign = ({
           Unsign This Campaign
         </Button>
         {userIsAdmin && (
-          <Button
-            style={{ marginTop: '1em' }}
-            bsStyle="info"
-            block
-            onClick={toggleShowUpdateCampaignModal}
-          >
-            Update Campaign Info
-          </Button>
+          <Fragment>
+            <Button
+              style={{ marginTop: '1em' }}
+              bsStyle="info"
+              block
+              onClick={toggleShowUpdateCampaignModal}
+            >
+              Update Campaign Info
+            </Button>
+            <Button
+              style={{ marginTop: '1em' }}
+              bsStyle="warning"
+              block
+              onClick={toggleShowAdminAddSignatureModal}
+            >
+              Add Signer To Campaign
+            </Button>
+          </Fragment>
         )}
       </div>
     </div>
@@ -59,6 +70,7 @@ const RenderRemoveSignatureAndUpdateCampaign = ({
 
 RenderRemoveSignatureAndUpdateCampaign.propTypes = {
   handleRemoveSignatureFromCamapaign: PropTypes.func.isRequired,
+  toggleShowAdminAddSignatureModal: PropTypes.func.isRequired,
   toggleShowUpdateCampaignModal: PropTypes.func.isRequired,
   userIsAdmin: PropTypes.bool.isRequired
 };
