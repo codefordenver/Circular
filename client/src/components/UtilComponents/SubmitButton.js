@@ -29,6 +29,7 @@ SubmitButton.defaultProps = {
 
 SubmitButton.propTypes = {
   buttonText: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
   handleSelection: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   faArrowDirection: PropTypes.string

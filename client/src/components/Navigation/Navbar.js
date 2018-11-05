@@ -62,7 +62,7 @@ const NavBar = ({
             <NavItem eventKey={3}>WHO WE ARE</NavItem>
           </LinkContainer>
           {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS and location */}
-          {userHasAssociatedCampaign && (
+          {showMyCampaignNavItem && (
             <MyCampaignNavItem signedCampaignId={createdCampaignId || signedCampaignId} />
           )}
           {auth.status && (
@@ -80,12 +80,10 @@ const NavBar = ({
 };
 
 MyCampaignNavItem.defaultProps = {
-  createdCampaignId: null,
   signedCampaignId: null
 };
 
 MyCampaignNavItem.propTypes = {
-  createdCampaignId: PropTypes.string,
   signedCampaignId: PropTypes.string
 };
 
