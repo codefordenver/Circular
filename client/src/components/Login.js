@@ -4,6 +4,9 @@ import { withRouter } from 'react-router';
 import { Button } from 'react-bootstrap';
 
 const NavBarSignIn = ({ auth, firebaseSignInGoogle, firebaseSignInFacebook, router }) => {
+  if (auth.status === 'SIGNED_IN' && router.location.state.createCampaignFlow === true) {
+    router.push('/create-campaign');
+  }
   if (auth.status === 'SIGNED_IN') {
     router.goBack();
   }

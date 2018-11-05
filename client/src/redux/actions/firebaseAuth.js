@@ -34,13 +34,6 @@ const firebaseSignInGoogleRequest = () => ({
   type: FIREBASE_SIGN_IN_GOOGLE_REQUEST
 });
 
-// SIGNIN SUCCESS
-// FIREBASE SIGN IN GOOGLE SUCCESS
-// export const FIREBASE_SIGN_IN_GOOGLE_SUCCESS = 'FIREBASE_SIGN_IN_GOOGLE_SUCCESS';
-// export const firebaseSignInGoogleSuccess = () => ({
-//   type: FIREBASE_SIGN_IN_GOOGLE_SUCCESS
-// });
-
 // FIREBASE SIGN IN
 // GOOGLE SIGN IN
 export const firebaseSignInGoogle = () => dispatch => {

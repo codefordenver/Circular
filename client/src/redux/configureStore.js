@@ -11,7 +11,7 @@ import rootReducer from './reducers/index';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['routing'] // routing is not persisted
+  blacklist: ['routing', 'activeCampaign'] // routing is not persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

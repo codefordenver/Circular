@@ -16,6 +16,7 @@ import Collaboration from './components/Informational/Collaboration';
 import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import CampaignAlreadyExistsContainer from './containers/CampaignAlreadyExistsContainer';
 import NewCampaignContainer from './containers/NewCampaignContainer';
+import CreateCampaignContainer from './containers/CreateCampaignContainer';
 import NotFound from './components/UtilComponents/NotFound';
 import AuthenticatedRoutesContainer from './containers/AuthenticatedRoutesContainer';
 import LoginContainer from './containers/LoginContainer';
@@ -33,9 +34,9 @@ export default (
 
     <Route path="/login" component={LoginContainer} />
     <Route path="/new-campaign" component={NewCampaignContainer} />
-    {/* <Route component={AuthenticatedRoutesContainer}> */}
-    <Route path="/create-campaign" component={NewCampaignContainer} />
-    {/* </Route> */}
+    <Route component={AuthenticatedRoutesContainer}>
+      <Route path="/create-campaign" component={CreateCampaignContainer} />
+    </Route>
     {/* <Route path="/new-campaign" component={NewCampaign}>
       <IndexRedirect to="address" />
       <Route path="address" component={CreateCampaignStep1} />

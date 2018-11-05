@@ -54,7 +54,7 @@ export const firebaseCreateNewCampaign = (address, latLng, uid) => async dispatc
   dispatch(firebaseUpdateUserCreatedCampaignId(uid, newCampaignRef.id));
   // SETS ACTIVE CAMPAIGN TO CAMPAIGN ID CREATED ABOVE
   dispatch(firebasePopulateActiveCampaign(newCampaignRef.id));
-  dispatch(push({ pathname: `${newCampaignRef.id}`, state: { isNewCampaign: true } }));
+  dispatch(push({ pathname: `/campaign/${newCampaignRef.id}`, state: { isNewCampaign: true } }));
   // TODO clear search information
 };
 

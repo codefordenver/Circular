@@ -12,24 +12,13 @@ class CreateCampaign extends React.Component {
 
   _makeNewCampaign = async () => {
     this.setState({ creatingCampaign: true });
-    const {
-      auth,
-      firebaseCampaigns,
-      firebaseCreateNewCampaign,
-      firebaseInitialSearch,
-      router
-    } = this.props;
+    const { auth, firebaseCreateNewCampaign, firebaseInitialSearch } = this.props;
     await firebaseCreateNewCampaign(
       firebaseInitialSearch.searchedAddress,
       firebaseInitialSearch.searchedGeoPoint,
       auth.uid
     );
-    const redirectCampaignId = await firebaseCampaigns.activeCampaign;
-    // PUSH NEWLY CREATED CAMPAIGN TO ROUTER
-    router.push({
-      pathname: `/campaign/${redirectCampaignId}`,
-      state: { isNewCampaign: true }
-    });
+    // Route handleing in Redux
   };
 
   render() {
@@ -57,19 +46,20 @@ class CreateCampaign extends React.Component {
 }
 
 CreateCampaign.defaultProps = {
-  firebaseCampaigns: { activeCampaign: null },
+  activeCampaign: { campaignId: null },
   firebaseInitialSearch: null
 };
 
 CreateCampaign.propTypes = {
+  activeCampaign: PropTypes.shape({
+    campaignId: PropTypes.string
+  }),
   auth: PropTypes.shape({
     status: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     uid: PropTypes.string
   }).isRequired,
-  firebaseCampaigns: PropTypes.shape({
-    activeCampaign: PropTypes.string
-  }),
+
   firebaseCreateNewCampaign: PropTypes.func.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired
