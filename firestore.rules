@@ -1,47 +1,52 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-   
+
     // ##########################
     // ##### GENERAL UTILS ######
-    
+
     // current user object
     function currentUser() {
-      return request.auth
+      return request.auth.uid;
     }
-    
+
     // get requesting users data
     function getUserData() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data
     }
-    
-    // icoming data object
+
+    // incoming data object
     function incomingData() {
-      return request.resource.data
+      return request.resource.data;
     }
 
     // ##### GENERAL UTILS ######
     // ##########################
-    
+
     // check if user is signed in
     function signedIn() {
     	return currentUser() != null;
     }
-    
+
+    // Is current user the campaign admin of currently selected campaign?
+    function isAdmin(campaignId) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == campaignId;
+    }
+
     // check if user exists
     function userExists(userId) {
       return exists(/databases/$(database)/documents/users/$(userId))
     }
-    
+
     // check if email exists in users collection
     function emailExists() {
     	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == incomingData().email
     }
-    
-    // check if user is admin of requested campaign 
+
+    // check if user is admin of requested campaign
     function userIsAdminOfRequestedCampaign() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId;
     }
-    
+
     // check if request is made by campaign owner
     // need more robust rules here
     function isCampaignOwner() {
@@ -51,7 +56,7 @@ service cloud.firestore {
     // check if it's the user's own data
     function isUsersData(userId) {
       return currentUser().uid == userId
-    } 
+    }
 
     match /wasteProviders/{wasteProvider} {
       allow read: if true;
@@ -60,8 +65,15 @@ service cloud.firestore {
 
     match /campaigns/{campaignId} {
       allow read: if true;
-      allow create, update: if request.auth.uid != null;
-      
+
+      // Only authenticated users can create a campaign and only one campaign
+      allow create: if signedIn()
+                    && currentUser().data.createdCampaignId == null;
+
+      // Only authenticated users and campaign owner can update campaign
+      allow update: if signedIn()
+                    && isAdmin(campaignId);
+
       match /signatures/{signatureId} {
         allow read, create: if true;
         allow delete: if signedIn() && isUsersData(signatureId)
