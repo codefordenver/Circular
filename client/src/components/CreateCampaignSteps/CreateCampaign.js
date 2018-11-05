@@ -18,7 +18,7 @@ class CreateCampaign extends React.Component {
       firebaseInitialSearch.searchedGeoPoint,
       auth.uid
     );
-    // Route handleing in Redux
+    // Route redirect handleing in Redux
   };
 
   render() {
@@ -46,24 +46,16 @@ class CreateCampaign extends React.Component {
 }
 
 CreateCampaign.defaultProps = {
-  activeCampaign: { campaignId: null },
   firebaseInitialSearch: null
 };
 
 CreateCampaign.propTypes = {
-  activeCampaign: PropTypes.shape({
-    campaignId: PropTypes.string
-  }),
   auth: PropTypes.shape({
     status: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     uid: PropTypes.string
   }).isRequired,
-
   firebaseCreateNewCampaign: PropTypes.func.isRequired,
-  router: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
   firebaseInitialSearch: PropTypes.shape({
     searchedGeoPoint: PropTypes.shape({
       _lat: PropTypes.number.isRequired,
