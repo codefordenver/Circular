@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
-import AddressHeading from './AddressHeading';
-import SubmitButton from './SubmitButton';
+import AddressHeading from '../UtilComponents/AddressHeading';
+import SubmitButton from '../UtilComponents/SubmitButton';
 import Loading from './Loading';
 
 const CampaignAlreadyExists = ({ exactMatch, router }) => {

@@ -3,7 +3,6 @@ import { IndexRoute, Route } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import CampaignSearchContainer from './containers/CampaignSearchContainer';
-// import NewCampaign from './containers/NewCampaign';
 // import CreateCampaignStep1 from './components/CreateCampaignStep1';
 // import CreateCampaignStep2 from './components/CreateCampaignStep2';
 // import CreateCampaignStep3 from './components/CreateCampaignStep3';
@@ -33,9 +32,10 @@ export default (
     <Route path="/campaign/:id" component={CampaignContainer} />
 
     <Route path="/login" component={LoginContainer} />
-    <Route component={AuthenticatedRoutesContainer}>
-      <Route path="/create-campaign" component={NewCampaignContainer} />
-    </Route>
+    <Route path="/new-campaign" component={NewCampaignContainer} />
+    {/* <Route component={AuthenticatedRoutesContainer}> */}
+    <Route path="/create-campaign" component={NewCampaignContainer} />
+    {/* </Route> */}
     {/* <Route path="/new-campaign" component={NewCampaign}>
       <IndexRedirect to="address" />
       <Route path="address" component={CreateCampaignStep1} />
