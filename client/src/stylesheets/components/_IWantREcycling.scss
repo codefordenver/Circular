@@ -1,0 +1,18 @@
+.i-want-recycling-wrapper {
+  display: flex;
+  background: white;
+  color: $main-blue;
+  height: 5em;
+  justify-content: center;
+  margin-top: 3em;
+
+  .header {
+    align-items: center;
+    display: flex;
+    font-size: 1.7em;
+    font-weight: 700;
+    padding: 1em;
+    text-align: center;
+  }
+
+}
