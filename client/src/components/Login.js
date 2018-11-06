@@ -7,9 +7,7 @@ const NavBarSignIn = ({ auth, firebaseSignInGoogle, firebaseSignInFacebook, rout
   if (auth.status === 'SIGNED_IN' && router.location.state.createCampaignFlow === true) {
     router.push('/create-campaign');
   }
-  if (auth.status === 'SIGNED_IN') {
-    router.goBack();
-  }
+
   return (
     <div>
       To continue please sign in:{' '}
