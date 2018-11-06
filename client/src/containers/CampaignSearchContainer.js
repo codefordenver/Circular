@@ -21,7 +21,7 @@ const CampaignSearch = ({ location, firebaseInitialSearch, router }) => {
   }
 
   if (!exactMatch) {
-    router.replace('/create-campaign');
+    router.replace('/new-campaign');
   }
 
   return null;

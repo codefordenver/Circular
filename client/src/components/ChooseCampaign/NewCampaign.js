@@ -53,19 +53,6 @@ NewCampaign.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
-  // firebaseCampaigns: PropTypes.shape({
-  //   activeCampaign: PropTypes.string
-  // }),
-  // firebaseCreateNewCampaign: PropTypes.func.isRequired,
-  // router: PropTypes.shape({
-  //   push: PropTypes.func.isRequired
-  // }).isRequired,
-  // firebaseInitialSearch: PropTypes.shape({
-  //   searchedGeoPoint: PropTypes.shape({
-  //     _lat: PropTypes.number.isRequired,
-  //     _long: PropTypes.number.isRequired
-  //   }).isRequired
-  // })
 };
 
 export default withRouter(NewCampaign);
