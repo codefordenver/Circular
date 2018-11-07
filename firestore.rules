@@ -1,60 +1,107 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    function currentUser() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid));
-    }
-    
-    function signedIn() {
-    	return request.auth.uid != null;
-    }
-    
-    function isAdmin(campaignId) {
-     // does user have createdCampaignId == requested campaignId
-     return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == campaignId
-    }
-    
-    function signedCampaign() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.signedCampaignId == null
+    // ##########################
+    // ##### GENERAL UTILS ######
 
+    // return current user object
+    function currentUser() {
+      return request.auth;
     }
-    
+
+    // get requesting users data
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // incoming data object
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    // ##### GENERAL UTILS ######
+    // ##########################
+
+    // check if user is signed in
+    function signedIn() {
+    	return currentUser() != null;
+    }
+
+    // check if user has signed campaign
+    function hasNotSignedCampaign() {
+      return getUserData().signedCampaignId == null;
+    }
+
+    // check if user exists
+    function userExists(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId));
+    }
+
+    // check if email exists in users collection
+    function emailExists() {
+      return getUserData().email == incomingData().email;
+    }
+
+    // check if user is admin of requested campaign
+    function userIsAdminOfRequestedCampaign() {
+      return getUserData().createdCampaignId == incomingData().signedCampaignId;
+    }
+
+    // check if request is made by campaign owner
+    // need more robust rules here
+    function isCampaignOwner(campaignId) {
+      return getUserData().createdCampaignId == campaignId;
+    }
+
+    // check if it's the user's own data
+    function isUsersData(userId) {
+      return currentUser().uid == userId;
+    }
+
+    // ###########################
+    // ##### DOCUMENT RULES ######
+
     match /users/{userId} {
       // User can read, update, or delete their own data
-      allow read, update, delete: if request.auth.uid == userId;
+      // Signature user data is stored in campaigns/signatures
+      allow create: if signedIn() && !userExists(userId) || signedIn()
+                    && !emailExists()
+                    && userIsAdminOfRequestedCampaign();
 
-      allow create: if signedIn();
+      allow read, update, delete: if signedIn() && isUsersData(userId);
     }
 
     match /campaigns/{campaignId} {
+      // Anyone can read campaigns, including unauthenticated users
       allow read;
 
       // Only authenticated users can create a campaign and only one campaign
       allow create: if signedIn()
-      							&& currentUser().data.createdCampaignId == null;
-			
+      							&& getUserData().createdCampaignId == null;
+
       // Only authenticated users and campaign owner can update or delete campaign
       allow update, delete: if signedIn()
-      											&& isAdmin(campaignId)
-                            
-                            
-        match /signatures/{signature} {
+      											&& isCampaignOwner(campaignId);
+
+      match /signatures/{signatureId} {
+        // Anyone can read signatures, including unauthenticated users
         allow read;
 
-          // Only authenticated users can sign a campaign and only one campaign
-          allow create: if signedIn()
-                        && signedCampaign()
+        // Only authenticated users can sign a campaign and only one campaign
+        allow create: if signedIn() && hasNotSignedCampaign();
 
-          // Only user can update or delete their own signature
-          allow update, delete: if signedIn()
-          											&& request.auth.uid == currentUser().data.uid;
-        }
+        // Only authenticated users can update or delete their own signature
+        allow update, delete: if signedIn() && isUsersData(signatureId);
+      }
     }
 
     match /wasteProviders/{wasteProvider} {
       allow read;
 
       // Maybe add 'appAdmin' boolean field to user?
-      allow write: if currentUser().data.appAdmin == true;
+      allow write: if getUserData().appAdmin == true;
     }
+
+    // ##### DOCUMENT RULES ######
+    // ###########################
   }
 }
