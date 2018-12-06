@@ -38,7 +38,7 @@ const HeroCTA = ({
             router={router}
           />
           <div className="text-center">
-            <Button className="map-btn" bsStyle="as-link" onClick={openMap}>
+            <Button className="map-btn" bsStyle="link" onClick={openMap}>
               Explore Nearby Campaigns
             </Button>
           </div>
