@@ -50,8 +50,25 @@ const ToolsForTenants = () => (
             titleText={'FAQs'}
             body={
               <div>
-                <strong>How much time will I need to dedicate?</strong>
-                <p>(give a baseline or minimum)</p>
+                <div>
+                  <strong>How much time will I need to dedicate?</strong>
+                  <p>(give a baseline or minimum)</p>
+                </div>
+
+                <div className="faq-div">
+                  <strong>How can I get people to sign the petition?</strong>
+                  <p>
+                    (Ideas of where to post locally; digtially post; attending resident meetings and
+                    mixers(if there are ones), newsletter, etc.)
+                  </p>
+                </div>
+
+                <div className="faq-div">
+                  <strong>How should I ask my neighbors to get involved?</strong>
+                  <p>
+                    (Provide fact sheet; examples from case studies; door-to-door flyering, etc.){' '}
+                  </p>
+                </div>
               </div>
             }
             defaultExpanded
