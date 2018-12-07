@@ -9,7 +9,7 @@ import CreateCampaignStep2 from './components/CreateCampaignStep2';
 import CreateCampaignStep3 from './components/CreateCampaignStep3';
 import HowItWorks from './components/HowItWorks/HowItWorks';
 import CampaignContainer from './containers/CampaignContainer';
-import RequestRecyclingTips from './components/Informational/RequestRecyclingTips';
+import ToolsForTenants from './components/Informational/ToolsForTenants';
 import DenverInfo from './components/Informational/DenverInfo';
 import ManagerResources from './components/Informational/ManagerResources';
 import DenverLearnMore from './components/Informational/DenverLearnMore';
@@ -49,7 +49,7 @@ export default (
     />
     <Route
       path="/tips-for-requesting"
-      getComponent={(location, callback) => callback(null, RequestRecyclingTips)}
+      getComponent={(location, callback) => callback(null, ToolsForTenants)}
     />
     <Route
       path="/denver-recycling-info"
