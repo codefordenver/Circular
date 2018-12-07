@@ -32,6 +32,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.5",
     "react-share": "^2.0.0",
+    "react-spring": "^5.8.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",

@@ -65,45 +65,6 @@ describe('The landing page', () => {
     });
   });
 
-  // MAIN SEARCH FEATURES
-  describe('Main Search Block', () => {
-    // SEARCH ADDRESS BAR
-    describe('When Searching an Address', () => {
-      it('Should fill out search box and click search and visit choose campaign page', () => {
-        cy.get('.search_input')
-          .type('Denver')
-          .should('have.value', 'Denver')
-          .then(() => {
-            cy.get('.search_button').click(() => {
-              cy.visit('/choose-campaign');
-            });
-          });
-      });
-    });
-    // MAP MODAL
-    describe('Explore the Map Modal', () => {
-      it('Opens the map modal', () => {
-        cy.contains('Explore Nearby Campaigns').click({ isOpen: true });
-      });
-    });
-  });
-
-  //BOTTOM FEATURES
-  describe('Bottom Features', () => {
-    describe('Wait, But Why?', () => {
-      it('Navigates to Learn More', () => {
-        cy.contains('LEARN MORE').click();
-        cy.url().should('include', '/denver-learn-more');
-      });
-    });
-    describe('Tips and Resources', () => {
-      it('Navigates to Manager Resources', () => {
-        cy.contains('TIPS AND RESOURCES').click();
-        cy.url().should('include', '/manager-resources');
-      });
-    });
-  });
-
   //FOOTER
   describe('Footer', () => {
     describe('Privacy Policy', () => {

@@ -1,0 +1,65 @@
+.step-header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  i.how-icon {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+
+  h2 {
+    @include display-24-med;
+    text-align: center;
+  }
+
+  h3 {
+    @include display-20-thin;
+    text-align: left;
+  }
+
+  &.stacked {
+    flex-direction: column;
+    i.how-icon {
+      padding: 1rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .step-header-content {
+    i.how-icon {
+      font-size: 3rem;
+    }
+
+    h2 {
+      @include display-36-thin;
+    }
+
+    h3 {
+      @include display-24-thin;
+      text-align: left;
+    }
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .step-header-content {
+    i.how-icon {
+      font-size: 4rem;
+    }
+
+    h3 {
+      @include display-32-thin;
+    }
+  }
+}
+
+@media only screen and (min-width: 820px) {
+  .step-header-content {
+    h3 {
+      @include display-36-thin;
+    }
+  }
+}

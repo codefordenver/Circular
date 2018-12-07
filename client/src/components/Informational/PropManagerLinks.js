@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, PageHeader } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
 
 const PropManagerLinks = () => (
   <Col xs={10} xsOffset={1} md={6} mdOffset={0} className="property-manager-links-wrapper">
@@ -13,9 +12,9 @@ const PropManagerLinks = () => (
         your building's appeal by providing recycling service. Please visit the page below to
         estimate your required level of service and tips on purchasing service.
       </p>
-      <LinkContainer to="/manager-resources">
-        <Link className="home-section-link">TIPS AND RESOURCES</Link>
-      </LinkContainer>
+      <Link to="/manager-resources" className="home-section-link">
+        TIPS AND RESOURCES
+      </Link>
     </div>
   </Col>
 );

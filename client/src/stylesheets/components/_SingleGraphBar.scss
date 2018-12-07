@@ -1,0 +1,45 @@
+@import "../base/colors";
+
+.outer-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .percentage-text {
+    z-index: 1;
+  }
+
+  .main-bar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @include display-20-thin;
+
+    &.with-bg-img {
+      background-image: url($crushed_can);
+      background-repeat: repeat-x;
+      background-size: contain;
+    }
+
+    .fill {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+    }
+  }
+
+  .space {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    @include display-20-thin;
+  }
+
+}

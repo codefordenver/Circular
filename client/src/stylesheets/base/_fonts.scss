@@ -11,9 +11,40 @@ $body_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
   color: $mainwhite;
 }
 
+
+@mixin display-72-med () {
+  @include font($display_stack, 72px, 500);
+  line-height: normal;
+}
+
+@mixin display-48-med () {
+  @include font($display_stack, 48px, 500);
+  line-height: normal;
+}
+
+@mixin display-48-thin () {
+  @include font($display_stack, 48px, 300);
+  line-height: normal;
+}
+
+@mixin display-36-thin () {
+  @include font($display_stack, 36px, 300);
+  line-height: normal;
+}
+
 @mixin display-36-med () {
   @include font($display_stack, 36px, 500);
   line-height: normal;
+}
+
+@mixin display-32-thin () {
+  @include font($display_stack, 32px, 300);
+  line-height: normal;
+}
+
+@mixin display-28-med () {
+  @include font($display_stack, 28px, 500);
+  line-height: 1.25;
 }
 
 @mixin display-24-med () {
@@ -26,8 +57,18 @@ $body_stack: "Open Sans", "Segoe UI", Tahoma, sans-serif;
   line-height: 1.25;
 }
 
+@mixin display-24-thin () {
+  @include font($display_stack, 24px, 300);
+  line-height: 1.25;
+}
+
 @mixin display-20-reg () {
   @include font($display_stack, 20px, 400);
+  line-height: 1.33;
+}
+
+@mixin display-20-thin () {
+  @include font($display_stack, 20px, 300);
   line-height: 1.33;
 }
 

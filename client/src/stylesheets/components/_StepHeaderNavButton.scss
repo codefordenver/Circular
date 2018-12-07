@@ -1,0 +1,39 @@
+button.step-header-nav {
+  background: transparent;
+  border: none;
+  margin: 0 1rem;
+  color: $maingreen;
+  opacity: 0.8;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: $hovergreen;
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.disabled {
+    opacity: 0.2;
+    cursor: default;
+    &:hover {
+      color: $maingreen;
+      opacity: 0.2;
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  button.step-header-nav {
+    margin: 0 2rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  button.step-header-nav {
+    margin: 0 3rem;
+  }
+}

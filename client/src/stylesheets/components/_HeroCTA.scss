@@ -6,10 +6,10 @@
   color: $mainwhite;
 
   h1 {
-    font-size: 70px;
+    font-size: 60px;
     letter-spacing: 3px;
     text-shadow: 30px 30px 30px 30px #000;
-    margin: 10px 0;
+    margin: 15px 15px;
   }
 
   h2,
@@ -19,7 +19,7 @@
     margin: 10px 0;
   }
 
-  h2 {
+  .font-italic {
     @include font('Dancing Script', 50px, regular);
   }
 
@@ -29,29 +29,28 @@
 }
 .hero-wrapper {
   position: relative;
+  height: 100%;
   background-image: url($desktop-hero-image);
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  box-sizing: padding-box;
+  box-sizing: border-box;
+  background-attachment: fixed;
 
   .opacity-div {
     background-color: rgba(0, 0, 0, 0.35);
-    padding: 2rem 150px;
+    padding: 5rem 12%;
     width: 100vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   @media #{$information-phone} {
     background-image: url($mobile-hero-image);
-  }
-
-  .tinted {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.25);
   }
 }
 .hero-search {
@@ -76,16 +75,30 @@
       padding: 0 0 50px 0;
     }
   }
+
+  .hero-page-header {
+    h1 {
+      font-size: 48px;
+    }
+
+    .font-italic {
+      @include font('Dancing Script', 48px, regular);
+    }
+  }
 }
 
 @media screen and (max-width: 550px) {
   .hero-page-header {
     h1 {
-      font-size: 40px;
+      font-size: 32px;
+    }
+
+    .font-italic {
+      @include font('Dancing Script', 32px, regular);
     }
 
     h2 {
-      font-size: 30px;
+      font-size: 28px;
     }
 
     h3 {

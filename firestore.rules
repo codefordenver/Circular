@@ -1,60 +1,78 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+   
+    // ##########################
+    // ##### GENERAL UTILS ######
+    
+    // current user object
     function currentUser() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+      return request.auth
     }
     
+    // get requesting users data
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+    }
+    
+    // icoming data object
+    function incomingData() {
+      return request.resource.data
+    }
+
+    // ##### GENERAL UTILS ######
+    // ##########################
+    
+    // check if user is signed in
     function signedIn() {
-    	return request.auth.uid != null;
+    	return currentUser() != null;
     }
     
-    function isAdmin(campaignId) {
-     // does user have createdCampaignId == requested campaignId
-     return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == campaignId
+    // check if user exists
+    function userExists(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId))
     }
     
-    function signedCampaign() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.signedCampaignId == null
+    // check if email exists in users collection
+    function emailExists() {
+    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == incomingData().email
+    }
+    
+    // check if user is admin of requested campaign 
+    function userIsAdminOfRequestedCampaign() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId
+    }
+    
+    // check if request is made by campaign owner
+    // need more robust rules here
+    function isCampaignOwner() {
+      return getUserData().createdCampaignId != null;
+    }
 
-    }
-    
-    match /users/{userId} {
-      // User can read, update, or delete their own data
-      allow read, update, delete: if request.auth.uid == userId;
+    // check if it's the user's own data
+    function isUsersData(userId) {
+      return currentUser().uid == userId
+    } 
 
-      allow create: if signedIn();
+    match /wasteProviders/{wasteProvider} {
+      allow read: if true;
+      allow write: if signedIn();
     }
 
     match /campaigns/{campaignId} {
-      allow read, write;
-
-      // Only authenticated users can create a campaign and only one campaign
-      allow create: if signedIn()
-      							&& currentUser().data.createdCampaignId == null;
-			
-      // Only authenticated users and campaign owner can update or delete campaign
-      allow update, delete: if signedIn()
-      											&& isAdmin(campaignId)
-                            
-                            
-        match /signatures/{signature} {
-        allow read;
-
-          // Only authenticated users can sign a campaign and only one campaign
-          allow create: if signedIn()
-                        && signedCampaign()
-
-          // Only user can update or delete their own signature
-          allow update, delete: if signedIn()
-          											&& request.auth.uid == currentUser().data.uid;
-        }
+      allow read: if true;
+      allow create, update: if request.auth.uid != null;
+      
+      match /signatures/{signatureId} {
+        allow read, create: if true;
+        allow delete: if signedIn() && isUsersData(signatureId)
+      }
     }
 
-    match /wasteProviders/{wasteProvider} {
-      allow read;
-
-      // Maybe add 'appAdmin' boolean field to user?
-      allow write: if currentUser().data.appAdmin == true;
+    match /users/{userId} {
+      // no one can read user data - signature user data is stored in campaigns/signatures
+      allow create: if signedIn() && !userExists(userId) || signedIn() && !emailExists() && userIsAdminOfRequestedCampaign()
+      allow update: if signedIn() && isUsersData(userId)
+      allow read: if signedIn() && isUsersData(userId)
     }
   }
 }
