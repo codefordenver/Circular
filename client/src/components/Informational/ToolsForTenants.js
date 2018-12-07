@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
 import CollapsePanel from '../UtilComponents/CollapsePanel';
+import Footer from '../Footer/Footer';
 
 const ToolsForTenants = () => (
   <div>
@@ -109,6 +110,8 @@ const ToolsForTenants = () => (
         </Col>
       </Row>
     </Grid>
+    <div className="spacer" />
+    <Footer />
   </div>
 );
 export default ToolsForTenants;
