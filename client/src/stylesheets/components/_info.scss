@@ -7,20 +7,54 @@
     padding-bottom: 1em;
   }
 }
-
+#f1{
+  flex: 1;
+  order: 1;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 450px;
+  padding: 20px;
+}
+#f1{
+  flex: 1;
+  order: 1;
+  //flex: 1;
+  //text-align: center;
+  //display: block;
+  //margin-left: auto;
+  //margin-right: auto;
+  //max-width: 438px;
+  //padding: 20px;
+}
+#f3{
+  flex: 1;
+  order: 1;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 438px;
+  padding: 20px;
+}
+.submit-button {
+width: 15%;
+height: 100px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
 .info-link {
   text-decoration: none;
   color: $maingreen;
 }
-
 .info-link:hover {
   color: $hovergreen;
 }
-
 .info-page-header-overrides {
   border-bottom: none;
 }
-
 .info-list {
   padding-left: 25px;
   padding-right: 25px;
@@ -30,11 +64,64 @@
     padding-bottom: 7px;
   }
 }
-
 .info-numeric-list {
   list-style-type: decimal;
 }
-
 .info-alpha-list {
   list-style-type: lower-alpha;
+}
+#center-line {
+  background-color: black;
+  border-color: black;
+  content:"";
+  margin: 10px auto;
+  width: 60%;
+  height: 100px;
+  border: 1px solid #333;
+  position:relative;
+  text-align:center
+}
+.flexable {
+  display: flex;
+  background-color: red;
+}
+@media only screen and (min-width: 768px) {
+  .info-text {
+    display: flex;
+    height: 600px;
+  }
+  #f1{
+    flex: 1;
+    order: 1;
+    text-align: right;
+    margin-right: 1%;
+  }
+  #f2{
+    border-left: 1px solid white;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    margin-left : 1%;
+    top: 25%;
+  }
+  #f3{
+    flex: 1;
+    order: 1; 
+    text-align: left;
+    margin-left: 1%;
+  }
+  #f1 .join-campaign-button.btn.btn-remove-default.btn-block {
+      width: 150px;
+      display: inline;
+      margin-top: 50px;
+   }
+   #f3 .join-campaign-button.btn.btn-remove-default.btn-block {
+    width: 150px;
+    display: inline;
+    margin-top: 98px;
+   }
+   .join-campaign-button.btn.btn-remove-default.btn-block {
+      width: 250px;
+   }
+ 
 }
