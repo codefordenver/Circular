@@ -6,7 +6,7 @@ const Collaboration = () => (
   <Grid fluid>
     <Row>
       <Col xs={12}>
-        <PageHeader className="info-page-header-overrides text-center">Who you Are We</PageHeader>
+        <PageHeader className="info-page-header-overrides text-center">Who We Are </PageHeader>
       </Col>
     </Row>
     <Row>
