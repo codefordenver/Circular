@@ -24,12 +24,13 @@ const SubmitButton = ({ buttonText, handleSelection, name, faArrowDirection, dis
 );
 
 SubmitButton.defaultProps = {
-  faArrowDirection: 'right'
+  faArrowDirection: 'right',
+  disabled: false
 };
 
 SubmitButton.propTypes = {
   buttonText: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   handleSelection: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   faArrowDirection: PropTypes.string

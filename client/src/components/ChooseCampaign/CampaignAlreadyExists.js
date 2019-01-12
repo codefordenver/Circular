@@ -45,7 +45,7 @@ CampaignAlreadyExists.defaultProps = {
 
 CampaignAlreadyExists.propTypes = {
   exactMatch: PropTypes.shape({
-    addres: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     campaignId: PropTypes.string.isRequired
   }),
   router: PropTypes.shape({
