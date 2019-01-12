@@ -29,7 +29,7 @@ function NewCampaign({ auth, router }) {
             }
           />
           <SubmitButton
-            buttonText={'CREATE CAMPAIGN'}
+            buttonText={"Let's do this!"}
             handleSelection={handleSelection}
             name={'NEW_CAMPAIGN'}
           />
