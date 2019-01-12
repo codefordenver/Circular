@@ -10,7 +10,7 @@
   "scripts": {
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",
-    "ci:start-app-for-test": "concurrently \"yarn start\" \"serve -s client/build -p 3000\"",
+    "ci:start-app-for-test": "concurrently \"yarn client\" \"serve client/build 3000\"",
     "ci:test": "cypress run",
     "lint": "eslint .",
     "dev": "concurrently \"yarn client\"",
@@ -38,7 +38,7 @@
     "nodemon": "^1.12.1",
     "path-parser": "^2.0.2",
     "react-bootstrap": "^0.32.1",
-    "serve": "7.0"
+    "serve": "^10.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
