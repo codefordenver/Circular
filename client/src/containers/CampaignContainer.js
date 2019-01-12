@@ -27,10 +27,6 @@ class CampaignContainer extends Component {
     this.state = {
       isNewCampaign: false
     };
-    if (this.props.location.state && this.props.location.state.isNewCampaign !== undefined) {
-      // eslint-disable-next-line react/no-direct-mutation-state
-      this.state.isNewCampaign = this.props.location.state.isNewCampaign;
-    }
   }
 
   componentDidMount() {
@@ -38,6 +34,18 @@ class CampaignContainer extends Component {
       this.props.firebaseFetchWasteProviders();
     }
     this.props.firebasePopulateCampaignById(this.props.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.location.state &&
+      nextProps.location.state.isNewCampaign !== undefined &&
+      nextProps.location.state.isNewCampaign !== this.state.isNewCampaign
+    ) {
+      this.setState(() => ({
+        isNewCampaign: nextProps.location.state.isNewCampaign
+      }));
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -79,18 +87,16 @@ class CampaignContainer extends Component {
       <div>
         {loading && <Loader />}
         {loaded && activeCampaign && error && <NotFound />}
-        {loaded &&
-          activeCampaign &&
-          !error && (
-            <CampaignPage
-              handleChangeIsNewCampaign={this.handleChangeIsNewCampaign}
-              signCampaignProps={signCampaignProps}
-              isNewCampaign={this.state.isNewCampaign}
-              activeCampaign={activeCampaign}
-              hrefIsLocalhost={hrefIsLocalhost}
-              campaignId={campaignId}
-            />
-          )}
+        {loaded && activeCampaign && !error && (
+          <CampaignPage
+            handleChangeIsNewCampaign={this.handleChangeIsNewCampaign}
+            signCampaignProps={signCampaignProps}
+            isNewCampaign={this.state.isNewCampaign}
+            activeCampaign={activeCampaign}
+            hrefIsLocalhost={hrefIsLocalhost}
+            campaignId={campaignId}
+          />
+        )}
       </div>
     );
   }
