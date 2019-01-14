@@ -16,7 +16,7 @@ class AutoSuggestInput extends Component {
     this.onChange = address => this.setState({ address, error: '' });
   }
 
-  handleSelect(address) {
+  handleSelect = address => {
     // IF USER HAS ALREADY SIGNED A CAMPAIGN, SKIP SELECTION PROCESS
     // TODO HANDLE USER SEARCH FLOW FOR ALREADY SIGNED USERS
     const userHasSignedCampaign = this.props.auth.signedCampaignId;
@@ -29,7 +29,7 @@ class AutoSuggestInput extends Component {
         this.props.firebaseSearchAddressFlow(address, searchedGeoPoint, userHasSignedCampaign);
       })
       .catch(error => this.setState({ error }));
-  }
+  };
 
   handleSearchClick(e) {
     e.stopPropagation();
