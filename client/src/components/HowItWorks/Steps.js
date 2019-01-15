@@ -17,12 +17,12 @@ class Steps extends Component {
   }
 
   componentDidMount() {
-    const { autoSlide, currentStep } = this.state;
-    const { steps, autoSlideDelay } = this.props;
+    const { autoSlide } = this.state;
+    const { autoSlideDelay } = this.props;
     if (autoSlide) {
       this.autoSlideInterval = setInterval(() => {
         if (autoSlide) {
-          const nextStep = (currentStep + 1) % steps.length;
+          const nextStep = (this.state.currentStep + 1) % this.props.steps.length;
           this.setState({ currentStep: nextStep });
         }
       }, autoSlideDelay);

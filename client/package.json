@@ -48,5 +48,8 @@
     "build": "yarn build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "resolutions": {
+    "**/event-stream": "^4.0.1"
   }
 }
