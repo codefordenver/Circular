@@ -20,8 +20,9 @@ It’s time to organize and request better waste services from property managers
     - REACT_APP_projectId
     - REACT_APP_storageBucket
     - REACT_APP_messagingSenderId
-5. create a client/.env.local file also from another developer or adding a line like
-    - REACT_APP_GOOGLE_MAPS_KEY=GOOGLKEY
+5. you will need to use a personal Google Maps API key for your local environment, to get one visit [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+6. create a client/.env.local file and add a line like below
+    - REACT_APP_GOOGLE_MAPS_KEY=GOOGLEKEY
 
 ## Local Development
 
