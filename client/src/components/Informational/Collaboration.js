@@ -27,7 +27,7 @@ const Collaboration = () => (
               <SubmitButton buttonText={'Eco-Cycle'} />
             </p>
           </div>
-          <div id="f2" /> />
+          <div id="f2" />
           <div id="f3">
             <p className="info-page-header-overrides">
               Code For Denver <br />
