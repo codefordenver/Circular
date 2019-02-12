@@ -10,6 +10,7 @@
   "scripts": {
     "client": "(cd ./client && yarn start)",
     "cypress": "cypress",
+    "jest": "jest",
     "ci:start-app-for-test": "concurrently \"yarn client\" \"serve client/build 3000\"",
     "ci:test": "cypress run",
     "lint": "eslint .",
