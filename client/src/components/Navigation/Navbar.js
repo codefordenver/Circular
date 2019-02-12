@@ -16,7 +16,7 @@ const MyCampaignNavItem = ({ signedCampaignId }) => (
 
 const NavBar = ({
   auth,
-  auth: { signedCampaignId },
+  auth: { createdCampaignId, signedCampaignId },
   closeMap,
   firebaseSignOut,
   firebaseSignInGoogle,
@@ -24,9 +24,11 @@ const NavBar = ({
   userSignatures,
   ...props
 }) => {
-  const userHasSignedCampaign = auth.status === 'SIGNED_IN' && signedCampaignId !== null;
+  const userHasAssociatedCampaign = signedCampaignId || createdCampaignId;
   const showMyCampaignNavItem =
-    `/campaign/${signedCampaignId}` !== props.location.pathname && userHasSignedCampaign;
+    `/campaign/${signedCampaignId}` !== props.location.pathname &&
+    userHasAssociatedCampaign &&
+    auth.status === 'SIGNED_IN';
   let homeText;
   homeText =
     props.location.pathname === '/' ? (homeText = 'RE:IMAGINE DENVER') : (homeText = 'HOME');
@@ -60,7 +62,9 @@ const NavBar = ({
             <NavItem eventKey={3}>WHO WE ARE</NavItem>
           </LinkContainer>
           {/*  RENDERS MyCampaignNavItem BASED ON AUTH STATUS and location */}
-          {showMyCampaignNavItem && <MyCampaignNavItem signedCampaignId={signedCampaignId} />}
+          {showMyCampaignNavItem && (
+            <MyCampaignNavItem signedCampaignId={createdCampaignId || signedCampaignId} />
+          )}
           {auth.status && (
             <NavBarSignIn
               auth={auth}
@@ -89,6 +93,7 @@ NavBar.defaultProps = {
 
 NavBar.propTypes = {
   auth: PropTypes.shape({
+    createdCampaignId: PropTypes.string,
     signedCampaignId: PropTypes.string,
     status: PropTypes.string.isRequired
   }).isRequired,

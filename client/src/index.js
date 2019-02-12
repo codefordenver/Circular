@@ -22,7 +22,7 @@ bootstrapUtils.addStyle(Navbar, 'remove-default');
 bootstrapUtils.addStyle(ControlLabel, 'remove-default');
 bootstrapUtils.addStyle(Button, ...['remove-default', 'as-link']);
 
-const store = configureStore();
+export const store = configureStore();
 const persistor = persistStore(store);
 
 store.dispatch(startListeningToAuthChanges());

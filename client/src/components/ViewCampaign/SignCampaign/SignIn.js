@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import GoogleButton from 'react-google-button';
 
-const RenderSignIn = ({ firebaseSignInFacebook, firebaseSignInGoogle }) => (
+const SignIn = ({ firebaseSignInFacebook, firebaseSignInGoogle }) => (
   <div>
     <h4>Sign In With:</h4>
     <div className="login-button-signature">
@@ -23,9 +23,9 @@ const RenderSignIn = ({ firebaseSignInFacebook, firebaseSignInGoogle }) => (
   </div>
 );
 
-RenderSignIn.propTypes = {
+SignIn.propTypes = {
   firebaseSignInFacebook: PropTypes.func.isRequired,
   firebaseSignInGoogle: PropTypes.func.isRequired
 };
 
-export default RenderSignIn;
+export default SignIn;

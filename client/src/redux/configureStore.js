@@ -11,7 +11,7 @@ import rootReducer from './reducers/index';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['routing'] // routing is not persisted
+  whitelist: ['auth']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
