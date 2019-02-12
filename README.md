@@ -22,7 +22,7 @@ It’s time to organize and request better waste services from property managers
     - REACT_APP_messagingSenderId
 5. you will need to use a personal Google Maps API key for your local environment, to get one visit [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 6. create a client/.env.local file and add a line like below
-    - REACT_APP_GOOGLE_MAPS_KEY=GOOGLEKEY
+    - REACT_APP_GOOGLE_MAPS_KEY=<GOOGLEKEY>
 
 ## Local Development
 
