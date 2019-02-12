@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NavBar from '../components/Navigation/Navbar';
+import Footer from '../components/Footer/Footer';
 
 const Application = ({
   auth,
@@ -22,6 +23,7 @@ const Application = ({
       {...props}
     />
     {props.children}
+    <Footer />
   </div>
 );
 
