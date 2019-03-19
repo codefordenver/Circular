@@ -9,8 +9,11 @@ const MapWithAMarker = withRouter(
     withGoogleMap(props => (
       <GoogleMap
         ref={props.onMapLoad}
-        defaultZoom={10}
-        defaultCenter={{ lat: 39.7392, lng: -104.9903 }}
+        defaultZoom={15}
+        defaultCenter={{
+            lat: props.activeCampaign.latLng._lat || 39.7392,
+            lng: props.activeCampaign.latLng._long || -104.9903
+          }}
         onClick={props.onMapClick}
       >
         <Marker
