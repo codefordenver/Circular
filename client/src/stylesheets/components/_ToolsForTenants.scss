@@ -1,0 +1,32 @@
+@import "../base/colors";
+@import '../base/fonts';
+
+.page-header {
+	text-align: center;
+}
+
+h1 {
+	background-color: white;
+	color: $dark-blue;
+	padding: 1% 0;
+}
+
+.info-text > p {
+	font-style: italic;
+	margin-top: .25%;
+}
+
+.faq-div {
+	margin-top: 2%;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.spacer {
+	margin: 5%;
+}
+
+
+

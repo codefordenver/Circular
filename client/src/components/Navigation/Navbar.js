@@ -53,7 +53,7 @@ const NavBar = ({
               <MenuItem eventKey={2.1}>Property Manager Resources</MenuItem>
             </LinkContainer>
             <LinkContainer to="/tips-for-requesting">
-              <MenuItem eventKey={2.2}>Tips for Requesting</MenuItem>
+              <MenuItem eventKey={2.2}>Tools for Tenants</MenuItem>
             </LinkContainer>
           </NavDropdown>
           <LinkContainer to="/who-are-we">
