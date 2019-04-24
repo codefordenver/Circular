@@ -1,78 +1,112 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-   
     // ##########################
     // ##### GENERAL UTILS ######
-    
-    // current user object
+
+    // return current user object
     function currentUser() {
-      return request.auth
+      return request.auth;
     }
-    
+
     // get requesting users data
     function getUserData() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
-    
-    // icoming data object
+
+    // incoming data object
     function incomingData() {
-      return request.resource.data
+      return request.resource.data;
     }
 
     // ##### GENERAL UTILS ######
     // ##########################
-    
+
     // check if user is signed in
     function signedIn() {
-    	return currentUser() != null;
+      return currentUser() != null;
     }
-    
+
+    // check if user has signed campaign
+    function hasNotSignedCampaign() {
+      return getUserData().signedCampaignId == null;
+    }
+
     // check if user exists
     function userExists(userId) {
-      return exists(/databases/$(database)/documents/users/$(userId))
+      return exists(/databases/$(database)/documents/users/$(userId));
     }
-    
+
     // check if email exists in users collection
     function emailExists() {
-    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == incomingData().email
+      return getUserData().email == incomingData().email;
     }
-    
-    // check if user is admin of requested campaign 
+
+    // check if user is admin of requested campaign
     function userIsAdminOfRequestedCampaign() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.createdCampaignId == incomingData().signedCampaignId
+      return getUserData().createdCampaignId == incomingData().signedCampaignId;
     }
-    
+
     // check if request is made by campaign owner
     // need more robust rules here
-    function isCampaignOwner() {
-      return getUserData().createdCampaignId != null;
+    function isCampaignOwner(campaignId) {
+      return getUserData().createdCampaignId == campaignId;
     }
 
     // check if it's the user's own data
     function isUsersData(userId) {
-      return currentUser().uid == userId
-    } 
+      return currentUser().uid == userId;
+    }
 
-    match /wasteProviders/{wasteProvider} {
-      allow read: if true;
-      allow write: if signedIn();
+    // ###########################
+    // ##### DOCUMENT RULES ######
+
+    match /users/{userId} {
+      // User can read, update, or delete their own data
+      // Signature user data is stored in campaigns/signatures
+      allow create: if signedIn()
+                    && !userExists(userId)
+                    && isUsersData(userId) || signedIn()
+                    && !emailExists()
+                    && userIsAdminOfRequestedCampaign();
+
+      allow read, update, delete: if signedIn() && isUsersData(userId);
     }
 
     match /campaigns/{campaignId} {
-      allow read: if true;
-      allow create, update: if request.auth.uid != null;
-      
+      // Anyone can read campaigns, including unauthenticated users
+      allow read;
+
+      // Only authenticated users can create a campaign and only one campaign
+      allow create: if signedIn()
+                    && getUserData().createdCampaignId == null;
+
+      // Only authenticated users and campaign owner can update or delete campaign
+      allow update, delete: if signedIn()
+                            && isCampaignOwner(campaignId);
+
       match /signatures/{signatureId} {
-        allow read, create: if true;
-        allow delete: if signedIn() && isUsersData(signatureId)
+        // Anyone can read signatures, including unauthenticated users
+        allow read;
+
+        // Only authenticated users can sign a campaign and only one campaign
+        allow create: if signedIn() && hasNotSignedCampaign();
+
+        // Only authenticated users can update or delete their own signature
+        allow update, delete: if signedIn() && isUsersData(signatureId);
       }
     }
 
-    match /users/{userId} {
-      // no one can read user data - signature user data is stored in campaigns/signatures
-      allow create: if signedIn() && !userExists(userId) || signedIn() && !emailExists() && userIsAdminOfRequestedCampaign()
-      allow update: if signedIn() && isUsersData(userId)
-      allow read: if signedIn() && isUsersData(userId)
+    match /wasteProviders/{wasteProvider} {
+      //Anyone can read waste providers, including unauthenticated users
+      allow read;
+
+      // Maybe add 'appAdmin' boolean field to user?
+      // allow write: if getUserData().appAdmin == true;
+      // No one can write waste provider data at this time
+      allow write: if false;
     }
+
+    // ##### DOCUMENT RULES ######
+    // ###########################
   }
 }
