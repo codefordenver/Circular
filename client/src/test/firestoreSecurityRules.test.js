@@ -51,7 +51,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
    * ============
    */
 
-  describe('user document rules', () => {
+  describe.skip('user document rules', () => {
     // User can read, update, or delete their own data
     // Signature user data is stored in campaigns/signatures
 
@@ -97,7 +97,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
       });
     });
 
-    describe('read data', () => {
+    describe.skip('read data', () => {
       it('should only allow users to read their own data', async () => {
         await firebase.assertSucceeds(
           alice
@@ -126,7 +126,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
       });
     });
 
-    describe('update data', () => {
+    describe.skip('update data', () => {
       it('should only allow users to update their own data', async () => {
         // Update doesn't work here. Pass 'merge: true' to
         //  '.set' method to do a true update of record instead of full overwrite
@@ -166,7 +166,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
       });
     });
 
-    describe('delete data', () => {
+    describe.skip('delete data', () => {
       it('should only allow users to delete their own data', async () => {
         await firebase.assertSucceeds(
           alice
@@ -203,7 +203,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
    */
 
   describe('campaign document rules', () => {
-    describe('create data', () => {
+    describe.skip('create data', () => {
       // Only authenticated users can create a campaign and only one campaign
 
       it('should require users to log in before creating a campaign', async () => {
@@ -230,7 +230,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
     describe('read data', () => {
       // Anyone can read campaigns, including unauthenticated users
 
-      it('should allow anyone to read campaigns', async () => {
+      it.skip('should allow anyone to read campaigns', async () => {
         const db = authedApp(null);
         const campaign = db.collection('campaigns').doc('campaign1');
         await firebase.assertSucceeds(campaign.get());
@@ -240,7 +240,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
     describe('update data', () => {
       // Only authenticated users and campaign owner can update campaign
 
-      it('should only allow campaign owner to update campaign', async () => {
+      it.skip('should only allow campaign owner to update campaign', async () => {
         const db = authedApp({ uid: 'alice' });
         const alice = db.collection('users').doc('alice');
         const campaign1 = db.collection('campaigns').doc('campaign1');
@@ -263,14 +263,14 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
         );
       });
 
-      it('should require users to log in before signing a campaign', async () => {
+      it.skip('should require users to log in before signing a campaign', async () => {
         const db = authedApp(null);
         const user = db.collection('users').doc('alice');
         await firebase.assertFails(user.set({ signedCampaignId: 'alice' }));
       });
     });
 
-    describe('delete data', () => {
+    describe.skip('delete data', () => {
       // Only authenticated users and campaign owner can delete campaign
 
       it('should only allow campaign owner to delete campaign', async () => {
@@ -298,7 +298,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
      * ==========================
      */
 
-    describe('campaign signatures document rules', () => {
+    describe.skip('campaign signatures document rules', () => {
       describe('create data', () => {
         // Only authenticated users can sign a campaign and only one campaign
 
@@ -430,7 +430,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
    * ======================
    */
 
-  describe('waste provider document rules', () => {
+  describe.skip('waste provider document rules', () => {
     // Anyone can read waste providers, including unauthenticated users
     // No one can write waste provider data at this time
 
