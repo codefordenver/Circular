@@ -45,19 +45,53 @@ afterAll(async () => {
 });
 
 describe('Denver Re-Imagine app Firestore security rules', () => {
+  const alice = authedApp({ uid: 'alice' });
+  const bob = authedApp({ uid: 'bob' });
+  const guest = authedApp(null);
+  const alicesCampaign = alice.collection('campaigns').doc('alicesCampaign');
+  const unauthedCampaign = guest.collection('campaigns').doc('unauthedCampaign');
+  const signature = alice
+    .collection('campaigns')
+    .doc('alicesCampaign')
+    .collection('signatures')
+    .doc('alice');
+
+  beforeEach(async () => {
+    await alice
+      .collection('users')
+      .doc('alice')
+      .set({ createdCampaignId: null });
+
+    await alicesCampaign.set({
+      campaignId: 'alicesCampaign',
+      campaignCreatorId: 'alice',
+      address: 'Glendale'
+    });
+
+    await alice
+      .collection('users')
+      .doc('alice')
+      .set({
+        displayName: 'alice',
+        createdCampaignId: 'alicesCampaign',
+        signedCampaignId: null
+      });
+
+    await signature.set({
+      uid: 'alice',
+      signerMessage: 'Yay recycling!'
+    });
+  });
+
   /*
    * ============
    *  User Rules
    * ============
    */
 
-  describe.skip('user document rules', () => {
+  describe('user document rules', () => {
     // User can read, update, or delete their own data
     // Signature user data is stored in campaigns/signatures
-
-    const alice = authedApp({ uid: 'alice', displayName: 'alice' });
-    const bob = authedApp({ uid: 'bob' });
-    const db = authedApp(null);
 
     describe('create data', () => {
       it('should allow authenticated user to create profile', async () => {
@@ -86,7 +120,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
 
       it('should not allow unauthenticated guests to create profile', async () => {
         await firebase.assertFails(
-          db
+          guest
             .collection('users')
             .doc('bob')
             .set({
@@ -97,7 +131,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
       });
     });
 
-    describe.skip('read data', () => {
+    describe('read data', () => {
       it('should only allow users to read their own data', async () => {
         await firebase.assertSucceeds(
           alice
@@ -118,7 +152,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
 
       it('should not allow unauthenticated guests to read users data', async () => {
         await firebase.assertFails(
-          db
+          guest
             .collection('users')
             .doc('alice')
             .get()
@@ -126,7 +160,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
       });
     });
 
-    describe.skip('update data', () => {
+    describe('update data', () => {
       it('should only allow users to update their own data', async () => {
         // Update doesn't work here. Pass 'merge: true' to
         //  '.set' method to do a true update of record instead of full overwrite
@@ -148,25 +182,21 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
           bob
             .collection('users')
             .doc('alice')
-            .update({
-              displayName: 'Bob'
-            })
+            .update({ displayName: 'Bob' })
         );
       });
 
       it('should not allow unauthenticated guests to update users data', async () => {
         await firebase.assertFails(
-          db
+          guest
             .collection('users')
             .doc('alice')
-            .update({
-              displayName: 'Anonymous'
-            })
+            .update({ displayName: 'Anonymous' })
         );
       });
     });
 
-    describe.skip('delete data', () => {
+    describe('delete data', () => {
       it('should only allow users to delete their own data', async () => {
         await firebase.assertSucceeds(
           alice
@@ -187,7 +217,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
 
       it('should not allow unauthenticated guests to delete users data', async () => {
         await firebase.assertFails(
-          db
+          guest
             .collection('users')
             .doc('alice')
             .delete()
@@ -203,18 +233,14 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
    */
 
   describe('campaign document rules', () => {
-    describe.skip('create data', () => {
+    describe('create data', () => {
       // Only authenticated users can create a campaign and only one campaign
 
       it('should require users to log in before creating a campaign', async () => {
-        const db = authedApp(null);
-        const campaign = db.collection('campaigns').doc('campaign1');
-        await firebase.assertFails(campaign.set({ campaignCreatorId: 'alice' }));
+        await firebase.assertFails(unauthedCampaign.set({ campaignCreatorId: 'alice' }));
       });
 
       it('should prevent users from creating more than one campaign', async () => {
-        const alice = authedApp({ uid: 'alice' });
-
         await firebase.assertSucceeds(
           alice
             .collection('users')
@@ -230,65 +256,55 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
     describe('read data', () => {
       // Anyone can read campaigns, including unauthenticated users
 
-      it.skip('should allow anyone to read campaigns', async () => {
-        const db = authedApp(null);
-        const campaign = db.collection('campaigns').doc('campaign1');
-        await firebase.assertSucceeds(campaign.get());
+      it('should allow anyone to read campaigns', async () => {
+        await firebase.assertSucceeds(alicesCampaign.get());
       });
     });
 
     describe('update data', () => {
       // Only authenticated users and campaign owner can update campaign
 
-      it.skip('should only allow campaign owner to update campaign', async () => {
-        const db = authedApp({ uid: 'alice' });
-        const alice = db.collection('users').doc('alice');
-        const campaign1 = db.collection('campaigns').doc('campaign1');
-
-        // User createdCampaignId must be set to null before saving campaign
-        await alice.set({ createdCampaignId: null });
-        await campaign1.set({ address: 'Glendale' });
-        await alice.set({ createdCampaignId: 'campaign1' });
-
-        await firebase.assertSucceeds(campaign1.set({ address: 'Denver' }, { merge: true }));
-      });
-
-      it('should not allow user to update campaign they do not own', async () => {
-        const bob = authedApp({ uid: 'bob' });
-        const campaign1 = bob.collection('campaigns').doc('campaign1');
+      it('should require users to log in before updating a campaign', async () => {
         await firebase.assertFails(
-          campaign1.update({
-            address: 'Denver'
-          })
+          guest
+            .collection('campaigns')
+            .doc('alicesCampaign')
+            .update({ address: 'Denver' })
         );
       });
 
-      it.skip('should require users to log in before signing a campaign', async () => {
-        const db = authedApp(null);
-        const user = db.collection('users').doc('alice');
-        await firebase.assertFails(user.set({ signedCampaignId: 'alice' }));
+      it('should only allow campaign owner to update campaign', async () => {
+        await firebase.assertFails(
+          bob
+            .collection('campaigns')
+            .doc('alicesCampaign')
+            .update({ address: 'Denver' })
+        );
+
+        await firebase.assertSucceeds(alicesCampaign.set({ address: 'Denver' }, { merge: true }));
+      });
+
+      it('should require users to log in before signing a campaign', async () => {
+        const registeredUser = guest.collection('users').doc('alice');
+
+        await firebase.assertFails(registeredUser.update({ signedCampaignId: 'alicesCampaign' }));
       });
     });
 
-    describe.skip('delete data', () => {
+    describe('delete data', () => {
       // Only authenticated users and campaign owner can delete campaign
 
       it('should only allow campaign owner to delete campaign', async () => {
-        const alice = authedApp({ uid: 'alice' });
-        const campaign1 = alice.collection('campaigns').doc('campaign1');
-
-        await alice
-          .collection('users')
-          .doc('alice')
-          .set({ createdCampaignId: 'campaign1' });
-
-        await firebase.assertSucceeds(campaign1.delete());
+        await firebase.assertSucceeds(alicesCampaign.delete());
       });
 
       it('should not allow user to delete campaign they do not own', async () => {
-        const bob = authedApp({ uid: 'bob' });
-        const campaign1 = bob.collection('campaigns').doc('campaign1');
-        await firebase.assertFails(campaign1.delete());
+        await firebase.assertFails(
+          bob
+            .collection('campaigns')
+            .doc('alicesCampaign')
+            .delete()
+        );
       });
     });
 
@@ -298,35 +314,30 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
      * ==========================
      */
 
-    describe.skip('campaign signatures document rules', () => {
+    describe('campaign signatures document rules', () => {
       describe('create data', () => {
         // Only authenticated users can sign a campaign and only one campaign
 
         it('should require users to log in before signature data can be created', async () => {
-          const db = authedApp(null);
+          const signature2 = unauthedCampaign.collection('signatures').doc('signature1');
 
-          const signature = db
-            .collection('campaigns')
-            .doc('campaign1')
-            .collection('signatures')
-            .doc('signature1');
-
-          await firebase.assertFails(signature.set({ uid: 'signature1' }));
+          await firebase.assertFails(signature2.set({ uid: 'signature1' }));
         });
 
         it('should prevent users from signing more than one campaign', async () => {
-          const db = authedApp({ uid: 'alice' });
-          const alice = db.collection('users').doc('alice');
-          await alice.set({ signedCampaignId: 'campaign1' });
+          await alice
+            .collection('users')
+            .doc('alice')
+            .set({ signedCampaignId: 'alicesCampaign' }, { merge: true });
 
-          const signature = db
+          const signature3 = alice
             .collection('campaigns')
-            .doc('campaign1')
+            .doc('bobsCampaign')
             .collection('signatures')
             .doc('alice');
 
           await firebase.assertFails(
-            signature.set({
+            signature3.set({
               uid: 'alice',
               signerMessage: 'Yay recycling!'
             })
@@ -338,8 +349,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
         // Anyone can read signatures, including unauthenticated users
 
         it('should allow anyone to read campaign signatures', async () => {
-          const db = authedApp(null);
-          const signatures = db
+          const signatures = guest
             .collection('campaigns')
             .doc('campaign1')
             .collection('signatures');
@@ -352,24 +362,10 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
         // Only authenticated users can update their own signature
 
         it('should only allow signature owner to update signature data', async () => {
-          const alice = authedApp({ uid: 'alice' });
-          const bob = authedApp({ uid: 'bob' });
-
-          const signature = alice
-            .collection('campaigns')
-            .doc('campaign1')
-            .collection('signatures')
-            .doc('alice');
-
-          await alice
-            .collection('users')
-            .doc('alice')
-            .set({ signedCampaignId: null });
-
-          await signature.set({
-            uid: 'alice',
-            signerMessage: 'Yay recycling!'
-          });
+          // await signature.set({
+          //   uid: 'alice',
+          //   signerMessage: 'Yay recycling!'
+          // });
 
           await firebase.assertSucceeds(
             signature.set({ signerMessage: 'I really like recycling!' }, { merge: true })
@@ -378,7 +374,7 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
           await firebase.assertFails(
             bob
               .collection('campaigns')
-              .doc('campaign1')
+              .doc('alicesCampaign')
               .collection('signatures')
               .doc('alice')
               .set({ signerMessage: 'I hate recycling!' }, { merge: true })
@@ -390,29 +386,10 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
         // Only authenticated users can delete their own signature
 
         it('should only allow signature owner to delete signature', async () => {
-          const alice = authedApp({ uid: 'alice' });
-          const bob = authedApp({ uid: 'bob' });
-
-          const signature = alice
-            .collection('campaigns')
-            .doc('campaign1')
-            .collection('signatures')
-            .doc('alice');
-
-          await alice
-            .collection('users')
-            .doc('alice')
-            .set({ signedCampaignId: null });
-
-          await signature.set({
-            uid: 'alice',
-            signerMessage: 'Yay recycling!'
-          });
-
           await firebase.assertFails(
             bob
               .collection('campaigns')
-              .doc('campaign1')
+              .doc('alicesCampaign')
               .collection('signatures')
               .doc('alice')
               .delete()
@@ -430,16 +407,16 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
    * ======================
    */
 
-  describe.skip('waste provider document rules', () => {
+  describe('waste provider document rules', () => {
     // Anyone can read waste providers, including unauthenticated users
     // No one can write waste provider data at this time
 
     describe('create data', () => {
       it('should not allow anyone to create waste providers', async () => {
-        const db = authedApp({ uid: 'alice' });
+        // const db = authedApp({ uid: 'alice' });
 
         await firebase.assertFails(
-          db
+          alice
             .collection('wasteProviders')
             .doc('wasteProvider1')
             .set({ name: 'wasteProvider1' })
@@ -449,19 +426,19 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
 
     describe('read data', () => {
       it('should allow anyone to read waste provider data', async () => {
-        const db = authedApp(null);
-        const wasteProvider = db.collection('wasteProviders').doc('wasteProvider1');
+        // const alice = authedApp(null);
+        const wasteProvider = alice.collection('wasteProviders').doc('wasteProvider1');
 
         await firebase.assertSucceeds(wasteProvider.get());
       });
     });
 
     describe('update data', () => {
-      it('should now allow anyone to update waste provider data', async () => {
-        const db = authedApp({ uid: 'alice' });
+      it('should not allow anyone to update waste provider data', async () => {
+        // const alice = authedApp({ uid: 'alice' });
 
         await firebase.assertFails(
-          db
+          alice
             .collection('wasteProviders')
             .doc('wasteProvider1')
             .update({ name: 'wasteProvider1' })
@@ -470,11 +447,11 @@ describe('Denver Re-Imagine app Firestore security rules', () => {
     });
 
     describe('delete data', () => {
-      it('should now allow anyone to delete waste providers', async () => {
-        const db = authedApp({ uid: 'alice' });
+      it('should not allow anyone to delete waste providers', async () => {
+        // const alice = authedApp({ uid: 'alice' });
 
         await firebase.assertFails(
-          db
+          alice
             .collection('wasteProviders')
             .doc('wasteProvider1')
             .delete()
