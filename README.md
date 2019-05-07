@@ -62,3 +62,16 @@ yarn cypress open
 This will open the cypress GUI for selecting and running tests. From here you can run the `example_spec` which is a demo of all the cypress functionality, or you can run other tests developed against specifically for this project.
 
 Tests are written in the [cypress/integration](cypress/integration) directory.
+
+## Cloud Firestore security rules testing
+To test the Cloud Firestore security rules with a locally installed CLI, you will need to install the security rules emulator from [here](https://firebase.google.com/docs/firestore/security/test-rules-emulator). Follow the provided instructions to become familiar with testing the security rules.
+
+Start the emulator:
+```sh
+firebase serve --only firestore
+```
+
+In another shell tab, run the tests using Jest:
+```sh
+yarn jest
+```

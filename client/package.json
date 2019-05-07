@@ -53,7 +53,8 @@
     "**/event-stream": "^4.0.1"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.8.1",
+    "@firebase/testing": "^0.7.7",
+    "filesystem": "^1.0.1",
     "react-testing-library": "^5.6.1"
   }
 }
