@@ -12,7 +12,7 @@
     "cypress": "cypress",
     "test": "jest",
     "ci:start-app-for-test": "concurrently \"yarn client\" \"serve client/build 3000\"",
-    "ci:test": "test && cypress run",
+    "ci:test": "cypress run",
     "lint": "eslint .",
     "dev": "concurrently \"yarn client\"",
     "test-dev": "cross-env NODE_ENV=test yarn dev",
