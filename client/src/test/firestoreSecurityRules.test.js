@@ -7,7 +7,6 @@ const fs = require('fs');
  * ============
  */
 const projectName = 're-imagine';
-const coverageUrl = `http://localhost:8080/emulator/v1/projects/${projectName}:ruleCoverage.html`;
 
 const rules = fs.readFileSync('firestore.rules', 'utf8');
 
